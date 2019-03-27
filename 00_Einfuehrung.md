@@ -194,10 +194,14 @@ Die Norm kann als eine Art Checkliste verstanden werden.
 ## 2. Und warum der ganze Aufwand?
 
 {{0-1}}
-![ISO 9126](./img/00_Einfuehrung/LinesOfCode.jpg)<!-- width="80%" --> [^1]
+![ISO 9126](./img/00_Einfuehrung/LinesOfCode.jpg)<!-- width="80%" --> [Weforum]
+
+{{0-1}}
+![ISO 9126](./img/00_Einfuehrung/AufwandsverteilungCodeentwicklung.png)<!-- width="80%" --> [Lemburg]
+
 
 {{1-2}}
-Ariane
+![Ariane](./img/00_Einfuehrung/Ariane.jpg)<!-- width="80%" --> [Golem]
 
 {{1-2}}
 ```ada  CodezeileAriane
@@ -320,12 +324,18 @@ Texteditor vs. Integred development environment (IDE)
 
 **Referenzen**
 
-[^1] Wikipedia "ISO/IEC 9126", Autor *Sae1962*
+*[Golem]* Frank Wunderlich-Pfeiffer, "In den Neunzigern stürzte alles ab", 
+[Golem](https://www.golem.de/news/softwarefehler-in-der-raumfahrt-in-den-neunzigern-stuerzte-alles-ab-1511-117537.html)
 
-[^2]
-Dragan Radovanovic, Kif Leswing, "Google runs on 5000 times more code than the original space shuttle", 2016, https://www.weforum.org/agenda/2016/07/google-runs-on-5000-times-more-code-than-the-original-space-shuttle?utm_content=buffer45d4c&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer
+*[Wiki9126]* Wikipedia "ISO/IEC 9126", Autor *Sae1962*
 
-[^3] Wikipedia "V Modell", Autor *Michael Pätzold*
+*[Lemburg]* Prof. Dr. Thorsten Lemburg, Einführung in die Softwareentwicklung,
+[Link](https://wr.informatik.uni-hamburg.de/_media/teaching/wintersemester_2010_2011/siw-2011-lemburg-einfuehrung_in_die_softwareentwicklung-druckversion.pdf)
+
+*[Weforum]*
+Dragan Radovanovic, Kif Leswing, "Google runs on 5000 times more code than the original space shuttle", 2016, [Link](https://www.weforum.org/agenda/2016/07/google-runs-on-5000-times-more-code-than-the-original-space-shuttle?utm_content=buffer45d4c&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer)
+
+*[WikiVModell]* Wikipedia "V Modell", Autor *Michael Pätzold*
 
 **Autoren**
 
