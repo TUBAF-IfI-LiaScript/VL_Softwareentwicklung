@@ -157,26 +157,75 @@ C#
 
 ### Historie
 
-+ Version 1.0 im Jahre 2002
-+ Aktuell: C# 7.2 (16.08.2017), die Version 8.0 ist angekündigt und einige Sprachfeatures bereits publiziert
+| Jahr | Version .NET     | Version C# | Ergänzungen                                                                                                                                                 |
+| ---- | ---------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2002 | 1.0              | 1.0        |                                                                                                                                                             |
+| 2006 | 3.0              | 2.0        | Generics, Anonyme Methoden, Iteratoren, Private setters, Delegates                                                                                          |
+| 2007 | 3.5              | 3.0        | Implizit typisierte Variablen, Objekt- und Collection-Initialisierer, Automatisch implementierte Properties, LINQ, Lambda Expressions                       |
+| 2010 | 4.0              | 4.0        | Dynamisches Binding, Benannte und optionale Argumente, Generische Co- und Kontravarianz                                                                     |
+| 2012 | 4.5              | 5.0        | Asynchrone Methoden                                                                                                                                         |
+| 2015 | 4.6              | 6.0        | Exception Filters, Indizierte Membervariablen und Elementinitialisierer, Mehrzeilige String-Ausdrücke, Implementierung von Methoden mittels Lambda-Ausdruck |
+| 2017 | 4.6.2/ .NET Core | 7.0        | Mustervergleiche (Pattern matching),  Binärliterale 0b..., Tupel                                                                                    |
 
-### Konzepte
+Aktuell: Die Version C# 8.0 ist angekündigt und einige Sprachfeatures bereits publiziert ([Link](https://devblogs.microsoft.com/dotnet/building-c-8-0/))
 
+### Konzepte und Einbettung
+
+{{0-1}}
 **Compilierung unter C** (zum Vergleich)
 
+{{0-1}}
 ![instruction-set](./img/01_Grundlagen/compilerElements.png)<!-- width="80%" --> [^1]
 
+{{1}}
+**.NET**
 
-**??????**
+{{1-2}}
+> *.NET Framework ist eine __Ausführungsumgebung__ für die Laufzeit, die Apps für*
+> *.NET Framework verwaltet. Sie besteht aus der __Common Language Runtime__, die*
+> *Speicherverwaltung und andere Systemdienste bereitstellt, und einer*
+> *umfangreichen __Klassenbibliothek__, die Programmierern stabilen, zuverlässigen*
+> *Code für alle wesentlichen Bereiche der App-Entwicklung zur Verfügung stellt.* [MSNET]
 
-Die Common Language Infrastructure (CLI) ist eine von Microsoft entwickelte und von ISO und ECMA standardisierte offene Spezifikation (technischer Standard), die ausführbaren Code und eine Laufzeitumgebung beschreibt, in der mehrere High-Level-Sprachen (C#. Visual Basic, F#) kombiniert und plattformunabhängig ausgeführt werden können. Das .NET Framework, .NET Core, Mono, DotGNU und Portable.NET sind Implementierungen der CLI.
+{{1-2}}
+![instruction-set](./img/01_Grundlagen/CLRstructure.png)<!-- width="70%" --> [Bhogayta]
+
+{{1-2}}
+* ASP.NET ... ist ein Web Application Framework, mit dem sich dynamische Webseiten, Webanwendungen und Webservices entwickeln lassen.
+*  ActiveX Data Objects (ADO) ... ist eine auf ActiveX basierende Schnittstelle zum Datenzugriff auf Datenbanken und tabellenartige Datenquellen über eine einheitliche API.
+* Windows Forms ... ist ein GUI-Toolkit des Microsoft .NET Frameworks. Es ermöglicht die Erstellung grafischer Benutzeroberflächen (GUIs) für Windows.
 
 
-![CIL Konzept](./img/01_Grundlagen/Common_Language_Infrastructure.png) <!-- width="80%" -->[^2]
 
 
+{{2-3}}
+*Frage: Des öfteren wird von .NET Framework und .NET Core gesprochen, was sind die Unterschiede?*
 
-```cil
+{{2-3}}
+> *Think of .NET Core as a subset of .NET Framework that makes sense to be*
+> *cross-platform, redesigned in a much more granular fashion. Microsoft .NET*
+> *Core is the future of .NET and we are happy it has become open source now.* [BlogNET]
+
+{{3-4}}
+*Frage: Was sind Alternativen?*
+
+{{3-4}}
+Mono, DotGNU und Portable.NET sind Implementierungen der CLI.
+
+{{4-5}}
+*Frage:  Was bedeutet das für den "Build"-Prozess?*
+
+{{4-5}}
+![instruction-set](./img/01_Grundlagen/ExecutionModel.png)<!-- width="90%" --> [Bhogayta]
+
+{{4-5}}
+Die spezifischen Compiler der einzelnen .NET Sprachen (C#. Visual Basic, F#) bilden den Quellcode
+auf einen Zwischencode ab. Die Common Language Infrastructure (CLI) ist eine von ISO und ECMA
+standardisierte offene Spezifikation (technischer Standard), die ausführbaren
+Code und eine Laufzeitumgebung beschreibt.
+
+{{4-5}}
+```cil    CLI
 .assembly HalloWelt { }
 .assembly extern mscorlib { }
 .method public static void Main() cil managed
@@ -188,7 +237,6 @@ Die Common Language Infrastructure (CLI) ist eine von Microsoft entwickelte und 
     ret
 }
 ```
-
 
 ### Abgrenzung zu Java und C++
 
@@ -272,11 +320,15 @@ Interpreter unter Visual Studio.
 
 **Referenzen**
 
-[^1]: Abbildung Stufen der Compilierung (Quelle: https://medium.com/@vietkieutie/what-happens-when-you-type-gcc-main-c-2a136896ade3)
+[BlogNET] "What’s the difference Between .NET Core vs .NET Framework", https://www.amarinfotech.com/difference-between-net-core-2-0-vs-net-framework.html
 
-[^2]: Wikipedia "Visual overview of the Common Language Infrastructure (CLI)", Autor *Jarkko Piiroinen*
+[Thong] J. Thong, "What happens when you type GCC main.c", [Link](https://medium.com/@vietkieutie/what-happens-when-you-type-gcc-main-c-2a136896ade3)
 
-[^3]:
+[WikiCLI] Wikipedia "Visual overview of the Common Language Infrastructure (CLI)", Autor *Jarkko Piiroinen*
+
+[MSNET] "Erste Schritte mit .NET Framework", [Link](https://docs.microsoft.com/de-de/dotnet/framework/get-started/)
+
+[Bhogayta]  S. Bhogayta, "Introduction To Dotnet", [Link](https://www.slideshare.net/samirbhogayta/introduction-to-dotnet)
 
 **Autoren**
 
