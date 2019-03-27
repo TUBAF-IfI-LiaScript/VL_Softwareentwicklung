@@ -204,7 +204,7 @@ Abgrenzung zum Softwareengineering
 Gemäß ISO 9126 gibt es die sechs folgenden Qualitätsmerkmale für
 Softwareprodukte:
 
-![ISO 9126](./img/00_Einfuehrung/ISO_9126_quality.png)<!-- width="80%" --> [^1]
+![ISO 9126](./img/00_Einfuehrung/ISO_9126_quality.png)<!-- width="80%" --> [Wiki9126](#7)
 
 Nachfolger ISO 25010: Zusätzlich
 
@@ -217,15 +217,16 @@ Die Norm kann als eine Art Checkliste verstanden werden.
 
 ## 2. Und warum der ganze Aufwand?
 
-{{0-1}}
-![ISO 9126](./img/00_Einfuehrung/LinesOfCode.jpg)<!-- width="80%" --> [Weforum]
-
-{{0-1}}
-![ISO 9126](./img/00_Einfuehrung/AufwandsverteilungCodeentwicklung.png)<!-- width="80%" --> [Lemburg]
+                                     {{0-1}}
+![ISO 9126](./img/00_Einfuehrung/LinesOfCode.jpg)<!-- width="80%" --> [Weforum](#7)
 
 
-{{1-2}}
-![Ariane](./img/00_Einfuehrung/Ariane.jpg)<!-- width="80%" --> [Golem]
+![ISO 9126](./img/00_Einfuehrung/AufwandsverteilungCodeentwicklung.png)<!-- width="80%" --> [Lemburg](#7)
+
+*******************************************************************************
+
+                                    {{1-2}}
+![Ariane](./img/00_Einfuehrung/Ariane.jpg)<!-- width="80%" --> [Golem](#7)
 
 ```ada
 P_M_DERIVE(T_ALG.E_BH) := UC_16S_EN_16NS (TDB.T_ENTIER_16S
@@ -278,7 +279,6 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 
                                     {{3-4}}
 | Aspekt                 | Bewertung |
-|------------------------|-----------|
 | Funktionalität         | ?         |
 | Zuverlässigkeit        |           |
 | Benutzbarkeit          |           |
@@ -288,7 +288,6 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 
                                      {{4}}
 | Aspekt                 | Bewertung                                                         |
-|-----|-----|
 | Funktionalität         | feste Feldlänge, das Programm stürzt bei mehr als 10 Einträgen ab |
 | Zuverlässigkeit        | mehrfaches Öffnen ein und der selben Datei                                                                   |
 | Benutzbarkeit          | im Programmcode enthaltene Dateinamen, feste Feldlänge            |
@@ -313,7 +312,7 @@ TODO
 
 > *CASE is the use of computer-based support in the software development process*
 
-**Klassifikation**
+**Klassifikation nach dem Einsatzzweck**
 
 Anforderungsanalyse
 * Spezifikation
@@ -334,6 +333,9 @@ Koordination Entwicklungsprozess
 * Deployment
 * Support
 
+
+                                   {{1}}
+*******************************************************************************
 **Spezifische Werkzeuge oder eine geschlossene Suite?**
 
 * Tools - einzelne Aktivitäten im Software Life-cycle
@@ -348,6 +350,8 @@ Texteditor vs. Integred development environment (IDE)
   Programmiersprachen, etc.
 * Analyse der Komplexität des Vorhabens, der erforderlichen Unterstützung
 * Analyse der Rahmenbedingungen (Betriebssysteme, Kosten)
+
+*******************************************************************************
 
 ## Anhang
 
