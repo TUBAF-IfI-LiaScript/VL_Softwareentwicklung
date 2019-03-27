@@ -14,8 +14,6 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 ** TU Bergakademie Freiberg - Sommersemester 2019**
 
-
-
 ```csharp    HelloWorld.cs
 using System;
 
@@ -41,7 +39,6 @@ namespace Rextester
 * Einführung in die Werkzeuge der Softwareentwicklung
 * Nutzung moderner und aktueller Programmiertechniken
 
-
 {{1}}
 **Dozenten**
 
@@ -54,6 +51,9 @@ namespace Rextester
 | Ben Lorenz       | ben.lorenz@informatik.tu-freiberg.de       |
 | Martin Reinhardt | martin.reinhardt@informatik.tu-freiberg.de |
 
+Die Übungen beginnen in der Woche nach den Osterferien, finden dann aber an
+zwei Terminen pro Woche statt!
+
 {{2}}
 **Zeitaufwand und Engagement**
 
@@ -63,6 +63,12 @@ Der Zeitaufwand beträgt 180h und setzt sich zusammen aus 60h Präsenzzeit und
 Lehrveranstaltungen, die eigenständige Lösung von Übungsaufgaben sowie die
 Prüfungsvorbereitung.
 
+{{2}}
+*Sieben Minuten für sieben Punkte* ... Einbettung einer studentischen
+Zusammenfassung in jeden Foliensatz. Wir organisieren Sie in Gruppen von 2
+Studenten, die zu Beginn jeder Veranstaltung die zentralen Aspekte der  
+vorangegangen Vorlesung komprimiert darstellt.
+
 {{3}}
 **Literaturhinweise**
 
@@ -71,19 +77,20 @@ Literaturhinweise werden zu verschiedenen Themen als Links oder Referenzen
 in die Unterlagen integriert.
 
 {{3}}
-* Online Kurse
-
-     + Das ist ein test
-
-{{3}}
-* Videotutorials
-
-     + Das ist ein test
+Es exisitieren eine vielzahl kommerzielle Angebote, die aber einzele Aspekte
+in freien Tutorial vorstellen. In der Regel gibt es keinen geschlossenen Kurs
+sondern erfordert eine individuelle Suche nach spezifischen Inhalten.
 
 {{3}}
-* Bücher
-
-     + Das ist ein test
+| Medium         | Bemerkung                                                       | Links                                                                              |
+| -------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Online Kurse   | Leitfaden von Microsoft für C# aber auch die Werkzeuge          | [Link](https://docs.microsoft.com/de-de/dotnet/csharp/)                            |
+|                | C# Tutorial for Beginners: Learn in 7 Days                      | [Link](https://www.guru99.com/c-sharp-tutorial.html)                               |
+|                | Programmierkonzepte von C#                                      | [Link](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/) |
+| Videotutorials | Umfangreicher C# Kurs mit guten konzeptionellen Anmerkungen     | [Link](https://www.youtube.com/watch?v=M3lqkuZQBcM&t=2160s)                        |
+|                | Einsteigerkurs als Ausgangspunkt für eine Tutorienreihe         | [Link](https://www.youtube.com/watch?v=gfkTfcpWqAY&t=151s)                         |
+| Bücher         | J. Albahari, B. Albahari, "C# 7.0 in a Nutshell", O'Reilly 2017 |                                                                                    |
+|                | H. Mössenböck, "Kompaktkurs C# 7", dpunkt.verlag                                                                |                                                                                    |
 
 {{4}}
 **Struktur der Vorlesungsunterlagen**
@@ -94,8 +101,8 @@ Foliensatz von Herrn Dr. Martin Reinhardt, der die Veranstaltung im vergangenen 
 gehalten hat.
 
 {{4}}
-* Einordnung im Gesamtkontext
-* Fragen an die Veranstaltung
+* Einordnung im Gesamtkontext (Entwicklungsmethodik, C#, Tools)
+* Zusammenfassung der letzten Veranstaltung
 * ... eigentlicher Inhalt ...
 * Beispiel der Woche
 * Anhang mit Referenzen und Literaturhinweisen
@@ -135,8 +142,10 @@ Link auf den GitHub: https://github.com/liaScript/CCourse
 
 ## 1. Softwareentwicklung
 
+{{0}}
 **Worum geht es, was ist "Softwareentwicklung"?**
 
+{{0}}
 | Begriff               | Definitionsansatz                                                                                                                                |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Software als "Medium" | "Software war all das, was zum Funktionieren eines Computers notwendig, aber nicht Hardware ist."                                                |
@@ -146,50 +155,68 @@ Link auf den GitHub: https://github.com/liaScript/CCourse
 | Software als Prozess  | "Software ist die Idee, die Lösung, die man sich für ein Problem ausgedacht hat, das Verfahren, das helfen soll ..."                             |
 |                       | "Dabei sind Computerprogramme nicht nur als Beschreibung der auszuführenden Funktionen ... Vereinbarung zur Nutzung, ... Dokumentationsinhalte." |
 
+{{1}}
 *Tessen Freund: Software Engineering durch Modellierung wissensintensiver Entwicklungsprozesse, S. 25*
 [Link google books](http://books.google.de/books?id=2HPldlxhBOkC&pg=PA25#v=onepage&q&f=false)
 
+{{1}}
 > Unter dem Begriff Softwareentwicklung versteht man die Konzeption
 > und standardisierte Umsetzung von Softwareprojekten und die damit
 > verbundenen Prozesse.
 
+{{1}}
 Abgrenzung zum Softwareengineering
 
+{{1}}
 > „Zielorientierte Bereitstellung und systematische Verwendung von Prinzipien,
 > Methoden und Werkzeugen für die arbeitsteilige, ingenieurmäßige Entwicklung
 > und Anwendung von umfangreichen Softwaresystemen.“ [Balzert, S. 36]
 
+{{2}}
 **Was heißt das, "ingenieurmäßig" oder "standardisiert"?**
 
+{{2}}
 Gemäß ISO 9126 gibt es die sechs folgenden Qualitätsmerkmale für Softwareprodukte:
 
+{{2}}
 ![ISO 9126](./img/00_Einfuehrung/ISO_9126_quality.png)<!-- width="80%" --> [^1]
 
+{{2}}
 Nachfolger ISO 25010: Zusätzlich
+
+{{2}}
 * Kompatibilität
 * Sicherheit
+
+{{2}}
 Die Norm kann als eine Art Checkliste verstanden werden.
 
 ## 2. Und warum der ganze Aufwand?
 
+{{0-1}}
 ![ISO 9126](./img/00_Einfuehrung/LinesOfCode.jpg)<!-- width="80%" --> [^1]
 
+{{1-2}}
 Ariane
 
-```
+{{1-2}}
+```ada  CodezeileAriane
 P_M_DERIVE(T_ALG.E_BH) := UC_16S_EN_16NS (TDB.T_ENTIER_16S
                                    ((1.0/C_M_LSB_BH) *
                                    G_M_INFO_DERIVE(T_ALG.E_BH)))
 ```
 
-
+{{2-3}}
 Toll Connect
 
-Und im Kleinen
+{{3-5}}
+Und im Kleinen ...
 
-Das Beispiel und die Bewertung entstammt der Vorlesung "Software Engineering"
+{{3-5}}
+Das folgende anschauliche Beispiel und die zugehörige Analyse entstammt der Vorlesung "Software Engineering"
 von Prof. Dr. Schürr, TU Darmstadt.
 
+{{3-5}}
 ```pascal
 program SORT;
 var a, b: file of integer;
@@ -217,18 +244,20 @@ begin
     end
 end SORT;
 ```
+{{3-5}}
 Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 
+{{3-4}}
 | Aspekt                 | Bewertung |
-| Funktionalität         |           |
+| Funktionalität         | ?         |
 | Zuverlässigkeit        |           |
 | Benutzbarkeit          |           |
 | Effizienz              |           |
 | Wartungsfreundlichkeit |           |
 | Übertragbarkeit        |           |
 
+{{4}}
 | Aspekt                 | Bewertung                                                         |
-| ---------------------- | ----------------------------------------------------------------- |
 | Funktionalität         | feste Feldlänge, das Programm stürzt bei mehr als 10 Einträgen ab |
 | Zuverlässigkeit        | mehrfaches Öffnen ein und der selben Datei                                                                   |
 | Benutzbarkeit          | im Programmcode enthaltene Dateinamen, feste Feldlänge            |
@@ -241,7 +270,6 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 **Abgrenzung am Beispiel des V-Prozesses**
 
 ![ISO 9126](./img/00_Einfuehrung/V-Modell.png)<!-- width="80%" --> [^3]
-
 
 **Agile Softwarentwicklung**
 
