@@ -32,6 +32,9 @@ namespace Rextester
 
 ## 0 - Organisatorisches
 
+                                    {{0-1}}
+*******************************************************************************
+
 **Zielstellung der Veranstaltung**
 
 * Verstehen verschiedener Programmierparadigmen
@@ -39,10 +42,13 @@ namespace Rextester
 * Einführung in die Werkzeuge der Softwareentwicklung
 * Nutzung moderner und aktueller Programmiertechniken
 
-{{1}}
+*******************************************************************************
+
+                                    {{1-2}}
+*******************************************************************************
+
 **Dozenten**
 
-{{1}}
 | Name             | Email                                      |
 |:-----------------|:-------------------------------------------|
 | Sebastian Zug    | sebastian.zug@informatik.tu-freiberg.de    |
@@ -54,34 +60,39 @@ namespace Rextester
 Die Übungen beginnen in der Woche nach den Osterferien, finden dann aber an
 zwei Terminen pro Woche statt!
 
-{{2}}
+*******************************************************************************
+
+
+                                    {{2-3}}
+*******************************************************************************
+
 **Zeitaufwand und Engagement**
 
-{{2}}
 Der Zeitaufwand beträgt 180h und setzt sich zusammen aus 60h Präsenzzeit und
 120h Selbststudium. Letzteres umfasst die Vor- und Nachbereitung der
 Lehrveranstaltungen, die eigenständige Lösung von Übungsaufgaben sowie die
 Prüfungsvorbereitung.
 
-{{2}}
 *Sieben Minuten für sieben Punkte* ... Einbettung einer studentischen
 Zusammenfassung in jeden Foliensatz. Wir organisieren Sie in Gruppen von 2
 Studenten, die zu Beginn jeder Veranstaltung die zentralen Aspekte der  
 vorangegangen Vorlesung komprimiert darstellt.
 
-{{3}}
+*******************************************************************************
+
+
+                                    {{3-4}}
+*******************************************************************************
+
 **Literaturhinweise**
 
-{{3}}
 Literaturhinweise werden zu verschiedenen Themen als Links oder Referenzen
 in die Unterlagen integriert.
 
-{{3}}
 Es exisitieren eine vielzahl kommerzielle Angebote, die aber einzele Aspekte
 in freien Tutorial vorstellen. In der Regel gibt es keinen geschlossenen Kurs
 sondern erfordert eine individuelle Suche nach spezifischen Inhalten.
 
-{{3}}
 | Medium         | Bemerkung                                                       | Links                                                                              |
 | -------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | Online Kurse   | Leitfaden von Microsoft für C# aber auch die Werkzeuge          | [Link](https://docs.microsoft.com/de-de/dotnet/csharp/)                            |
@@ -92,25 +103,31 @@ sondern erfordert eine individuelle Suche nach spezifischen Inhalten.
 | Bücher         | J. Albahari, B. Albahari, "C# 7.0 in a Nutshell", O'Reilly 2017 |                                                                                    |
 |                | H. Mössenböck, "Kompaktkurs C# 7", dpunkt.verlag                                                                |                                                                                    |
 
-{{4}}
+*******************************************************************************
+
+
+                                    {{4-5}}
+*******************************************************************************
+
 **Struktur der Vorlesungsunterlagen**
 
-{{4}}
 Hinweis: Die Vorlesung basiert in den ersten Woche in starkem Maße auf dem
 Foliensatz von Herrn Dr. Martin Reinhardt, der die Veranstaltung im vergangenen Jahr
 gehalten hat.
 
-{{4}}
 * Einordnung im Gesamtkontext (Entwicklungsmethodik, C#, Tools)
 * Zusammenfassung der letzten Veranstaltung
 * ... eigentlicher Inhalt ...
 * Beispiel der Woche
 * Anhang mit Referenzen und Literaturhinweisen
 
-{{5}}
+*******************************************************************************
+
+                                    {{5-6}}
+*******************************************************************************
+
 **Vorlesungsplan**
 
-{{5}}
 |     | Tag       | Inhalt der Vorlesung   |
 |:--- | --------- |:---------------------- |
 | 1   | 2. April  | Ausfall                |
@@ -124,28 +141,32 @@ gehalten hat.
 | 5.  | 30. April |                        |
 |     |           | ...                    |
 
-{{6}}
+*******************************************************************************
+
+                                    {{6-7}}
+*******************************************************************************
+
 **Wie können Sie zum Gelingen der Veranstaltung beitragen**
 
-{{6}}
 * Stellen Sie Fragen, seinen Sie kommunikativ!
 * Organisieren Sie sich in Arbeitsgruppen!
 * Experimentieren Sie mit verschiedenen Entwicklungsumgebung um "Ihren Editor"
   zu finden
 * Machen Sie Verbesserungsvorschläge für die Vorlesungsfolien!
 
-{{6}}
 ![Atom IDE Screenshot](./img/00_Einfuehrung/screenShotAtom.png)<!-- width="100%" -->
 
-{{6}}
 Link auf den GitHub: https://github.com/liaScript/CCourse
+
+*******************************************************************************
 
 ## 1. Softwareentwicklung
 
-{{0}}
+                                    {{0-1}}
+*******************************************************************************
+
 **Worum geht es, was ist "Softwareentwicklung"?**
 
-{{0}}
 | Begriff               | Definitionsansatz                                                                                                                                |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Software als "Medium" | "Software war all das, was zum Funktionieren eines Computers notwendig, aber nicht Hardware ist."                                                |
@@ -155,68 +176,71 @@ Link auf den GitHub: https://github.com/liaScript/CCourse
 | Software als Prozess  | "Software ist die Idee, die Lösung, die man sich für ein Problem ausgedacht hat, das Verfahren, das helfen soll ..."                             |
 |                       | "Dabei sind Computerprogramme nicht nur als Beschreibung der auszuführenden Funktionen ... Vereinbarung zur Nutzung, ... Dokumentationsinhalte." |
 
-{{1}}
+*******************************************************************************
+
+                                    {{1-2}}
+*******************************************************************************
+
 *Tessen Freund: Software Engineering durch Modellierung wissensintensiver Entwicklungsprozesse, S. 25*
 [Link google books](http://books.google.de/books?id=2HPldlxhBOkC&pg=PA25#v=onepage&q&f=false)
 
-{{1}}
 > Unter dem Begriff Softwareentwicklung versteht man die Konzeption
 > und standardisierte Umsetzung von Softwareprojekten und die damit
 > verbundenen Prozesse.
 
-{{1}}
 Abgrenzung zum Softwareengineering
 
-{{1}}
 > „Zielorientierte Bereitstellung und systematische Verwendung von Prinzipien,
 > Methoden und Werkzeugen für die arbeitsteilige, ingenieurmäßige Entwicklung
 > und Anwendung von umfangreichen Softwaresystemen.“ [Balzert, S. 36]
 
-{{2}}
+*******************************************************************************
+
+                                     {{2}}
+*******************************************************************************
+
 **Was heißt das, "ingenieurmäßig" oder "standardisiert"?**
 
-{{2}}
-Gemäß ISO 9126 gibt es die sechs folgenden Qualitätsmerkmale für Softwareprodukte:
+Gemäß ISO 9126 gibt es die sechs folgenden Qualitätsmerkmale für
+Softwareprodukte:
 
-{{2}}
 ![ISO 9126](./img/00_Einfuehrung/ISO_9126_quality.png)<!-- width="80%" --> [^1]
 
-{{2}}
 Nachfolger ISO 25010: Zusätzlich
 
-{{2}}
 * Kompatibilität
 * Sicherheit
 
-{{2}}
 Die Norm kann als eine Art Checkliste verstanden werden.
+
+*******************************************************************************
 
 ## 2. Und warum der ganze Aufwand?
 
-{{0-1}}
+                                    {{0-1}}
 ![ISO 9126](./img/00_Einfuehrung/LinesOfCode.jpg)<!-- width="80%" --> [^1]
 
-{{1-2}}
-Ariane
+                                    {{1-2}}
+*******************************************************************************
+Ariane: TODO Beschreibung
 
-{{1-2}}
-```ada  CodezeileAriane
+```ada
 P_M_DERIVE(T_ALG.E_BH) := UC_16S_EN_16NS (TDB.T_ENTIER_16S
                                    ((1.0/C_M_LSB_BH) *
                                    G_M_INFO_DERIVE(T_ALG.E_BH)))
 ```
+*******************************************************************************
 
-{{2-3}}
+                                    {{2-3}}
 Toll Connect
 
-{{3-5}}
+                                    {{3-5}}
+*******************************************************************************
 Und im Kleinen ...
 
-{{3-5}}
-Das folgende anschauliche Beispiel und die zugehörige Analyse entstammt der Vorlesung "Software Engineering"
-von Prof. Dr. Schürr, TU Darmstadt.
+Das folgende anschauliche Beispiel und die zugehörige Analyse entstammt der
+Vorlesung "Software Engineering" von Prof. Dr. Schürr, TU Darmstadt.
 
-{{3-5}}
 ```pascal
 program SORT;
 var a, b: file of integer;
@@ -244,11 +268,14 @@ begin
     end
 end SORT;
 ```
-{{3-5}}
+
 Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 
-{{3-4}}
+*******************************************************************************
+
+                                    {{3-4}}
 | Aspekt                 | Bewertung |
+|------------------------|-----------|
 | Funktionalität         | ?         |
 | Zuverlässigkeit        |           |
 | Benutzbarkeit          |           |
@@ -256,8 +283,9 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 | Wartungsfreundlichkeit |           |
 | Übertragbarkeit        |           |
 
-{{4}}
+                                     {{4}}
 | Aspekt                 | Bewertung                                                         |
+|-----|-----|
 | Funktionalität         | feste Feldlänge, das Programm stürzt bei mehr als 10 Einträgen ab |
 | Zuverlässigkeit        | mehrfaches Öffnen ein und der selben Datei                                                                   |
 | Benutzbarkeit          | im Programmcode enthaltene Dateinamen, feste Feldlänge            |
@@ -307,12 +335,14 @@ Koordination Entwicklungsprozess
 
 * Tools - einzelne Aktivitäten im Software Life-cycle
 * Workbenches - mehrere Werkzeuge
-* Environments - Kombination mehrerer Workbenches und Werkzeuge zur Unterstützung des kompletten Software Life-cycle
+* Environments - Kombination mehrerer Workbenches und Werkzeuge zur
+  Unterstützung des kompletten Software Life-cycle
 
 Texteditor vs. Integred development environment (IDE)
 
 * Analyse des Workflows und der Formen der Zusammenarbeit
-* Analyse der verwendeten Spezifikations und Modellierungstechniken, Programmiersprachen, etc.
+* Analyse der verwendeten Spezifikations und Modellierungstechniken,
+  Programmiersprachen, etc.
 * Analyse der Komplexität des Vorhabens, der erforderlichen Unterstützung
 * Analyse der Rahmenbedingungen (Betriebssysteme, Kosten)
 
