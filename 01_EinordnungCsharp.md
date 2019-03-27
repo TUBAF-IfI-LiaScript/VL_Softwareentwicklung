@@ -14,15 +14,17 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 **Fragen an die heutige Veranstaltung ...**
 
-*
+
 
 ---------------------------------------------------------------------
+
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
 https://github.com/liaScript/CsharpCourse/blob/master/01_EinordnungCsharp.md
 
 Die interaktive Form ist unter diese Link zu finden ->
 [LiaScript Vorlesung 1](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/01_EinordnungCsharp.md#1)
+
 ---------------------------------------------------------------------
 
 ## 1. Programmierparadigmen
@@ -73,21 +75,21 @@ style="width: 95%; max-width: 960px; display: block; margin-left: auto; margin-r
      + **Funktionale Sprachen** ... Abbildung der Algorithmen auf funktionale Darstellungen
 
 {{1-2}}
-```haskell    prologBeispiel.cs
-% Definition einer Funktion
+```haskell  Haskell.hs
+-- Definition einer Funktion
 fac 0 = 1
 fac n = n * fac (n-1)
 
-% Berechnung eines Ergebnisses
+-- Berechnung eines Ergebnisses
 main = print (fac 42)
 ```
-@Rextester.eval(@Haskell)
+@Rextester.Haskell
 
 {{1-2}}
      + **Logische Sprachen** ... Ableitung einer Lösung aus einer Menge von Fakten
 
 {{1-2}}
-```prolog    prologBeispiel.cs
+```prolog    Prolog.pro
 % Prolog Text mit Fakten
 mann(adam).
 mann(tobias).
@@ -101,9 +103,11 @@ vater(tobias,ulrike).
 mutter(eva,tobias).
 mutter(daniela,frank).
 mutter(daniela,ulrike).
-%       ?- mann(tobias).
 ```
-@Rextester.eval(@Prolog)
+```prolog Query
+mann(tobias).
+```
+@Rextester._eval_(@uid,@Prolog,false,`@input(1)`)
 
 {{1-2}}
      + **Abfragesprachen** ... Generierung einer Auswahl von Daten
@@ -133,7 +137,8 @@ sich in dieser Richtung weiter.
 "Das ist ja alles gut und schön, aber ich ich bin C Programmierer"
 
 {{3}}
-> **Anti-Pattern Golden Hammer**: *if all you have is a hammer, everything looks like a nail.*
+> **Anti-Pattern Golden Hammer**:
+> *if all you have is a hammer, everything looks like a nail.*
 
 ## 2. --- Warum also C#
 
