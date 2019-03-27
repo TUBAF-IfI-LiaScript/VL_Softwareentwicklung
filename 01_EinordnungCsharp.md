@@ -176,60 +176,65 @@ Aktuell: Die Version C# 8.0 ist angekündigt und einige Sprachfeatures bereits p
 
 ### Konzepte und Einbettung
 
-{{0-1}}
+                                        {{0-1}}
+********************************************************************************
+
 **Compilierung unter C** (zum Vergleich)
 
-{{0-1}}
-![instruction-set](./img/01_Grundlagen/compilerElements.png)<!-- width="80%" --> [^1]
+![Uebersetzungprozess](./img/01_EinordnungCsharp/compilerElements.png)<!-- width="80%" -->
 
-{{1}}
+********************************************************************************
+
+                                        {{1-2}}
+********************************************************************************
+
 **.NET**
 
-{{1-2}}
 > *.NET Framework ist eine __Ausführungsumgebung__ für die Laufzeit, die Apps für*
 > *.NET Framework verwaltet. Sie besteht aus der __Common Language Runtime__, die*
 > *Speicherverwaltung und andere Systemdienste bereitstellt, und einer*
 > *umfangreichen __Klassenbibliothek__, die Programmierern stabilen, zuverlässigen*
 > *Code für alle wesentlichen Bereiche der App-Entwicklung zur Verfügung stellt.* [MSNET]
 
-{{1-2}}
 ![instruction-set](./img/01_Grundlagen/CLRstructure.png)<!-- width="70%" --> [Bhogayta]
 
-{{1-2}}
 * ASP.NET ... ist ein Web Application Framework, mit dem sich dynamische Webseiten, Webanwendungen und Webservices entwickeln lassen.
 *  ActiveX Data Objects (ADO) ... ist eine auf ActiveX basierende Schnittstelle zum Datenzugriff auf Datenbanken und tabellenartige Datenquellen über eine einheitliche API.
 * Windows Forms ... ist ein GUI-Toolkit des Microsoft .NET Frameworks. Es ermöglicht die Erstellung grafischer Benutzeroberflächen (GUIs) für Windows.
 
+********************************************************************************
 
 
+                                        {{2-3}}
+********************************************************************************
 
-{{2-3}}
 *Frage: Des öfteren wird von .NET Framework und .NET Core gesprochen, was sind die Unterschiede?*
 
-{{2-3}}
 > *Think of .NET Core as a subset of .NET Framework that makes sense to be*
 > *cross-platform, redesigned in a much more granular fashion. Microsoft .NET*
 > *Core is the future of .NET and we are happy it has become open source now.* [BlogNET]
 
-{{3-4}}
+********************************************************************************
+
+                                        {{3-4}}
+********************************************************************************
 *Frage: Was sind Alternativen?*
 
-{{3-4}}
 Mono, DotGNU und Portable.NET sind Implementierungen der CLI.
 
-{{4-5}}
+********************************************************************************
+
+                                      {{4-5}}
+********************************************************************************
 *Frage:  Was bedeutet das für den "Build"-Prozess?*
 
-{{4-5}}
 ![instruction-set](./img/01_Grundlagen/ExecutionModel.png)<!-- width="90%" --> [Bhogayta]
 
-{{4-5}}
 Die spezifischen Compiler der einzelnen .NET Sprachen (C#. Visual Basic, F#) bilden den Quellcode
 auf einen Zwischencode ab. Die Common Language Infrastructure (CLI) ist eine von ISO und ECMA
 standardisierte offene Spezifikation (technischer Standard), die ausführbaren
 Code und eine Laufzeitumgebung beschreibt.
 
-{{4-5}}
 ```cil    CLI
 .assembly HalloWelt { }
 .assembly extern mscorlib { }
@@ -243,33 +248,67 @@ Code und eine Laufzeitumgebung beschreibt.
 }
 ```
 
-### Abgrenzung zu Java und C++
+Ein Assembly umfasst:
+* das Assemblymanifest, das die Assemblymetadaten enthält.
+* die Typmetadaten.
+* den CIL-Code
+* Links auf mögliche Ressourcen.
 
+Ein Assembly bildet:
+* bildet eine Sicherheitsgrenze. Eine Assembly ist die Einheit, bei der Berechtigungen angefordert und erteilt werden. Weitere Informationen über Sicherheitsgrenzen bei Assemblys finden Sie unter Überlegungen zur Assemblysicherheit.
+* bildet eine Typgrenze. Die Identität jedes Typs enthält den Namen der Assembly, in der dieser sich befindet. Wenn der Typ MyType in den Gültigkeitsbereich einer Assembly geladen wird, ist dieser nicht derselbe wie der Typ MyType, der in den Gültigkeitsbereich einer anderen Assembly geladen wurde.
+* bildet eine Versionsgrenze. Die Assembly ist die kleinste, in verschiedenen Versionen verwendbare Einheit in der Common Language Runtime. Alle Typen und Ressourcen in derselben Assembly bilden eine Einheit mit derselben Version. Das Assemblymanifest beschreibt die von Ihnen für abhängige Assemblys angegebenen Versionsabhängigkeiten. Weitere Informationen über die Versionen finden Sie unter Assemblyversionen.
+* bildet eine Bereitstellungseinheit. Beim Starten einer Anwendung müssen nur die von der Anwendung zu Beginn aufgerufenen Assemblys vorhanden sein. Andere Assemblys, z. B. Lokalisierungsressourcen oder Assemblys mit Hilfsklassen, können bei Bedarf abgerufen werden. Dadurch ist die Anwendung beim ersten Herunterladen einfach und schlank. Weitere Informationen über die Bereitstellung von Assemblys finden Sie unter Bereitstellung von Anwendungen.
+* stellt die Einheit dar, in der die parallele Ausführung unterstützt wird. Weitere Informationen über das Ausführen mehrerer Versionen einer Assembly finden Sie unter Assemblys und parallele Ausführung.
 
+********************************************************************************
 
+                                  {{5-6}}
+********************************************************************************
+*Frage:  Was passiert unter der Haube der CLR?*
 
-void *memcpy (void* destination, const void* source, size_t num);
+Für die *Managed Code Execution* stellt die CLR ein entsprechendes Set von Komponenten
+bereit:
 
+* Class Loader ... Einlesen der Assemblies in die CLR Ausführungsumgebung unter
+Beachtung der Sicherheits-, Versions-, Typinformationen usw.
+* Just-in-Time Compiler ... Abbildung der CIL auf den ausführbaren Maschinencode
+* Code Execution und Debugging
+* Garbage Collection ... der GC ist für die Bereinigung von Referenz-Objekten auf
+dem Heap verantwortlich und wird von der CLR zu nicht-deterministischen Zeitpunkten
+gestartet.
 
+********************************************************************************
 
+### Abgrenzung zu Java
 
+vgl. Vortrag von Mössenböck ([link](https://www.dcl.hpi.uni-potsdam.de/teaching/componentVl05/slides/Net_VL2_01_Java-CS-Moessenboeck.pdf))
 
-## 4. Es wird konkret ... Hello World
+|                  | Java                                        | C#                                         |
+| ---------------- | ------------------------------------------- | ------------------------------------------ |
+| Veröffentlichung | 1995                                        | 2001                                       |
+| Plattform        | (Java) Unix/Linux,  Windows, MacOS, Android | (.NET) Windows, Linux, Android, iOS, MacOS |
+| VM               | Java-VM                                     | CLR                                        |
+| Zwischencode     | Java-Bytecode                               | CIL                                        |
+| JIT              | per Methoden                                | per Methode / gesamt                       |
+| Komponenten      | Beans                                       | Assemblies                                           |
+| Versionierung    | nein                                        | ja                                         |
+| Leitidee         | Eine Sprache auf vielen Plattformen         | Viele Sprachen auf einer Plattformen       |
 
-```csharp    HelloWorld.cs
-using System;
+Beim Punkt "Leitidee" muss man kritisch fragen ob auf der C# Seite die
+Programmiersprache oder das .NET Framework gemeint ist!
 
-namespace Rextester // This namespace is necessary for Rextester API !
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            Console.WriteLine("Hello, world!");
-        }
-    }
-}
-```
+## 3. Es wird konkret ... Hello World
+
+Die organisatorischen Schlüsselkonzepte in C# sind: **Programme**, **Namespaces**,
+**Typen**, **Member** und **Assemblys**. C#-Programme bestehen aus mindestens einer
+Quelldatei, von denen mindestens eine `Main` als einen Methodennamen hat
+Programme deklarieren Typen, die Member enthalten, und können in Namespaces
+organisiert werden.
+
+Wenn C#-Programme kompiliert werden, werden sie physisch in Assemblys verpackt.
+Assemblys haben diese unter Windows Betriebssystemen die Erweiterung .exe oder
+.dll, je nachdem, ob sie Anwendungen oder Bibliotheken implementieren.
 
 *A) LiaScript Umgebung*
 
@@ -292,34 +331,116 @@ namespace Rextester // This namespace is necessary for Rextester API !
 
 *B) Mono Kommandozeile*
 
-``` bash @output
-▶ mcs helloWorld.cs
+Die Webseite des Mono Projekts ist unter [MonoProject](https://www.mono-project.com/) zu finden.
 
-▶ ls
-helloWorld.cs  helloWorld.exe
+```csharp    HelloWorld.cs
+using System;
+namespace HelloWorld
+{
+    class Hello
+    {
+        static void Main()
+        {
+            Console.WriteLine("Hello World!");
 
-▶ mono helloWorld.exe
-Hello, world!
+            // Keep the console window open in debug mode.
+            Console.WriteLine("Press any key to exit.");
+            Console.ReadKey();
+        }
+    }
+}
 ```
 
 Eine ausführliche Hilfe findet sich unter https://www.mono-project.com/docs/getting-started/mono-basics/
 (Allerdings ist dort ein Typo passiert statt des Mono-Compilers wird der .NET
 Compiler aufgerufen. Bitte genau hinschauen.)
 
-*C) Monodeveloper*
+``` bash @output
+▶ mcs --about
+The Turbo C# compiler is Copyright 2001-2011, Novell, Inc. 2011-2016 Xamarin Inc, 2016-2017 Microsoft Corp
 
-![EventDrivenGUI](../Bilder/0_Motivation/MonoDeveloper.png)<!-- width="80%" --> [ref](#8) [^3]
+The compiler source code is released under the terms of the
+MIT X11 or GNU GPL licenses
+
+▶ mcs HelloWorld.cs
+
+▶ ls
+HelloWorld.cs  HelloWorld.exe
+
+▶ mono HelloWorld.exe
+Hello, world!
+Press any key to exit.
+
+▶ ikdasm HelloWorld.exe
+...
+
+```
+
+Eine gute Hilfestellung zur Analyse von Assemblies findet sich unter [codeproject](https://www.codeproject.com/Articles/362076/Understanding-Common-Intermediate-Language-CIL)
 
 
-*D) .NET Kommandozeile*
+*C) .NET Kommandozeile*
 
+Das .NET Core Framework kann unter [.NET](https://dotnet.microsoft.com/download/linux-package-manager/rhel/sdk-current)
+für verschiedene Betriebssystem heruntergeladen werden. Das SDK umfasst sowohl die
+Bibliotheken, Laufzeitumgebung und Tools.
 
-*E) .NET Visual Code*
+``` bash @output
+▶ csc
+Microsoft (R) Visual C# Compiler version 2.8.2.62916 (2ad4aabc)
+Copyright (C) Microsoft Corporation. All rights reserved.
+```
+
+Leider muss dann wieder mono als Ausführungsumgebung herhalten, um mit der .NET
+CLR zu arbeiten braucht es offenbar immer ein ganzes Projekt:
+
+``` bash @output
+▶ dotnet new console
+
+▶ tree
+.
+├── bin
+│   └── Debug
+│       └── netcoreapp2.2
+│           ├── dotnet.deps.json
+│           ├── dotnet.dll
+│           ├── dotnet.pdb
+│           ├── dotnet.runtimeconfig.dev.json
+│           └── dotnet.runtimeconfig.json
+├── dotnet.csproj
+├── obj
+│   ├── Debug
+│   │   └── netcoreapp2.2
+│   │       ├── dotnet.AssemblyInfo.cs
+│   │       ├── dotnet.AssemblyInfoInputs.cache
+│   │       ├── dotnet.assets.cache
+│   │       ├── dotnet.csprojAssemblyReference.cache
+│   │       ├── dotnet.csproj.CoreCompileInputs.cache
+│   │       ├── dotnet.csproj.FileListAbsolute.txt
+│   │       ├── dotnet.dll
+│   │       ├── dotnet.pdb
+│   │       └── project.razor.json
+│   ├── dotnet.csproj.nuget.cache
+│   ├── dotnet.csproj.nuget.g.props
+│   ├── dotnet.csproj.nuget.g.targets
+│   └── project.assets.json
+└── Program.cs
+
+```
+
+*C) .NET Visual Code*
+
+Alternativ können Sie auch die Microsoft Visual Studio oder Visual Code Suite nutzen.
+Diese kann man zum Beispiel auf unser gerade erstelltes Projekt anwenden
 
 
 Evaluieren Sie auch den interaktiven Modus mit gsharp, csharp oder dem .NET
 Interpreter unter Visual Studio.
 
+
+*D) Monodeveloper*
+
+![EventDrivenGUI](./img/01_EinordnungCsharp/MonoDeveloper.png)<!-- width="80%" -->
 
 ## Anhang
 
