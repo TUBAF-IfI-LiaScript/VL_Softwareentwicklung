@@ -123,7 +123,6 @@ gehalten hat.
 
 * Einordnung im Gesamtkontext (Entwicklungsmethodik, C#, Tools)
 * 7 Fragen (die jeweils eine Woche später ergänzt werden)
-* Zusammenfassung der letzten Veranstaltung
 * ... eigentlicher Inhalt ...
 * Beispiel der Woche
 * Anhang mit Referenzen und Literaturhinweisen
@@ -131,26 +130,6 @@ gehalten hat.
 *******************************************************************************
 
                                     {{5-6}}
-*******************************************************************************
-
-**Vorlesungsplan**
-
-|     | Tag       | Inhalt der Vorlesung   |
-|:--- | --------- |:---------------------- |
-| 1   | 2. April  | Ausfall                |
-|     | 3. April  | Motivation             |
-| 2   | 9. April  | Warum C#, Einführung   |
-|     | 10. April |                        |
-| 3.  | 16. April |                        |
-|     | 17. April |                        |
-| 4.  | 23. April |                        |
-|     | 24. April |                        |
-| 5.  | 30. April |                        |
-|     |           | ...                    |
-
-*******************************************************************************
-
-                                    {{6-7}}
 *******************************************************************************
 
 **Wie können Sie zum Gelingen der Veranstaltung beitragen**
@@ -372,7 +351,7 @@ Softwaretechnische Probleme bei der Einführung 2003:
 
                                     {{5}}
 *******************************************************************************
-Und im Kleinen ...
+**Und im Kleinen ...**
 
 Das folgende anschauliche Beispiel und die zugehörige Analyse entstammt der
 Vorlesung "Software Engineering" von Prof. Dr. Schürr, TU Darmstadt.
@@ -440,15 +419,18 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 
 **Der Faktor Mensch**
 
-![FaktorMensch](./img/00_Einfuehrung/Kommunikationsbedarfe.png)<!-- width="80%" --> [Lemburg2](#7)
+![FaktorMensch](./img/00_Einfuehrung/Kommunikationsbedarfe.png)<!-- width="60%" --> [Lemburg2](#7)
 
 Hier ist eine koordinierte Interaktion und Kommunikation notwendig!
+
+
+------------------------------------------------------------------------
 
 **Ansätze zur Koodination**
 
 *Erweitertes Wasserfallmodell*
 
-![Wasserfallmodell](./img/00_Einfuehrung/Wasserfallmodell.png)<!-- width="80%" --> [Lemburg2](#7)
+![Wasserfallmodell](./img/00_Einfuehrung/Wasserfallmodell.png)<!-- width="60%" --> [Lemburg2](#7)
 
 Eigenschaften des Wasserfallmodells:
 * Aktivitäten sind in der vorgegebenen Reihenfolge und in der vollen Breite vollständigdurchzuführen.
@@ -465,6 +447,7 @@ Nachteile:
 * Frühes festschreiben der Anforderungen ist sehr problematisch und kann zu teuren Änderungenführen
 * Fehler werden eventuell erst sehr spät erkannt und müssen mit erheblichen Aufwand  entfernt werden
 
+------------------------------------------------------------------------
 *V-Modell*
 
 ![V-Modell](./img/00_Einfuehrung/VModell.png)<!-- width="80%" --> [Lemburg2](#7)
@@ -481,8 +464,13 @@ Nachteile:
 * Die im V-Modell definierten Rollen (bis zu 25) sind für gängige Softwareentwicklungen nicht realistisch
 * explizite Werkzeuge notwendig
 
+------------------------------------------------------------------------
+
 Alternative Ansätze: *Agile Softwareentwicklung*, *Rational Unified Process*, *Spiralmodell*
 
+Weitere Informationen zum Beispiel unter
+
+https://www.dev-insider.de/was-ist-agile-softwareentwicklung-a-569187/
 
 ## 4. Computer-aided software engineering (CASE)
 
