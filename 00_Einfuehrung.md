@@ -481,6 +481,9 @@ Nachteile:
 * Die im V-Modell definierten Rollen (bis zu 25) sind für gängige Softwareentwicklungen nicht realistisch
 * explizite Werkzeuge notwendig
 
+Alternative Ansätze: *Agile Softwareentwicklung*, *Rational Unified Process*, *Spiralmodell*
+
+
 ## 4. Computer-aided software engineering (CASE)
 
 > *CASE is the use of computer-based support in the software development process*
