@@ -14,6 +14,29 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 **Fragen an die heutige Veranstaltung ...**
 
+*1. Welches Programmierparadigma findet bei folgendem Codefragment Anwendung:*
+
+```python    
+print("Berechne die Summe von Zahlenreihen")
+max_value = 10
+sum = 0
+for i in range(0, max_value + 1):
+    sum += i
+    print("{:>2d}".format(i) + "{:>5d}".format(sum))
+```
+@Rextester.eval(@Python)
+
+---------------------------------------------------------------------
+
+*2. Frage*
+
+
+
+---------------------------------------------------------------------
+
+*2. Recherchieren Sie Unterschiede zwischen der Mono-Implementierung der .NET Core.*
+
+---------------------------------------------------------------------
 
 
 ---------------------------------------------------------------------
@@ -43,38 +66,38 @@ Das Programmierparadigma:
 
 {{1-4}}
 <!--
-style="width: 95%; max-width: 960px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 85%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ````````````
-                                 Programmierparadigmen
-                                           ┃
-                         ┏━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━┓
-            Imperative Programmierung                 Deklarative Programmierung
-                       ┃                                          ┃
-      ┏━━━━━━━━━━━━━━━━╋━━━━━━━━━━━━━━━┓                 ┏━━━━━━━━╋━━━━━━━━━┓
- Strukturiert    Prozedural    Objektorientiert    Funktional   Logisch    ....  
+                         Programmierparadigmen
+                                  ┃
+                ┏━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━┓
+    Imperative Programmierung         Deklarative Programmierung
+                ┃                                   ┃
+      ┏━━━━━━━━━┻━━━━━━━━┓                 ┏━━━━━━━━┻━━━━━━━━━┓
+  Prozedural    Objektorientiert    Funktional             Logisch  
+
+ Strukturierte Programmierung, Aspektorientierte Programmierung,
+ Generative Programmierung, Generische Programmierung
 
 ````````````
-{{1-2}}
-**Imperative Programmierung** ... Quellcode besteht aus einer Folge von Befehlen die in einer festen Reihenfolge abgearbeitet werden.
 
-{{1-2}}
-     + **Strukturierte  Programmierung** ... Verzicht bzw. Einschränkung des `Goto` Statements zugunsten von Kontrollstrukturen (Kernkonzepte: Verzweigungen,
-     Schleifen)
+                                       {{1-2}}
+*******************************************************************************
+* **Imperative Programmierung** ... Quellcode besteht aus einer Folge von Befehlen die in einer festen Reihenfolge abgearbeitet werden.
 
-{{1-2}}
-     + **Prozedurale Programmierung** ... Zerlegung von Programmen in überschaubare Teile, die durch eine definierte Schnittstelle aufrufbar sind (Kernkonzepte: Funktion, Prozedur, Routine, Unterprogramm)
+    + **Prozedurale Programmierung** ... Zerlegung von Programmen in überschaubare Teile, die durch eine definierte Schnittstelle aufrufbar sind (Kernkonzepte: Funktion, Prozedur, Routine, Unterprogramm)
 
-{{1-2}}
-     + **Objektorientierte Programmierung** ... Kapselung von Daten und Funktionen in einem Konzept
+    + **Objektorientierte Programmierung** ... Kapselung von Daten und Funktionen in einem Konzept
 
-{{1-2}}
-**Deklarative Programmierung** ... • Es wird kein Lösungsweg implementiert, sondern nur angegeben, was gesucht ist.
+*******************************************************************************
 
-{{1-2}}
+                                       {{2-3}}
+*******************************************************************************
+* **Deklarative Programmierung** ... • Es wird kein Lösungsweg implementiert, sondern nur angegeben, was gesucht ist.
+
      + **Funktionale Sprachen** ... Abbildung der Algorithmen auf funktionale Darstellungen
 
-{{1-2}}
 ```haskell  Haskell.hs
 -- Definition einer Funktion
 fac 0 = 1
@@ -85,10 +108,8 @@ main = print (fac 42)
 ```
 @Rextester.Haskell
 
-{{1-2}}
-     + **Logische Sprachen** ... Ableitung einer Lösung aus einer Menge von Fakten
+     + **Logische Sprachen** ... Ableitung einer Lösung aus einer Menge von Fakten, Generierung einer Auswahl von Daten
 
-{{1-2}}
 ```prolog    Prolog.pro
 % Prolog Text mit Fakten
 mann(adam).
@@ -108,37 +129,96 @@ mutter(daniela,ulrike).
 mann(tobias).
 ```
 @Rextester._eval_(@uid,@Prolog,false,`@input(1)`)
+*******************************************************************************
 
-{{1-2}}
-     + **Abfragesprachen** ... Generierung einer Auswahl von Daten
 
-{{1-2}}
+                                      {{3-4}}
+*******************************************************************************
+
+* **Weiter Konzepte** ... keine Spezifische Zuordenbarkeit
+
+     + **Strukturierte  Programmierung** ... Verzicht bzw. Einschränkung des `Goto` Statements zugunsten von Kontrollstrukturen (Kernkonzepte: Verzweigungen,
+     Schleifen)
+
      + **Nebenläufig**, **Reflektiv**, **Generisch**, ...
 
-{{2}}
+*******************************************************************************
+
+                                    {{4-5}}
+*******************************************************************************
 Viele Sprachen unterstützen verschiedene Elemente der Paradigmen, bzw. entwickeln
 sich in dieser Richtung weiter.
 
-{{2}}
-| Sprache | Paradigmen                                          |
-| ------- | --------------------------------------------------- |
-| Pascal  | imperativ, prozedural                               |
-| C       | imperativ, prozedural                               |
-| Ada     | imperativ, objektorientiert                         |
-| Java    | imperativ, objektorientiert                         |
-| Python  | imperativ, objektorientiert, funktional             |
-| C#      | imperativ, prozedural, objektorientiert, funktional |                                                    |
-| C++     | imperativ, prozedural, objektorientiert, funktional |
-| Haskell | deklarativ, funktional                              |
-| Prolog  | deklarativ, Logisch                                 |
-| SQL     | deklarativ, Abfragesprache                          |
+| Sprache | imperativ                    | deklarativ |
+| ------- | ---------------------------- | ---------- |
+| Pascal  | prozedural                   |            |
+| C       | prozedural                   |            |
+| Ada     | objektorientiert             |            |
+| Java    | objektorientiert             |            |
+| Python  | objektorientiert,            | funktional |
+| C#      | prozedural, objektorientiert | funktional |
+| C++     | prozedural, objektorientiert | funktional |
+| Haskell |                              | funktional |
+| Prolog  |                              | Logisch    |
+| SQL     |                              | Logisch    |
+
+Am Beispiel ... Berechnen Sie die Summe der Ziffern eines Arrays.
+
+```python    
+my_list = range(0,10)
+
+# imperative
+result = 0
+for x in my_list:
+    result += x
+print("Result in imperative style      :" + str(result))
+
+# procedural
+result = 0
+def do_add(list_of_numbers):
+    result = 0
+    for x in my_list:
+        result += x
+    return result
+print("Result in procedural style      :" + str(result))
+
+# object oriented
+class MyClass(object):
+    def __init__(self, any_list):
+        self.any_list = any_list
+        self.sum = 0
+    def do_add(self):
+      self.sum = sum(self.any_list)
+create_sum = MyClass(my_list)
+create_sum.do_add()
+print("Result in object oriented style :" + str(create_sum.sum))
+
+# functional
+import functools
+result = functools.reduce(lambda x, y: x + y, my_list)
+print("Result in functional style      :" + str(result))
+
+```
+@Rextester.eval(@Python)
+
+*******************************************************************************
+
+                                  {{5}}
+*******************************************************************************
+"Das ist ja alles gut und schön, aber ich ich bin C Programmierer!"
 
 {{3}}
-"Das ist ja alles gut und schön, aber ich ich bin C Programmierer"
-
-{{3}}
-> **Anti-Pattern Golden Hammer**:
+> **Anti-Pattern "Golden Hammer"**:
 > *if all you have is a hammer, everything looks like a nail.*
+
+Lösungsansätze:
+* Individuell - Hinterfragen des Vorgehens und der Intuition, bewusste Weiterentwicklung des eigenen Horizontes (ohne auf jeden Zug auf zuspringen)
+* im Team - Teilen Sie Ihre Erfahrungen im Team / der Community, besetzen Sie Teams mit
+Mitarbeitern unterschiedlichen Backgrounds (Technical Diversity)
+
+Weitere Diskussion unter: https://sourcemaking.com/antipatterns/golden-hammer
+
+*******************************************************************************
 
 ## 2. --- Warum also C#
 
