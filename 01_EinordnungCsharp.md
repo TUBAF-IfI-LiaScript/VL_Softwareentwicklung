@@ -10,9 +10,18 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 -->
 
-# Vorlesung Softwareentwicklung - 1 - Grundlagen
+# Vorlesung Softwareentwicklung - 1 - Einordnung der Sprache C#
 
-**Fragen an die heutige Veranstaltung ...**
+Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
+
+https://github.com/liaScript/CsharpCourse/blob/master/01_EinordnungCsharp.md
+
+Die interaktive Form ist unter diese Link zu finden ->
+[LiaScript Vorlesung 1](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/01_EinordnungCsharp.md#1)
+
+---------------------------------------------------------------------
+
+## Kontrollfragen
 
 *1. Welches Programmierparadigma findet bei folgendem Codefragment Anwendung:*
 
@@ -28,12 +37,6 @@ for i in range(0, max_value + 1):
 
 ---------------------------------------------------------------------
 
-*2. Frage*
-
-
-
----------------------------------------------------------------------
-
 *2. Recherchieren Sie Unterschiede zwischen der Mono-Implementierung der .NET Core.*
 
 ---------------------------------------------------------------------
@@ -41,14 +44,7 @@ for i in range(0, max_value + 1):
 
 ---------------------------------------------------------------------
 
-Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/liaScript/CsharpCourse/blob/master/01_EinordnungCsharp.md
-
-Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 1](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/01_EinordnungCsharp.md#1)
-
----------------------------------------------------------------------
 
 ## 1. Programmierparadigmen
 
