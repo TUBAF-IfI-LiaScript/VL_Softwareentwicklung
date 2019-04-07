@@ -14,10 +14,10 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/liaScript/CsharpCourse/blob/master/02_Elemente.md
+https://github.com/liaScript/CsharpCourse/blob/master/02_ElementsI.md
 
 Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 2](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/02_Elemente.md#1)
+[LiaScript Vorlesung 1](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/02_ElementsI.md#1)
 
 ---------------------------------------------------------------------
 
@@ -46,8 +46,6 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 ---------------------------------------------------------------------
 
 ## Kontrollfragen
-
-**Fragen an die heutige Veranstaltung ...**
 
 *1. Was bedeutet die Aussage, das C# ein einheitliches Typsystem habe?*
 
@@ -262,8 +260,6 @@ style="width: 80%; max-width: 760px; display: block; margin-left: auto; margin-r
 
 ````````````
 
- 1.  Wertyp vs. Referenztypen
-
 |                  | Werttypen        | Referenztypen                              |
 |:---------------- |:---------------- |:------------------------------------------ |
 | Variable enthält | einen Wert       | eine Referenz                              |
@@ -328,7 +324,7 @@ namespace Rextester
 @Rextester.eval(@CSharp)
 
 
-2. Benutzerorientierte vs. vordefinierte Typen
+### Numerische Datentypen
 
 | Kategorie | Type                        | Suffix | Name    | .NET Typ | Bit |
 | --------- | --------------------------- | ------ | ------- | -------- | --- |
@@ -398,7 +394,7 @@ Da die Konvertierung von Ganzkommazahlen in Gleitkommazahlen in jedem Fall
 umgesetzt werden kann, sieht C# hier eine implizite Konvertierung vor. Umgekehrt
 muss diese explizit realisiert werden.
 
-## Exkurs: Gleitkommazahlen
+### Exkurs: Gleitkommazahlen
 
 Gleitkommazahlen? Wie funktioniert das eigentlich?
 
@@ -441,7 +437,7 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-## 3. Arithmetische Operatoren
+### 3. Arithmetische Operatoren
 
                                  {{0-1}}
 ********************************************************************************
