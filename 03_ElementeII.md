@@ -690,7 +690,7 @@ Viertelkreis zur Quadratfläche:
 $$\frac{Punkte_{in}}{Punkte_{all}} = \frac{A_{Kreisausschnitt}}{Quadratfläche} = \frac{\frac{1}{4}\pi r^2}{r^2} = \frac{1}{4} \pi$$
 
 
-```csharp    HelloWorld_rex.cs
+```csharp   
 using System;
 
 namespace Rextester
@@ -700,14 +700,16 @@ namespace Rextester
     public static void Main(string[] args)
     {
       var random = new Random();
-      double x, y;
-      for (int i=0; i<100; i++){
+      double x, y, dist;
+      int inside = 0, outside = 0;
+      for (int i=0; i<100000; i++){
         x = random.NextDouble();
         y = random.NextDouble();
         dist = Math.Sqrt(x*x + y * y);
-        if dist > 0
+        if (dist > 1) outside ++;
+        else inside++;
       }
-      Console.WriteLine("Hello, world!");
+      Console.WriteLine("{0:F}", 4 * (float)inside/(inside + outside));
     }
   }
 }
