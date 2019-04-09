@@ -7,6 +7,7 @@ language: de
 narrator: Deutsch Female
 
 import: https://raw.githubusercontent.com/liaScript/rextester_template/master/README.md
+        https://raw.githubusercontent.com/liaScript/tau-prolog_template/master/README.md
 
 -->
 
@@ -125,10 +126,13 @@ grossvater(X,Y) :-
      vater(X,Z),
      vater(Z,Y).
 ```
+@Tau.program(Prolog.pro)
+
 ```prolog Query
 grossvater(adam,frank).
 ```
-@Rextester._eval_(@uid,@Prolog,false,`@input(1)`)
+@Tau.query(Prolog.pro)
+
 *******************************************************************************
 
 
