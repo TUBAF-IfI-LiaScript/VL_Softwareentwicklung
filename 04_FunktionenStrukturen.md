@@ -305,13 +305,275 @@ dass die Deklaration beim Aufruf selbst erfolgt. Im Zusammenhang mit impliziten
 Variablendeklarationen kann man dann typunabhängig Rückgabewerte aus Funktionen
 entgegennehmen.
 
+Zudem sollte für eine sehr umfangreiches Set von Rückgabewerten geprüft werden,
+ob diese wirklich alle benötig werden. Mit dem *discard* Platzhalter `out _` werden unnötige
+Deklarationen eingespart.
+
+```csharp  
+static void SuperComplexMethod(out  string result, out int countA, out int countB){}
+SuperComplexMethod(out _, out_, out int count);
+```
+
+### Parameterlisten
+
+C# erlaubt es Methoden zu definieren, die eine variable Zahl von Parametern
+haben. Dabei wird der letzte Parameter als Array deklariert, so dass die  
+Informationen dann systematisch zu evaluieren sind. Dafür wird der `params`
+Modifikator eingefügt.
+
+```csharp    variableParameters.cs
+using System;
+
+namespace Parameters
+{
+  public class Program
+  {
+    static void Add(out int sum, params int [] list)
+    {
+      sum = 0;
+      foreach(int i in list) sum+=i;
+    }
+
+    public static void Main(string[] args){
+      Add(out int sum, 3, 3, 5 , 6);
+      Console.WriteLine(sum);
+    }
+  }
+}
+```
+
+Letztendlich wird damit eine Funktionalität realisiert, wie sie für
+`Main(string[] args)` obligatorisch ist.
+
 ### Benannte und optionale Argumente
+
+Funktionsdeklarationen können mit Default-Werten spezifiziert werden. Dadurch
+wird auf der einen Seite Flexibilität über ein breites Interface garantiert,
+auf der anderen aber lästige Tipparbeit vermieden. Der Code bleibt damit
+übersichtlich.
+
+```csharp   
+static void Sort(string [] s, int from, int to, bool ascending, bool ignoreCases){}
+
+static void Sort(string [] s, int from=0, int to=-1, bool ascending = true, bool ignoreCases= false){}
+```
+
+Die *default*-Werte müssen aber der Reihenfolge nach "abgearbeitet" werden.
+eine partielle Auswahl bestimmter Werte ist nicht möglich.
+
+```csharp   
+string [] s = {'Rotkäpchen', 'Hänsel', 'Gretel', 'Hexe'};
+//Aufruf     // implizit
+Sort(s);     // from=0, to=-1, ascending = true, ignoreCases= false
+Sort(s, 3);  // to=-1, ascending = true, ignoreCases= false
+```
+
+Darüber hinaus lässt sich die Reihenfolge der Parameter aber auch auflösen. Der
+Variablenname wird dann explizit angegeben `,variablenname:Wert, `.
+
+<!-- --{{1}}-- Idee des Beispiels:
+          PrintDate(1, year:2019, month:12);  
+-->
+```csharp   
+using System;
+
+namespace Rextester
+{
+  public class Program
+  {
+    static void PrintDate(int day=1111, int month=2222, int year=3333 ){
+      Console.WriteLine("Day {0} Month {1} Year {2}", day, month, year);
+    }
+
+    public static void Main(string[] args){
+      PrintDate();           
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+### Überladen von Funktionen
+
+Innerhalb der Konzepte von C# ist es explizit vorgesehen, dass Methoden gleichen
+Namens auftreten, wenn diese sich in ihren Parametern unterscheiden:
+
+* Anzahl der Parameter
+* Parametertypen
+* Paramterattribute (ref, out)
+
+Ein bereits mehrfach genutztes Beispiel dafür ist die `System.Write`-Methode,
+die unabhängig vom Typ der übergebenen Variable eine entsprechende Ausgabe
+realisiert. Die Dokumentation unter [Link](https://docs.microsoft.com/de-de/dotnet/api/system.console.write?view=netframework-4.7.2) kennt 18 verschiedene
+Parametersets für diese Methode. Der Vorteil liegt darin, dass der Nutzer sich nicht
+18 verschiedene Methoden zu merken muss.
+
+```csharp   
+using System;
+
+namespace Rextester
+{
+  public class Program
+  {
+    public static void Main(string[] args){
+      double value = 1d;                                   // originär unterstützt
+      DateTime date = new DateTime(2008, 5, 1, 8, 30, 52); // auf ToString() angewiesen
+      Console.WriteLine(date);
+      }
+   }
+}
+```
+@Rextester.eval(@CSharp)
+
+## 2 Structs
+
+                                         {{0-1}}
+*******************************************************************************
+
+Ausgangspunkt für die weiteren Überlegungen ist die Konfiguration von `structs`
+in C.
+
+
+```cpp         struct.c
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct RectangleStructure{
+    double length;
+    double width;
+    double area;
+} Rectangle;
+
+int main(int argc, char const *argv[])
+{
+    Rectangle rect1, rect2, rect3;
+    // Initialisierung:
+    rect1.length = 2.5; rect1.width = 5;
+    rect2.length = 4; rect2.width = 8;
+    rect3.length = 1.5; rect3.width = 2.1;
+    // Berechnung:
+    rect1.area = rect1.length * rect1.width;
+    rect2.area = rect2.length * rect2.width;
+    rect3.area = rect3.length * rect3.width;
+    // Ausgabe:
+    printf("Rectangle 1 has an area of %f\n",rect1.area);
+    printf("Rectangle 2 has an area of %f\n",rect2.area);
+    printf("Rectangle 3 has an area of %f\n",rect3.area);
+    return 0;
+}
+```
+@Rextester.C
+
+**Was fehlt uns?**
+
+*******************************************************************************
+
+                                       {{1-2}}
+*******************************************************************************
+
+Richtig, ein Set zugehöriger Funktionen!
+
+```cpp    structAndFunctions.c
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct RectangleStructure{
+    double length;
+    double width;
+    double area;
+} Rectangle;
+
+void initializeRectangle(Rectangle *actualRect, double length,
+                         double width){
+ actualRect->length = length;
+ actualRect->width = width;
+}
+
+void computeArea(Rectangle *actualRect){
+ actualRect->area = actualRect->length * actualRect->width;
+}
+
+void printRectangleArea(Rectangle *actualRect){
+ printf("The Rectangle has an area of %f\n",actualRect->area);
+}
+
+int main(int argc, char const *argv[])
+{
+    Rectangle rect1;
+    // Initialisierung:
+    initializeRectangle(&rect1, 30, 40);
+    computeArea(&rect1);
+    printRectangleArea(&rect1);
+    return 0;
+}
+```
+@Rextester.C
+
+C sieht keine Möglichkeit vor Funktion und Daten "dichter" zusammenzubringen, wenn man von Funktionspointern im `struct` absieht.
+
+*******************************************************************************
+
+                                 {{2-3}}
+*******************************************************************************
+
+Und in C#?
+
+https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/classes-and-structs/using-structs
+
+*******************************************************************************
 
 
 
 ## 3. Beispiel der Woche ...
 
+Entwickeln Sie ein Programm, dass als Kommandozeilen-Parameter eine Funktionsnamen
+und eine Ganzzahl übernimmt und die entsprechende Ausführung realisiert. Als
+Funktionen sollen dabei `Square` und `Reciprocal` dienen. Der Aufruf erfolgt
+also mit
 
+```bash
+mono Calculator Square 7    
+mono Calculator Reciprocal 9
+```
+Welche Varianten der Eingaben müssen Sie prüfen?
+
+Eine mögliche Lösung finden Sie unter ... [Link]()
+
+```csharp    Calculator.cs
+using System;
+namespace Calcualator
+{
+  class MainClass
+  {
+    static double Square(int num) => num * num;
+    static double Reciprocal (int num) => 1f / num;
+
+    static void Main(string[] args)
+    {
+      bool Error = false;
+      double result = 0;
+      int num = 1;
+      if (args.Length == 2)
+      {
+        // Hier geht es weiter, welche Fälle müssen Sie bedenken?
+        // int.TryParse(args[1], out num) erlaubt ein fehlertolerantes Parsen
+        // eines strings
+      }
+      else Error = true;
+
+      if (Error)
+      {
+        Console.WriteLine("Please enter a function and a numeric argument.");
+        Console.WriteLine("Usage: Square    <int> or\n       Reciprocal <int>");
+      }
+      else
+      {
+        Console.WriteLine("{0} Operation on {1} generates {2}", args[0], num, result );
+      }
+    }
+  }
+}
+```csharp   
 
 
 
