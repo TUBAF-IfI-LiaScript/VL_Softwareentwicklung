@@ -1,1 +1,12 @@
+*.suo
+*.ide
+*.ide-wal
+*.config
+*.ide-shm
+*.pdb
+*.scproj
+*.cache
 *.exe
+
+/code/01_EinordnungCsharp/VS_Example/
+/code/01_EinordnungCsharp/gtkExample/
