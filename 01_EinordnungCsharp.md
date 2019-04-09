@@ -35,16 +35,16 @@ for i in range(0, max_value + 1):
 ```
 @Rextester.eval(@Python)
 
----------------------------------------------------------------------
-
-*2. Recherchieren Sie Unterschiede zwischen der Mono-Implementierung der .NET Core.*
-
----------------------------------------------------------------------
-
+[(X)] Imperative Programmierung
+[( )] Logische Programmierung
+[( )] Objektorientierte Programmierung
+[[?]] Wohl in der Vorlesung nicht aufgepasst? :-)
 
 ---------------------------------------------------------------------
 
+*2. .... hier folgen jetzt Ihre Fragen*
 
+---------------------------------------------------------------------
 
 ## 1. Programmierparadigmen
 
@@ -120,9 +120,13 @@ vater(tobias,ulrike).
 mutter(eva,tobias).
 mutter(daniela,frank).
 mutter(daniela,ulrike).
+
+grossvater(X,Y) :-
+     vater(X,Z),
+     vater(Z,Y).
 ```
 ```prolog Query
-mann(tobias).
+grossvater(adam,frank).
 ```
 @Rextester._eval_(@uid,@Prolog,false,`@input(1)`)
 *******************************************************************************
@@ -158,7 +162,8 @@ sich in dieser Richtung weiter.
 | Prolog  |                              | Logisch    |
 | SQL     |                              | Logisch    |
 
-Am Beispiel ... Berechnen Sie die Summe der Ziffern eines Arrays.
+Viele Paradigmen in einer Sprache am Beispiel eines Python Programmes ...
+Berechnen Sie die Summe der Ziffern eines Arrays.
 
 ```python    
 my_list = range(0,10)
@@ -176,7 +181,7 @@ def do_add(list_of_numbers):
     for x in my_list:
         result += x
     return result
-print("Result in procedural style      :" + str(result))
+print("Result in procedural style      :" + str(do_add(my_list)))
 
 # object oriented
 class MyClass(object):
@@ -209,14 +214,13 @@ print("Result in functional style      :" + str(result))
 
 Lösungsansätze:
 * Individuell - Hinterfragen des Vorgehens und der Intuition, bewusste Weiterentwicklung des eigenen Horizontes (ohne auf jeden Zug auf zuspringen)
-* im Team - Teilen Sie Ihre Erfahrungen im Team / der Community, besetzen Sie Teams mit
-Mitarbeitern unterschiedlichen Backgrounds (Technical Diversity)
+* im Team - Teilen Sie Ihre Erfahrungen im Team / der Community, besetzen Sie Teams mit Mitarbeitern unterschiedlichen Backgrounds (Technical Diversity)
 
 Weitere Diskussion unter: https://sourcemaking.com/antipatterns/golden-hammer
 
 *******************************************************************************
 
-## 2. --- Warum also C#
+## 2. --- Warum also C#?
 
 C# wurde unter dem Codenamen *Cool* entwickelt, vor der Veröffentlichung aber
 umbenannt. Der Name C Sharp leitet sich vom Zeichen Kreuz (♯, englisch sharp)
@@ -270,9 +274,9 @@ Aktuell: Die Version C# 8.0 ist angekündigt und einige Sprachfeatures bereits p
 > *.NET Framework verwaltet. Sie besteht aus der __Common Language Runtime__, die*
 > *Speicherverwaltung und andere Systemdienste bereitstellt, und einer*
 > *umfangreichen __Klassenbibliothek__, die Programmierern stabilen, zuverlässigen*
-> *Code für alle wesentlichen Bereiche der App-Entwicklung zur Verfügung stellt.* [MSNET]
+> *Code für alle wesentlichen Bereiche der App-Entwicklung zur Verfügung stellt.* [MSNET](#9)
 
-![instruction-set](./img/01_Grundlagen/CLRstructure.png)<!-- width="70%" --> [Bhogayta]
+![instruction-set](./img/01_EinordnungCsharp/CLRstructure.png)<!-- width="70%" --> [Bhogayta](#9)
 
 * ASP.NET ... ist ein Web Application Framework, mit dem sich dynamische Webseiten, Webanwendungen und Webservices entwickeln lassen.
 *  ActiveX Data Objects (ADO) ... ist eine auf ActiveX basierende Schnittstelle zum Datenzugriff auf Datenbanken und tabellenartige Datenquellen über eine einheitliche API.
@@ -288,7 +292,7 @@ Aktuell: Die Version C# 8.0 ist angekündigt und einige Sprachfeatures bereits p
 
 > *Think of .NET Core as a subset of .NET Framework that makes sense to be*
 > *cross-platform, redesigned in a much more granular fashion. Microsoft .NET*
-> *Core is the future of .NET and we are happy it has become open source now.* [BlogNET]
+> *Core is the future of .NET and we are happy it has become open source now.* [BlogNET](#9)
 
 ********************************************************************************
 
@@ -296,7 +300,7 @@ Aktuell: Die Version C# 8.0 ist angekündigt und einige Sprachfeatures bereits p
 ********************************************************************************
 *Frage: Was sind Alternativen?*
 
-Mono, DotGNU und Portable.NET sind Implementierungen der CLI.
+Mono, DotGNU und Portable.NET sind Implementierungen der CLR.
 
 ********************************************************************************
 
@@ -304,7 +308,7 @@ Mono, DotGNU und Portable.NET sind Implementierungen der CLI.
 ********************************************************************************
 *Frage:  Was bedeutet das für den "Build"-Prozess?*
 
-![instruction-set](./img/01_Grundlagen/ExecutionModel.png)<!-- width="90%" --> [Bhogayta]
+![instruction-set](./img/01_EinordnungCsharp/ExecutionModel.png)<!-- width="90%" --> [Bhogayta](#9)
 
 Die spezifischen Compiler der einzelnen .NET Sprachen (C#. Visual Basic, F#) bilden den Quellcode
 auf einen Zwischencode ab. Die Common Language Infrastructure (CLI) ist eine von ISO und ECMA
