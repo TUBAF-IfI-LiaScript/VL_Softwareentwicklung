@@ -465,14 +465,24 @@ Das .NET Core Framework kann unter [.NET](https://dotnet.microsoft.com/download/
 für verschiedene Betriebssystem heruntergeladen werden. Das SDK umfasst sowohl die
 Bibliotheken, Laufzeitumgebung und Tools.
 
+**Variante I - Microsoft C# Compiler**
+
 ``` bash @output
 ▶ csc
 Microsoft (R) Visual C# Compiler version 2.8.2.62916 (2ad4aabc)
 Copyright (C) Microsoft Corporation. All rights reserved.
 ```
 
-Leider muss dann wieder mono als Ausführungsumgebung herhalten, um mit der .NET
-CLR zu arbeiten braucht es offenbar immer ein ganzes Projekt:
+**Variante II - Microsoft Build Tools**
+
+``` bash @output
+▶ dotnet new console
+▶ dotnet build
+▶ dotnet run
+```
+
+Aus dem generieren eines neuen Konsolenprojektes ergibt sich ein beeindruckender
+Baum von Projektdateien.
 
 ``` bash @output
 ▶ dotnet new console
@@ -516,7 +526,6 @@ Diese kann man zum Beispiel auf unser gerade erstelltes Projekt anwenden
 
 Evaluieren Sie auch den interaktiven Modus mit gsharp, csharp oder dem .NET
 Interpreter unter Visual Studio.
-
 
 *D) Monodeveloper*
 
