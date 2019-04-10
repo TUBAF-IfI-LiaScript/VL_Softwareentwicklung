@@ -26,7 +26,7 @@ Die interaktive Form ist unter diese Link zu finden ->
 c# Schlüsselwörter:
 
 | abstract    | as       | base     | bool       | break      | byte      |  
-| case        | catch    | char     |`checked`   |`class`     | const     |
+| case        | catch    | char     | checked    |`class`     | const     |
 | continue    | decimal  | default  | delegate   | do         | double    |
 | else        | enum     | event    | explicit   | extern     | false     |
 | finally     | fixed    | float    | for        | foreach    | goto      |
@@ -36,7 +36,7 @@ c# Schlüsselwörter:
 | protected   | public   | readonly | ref        | return     | sbyte     |
 | sealed      | short    | sizeof   | stackalloc |`static`    | string    |
 | struct      | switch   | this     | throw      | true       | try       |
-| typeof      | uint     | ulong    |  unchecked | unsafe     | ushort    |
+| typeof      | uint     | ulong    | unchecked  | unsafe     | ushort    |
 | `using`     | virtual  |`void`    | volatile   | while      |           |
 
 Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
@@ -168,15 +168,7 @@ festgehalten. Es dürfen beliebige Zeichen bis auf die jeweiligen Hochkommas
 oder das `\` als Escape-Zeichen (wenn diese nicht mit dem Escape Zeichen
 kombiniert sind) eingeschlossen sein.
 
-| Escape Zeichen | Bedeutung                            |
-|:---------------|:-------------------------------------|
-| `\'`           | `'`                                  |         
-
-ERGÄNZEN
-
-Um zum Beispiel den Text `file "c:\text.txt"` darzustellen müssen wir
-
-```csharp    Print .cs
+```csharp    Print
 using System;
 
 namespace Rextester
@@ -185,8 +177,8 @@ namespace Rextester
      {
          public static void Main(string[] args)
          {
-             Console.WriteLine("file \"c:\\text.txt\"");
-             //alternative Schreibweise mit @
+             Console.WriteLine("Das ist ein ganzer Satz");
+             Console.WriteLine('e');
          }
      }
 }
@@ -229,6 +221,13 @@ namespace Rextester
 
 In einer der folgenden Veranstaltungen werden die Möglichkeiten der Dokumentation
 explizit adressiert.
+
+1. Code gut kommentieren (Zielgruppenorientierte Kommentierung)
+2. Header-Kommentare als Einstiegspunkt
+3. Gute Namensgebung für Variablen und Methoden
+4. Community- und Sprach-Standards beachten
+5. Dokumentationen schreiben
+6. Dokumentation des Entwicklungsflusses
 
 ********************************************************************************
 
@@ -307,7 +306,7 @@ namespace Rextester
     {
         public static void Main(string[] args)
         {
-            Point p1 = new Point()
+            Point p1 = new Point();
             p1.X = 7;
 
             Point p2 = p1;
@@ -326,19 +325,19 @@ namespace Rextester
 
 ### Numerische Datentypen
 
-| Kategorie | Type                        | Suffix | Name    | .NET Typ | Bit |
-| --------- | --------------------------- | ------ | ------- | -------- | --- |
-| Numerisch | Ganzzahl vorzeichenbehaftet |        | sbyte   | SByte    | 8   |
-|           |                             |        | short   | Int16    | 16  |
-|           |                             |        | int     | Int32    | 32  |
-|           |                             | `L`    | long    | Int64    | 64  |
-|           | Ganzzahl ohne Vorzeichen    |        | byte    | Byte     | 8   |
-|           |                             |        | ushort  | UInt16   | 16  |
-|           |                             | `U`    | uint    | UInt32   | 32  |
-|           |                             | `UL`   | ulong   | UInt64   | 64  |
-|           | Gleitkommazahl              | `F`    | float   | Single   | 32  |
-|           |                             | `D`    | double  | Double   | 64  |
-|           |                             | `M`    | decimal | Decimal  | 128 |
+| Type                        | Suffix | Name    | .NET Typ | Bit |
+| --------------------------- | ------ | ------- | -------- | --- |
+| Ganzzahl vorzeichenbehaftet |        | sbyte   | SByte    | 8   |
+|                             |        | short   | Int16    | 16  |
+|                             |        | int     | Int32    | 32  |
+|                             | `L`    | long    | Int64    | 64  |
+| Ganzzahl ohne Vorzeichen    |        | byte    | Byte     | 8   |
+|                             |        | ushort  | UInt16   | 16  |
+|                             | `U`    | uint    | UInt32   | 32  |
+|                             | `UL`   | ulong   | UInt64   | 64  |
+| Gleitkommazahl              | `F`    | float   | Single   | 32  |
+|                             | `D`    | double  | Double   | 64  |
+|                             | `M`    | decimal | Decimal  | 128 |
 
 Eingabe von Zahlenwerten
 
@@ -363,7 +362,7 @@ Numerische Suffixe
 | U      | uint    | uint i = 1U      |                                       |
 
 
-<!-- --{{1}}-- Illustration des Gebrauchs der Suffixe, Einführung von var -->
+<!-- --{{0}}-- Illustration des Gebrauchs der Suffixe, Einführung von var -->
 ```csharp    HelloWorld_rex.cs
 using System;
 
@@ -416,7 +415,7 @@ namespace Rextester
         public static void Main(string[] args)
         {
 
-         double fnumber = 123456789012.34567;   
+         double fnumber = 123456784649577.0;    
          double additional = 0.0000001;
          Console.WriteLine("Experiment 1");
          Console.WriteLine("{0} + {1} = {2}", fnumber, additional,
@@ -557,7 +556,7 @@ namespace Rextester
         {
             short x = 1, y = 1;
             short z = x + y;
-            Console.WriteLine("Division von 2/3 {0:D} = ", z);
+            Console.WriteLine("Division von 2/3  = {0:D}", z);
         }
     }
 }
