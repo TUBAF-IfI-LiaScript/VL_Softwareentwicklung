@@ -17,7 +17,7 @@ Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 https://github.com/liaScript/CsharpCourse/blob/master/02_ElementsI.md
 
 Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 2](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/02_ElementsII.md#1)
+[LiaScript Vorlesung 2](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/02_ElementsI.md#1)
 
 ---------------------------------------------------------------------
 
