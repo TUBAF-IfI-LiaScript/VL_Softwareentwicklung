@@ -526,56 +526,6 @@ https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/classes-and-str
 
 ## 3. Beispiel der Woche ...
 
-Entwickeln Sie ein Programm, dass als Kommandozeilen-Parameter eine Funktionsnamen
-und eine Ganzzahl übernimmt und die entsprechende Ausführung realisiert. Als
-Funktionen sollen dabei `Square` und `Reciprocal` dienen. Der Aufruf erfolgt
-also mit
-
-```bash
-mono Calculator Square 7    
-mono Calculator Reciprocal 9
-```
-Welche Varianten der Eingaben müssen Sie prüfen?
-
-Eine mögliche Lösung finden Sie unter ... [Link]()
-
-```csharp    Calculator.cs
-using System;
-namespace Calcualator
-{
-  class MainClass
-  {
-    static double Square(int num) => num * num;
-    static double Reciprocal (int num) => 1f / num;
-
-    static void Main(string[] args)
-    {
-      bool Error = false;
-      double result = 0;
-      int num = 1;
-      if (args.Length == 2)
-      {
-        // Hier geht es weiter, welche Fälle müssen Sie bedenken?
-        // int.TryParse(args[1], out num) erlaubt ein fehlertolerantes Parsen
-        // eines strings
-      }
-      else Error = true;
-
-      if (Error)
-      {
-        Console.WriteLine("Please enter a function and a numeric argument.");
-        Console.WriteLine("Usage: Square    <int> or\n       Reciprocal <int>");
-      }
-      else
-      {
-        Console.WriteLine("{0} Operation on {1} generates {2}", args[0], num, result );
-      }
-    }
-  }
-}
-```csharp   
-
-
 
 
 ## Anhang
