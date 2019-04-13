@@ -237,7 +237,7 @@ namespace Rextester
 In Kombination mit den Breiten und Präzisionsinformationen lasse sich damit sehr
 mächtige Dastellungen realisieren.
 
-```csharp   IndizesBreite
+```csharp
 using System;
 
 namespace Rextester
@@ -261,11 +261,166 @@ namespace Rextester
 
 https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/tokens/interpolated
 
+```csharp   Zeichenfolgeninterpolation
+using System;
 
-### Stream Konzept
+namespace Rextester
+{
+  public class Program
+  {
+    public static void Main(string[] args)
+    {
+       double value = 1233.1232;
+       Console.WriteLine(value);
+       Console.WriteLine(value.ToString("F:20,5"));
 
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
 
+### Leseoperationen
 
+Leseoperationen von der Console werden durch zwei Methoden abgebildet:
+
+```
+public static int Read ();
+public static string ReadLine ();
+```
+
+```csharp   
+using System;
+
+namespace Rextester
+{
+  public class Program
+  {    
+    public static void Main(string[] args)
+    {
+      char ch;
+      int x;
+      Console.WriteLine("Print Unicode-Indizes");
+      do  
+        {
+          x = Console.Read();   // Lesen eines Zeichens
+          ch = Convert.ToChar(x);
+          Console.Write("{0}-", x);
+          // Hier könnte man jetzt eine Filterung realiseren
+        } while (ch != '+');      
+    }
+  }
+}
+```
+``` bash stdin
+A0,12,B⺀+
+```
+@Rextester._eval_(@uid,@CSharp,true,`@input(1)`)
+
+Das Beispiel zeigt sehr schön, wie verschiedene Zeichensätze auf unterschiedlich
+lange Codes abgebildet werden. Das chinesische Zeichen, dass vor dem Escape-Zeichen "+" steht generiert einen 2Byte breiten Wert.
+
+### Ziele der Schreiboperationen
+
+Üblicherweise möchte man die Ausgabegeräte (Konsole, Dateien, Netzwerk, Drucker,
+etc.) anpassen können. `System.IO` bietet dafür bereits verschiedene
+Standardschnittstellen.
+
+```csharp   
+using System;
+
+namespace Rextester
+{
+  public class Program
+  {
+    public static void Main(string[] args)
+    {
+       Console.WriteLine("Ausgabe auf das Standard-Gerät");
+       Console.Out.WriteLine("Ausgabe nach Out (default die Konsole)");
+       //Console.Error.WriteLine("Ausgabe an die Fehlerschnittstelle");
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+Die dafür vorgesehenen Standardeinstellungen können aber entsprechend umgelenkt
+werden. Dafür greift C# analog zu vielen anderen Sprachen (und Betriebssysteme)
+das Stream Konzept auf, dass eine Abstraktion für verschiedene Quellen und
+Senken von Informationen bereitstellt. Darauf aufbauend sind dann Lese- /
+Schreiboperationen möglich.
+
+Einen guten Überblick dazu bietet: https://www.youtube.com/watch?v=CN5A3Q2ePak
+
+Von der Klasse `System.IO.Stream` leiten sich entsprechend [MemoryStream](https://docs.microsoft.com/de-de/dotnet/api/system.io.memorystream?view=netframework-4.7.2), [FileStream](https://docs.microsoft.com/de-de/dotnet/api/system.io.filestream?view=netframework-4.7.2), [NetworkStream](https://docs.microsoft.com/de-de/dotnet/api/system.net.sockets.networkstream?view=netframework-4.7.2) ab. Diese bringen sowohl
+eigene Lese-/Operationen mit, gleichzeitig ist aber auch das "Umlenken" von
+Standardoperationen möglich.
+
+```CSharp
+// Das Beispiel entstammt der Dokumentation des .Net Frameworks
+// https://docs.microsoft.com/de-de/dotnet/api/system.console.out?view=netframework-4.7.2
+
+using System;
+using System.IO;
+
+public class Example
+{
+   public static void Main()
+   {
+      // Get all files in the current directory.
+      string[] files = Directory.GetFiles(".");
+      Array.Sort(files);
+
+      // Display the files to the current output source to the console.
+      Console.WriteLine("First display of filenames to the console:");
+      Array.ForEach(files, s => Console.Out.WriteLine(s));   
+      Console.Out.WriteLine();
+
+      // Redirect output to a file named Files.txt and write file list.
+      StreamWriter sw = new StreamWriter(@".\Files.txt");
+      sw.AutoFlush = true;
+      Console.SetOut(sw);
+      Console.Out.WriteLine("Display filenames to a file:");
+      Array.ForEach(files, s => Console.Out.WriteLine(s));   
+      Console.Out.WriteLine();
+
+      // Close previous output stream and redirect output to standard output.
+      Console.Out.Close();
+      sw = new StreamWriter(Console.OpenStandardOutput());
+      sw.AutoFlush = true;
+      Console.SetOut(sw);
+
+      // Display the files to the current output source to the console.
+      Console.Out.WriteLine("Second display of filenames to the console:");
+      Array.ForEach(files, s => Console.Out.WriteLine(s));   
+   }   
+}
+```
+
+Darüber hinaus stehen aber auch spezifische Zugriffsmethoden zum Beispiel für
+Dateien zur Verfügung.
+
+```CSharp
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.IO; //Erforderlicher Namespace
+namespace Wiki
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Unmittelbare Ausgabe in eine Datei
+            File.WriteAllText(@"C:\test1.txt", "Sehr einfach");
+
+            // Einlesen des gesamten Inhalts einer Textdatei
+            string text = File.ReadAllText(@"C:\test1.txt");
+            Console.WriteLine(text);
+        }
+     }
+}
+```
 
 ### Beispiel
 
@@ -280,7 +435,7 @@ In Markdown sind Tabellen nach folgendem Muster aufgebaut:
 
 Geben Sie die Daten bestimmte Fußballvereine in einer Markdown-Tabelle aus.
 
-```csharp   IndizesBreite
+```csharp   GenerateMarkDownTable
 using System;
 
 namespace Rextester
@@ -289,26 +444,28 @@ namespace Rextester
   {
     public static void Main(string[] args)
     {
-       string [] clubs = {"Rot Weiß", "Blau Gelb", "Eintracht", "Kickers"};
-       int maxlength = 0;
-       foreach(string club in clubs)  maxlength =  club.Length < maxlength ? maxlength : club.Length ;
+      string [] clubs = {"Blau Weiß", "Grün Gelb 1905", "Borussia Tralla Trullas", "Eintracht"};
+      int [] punkte = {12, 10, 9, 5};
+      int maxlength = 0;
+      foreach(string club in clubs)  maxlength =  club.Length < maxlength ? maxlength : club.Length ;
+      maxlength += 1;
 
-       //Console.WriteLine("".PadLeft(maxlength + 10, '-'));
-       Console.Write("| ");
-       Console.Write("Name".ToString("G:10"));
-       //
-       //Console.WriteLine(maxlength);
-
+      string output;
+      output  = "| ";
+      output += "Verein".PadRight(maxlength, ' ') + "| Punkte |\n";
+      output += "|:"+ "".PadRight(maxlength, '-') + "|:-------|\n";
+      for (int i = 0; i < clubs.Length; i++){
+         output += String.Format("| {0}| {1, -7}|\n", clubs[i].PadRight(maxlength, ' '), punkte[i]);
+      }
+      Console.WriteLine(output);
     }
   }
 }
 ```
 @Rextester.eval(@CSharp)
 
-
-## 2. Leseoperationen
-
-
+Welche Annahmen werden implizit bei der Erstellung der Tabelle getroffen? Wo
+sehen Sie Verbesserungsbedarf?
 
 ## 4. Ausnahmebehandlungen
 
@@ -352,15 +509,84 @@ handler, der mit dem Schlüsselwort `catch` gekennzeichnet ist, umgeleitet.
 Befehl.
 + ein `finally`-Block wird im Anschluss an die Aktivierung eines `catch`
 Blockes ausgeführt, wenn eine Ausnahme ausgelöst wurde. Hier werden Ressourcen freizugeben, beispielsweise ein Stream geschlossen.
++ Wird kein passender catch-Block gefunden, kommt es zur Behandlung in der Laufzeitumgebung.
 
-try catch finally
+```csharp   IndizesBreite
+using System;
 
+namespace Rextester
+{
+  public class Program
+  {
+    static int Berechnung(int a, int b)
+    {
+      try
+      {
+        return a / b;
+      }
+      catch (OverflowException e)
+      {
+        Console.WriteLine("[ERROR] " + e.Message);
+        return -2;
+      }
+  }
+
+  public static void Main(string[] args)
+  {
+      try
+      {
+        return Berechnung(2, 0);
+      }
+      catch (DivideByZeroException e)
+      {
+        Console.WriteLine("[ERROR] " + e.Message);
+      }
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+## Best Practice
+
+Die folgende Darstellung geht auf die umfangreiche Sammlung von Hinweisen
+zum Thema Exceptions unter
+https://docs.microsoft.com/de-de/dotnet/standard/exceptions/best-practices-for-exceptions
+zurück.
+
+* Differenzieren Sie zwischen Ausnahmevermeidung und Ausnahmebehandlung anhand der erwarteten Häufigkeit und der avisierten "Signalwirkung"
+
+```csharp
+// Ausnahmevermeidung
+if (conn.State != ConnectionState.Closed)
+{
+    conn.Close();
+}
+
+// Ausnahmebehandlung
+try
+{
+    conn.Close();
+}
+catch (InvalidOperationException ex)
+{
+    Console.WriteLine(ex.GetType().FullName);
+    Console.WriteLine(ex.Message);
+}
+```
+
+* Auslösen von Ausnahmen statt Zurückgeben eines Fehlercodes
+* Verwenden der vordefinierten .NET-Ausnahmetypen
+* Enden von Ausnahmeklassen auf das Wort *Exception*
+* Vermeiden Sie unklare Ausgaben für den Fall einer Ausnahmebehandlung, stellen Sie alle Informationen bereit, die für die Analyse des Fehlers nötig sind
+* Stellen Sie den Status einer Methode wieder her, die von einer Ausnahmebehandlung betroffen war (Beispiel: Code für Banküberweisungen, Abbuchen von einem Konto und Einzahlung auf ein anderes. Scheitert die zweite Aktion muss auch die erste zurückgefahren werden.)
+* Testen Sie Ihre Ausnahmebehandlungsstrategie!
 
 ### Beispiel Exception-Handling
 
 Schreiben Sie die Einträge eines Arrays in eine Datei!
 
-Lösung unter  ....
+Lösung unter [ExceptionHandling.cs](https://github.com/liaScript/CsharpCourse/blob/master/code/04_IO_Ausnahmebehandlung/ExceptionHandling.cs)
 
 | Schritt 1: Welche Fehler können auftreten? Welche Fehler werden durch die Implementierung abgefangen? |
 | Schritt 2: Wo sollen die Fehler abgefangen werden?                                                    |
@@ -421,9 +647,6 @@ namespace Calcualator
   }
 }
 ```csharp   
-
-
-
 
 ## Anhang
 
