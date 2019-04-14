@@ -680,7 +680,7 @@ Blockes.
 
 ## 3. Beispiel der Woche ...
 
-![SoftwareLebenszyklus](/img/02_Elemente/Pi_statistisch.png)<!-- width="60%" --> [WikiMonteCarlo](#7)
+![MonteCaroloPI](/img/02_Elemente/Pi_statistisch.png)<!-- width="60%" --> [WikiMonteCarlo](#7)
 
 Betrachtet wird ein Einheitsquadrat mit Einheitsviertelkreis, indem $n$
 zufällige Punkte erzeugt werden. Dabei verhält sich die Anzahl Punkte im

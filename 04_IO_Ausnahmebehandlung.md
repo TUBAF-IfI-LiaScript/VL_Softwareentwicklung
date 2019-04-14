@@ -12,11 +12,6 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 # Vorlesung Softwareentwicklung - 4 - Funktionen und Strukturen
 
-**Fragen an die heutige Veranstaltung ...**
-
-*
-
----------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
 https://github.com/liaScript/CsharpCourse/blob/master/04_FunktionenStrukturen.md
@@ -52,7 +47,7 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
 ## Kontrollfragen
 
-*1.
+*1. Erläutern Sie den Unterschied zwischen "kombinierter" und "interpolierter" String-Generierung.*
 
 --------------------------------------------------------------------
 
@@ -115,6 +110,9 @@ Diese wird implizit aufgerufen.
 
 <!-- --{{1}}-- Idee des Codeblockes
   * Darstellung ToString()
+    public override string ToString(){
+        return Name + " " + Alter;
+    }
  -->
 
 ```csharp   Write/WriteLine
@@ -122,16 +120,16 @@ using System;
 
 namespace Rextester
 {
-  public class Student{
-    string Name = "Mickey Maus";
-    int Alter = 35;
+  public class SuperStudent{
+    string Name = "Alexander von Humboldt";
+    int Alter = 25;
   }
 
   public class Program
   {
     public static void Main(string[] args)
     {
-       Student s = new() Student();
+       SuperStudent s = new SuperStudent();
        Console.WriteLine(s);
     }
   }
@@ -162,15 +160,18 @@ Dabei sind folgende Ausdrücke möglich:
 "{n}"
 "{n, width}"
 "{n, width:format}"
-"{n, width:format precision}"    //ohne Lehrzeichen zwischen format und precision
+"{n, width:format precision}" //ohne Lehrzeichen zwischen format und precision!
 ```
 
 <!-- --{{1}}-- Idee des Codeblockes
-  * Diskussion der Indizes, Durchtauschen der Indizes, Erzeugung Exception
+  * Diskussion der Indizes, Durchtauschen der Indizes,
+  * Erzeugung Fehler Indizes
   * Darstellung der Breite
+  * Positives negatives Vorzeichen der Breite
+  * Angabe der Formate, precision
  -->
 
-```csharp   IndizesBreite
+```csharp   IndizesKombinierteFormatierung
 using System;
 
 namespace Rextester
@@ -210,7 +211,7 @@ Eine komplette Auflistung findet sich unter https://docs.microsoft.com/de-de/dot
   * Einführung einer cultural Instanz
 
  -->
-```csharp   IndizesBreite
+```csharp   WriteDate
 using System;
 using System.Globalization;
 using System.Threading;
@@ -234,32 +235,16 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-In Kombination mit den Breiten und Präzisionsinformationen lasse sich damit sehr
-mächtige Dastellungen realisieren.
-
-```csharp
-using System;
-
-namespace Rextester
-{
-  public class Program
-  {
-    public static void Main(string[] args)
-    {
-       double value = 1233.1232;
-       Console.WriteLine(value);
-       Console.WriteLine(value.ToString("F:20,5"));
-
-    }
-  }
-}
-```
-@Rextester.eval(@CSharp)
-
-
 ### Zeichenfolgeninterpolation
 
-https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/tokens/interpolated
+Wesentliches Element der Zeichenfolgeninterpolation ist die "Ausführung" von
+Code innerhalb der Ausgabespezifikation. Die Breite der möglichkeit reicht dabei
+von einfachen Variablennamen bis hin zu komplexen Ausdrücken. Hier bitte
+Augenmaß im Hinblick auf die Lesbarkeit walten lassen! Angeführt wird ein
+solcher Ausdruck durch ein `$`.
+
+Dieser Modus wird seit C# 6.0 unterstützt und ist in Rextester noch nicht
+implementiert.
 
 ```csharp   Zeichenfolgeninterpolation
 using System;
@@ -270,55 +255,31 @@ namespace Rextester
   {
     public static void Main(string[] args)
     {
-       double value = 1233.1232;
-       Console.WriteLine(value);
-       Console.WriteLine(value.ToString("F:20,5"));
-
+      // Composite formatting:
+      var date = DateTime.Now;
+      string city = "Freiberg";
+      Console.WriteLine("Hello, {0}! Today is {1}, it's {2:HH:mm} now.", city, date.DayOfWeek, date);
+      // String interpolation:
+      Console.WriteLine($"Hello, {city}! Today is {date.DayOfWeek}, it's {date:HH:mm} now.");
     }
   }
 }
 ```
-@Rextester.eval(@CSharp)
-
-### Leseoperationen
-
-Leseoperationen von der Console werden durch zwei Methoden abgebildet:
-
-```
-public static int Read ();
-public static string ReadLine ();
+``` bash @output
+▶ mono PrintDate.exe
+Hello, Freiberg! Today is Sunday, it's 09:19 now.
+Hello, Freiberg! Today is Sunday, it's 09:19 now.
 ```
 
-```csharp   
-using System;
-
-namespace Rextester
-{
-  public class Program
-  {    
-    public static void Main(string[] args)
-    {
-      char ch;
-      int x;
-      Console.WriteLine("Print Unicode-Indizes");
-      do  
-        {
-          x = Console.Read();   // Lesen eines Zeichens
-          ch = Convert.ToChar(x);
-          Console.Write("{0}-", x);
-          // Hier könnte man jetzt eine Filterung realiseren
-        } while (ch != '+');      
-    }
-  }
-}
+Die Darstellung des Ausdrucks folgt dabei der Semantik:
 ```
-``` bash stdin
-A0,12,B⺀+
+{<interpolatedExpression>[,<alignment>][:<formatString>]}
 ```
-@Rextester._eval_(@uid,@CSharp,true,`@input(1)`)
 
-Das Beispiel zeigt sehr schön, wie verschiedene Zeichensätze auf unterschiedlich
-lange Codes abgebildet werden. Das chinesische Zeichen, dass vor dem Escape-Zeichen "+" steht generiert einen 2Byte breiten Wert.
+Damit lassen sich dann sehr mächtige Ausdrücke formulieren vgl [Link](
+https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/tokens/interpolated) oder aber in den Beispielen von
+
+[Interpolated.cs](LINK AUF GIT Einfuegen)
 
 ### Ziele der Schreiboperationen
 
@@ -467,7 +428,51 @@ namespace Rextester
 Welche Annahmen werden implizit bei der Erstellung der Tabelle getroffen? Wo
 sehen Sie Verbesserungsbedarf?
 
-## 4. Ausnahmebehandlungen
+
+## 2. Leseoperationen
+
+LESEN VON COMMANDOZEILEN EINTRAEGEN!!!
+
+
+Leseoperationen von der Console werden durch zwei Methoden abgebildet:
+
+```
+public static int Read ();
+public static string ReadLine ();
+```
+
+```csharp   
+using System;
+
+namespace Rextester
+{
+  public class Program
+  {    
+    public static void Main(string[] args)
+    {
+      char ch;
+      int x;
+      Console.WriteLine("Print Unicode-Indizes");
+      do  
+        {
+          x = Console.Read();   // Lesen eines Zeichens
+          ch = Convert.ToChar(x);
+          Console.Write("{0}-", x);
+          // Hier könnte man jetzt eine Filterung realiseren
+        } while (ch != '+');      
+    }
+  }
+}
+```
+``` bash stdin
+A0,12,B⺀+
+```
+@Rextester._eval_(@uid,@CSharp,true,`@input(1)`)
+
+Das Beispiel zeigt sehr schön, wie verschiedene Zeichensätze auf unterschiedlich
+lange Codes abgebildet werden. Das chinesische Zeichen, dass vor dem Escape-Zeichen "+" steht generiert einen 2Byte breiten Wert.
+
+## 3. Ausnahmebehandlungen
 
 Die C#-Funktionen zur Ausnahmebehandlung unterstützen bei der Handhabung von
 unerwarteten oder außergewöhnlichen Situationen, die beim Ausführen von Programmen auftreten.
@@ -547,7 +552,7 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-## Best Practice
+### Best Practice
 
 Die folgende Darstellung geht auf die umfangreiche Sammlung von Hinweisen
 zum Thema Exceptions unter
@@ -597,7 +602,7 @@ Lösung unter [ExceptionHandling.cs](https://github.com/liaScript/CsharpCourse/b
 https://docs.microsoft.com/de-de/dotnet/api/system.io.streamwriter.-ctor?view=netframework-4.7.2#System_IO_StreamWriter__ctor_System_String_)
 
 
-## 5. Beispiel der Woche ...
+## 4. Beispiel der Woche ...
 
 Entwickeln Sie ein Programm, dass als Kommandozeilen-Parameter eine Funktionsnamen
 und eine Ganzzahl übernimmt und die entsprechende Ausführung realisiert. Als
@@ -646,13 +651,11 @@ namespace Calcualator
     }
   }
 }
-```csharp   
+```
 
 ## Anhang
 
 **Referenzen**
-
-[MSDoku] C# Dokumentation, "Pattern Matching",  [Link](https://docs.microsoft.com/en-us/dotnet/csharp/pattern-matching)
 
 [WikiMonteCarlo]  ZUM-Wiki, "Monte Carlo Simulation" Autor "Springob", [Link](https://de.wikipedia.org/wiki/Monte-Carlo-Simulation#/media/File:Pi_statistisch.png)
 
