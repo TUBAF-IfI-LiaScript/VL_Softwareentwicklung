@@ -525,7 +525,7 @@ Weitere Infos https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/c
 Anweisungen  setzen sich zusammen aus Zuweisungen, Methodenaufrufen, Verzweigungen
 Sprunganweisungen und Anweisungen zur Fehlerbehandlung.
 
-![ISO 9126](./img/03_ElementeII/Flowchart_de.png)<!-- width="50%" --> [WikiFlow](#13)
+![ISO 9126](./img/03_ElementeII/Flowchart_de.png)<!-- width="30%" --> [WikiFlow](#13)
 
 ### Verzweigungen
 
@@ -784,7 +784,7 @@ Vgl. Links zur Diskussion um goto auf https://de.wikipedia.org/wiki/Sprunganweis
 
 ## 3. Beispiel der Woche ...
 
-![MonteCaroloPI](/img/03_ElementeII/Pi_statistisch.png)<!-- width="60%" --> [WikiMonteCarlo](#7)
+![MonteCaroloPI](/img/03_ElementeII/Pi_statistisch.png)<!-- width="30%" --> [WikiMonteCarlo](#7)
 
 Betrachtet wird ein Einheitsquadrat mit Einheitsviertelkreis, indem $n$
 zufällige Punkte erzeugt werden. Dabei verhält sich die Anzahl Punkte im
