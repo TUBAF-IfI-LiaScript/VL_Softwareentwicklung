@@ -12,6 +12,8 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 # Vorlesung Softwareentwicklung - 2 - Elemente der Sprache
 
+---------------------------------------------------------------------
+
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
 https://github.com/liaScript/CsharpCourse/blob/master/02_ElementeI.md
@@ -54,9 +56,35 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 [( )] Alle Methoden können auf alle Typen angewandt werden.
 ---------------------------------------------------------------------
 
-*2. Hier stehen jetzt Ihre Fragen ... *
+*2. Warum macht es Sinn Schlüsselwörter der Sprache C\# als Variablennamen zu nutzen? Wie kann das realisiert werden*
+
+[(X)] vorangestelltes "@"
+[( )] Unterstriche vor dem Namen
+[[?]] ... , um Variablennamen aus anderen Programmiersprachen der .NET Familie abzudecken
 
 ---------------------------------------------------------------------
+
+*3. Welche Speichergrößen belegen `short`, `int` und `long` unter C#? Welche maximal darstellbaren Wertegrößen ergeben sich daraus*
+
+
+---------------------------------------------------------------------
+
+*4. Unter welchen Bedingungen generieren Gleitkommaoperationen falsche Ergebnisse?*
+
+---------------------------------------------------------------------
+
+*5. Welche aritmetischen Operationen lassen sich durch Dekrementieren und Inkrementieren ersetzen?*
+
+---------------------------------------------------------------------
+
+*6. Was bedeutet "PascalCase"*
+
+[( )] calcluates\_mean\_value
+[( )] calcluatesMeanValue
+[(X)] CalcluatesMeanValue
+[[?]] In objektorientierten Programmiersprachen wie Java, aber auch in Basic, ist es üblich, den lowerCamelCase für die Namen von Variablen und Methoden zu verwenden und den UpperCamelCase für die Namen von Klassen.
+
+
 
 ## 1. Symbole
 
@@ -611,4 +639,4 @@ keine
 
 **Autoren**
 
-Sebastian Zug, André Dietrich
+Sebastian Zug, André Dietrich, Miriam Hähnel, Tom John
