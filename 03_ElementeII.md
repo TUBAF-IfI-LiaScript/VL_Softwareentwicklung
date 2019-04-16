@@ -12,11 +12,8 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 # Vorlesung Softwareentwicklung - 3 - Elemente der Sprache
 
-**Fragen an die heutige Veranstaltung ...**
-
-*
-
 ---------------------------------------------------------------------
+
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
 https://github.com/liaScript/CsharpCourse/blob/master/03_ElementsII.md
@@ -30,20 +27,19 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 c# Schlüsselwörter:
 
-| abstract    | as       | base     | bool       | break      |`byte`     |  
+| abstract    | as       | base     |`bool`      | break      |`byte`     |  
 | case        | catch    | char     |`checked`   |`class`     | const     |
 | continue    | decimal  | default  | delegate   | do         |`double`   |
-| else        | enum     | event    | explicit   | extern     | false     |
-| finally     | fixed    | float    | for        | foreach    | goto      |
+| else        | enum     | event    | explicit   | extern     |`false`    |
+| finally     | fixed    |`float`   | for        | foreach    | goto      |
 | if          | implicit | in       |`int`       | interface  | internal  |
-| is          | lock     | long     |`namespace` | new        | null      |
+| is          | lock     |`long`    |`namespace` | new        | null      |
 | object      | operator | out      | override   | params     | private   |
 | protected   | public   | readonly | ref        | return     |`sbyte`    |
-| sealed      | short    | sizeof   | stackalloc |`static`    | string    |
-| struct      | switch   | this     | throw      | true       | try       |
-| typeof      | uint     | ulong    |`unchecked` | unsafe     |`ushort`   |
+| sealed      |`short`   | sizeof   | stackalloc |`static`    |`string`   |
+| struct      | switch   | this     | throw      |`true`      | try       |
+| typeof      |`uint`    |`ulong`   |`unchecked` | unsafe     |`ushort`   |
 | `using`     | virtual  |`void`    | volatile   | while      |           |
-
 
 Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 `ascending` wurde hier verzichtet.
@@ -52,11 +48,11 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
 ## Kontrollfragen
 
-*1. Was bedeutet die Aussage, das C# ein einheitliches Typsystem habe?*
+*1. Welche Funktionalität lässt sich mit dem Schlüsselwort `checked` abdecken?*
 
-[( )] Es gibt lediglich einen Datentyp.
-[(X)] Alle Typen erben von der Klasse `Object`
-[( )] Alle Methoden können auf alle Typen angewandt werden.
+[( )] Überwachung von allen arithmetischen Operationen
+[(X)] Überlaufüberprüfung bei arithmetischen Operationen für ganzzahlige Typen und Konvertierungen
+[( )] Genauigkeitsüberwachung bei Gleitkommazahlen
 ---------------------------------------------------------------------
 
 *2. Hier stehen jetzt Ihre Fragen ...*
@@ -86,7 +82,7 @@ namespace Rextester
 @Rextester.eval(@CSharp)
 
 Die Vergleichsoperatoren `==` und `!=` testen auf Gleichheit oder Ungleichheit
-für jeden Typ und geben in jedem Fall einen bool Wert zurück. Dabei muss
+für jeden Typ und geben in jedem Fall einen `bool` Wert zurück. Dabei muss
 unterschieden werden zwischen Referenztypen (Zeigen beide Variablen auf die
 gleiche Objektinstanz?) und Wertetypen (Stimmen die spezifischen Werte überein?).
 
@@ -121,21 +117,43 @@ Die Gleichheits- und Vergleichsoperationen  `==`, `!=`, `>=`, `>` usw. sind auf
 alle  numerischen Typen anwendbar. Für Nutzerspezifische Datentypen können die
 entsprechenden Operatoren überladen werden.
 
-Konditionale Operatoren ermöglichen die Verknüpfung von Boolschen Aussagen
+Logische Operatoren `&`, `&&`, `|`, `||` und `^` ermöglichen die Verknüpfung von Boolschen Aussagen. Dabei wird zwischen "konditionalen" und "nicht-konditionalen" Operatoren
+unterschieden. Die erste Gruppe kann auf alle Basisdatentypen angewandt werden
+die letztgenannte nur auf `bool`.
+
+<!-- --{{1}}-- Idee des Codefragments:
+    * Wechsel zu && -> Fehlermeldung
+-->
+```csharp    
+using System;
+
+namespace Rextester
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            byte a =  6; // 0110
+            byte b = 10; // 1010
+
+            Console.WriteLine(Convert.ToString(a & b, toBase:2));
+        }
+    }
+}
+```
+@Rextester.eval(@CSharp)
+
 
 ```csharp    
 bool a=true, b=true, c=false;
-Console.WriteLine(a && (b || c)); // short-circuit evaluation
+Console.WriteLine(a || (b && c)); // short-circuit evaluation
 
 // alternativ
-
-Console.WriteLine(a & (b | c));   // keine short-circuit evaluation
+Console.WriteLine(a | (b & c));   // keine short-circuit evaluation
 ```
 
-Beachten Sie den Unterschied zu C oder C++ wo die Operatoren `&` und `|` bitweise Operationen definieren.
 
 ### Char / String Datentypen und Operatoren
-
 
                                    {{0-1}}
 ********************************************************************************
@@ -243,66 +261,29 @@ namespace Rextester
 Der Gebrauch des `+` Operators im Zusammenhang mit `string` Daten ist nicht effektiv.
 eine bessere Performanz bietet `System.Text.StringBuilder`.
 
-********************************************************************************
-
-                                   {{3-4}}
-********************************************************************************
-Mit C# 6.0 wurden *interpolated strings* eingeführt. Damit ist es möglich bei
-der Stringgenerierung Code einzubetten. Diese bieten ein beeindruckendes Spektrum
-an variablen String-Definitionen.
-
-
-```
-{<interpolatedExpression>[,<alignment>][:<formatString>]}
-```
-
-```csharp        InterpolatedStrings.cs
-using System;
-
-namespace MyNamespace
-{
-  public class Program
-  {
-    public static void Main(string[] args)
-    {
-      double a = 5.0, b = 3;
-      // Anstatt auf Indizes zu bauen, wie in anderen Sprachen
-      Console.WriteLine("Das Ergebnis von {0} + {1} = {2}", a, b, a+b);
-      // Unmittelbare Einbettung
-      Console.WriteLine($"Das Ergebnis von {a} + {b} = {a + b}");
-      Console.WriteLine($"Offenbar ist {a > b ? a : b} der größere Wert!");
-      Console.WriteLine($@"\t Produktes {a * b, 7:F3} \n\tDifferenz {a + b, 7:F3}");
-      Console.WriteLine("\nAus Maus!");
-    }
-  }
-}
-```
-
-```
-mcs InterpolatedStrings.cs
-mono InterpolatedStrings.exe
-
-Das Ergebnis von 5 + 3 = 8
-Das Ergebnis von 5 + 3 = 8
-Offenbar ist 5 der größere Wert!
-\t Produktes  15.000 \n\tDifferenz   8.000
-```
+In der nächsten Vorlesung werden wir uns explizit mit den Konzepten der
+Ausgabe und entsprechend den Methoden der String Generierung beschäftigen.
 
 ********************************************************************************
 
 ### Enumerations
 
-Enumerationstypen erlauben die Auswahl aus einer Aufstellung von Konstanten.
+
+                                   {{0-1}}
+********************************************************************************
+
+Enumerationstypen erlauben die Auswahl aus einer Aufstellung von Konstanten, die
+als Enumeratorlisten bezeichnet wird. Was passiert intern? Die Konstanten werden
+auf einen ganzzahligen Typ außer char gemappt. Der Standardtyp von Enumerationselementen ist `int`. Um eine Enumeration eines anderen ganzzahligen Typs, z. B. `byte` zu deklarieren, setzen Sie einen Doppelpunkt hinter dem Bezeichner, auf den der Typ folgt.
 
 <!-- --{{1}}-- Idee des Codefragments:
-  * Darstellung der Möglichkeit Constanten zuzuordnen Sat = 5
   * Darstellung des Enum spezifischen Cast Operators
         Day startingDay = (Day) 5;
-  * Mehrfachbelegungen über das [Flags] Attribut dann aber mit individuellen
-    Belegungen Sat = 0, Sun = 1, Mon = 2, Tue = 4 usw.
+  * Darstellung der Möglichkeit Constanten zuzuordnen Sat = 5
 -->
 ```csharp  
 using System;  
+
 namespace Rextester
 {
   public class Program
@@ -319,6 +300,45 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
+********************************************************************************
+
+                                   {{1-2}}
+********************************************************************************
+
+Dabei schließen sich die Instanzen nicht gegenseitig aus, mit einem entsprechenden
+Attribut können wir auch Mehrfachbelegungen realisieren.
+
+<!-- --{{1}}-- Idee des Codefragments:
+  * Hinweis auf Zahlenzuordnung mit Zweierpotenzen
+-->
+```csharp  
+// https://docs.microsoft.com/de-de/dotnet/api/system.flagsattribute?view=netframework-4.7.2
+
+using System;  
+
+namespace Rextester
+{
+  public class Program
+  {
+    [FlagsAttribute] // <- Specifisches Enum Attribut
+    enum MultiHue : short
+    {
+       None = 0, Black = 1, Red = 2, Green = 4, Blue = 8
+    };
+
+    public static void Main(string[] args)
+    {
+       Console.WriteLine(
+            "\nAll possible combinations of values with FlagsAttribute:");
+       for( int val = 0; val <= 16; val++ )
+          Console.WriteLine( "{0,3} - {1:G}", val, (MultiHue)val);
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+********************************************************************************
 
 ### Arrays
 
@@ -353,7 +373,12 @@ Deklaration auch die Initialierung erfolgt.
 <typ>[] name = new <typ>[] {<eintrag_0>, <eintrag_1>, <eintrag_2>};
 ```
 
-```csharp
+<!-- --{{1}}-- Idee des Codefragments:
+  * Statische Beschränkung der Loop! Fehler generieren
+  * Ersetzen durch intArray.Length
+  * Wie kann man nach mehreren Zeichen splitten?
+-->
+```csharp    ExampleArrays
 using System;
 
 namespace Rextester
@@ -364,7 +389,7 @@ namespace Rextester
     {
       int [] intArray = new int [5];
       short [] shortArray = new short[] { 1, 3, 5, 7, 9 };
-      for (int i = 0; i < intArray.Length; i++){
+      for (int i = 0; i < 3; i++){
         Console.Write("{0, 3}", intArray[i]);
       }
       Console.WriteLine("");
@@ -386,8 +411,9 @@ namespace Rextester
 ********************************************************************************
 
 > Achtung Die unterschiedliche Initialisierung von Wert- und Referenztypen
-> generiert ggf. Fehler
+> generiert ggf. Fehler!
 
+Erzeugung eines Arrays von structs - Wertetypen
 
 ```csharp
 public struct Point {public int X, Y;}
@@ -395,6 +421,7 @@ public struct Point {public int X, Y;}
 Point [] pointcloud = new Point[100];
 int x = pointcloud[99].X                    // x = 0
 ```
+Erzeugung eines Arrays von Klasseninstanzen - Referenztypen
 
 ```csharp
 public class Point {public int X, Y;}
@@ -451,16 +478,54 @@ int [][] = jaggedMatrix ={
 };
 ```
 
-### Implizit typisierte Variablen
-
-TODO
 
 ********************************************************************************
+
+### Implizit typisierte Variablen
+
+Seit der Version 3.0 unterstützt C# implizite Typzuordnungen. In diesem Fall
+ordnet der Compiler den Daten automatisch einen passenden Typ zu.
+
+<!-- --{{1}}-- Idee des Codefragments:
+  * Statische Beschränkung der Loop! Fehler generieren
+  * Ersetzen durch intArray.Length
+  * Wie kann man nach mehreren Zeichen splitten?
+-->
+```csharp    Usagevar
+using System;
+using System.Collections.Generic;
+
+namespace Rextester
+{
+  public class Program
+  {
+    public static void Main(string[] args)
+    {
+      //int num = 123;
+      //string str = "asdf";
+      //Dictionary<int, string> dict = new Dictionary<int, string>();
+
+      var num = 123;
+      var str = "asdf";
+      var dict = new Dictionary<int, string>();
+
+      Console.WriteLine("{0}, {1}, {2}", num.GetType(), str.GetType(), dict.GetType());
+
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+Weitere Infos https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/classes-and-structs/implicitly-typed-local-variables
+
 
 ## 2. Anweisungen
 
 Anweisungen  setzen sich zusammen aus Zuweisungen, Methodenaufrufen, Verzweigungen
 Sprunganweisungen und Anweisungen zur Fehlerbehandlung.
+
+![ISO 9126](./img/03_ElementeII/Flowchart_de.png)<!-- width="50%" --> [WikiFlow](#13)
 
 ### Verzweigungen
 
@@ -611,7 +676,8 @@ Lesbarkeit, gleichzeitig können aber auch komplexere Anweisungen integriert
 werden.
 
 <!-- --{{1}}-- Idee des Codefragments:
-  * A
+  * Hinweis, dass Dekrementieren und Intkrementieren durch beliebige andere
+  Funktioen ersetzt werden können.
 -->
 ```csharp
 using System;
@@ -672,15 +738,53 @@ namespace Rextester
 
 ### Sprünge
 
-Während `goto <label>` bestimmte Positionen im Code adressiert, lassen sich mit
+Während  bestimmte Positionen im Code adressiert, lassen sich mit
 `break` Schleifen beenden, dient `continue` der Unterbrechung des aktuellen
 Blockes.  
 
-**return**
+| Sprunganweisung | Wirkung                                                                              |
+| --------------- | ------------------------------------------------------------------------------------ |
+| `break`         | beendet die Ausführung der nächsten einschließenden Schleife oder `switch`-Anweisung |
+| `continue`      | realisiert einen Sprung in die nächste Iteration der einschließenden Schleife        |
+| `goto <label>`  | Sprung an eine Stelle im Code, er durch das Label markiert ist                       |
+| `return`                |     beendet die Ausführung der Methode, in der sie angezeigt wird und gibt den optional nachfolgenden Wert zurücksetzen                                                                                  |
+
+<!-- --{{1}}-- Idee des Codefragments:
+-->
+```csharp   GoTo
+using System;
+
+namespace Rextester
+{
+  public class Program
+  {
+    public static void Main(string[] args)
+    {
+      int dummy = 0;
+      for (int y = 0; y < 10; y++)
+      {
+        for (int x = 0; x < 10; x++)
+        {
+          if (x == 5 && y == 5)
+          {
+            goto Outer;
+          }
+        }
+        dummy++;
+      }
+      Outer:
+          Console.WriteLine(dummy);
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+Vgl. Links zur Diskussion um goto auf https://de.wikipedia.org/wiki/Sprunganweisung
 
 ## 3. Beispiel der Woche ...
 
-![MonteCaroloPI](/img/02_Elemente/Pi_statistisch.png)<!-- width="60%" --> [WikiMonteCarlo](#7)
+![MonteCaroloPI](/img/03_ElementeII/Pi_statistisch.png)<!-- width="60%" --> [WikiMonteCarlo](#7)
 
 Betrachtet wird ein Einheitsquadrat mit Einheitsviertelkreis, indem $n$
 zufällige Punkte erzeugt werden. Dabei verhält sich die Anzahl Punkte im
@@ -690,7 +794,7 @@ Viertelkreis zur Quadratfläche:
 $$\frac{Punkte_{in}}{Punkte_{all}} = \frac{A_{Kreisausschnitt}}{Quadratfläche} = \frac{\frac{1}{4}\pi r^2}{r^2} = \frac{1}{4} \pi$$
 
 
-```csharp   
+```csharp      CalcPi
 using System;
 
 namespace Rextester
@@ -724,6 +828,8 @@ namespace Rextester
 [MSDoku] C# Dokumentation, "Pattern Matching",  [Link](https://docs.microsoft.com/en-us/dotnet/csharp/pattern-matching)
 
 [WikiMonteCarlo]  ZUM-Wiki, "Monte Carlo Simulation" Autor "Springob", [Link](https://de.wikipedia.org/wiki/Monte-Carlo-Simulation#/media/File:Pi_statistisch.png)
+
+[WikiFlow]  Wikipedia, "Flussdiagramm" Autor "Erik Streb", [Link](https://upload.wikimedia.org/wikipedia/commons/6/6b/Flowchart_de.svg)
 
 **Autoren**
 
