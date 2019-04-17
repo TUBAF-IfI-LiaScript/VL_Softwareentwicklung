@@ -519,7 +519,7 @@ namespace Rextester
 
         //Beispiel 3:
         string s = "5";
-        Console.WriteLine(int.Parse(s, NumberStyles.Float);
+        Console.WriteLine(int.Parse(s, NumberStyles.Float));
     }
   }
 }
@@ -549,7 +549,8 @@ namespace Rextester
     {
       try
       {
-        return a / b;
+          checked {return a + b;}        // Fall 1
+          //return a / b;                // Fall 2
       }
       catch (OverflowException e)
       {
@@ -562,7 +563,8 @@ namespace Rextester
   {
       try
       {
-        return Berechnung(2, 0);
+        Berechnung(int.MaxValue, 1);     // Fall 1
+        //Berechnung(2, 0);              // Fall 2
       }
       catch (DivideByZeroException e)
       {
