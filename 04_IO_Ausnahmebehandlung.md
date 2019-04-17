@@ -63,7 +63,7 @@ und das Schreiben in Dateien vorgestellt werden sollen.
 
 Für das Schreiben stehen zwei Methoden `System.Console.Write` und `System.Console.ẀriteLine`.
 
-<!-- --{{1}}-- Idee des Codeblockes
+<!-- --{{0}}-- Idee des Codeblockes
   * Erinnerung an Steuerzeichen /n /t
  -->
 
@@ -76,7 +76,6 @@ namespace Rextester
   {
     public static void Main(string[] args)
     {
-      string s = "Start " + "Zero";
       Console.Write("One");     
       Console.Write("Two");     
       Console.WriteLine("Three");
@@ -102,45 +101,6 @@ zweitens verschiedene **Ausgabeschnittstellen**.
 | `WriteLine(String, Object, Object, Object)`               |                                           |
 | `WriteLine(String, Object[])`                             |                                           |
 
-### Nicht-String Parameter
-
-Die Darstellung der Basisdatentypen erfolgt unter der Maßgabe, dass diese vom
-der Klasse Objekt erben und damit die Methode `toString()` implementieren.
-Diese wird implizit aufgerufen.
-
-<!-- --{{1}}-- Idee des Codeblockes
-  * Darstellung ToString()
-    public override string ToString(){
-        return Name + " " + Alter;
-    }
- -->
-
-```csharp   Write/WriteLine
-using System;
-
-namespace Rextester
-{
-  public class SuperStudent{
-    string Name = "Alexander von Humboldt";
-    int Alter = 25;
-  }
-
-  public class Program
-  {
-    public static void Main(string[] args)
-    {
-       SuperStudent s = new SuperStudent();
-       Console.WriteLine(s);
-    }
-  }
-}
-```
-@Rextester.eval(@CSharp)
-
-Für nutzerspezifische Referenztypen gibt `WriteLine` den Namen der Instanz
-zurück. Eigene Implementierungen der `ToString()` Methode erlauben individuelle
-Ausgaben.
-
 ### Kombinierte Formatierung von Strings   
 
 Die "Kombinierte Formatierung" unter C# ermöglicht eine breite Festlegung bezüglich des Formats der Ausgaben. Die folgenden Aussagen beziehen sich dabei aber nicht
@@ -163,7 +123,7 @@ Dabei sind folgende Ausdrücke möglich:
 "{n, width:format precision}" //ohne Lehrzeichen zwischen format und precision!
 ```
 
-<!-- --{{1}}-- Idee des Codeblockes
+<!-- --{{0}}-- Idee des Codeblockes
   * Diskussion der Indizes, Durchtauschen der Indizes,
   * Erzeugung Fehler Indizes
   * Darstellung der Breite
@@ -204,7 +164,7 @@ Eine komplette Auflistung findet sich unter https://docs.microsoft.com/de-de/dot
 > Achtung: Die Formatzeichen sind typspezifisch, es exisiteren analoge Zeichen
 > mit unterschiedlicher Bedeutung für Zeitwerte
 
-<!-- --{{1}}-- Idee des Codeblockes
+<!-- --{{0}}-- Idee des Codeblockes
   * Illustration, dass die Formatierungsmethoden auf verschiedenen Ebenen
   funktionen
   * Hinweis auf fehlender Möglichkeit einer Breitenangabe
@@ -272,14 +232,14 @@ Hello, Freiberg! Today is Sunday, it's 09:19 now.
 ```
 
 Die Darstellung des Ausdrucks folgt dabei der Semantik:
+
 ```
 {<interpolatedExpression>[,<alignment>][:<formatString>]}
 ```
 
-Damit lassen sich dann sehr mächtige Ausdrücke formulieren vgl [Link](
-https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/tokens/interpolated) oder aber in den Beispielen von
+Damit lassen sich dann sehr mächtige Ausdrücke formulieren vgl. [Link](https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/tokens/interpolated) oder aber in den Beispielen von
 
-[Interpolated.cs](LINK AUF GIT Einfuegen)
+[Interpolated.cs](https://github.com/liaScript/CsharpCourse/blob/master/code/04_IO_Ausnahmebehandlung/Interplolated.cs)
 
 ### Ziele der Schreiboperationen
 
@@ -375,7 +335,8 @@ namespace Wiki
             // Unmittelbare Ausgabe in eine Datei
             File.WriteAllText(@"C:\test1.txt", "Sehr einfach");
 
-            // Einlesen des gesamten Inhalts einer Textdatei
+            // Einlesen des gesamten Inhalts einer Textdatei und
+            // Ausgabe auf dem Bildschirm
             string text = File.ReadAllText(@"C:\test1.txt");
             Console.WriteLine(text);
         }
@@ -431,17 +392,54 @@ sehen Sie Verbesserungsbedarf?
 
 ## 2. Leseoperationen
 
-LESEN VON COMMANDOZEILEN EINTRAEGEN!!!
+                                {{0-1}}
+*******************************************************************************
 
+Eine Grundlegende Eingabemöglichkeit ist die Übergabe von Parametern beim
+Aufruf des Programms von der Kommandozeile.
 
-Leseoperationen von der Console werden durch zwei Methoden abgebildet:
+```csharp   
+using System;
+
+namespace Rextester
+{
+  public class Program
+  {
+    public static int Main(string[] args)
+    {
+
+      if (args.Length == 0)
+      {
+          System.Console.WriteLine("Offenbar keine Eingabe - Fehler!");
+          return 1;
+      }
+      if (args.Length == 2)  // Erwartete Zahl von Parametern
+      {
+          ...
+          long num = long.Parse(args[0]);  
+          long num = Convert.ToInt64(s);  // Größere Spezifikationsbandbreite
+          int.TryParse(args[0], out num);
+      }
+
+      ...
+
+    }
+  }
+}
+```
+*******************************************************************************
+
+                                {{1-2}}
+*******************************************************************************
+
+Leseoperationen von der Console (oder anderen Streams) werden durch zwei Methoden abgebildet:
 
 ```
 public static int Read ();
 public static string ReadLine ();
 ```
 
-```csharp   
+```csharp            ReadFromConsole
 using System;
 
 namespace Rextester
@@ -466,11 +464,14 @@ namespace Rextester
 ```
 ``` bash stdin
 A0,12,B⺀+
+
 ```
 @Rextester._eval_(@uid,@CSharp,true,`@input(1)`)
 
 Das Beispiel zeigt sehr schön, wie verschiedene Zeichensätze auf unterschiedlich
 lange Codes abgebildet werden. Das chinesische Zeichen, dass vor dem Escape-Zeichen "+" steht generiert einen 2Byte breiten Wert.
+
+*******************************************************************************
 
 ## 3. Ausnahmebehandlungen
 
@@ -598,8 +599,7 @@ Lösung unter [ExceptionHandling.cs](https://github.com/liaScript/CsharpCourse/b
 | Schritt 3: Gibt es Prioritäten bei der Abarbeitung?                                                   |
 | Schritt 4: Sind abschließende "Arbeiten" notwendig?                                                   |
 
-[Link auf die Dokumentation der StreamWriter Klasse](
-https://docs.microsoft.com/de-de/dotnet/api/system.io.streamwriter.-ctor?view=netframework-4.7.2#System_IO_StreamWriter__ctor_System_String_)
+[Link auf die Dokumentation der StreamWriter Klasse](https://docs.microsoft.com/de-de/dotnet/api/system.io.streamwriter.-ctor?view=netframework-4.7.2#System_IO_StreamWriter__ctor_System_String_)
 
 
 ## 4. Beispiel der Woche ...
@@ -657,7 +657,6 @@ namespace Calcualator
 
 **Referenzen**
 
-[WikiMonteCarlo]  ZUM-Wiki, "Monte Carlo Simulation" Autor "Springob", [Link](https://de.wikipedia.org/wiki/Monte-Carlo-Simulation#/media/File:Pi_statistisch.png)
 
 **Autoren**
 
