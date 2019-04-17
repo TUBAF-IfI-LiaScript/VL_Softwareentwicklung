@@ -43,6 +43,27 @@ c# Schlüsselwörter:
 Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 `ascending` wurde hier verzichtet.
 
+
+## Fragen aus dem Auditorium
+
+*Wie kann ich die Position eines bestimmten Eintrages in einem Array identifizieren?*
+
+```csharp   IndexOf()
+using System;
+
+namespace Rextester
+{
+  public class Program
+  {
+    public static void Main(string[] args)
+    {
+
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
 ---
 
 ## Kontrollfragen
