@@ -10,19 +10,15 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 -->
 
-# Vorlesung Softwareentwicklung - 4 - Funktionen und Strukturen
+# Vorlesung Softwareentwicklung - 5 - Funktionen und Strukturen
 
-**Fragen an die heutige Veranstaltung ...**
-
-*
-
----------------------------------------------------------------------
+--------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/liaScript/CsharpCourse/blob/master/04_FunktionenStrukturen.md
+https://github.com/liaScript/CsharpCourse/blob/master/05_FunktionenStrukturen.md
 
 Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 1](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/04_FunktionenStrukturen.md#1)
+[LiaScript Vorlesung 5](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/05_FunktionenStrukturen.md#1)
 
 ---------------------------------------------------------------------
 
@@ -30,19 +26,19 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 c# Schlüsselwörter:
 
-| abstract    | as       | base     | bool       | break      |`byte`     |  
-| case        | catch    | char     |`checked`   |`class`     | const     |
-| continue    | decimal  | default  | delegate   | do         |`double`   |
-| else        | enum     | event    | explicit   | extern     | false     |
-| finally     | fixed    | float    | for        | foreach    | goto      |
-| if          | implicit | in       |`int`       | interface  | internal  |
-| is          | lock     | long     |`namespace` | new        | null      |
+| abstract    | as       | base     | bool       |`break`     |`byte`     |  
+|`case`       |`catch`   | char     |`checked`   |`class`     | const     |
+|`continue`   |`decimal` | default  | delegate   |`do`        |`double`   |
+|`else`       |`enum`    | event    | explicit   | extern     |`false`    |
+|`finally`    | fixed    | float    | for        | foreach    |`goto`     |
+|`if`         | implicit | in       |`int`       | interface  | internal  |
+| is          | lock     |`long`    |`namespace` | new        | null      |
 | object      | operator | out      | override   | params     | private   |
-| protected   | public   | readonly | ref        | return     |`sbyte`    |
-| sealed      | short    | sizeof   | stackalloc |`static`    | string    |
-| struct      | switch   | this     | throw      | true       | try       |
-| typeof      | uint     | ulong    |`unchecked` | unsafe     |`ushort`   |
-| `using`     | virtual  |`void`    | volatile   | while      |           |
+| protected   | public   | readonly | ref        |`return`    |`sbyte`    |
+| sealed      |`short`   | sizeof   | stackalloc |`static`    | string    |
+| struct      |`switch`  | this     |`throw`     |`true`      |`try`      |
+| typeof      |`uint`    |`ulong`   |`unchecked` | unsafe     |`ushort`   |
+|`using`      | virtual  |`void`    | volatile   |`while`     |           |
 
 
 Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
@@ -66,23 +62,25 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 *2. Hier stehen jetzt Ihre Fragen ...*
 
 ---------------------------------------------------------------------
-## Ergänzung - Anwendung der switch Anweisung
+## Motivation
 
-Identifizieren Sie das auftreten des Musters *a{c}df* in einem Signalverlauf!
+Identifizieren Sie das Auftreten des Musters *a{c}df* in einem Signalverlauf!
 
 <!--
 style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
 -->
-````
+````ascii
                   .-  a   -. .-- c  --. .-  d   -.
                   |        | |        | |        |
                   |        v |        v |        v
             .----.-.       .-.        .-.       .-. --.
             *   ( A )     ( B )      ( C )     ( D )  *
-            '--->'-'       '-'       ^'-'|      '-'<--.
-                  ^         |        |   |       |
-                  |--- * ---.        . c .       |
+            '--->'-'       '-'       ^'-'\     '-'<--.
+                  ^         |       /    |       |
+                  |--- * ---╯      | .   -'        |
                   .-------------- f -------------.
+
+
 ````
 
 ```csharp   
@@ -128,8 +126,8 @@ namespace Rextester
 ``` bash stdin
 abaccdaafab
 ```
-@Rextester._eval_(@uid,@CSharp,true,`@input(1)`)
 
+Welche anderen Lösungsansätze sind denkbar?
 
 ## 1. Funktionen in C#
 
@@ -143,11 +141,11 @@ C# kennt *benannte* und *anonyme* Methoden, in diesem Abschnitt wird nur auf
 die benannten Methoden eingegangen. Prozeduren sind Funktionen ohne Rückgabewert,
 sie werden entsprechend als `void` deklariert.
 
-<!-- --{{1}}-- Idee des Codefragments:
+<!-- --{{0}}-- Idee des Codefragments:
   * Bedeutung von void static
   * static void Calc(float p)            Überladen von Funktionen
 -->
-```csharp   
+```csharp                    Functions
 using System;
 
 namespace Rextester
@@ -172,7 +170,21 @@ namespace Rextester
 ### Verkürzte Darstellung
 
 Methoden können in Kurzform in einer einzigen Zeile angegeben werden. Dafür nutzt
-C# die Syntax von Lambda Ausdrücken die für anonyme Funktionen verwendet werden.
+C# die Syntax von Lambda Ausdrücken, die für anonyme Funktionen verwendet werden.
+
+
+```csharp
+public override string ToString() => $"{fname} {lname}".Trim();
+
+// oder
+
+public override string ToString()
+{
+   return $"{fname} {lname}".Trim();
+}
+```
+
+Damit lassen sich einfache Funktionen sehr kompakt darstellen.
 
 ```csharp  
 public class Program
@@ -190,19 +202,20 @@ public class Program
 
 ### Übergeben von Parametern
 
+                                       {{0-2}}
+********************************************************************************
+
 Ohne weitere Refrenzparameter werden Variablen an Funktionen bei
 
 * Wertetypen (Basistypen, Enumerationen, structs, Tupel) mittels *pass-by-value*
-* Referenztypen (Klassen, Interfaces, Arrays, Delegates) mittels *pass-by-value*
+* Referenztypen (Klassen, Interfaces, Arrays, Delegates) mittels *pass-by-reference*
 
 an eine Funktion übergeben.
 
-<!-- --{{1}}-- Idee des Codefragments:
-  * Ersetzen der integer Variablen p durch ein Array
-          int [] p = new int [] {6};
-  * Einführen von ref
+<!-- --{{1}}-- Idee des Codebeispiels FunctionParameters:
+Ersetzen Sie die integer Variable p durch ein Array der Größe 1 und beobachten Sie das veränderte Ergebnis. Nutzen Sie das Schlüsselwort ref um eine datentypunabhängige pass-by-reference Übergabe zu realisieren.
 -->
-```csharp   
+```csharp          FunctionParameters
 using System;
 
 namespace Rextester
@@ -225,30 +238,74 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-Welche Lösungen sind möglich um einen referenzierten Zugriff zu ermöglichen?
+Welche Lösungen sind möglich den Zugriff einer Funktion auf eine übergebene
+Variable generell sicherzustellen?
+
+********************************************************************************
+
+********************************************************************************
+
+                                     {{2-3}}
+********************************************************************************
 
 **Ansatz 0 - Globale Variablen**
 
 ... sind in C# als isoliertes Konzept nicht implementiert, können aber als
-statische Klasse realisiert werden.
+statische Klassen realisiert werden.
 
-**Ansatz 1 - Rückgabe des angepassten Wertes**
-(unüblich und auf einen Wert beschränkt)
+```csharp          staticClassAsGlobalVariableContainer
+using System;
+
+namespace Rextester
+{
+  public static class Counter
+  {
+     public static int globalCounter = 0;
+  }
+
+  public class Program
+  {
+    static void IncrementsCounter(){
+       Counter.globalCounter++;
+    }
+    public static void Main(string[] args){
+      Console.WriteLine(Counter.globalCounter);   
+      IncrementsCounter();
+      Console.WriteLine(Counter.globalCounter);               
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+********************************************************************************
+
+                                     {{3-4}}
+********************************************************************************
+
+**Ansatz 1 - Rückgabe des modifizierten Wertes**
 
 ```csharp   
-static int Calc( int p)  
+static int Calc( int input)  
 {
   // operationen über P
-  return p;
+  int output = ... input
+  return output;
 }
 
 public static void Main(string[] args){
   ...
   int p = 5;
-  p = Calc(ref p);  
+  p = Calc(p);  
   ...
 }
 ```
+
+********************************************************************************
+
+                                     {{4-5}}
+********************************************************************************
+
 **Ansatz 2 - Übergabe als Referenz**
 
 Bei der Angabe des `ref`-Attributes wird statt der Variablen in jedem Fall die
@@ -260,19 +317,33 @@ kann isoliert nicht genutzt werden, um die Adresse einer Variablen zu bestimmen
 Vorteil: auf beliebig viele Parameter ausweisbar, keine Synchronisation der
 Variablennamen zwischen Übergabeparameter und Rückgabewert notwendig.
 
-```csharp   
-static void Calc(ref int p)  
-{
-  // operationen über P
-}
+```csharp         UsageOfRef
+using System;
 
-public static void Main(string[] args){
-  ...
-  int p = 5;
-  Calc(ref p);  
-  ...
+namespace Rextester
+{
+  public class Program
+  {
+    static void Calc(ref int p)
+    {
+       p = p * 2;
+    }
+    public static void Main(string[] args){
+      int p = 1;
+      Console.WriteLine(p);   
+      Calc(ref p);
+      Console.WriteLine(p);               
+    }
+  }
 }
 ```
+@Rextester.eval(@CSharp)
+
+
+********************************************************************************
+
+                                     {{5-6}}
+********************************************************************************
 
 **Ansatz 3 - Übergabe als out-Referenz**
 
@@ -306,13 +377,22 @@ Variablendeklarationen kann man dann typunabhängig Rückgabewerte aus Funktione
 entgegennehmen.
 
 Zudem sollte für eine sehr umfangreiches Set von Rückgabewerten geprüft werden,
-ob diese wirklich alle benötig werden. Mit dem *discard* Platzhalter `out _` werden unnötige
-Deklarationen eingespart.
+ob diese wirklich alle benötig werden. Mit dem *discard* Platzhalter `out _` werden unnötige Deklarationen eingespart.
 
 ```csharp  
-static void SuperComplexMethod(out  string result, out int countA, out int countB){}
-SuperComplexMethod(out _, out_, out int count);
+// Defintion
+static void SuperComplexMethod(out string result,
+                               out int countA,
+                               out int countB)
+{
+  // super complex
+}
+
+// Aufruf der Methode
+SuperComplexMethod(out _, out _, out int count);
 ```
+
+********************************************************************************
 
 ### Parameterlisten
 
@@ -335,7 +415,8 @@ namespace Parameters
     }
 
     public static void Main(string[] args){
-      Add(out int sum, 3, 3, 5 , 6);
+      int sum = 0;
+      Add(out sum, 3, 3, 5 , 6);
       Console.WriteLine(sum);
     }
   }
@@ -353,9 +434,14 @@ auf der anderen aber lästige Tipparbeit vermieden. Der Code bleibt damit
 übersichtlich.
 
 ```csharp   
-static void Sort(string [] s, int from, int to, bool ascending, bool ignoreCases){}
+static void Sort(string [] s, int from, int to,
+                 bool ascending, bool ignoreCases){}
 
-static void Sort(string [] s, int from=0, int to=-1, bool ascending = true, bool ignoreCases= false){}
+static void Sort(string [] s,
+                 int from = 0,
+                 int to = -1,
+                 bool ascending = true,
+                 bool ignoreCases= false){}
 ```
 
 Die *default*-Werte müssen aber der Reihenfolge nach "abgearbeitet" werden.
@@ -386,7 +472,7 @@ namespace Rextester
     }
 
     public static void Main(string[] args){
-      PrintDate();           
+      PrintDate(year:2019);           
     }
   }
 }
@@ -404,31 +490,19 @@ Namens auftreten, wenn diese sich in ihren Parametern unterscheiden:
 
 Ein bereits mehrfach genutztes Beispiel dafür ist die `System.Write`-Methode,
 die unabhängig vom Typ der übergebenen Variable eine entsprechende Ausgabe
-realisiert. Die Dokumentation unter [Link](https://docs.microsoft.com/de-de/dotnet/api/system.console.write?view=netframework-4.7.2) kennt 18 verschiedene
-Parametersets für diese Methode. Der Vorteil liegt darin, dass der Nutzer sich nicht
-18 verschiedene Methoden zu merken muss.
+realisiert.
 
-```csharp   
-using System;
-
-namespace Rextester
-{
-  public class Program
-  {
-    public static void Main(string[] args){
-      double value = 1d;                                   // originär unterstützt
-      DateTime date = new DateTime(2008, 5, 1, 8, 30, 52); // auf ToString() angewiesen
-      Console.WriteLine(date);
-      }
-   }
-}
-```
-@Rextester.eval(@CSharp)
-
-## 2 Structs
+## 2. Structs
 
                                          {{0-1}}
 *******************************************************************************
+
+Ein struct-Typ ist ein ein Werttyp, der in der Regel verwendet wird, um eine
+Gruppe verwandter Variablen zusammenzufassen. Beispiele dafür können sein:
+
+* karthesische Koordinaten (x, y, z)
+* Merkmale eines Produktes (Größe, Name, Preis)
+* Charakteristik einer Datei (Speicherort, Name, Größe, Rechteinformationen)
 
 Ausgangspunkt für die weiteren Überlegungen ist die Konfiguration von `structs`
 in C.
@@ -456,9 +530,9 @@ int main(int argc, char const *argv[])
     rect2.area = rect2.length * rect2.width;
     rect3.area = rect3.length * rect3.width;
     // Ausgabe:
-    printf("Rectangle 1 has an area of %f\n",rect1.area);
-    printf("Rectangle 2 has an area of %f\n",rect2.area);
-    printf("Rectangle 3 has an area of %f\n",rect3.area);
+    printf("Rectangle 1 has an area of %5.1f\n",rect1.area);
+    printf("Rectangle 2 has an area of %5.1f\n",rect2.area);
+    printf("Rectangle 3 has an area of %5.1f\n",rect3.area);
     return 0;
 }
 ```
@@ -509,20 +583,325 @@ int main(int argc, char const *argv[])
 ```
 @Rextester.C
 
-C sieht keine Möglichkeit vor Funktion und Daten "dichter" zusammenzubringen, wenn man von Funktionspointern im `struct` absieht.
+C sieht keine Möglichkeit vor Funktion und Daten "dichter" zusammenzubringen,
+wenn man von Funktionspointern im `struct` absieht.
 
 *******************************************************************************
 
                                  {{2-3}}
 *******************************************************************************
 
-Und in C#?
+Und in C#? C# erweitert das Konzept in Richtung der Konzepte der objektorientierten
+Programmierung und integriert Operationen über den Daten in das `struct`-Konzept.
+Dabei können sie folgende Elemente umfassen:
 
-https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/classes-and-structs/using-structs
+* Felder und Konstanten
+* Methoden
+* Konstruktoren und Destruktoren
+* Properties
+* Indexer
+* Events
+* überladene Operatoren
+* geschachtelte Typen
+
+```csharp        FirstStructExample
+using System;
+
+namespace Rextester
+{
+  public struct Animal
+  {
+    public string name;               // Felder / Konstanten
+    public string sound;              //
+
+    public void MakeNoise() {         // Methode
+    	Console.WriteLine("{0} makes {1}", name, sound);
+    }
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args){
+      Animal kitty;
+      kitty.name = "Kitty";
+      kitty.sound = "Miau";     
+      kitty.MakeNoise();
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+*******************************************************************************
+
+### Konstruktoren
+
+                                 {{0-1}}
+*******************************************************************************
+
+```csharp
+Animal kitty;
+kitty.name = ... ;
+kitty.sound = ...;
+...
+kitty.state = State.Hungry;
+
+Animal wally;
+wally.name = ... ;
+wally.sound = ...;
+...
+wally.state = State.Sleeps;
+```
+
+Haben wir auch wirklich alle initialen Variablen gesetzt? Das Vorgehen
+scheint doch sehr unübersichtlich und fehleranfällig!
+
+*******************************************************************************
+
+                                 {{1-2}}
+*******************************************************************************
+
+Konstruktoren sind spezielle Methoden für die Initalisierung eines Objektes. In
+`structs` dürfen allerdings (im Unterschied zu Klassen) keine parameterlosen
+Methoden sein. Der Compiler erzeugt diese automatisch, die Methode beschreibt
+alle Felder mit den datentypspezifischen Nullwerten.
+
+> *Anmerkung 1:* Konstruktoren sind Methoden und folglich steht das gesamte Spektrum
+> der Variabilität bei deren Defintion zur Verfügung (Überladen, vordefinierte
+> Variablen, Parameterlisten, usw.)
+
+> *Anmerkung 2:* Um einen Konstruktor für die Intialisierung zu nutzen
+> braucht es einen erweiterten Aufruf.
+
+
+| Konstruktor                                  | Aufruf                                      |
+| -------------------------------------------- | ------------------------------------------- |
+| Aufruf des (impliziten) Standardkonstruktors | `Animal kitty = new Animal()`               |
+| `public Animal(name, sound)`                 | `Animal kitty = new Animal("kitty","Miau")` |
+| `public Animal(name, sound = "Miau")`        | `Animal kitty = new Animal("kitty")`        |
+
+
+```csharp                                      Constructors
+using System;
+
+namespace Rextester
+{
+  public struct Animal
+  {
+    public string name;   
+    public string sound;  
+
+    public void MakeNoise() {
+    	Console.WriteLine("{0} makes {1}", name, sound);
+    }
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args){
+      Animal cat = new Animal();
+      cat.name = "Kitty";
+      cat.sound = "Miau";
+      cat.MakeNoise();
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+*******************************************************************************
+
+### Beispiele für die Nutzung von Structs
+
+
+                                 {{0-1}}
+*******************************************************************************
+
+Im folgenden Beispiel werden Instanzen des Structs "Animal" von einem anderen
+Struct "Farm" genutzt und dort in einer (generischen) Liste gespeichert.
+
+```csharp                                      Usage
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace Rextester
+{
+  public struct Animal
+  {
+    public string name;   
+    public string sound;  
+
+    public Animal(string name, string sound = "Miau"){
+      this.name = name;
+      this.sound = sound;
+    }
+
+    public void MakeNoise() {
+    	Console.WriteLine("{0} makes {1}", name, sound);
+    }
+  }
+
+  public struct Farm{
+    public string adress;
+    public List<Animal> animalList;
+
+    public Farm(string adress) {
+    	animalList = new List<Animal>();
+    	this.adress = adress;
+    }
+
+    public void AddAnimal(Animal newanimal){
+      animalList.Add(newanimal);
+    }
+
+    public void PrintAnimals(){
+      foreach (Animal ped in animalList){
+        ped.MakeNoise();
+      }
+    }
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args){
+      Animal Wally = new Animal ("Wally","Wau");
+      Animal Kitty = new Animal ("Kitty","Miau");
+      Farm myFarm = new Farm("Biobauernhof Freiberg");
+      myFarm.AddAnimal(Wally);
+      myFarm.AddAnimal(Kitty);
+      myFarm.PrintAnimals();
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
 
 *******************************************************************************
 
 
+                                 {{1-2}}
+*******************************************************************************
+Embedded Structs
+
+
+*******************************************************************************
+
+### Sichtbarkeitsattribute
+
+Struct und Klassen abstrahieren Daten und verbergen konkrete Realisierungen von
+Programmteilen. Um zu steuern, welche Elemente eines Programms aus welchem
+Kontext heraus sichtbar sind, werden diese mit Attributen versehen.
+
+                                 {{0 - 1}}
+*******************************************************************************
+
+
+**Sichtbarkeit der Stuktur**
+
+Strukturen, die innerhalb eines Namespace (mit anderen Worten, die nicht in anderen Klassen oder Strukturen geschachtelt sind) direkt deklariert werden, können entweder `public` oder `internal` sein. Wenn kein Modifizierer angegeben ist, wird standardmäßig `internal` verwendet.
+Damit lässt sich konfigurieren, wie auf diese zurückgegriffen werden kann.
+
+<!--
+style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+-->
+````ascii
+
+            Programm.cs                       Farmland.cs
+            +-----------------------+         +-------------------------+
+            | class Program{        |    .->  | internal struct Animal{ |
+            |   public void Main(){ |    |    |    ...                  |
+            |      Animal Kitty;    | ---.    | }                       |
+            |      ...              |         |                         |
+            |      Farm Bullerbue;  | ----->  | public struct Farm{     |
+            |   }                   |         |    ...                  |
+            |}                      |         | }                       |
+            +-----------------------+         +-------------------------+
+
+Schritt 1                                     mcs -target:library Farmland.cs
+Schritt 2   mcs -reference:Farmland.dll Programm.cs
+````
+
+Das struct "Animal" soll in einem anderen Assembly nicht aufrufbar sein. Wir
+wollen die Implementierung kapsel und verbergen. Folglich generiert der entsprechende
+Aufruf einen Compiler-Fehler. Zugehörige Dateien sind unter [Link] zu finden
+
+```bash
+mcs -reference:Farmland.dll Programm.cs
+error CS0122: `Animal´ is inaccessible due to its protection level
+error CS0841: A local variable `Kitty' cannot be used before it is declared
+```
+
+*******************************************************************************
+
+
+                                 {{1-2}}
+*******************************************************************************
+
+**Sichtbarkeit der Felder und Member einer Stuktur**
+
+Für die Sichtbarkeit auf der Ebene der Felder und Member können für structs
+drei Attribute verwendet werden `private`, `internal` und `public`. Standard
+ist `private`.
+
+```csharp                                      Attributes
+using System;
+
+namespace Rextester
+{
+  public struct Animal
+  {
+    public string name;   
+    internal string sound;
+    private byte age;       
+
+    public Animal(string name, uint born, string sound = "Miau"){
+      this.name = name;
+      this.sound = sound;
+      age = (byte) (2019 - born);
+    }
+
+    public void MakeNoise() {
+    	Console.WriteLine("{0} ({1} years old) makes {2}", name, age, sound);
+    }
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args){
+      Animal Wally = new Animal ("Wally", 2014, "Wau");
+      Wally.MakeNoise();
+      Wally.age = 5;
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+
+*******************************************************************************
+
+### ... ja, aber ...
+
+Welche Einschränkungen haben Structs gegenüber Klassen?
+
+> `struct`s kennen das Konzept der Vererbung nicht! Eine Struktur kann nicht von einer
+> anderen Struktur oder Klasse erben, und sie kann auch nicht die Basis einer Klasse
+> sein.
+
+https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/classes-and-structs/using-structs
+
+Welche Konsequenzen hat das?
+
+| Structs                                         | Klassen |
+| ----------------------------------------------- | ------- |
+| Werttyp (Variablen enthalten das Objektes)      | Referenzdatentyp         |
+| Abgelegt auf dem Stack                          | Gespeichert auf dem Heap        |
+| Unterstützen keine Vererbung                    |  Unterstützen Vererbung       |
+| können Interfaces implementieren                | können Interfaces implementieren        |
+| `internal` und `public` als Struct-Attribute | `private`, `internal` und `public` als Klassenattribute |
+| `private`, `internal` und `public` als Feld und Member-Attribute| analog plus 3 weitere Attribute|
+| keine parameterlosen Konstruktoren deklarierbar |         |
 
 ## 3. Beispiel der Woche ...
 
@@ -532,9 +911,7 @@ https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/classes-and-str
 
 **Referenzen**
 
-[MSDoku] C# Dokumentation, "Pattern Matching",  [Link](https://docs.microsoft.com/en-us/dotnet/csharp/pattern-matching)
 
-[WikiMonteCarlo]  ZUM-Wiki, "Monte Carlo Simulation" Autor "Springob", [Link](https://de.wikipedia.org/wiki/Monte-Carlo-Simulation#/media/File:Pi_statistisch.png)
 
 **Autoren**
 
