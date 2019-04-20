@@ -711,81 +711,14 @@ namespace Rextester
 
 *******************************************************************************
 
-### Beispiele für die Nutzung von Structs
+### Embedded Structs
 
 
-                                 {{0-1}}
-*******************************************************************************
-
-Im folgenden Beispiel werden Instanzen des Structs "Animal" von einem anderen
-Struct "Farm" genutzt und dort in einer (generischen) Liste gespeichert.
-
-```csharp                                      Usage
-using System;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace Rextester
-{
-  public struct Animal
-  {
-    public string name;   
-    public string sound;  
-
-    public Animal(string name, string sound = "Miau"){
-      this.name = name;
-      this.sound = sound;
-    }
-
-    public void MakeNoise() {
-    	Console.WriteLine("{0} makes {1}", name, sound);
-    }
-  }
-
-  public struct Farm{
-    public string adress;
-    public List<Animal> animalList;
-
-    public Farm(string adress) {
-    	animalList = new List<Animal>();
-    	this.adress = adress;
-    }
-
-    public void AddAnimal(Animal newanimal){
-      animalList.Add(newanimal);
-    }
-
-    public void PrintAnimals(){
-      foreach (Animal ped in animalList){
-        ped.MakeNoise();
-      }
-    }
-  }
-
-  public class Program
-  {
-    public static void Main(string[] args){
-      Animal Wally = new Animal ("Wally","Wau");
-      Animal Kitty = new Animal ("Kitty","Miau");
-      Farm myFarm = new Farm("Biobauernhof Freiberg");
-      myFarm.AddAnimal(Wally);
-      myFarm.AddAnimal(Kitty);
-      myFarm.PrintAnimals();
-    }
-  }
-}
-```
-@Rextester.eval(@CSharp)
-
-*******************************************************************************
 
 
-                                 {{1-2}}
-*******************************************************************************
-Embedded Structs
 
 
-*******************************************************************************
+
 
 ### Sichtbarkeitsattribute
 
@@ -903,8 +836,68 @@ Welche Konsequenzen hat das?
 | `private`, `internal` und `public` als Feld und Member-Attribute| analog plus 3 weitere Attribute|
 | keine parameterlosen Konstruktoren deklarierbar |         |
 
+
 ## 3. Beispiel der Woche ...
 
+Im folgenden Beispiel werden Instanzen des Structs "Animal" von einem anderen
+Struct "Farm" genutzt und dort in einer (generischen) Liste gespeichert.
+
+```csharp                                      Usage
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace Rextester
+{
+  public struct Animal
+  {
+    public string name;   
+    public string sound;  
+
+    public Animal(string name, string sound = "Miau"){
+      this.name = name;
+      this.sound = sound;
+    }
+
+    public void MakeNoise() {
+    	Console.WriteLine("{0} makes {1}", name, sound);
+    }
+  }
+
+  public struct Farm{
+    public string adress;
+    public List<Animal> animalList;
+
+    public Farm(string adress) {
+    	animalList = new List<Animal>();
+    	this.adress = adress;
+    }
+
+    public void AddAnimal(Animal newanimal){
+      animalList.Add(newanimal);
+    }
+
+    public void PrintAnimals(){
+      foreach (Animal ped in animalList){
+        ped.MakeNoise();
+      }
+    }
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args){
+      Animal Wally = new Animal ("Wally","Wau");
+      Animal Kitty = new Animal ("Kitty","Miau");
+      Farm myFarm = new Farm("Biobauernhof Freiberg");
+      myFarm.AddAnimal(Wally);
+      myFarm.AddAnimal(Kitty);
+      myFarm.PrintAnimals();
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
 
 
 ## Anhang
