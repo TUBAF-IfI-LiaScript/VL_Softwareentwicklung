@@ -26,16 +26,16 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 c# Schlüsselwörter:
 
-| abstract    | as       | base     | bool       |`break`     |`byte`     |  
-|`case`       |`catch`   | char     |`checked`   |`class`     | const     |
+| abstract    | as       | base     |`bool`      |`break`     |`byte`     |  
+|`case`       |`catch`   |`char`    |`checked`   |`class`     | const     |
 |`continue`   |`decimal` | default  | delegate   |`do`        |`double`   |
 |`else`       |`enum`    | event    | explicit   | extern     |`false`    |
-|`finally`    | fixed    | float    | for        | foreach    |`goto`     |
+|`finally`    | fixed    |`float`   |`for`       |`foreach`   |`goto`     |
 |`if`         | implicit | in       |`int`       | interface  | internal  |
 | is          | lock     |`long`    |`namespace` | new        | null      |
 | object      | operator | out      | override   | params     | private   |
 | protected   | public   | readonly | ref        |`return`    |`sbyte`    |
-| sealed      |`short`   | sizeof   | stackalloc |`static`    | string    |
+| sealed      |`short`   | sizeof   | stackalloc |`static`    |`string`   |
 | struct      |`switch`  | this     |`throw`     |`true`      |`try`      |
 | typeof      |`uint`    |`ulong`   |`unchecked` | unsafe     |`ushort`   |
 |`using`      | virtual  |`void`    | volatile   |`while`     |           |
@@ -48,7 +48,8 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
 ## Kontrollfragen
 
-*1. Welche Default Values nehmen Referenztypen, numerische, char und bool Variablen an?*
+*1. Welche Default Values nehmen Referenztypen, numerische, char und bool
+Variablen an?*
 
 | Typ                       | Default Wert |
 | ------------------------- | ------------ |
@@ -172,7 +173,6 @@ namespace Rextester
 Methoden können in Kurzform in einer einzigen Zeile angegeben werden. Dafür nutzt
 C# die Syntax von Lambda Ausdrücken, die für anonyme Funktionen verwendet werden.
 
-
 ```csharp
 public override string ToString() => $"{fname} {lname}".Trim();
 
@@ -225,13 +225,13 @@ namespace Rextester
     static void Calc(int p)  
     {
       p = p + 1;
-      Console.WriteLine(p);
+      Console.WriteLine("Innerhalb von Calc {0}", p);
     }
 
     public static void Main(string[] args){
       int p = 6;
       Calc(p);  
-      Console.WriteLine(p);                
+      Console.WriteLine("Innerhalb von Main {0}", p);              
     }
   }
 }
@@ -598,7 +598,7 @@ Dabei können sie folgende Elemente umfassen:
 * Felder und Konstanten
 * Methoden
 * Konstruktoren und Destruktoren
-* Properties
+* Eigenschaften(Properties)
 * Indexer
 * Events
 * überladene Operatoren
@@ -681,6 +681,11 @@ alle Felder mit den datentypspezifischen Nullwerten.
 | `public Animal(name, sound = "Miau")`        | `Animal kitty = new Animal("kitty")`        |
 
 
+<!-- --{{1}}-- Idee des Beispiels:
+       + Deklaration eines parameterlosen Konstruktors
+       + Deklaration eines Konstruktors mit einzelnem Parameter
+       + Überladen des Konstruktors
+-->
 ```csharp                                      Constructors
 using System;
 
@@ -713,11 +718,36 @@ namespace Rextester
 
 ### Embedded Structs
 
+Eine innerhalb einer Struktur (oder Klasse) definierte Struktur (oder Klasse)
+wird als geschachtelter Typ bezeichnet.
 
+Unabhängig davon, ob der äußere Typ eine Klasse oder eine Struktur ist, lautet
+die Standardeinstellung von geschachtelten Typen private. Sie sind nur über
+ihren enthaltenden Typ zugänglich. Es können aber auch weitere
+Zugriffsmodifizierer angeben werden.
 
+```csharp                   NestedStructs                    
+public structs Container
+{
+    public structs Nested
+    {
+        private Container parent;
 
+        public Nested()
+        {
+        }
+        public Nested(Container parent)
+        {
+            this.parent = parent;
+        }
+    }
+}
 
+// Aufruf mit
+Container.Nested nest = new Container.Nested();
+```
 
+zum Beispiel vgl. [C# Programmierhandbuch](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/classes-and-structs/nested-types)
 
 
 ### Sichtbarkeitsattribute
@@ -732,8 +762,15 @@ Kontext heraus sichtbar sind, werden diese mit Attributen versehen.
 
 **Sichtbarkeit der Stuktur**
 
-Strukturen, die innerhalb eines Namespace (mit anderen Worten, die nicht in anderen Klassen oder Strukturen geschachtelt sind) direkt deklariert werden, können entweder `public` oder `internal` sein. Wenn kein Modifizierer angegeben ist, wird standardmäßig `internal` verwendet.
-Damit lässt sich konfigurieren, wie auf diese zurückgegriffen werden kann.
+Strukturen, die innerhalb eines Namespace (mit anderen Worten, die nicht in anderen Klassen oder Strukturen geschachtelt sind) direkt deklariert werden, können entweder `private, ``public` oder `internal` sein.
+
+| Bezeichner | Konsequenz                                            |
+| ---------- | ----------------------------------------------------- |
+| public     | Keine Einschränkungen für den Zugriff                 |
+| internal   | Der Zugriff ist auf die aktuelle Assembly beschränkt. |
+| private    | Der Zugriff kann nur aus dem Code der gleichen Struktur erfolgen.                                                      |
+
+Wenn kein Modifizierer angegeben ist, wird standardmäßig `internal` verwendet.
 
 <!--
 style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
@@ -756,13 +793,24 @@ Schritt 2   mcs -reference:Farmland.dll Programm.cs
 ````
 
 Das struct "Animal" soll in einem anderen Assembly nicht aufrufbar sein. Wir
-wollen die Implementierung kapsel und verbergen. Folglich generiert der entsprechende
-Aufruf einen Compiler-Fehler. Zugehörige Dateien sind unter [Link] zu finden
+wollen die Implementierung kapseln und verbergen. Folglich generiert der entsprechende
+Aufruf einen Compiler-Fehler. Zugehörige Dateien sind unter [GitHub](https://github.com/liaScript/CsharpCourse/tree/master/code/05_FunktionenStrukturen/DifferentAssemblies) zu finden.
+
+Variante 1: Compilieren von Farmland und Programm in ein Assambly
 
 ```bash
+mcs Programm.cs Farmland.cs
+My name ist Kitty.
+```
+
+
+Variante 2: Compilieren von Farmland als externe Bibliothek
+
+```bash
+mcs -target:library Farmland.cs
 mcs -reference:Farmland.dll Programm.cs
-error CS0122: `Animal´ is inaccessible due to its protection level
-error CS0841: A local variable `Kitty' cannot be used before it is declared
+Programm.cs(8,13): error CS0122: `Farm.Animal' is inaccessible due to its protection level
+Programm.cs(9,26): error CS0841: A local variable `cat' cannot be used before it is declared
 ```
 
 *******************************************************************************
@@ -878,8 +926,8 @@ namespace Rextester
     }
 
     public void PrintAnimals(){
-      foreach (Animal ped in animalList){
-        ped.MakeNoise();
+      foreach (Animal pet in animalList){
+        pet.MakeNoise();
       }
     }
   }

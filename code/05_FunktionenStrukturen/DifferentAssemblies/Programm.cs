@@ -5,7 +5,7 @@ namespace Programm{
   {
     public static void Main(string[] args)
     {
-       Auxillaries.Animal cat = new Auxillaries.Animal("Kitty");
+       Farm.Animal cat = new Farm.Animal("Kitty");
        Console.WriteLine(cat);
     }
   }

@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Auxillaries
+namespace Farm
 {
-  public struct Animal{
+  internal struct Animal{
     public string name;
     public string sound;
 
@@ -12,6 +12,6 @@ namespace Auxillaries
       this.name = name;
       this.sound = sound;
     }
-    public override string ToString() => "My name ist " + name;
+    public override string ToString() => "My name ist " + name + ", " + sound + "!";
   }
 }
