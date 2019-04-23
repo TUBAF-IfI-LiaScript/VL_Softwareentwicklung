@@ -219,7 +219,7 @@ namespace Rextester
 ### Zeichenfolgeninterpolation
 
 Wesentliches Element der Zeichenfolgeninterpolation ist die "Ausführung" von
-Code innerhalb der Ausgabespezifikation. Die Breite der möglichkeit reicht dabei
+Code innerhalb der Ausgabespezifikation. Die Breite der Möglichkeiten reicht dabei
 von einfachen Variablennamen bis hin zu komplexen Ausdrücken. Hier bitte
 Augenmaß im Hinblick auf die Lesbarkeit walten lassen! Angeführt wird ein
 solcher Ausdruck durch ein `$`.
