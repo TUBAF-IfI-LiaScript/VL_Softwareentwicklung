@@ -71,15 +71,20 @@ Identifizieren Sie das Auftreten des Musters *a{c}df* in einem Signalverlauf!
 style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ````ascii
-                  .-  a   -. .-- c  --. .-  d   -.
-                  |        | |        | |        |
-                  |        v |        v |        v
-            .----.-.       .-.        .-.       .-. --.
-            *   ( A )     ( B )      ( C )     ( D )  *
-            '--->'-'       '-'       ^'-'\     '-'<--.
-                  ^         |       /    |       |
-                  |--- * ---╯      | .   -'        |
-                  .-------------- f -------------.
+
+
+                  .- 'a' -. .- 'c' -. .- 'd' -.
+            .-.   |       | |       | |       |   .--.
+            |  \  |       v |       v |       v  /   |  
+            |   v.-.      .-.       .-.       .-.    |
+          !'a'  ( A )    ( B )     ( C )     ( D )  !'f'
+            |   /'-'      '-'      ^'-'\\     '-'^   |
+            '--'  ^        |      /     \\     |  \  |
+                  |- !'c'--'     '- 'c' -'\    |   '-'
+                  |                        \   |
+                  |------- !'c' & !'d' -----'  |
+                  |                            |
+                  .------------- 'f' ----------.
 
 
 ````
@@ -104,7 +109,6 @@ namespace Rextester
         switch (state){
           case states.A:
             if (sign == 'a') state = states.B;
-            else state = states.A;
             break;
           case states.B:
             if (sign == 'c') state = states.C;
@@ -727,9 +731,9 @@ ihren enthaltenden Typ zugänglich. Es können aber auch weitere
 Zugriffsmodifizierer angeben werden.
 
 ```csharp                   NestedStructs                    
-public structs Container
+public struct Container
 {
-    public structs Nested
+    public struct Nested
     {
         private Container parent;
 
