@@ -48,8 +48,7 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
 ## Kontrollfragen
 
-*1. Welche Default Values nehmen Referenztypen, numerische, char und bool
-Variablen an?*
+*1. Welche Default Values nehmen Referenztypen, numerische, char und bool Variablen an?*
 
 | Typ                       | Default Wert |
 | ------------------------- | ------------ |
@@ -60,7 +59,44 @@ Variablen an?*
 
 --------------------------------------------------------------------
 
-*2. Hier stehen jetzt Ihre Fragen ...*
+*2. Vergleichen Sie Funktionen und Prozeduren, worin liegen die grundlegenden Unterschiede?*
+
+Prozeduren haben im Gegensatz zu Funktionen keinen Rückgabewert.
+
+---------------------------------------------------------------------
+*3. Welche Ausgabe wird bei der Console.WriteLine(a) generiert, wenn a ein Referenzdatentyp ist, für den keine spezifisce ToString() Methode implementiert wurde?*
+
+Der Typ der Variablen (ausgehend von der Definition der Methode in der Basis-"Object" Klasse).
+
+---------------------------------------------------------------------
+*4. Wie lassen sich globale Variablen in C# realisieren, warum sollte drauf verzichtet werden?*
+
+Als Feld in einer statischen Klasse.
+
+---------------------------------------------------------------------
+*5. Vergleichen Sie Funktionen und Prozeduren, worin liegen die grundlegenden Unterschiede?*
+
+Prozeduren haben im Gegensatz zu Funktionen keinen Rückgabewert.
+
+---------------------------------------------------------------------
+*6. Welche Gemeinsamkeiten und welche Unterschiede zeichen Klassen und Strukturen in C# aus?*
+
+Stucts kennen keine Vererbung, sie können lediglich mehrere Interfaces implementieren. Folglich ist die Zahl der Zugriffsattribute bei Klassen größer.
+
+---------------------------------------------------------------------
+*7. Welche Rolle spielt das "Try" in "TryParse"?*
+
+---------------------------------------------------------------------
+*8. Welchen Fehler sehen Sie in folgendem Code Fragment?*
+
+```
+short number;
+Console.Write("Bitte eine PLZ eingeben (5 Ziffern)");
+number = Console.ReadLine();
+```
+
+ReadLine gibt ein string Objekt zurück, das vor dem Gebrauch geparst werden muss.
+Zudem ist der Wertebereich von short zu klein um 99999 aufzunehmen.
 
 ---------------------------------------------------------------------
 ## Motivation
@@ -960,4 +996,4 @@ namespace Rextester
 
 **Autoren**
 
-Sebastian Zug, André Dietrich
+Sebastian Zug, André Dietrich, Yassine Alexandre Perrier
