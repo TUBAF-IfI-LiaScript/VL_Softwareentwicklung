@@ -197,86 +197,75 @@ namespace Rextester
 
 ## 2. Visionen der Objektorientierung
 
+                                     {{0-1}}
+*******************************************************************************
+
 > Ein Objekt ist ein Bestandteil eines Programms, der Zustände enthalten kann. Diese Zustände werden von dem Objekt vor einem Zugriff von außen versteckt und damit geschützt. Außerdem stellt ein Objekt anderen Objekten Operationen zur Verfügung. Von außen kann dabei auf das Objekt ausschließlich zugegriffen werden, indem eine Operation auf dem Objekt aufgerufen wird.
 Ein Objekt legt dabei selbst fest, wie es auf den Aufruf einer Operation reagiert. Die Reaktion kann in Änderungen des eigenen Zustands oder dem Aufruf von Operationen auf weiteren Objekte bestehen.
 
-> **Merke**  *Objekt = Identität + Zustand + Verhalten*
+> **Merke**  *Ein Objekt ist eine zur Ausführungszeit vorhandene und für ihre Member Speicher allozierende Instanz, die sich aus der der Spezifikation einer Klasse erschließt.*
 
 Ideen der OOP:
-* Objekte der realen Welt müssen sich in der Programmierung widerspiegeln
-* Es geht nicht um das Manipulieren von Daten sondern um Zustandsänderungen von Objekten
+* Objekte der *realen Welt* müssen sich in der Programmierung widerspiegeln
+* Es geht nicht um das Manipulieren von Daten, sondern um Zustandsänderungen von Objekten
 * Im Zentrum der objektorientierten Programmierung stehen Objekte, die mittels Nachrichten miteinander kommunizieren
 
 > **Merke** Wir haben zwei Herausforderungen zu meistern - Modellierung und Realisierung.
 
-Beispiel 1 - Simulationsumgebung Fußballspiel:
+![OOPGeschichte](/img/06_OOPI/OOPHistory.png)<!-- width="60%" --> [WikiOOP](#7)
+
+
+*******************************************************************************
+
+                                     {{1-4}}
+*******************************************************************************
+
+**Beispiel - Simulationsumgebung Fußballspiel:**
 
 + 1 Objekt vom Typ "Spielsituation"
 + 1 Objekt vom Typ "Ball"
 + 2 Objekte vom Typ "Trainer"
 + 3 Objekte vom Typ "Schiedsrichter"
 + 22 Objekte vom Typ "Fußballspieler"
-+ alle sind aber gleichzeitig Menschen, die Fußballspieler gliedern sich  
-weiter
 
-Welche Eigenschaften hat jedes Objekt des Typen "Spieler":
+**Welche Eigenschaften hat jedes Objekt des Typen "Spieler"?**
 
+*******************************************************************************
+
+                                     {{2-4}}
+*******************************************************************************
 + Name, Alter, Geschlecht, Gewicht, Größe
 + Position (x, y, z),  
 + im Spiel, Geschwindigkeit
 + Mannschaft, Rolle (Stürmer, Tormann, Verteidiger), Nummer
 + physischer Zustand (topfit, ausgepowert, verletzt)
 
-Welche Methoden sollten über dem Objekt erlaubt sein:
+Einige der Eigenschaften:
+- ändern sich im Spielkontext, andere bleiben konstant
+- lassen sich durchaus allen Personen zuordnen, anderen nur spezifischen Kategorien von Beteiligten.
 
-+ "FängtDenBall()"
+*******************************************************************************
+
+                                     {{3-4}}
+*******************************************************************************
+
+**Welche Methoden sollten über dem Objekt "Spieler" erlaubt sein und wie verändert dies deren Zustand**
+
++ "FängtDenBall()" -> Wirkt sich auf den Zustand von Ball aus, die Position des Balles ist identisch mit der des Spielers ... und es gibt nur einen Ball!
 + "WirftDenBall()"
-+ "BallAnnahmeFuß()"
-+
-
-<!--
-style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
-````ascii
-
-  Modell                          Realisierung          
++ "Foul(Spieler gefoulterSpieler)" -> Wirkt sich auf die Fitness von gefoulterSpieler aus  
 
 
-  +-----------------------+         
-  | Spieler               |       class Spieler{ // oder struct !!!
-  +-----------------------+     
-  | + Name                |           string Name; byte? Alter;
-  | + Alter               |           int x, y, dx, dy;
-  | + Position            |           enum Position {Stürmer, Tormann, Verteidiger}
-  | ...                   | -->       Position myPosition;
-  +-----------------------+
-  | + FängtDenBall()      |           void FängtDenBall()
-  | + SchießtDenBall()    |           Kraft = SchießtDenBall()
-  | + Foul()              |           Spieler = Foul()
-  | ...                   |        }
-  +-----------------------+
-
-  +-----------------------+         
-  | Schiedsrichter        |       class Schiedsrichter{ // oder struct !!!
-  +-----------------------+     
-  | + Name                |           string Name; byte? Alter;
-  | + Alter               |           int x, y, dx, dy;
-  | + Position            |           Position myPosition;
-  | ...                   | -->       
-  +-----------------------+
-  | + StartedSpiel()      |           void StartedSpiel()
-  | + BeendetDasSpiel()   |           Kraft = SchießtDenBall()
-  | + ErkenntFoul()       |           float = Foul()
-  | ...                   |        }
-  +-----------------------+
-
-
-````
 
 Welche Schwachstellen sehen Sie bei unserem Modellierungsansatz / der
 Realisierung?
 
+*******************************************************************************
+
 ### Kapselung
+
+                                     {{0-1}}
+*******************************************************************************
 
 >  Die Verkapselung bezieht sich auf die "Einhüllung" von Daten und Methoden innerhalb einer Struktur einhüllt, die die Objektimplementierung verbirgt und den unmittelbaren Datenzugriff außerhalb vorbestimmter Dienste unterbindet.
 
@@ -284,43 +273,14 @@ Vom Innenleben einer Klasse soll der Verwender – gemeint sind sowohl die Algor
 
 Standardidentifier für Daten- und Methodenzugriffe sind dabei:
 
-| Bezeichner | UML Kürzel | Bedeutung |
-| ---------- | ---------- | --------- |
-| public     | +           | Zugreifbar für alle Objekte (auch die anderer Klassen)          |
-| private    | -           | Nur für Objekte der eigenen Klasse zugreifbar          |
-| protected  | #           | Nur für Objekte der eigenen Klasse und von Spezialisierungen derselben zugreifbar          |
+| Bezeichner | UML Kürzel | Bedeutung                                                                         |
+| ---------- | ---------- | --------------------------------------------------------------------------------- |
+| public     | +          | Zugreifbar für alle Objekte (auch die anderer Klassen)                            |
+| private    | -          | Nur für Objekte der eigenen Klasse zugreifbar                                     |
+| protected  | #          | Nur für Objekte der eigenen Klasse und von Spezialisierungen derselben zugreifbar |
 
-sowie weitere programmiersprachenspezifische Realisierungen (internal, protected, usw.).
+sowie weitere programmiersprachenspezifische Realisierungen (`internal`, `protected`).
 
-**Am Beispiel Fußballspiel**
-1. Die Position x,y eines jeden Spielers und des Balls sollte nur über entsprechende
-Zugriffsmethoden manipuliert werden.
-2. Die konkrete Implementierung der "Foul"-Methode bleibt geheim :-)
-
-```csharp                           AccessMethods
-using System;
-
-namespace Rextester
-{
-  public class Program
-  {
-    public static void Main(string[] args){
-      Type t = typeof(Program);
-      Console.WriteLine("Methods:");
-      System.Reflection.MethodInfo[] methodInfo = t.GetMethods();
-
-      foreach (System.Reflection.MethodInfo mInfo in methodInfo)
-        Console.WriteLine(mInfo.ToString());
-
-      Console.WriteLine("Members:");
-      System.Reflection.MemberInfo[] memberInfo = t.GetMembers();
-      foreach (System.Reflection.MemberInfo mInfo in methodInfo)
-        Console.WriteLine(mInfo.ToString());
-    }
-  }
-}
-```
-@Rextester.eval(@CSharp)
 
 
 **Vorteile**
@@ -335,15 +295,71 @@ namespace Rextester
 + In Abhängigkeit vom Anwendungsfall Geschwindigkeitseinbußen durch den Aufruf von Zugriffsfunktionen (direkter Zugriff auf die Datenelemente wäre schneller).
 + Zusätzlicher Programmieraufwand für die Erstellung von Zugriffsfunktionen.
 
+*******************************************************************************
+
+                                     {{1-2}}
+*******************************************************************************
+
+**Beispiel Fußballsimulation**
+
+1. Die Position x,y eines jeden Spielers und des Balls sollte nur über entsprechende Zugriffsmethoden manipuliert werden.
+2. Die konkrete Implementierung der "Foul" oder "SchießtDenBall"-Methode bleibt geheim :-)
+
+<!--
+style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
+-->
+````ascii
+                                       public struct Position{float x; float y};
+  +---------------------------+        
+  | Spieler                   |        public class Spieler{ // oder struct !!!   
+  +---------------------------+           enum Rolle {Stürmer, Tormann, Verteidiger};
+  | - name: string            |           private string Name; byte? Alter;   |
+  | - alter: byte             |           private int x, y, dx, dy;           |  Geschützte
+  | - player: Postition       |           private Rolle player;               |  Felder
+  | ...                       | -->       private Position position;          |
+  +---------------------------+                                                
+  | ✛ FängtDenBall(): void    |           public get ... set ...              |  Zugriffsmethoden für
+  | ✛ SchießtDenBall(): Kraft |                                                  Felder
+  | ✛ Foul()                  |           public void FängtDenBall();
+  | ...                       |           public Kraft = SchießtDenBall();
+  +---------------------------+           public Foul(SpielerX);              |  Event an SpielerX im
+                                       }                                         "Erfolgsfall"
+````
+
+*******************************************************************************
+
 ### Vererbung
 
-> Die Vererbung dient dazu, aufbauend auf existierenden Klassen neue zu schaffen,.
-Aus der Klassenspezifikation einer Klasse wird eine neue Klasse hergeleitet. Diese
-ist dann entweder eine Erweiterung oder eine Einschränkung der ursprünglichen Klasse.
+
+                                     {{0-1}}
+*******************************************************************************
+> Die Vererbung dient dazu, aufbauend auf existierenden Klassen neue zu
+> schaffen. Aus der Klassenspezifikation einer Klasse wird eine neue Klasse
+> hergeleitet. Diese ist dann entweder eine Erweiterung oder eine Einschränkung
+> der ursprünglichen Klasse.
 
 Die vererbende Klasse wird meist Basisklasse (auch Super-, Ober- oder Elternklasse) genannt, die erbende abgeleitete Klasse (auch Sub-, Unter- oder Kindklasse). Den Vorgang des Erbens nennt man meist Ableitung oder Spezialisierung.
 
 ![Vererbungsbeispiel](/img/06_OOPI/Vererbungsbeispiel.png)<!-- width="60%" --> [WikiInheri](#7)
+
+
+**Vorteile**
+
++ Abbildung der Eigenschaften und Daten in einem hierarchischen Konzept
++ Steigerung der Wartbarkeit und Erweiterbarkeit
+
+**Nachteile**
+
++ Eine Klasse, die als Subklasse aus anderen Klassen entsteht, ist kein autonomer Baustein. Bei der Verwendung der Klasse wird es immer wieder zu Rückgriffen auf die Basisklasse(n) kommen.
++ Bisweilen schwierige Modellierung
++ Schaffung von Abhängigkeitsverhältnissen, die dem Modularisierungsgedanken nicht entsprechen.
+
+
+*******************************************************************************
+
+                                     {{1-2}}
+*******************************************************************************
+
 
 **Am Beispiel Fußballspiel**
 
@@ -358,27 +374,33 @@ style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-r
   | Spieler               |       
   +-----------------------+       
   | + Position            |           
-  | ...                   | -->
-  +-----------------------+
-  | + FängtDenBall()      |       +------------------------+
-  | + SchießtDenBall()    |       | Person                 |    
-  | + Foul()              |       +------------------------+
-  | ...                   |   ▷  ▹| Name                   |
+  | ...                   | --.
+  +-----------------------+   |
+  | + FängtDenBall()      |   |   +------------------------+
+  | + SchießtDenBall()    |   |   | Person                 |    
+  | + Foul()              |   |   +------------------------+
+  | ...                   |   '--▷| Name                   |
   +-----------------------+       | Alter                  |
                                   | ...                    |
   +-----------------------+       +------------------------+  
   | Schiedsrichter        |       | SetName()              |
-  +-----------------------+       | SetAge()               |
-  | + Rolle               |       | ...                    |    
-  | + ...                 |       +------------------------+  
-  +-----------------------+
-  | + StartedSpiel()      |      
-  | + BeendetDasSpiel()   |           
+  +-----------------------+   .--▷| SetAge()               |
+  | + Rolle               |   |   | ...                    |    
+  | + ...                 |   |   +------------------------+  
+  +-----------------------+   |
+  | + StartedSpiel()      |   |   
+  | + BeendetDasSpiel()   | --'           
   | + ErkenntFoul()       |
   | ...                   |       
   +-----------------------+
 
 ````
+
+*******************************************************************************
+
+                                     {{2-3}}
+*******************************************************************************
+
 
 **Zentrale Objekt-Klasse**
 
@@ -415,26 +437,77 @@ namespace Rextester
 @Rextester.eval(@CSharp)
 
 
+```csharp                           AccessMethods
+using System;
 
+namespace Rextester
+{
+  public class Program
+  {
+    public static void Main(string[] args){
+      Type t = typeof(Program);
+      Console.WriteLine("------ Methods --------");
+      System.Reflection.MethodInfo[] methodInfo = t.GetMethods();
 
-Nachteile
+      foreach (System.Reflection.MethodInfo mInfo in methodInfo)
+        Console.WriteLine(mInfo.ToString());
 
-+ Eine Klasse, die als Subklasse aus anderen Klassen entsteht, ist kein autonomer Baustein. Bei der Verwendung der Klasse kann es immer wieder zu Rückgriffen auf die Basisklasse(n) kommen.
+      Console.WriteLine("------  Members ------");
+      System.Reflection.MemberInfo[] memberInfo = t.GetMembers();
+      foreach (System.Reflection.MemberInfo mInfo in methodInfo)
+        Console.WriteLine(mInfo.ToString());
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
 
-+ Bisweilen schwierige Modellierung (das )
-
-
-Mit Vererbung schafft man Abhängigkeitsbeziehungen, die dem Modularisierungsgedanken nicht entsprechen. Man muss daher immer genau abwägen, ob man die Vorteile von Vererbung nutzen möchte (leichte Realisierbarkeit durch Rückgriff auf Gegebenes) oder ob man die Nachteile von Vererbung (keine Bausteine, die man autonom verwenden kann) vermeiden möchte.
-
+*******************************************************************************
 
 ### Polymorphie
 
 > Polymorphie oder Polymorphismus (griechisch für Vielgestaltigkeit) ermöglicht, dass ein Bezeichner sich in seiner Funktionalität in Abhängigkeit von den Datentypen verändert.  
 
-Die Vielgetaltigkeit deckt dabei zwei Aspekte ab:
+Die Polymorphie der objektorientierten Programmierung ist eine Eigenschaft, die
+immer im Zusammenhang mit Vererbung und Schnittstellen (Interfaces) auftritt.
+Eine Methode ist polymorph, wenn sie in verschiedenen Klassen die gleiche
+Signatur hat, jedoch erneut implementiert ist.
 
-+ Die virtuelle Methoden, die eine Basisklasse definiert und implementiert, können von abgeleiteten Klassen überschrieben werden. Zur Laufzeit, wenn die Methode der
-abgeleiteten Klasse aufgerufen wird, sucht die CLR den Laufzeittyp des Objekts und ruft die Überschreibung der virtuellen Methode auf.
+```csharp
+public class Shape
+{
+    public int X { get; private set; }
+    ....
+    // Virtual method
+    public virtual void Draw()
+    {
+        Console.WriteLine("Performing base class drawing tasks");
+    }
+}
+
+class Circle : Shape
+{
+    public override void Draw()
+    {
+        // Code to draw a circle...
+        Console.WriteLine("Drawing a circle");
+        base.Draw();
+    }
+}
+
+class Square : Shape {}
+...
+
+```
+In C# ist jeder Typ polymorph, da alle Typen, einschließlich
+benutzerdefinierten Typen, von Object erben.
+
+Beim Vererben erhält die abgeleitete Klasse alle Methoden, Felder, Eigenschaften
+und Ereignisse der Basisklasse. Dabei gilt es zu entscheiden, welche davon
+unverändert übernommen und welche auf die spezifischen Anforderungen angepasst
+werden sollen.
+
+**Am Beispiel Fußballspiel**
 
 ```csharp   
 using System;
@@ -459,46 +532,6 @@ namespace Rextester
 }
 ```
 
-+ In Methodenparametern, Auflistungen und Arrays können Objekte einer abgeleiteten Klasse zur Laufzeit als Objekte einer Basisklasse behandelt werden. In diesem Fall ist der deklarierte Typ des Objekts nicht mehr mit dem Laufzeittyp identisch.
-
-
-**Am Beispiel Fußballspiel**
-
-
-<!--
-style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
-````ascii
-
-   Erbende Klasse                  Höherabstrakte Klasse          
-
-  +-----------------------+         
-  | Spieler               |       
-  +-----------------------+       
-  | + Position            |           
-  | ...                   | --.
-  +-----------------------+   |
-  | + SetName()           |   |   +------------------------+
-  | + SetAge()            |   |   | Person                 |    
-  | + ...                 |   |   +------------------------+
-  | + Foul()              |   .--▷| Name                   |
-  +-----------------------+       | Alter                  |
-                                  | ...                    |
-  +-----------------------+       +------------------------+  
-  | Schiedsrichter        |   .--▷| SetName()              |
-  +-----------------------+   |   | SetAge()               |
-  | + Rolle               |   |   | ...                    |    
-  | + ...                 |   |   +------------------------+  
-  +-----------------------+   |
-  | + SetName()           | --.      
-  | + SetAge()            |            
-  | + ...                 |
-  | + StarteSpiel()       |       
-  +-----------------------+
-
-````
-
-
 ### Weitere Beispiele
 
 | Beispiel  | Kapselung                                                                                                         | Vererbung                                                      | Polymorphie                                                                                                              |
@@ -509,17 +542,17 @@ style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-r
 
 ### Begriffe
 
-| Begriff     | Bedeutung                                                                                                                                                                                                                                                                                                                                                                    |
-| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Objekt      | Ein Element, welches Funktionen, Methoden, Prozeduren, einen inneren Zustand, oder mehrere dieser Dinge besitzt.                                                                                                                                                                                                                                                             |
-| Entität     | Ein Objekt, welches eine Identität besitzt, welche unveränderlich ist. Beispielsweise kann eine Person ihre Adresse, Telefonnummer oder Namen ändern, ohne zu einer anderen Person zu werden. Eine Person ist also eine Entität.                                                                                                                                             |
-| Wertobjekt  | Ein Objekt, welches über seinen Wert definiert wird. Eine Telefonnummer, welche sich ändert, ist also eine andere Telefonnummer. Gleichartig ist eine Adresse, bei der sich lediglich die Hausnummer ändert, eine andere Adresse, selbst wenn alle anderen Daten gleich bleiben. Somit stellt eine Telefonnummer und eine Adresse keine Entität dar, sondern ein Wertobjekt. |
-| Eigenschaft | Ein Bestandteil des Zustands eines Objekts. Hierbei kann es sich um eine Entität oder ein Wertobjekt handeln.                                                                                                                                                                                                                                                                |
-| Prozedur    | Verändert den Zustand eines Objektes, ohne einen Rückgabewert zu liefern. Eine Prozedur kann andere Objekte als Parameter entgegennehmen.                                                                                                                                                                                                                                    |
-| Funktion    | Ordnet einer gegebenen Eingabe einen bestimmten Rückgabewert zu. Eine Funktion zeichnet sich insbesondere dadurch aus, dass sie nicht den Zustand eines Objekts verändert.                                                                                                                                                                                                   |
-| Methode     | Verändert den Zustand eines Objekts und liefert zudem einen Rückgabewert. Eine Methode kann andere Objekte als Parameter entgegennehmen.                                                                                                                                                                                                                                     |
-| Modul       | Eine zusammengefasste Gruppe von Objekten.                                                                                                                                                                                                                                                                                                                                   | [Ghosh]
-
+| Begriff     | Bedeutung                                                                                                                                                                                                                        |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Klassen     | Klassen sind Vorlagen, aus denen Instanzen genannte Objekte zur Laufzeit erzeugt werden.                                                                                                                                         |
+| Objekt      | Ein Element, welches Funktionen, Methoden, Prozeduren, einen inneren Zustand, oder mehrere dieser Dinge besitzt. Es leitet sich von  einer Spezifikation ab.                                                                     |
+| Entität     | Ein Objekt, welches eine Identität besitzt, welche unveränderlich ist. Beispielsweise kann eine Person ihre Adresse, Telefonnummer oder Namen ändern, ohne zu einer anderen Person zu werden. Eine Person ist also eine Entität. |
+| Eigenschaft | Ein Bestandteil des Zustands eines Objekts.                                                                                                                                                                                      |
+| Prozedur    | Verändert den Zustand eines Objektes, ohne einen Rückgabewert zu liefern. Eine Prozedur kann andere Objekte als Parameter entgegennehmen.                                                                                        |
+| Funktion    | Ordnet einer gegebenen Eingabe einen bestimmten Rückgabewert zu. Eine Funktion zeichnet sich insbesondere dadurch aus, dass sie nicht den Zustand eines Objekts verändert.                                                       |
+| Methode     | Verändert den Zustand eines Objekts und liefert zudem einen Rückgabewert. Eine Methode kann andere Objekte als Parameter entgegennehmen.                                                                                         |
+| Modul       | Eine zusammengefasste Gruppe von Objekten.                                                                                                                                                                                       |
+[Ghosh]
 
 ## 3. Prinzipien des (objektorientierten) Softwareentwurfs
 
@@ -625,14 +658,15 @@ class List<T>{
 }
 
 class ObservableList<T> : List<T>
- {
+{
   public event Action CollectionChanged;
- }
+}
 ```
+
 
 ###  Liskovsche Substitutionsprinzip (LSP)
 
-Das Liskovsche Substitutionsprinzip (LSP) oder Ersetzbarkeitsprinzip besagt, dass ein Programm, das Objekte einer Basisklasse T verwendet, auch mit Objekten der davon abgeleiteten Klasse S korrekt funktionieren muss, ohne dabei das Programm zu verändern:
+> Das Liskovsche Substitutionsprinzip (LSP) oder Ersetzbarkeitsprinzip besagt, dass ein Programm, das Objekte einer Basisklasse T verwendet, auch mit Objekten der davon abgeleiteten Klasse S korrekt funktionieren muss, ohne dabei das Programm zu verändern:
 
 *"Sei $q(x)$ eine beweisbare Eigenschaft von Objekten $x$ des Typs $T$. Dann soll $q(y)$ für Objekte $y$ des Typs $S$ wahr sein, wobei $S$bein Untertyp von $T$ ist.“* [2]
 
@@ -645,23 +679,268 @@ Beispiel: Vögel / Flugunfähgige Vögel
 
 ### Interface Segregation Prinzip
 
+Zu große Schnittstellen in mehrere
+Schnittstellen aufgeteilt werden, falls implementierende Klassen unnötige
+Methoden haben müssen. Nach erfolgreicher Anwendung dieses Entwurfprinzips würde
+ein Modul, das eine Schnittstelle benutzt, nur die Methoden implementieren
+müssen, die es auch wirklich braucht.
+
+                                     {{1-2}}
+*******************************************************************************
+
+Was sind eigentlich Interfaces?
+
+Eine Schnittstelle enthält Definitionen für eine Gruppe von zugehörigen
+Funktionalitäten, die von einer Klasse oder einer Struktur implementiert werden
+können.
+
+Durch die Verwendung von Schnittstellen können Sie beispielsweise das Verhalten aus mehreren Quellen in einer Klasse einbeziehen. Diese Funktion ist wichtig in C#, da die Sprache die mehrfache Vererbung von Klassen nicht unterstützt. Zudem müssen Sie eine Schnittstelle verwenden, wenn Sie die Vererbung für Strukturen simulieren möchten, da sie tatsächlich nicht von einer anderen Struktur oder Klasse erben können. [MSProgrammierhandbuchC#]
+
+https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/interfaces/
 
 
+*******************************************************************************
+
+                                      {{2-3}}
+*******************************************************************************
+
+```csharp
+public interface IVehicle
+{
+    void Drive();
+    void Fly();
+}
+
+
+public class MultiFunctionalCar : IVehicle
+{
+    public void Drive()
+    {
+        //actions to start driving car
+        Console.WriteLine("Drive a multifunctional car");
+    }
+
+    public void Fly()
+    {
+        //actions to start flying
+        Console.WriteLine("Fly a multifunctional car");
+    }
+}
+
+public class Car : IVehicle
+{
+    public void Drive()
+    {
+        //actions to drive a car
+        Console.WriteLine("Driving a car");
+    }
+
+    public void Fly()
+    {
+        throw new NotImplementedException();
+    }
+}
+```
+
+Lösung unter Beachtung des Interface Segregation Prinzip
+
+```csharp
+public interface ICar
+{
+    void Drive();
+}
+
+public interface IAirplane
+{
+    void Fly();
+}
+
+public class Car : ICar
+{
+    public void Drive()
+    {
+        //actions to drive a car
+        Console.WriteLine("Driving a car");
+    }
+}
+
+
+public class MultiFunctionalCar : ICar, IAirplane
+{
+    public void Drive()
+    {
+        //actions to start driving car
+        Console.WriteLine("Drive a multifunctional car");
+    }
+
+    public void Fly()
+    {
+        //actions to start flying
+        Console.WriteLine("Fly a multifunctional car");
+    }
+}
+```
+
+Man könnte jetzt sogar ein Highlevel Interface realisieren, dass beide Aspekte
+integriert.
+
+```
+public interface IMultiFunctionalVehicle : ICar, IAirplane
+{
+}
+
+public class MultiFunctionalCar : IMultiFunctionalVehicle
+{
+}
+```
+**Vorteil**
+
++ übersichtlichere kleinere Schnittstellen, die flexibler kombiniert werden können
++ Klassen umfassen keine Methoden, die sie nicht benötigen
+
+-> Das Prinzip der Schnittstellentrennung verbessert die Lesbarkeit und Wartbarkeit unseres Codes.
+
+*******************************************************************************
+
+### Dependency Inversion Prinzip
+
+> "High-level modules should not depend on low-level modules. Both should
+depend on abstractions. Abstractions should not depend upon details. Details
+should depend upon abstractions" [Martin]
+
+Eine Klasse einer höheren Ebene soll nicht von einer Klasse einer tieferen Ebene
+abhängig sein!
+
+
+```csharp
+public class Email
+{
+    public string ToAddress { get; set; }
+    public string Subject { get; set; }
+    public string Content { get; set; }
+    public void SendEmail()
+    {
+        //Send email
+    }
+}
+
+public class SMS
+{
+    public string PhoneNumber { get; set; }
+    public string Message { get; set; }
+    public void SendSMS()
+    {
+        //Send sms
+    }
+}
+
+public class Notification
+{
+    private Email _email;
+    private SMS _sms;
+    public Notification()
+    {
+        _email = new Email();
+        _sms = new SMS();
+    }
+
+    public void Send()
+    {
+        _email.SendEmail();      // Abhängigkeit von Email
+        _sms.SendSMS();          // Abhängigkeit von SMS
+    }
+}
+
+```
+
+
+```csharp
+// Schritt 1: Interface Definition
+public interface IMessage
+{
+    void SendMessage();
+}
+
+// Schritt 2: Die niederwertigeren Klassen implmentieren das Interface
+public class Email : IMessage
+{
+    public string ToAddress { get; set; }
+    public string Subject { get; set; }
+    public string Content { get; set; }
+    public void SendMessage()
+    {
+        //Send email
+    }
+}
+
+public class SMS : IMessage
+{
+    public string PhoneNumber { get; set; }
+    public string Message { get; set; }
+    public void SendMessage()
+    {
+        //Send sms
+    }
+}
+
+// Schritt 3: Die höherwertige Klasse wird gegen das Interface implementiert
+public class Notification
+{
+    private ICollection<IMessage> _messages;
+    public Notification(ICollection<IMessage> messages)
+    {
+        this._messages = messages;
+    }
+    public void Send()
+    {
+        foreach(var message in _messages)
+        {
+            message.SendMessage();
+        }
+    }
+}
+```
+
+Beispiel aus https://exceptionnotfound.net/simply-solid-the-dependency-inversion-principle/
 
 
 ## 5. Beispiel der Woche ...
 
-```csharp                                      
+```csharp           Fußballspieler                                   
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace Rextester
 {
+  class Person{
+    public int alter;
+  }
+
+  class Spieler : Person{
+    public float erfahrung;
+    public int rückennummer;
+  }
+
+  class Torwart : Spieler{
+    public void FängtDenBall(){
+      if (erfahrung > 0.5 & alter < 60) {
+        Console.WriteLine("Ball gefangen!");
+      }
+      else {
+        Console.WriteLine("Das war wohl nichts!");
+      }
+    }
+  }
+
   public class Program
   {
     public static void Main(string[] args){
-
+      Torwart A = new Torwart();
+      A.alter = 25;
+      A.rückennummer = 13;
+      A.erfahrung = 0.8f;
+      A.FängtDenBall();
     }
   }
 }
