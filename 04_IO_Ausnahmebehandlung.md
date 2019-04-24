@@ -68,13 +68,29 @@ namespace Rextester
 
 ## Kontrollfragen
 
-*1. Erläutern Sie den Unterschied zwischen "kombinierter" und "interpolierter" String-Generierung.*
+*1. Erläutern Sie den Unterschied zwischen "kombinierter" und "interpolierter" String-Generierung. Welches spezfische Zeichen wird genutzt, um den Unterschied im Programmcode festzuhalten?*
 
 --------------------------------------------------------------------
 
-*2. Hier stehen jetzt Ihre Fragen ...*
+*2. Was passiert beim Kompilieren von C#-Quellecode? Wo liegen die Unterschiede im Hinblick auf C oder C++?*
+
+--------------------------------------------------------------------
+
+*3. Mit welcher Verzweigung lassen sich lange Ketten von "if else" einsparen? Welche Besonderheiten gibt es dabei unter c#*
 
 ---------------------------------------------------------------------
+
+*4. Welcher Wert wird von den Vergleichoperatoren `==` und `!=` zurückgegeben?*
+
+---------------------------------------------------------------------
+
+*5. Was ist eine Enumeration ? Und was ist der Standardtyp von den Enumerationelementen? Warum ist diese Frage von Bedeutung?*
+
+---------------------------------------------------------------------
+
+*6. Was ist der Unterschied zwischen eine "while"-Schleife und eine "do while"-Schleife ?*
+
+------------------------------------------------------------------------
 
 ## 1. Schreiboperation
 
