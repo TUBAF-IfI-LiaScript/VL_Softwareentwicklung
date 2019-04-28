@@ -523,7 +523,7 @@ namespace Rextester
       }
     }
 
-    public class Spieler {
+    public class Spieler: Person {
       public override void setAge(int alter) {
         // hier wird noch getestet ob der Spieler älter als 16 ist
       }
