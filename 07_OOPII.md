@@ -10,7 +10,7 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 -->
 
-# Vorlesung Softwareentwicklung - 7 - UML und OOP
+# Vorlesung Softwareentwicklung - 7 - OOP in C#
 
 --------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
@@ -18,7 +18,7 @@ Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 https://github.com/liaScript/CsharpCourse/blob/master/07_OOPII.md
 
 Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 6](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/07_OOPII.md#1)
+[LiaScript Vorlesung 7](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/07_OOPII.md#1)
 
 ---------------------------------------------------------------------
 
@@ -27,12 +27,12 @@ Die interaktive Form ist unter diese Link zu finden ->
 c# Schlüsselwörter:
 
 | abstract    | as       | base     |`bool`      |`break`     |`byte`     |
-|`case`       |`catch`   | char     |`checked`   |`class`     | const     |
+|`case`       |`catch`   |`char`    |`checked`   |`class`     | const     |
 |`continue`   |`decimal` | default  | delegate   |`do`        |`double`   |
 |`else`       |`enum`    | event    | explicit   | extern     |`false`    |
 |`finally`    | fixed    |`float`   |`for`       |`foreach`   |`goto`     |
 |`if`         | implicit | in       |`int`       | interface  |`internal` |
-| is          | lock     |`long`    |`namespace` |`new`       | null      |
+| is          | lock     |`long`    |`namespace` |`new`       |`null`     |
 | object      | operator |`out`     | override   |`params`    |`private`  |
 | protected   |`public`  | readonly |`ref`       |`return`    |`sbyte`    |
 | sealed      |`short`   | sizeof   | stackalloc |`static`    |`string`   |
@@ -60,6 +60,9 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
 > Klassen [und Strukturen] sind zwei der grundlegenden Konstrukte des allgemeinen Typsystems in .NET Framework. Bei beiden handelt es sich um eine Datenstruktur, die einen als logische Einheit zusammengehörenden Satz von Daten und Verhalten kapselt.
 
+                                  {{0-1}}
+******************************************************************************
+
 Entsprechend können Klassenspezifikationen folgende Elemente umfassen:
 
 | Member / Elemente   | englische Bezeichnung | Funktion                                                                                    |
@@ -75,6 +78,9 @@ Entsprechend können Klassenspezifikationen folgende Elemente umfassen:
 | Operatoren          | *operators*           | Set von '==', '+' etc. mit eigener Bedeutung                                                |
 | Geschachtelte Typen | *embedded types*      | Integrierte Klassen oder Structs, die nur innerhalb einer Klasse/ Structs angewendet werden |
 
+******************************************************************************
+                                     {{1-2}}
+******************************************************************************
 
 ```csharp         Klassenelemente
 class Person{
@@ -103,22 +109,38 @@ class Person{
 
 ```
 
+Vgl. obriges Beispiel mit Fehlern unter [Link](https://github.com/liaScript/CsharpCourse/tree/master/code/07_OOPII/PersonManagement_with_errors). Identifizieren Sie die Fehler und
+korrigieren Sie diese.
+
+******************************************************************************
+                                     {{2-3}}
+******************************************************************************
+
 |                              | Fields                                       | Methods                                            |
 | ---------------------------- | -------------------------------------------- | -------------------------------------------------- |
 | Statisches Attribut          | `static`                                     | `static`                                           |
 | Zugriffsattribute            | `public`, `internal`, `private`, `protected` | `public`, `internal`, `private`, `protected`       |
-| Vererbungsattribut           | 'new'                                        | `new`, `virtual`, `abstract`, `override`, `sealed` |
+| Vererbungsattribut           | `new`                                        | `new`, `virtual`, `abstract`, `override`, `sealed` |
 | Unsafe Attribute             | `unsafe`                                     |                                                    |
 | Attribut Teilimplementierung |                                              | `partitial`                                        |
 | Unmanaged Code Attribute     |                                              | `unsafe extern`                                    |
 | Read-only Attribute          | `readonly`                                   |                                                    |
 | Threading Attribute          | `volatile`                                   |                                                    |
 
+******************************************************************************
+
 ### Felder
 
-Felder sind variablen eines beliebigen Typs, die einer Klasse unmittelbar
-zugeordnet sind. Eine Klasse oder Struktur kann Instanzenfelder, statische
-Felder oder beides gemischt verfügen.
+                                     {{0-1}}
+******************************************************************************
+
+Felder sind Variablen eines beliebigen Typs, die einer Klasse unmittelbar
+zugeordnet sind. In Feldern werden die Daten abgelegt, die übergreifend
+Verwendung finden. Der Idee der Kapselung folgend, sollten nur methodenlokal
+relevante Variablen auch dort deklariert werden.
+
+Eine Klasse oder Struktur kann Instanzenfelder, statische Felder oder beides
+gemischt verfügen.
 
 <!--
 style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
@@ -184,14 +206,16 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-In Feldern werden die Daten abgelegt, die übergreifend Verwendung finden. Der
-Idee der Kapselung folgend, sollten nur methodenlokal relevante Variablen auch
-dort deklariert werden.
+******************************************************************************
 
-Felder können mit der Deklaration auch initialisiert werden. Desweiteren kann
-mit `readonly` der Wert nach dem Ende des Konstruktorabarbeitung geschützt
-werden. Eine solche Variable kann als static deklariert werden, um zu vermeiden,
-dass eine entsprechende Zahl von Kopien erstellt wird.
+                                     {{1-2}}
+******************************************************************************
+
+Felder können mit der Deklaration oder im Konstruktor  initialisiert werden.
+Desweiteren kann mit `readonly` der Wert nach dem Ende des
+Konstruktorabarbeitung geschützt werden. Eine solche Variable kann als static
+deklariert werden, um zu vermeiden, dass eine entsprechende Zahl von Kopien
+erstellt wird.
 
 ```csharp          ReadOnlyExample
 public class Person{
@@ -206,6 +230,8 @@ public class Person{
     //...
   }
 ```
+
+******************************************************************************
 
 ### Konstanten
 
@@ -254,6 +280,9 @@ namespace Rextester
 
 ### Konstuktoren
 
+                                     {{0-1}}
+******************************************************************************
+
 Beim Erzeugen einer Instanz einer `class` oder eines `structs` wird deren
 Konstruktor aufgerufen. Dieser ist für die Initialisierung der Instanz auf der
 Zustandsebene verantwortlich. Konstruktoren können überladen werden und
@@ -269,20 +298,28 @@ public class Wine
    public decimal Price;
    public int Year;
 
-   // public Wine() //<- Implzit vorhanden, kann aber überschrieben werden
+   // public Wine() // <- Implzit vorhanden, kann aber überschrieben werden
+                    // Standardkonstruktor
    public Wine (decimal price){Price = price;}
    public Wine (decimal price, int year) : this (price) {Year = year;}
 }
 ```
 
+Der Standardkonstruktor wird implizit generiert, wenn kein anderer Konstruktor
+durch den Entwickler spezifiziert wurde. Sofern das geschieht, steht dieser auch
+nicht mehr bereit.
 
-Statische Konstruktoren
+******************************************************************************
+
+                                     {{1-2}}
+******************************************************************************
+
+
+**Statische Konstruktoren**
 
 + ... können nicht über Zugriffsmodifizierer oder Parameter verfügen.
 
-+ ... werden automatisch vor dem Erzeugen der ersten Instanz ausgeführt und können
-nicht direkt aufgerufen werden. Damit hat der Nutzer keine Kontrolle, wann
-der Konstruktor ausgeführt wird.
++ ... werden automatisch vor dem Erzeugen der ersten Instanz ausgeführt und können nicht direkt aufgerufen werden. Damit hat der Nutzer keine Kontrolle, wann der Konstruktor ausgeführt wird.
 
 + ... werden kein zweites mal aufgerufen, wenn eine Ausnahme ausgelöst wird.
 
@@ -297,7 +334,7 @@ namespace Rextester
      public string NameStudent;
 
      static BAFStudent(){
-       Console.WriteLine("University wird initialisiert");
+       Console.WriteLine("Universität wird initialisiert");
        Universität = "TU BAF Freiberg";
      }
 
@@ -321,10 +358,10 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-Im Beispiel der Woche folgt eine Implementierung, die den Zugriff auf die
-statische Variable über eine Memberfunktion realisiert.
+******************************************************************************
 
-
+                                    {{2-3}}
+******************************************************************************
 
 Für die Objektinitialisierung besteht neben den Konstruktoren und dem
 unmittelbaren Zugriff auf die Membervariablen (vermeiden!) die Möglichkeit
@@ -357,6 +394,7 @@ namespace Rextester
    public class Program
      {
        public static void Main(string[] args){
+         // Initalisierung über Standardkonstruktor und direkten Feldzugriff
          Wine bottle0 = new Wine();
          bottle0.Vinyard = "Chateau Latour";
          Console.WriteLine(bottle0);
@@ -379,13 +417,15 @@ namespace Rextester
 @Rextester.eval(@CSharp)
 
 3 Varianten, und was ist nun besser? Der Aufruf über den Konstruktor ermöglicht
-die Initialisierung von `readonly` Variablen. Problematisch wird der Ansatz über
-Initializer, wenn die Implementierung weitergegeben wird. Da die Initializer
-beim Kompilieren in einen Konstruktor umgewandelt werden, stehen nur die
-Konstruktoren bereit, die auch tatsächlich verwendet wurden. Dies kann bei der
-Erweiterung um zusätzliche Variablen dazu führen, dass schlicht und einfach
-kein Aufruf dafür besteht.
+die Initialisierung von `readonly` Variablen.
 
+Initalizer werden als atomare Funktion realisiert, sind damit Thread-sicher,
+sind damit aber auch schwieriger zu debuggen. Zudem können nur `public`
+Member damit adressiert werden. An dieser Stelle wird deutlich, dass
+Initializier ggf. beim schnellen Testen Tipparbeit sparen, in realen Anwendungen
+aber nicht zum Einsatz kommen sollten.
+
+******************************************************************************
 
 ### Destruktoren / Finalizer
 
@@ -576,8 +616,40 @@ namespace Rextester
 Was ist der Vorteil der Klasse + Indexer Lösung? Wie würden Sie die Indizierung
 noch absichern?
 
+## 2. Besonderheiten
 
-## 2. Beispiel der Woche ...
+Eine statische Klasse kann im Unterschied zu einer nicht statischen Klasse nicht
+instanziiert werden. Der Zugriff erfolgt immer über den Klassennamen.
+
+Eine statische Klasse:
+
++ enthält nur statische Member
++ kann nicht instanziiert werden
++ ist versiegelt
++ darf keine Instanzkonstruktoren enthalten
+
+
+```csharp    StaticClass
+using System;
+
+namespace Rextester
+{
+  public class Program
+  {
+    public static void Main(string[] args)
+    {
+      double number = -3.14;  
+      Console.WriteLine(Math.Abs(number));  
+      Console.WriteLine(Math.Floor(number));  
+      Console.WriteLine(Math.Round(Math.Abs(number)));  
+      //var a = new Math();
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+## 3. Beispiel der Woche ...
 
 Entwickeln Sie eine Klassenstruktur für die Speicherung der Daten eines
 Studenten.
@@ -618,8 +690,8 @@ namespace Rextester
             eingeschrieben = value;
           else
           {
-            if (value) Console.WriteLine("!Der Student {0} ist schon eingeschrieben!", Name);
-            else Console.WriteLine("!Der Student {0} ist schon exmatrikuliert!", Name);
+            if (value) Console.WriteLine("!Student {0} ist schon eingeschrieben!", Name);
+            else Console.WriteLine("!Student {0} ist schon exmatrikuliert!", Name);
           }
          }
        }
@@ -629,14 +701,12 @@ namespace Rextester
       }
 
       public void printTopics(){
-          Console.WriteLine("Der Student {0} hat folgende Fächer absolviert:", Name);
+          Console.WriteLine("Student {0} hat folgende Fächer absolviert:", Name);
           foreach (string topic in fächer){
             Console.Write(topic + " ");
           }
           Console.WriteLine();
       }
-
-
      }
 
    public class Program
