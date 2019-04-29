@@ -27,7 +27,7 @@ Die interaktive Form ist unter diese Link zu finden ->
 c# Schlüsselwörter:
 
 | abstract    | as       | base     |`bool`      |`break`     |`byte`     |  
-|`case`       |`catch`   | char     |`checked`   |`class`     | const     |
+|`case`       |`catch`   |`char`    |`checked`   |`class`     | const     |
 |`continue`   |`decimal` | default  | delegate   |`do`        |`double`   |
 |`else`       |`enum`    | event    | explicit   | extern     |`false`    |
 |`finally`    | fixed    |`float`   |`for`       |`foreach`   |`goto`     |
@@ -679,7 +679,8 @@ Beispiel: Vögel / Flugunfähgige Vögel
 
 ### Interface Segregation Prinzip
 
-Zu große Schnittstellen in mehrere
+Zu große Schnittstellen sollten in mehrere Schnittstellen aufgeteilt werden,
+so dass die implementierende Klassen keine unnötigen Methoden umfasst.
 Schnittstellen aufgeteilt werden, falls implementierende Klassen unnötige
 Methoden haben müssen. Nach erfolgreicher Anwendung dieses Entwurfprinzips würde
 ein Modul, das eine Schnittstelle benutzt, nur die Methoden implementieren
@@ -688,13 +689,15 @@ müssen, die es auch wirklich braucht.
                                      {{1-2}}
 *******************************************************************************
 
-Was sind eigentlich Interfaces?
+Was sind eigentlich Interfaces oder Schnittstellen?
 
 Eine Schnittstelle enthält Definitionen für eine Gruppe von zugehörigen
 Funktionalitäten, die von einer Klasse oder einer Struktur implementiert werden
 können.
 
-Durch die Verwendung von Schnittstellen können Sie beispielsweise das Verhalten aus mehreren Quellen in einer Klasse einbeziehen. Diese Funktion ist wichtig in C#, da die Sprache die mehrfache Vererbung von Klassen nicht unterstützt. Zudem müssen Sie eine Schnittstelle verwenden, wenn Sie die Vererbung für Strukturen simulieren möchten, da sie tatsächlich nicht von einer anderen Struktur oder Klasse erben können. [MSProgrammierhandbuchC#]
+Eine Schnittstelle gibt an, welche Methoden vorhanden sind oder vorhanden sein
+müssen. Zusätzlich zu dieser syntaktischen Definition sollte ein so genannter
+Kontrakt über die Bedeutung (Semantik) definiert werden.
 
 https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/interfaces/
 
@@ -805,11 +808,58 @@ public class MultiFunctionalCar : IMultiFunctionalVehicle
 ### Dependency Inversion Prinzip
 
 > "High-level modules should not depend on low-level modules. Both should
-depend on abstractions. Abstractions should not depend upon details. Details
-should depend upon abstractions" [Martin]
+> depend on abstractions. Abstractions should not depend upon details. Details
+> should depend upon abstractions" [Martin]
 
-Eine Klasse einer höheren Ebene soll nicht von einer Klasse einer tieferen Ebene
-abhängig sein!
+Lösungsansatz für die Realisierung ist eine veränderte Sicht auf die
+klassischerweise hierachische Struktur von Klassen.
+
+
+<!--
+style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+-->
+````ascii
+
+  Traditionelle Sicht                 Objektorientierte Perspektive        
+
+  +-----------------------+           +-------------------------------+  
+  | Präsentation          |           |          Präsentation         |
+  +-----------------------+           | Realisierung        Interface |      
+              |                       +-------------------------^-----+
+              |                                                 |
+              |                                                 |
+              v                               +-----------------+      
+  +-----------------------+           +-------|-----------------------+  
+  | Anwendung             |           |       |  Anwendung            |
+  +-----------------------+           | Realisierung        Interface |      
+              |                       +-------------------------^-----+
+              |                                                 |
+              |                                                 |
+              v                               +-----------------+      
+  +-----------------------+           +-------|-----------------------+  
+  | Verarbeitung          |           |       |  Verarbeitung         |
+  +-----------------------+           | Realisierung        Interface |      
+             |                        +-------------------------^-----+
+             |                                                  |
+             |                                                  |
+             v                                +-----------------+      
+  +-----------------------+           +-------|-----------------------+  
+  | Daten                 |           |       |     Daten             |
+  +-----------------------+           | Realisierung        Interface |     
+                                      +-------------------------------+
+````
+
+
+Das folgende Beispiel entstammt der Webseite
+https://exceptionnotfound.net/simply-solid-the-dependency-inversion-principle/
+
+Beachten Sie, dass die Benachrichtigungsklasse, eine übergeordnete Klasse, eine
+Abhängigkeit sowohl von der E-Mail-Klasse als auch von der SMS-Klasse hat, bei
+denen es sich um untergeordnete Klassen handelt. Mit anderen Worten, die
+Benachrichtigung hängt von der konkreten Implementierung von E-Mail und SMS ab
+und nicht von einer Abstraktion der Implementierung. Da DIP verlangt, dass
+sowohl Klassen der höheren als auch der unteren Ebenen von Abstraktionen
+abhängen, verstoßen wir derzeit gegen das Prinzip der Abhängigkeitsinversion.
 
 
 ```csharp
@@ -853,6 +903,7 @@ public class Notification
 
 ```
 
+Lösung
 
 ```csharp
 // Schritt 1: Interface Definition
