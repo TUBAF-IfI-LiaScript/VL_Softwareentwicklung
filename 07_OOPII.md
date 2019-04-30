@@ -109,6 +109,18 @@ class Person{
 
 ```
 
+Und wie legen wir eine Instanz an? Dazu sind mehrere Schritte notwendig:
+
+```csharp  
+Person p;  // Generierung einer Referenzvariablen p auf dem Stack
+p = new Person();  // Generierung einer Instanz im Heap
+// alles zusammen
+// Person p = new Person();
+```
+
+Als Operanden erwartet der new-Operator einen Klassennamen und eine Parameterliste,
+die an den entsprechenden Konstruktor übergeben wird.
+
 Vgl. obriges Beispiel mit Fehlern unter [Link](https://github.com/liaScript/CsharpCourse/tree/master/code/07_OOPII/PersonManagement_with_errors). Identifizieren Sie die Fehler und
 korrigieren Sie diese.
 
@@ -136,8 +148,10 @@ korrigieren Sie diese.
 
 Felder sind Variablen eines beliebigen Typs, die einer Klasse unmittelbar
 zugeordnet sind. In Feldern werden die Daten abgelegt, die übergreifend
-Verwendung finden. Der Idee der Kapselung folgend, sollten nur methodenlokal
-relevante Variablen auch dort deklariert werden.
+Verwendung finden.
+
+Der Idee der Kapselung folgend, sollten nur methodenlokal relevante Variablen
+auch dort deklariert werden.
 
 Eine Klasse oder Struktur kann Instanzenfelder, statische Felder oder beides
 gemischt verfügen.
@@ -309,9 +323,60 @@ Der Standardkonstruktor wird implizit generiert, wenn kein anderer Konstruktor
 durch den Entwickler spezifiziert wurde. Sofern das geschieht, steht dieser auch
 nicht mehr bereit.
 
+
 ******************************************************************************
 
                                      {{1-2}}
+******************************************************************************
+
+Ein Konstruktor kann einen anderen Konstruktor der gleichen Klasse über das
+Schlüsselwort `this` aufrufen. Dabei kann der Aufruf mit oder ohne Parameter
+erfolgen.
+
+```csharp    ReadOnlyVsConst
+using System;
+
+namespace Rextester
+{
+  class Car
+  {
+    public readonly int NumberOfSeats;
+    public readonly int MaxSpeed;
+    private int CurrentSpeed;
+
+    public Car(int maxSpeed, int numberOfSeats)
+    {
+       Console.WriteLine("2 arg ctor");
+       this.MaxSpeed = maxSpeed;
+       this.NumberOfSeats = numberOfSeats;
+    }
+
+    public Car(int maxSpeed) : this(maxSpeed, 5)
+    {
+       Console.WriteLine("1 arg ctor");
+    }
+
+    public Car() : this(100)
+    {
+       Console.WriteLine("0 arg ctor");
+    }
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args){
+       Car myVehicle = new Car(5);
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+
+
+******************************************************************************
+
+                                     {{2-3}}
 ******************************************************************************
 
 
@@ -360,7 +425,7 @@ namespace Rextester
 
 ******************************************************************************
 
-                                    {{2-3}}
+                                    {{3-4}}
 ******************************************************************************
 
 Für die Objektinitialisierung besteht neben den Konstruktoren und dem
