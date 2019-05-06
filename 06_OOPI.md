@@ -52,9 +52,43 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
 --------------------------------------------------------------------
 
-*2. Hier stehen jetzt Ihre Fragen ...*
+*2. Worin unterscheiden sich in C# Structs und Klassen?*
+
+|                        | Klasse                    | Struct          |
+| ---------------------- | ------------------------- | --------------- |
+| Einordnung             | Referenztyp               | Wertetyp        |
+| Speicherung            | Heap                      | Stack           |
+| Vererbung              | ja                        | nein            |
+| Sichtbarkeitsattribute | private, public, internal | private, public |
 
 ---------------------------------------------------------------------
+
+*3. Können Methoden in C# außerhalb von Klassen exisitieren?*
+
+Nein, C# ist eine objektorientierte Sprache, Methoden können nur innerhalb von
+Klassendefinitionen angelegt werden.
+---------------------------------------------------------------------
+
+*4. Welche Aspekte bilden die Signatur einer Methode?*
+
+---------------------------------------------------------------------
+
+*5. Was bedeutet der Begriff des "Überladens" von Methoden?*
+
+---------------------------------------------------------------------
+
+*6. Welche Arten von Parameterübergaben sind realisierbar und welche Konsequenzen ergeben sich daraus?*
+
+|                   | Beschreibung                                                              |
+| ----------------- | ------------------------------------------------------------------------- |
+| pass-by-value     | Manipulationen in der Methode sind lokaler Natur                          |
+| pass-by-reference | Manipulationen der Variable sind auch in der aufrufenden Methode wirksam  |  
+
+C# ermöglicht mit `ref` eine Übergabge aller Datentypen als Referenzvariable.
+
+---------------------------------------------------------------------
+
+
 
 ## Einschub - Nullable
 
@@ -1025,4 +1059,4 @@ namespace Rextester
 
 **Autoren**
 
-Sebastian Zug, André Dietrich
+Sebastian Zug, André Dietrich, Franz Hofmann
