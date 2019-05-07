@@ -625,9 +625,13 @@ class YourDerivedGraphicsClass : GraphicsClass
 }
 ```
 
-Nun eintwickelt der Hersteller eine neue Version von GraphicsClass und integriert
-eine eigene Realisierung von `DrawRectangle`. Sobald Sie Ihre Anwendung neu
-gegen die Bibliothek kompilieren, erhalten Sie vom Compiler eine Warnung. Diese Warnung informiert Sie darüber, dass Sie das gewünschte Verhalten der DrawRectangle-Methode in Ihrer Anwendung bestimmen müssen.  Welche Möglichkeiten haben Sie - override oder new oder umbenennen? Welche Konsequenzen ergeben sich daraus?
+Nun eintwickelt der Hersteller eine neue Version von GraphicsClass und
+integriert eine eigene Realisierung von `DrawRectangle`. Sobald Sie Ihre
+Anwendung neu gegen die Bibliothek kompilieren, erhalten Sie vom Compiler eine
+Warnung. Diese Warnung informiert Sie darüber, dass Sie das gewünschte Verhalten
+der DrawRectangle-Methode in Ihrer Anwendung bestimmen müssen.  Welche
+Möglichkeiten haben Sie - override oder new oder umbenennen? Welche Konsequenzen
+ergeben sich daraus?
 
 ### Versiegeln von Klassen oder Membern
 
@@ -640,7 +644,9 @@ von Methoden zu verhindern.
 class A {}
 sealed class B : A {}
 ```
-Im Beispiel erbt die Klasse B von der Klasse A, allerdings kann keine Klasse von der Klasse B erben.
+
+Im Beispiel erbt die Klasse B von der Klasse A, allerdings kann keine Klasse von
+der Klasse B erben.
 
 Da Strukturen implizit versiegelt sind, können sie nicht geerbt werden.
 
@@ -649,7 +655,7 @@ using System;
 
 namespace Rextester
 {  
-  public class Animal
+  sealed public class Animal
   {
     public string Name;
     public Animal(string name){
@@ -663,26 +669,24 @@ namespace Rextester
   class Cat : Animal
   {
     public Cat(string name) : base(name) { }
-    public sealed override void makeSound(){
+    public sealed override void makeSound(){   // sealed schützt die Cat.makeSound methode
       Console.WriteLine("{0} - Miau ({1})", Name, this.GetType().Name);
     }
   }
 
-  class myCat : Cat
+  class Tiger : Cat
   {
-    public myCat(string name) : base(name) { }
+    public Tiger(string name) : base(name) { }
     public override void makeSound(){
-      Console.WriteLine("{0} - Miau ({1})", Name, this.GetType().Name);
+      Console.WriteLine("{0} - Grrrr ({1})", Name, this.GetType().Name);
     }
   }
 
   public class Program
   {
     public static void Main(string[] args){
-      Cat myCat = new Cat("Kity");
-      myCat.makeSound();
-      Animal myCatAsAnimal = new Cat("KatziTatzi");
-      myCatAsAnimal.makeSound();
+      Tiger evilTiger = new Tiger("Shir Khan");
+      evilTiger.makeSound();
     }
   }
 }
@@ -701,7 +705,7 @@ Diese Aufgabe übernehmen abstrakte Klassen und abstrakte Methoden. Eine abstrak
 Klasse:
 
 + kann nicht instanziiert werden
-+ kann abstakte Methoden umfassen
++ kann abstrakte Methoden umfassen
 + ist oft als Startpunkt(e) einer Vererbungshierarchie gedacht sind.
 
 Innerhalb der Klasse können abstrakte Methoden integriert werden, die
@@ -751,27 +755,11 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-Warum macht es keinen Sinn eine Abstrakte Klasse als `sealed` zu deklarieren?
+Warum macht es keinen Sinn eine abstrakte Klasse als `sealed` zu deklarieren?
 
 ## 4. Beispiel der Woche ...
 
-```csharp
-using System;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace Rextester
-{
-  public class Program
-  {
-    public static void Main(string[] args){
-
-    }
-  }
-}
-```
-@Rextester.eval(@CSharp)
-
+... fällt diesmal aus, weil wir gleich ein größeres Beispiel durchspielen.
 
 ## Anhang
 
