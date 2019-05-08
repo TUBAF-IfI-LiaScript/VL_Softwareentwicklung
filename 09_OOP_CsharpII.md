@@ -58,6 +58,9 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
 ## 1. Operatorenüberladung in C\#
 
+                                         {{0-1}}
+******************************************************************************
+
 Operatoren sind ein Set von Tokens, die grundlegende Operationen für
 Grunddatentypen beschreiben.
 
@@ -76,7 +79,7 @@ den Operatoren eine spezifische Bedeutung für die Klassen gegeben.
 
 + Operatoren werden in der Klasse überladen
 + Operatoren-Überladung ist immer static
-+ Nutzung des Schlüsselwortes operator
++ Nutzung des Schlüsselwortes `operator`
 
 **Überladbare Operatoren**
 
@@ -89,9 +92,15 @@ den Operatoren eine spezifische Bedeutung für die Klassen gegeben.
 | ()                                   | nicht überladbar, aber mittels custom conversion gleiche Funktionalität |
 | +=, -=, \*=, /=, %=, &=, ^=, <<=, >>= | Werden durch die zugehörigen Operatoren automatisch überladen           |
 
+
+******************************************************************************
+
+                                       {{1-2}}
+******************************************************************************
+
 **Beispiel**
 
-```csharp    Upcast
+```csharp    Operatoren
 using System;
 using System.Reflection;
 using System.ComponentModel.Design;
@@ -135,6 +144,12 @@ namespace Rextester
 
 Die Operatoren += und -= werden dabei automatisch mit überladen.
 
+
+******************************************************************************
+
+                                       {{2-3}}
+******************************************************************************
+
 > **Merke:** Die Typen beim Überladen von Operatoren müssen nicht übereinstimmen!
 
 Nehmen wir an, dass wir eine Skalierung $r$ unseres Vektors einfügen wollen und dafür
@@ -142,8 +157,15 @@ dessen Länge manipulieren.
 
 ```csharp
 // Es müssen beide Varianten implementiert werden!
-public static Point operator *(Point p1, double ratio) => new Point(p1.X * ratio, p1.Y * ratio);
-public static Point operator *(int ratio, Point p1) => new Point(p1.X * ratio, p1.Y * ratio);
+public static Point operator *(Point p1, double ratio)
+{
+  new Point(p1.X * ratio, p1.Y * ratio);
+}
+
+public static Point operator *(int ratio, Point p1)
+{
+  new Point(p1.X * ratio, p1.Y * ratio);
+}
 
 static void Main(string[] args)
 {
@@ -155,6 +177,12 @@ Console.WriteLine((1 * ptOne));
 ```
 
 Unäre Operatoren (++, --) können in gleicher Art und Weise überschrieben werden.
+
+
+******************************************************************************
+
+                                       {{3-4}}
+******************************************************************************
 
 Wann sind zwei Klasseninstanzen gleich? Müssen alle Inhalte übereinstimmen?
 Gibt es besondere Felder, deren Übereinstimmung relevanter sind?
@@ -221,11 +249,20 @@ if (pt1) Console.WriteLine("true"); // true
 Point pt2 = new Point(10, -10);
 ```
 
+******************************************************************************
+
 ## 2. Kompatiblität zwischen Typen
+
+                                   {{0-2}}
+******************************************************************************
 
 Strukturieren Sie die Klassen "Zug", "GüterZug", "PersonenZug" und "ICE" in einer
 sinnvolle Vererbungshierarchie. Wie setzen Sie diese in C# Code um?
 
+******************************************************************************
+
+                                  {{1-2}}
+******************************************************************************
 
 ```csharp    Upcast
 using System;
@@ -281,7 +318,12 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-In dieserm Fall ist Zug die Basisklasse und PersonenZug, GueterZug und ICE sind
+******************************************************************************
+
+                                   {{2-3}}
+******************************************************************************
+
+In diesem Fall ist Zug die Basisklasse und PersonenZug, GueterZug und ICE sind
 abgeleitete Klassen. Wir haben bereits gesehen, dass ein Mapping möglich ist,
 aber was sind die Konsequenzen?
 
@@ -297,6 +339,8 @@ veränderlich.
 | `Zug RB51 = new Zug()`     | Zug                    | Zug                     |
 | `RB51 = new PersonenZug()` | Zug                    | PersonenZug             |
 | `RB51 = new Ice`           | Zug                    | ICE                     |
+
+******************************************************************************
 
 
 ### Laufzeitprüfung
@@ -450,6 +494,8 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
+### Beispiel
+
 *Upcast* und *Downcast* ...  wozu brauche ich das den? Nehmen wir an, dass wir
 eine Ausgabemethode für beide Typen - Person und Fußballspieler - benötigen.
 Ja, es wäre möglich diese als Memberfunktion zu implementieren, problematisch
@@ -508,6 +554,9 @@ namespace Rextester
 
 ## 3. Interfaces
 
+                                         {{0-1}}
+*******************************************************************************
+
 **Wiederholung -Abstrakte Basisklasse**
 
 + abstrakte Basisklassen können die grundsätzliche Struktur für abgeleitete Klassen vorgeben
@@ -551,6 +600,11 @@ class App
 }
 ```
 Neben Feldern und Methoden können auch Properties und Indexer als abstract deklariert werden.
+
+*******************************************************************************
+
+                                    {{1-2}}
+*******************************************************************************
 
 **Interfaces**
 
@@ -607,8 +661,11 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-Eine Klasse kann unr von einer anderen Klasse erben, aber beliebig viele Interfaces implementieren.
+Eine Klasse kann nur von einer anderen Klasse erben, aber beliebig viele Interfaces implementieren.
+*******************************************************************************
 
+                                    {{2-3}}
+*******************************************************************************
 **Anwendung**
 
 ```csharp    UpCastExample
@@ -660,6 +717,11 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
+*******************************************************************************
+
+                                    {{3-4}}
+*******************************************************************************
+
 **Gegenüberstellung**
 
 | interface                         | abstract class                                    |
@@ -705,7 +767,7 @@ class Material : IList { }
 Ein Interface beschreibt Teile des Verhaltens einer Klasse und fungiert dabei
 wie ein Platzhalter.
 
-
+*******************************************************************************
 
 ## 4. Beispiel der Woche ...
 
