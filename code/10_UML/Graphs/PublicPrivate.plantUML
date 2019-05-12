@@ -1,0 +1,19 @@
+@startuml
+skinparam classAttributeIconSize 0
+class Car{
+  - speed: double
+  - setSpeed(double speed)
+  + getSpeed() : double
+}
+
+class TrafficOperator{
+  - Vehicle: Car[]
+  + superviseAllCars()
+}
+
+TrafficOperator "1" -- "0:.. "Car : "greift zu auf"
+
+note top of TrafficOperator : Das static Objekt kann auf die \nGeschwindigkeiten aller Fahrzeuges\n zurückgreifen, sie aber nicht verändern.
+note top of Car : speed als Property \n, public get Methode,  \nprivate set Methode
+
+@enduml
