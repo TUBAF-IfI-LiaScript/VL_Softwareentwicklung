@@ -1,0 +1,11 @@
+@startuml
+left to right direction
+hide members
+hide circle
+
+class "UML-Modell" as class2
+class "UML-Diagramm" as class1
+
+class2 "1" --> "1..*" class1
+
+@enduml

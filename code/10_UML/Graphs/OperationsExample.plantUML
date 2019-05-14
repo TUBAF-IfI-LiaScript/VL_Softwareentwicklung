@@ -1,0 +1,9 @@
+@startuml
+skinparam classAttributeIconSize 0
+class Example{
+   + {static} operation1()
+   - operation2(in param1: int = 5): int {readonly}
+   # operation3(inout param2 : C)
+   ~ operation4(out param3: String [1..*] {ordered}): B
+}
+@enduml

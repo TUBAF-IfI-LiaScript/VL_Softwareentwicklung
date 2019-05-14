@@ -1,0 +1,13 @@
+@startuml
+|Nutzer|
+start
+:foo1;
+|#AntiqueWhite|Admin|
+:foo2;
+:foo3;
+|Nutzer|
+:foo4;
+|Admin|
+:foo5;
+stop
+@enduml

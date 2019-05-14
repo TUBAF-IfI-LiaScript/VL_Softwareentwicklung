@@ -1,0 +1,18 @@
+@startuml
+
+start
+
+repeat
+  :Artikel suchen;
+  :Artikel in den \nWahrenkorb legen;
+repeat while (Weitere Artikel?)
+:Art der Bezahlung\n wählen;
+fork
+:Überweisung;
+fork again
+:Bankeinzug;
+end fork
+:"Lieferanschrift\n auswählen";
+stop
+
+@enduml
