@@ -101,8 +101,12 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
 > Das V-Modell ist ein Vorgehensmodell, das ähnlich dem Wasserfallmodell, den Softwareentwicklungsprozess in Phasen  organisiert. Zusätzlich zu den Entwicklungsphasen definiert das V-Modell auch das Evaluationsphasen, in welchen den einzelnen Entwicklungsphasen Testphasen gegenüber gestellt werden.
 
-
 vgl. zum Beispiel [Link](https://www.johner-institut.de/blog/iec-62304-medizinische-software/v-modell/)
+
+Achtung: Das V-Modell ist nur eine Variante eines Vorgehensmodells, moderne
+Entwicklungen stellen eher agile Methoden in den Vordergrund.
+
+vgl. zum Beispiel [Link](https://entwickler.de/online/agile/agile-methoden-einfuehrung-209035.html)
 
 ****************************************************************************
 
@@ -259,9 +263,6 @@ Use-Case Diagrammer erlaube die Abstraktion von Elementen auf der Basis von Gene
 | Bedeutung      | Ablauf von A schließt den Ablauf von B immer ein | Ablauf von A kann optional um B erweitert werden |
 | Anwendung      | Hierachische Zerlegung                           | Abbildung von Sonderfällen                       |
 | Abhängigkeiten | A muss B bei der Modellierung berücksichtigen    | Unabhängige Modellierung möglich                 |
-
-
-
 
 
 **Anwendungsfälle**

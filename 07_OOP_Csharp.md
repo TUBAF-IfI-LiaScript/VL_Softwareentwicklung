@@ -48,11 +48,40 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
 ## Kontrollfragen
 
-*1. Welche Sichtbarkeitsattribute können struct-Memberfunktionen in ihrer Sichtbarkeit spezifizieren und was bedeuten sie?*
+*1. Was sind Felder in der C# Welt?*
+
+Variablen beliebigen Typs, die einer Klasse unmittelbar zugeordnet sind. In
+Feldern werden Daten abgelegt, die klassenweit Verwendung finden. Als Felder
+werden nur methodenrelevante Variablen integriert.
 
 --------------------------------------------------------------------
 
-*2. Hier stehen jetzt Ihre Fragen ...*
+*2. Erklären Sie die Unterschied zwischen Instanzfeldern und statischen Feldern.*
+
+Instanzfelder beziehen sich auf eine individuelle Instanz der Klasse, während
+statische Felder über allen Instanzen wirken.
+
+--------------------------------------------------------------------
+
+*3. Was passiert, wenn für eine Klasse kein Konstruktor vorgegeben wird?*
+
+Der Kompiler erstellt automatisch einen Standardkonstruktor, sobald ein einziger
+Konstruktor definiert wird, entfällt dieser Schritt.
+
+---------------------------------------------------------------------
+
+*4. Welche Wirkung haben fehlende Set und Get Implmentierungen bei Properties?*
+
+ohne get ... lesegeschützt, ohne set ... schreibgeschützt. Properties können aber auch
+durch Zugriffsattribute feingranulare Regeln definieren.  
+
+---------------------------------------------------------------------
+
+*5. Wozu verwendet man Indexer?*
+
+---------------------------------------------------------------------
+
+*6. Welche Varianten stehen unter C# zur Verfügung, um konstante Werte zu definieren?*
 
 ---------------------------------------------------------------------
 
@@ -798,4 +827,4 @@ namespace Rextester
 
 **Autoren**
 
-Sebastian Zug, André Dietrich
+Sebastian Zug, André Dietrich, Hernan Valdes, Christian Bräunlich

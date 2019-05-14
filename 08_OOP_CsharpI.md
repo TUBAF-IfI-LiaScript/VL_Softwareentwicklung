@@ -759,7 +759,9 @@ Warum macht es keinen Sinn eine abstrakte Klasse als `sealed` zu deklarieren?
 
 ## 4. Beispiel der Woche ...
 
-... fällt diesmal aus, weil wir gleich ein größeres Beispiel durchspielen.
+Das Beispiel der Woche findet sich unter folgendem Link
+
+https://github.com/liaScript/CsharpCourse/tree/master/code/08_OOP_CsharpII/AbstractClasses
 
 ## Anhang
 
