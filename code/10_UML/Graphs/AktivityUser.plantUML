@@ -1,13 +1,17 @@
 @startuml
-|Nutzer|
+|User|
 start
-:foo1;
-|#AntiqueWhite|Admin|
-:foo2;
-:foo3;
-|Nutzer|
-:foo4;
-|Admin|
-:foo5;
+repeat
+:SchreibeDaten;
+if (Speicher voll?) then (nein)
+ :Ausgabe Speichergröße;
+else (ja)
+  |#AntiqueWhite|Admin|
+  :Vergrößere Speicher;
+  :Ausgabe zus. Speicher;
+endif
+|User|
+:Speichern;
+repeat while (Weitere Datensätze?)
 stop
 @enduml
