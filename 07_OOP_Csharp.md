@@ -15,10 +15,10 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 --------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/liaScript/CsharpCourse/blob/master/07_OOPII.md
+https://github.com/liaScript/CsharpCourse/blob/master/07_OOP_Csharp.md
 
 Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 7](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/07_OOPII.md#1)
+[LiaScript Vorlesung 7](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/07_OOP_Csharp.md#1)
 
 ---------------------------------------------------------------------
 

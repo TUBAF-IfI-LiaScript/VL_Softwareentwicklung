@@ -49,11 +49,11 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
 ## Kontrollfragen
 
-*1. Welche Sichtbarkeitsattribute können struct-Memberfunktionen in ihrer Sichtbarkeit spezifizieren und was bedeuten sie?*
+*1. Welche Unterschiede zeigen abstrakte Klassen und Interfaces unter C#*
 
 --------------------------------------------------------------------
 
-*2. Hier stehen jetzt Ihre Fragen ...*
+*2. Warum verzichten einige Programmiersprachen auf die Differenzierung zwischen Klassen und Interfaces?*
 
 ---------------------------------------------------------------------
 
@@ -253,12 +253,13 @@ Use-Case Diagrammer erlaube die Abstraktion von Elementen auf der Basis von Gene
 
 ![Modelle](img/10_UML/UseCase.png)<!-- width="70%" --> [Jeckle Seite 240](#7)
 
-|                | `<<include>>` Beziehung                          | `<<extend>>` Beziehung                           |
+|                | <img src="https://raw.githubusercontent.com/liaScript/CsharpCourse/master/img/10_UML/UseCaseInclude.png" height="42">                             | <img src="https://raw.githubusercontent.com/liaScript/CsharpCourse/master/img/10_UML/UseCaseExtend.png" height="42">         |
 | -------------- | ------------------------------------------------ | ------------------------------------------------ |
-|                | A --- include -->  B                             | A (extension points) <-- extends --- B           |
+|                | `<<include>>` Beziehung                          | `<<extend>>` Beziehung                           |
 | Bedeutung      | Ablauf von A schließt den Ablauf von B immer ein | Ablauf von A kann optional um B erweitert werden |
 | Anwendung      | Hierachische Zerlegung                           | Abbildung von Sonderfällen                       |
 | Abhängigkeiten | A muss B bei der Modellierung berücksichtigen    | Unabhängige Modellierung möglich                 |
+
 
 
 
