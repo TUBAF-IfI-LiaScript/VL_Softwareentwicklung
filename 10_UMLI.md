@@ -62,8 +62,9 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
                                        {{0}}
 ****************************************************************************
 
-"Entwickeln Sie ein webbasiertes System, mit dem Sie die Anmeldung
-und Bewertung von Prüfungsleistung erfassen."
+Kunde TU Freiberg: *Entwickeln Sie für mich ein webbasiertes System, mit dem Sie die Anmeldung und Bewertung von Prüfungsleistung erfassen.*
+
+Welche Fragen sollten Sie dem Kunden stellen, bevor Sie sich daran machen und munter Code schreiben?
 
 ****************************************************************************
                                         {{1}}
@@ -82,20 +83,20 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 -->
 ````````````
 
-              +------------------------------------------------------>   Zeit
-              |
-              |      Analyse                             Abnahmetest
-              |          \                                   ^
-              |           v                                 /
-              |        Grobentwurf                   Systemtests
-              |             \                             ^
-              |              v                           /
-              |           Feinentwurf             Integrationstests      
-Detailgrad    |                \                       ^
-              |                 v                     /
-              |             Implementierung  --> Modultests
-              |
-              v    
+         +------------------------------------------------------>   Zeit
+         |
+         |      Analyse                             Abnahmetest
+         |          \                                   ^
+         |           v                                 /
+         |        Grobentwurf                   Systemtests
+         |             \                             ^
+         |              v                           /
+         |           Feinentwurf             Integrationstests      
+ Detail- |                \                       ^
+ grad    |                 v                     /
+         |             Implementierung  --> Modultests
+         |
+         v    
 ````````````
 
 > Das V-Modell ist ein Vorgehensmodell, das ähnlich dem Wasserfallmodell, den Softwareentwicklungsprozess in Phasen  organisiert. Zusätzlich zu den Entwicklungsphasen definiert das V-Modell auch das Evaluationsphasen, in welchen den einzelnen Entwicklungsphasen Testphasen gegenüber gestellt werden.
@@ -105,7 +106,7 @@ vgl. zum Beispiel [Link](https://www.johner-institut.de/blog/iec-62304-medizinis
 
 ****************************************************************************
 
-## 1. Unified Modeling Language
+## 2. Unified Modeling Language
 
 > Die Unified Modeling Language, kurz UML, dient zur Modellierung, Dokumentation , Spezifikation und Visualisierung komplexer Softwaresysteme unabhängig von deren Fach- und Realsierungsgebiet. Sie liefert die Notationselemente gleichermaßen fpr statische und dynamische Modelle zur Analyse, Design und Architektur und unterstützt insbesondere objektorientierte Vorgehensweisen. [Jeckle]
 
@@ -191,7 +192,7 @@ WB is Waiting
 ```
 @plantUML.eval
 
-## 2. Diagramm-Typen
+## 3. Diagramm-Typen
 
 ![OOPGeschichte](/img/10_UML/UML-Diagrammhierarchie.png)<!-- width="90%" --> [WikiUMLHistory](#7)
 
@@ -250,7 +251,7 @@ Elemente:
 
 Use-Case Diagrammer erlaube die Abstraktion von Elementen auf der Basis von Generalisierungen. So können Akteure von einander erben und redundante Beschreibungen von Verhalten über `<<extend>>` oder `<<include>>` (unter bestimmten Bedingungen) erweitert werden.
 
-![Modelle](/img/10_UML/UseCase.png)<!-- width="70%" --> [Jeckle Seite 240](#7)
+![Modelle](img/10_UML/UseCase.png)<!-- width="70%" --> [Jeckle Seite 240](#7)
 
 |                | `<<include>>` Beziehung                          | `<<extend>>` Beziehung                           |
 | -------------- | ------------------------------------------------ | ------------------------------------------------ |
@@ -258,6 +259,8 @@ Use-Case Diagrammer erlaube die Abstraktion von Elementen auf der Basis von Gene
 | Bedeutung      | Ablauf von A schließt den Ablauf von B immer ein | Ablauf von A kann optional um B erweitert werden |
 | Anwendung      | Hierachische Zerlegung                           | Abbildung von Sonderfällen                       |
 | Abhängigkeiten | A muss B bei der Modellierung berücksichtigen    | Unabhängige Modellierung möglich                 |
+
+
 
 
 **Anwendungsfälle**
@@ -274,102 +277,9 @@ Use-Case Diagrammer erlaube die Abstraktion von Elementen auf der Basis von Gene
 + ... Use-Case Analysen aus Entwicklersicht durchzuführen
 + ... zu viele Use-Cases in einem Diagramm abzubilden (max. 10)
 
+## Und weiter geht's
 
-### Aktivitätsdiagramm
-
-> Aktivitätsdiagramme stellen die Vernetzung von elementaren Aktionen und deren
-> Verbindungen mit Kontroll- und Datenflüssen grafisch dar.
-
-**Aktivitätsmodellierung in UML1**
-
-![Aktivitätsdiagramme](http://www.plantuml.com/plantuml/svg/JOynRW9134LxdyAY8bTOYX3gz3Gq1lxkM3Fn8i-CLk8iANCJBXOJjaXdVV_tfB-lJRprhqBqTn4vRf16pCE7DyqeNFibmNR_8pM-mlXaHqaEoxEVkM2ArihpahI0jqTeWuDNyFsDdew0dG-uIohTffFnylX9vKcFisSQ7jzd-0AjyNrbB9EeqN0Gor2xzyXXLtxrDv-A4IvMBybrR66KNbVfPXVJvXlHFe1O-Wi0)<!-- width="30%" --> [Aktivitätsdiagramme.plantUML]
-
-
-![Aktivitätsdiagramme](http://www.plantuml.com/plantuml/png/SoWkIImgAStDuQhnAosfIYsguGABS5cbvUSRMdFLA3lcbMGMbgQ6PsIMfDOufkHcvjM09OsimPInDLmdc6y2v2EfChK6cfTVmEMGcfS2iWK0)<!-- width="20%" --> [ActivityUser.plantUML]
-
-
-Bis UML 1.x waren Aktivitätsdiagramme eine Mischung aus Zustandsdiagramm,
-Petrinetz und Ereignisdiagramm, was zu theoretischen und praktischen Problemen
-führte.
-
-**Erweiterung des Konzeptes in UML2**
-
-UML2 strukturiert das Konzept der Aktivitätsmodellierung neu und führt als übergeordnete
-Gliederungsebene Aktivitäten ein, die Aktionen, Objektknoten sowie Kontrollelemente der
-Ablaufsteuerung und verbindende Kanten umfasst. Die Grundidee ist dabei, dass neben dem
-Kontrollfluss auch der Objektfluss modelliert wird.
-
-<!--
-style="width: 80%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
--->
-````ascii
-                      Kontrollfluss
-     .-------------.                    .-------------.
-     | Aktion      |------------------> | Aktion      |
-     .-------------.                    .-------------.
-
- ---------------------------------------------------------------
-
-             Ausgabe-                 Eingabe-
-              pin                      pin
-                       Objektfluss
-    .-------------.                    .-------------.
-    | Aktion      |□----------------> □| Aktion      |
-    .-------------.                    .-------------.
-
-
-    .-------------.   +---------------+     .-------------.
-    | Aktion      |---| Objekt        |---> | Aktion      |
-    .-------------.   +---------------+     .-------------.
-````
-
-**Beispiel**
-
-![Aktivitätsdiagramme](/img/10_UML/ActivityDiagram.png)<!-- width="70%" --> [WikiActivityDiagram]
-
-Beispiels auf Anwendungsfall [Link](https://www.youtube.com/watch?v=VaKCZOhVJkQ)
-
-**Anwendungsfälle**
-
-+ Verfeinerung von Anwendungsfällen (aus den Use Case Diagrammen)
-+ Darstellung von Abläufen mit fachlichen Ausführungsbedingungen
-+ Darstellung für Aktionen im Fehlerfall oder Ausnahmesituationen
-
-Beispiel aus Lehrbuch!
-
-### Sequenzdiagramm
-
-> Sequenzdiagramme beschreiben den Austausch von Nachrichten zwischen Objekten mittels Lebenslinien.
-
-Ein Sequenzdiagramms besteht aus einem Kopf- und einem Inhaltsbereich. Das Schlüsselwort im Kopfbereich ist bei einem Sequenzdiagramm `sd`. Von jedem Kommunikationspartner geht eine Lebenslinie (gestrichelt) aus. Es sind zwei synchrone Operationsaufrufe, erkennbar an den Pfeilen mit ausgefüllter Pfeilspitze, dargestellt. Notationsvarianten für synchrone und asynchrone Nachrichten
-
-Eine Nachricht wird in einem Sequenzdiagramm durch einen Pfeil dargestellt, wobei der Name der Nachricht über den Pfeil geschrieben wird. Synchrone Nachrichten werden mit einer gefüllten Pfeilspitze, asynchrone Nachrichten mit einer offenen Pfeilspitze gezeichnet.
-
-Die schmalen Rechtecke, die auf den Lebenslinien liegen, sind Aktivierungsbalken, die den Focus of Control anzeigen, also jenen Bereich, in dem ein Objekt über den Kontrollfluss verfügt, und aktiv an Interaktionen beteiligt ist.
-
-
-**Beispiel**
-
-![Aktivitätsdiagramme](/img/10_UML/SequenzCheckEmail.png)<!-- width="60%" --> [WikiSequenceDiagram](#7)
-
-
-**Bestandteile**
-
-| Name                    | Beschreibung                                                                                                          |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Objekt                  | Dient zur Darstellung einer Klasse oder eines Objekts im Kopfbereich.                                                 |
-| Aktivitätsbalken        | Repräsentiert die Zeit, die ein Objekt zum Abschließen einer Aufgabe benötigt.                                        |
-| Paket                   | Strukturiert das Sequenzdiagramm                                                                                      |
-| Lebenslinien-Symbol     | Stellt durch die Ausdehnung nach unten den Zeitverlauf dar.                                                           |
-| Optionsschleifen-Symbol | Dient zur Darstellung von „Wenn-dann“-Szenarien                                                                       |
-| Alternativen-Symbol     | Stellt eine Auswahl zwischen zwei oder mehr Nachrichtensequenzen (die sich in der Regel gegenseitig ausschließen) dar |
-
-**Anwendungsfälle**
-
-+ Darstellung der Details eines UML-Use-Cases
-+ Modellierung der Logik von komplexen Verfahren, Funktionen oder Vorgängen
-+ Veranschaulichung der wechselseitigen Interaktion zwischen Objekten und Komponenten
-+ Planung von Szenarios
+... mit Aktivitäts-, Sequenz und Klassendiagrammen in der nächsten Woche.
 
 ## Anhang
 
