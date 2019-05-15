@@ -19,7 +19,7 @@ Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 https://github.com/liaScript/CsharpCourse/blob/master/11_UMLII.md
 
 Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 10](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/11_UMLII.md#1)
+[LiaScript Vorlesung 11](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/11_UMLII.md#1)
 
 ---------------------------------------------------------------------
 
