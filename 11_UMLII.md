@@ -11,15 +11,15 @@ import: https://raw.githubusercontent.com/liaScript/WebDev_template/master/READM
 import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
 -->
 
-# Vorlesung Softwareentwicklung - 7 - UML und OOP
+# Vorlesung Softwareentwicklung - 11 - UML und OOP
 
 --------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/liaScript/CsharpCourse/blob/master/10_UML.md
+https://github.com/liaScript/CsharpCourse/blob/master/11_UMLII.md
 
 Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 10](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/10_UML.md#1)
+[LiaScript Vorlesung 10](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/11_UMLII.md#1)
 
 ---------------------------------------------------------------------
 
