@@ -347,7 +347,7 @@ style="width: 100%; display: block; margin-left: auto; margin-right: auto;"
 Die Sichtbarkeitsattribute `public` und `private` sind unabhängig vom Vererbungs-, Instanzierungs- oder Paketstatus einer Klasse. Im Beispiel kannn der TrafficOperator nicht
 auf die Geschwindigkeiten der Instanzen von Car zurückgreifen.
 
-![PublicPrivate](http://www.plantuml.com/plantuml/svg/NP71pjCm48JlVefHJgregtBjgHK8n04LwKTSA0V7sIHBN3jQRueeucruZF_M5yD92eXUPsRdiyRxf5PqE7kJEWwz5Nk6ypQbWwfmEIYzSp4yyPMmDPE1LrP-662Dr1DLErHnA3tD2kdJA2vcRKuii_K2pHzhYRydFyszygFOkcPtx4cindlz9shPUTgDmCzVff8qvCI54nsypsfQBCUEXsiKBmkiroYskyq6HSvbOj48SQsu3h13NHWJeX8qzeZr8px7Nzk4f5RPuLX-fKxHsH36KrHCE8Mtb5pxZKF5JKUib3tlIV36jdAbeQ5q2XacjsVNJMWAAoGcs984WLshk93SVeMA96p-Uyxqudcxt9hmGM9FejypTeK-ByTkd1FlITjOqGhPw8KlLWdfdsxCdaALl_Ot)<!-- width="80%" --> [PublicPrivate.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/PublicPrivate.plantUML)
+![PublicPrivate](http://www.plantuml.com/plantuml/png/NP51pjCm48NtFiLJLd-XhNwsMRK2KR6eYbJ4Xh9mx4aonBKZUr944RVX6EnwCPoaWEZspJVVFCkR93hAS7OgTUnx7VKPnkcKjYAHgq7edGd-o5V2ishP4Wn7uqXD45xh-5q1AwIUo9QmOQWSpGd9SGoVvcmc5ddq4hi_emN-hlnGT-M7gEkQpQ6dg2NSzH-fvNmrbUF5Jvydopvupi3MkPobfyMeU5X6yQh0YzKAnNEvNgF884eKJIIk1TS1UgWBfNmGWeGUeSQCJ6MXNSBx6B9ClYrFliz5sQ0XmPwa3PQMo6daYnP2-XV_9toiLEADJZXKNwWJTDhxiGGiKtRjA9dsAtlBJKSib6VEKSHRtSOh3GsTV6uTRxzCDxs1_1A92RhAa6VJ2YuKRp-zfUZNQaFUvg_z3G00)<!-- width="60%" --> [PublicPrivate.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/publicPrivate.plantUML)
 
 **protected**
 
@@ -355,28 +355,13 @@ Die abgeleitete Klassen Bus und PassagerCar erben von Car und übernehmen damit 
 der Sitze wird beispielsweise mit ihrem Initialisierungswert von 5 auf 40 gesetzt.
 Zudem muss die Methode `StopAtStation` auch auf die Geschwindigkeit zurückgreifen können.
 
-![Protected](http://www.plantuml.com/plantuml/png/XL8_Jm8n5D_xALxg0Z4GJ7IvQ08oEM5onCKul2lleA6qbxvN1jJlRg6AuGPTBfVV_pQTic2Kj7EAjzPt6747nY7pJ2JQ9WazcU1hUo2OA6nO8Xef2fXZV5S08-2EQ5N1AgJ6qGdnQTTGNBGreN16he19wgDiK5J5CypKDQn_g26SGpwLAYNF-KD-JR6qzRChi5xW0Uv-7O-9_n3UJawTymsPxTAQBGaFoenQGZUJMb1iy1ax1ouZjgqrYuuYIlXUyK8RQnnLnrjuVJi5SCgAlMMQEPTHBXag_yBznsXq70OLQ8gDm3vuVMOk3dafwNM3lj6G3NfIZSUW-xvr9DiA719WQlypbpbzpvJyAZ-7Bm00)<!-- width="70%" --> [PublicPrivate.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/protected.plantUML)
+![Protected](http://www.plantuml.com/plantuml/png/XKy_Jm8n5D_lK_nI5z10CD7beWd8v8J94HVZqEkzWuPUUsbV7L2_kuKgXXjqQPhV_pSFB3t7pXHXfsqllUoWZ0nXmUnr7PaUbRELtXDcnLOt1AMzCbJ8Eh2NYhCQI-dV2s22q1Cr9HeNQqD7nCQk9hzgAv8S4dA1G5mTPAEiofvnegwm-Q76E8Ly5aKkUKeFsGtvt3RCBg4junwtluw76FuGtioEdSijgTrQgnrn6EKP5Rj-mHLBriucx1Iuzh9jjLhrv2MxxnNFjDNAK8cqw-Nr6D0vgnE_C2PX8IUa7-u-9fF3AfGGv6l6cxFYn9nTU2uP54DS2rmcXvYLqod4qBZnf5l6FaB6zbzt7ZGqpSasiJDV)<!-- width="60%" --> [protected.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/protected.plantUML)
 
 **internal**
 
 Ein Member vom Typ `protected internal` einer Basisklasse kann von jedem Typ innerhalb seiner enthaltenden Assembly aus zugegriffen werden.
 
-```ascii PlantUMLClasses
-skinparam classAttributeIconSize 0
-package Traffic <<Folder>> {
-  class Vehicle{
-    - speed: double
-    ~ setSpeed(double speed)
-    + getSpeed(): double
-  }
-}
-
-class Junction{
-  - cars: Traffic::Vehicles[]
-  + SimulateJam()
-}
-```
-@plantUML.eval
+![Protected](http://www.plantuml.com/plantuml/png/JOwzRkf044RxVOfFha38YDjQ2463T2b3b2PACUoExH7hjRK_HKZ8iqTcRONspCmvim-HV4oTLU4gRY1F7RIb40unUhcaoFzrxyvoOsnKAuQXnMlBQY1zfORnqfDvzLJNeh7T7djhsEzs-5B87hnnAzho280IOM0s5KoVBfOVx0U1utd4Yqpppl8nNA6PXykdgxkwAvNzf-HqbDwDWHAQVAWmFLHLKpoyVwZHTPOkMOfyecwn_5CSn0-M76T5ozB45a-r5OxsCn_CDHJ_2fGbYasrNgEOEgXGD9wbZhWbKAeBDRjHVkymhQazEvCw-mi0)<!-- width="50%" --> [internal.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/internal.plantUML)
 
 Der UML Standard kennt nur + Public, - Private, # Protected und ~ Internal. Das
 C# spezifische `internal protected` ist als weitere Differenzierungsmöglichlichkeit nicht
@@ -390,14 +375,14 @@ dass Sie ein „Eigenleben führen“. Unmittelbar wenn eine Instanz einer aktiv
 
 **Objekte vs. Klassen**
 
-![OOPGeschichte](/img/10_UML/ObjectVsClass.png)<!-- width="90%" --> [StackOverFlow](#7)
+![OOPGeschichte](/img/10_UML/ObjectVsClass.png)<!-- width="90%" --> [VisualParadigm](#7)
 
 
 ####  Attribute
 
-Im einfachsten Fall wird ein Attribut durch einen Namen repräsentiert, der in
-der Klasse eindeutig sein muss - Die Klasse bildet damit den Namensraum der
-enthaltenen Attribute.
+Im einfachsten Fall wird ein Attribut (unter C# sprechen wir von Feldern) durch
+einen Namen repräsentiert, der in der Klasse eindeutig sein muss - Die Klasse
+bildet damit den Namensraum der enthaltenen Attribute.
 
 Entsprechend der Spezifikation sind folgende Elemente eines Attributes
 definierbar:
@@ -409,7 +394,7 @@ definierbar:
 + *Sichtbarkeit* ... vgl. vorheriger Absatz
     Das "/" bedeutet, dass es sich um ein abgeleitetes Attribut handelt, dessen
     Daten von anderen Attributen abhängt
-+ *Name* ... des Attributes (unter C# sprechen wir von Feldern), Leer und Sonderzeichen sollten weggelassen werden, um zu vermeiden, dass Sie bei der Implementierung Probleme generieren.
++ *Name* ... des Attributes, Leer und Sonderzeichen sollten weggelassen werden, um zu vermeiden, dass Sie bei der Implementierung Probleme generieren.
 
 ```python
 class Zähler:
@@ -462,7 +447,7 @@ Daraus ergeben sich UML-korrekte Darstellungen
 | String                           | nein    | Name des Attributes fehlt                                                          |
 | privat, public name: String      | nein    | Fehler wegen mehrfachen Zugriffsattributen                                         |
 
-![Protected](http://www.plantuml.com/plantuml/png/LP3DJiCm48JlUOfHkO0G9Q7bfvP0fH87pkM6E3Zn2YmSRsHl920Apuwf6anlwy-VHzvPHz51-jOLyTtwJWVTed4wndkHOEjUwB5XlxLVXBBONU3XGxUTew40z2HL2jPB8gUPNKniYAB5DYEwldQsWOBXD15kiPXNosISvLSBXPhPaVQ97sM-L8Xl70G9VsTygR1DetzDORCdYZB344WRzkvp_F_3AuNDSpcVLoz3mst77AtGWN7z5xNtE1WAP7wbywpT56EnRs9pqC5gj-_nT5xX3bLvakmrUPCQ_W40)<!-- width="70%" --> [PublicPrivate.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/AttributeExample.plantUML)
+![Protected](http://www.plantuml.com/plantuml/png/LP3DIWCn58NtUOf3tIXYdR7rfm6b5bouhZjnaKakDfX9XkGEgCFuxCRICNHty_6T0pdhn2fotpgHFgplL5Gjj5CfFJ97s_HCpphuhVqcL69d3K7Rg1s9lOIdJzLsZWO1g2bGIrZFcPmNTZMn8R5YgqTqVUEiXeG9-IBSOp6lbzcuAAc5H1E28-KpFobyAP5s8J8o_YduMcARJ_-UosOlb7Y68P8omRklKQ28DnARrse-hzy67Tek9Cjq9Dp-Dnsq40r5Cd_IPT7kn2WEGsoE9bZjltiwlLTuG5sTPNjDtkInVm40)<!-- width="70%" --> [AttributeExample.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/AttributeExample.plantUML)
 
 ```csharp    AttributeExample
 using System;
@@ -479,14 +464,16 @@ namespace Rextester
     internal const string attribute5 = "Test";
     B attribute6;
     System.Collections.Speciallized.StringCollection attribute7;
+    private int wert;
     Object attribute8{
-      get{return wert;}
+      get{return wert * 10;}
     }
   }
 }
 ```
 
-**Operationen**
+
+#### Operationen
 
 Operationen werden durch  mindestens ihren Nahmen sowie wahlfrei weitere Angaben
 definiert. Folgende Aspekte können entsprechend der UML Spezifikation beschrieben werden:
@@ -501,8 +488,6 @@ Dabei ist die Parameterliste durch folgende Elemente definiert:
 [Übergaberichtung] Name [: Typ] [Multiplizität] [= Vorgabewert][{Eigenschaftswert}]
 ```
 
-#### Operationen
-
 + *Sichbarkeit* ... analog Attribute
 + *Name* ... analog Attribute
 + *Parameterliste* ... Aufzählung der durch die aufrufende Methode übergebenden Parameter, die im folgenden nicht benannten Elemente folgend den Vorgaben, die bereits für die Attribute erfasst wurden:
@@ -516,7 +501,7 @@ Dabei ist die Parameterliste durch folgende Elemente definiert:
 + *Eigenschaftswert* ... Angaben zu besonderen Charakteristika der Operation
 
 
-![Protected](http://www.plantuml.com/plantuml/png/HO_1IiKm44Nt-OeBRleK7xRLJK6eYWlNNOgBs0mIJ2SbcO8QuhURjc1tbzoSCpDz51racPoAdvPd7VI4qUaO7qI2VL-4NaRFW_qXtAYjmFENdcP7IG6uGYe2iME6docKvBckJcjrVRmqbMLixhg3PS4zxavxIe6qyUo-yyfS74nR6B_8ZZNeyBHPVuyVjzL_ttOOohhyWTVwVBvyG_B1K22JovX7gAnwObEk_0C0)<!-- width="70%" --> [PublicPrivate.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/OperationsExample.plantUML)
+![Protected](http://www.plantuml.com/plantuml/png/HO_1IiH044JlynK5NhAAYzdLIq1O5G-UzoWUnfb66oSzeTC1DSHlTpQ1pQtegbT57thpQaERNF_5qddrBKBoVVzWflm-6Bs4B4V-9TouJuw4m1eIkJc4vs_VTeb61-0AOoap3XDoHrfKbhhQdAphzRAhM33lr0rO3FUusongLF8nI_gPJip5okmBamTRi1qQFCsjVslYjZhx-mP7KvOFlDRRxUKRngoHbE9KPXxTv0uaiJpy3m00)<!-- width="50%" --> [OperationsExample.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/OperationsExample.plantUML)
 
 ```csharp    OperationsExample
 using System;
@@ -551,55 +536,46 @@ namespace Rextester
 
 Eine Schnittstelle wird ähnlich wie eine Klasse mit einem Rechteck dargestellt, zur Unterscheidung aber mit dem Schlüsselwort `interface` gekennzeichnet.
 
-![Protected](http://www.plantuml.com/plantuml/png/HO_1IiKm44Nt-OeBRleK7xRLJK6eYWlNNOgBs0mIJ2SbcO8QuhURjc1tbzoSCpDz51racPoAdvPd7VI4qUaO7qI2VL-4NaRFW_qXtAYjmFENdcP7IG6uGYe2iME6docKvBckJcjrVRmqbMLixhg3PS4zxavxIe6qyUo-yyfS74nR6B_8ZZNeyBHPVuyVjzL_ttOOohhyWTVwVBvyG_B1K22JovX7gAnwObEk_0C0)<!-- width="70%" --> [PublicPrivate.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/OperationsExample.plantUML)
+![Protected](http://www.plantuml.com/plantuml/png/NP1D3e9038NtFKMNke0J48BHZOc91p0kIgbnp30aCtNXZtSN5K9nsUzxRvffbPIYNbiFPzS8ieli1O7gf95OaJsbXAjXtBcaanlfklDUM5qNm0MLU28M_4InABOZA4iZfyPV17wrPvxFTzg2aNOrJCnaisp-a1q67IFTlWw6puu07u2uho_2UZYYU6abw8QKUfpSNHPBU44beUdFzmO0)<!-- width="30%" --> [PublicPrivate.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/OperationsExample.plantUML)
+
+Eine alternative Darstellung erfolgt in der LolliPop Notation, die die grafische Darstellung etwas entkoppelt.
+
+![Loolipop](http://www.plantuml.com/plantuml/png/ZP0n3e9044NxESMKK7W22Q7GmaHZOMaibkK3gykIx0wDnhDu62_cOg8anC9fNzwRoHH1b9UXizIQ2goDrnPCnWbyhJJuq7iny8Aj2GBEiiq7vVcDE0wCgmSqS9oie-TLmqYNRsHx1DtEoPr8MnK2hvJ0bSfTU2pjopEq74yCYmvE8bN47CmLIJf9EpmVrIZ-9ytkJzB5jFON_EQ92hWgVkO5)<!-- width="80%" --> [lollipop.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/lollipop.plantUML)
+
 
 ```csharp    OperationsExample
 using System;
 
 namespace Rextester
 {
-  class Example
+
+  interface Sortierliste{
+    void einfuegen (Eintrag e);
+    void loeschen (Eintrag e);
+  }
+
+  class Datenbank : SortierteListe
   {
-    public static void operation1(){
-      // Implementierung
-    }
-    private int operation2 (int param1 = 5)
-    {
-      // Implementierung
-      return value;
-    }
-    protected void operation3 (ref C param3)
-    {
-      // Implementierung
-      param3 = ...
-    }
-    internal B operation4 (out StringCollection param3)
-    {
-      // Implementierung
-      return value;
-    }
+    void einfuegen (Eintrag e) {//Implementierung};
+    void loeschen (Eintrag e) {//Implementierung};
   }
 }
 ```
 
 ### Beziehungen
 
+Die Möglichkeiten der Verknüpfung zwischen Klassen und Interfaces lassen sich wie folgt gliedern:
 
-### Unterschiede zur UML 1.x
-
-1. Ab der Version 2.0 der UML können Klassen innere Klassen besitzen.
-
-2. Schnittstellen können seit der UML 2 auch Attribute besitzen.
-
-2. Im Gegensatz zur UML 1.x gibt es in der UML2 kein Modellelement Attribut mehr. Attribute einer Klasse werden neu als Eigenschaften (engl. property) modelliert. Dieser Ansatz wurde eingeführt, damit das Metamodell der UML2 sowohl Attribute einer Klasse als auch Enden von Assoziationen einheitlich als Eigenschaften modellieren kann.
-
-3. Neben Eigenschaften und Operationen kann eine Klasse in UML2 neu auch über Ports und Signalempfänger als Merkmal verfügen.
+| Beziehung       | Darstellung                                                                                                                                          | Bedeutung                                                                                  |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Generalisierung | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/UmlCd_Generalisierung-1.svg/1024px-UmlCd_Generalisierung-1.svg.png" width="228"> | gerichtete Beziehung zwischen einer generelleren und einer spezielleren Klasse (Vererbung) |
+| Assoziationen   | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/UmlCd_Assoziation-1.svg/1920px-UmlCd_Assoziation-1.svg.png"width="228">                                                                                                                                                   | beschreiben die Verknüpfung allgemein                                                                                           |
+| Komposition/Aggregation   | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Komposition_Aggregation.svg/1920px-Komposition_Aggregation.svg.png"width="228">                                                                                                                                                   | Bildet Beziehungen von einem Ganzen und seinen Teilen ab                                                                                        |
 
 
 ## 4. Beispiele der Woche ...
 
 Einlesen des Beispiels aus der vergangenen Vorlesung unter Umbrello
-
 
 ## Anhang
 
@@ -613,8 +589,7 @@ derivative work: Chris828 (talk) - File:Objektorientieren methoden historie.png 
 
 [WikiDoxygen] https://commons.wikimedia.org/w/index.php?curid=24966914, Doxygen-Beispielwebseite, Autor Der Messer - Eigenes Werk, CC BY-SA 3.0
 
-[StackOverFlow] http://oi43.tinypic.com/2s7dr8y.jpg, StackOverFlow Forum, Autor unbekannt
-
+[VisualParadigm] What is Object Diagram?, https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-object-diagram/, Autor unbekannt
 
 **Autoren**
 

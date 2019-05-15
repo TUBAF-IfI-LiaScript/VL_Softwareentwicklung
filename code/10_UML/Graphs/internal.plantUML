@@ -1,0 +1,24 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+package RoadTraffic <<Folder>> {
+  class Vehicle{
+    - speed: double
+    ~ setSpeed(double speed)
+    + getSpeed(): double
+  }
+}
+
+class Junction{
+  - cars: Traffic::Vehicles[]
+  + SimulateJam()
+}
+
+class Airplane{
+  - heigth : double
+  + Fly()
+}
+
+Junction "1" -- "0:.. "Vehicle : "greift zu auf"
+Airplane -|> Vehicle
+@enduml

@@ -1,5 +1,6 @@
 @startuml
 skinparam classAttributeIconSize 0
+hide circle
 class Example{
    + {static} operation1()
    - operation2(in param1: int = 5): int {readonly}
