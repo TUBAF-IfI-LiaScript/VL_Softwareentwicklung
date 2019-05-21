@@ -236,6 +236,7 @@ Die schmalen Rechtecke, die auf den Lebenslinien liegen, sind Aktivierungsbalken
 | <img src="http://www.plantuml.com/plantuml/png/ZPCn3jim34LtdUBt00NQ8Ok15idGR0K2z0IApTX2PCgGw0w6ZzQj5wiYrqOP1sYM26B8pwTF-fZ4HXbxRuPykjeDbWLdsqMAAdG9taqkYGgUxg4BNYZ9K_Pfb63C8eEFNxVg2Z_gpbjkYRrZHxWzKjZOMjnFAxHstkvRMpFFdm_pRDP0LlsRNC5oPxtiPJO0HR1cL-5k6jftQkXPPXzvFDO0hs0k55DWwnqnXlZxrutO0FismBCeiBmH1lWlEV2A7TYpaa-aMSjuglB_H6CxZKaiD-_IbjcY79fl4to7RnKYReonNfHl7xuWt14QYflc4dljULPAGgubXhSfvMFa1hqJfgudrWxeodEqBO5jtU7aopOlH64Gw1Arx5M-vLSuYielbRFCyrFUMQZul-s_KqeZjoXVePOgAKfatOaTowfofSnEektNKeSzZXhXjzZIbLs2vQaugfHKOJ7gc7_6tly1"> |
 |Alkoholkontrolle.plantUML |
 
+<y
 ## 3. Klassendiagramme
 
 > Ein Klassendiagramm ist eine grafischen Darstellung (Modellierung) von Klassen, Schnittstellen sowie deren Beziehungen.
@@ -562,15 +563,18 @@ namespace Rextester
 }
 ```
 
+
+
 ### Beziehungen
 
 Die Möglichkeiten der Verknüpfung zwischen Klassen und Interfaces lassen sich wie folgt gliedern:
 
-| Beziehung       | Darstellung                                                                                                                                          | Bedeutung                                                                                  |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Generalisierung | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/UmlCd_Generalisierung-1.svg/1024px-UmlCd_Generalisierung-1.svg.png" width="228"> | gerichtete Beziehung zwischen einer generelleren und einer spezielleren Klasse (Vererbung) |
-| Assoziationen   | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/UmlCd_Assoziation-1.svg/1920px-UmlCd_Assoziation-1.svg.png"width="228">                                                                                                                                                   | beschreiben die Verknüpfung allgemein                                                                                           |
-| Komposition/Aggregation   | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Komposition_Aggregation.svg/1920px-Komposition_Aggregation.svg.png"width="228">                                                                                                                                                   | Bildet Beziehungen von einem Ganzen und seinen Teilen ab                                                                                        |
+| Beziehung                             | Darstellung                                                                                                                                          | Bedeutung                                                                                  |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Generalisierung                       | <img src="http://www.plantuml.com/plantuml/png/LOv12W8n40Jlyuh-m7vW3x9NRu8l2CcO7KmcC9diHVsxgoZehMcgw5ww1_DH2wsI654i5gR25uStcEJLaSGukZIbM4BlEB7rfZS2D5IUSNOJpGHipVwQnrSmsO9VXoP-MNWd7RMopJYgSsRROVhXC4ttmsU95jQqNtm2" width="228"> | gerichtete Beziehung zwischen einer generelleren und einer spezielleren Klasse (Vererbung) |
+| Assoziationen (ohne Anpassung)        | <img src="http://www.plantuml.com/plantuml/png/NOun3i9030Hxls8_a0-aIa57oGkEEvDOScp9vz2W_9q0ee1oLpEhdNgMo6rLMgGngaHL9kLR8XqXyv9e4bnJt8YgbjvnTaj_461bvH6N3B7vYBreyn4dtwxAj7_fpHg_QDmz_WnOgSjFjnEzvp4C7vCcjdOSV080"width="228">          | beschreiben die Verknüpfung allgemein                                                      |
+| Assoziationen (navigierbar)  | <img src="http://www.plantuml.com/plantuml/png/1S713SGW30J0lwjm0xHmuZf82n5iWYM39RFqdvcwUIVFT1dMeSsoESJnK1cQzWvgjqIZnHAva3kMblBJ_s58nUfd-WS0" width="128">                 | beschreiben die Verknüpfung allgemein                                                                                           |
+| Assoziation (Komposition/Aggregation) | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Komposition_Aggregation.svg/1920px-Komposition_Aggregation.svg.png"width="228">  | Bildet Beziehungen von einem Ganzen und seinen Teilen ab                                   |
 
 
 ## 4. Beispiele der Woche ...
