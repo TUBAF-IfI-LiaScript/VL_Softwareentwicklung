@@ -9,7 +9,11 @@
 *.cache
 *.txt
 *.odt
+*.csproj
+*.json
 
 
 /code/01_EinordnungCsharp/VS_Example/
 /code/01_EinordnungCsharp/gtkExample/
+/code/09_OOP_CsharpIII/Interface/bin
+/code/09_OOP_CsharpIII/Interface/obj

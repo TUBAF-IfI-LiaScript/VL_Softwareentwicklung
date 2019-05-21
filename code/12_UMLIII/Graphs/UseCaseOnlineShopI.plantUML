@@ -1,0 +1,15 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor Kunde
+
+rectangle Online-Shop {
+
+  Kunde -- (Artikel auswählen)
+  Kunde -- (Anschrift eingeben)
+  Kunde -- (Zahlungsmethode wählen)
+  Kunde -- (Daten für Bezahlung eingeben)
+  Kunde -- (Bestellung absenden)
+
+}
+@enduml
