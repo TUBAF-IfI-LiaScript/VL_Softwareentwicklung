@@ -16,7 +16,7 @@ import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/RE
 --------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/liaScript/CsharpCourse/blob/master/11_UMLII.md
+https://github.com/liaScript/CsharpCourse/blob/master/12_UMLIII.md
 
 Die interaktive Form ist unter diese Link zu finden ->
 [LiaScript Vorlesung 12](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/12_UMLIII.md#1)
@@ -49,9 +49,24 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
 ## Kontrollfragen
 
-*1. Hier stehen jetzt Ihre Fragen ...*
+Nehmen wir an, Sie wollen ein Spiel implementieren und modellieren die Abläufe.
+
+*1. Mit welchem Diagramm lässt sich der Spielablauf darstellen?*
 
 ---------------------------------------------------------------------
+
+*2. Welche Akteure sind bei dieser Anwendung denkbar?*
+
+---------------------------------------------------------------------
+
+*3. Wie bilden Sie folgende Klassen - Held (mit den Methoden kämpftGegen(), heilt() und läuft()), Zwerg (alle Methoden von Held und trinkt()) und Oger (alle Methoden von Held, überschreibt aber heilt()) in einem Klassendiagramm ab?*
+
+---------------------------------------------------------------------
+
+*4. Was sind Kardinalitäten in der UML Darstellung*
+
+---------------------------------------------------------------------
+
 
 ## 1. Beispielszenario UML-Modellierung  
 
@@ -92,8 +107,7 @@ Nach welchen Aspekten lassen die Anforderungen des Kunden strukturieren:
 + Datenformate und -inhalte "Die Rechnungsadresse besteht aus Anrede ..."
 + Verhalten
      - Kundensicht - "Kunden dürfen wählen"
-     - Betreibersicht - "Diese [Versandkosten] fallen ja nach
-Land unterschiedlich hoch aus"
+     - Betreibersicht - "Diese [Versandkosten] fallen ja nach Land unterschiedlich hoch aus"
 + Systemparameter
 
 ### Use-Case Diagramm
@@ -181,11 +195,12 @@ Das Anforderungsset des Kunden beschreibt 3 Zahlungsmethoden für die Abbrechnun
 
 Was bisher fehlte, war der Distributor, der, wie in unserem Use-Case Diagramm modelliert, per Benutzername und Kennwort auf den Online-Shop zugreifen möchte, um Bestell- und Kundendaten herunterzuladen. Die Klasse Distributor ist entsprechend mit den Klassen Bestellung und Land verknüpft. Diese Assoziationen drücken aus, dass der Distributor auf beliebig viele Bestellungen zugreifen kann und für mindestens ein Land verantwortlich ist, in das er Bestellungen auszuliefern hat. Die Klasse Format umfasst die Methoden zur Generierung der Ausgabeformate für die Daten, da davon ausgegangen wird, die dass die weitere Bearbeitung mit alternativen Programmen realisiert wird.
 
-![](http://www.plantuml.com/plantuml/png/TP51IyH038Nl-HLXZmjTz2eYkui8WdXGKF2MJhETqEcCPDBBue-tTLkxrFMOzvBl9JFRRAJMjG5o8_6Jb5fqWNBUcQcKdV6ZI_5LZenN4FXWQ0bLQczOYR8pIH6yL8nEr0K6-9d6dPeq7CRgdPHZaxGSwprdun2wM8_2lUHJND894BFpAWS3AdkFdE79-20_3EQMpQUAn_OdYXN0pCLrSOTpxiAPwNY3AonUsFauG6dILmXpJz5F306zL7EPJi9uuG2utcpMAvY4swBuFtYv_JFroUHRxfbVVso4jwJKvOPoljm1UueDIpnszMN_x6L_xvXtNheFILkofNp-NrkELTU6Rm00)<!-- width="90%" -->   
+![](http://www.plantuml.com/plantuml/png/RP51IyD048Nl-ok67WjRz2fIcYA281uK5BnDDcDtoMPMPcOlfJzUIsW3IQ_lUxmtZzcfeLWTijC-yIyA3X0ogZPcajfgz18AVwGZmPsBgIC8IK8cvx1L4mmssk4ROwvyq84ibexSgBuYTyxjIOto6SFQRm6-K8Zx8ksSDAmXIlenU80L-7SAaS-XUD5Nu2QFzzkneE43jMKK6h7KKpu7t6yswzMbmkX27hrVNZ1XVxg6pC-RRtp341dZGF_DfmK6zra4g_QeUjlXziWz9JxMmst-b7JyGf7hscdPd3uN6T0MyZJ2xOYxEkG_)<!-- width="100%" -->   
 
 ## 2. Verwendung von Klassendiagrammen unter Microsoft Studio
 
-
+vgl. Vorgehen auf dem Foliensatz von Herrn Dr. Reinhardt (Vorlesung "Softwareentwicklung SoSe 2018")
+[Link](https://github.com/liaScript/CsharpCourse/blob/master/documents/FolieReinhardt_VSExample.pdf)
 
 
 ## Anhang
@@ -196,4 +211,4 @@ Was bisher fehlte, war der Distributor, der, wie in unserem Use-Case Diagramm mo
 
 **Autoren**
 
-Sebastian Zug, André Dietrich
+Sebastian Zug, André Dietrich, Jören Hochmann, Benjamin Kobisch

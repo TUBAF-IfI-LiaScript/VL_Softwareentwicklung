@@ -49,13 +49,19 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
 ## Kontrollfragen
 
-*1. Welche Sichtbarkeitsattribute können struct-Memberfunktionen in ihrer Sichtbarkeit spezifizieren und was bedeuten sie?*
 
---------------------------------------------------------------------
-
-*2. Hier stehen jetzt Ihre Fragen ...*
+*1. Welche Aspekte lassen sich mit einem Aktivitätsdiagramm modellieren? Welche Elemente umfasst dieser Diagrammtyp?*
 
 ---------------------------------------------------------------------
+
+*2. Was beschreibt ein Sequenzdiagramm?*
+
+---------------------------------------------------------------------
+
+*3. Welche Komponenten lassen sich in einem Klassendiagramm darstellen?*
+
+---------------------------------------------------------------------
+
 
 ## 1. Fortsetzung Verhaltensdiagramme
 
@@ -597,4 +603,5 @@ derivative work: Chris828 (talk) - File:Objektorientieren methoden historie.png 
 
 **Autoren**
 
-Sebastian Zug, André Dietrich
+
+Sebastian Zug, André Dietrich, Maximilian Schwabe, Carina Lenoth

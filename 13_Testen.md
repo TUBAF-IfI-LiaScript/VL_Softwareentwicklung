@@ -570,6 +570,9 @@ Nachteil:
 
 Die wichtigsten Tools unter C# sind xUnit, nunit, MSTest. Einen guten Überblick zum Vergleich der Schlüsselworte liefert [Link](http://www.anarsolutions.com/automated-unit-testing-tools-comparison/)
 
+> Demo zur Anwendung des Testing-Frameworks unter Visual Studio
+
+
 ## Anhang
 
 **Referenzen**
