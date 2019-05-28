@@ -234,15 +234,15 @@ geben, die eine entsprechende Gliederung und Zuordnung erlaubt:
 
 | Tag           | Erlärung                                                                              |
 | ------------- | ------------------------------------------------------------------------------------- |
-| `<summary>`   | Umfasst kurze Informationen über einen Typ oder Member.                               |
-| `<remarks>`   | Ergänzt weiterführende Informationen zu Typen und Membern.                            |
-| `<returns>`   | Beschreibt den Rückgabewert einer Methode                                             |
-| `<value>`     | Beschreibt Bedeutung einer Eigenschaft                                                |
-| `<example>`   | Ermöglicht mit `<code>` die Einbettung von (Code-)Beispielen.                         |
-| `<para>`      | Ermöglicht die Beschreibung der Eingabeparameter einer Methode                        |
-| `<c>`         | Indikator für Inline-Codefragmente                                                    |
-| `<exception>` | Erlaubt die Beschreibung möglicher Exceptions, die in einer Methode auftreten können. |
-| `<see>`       | Klickbare Links in Verbindung mit `<cref>`                                             |
+| `〈summary〉`   | Umfasst kurze Informationen über einen Typ oder Member.                               |
+| `〈remarks〉`   | Ergänzt weiterführende Informationen zu Typen und Membern.                            |
+| `〈returns〉`   | Beschreibt den Rückgabewert einer Methode                                             |
+| `〈value〉`     | Beschreibt Bedeutung einer Eigenschaft                                                |
+| `〈example〉`   | Ermöglicht mit `〈code〉` die Einbettung von (Code-)Beispielen.                         |
+| `〈para〉`      | Ermöglicht die Beschreibung der Eingabeparameter einer Methode                        |
+| `〈c〉`         | Indikator für Inline-Codefragmente                                                    |
+| `〈exception〉` | Erlaubt die Beschreibung möglicher Exceptions, die in einer Methode auftreten können. |
+| `〈see〉`       | Klickbare Links in Verbindung mit `〈cref〉`                                             |
 
 Was lässt sich damit umsetzen?
 
@@ -437,7 +437,7 @@ ausgehend von einer Veränderung, eine bestimmte Folge von Aktionen auslösen.
 Ausgangspunkt für diese Aktionen können unterschiedliche Quellen sein (vgl.
 Generierung der Dokumentation in obriger Tabelle).
 
-**dotnet**
+### dotnet
 
 `dotnet` ist ein Tool für das Verwalten von .NET-Quellcode und Binärdateien. Das
 Programm stellt Befehle zur Verfügung, die bestimmte Aufgaben erfüllen, die zudem
@@ -461,7 +461,7 @@ cd MyExcelGenerator
 cat MyExcelGenerator.csproj
 dotnet add package EPPlus
 cat MyExcelGenerator.csproj
-... Program.cs anpassen ...
+... Program.cs anpassen ... siehe Codebeispiel im Codeordner
 dotnet build
 dotnet run
 soffice -calc myworkbook.xlsx
@@ -471,14 +471,72 @@ soffice -calc myworkbook.xlsx
 zurückzugreifen) standardisiert aber den Erstellungs- und Testprozess, sowie das
 Pakethandling!
 
-**MSBuild**
+### MSBuild
 
-TODO
+MSBuild ist Build-Tool, das insbesondere für das Erstellen von .NET-basierten
+Anwendungen genutzt wird. Microsofts Visual Studio ist in wesentlichem Maße von
+MSBuild abhängig; MSBuild selbst ist aber nicht von Visual Studio abhängig.
+Dadurch lassen sich mit MSBuild auch Visual-Studio-Projekte ohne den Einsatz von
+Visual Studio bauen.
 
+Im Wesentlichen besteht MSBuild aus der Datei `msbuild.exe` und dll-Dateien, die
+auch im .NET Framework enthalten sind, und XML-Schemas, nach deren Vorgaben die
+von msbuild.exe verwendeten Projektdateien aufgebaut sind. Wegen der
+XML-Basiertheit wird MSBuild auch als Auszeichnungssprache eingeordnet.
 
-Die Ausführung von dotnet build entspricht dotnet msbuild -restore -target:Build.
+```
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="A">
+    <Message Text="Hello World!"/>
+  </Target>
+</Project>
+```
 
-**Make**
+Innerhalb der xml-Struktur definieren Sie sogenannte Targets als Einsprungpunkte
+für den Erstellungsprozess. Im Beispiel sind dies zunächst nur HelloWorld-Ausgaben,
+im Weiteren wirde dies auf konkrete Kompiliervorgänge ausgeweitet.
+
+Ein spezifisches Target kann mit `msbuild filename /t:targetname` aufgerufen
+werden.
+
+```
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="A">
+    <Message Text="Hello World! A"/>
+  </Target>
+    <Target Name="B" DependsOnTargets="A">
+    <Message Text="Hello World! B"/>
+  </Target>
+</Project>
+```
+
+Ein minimales Konfigurationsfile für die Build-Prozess einer einzelnen C# Datei
+könnte folgende Konfiguration haben:
+
+```
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Include="helloworld.cs" />
+  </ItemGroup>
+  <Target Name="Build">
+    <Csc Sources="@(Compile)"/>  
+  </Target>
+</Project>
+```
+
+Ein Beispiel für eigene Experimente findet sich unter
+
+https://github.com/liaScript/CsharpCourse/tree/master/code/14_Tools/msbuildProject
+
+Die zuvor besprochenen dotnet Befehle bauen auf MSBuild auf und kapseln diese.
+Die Ausführung von `dotnet build` entspricht `dotnet msbuild -restore -target:Build`.
+
+Arbeiten Sie auch die Dokumentation von MSBuild durch, diese stellt auch das umfangreiche
+Featureset (vordefinierte Targets, integierte Tools, die Möglichkeit externe Anwendungen einzubetten) vor, das deutlich über die Beispiele hinausgeht.
+
+https://docs.microsoft.com/de-de/visualstudio/msbuild/msbuild?view=vs-2019
+
+###Make
 
 `make` wird  beispielsweise, um in Projekten, die aus vielen verschiedenen
 Dateien mit Quellcode bestehen, automatisiert alle Arbeitsschritte (Übersetzung,
@@ -537,7 +595,10 @@ clean:
 
 Das Hilfsprogramm make ist Teil des POSIX-Standards.
 
-Beispielhafte Implementierung im Projekt des Tages.
+Beispielhafte Implementierung eines Makefiles, dass die oben genannten Tools
+kombiniert, findet sich im Projekt des Tages.
+
+https://gitlab.com/Sebastian_Zug/CsharpCIExample
 
 ## Anhang
 
