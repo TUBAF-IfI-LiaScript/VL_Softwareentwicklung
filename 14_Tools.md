@@ -89,7 +89,7 @@ gezeigt. Dieses ist in zwei Teilprojekte aufgeteilt, einmal für das eigentliche
 └── text.txt
 ```
 
-![CsharpCIExample](http://www.plantuml.com/plantuml/png/VP51Ry8m38Nl-HK-WYRGpXmGi6aIXurf8EriKW-YfacLf4Eiwt-VcpLQeHEtsE_bytEoy05Tg0ejVAvCYGuBa1gzNuRWrBuAj9RMRDKNmRqugen0AYSr2L6YpF50i3IgGErh4Q_1AuLQ04oWfF221SrWoo1puDuTYnSzI4q_KWPCJnb7fSQz3mvbQ627Ej_PpScG6uqlc5jDL4R0qLREps1r3ZI6sQTLcMY4I0pupRVk0Wx3r8umsnXzRg9yDT57Kmli5dt0o64dd_x9VuEH48_sq27uT1CnM3nkJkZaaSidwpX3Aw-irSnl1j-p8n_wVzJLANzloXk5oXd_JFR4nFYAAUBGzMxjHtB5iOo6wNGUdram62QJxpcq1T__Ar82xinv_bM3hM919giA_GC0)<!-- width="60%" -->
+![CsharpCIExample](http://www.plantuml.com/plantuml/png/VP51Ry8m38Nl-HK-WYRGpXmGi6aIXurf8EriKW-YfacLf4Eiwt-VcpLQeHEtsE_bytEoy05Tg0ejVAvCYGuBa1gzNuRWrBuAj9RMRDKNmRqugen0AYSr2L6YpF50i3IgGErh4Q_1AuLQ04oWfF221SrWoo1puDuTYnSzI4q_KWPCJnb7fSQz3mvbQ627Ej_PpScG6uqlc5jDL4R0qLREps1r3ZI6sQTLcMY4I0pupRVk0Wx3r8umsnXzRg9yDT57Kmli5dt0o64dd_x9VuEH48_sq27uT1CnM3nkJkZaaSidwpX3Aw-irSnl1j-p8n_wVzJLANzloXk5oXd_JFR4nFYAAUBGzMxjHtB5iOo6wNGUdram62QJxpcq1T__Ar82xinv_bM3hM919giA_GC0)<!-- width="40%" -->
 
 
 ## 1. Dokumentation
@@ -195,7 +195,7 @@ Unter C\# wird hinsichtlich der Darstellung zusätzlich zwischen Kommentaren mit
 `//` oder `/*  */` und Dokumentationsinhalten unterschieden, die mit `///`
 eingeleitet werden.
 
-```csharp    Upcast
+```csharp    Dokumenation
 using System;
 
 // Eine zweielementige Vektorklasse ohne Methoden
@@ -380,14 +380,14 @@ gezeigt. Dabei werden zwei Verbesserungen der Darstellung realisiert.
    Anpassung des entsprechenden Eintrages von `NO` auf `YES`.
 
 ```
- # If the SOURCE_BROWSER tag is set to YES then a list of source files will be
- # generated. Documented entities will be cross-referenced with these sources.
- #
- # Note: To get rid of all source code in the generated output, make sure that
- # also VERBATIM_HEADERS is set to NO.
- # The default value is: NO.
+# If the SOURCE_BROWSER tag is set to YES then a list of source files will be
+# generated. Documented entities will be cross-referenced with these sources.
+#
+# Note: To get rid of all source code in the generated output, make sure that
+# also VERBATIM_HEADERS is set to NO.
+# The default value is: NO.
 
- SOURCE_BROWSER         = NO
+SOURCE_BROWSER         = NO
 ```
 
 3. Integration des Projektfiles README.md in die Dokumentation.
@@ -560,7 +560,7 @@ typisches Makefile für eine eingebettetes C Projekt (Arduino) stellt sich wie
 folgt dar:
 
 ```console
- # Source, Executable, Includes, Library Defines
+# Source, Executable, Includes, Library Defines
 INCL   = loop.h defs.h
 SRC    = a.c b.c d.c      # c Code-Dateien
 OBJ    = $(SRC:.c=.o)
@@ -574,19 +574,19 @@ LIBPATH = -L.
 LDFLAGS = -o $(EXE) $(LIBPATH) $(LIBS)
 RM      = /bin/rm -f
 
- # Compile and Assemble C Source Files into Object Files
+# Compile and Assemble C Source Files into Object Files
 %.o: %.c
        $(CC) -c $(CFLAGS) $*.c
 
- # Link all Object Files with external Libraries into Binaries
+# Link all Object Files with external Libraries into Binaries
 $(EXE): $(OBJ)
        $(CC) $(LDFLAGS) $(OBJ)
 
- # Objects depend on these Libraries
+# Objects depend on these Libraries
 $(OBJ): $(INCL)
 
 
- # Clean Up Objects, Exectuables, Dumps out of source directory
+# Clean Up Objects, Exectuables, Dumps out of source directory
 clean:
        $(RM) $(OBJ) $(EXE) core a.out
 ```
