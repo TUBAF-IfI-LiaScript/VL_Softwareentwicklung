@@ -9,7 +9,6 @@
 *.cache
 *.txt
 *.odt
-*.csproj
 *.json
 
 
