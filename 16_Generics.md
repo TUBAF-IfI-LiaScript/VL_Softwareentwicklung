@@ -215,6 +215,11 @@ Generische Klassen und Methoden vereinen Wiederverwendbarkeit, Typsicherheit und
 
 ### Vererbung bei generischen Typen
 
+In der UML werden generische Typen über eine sepeate Box in der oberen linken Ecke
+der Klassendarstellung im Klassendiagramm realisiert.
+
+![UseCaseOnlineShopII](http://www.plantuml.com/plantuml/png/BSqn2i9048NXVaunfNOUG2I2ZNLEC6uUEBYxaPaN2yMx6yNoUppuXwG5brObRzxl5jQqLCiyak6NXJYNkO_-XExawXEqU9GAaTzBHt1_Cjf1NwBgFH7SV8Vjoa2R7_ZpBGFwj9O-)<!-- width="30%" -->
+
 Generischen Typen können wie andere Typen von einer Klasse erben und Interfaces
 Implementieren. Die Basisklassen können dabei selbst wieder generische sein.
 
