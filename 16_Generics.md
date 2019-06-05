@@ -48,13 +48,50 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
 ## Kontrollfragen
 
-*1. Hier stehen jetzt Ihre Fragen ...*
+*1. Welche Möglichkeiten eröffnen generische Datentypen?*
+
+Generische Klassen und Methoden vereinen Wiederverwendbarkeit, Typsicherheit und
+Effizienz.
+
+*2. Wie werden generische Datentypen in C# umgesetzt?*
+
+```
+public class LinkedList<T>{
+  public void Add(T value){...}
+  public T this[int index]{...}
+}
+
+LinkedList <float> list1= new LinkedList<float>(3.14);
+LinkedList <ExampleClass> list1= new LinkedList<ExampleClass>(myExampleClass);
+```
+
+*3. Welche Probleme können bei der Verwendung generischen Typen entstehen?*
+
+*4. Welche Bedingungen sind bei der Vererbung von generischen Typen zu beachten?*
+
+*5. Welche Aufgabe haben die Beschränkungen? Welche Prüfungen lassen sich damit beispielsweise umsetzen?*
+
+*6. Wie werden generische Typen in UML-Klassendiagrammen dargestellt?*
+
 
 ---------------------------------------------------------------------
+## 0. Realisierung von CI Techniken unter GitLab
+
+https://gitlab.com/Sebastian_Zug/CsharpCIExample
+
+Da mit der Version
+
+https://gitlab.com/Sebastian_Zug/CsharpCIExample/commit/917ace1650739813049dcfef5cd8cdb20f0c3959
+
+ein fehlerhafter Test implementiert wurde, scheiterte dessen automatische
+Evaluation.
+
+https://gitlab.com/Sebastian_Zug/CsharpCIExample/-/jobs/224741162
+
 
 ## 1. Motivation
 
-Nehmen wir an, dass Sie ohne die entsprechenden .NET-Bibliotheken eine Liste für `int`-Werte imlementieren sollen.
+Versuchen wir nach dem Exkurs zur UML Modellierung und den Werkzeugen, den roten Faden der C# Programmierung wieder aufzunehmen. Nehmen wir an, dass Sie ohne die entsprechenden .NET-Bibliotheken eine Liste für `int`-Werte implementieren sollen.
 
 ```csharp  
 using System;
@@ -269,14 +306,14 @@ using System;
 namespace Rextester
 {
     public class Program{
-      static int Equal<Element>(Element x, Element y){
+      static int Plus<Element>(Element x, Element y){
          return (x + y);
       }
 
       public static void Main(string[] args){
         int a = 1;
         int b = 2;
-        Console.WriteLine(Equal<int>(a, b));   
+        Console.WriteLine(Plus<int>(a, b));   
         }
     }
 }
@@ -294,6 +331,10 @@ beschränken. Man definiert Beschänkungen oder *Constraints*, die die Breite de
 | `where T : <Schnittstelle>` | ... die Schnittstelle sein oder diese  implementieren.  |
 
 
+Das folgende Beispiel setzt die Möglichkeiten der Beschränkung konsequent um und lässt nur
+`Employee` selbst oder abgeleitete Typen zu. Damit wird sichergestellt, dass die Methoden,
+die in GenericList verwendet werden, im Parametertypen auch existieren.
+
 ```csharp          Constraints
 public class Employee
 {
@@ -309,190 +350,6 @@ public class GenericList<T> where T : Employee {
 }
 ```
 
-## 3. Generische Methoden
-
-                                {{0-1}}
-********************************************************************************
-```csharp      GenericMethod
-using System;
-
-namespace Rextester
-{
-    public class Program{
-
-      // Tauscht zwei Variablen lhs und rhs
-      static void Swap<T>(ref T lhs, ref T rhs)
-      {
-           T temp;
-           temp = lhs;
-           lhs = rhs;
-           rhs = temp;
-      }
-
-      public static void Main(string[] args){
-            int a = 99;
-            int b = 1;
-        //    ^
-        //    ------ Abstimmung der Typen
-        //    v
-            Swap<int>(ref a, ref b);
-            System.Console.WriteLine("a=" + a + " ,b=" + b);
-        }
-    }
-}
-```
-@Rextester.eval(@CSharp)
-
-Sie können das Typargument auch weglassen, der Compiler löst den Typ entsprechend auf. Eine Einschränkung oder ein Rückgabewert genügen ihm zur Ableitung des Typparameters nicht. Damit ist ein Typrückschluss bei Methoden ohne Parameter nicht möglich! Damit bewirken:
-
-```csharp      
-Swap<int>(ref a, ref b);  // und
-Swap(ref a, ref b);
-```
-
-einen analogen Aufruf.
-
-********************************************************************************
-                                     {{1-3}}
-********************************************************************************
-
-Welches Problem sehen Sie in folgendem Code-Fragment, bei dem eine generische Methode in einer  
-
-```csharp    
-class SampleClass<T>
-{
-    void Swap(ref T lhs, ref T rhs) { }
-}
-```
-
-********************************************************************************
-                                     {{2-3}}
-********************************************************************************
-
-
-Wenn eine generische Methode definiert wird, die die gleichen Typparameter wie die übergeordnete Klasse verwendet (hier `T`), gibt der Compiler die Warnung CS0693 aus. Innerhalb des Gültigkeitsbereichs der Methode
-wird der "äußere Klassentyp" durch den "inneren Methodentyp" ausgeblendet. Damit soll der Entwickler, der ggf. zwei unterschiedliche Typen avisiert darauf hingewiesen werden, dass diese hier keine Berücksichtung finden.
-
-
-```     .NET Dokumentation
-Compilerwarnung (Stufe 3) CS0693
-
-Der Typparameter "Typparameter" hat denselben Namen wie der Typparameter des
-äußeren Typs "Typ".
-
-Dieser Fehler tritt bei einem generischen Member, z. B. einer Methode in einer
-generischen Klasse, auf. Da der Typparameter der Methode nicht notwendigerweise
-mit dem Typparameter der Klasse übereinstimmt, können Sie ihm nicht den gleichen
-Namen geben. Weitere Informationen finden Sie unter Generic Methods (Generische
-Methoden).
-
-Um diese Situation zu vermeiden, verwenden Sie für einen der Typparameter einen
-anderen Namen.
-
-```
-********************************************************************************
-
-
-                                     {{3-4}}
-********************************************************************************
-
-Verwenden Sie Beschränkungen, analog zu den generischen Typen, sinnvolle Einschränkungen für die Typparametern in Methoden gewährleisten. Das folgende Beispiel gibt als Beschränkung die Implementierung des Interfaces IComparable<T> an, um unseren Vergleich zu realisieren.
-
-```csharp      IComparable
-using System;
-
-namespace Rextester
-{
-    public class Program{
-
-      static void SwapIfGreater<T>(ref T lhs, ref T rhs) where T : System.IComparable<T> {
-          T temp;
-          if (lhs.CompareTo(rhs) > 0)
-          {
-              temp = lhs;
-              lhs = rhs;
-              rhs = temp;
-          }
-      }
-
-      public static void Main(string[] args){
-            int a = 99;
-            int b = 1;
-            SwapIfGreater<int>(ref a, ref b);
-            System.Console.WriteLine("a=" + a + " ,b=" + b);
-        }
-    }
-}
-```
-@Rextester.eval(@CSharp)
-
-Was verbirgt sich hinter dem Interface `IComparable`? Werfen Sie einen Blick auf die
-entsprechende Dokumentation und benennen Sie die Methoden, die in Klassen, die dieses
-Interface implementieren, exisitieren müssen.
-
-https://docs.microsoft.com/de-de/dotnet/api/system.icomparable?view=netframework-4.8
-
-```csharp      IComparable
-using System;
-
-namespace Rextester
-{
-    public class Animal : IComparable {
-      private int size;
-      private int weight;
-
-      public Animal(int size, int weight){
-        this.size = size;
-        this.weight = weight;
-      }
-
-      public int Size{
-        get { return size;}
-      }
-
-      public int Weight{
-        get { return weight;}
-      }
-
-      public override string ToString(){
-        return "size " + size + " weight " + weight;
-      }
-
-      public int CompareTo (object obj){
-        if (obj == null) return 1;
-        else {
-          Animal otherAnimal = obj as Animal;
-          return (otherAnimal.size - size);
-        }
-      }
-    }
-
-    public class Program{
-
-      static void SwapIfGreater<T>(ref T lhs, ref T rhs) where T : System.IComparable{
-          T temp;
-          if (lhs.CompareTo(rhs) > 0)
-          {
-              temp = lhs;
-              lhs = rhs;
-              rhs = temp;
-          }
-      }
-
-      public static void Main(string[] args){
-            Animal AnimalA = new Animal(30, 10);
-            Console.WriteLine(AnimalA);
-            Animal AnimalB = new Animal(230, 3);
-            Console.WriteLine(AnimalB);
-
-            SwapIfGreater<Animal>(ref AnimalA, ref AnimalB);
-            Console.WriteLine(AnimalA);
-            Console.WriteLine(AnimalB);
-        }
-    }
-}
-```
-@Rextester.eval(@CSharp)
 
 ********************************************************************************
 

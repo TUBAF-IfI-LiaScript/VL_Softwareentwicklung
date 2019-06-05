@@ -48,8 +48,17 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
 ## Kontrollfragen
 
-*1. Hier stehen jetzt Ihre Fragen ...*
+*1. Welche Aufgaben realisiert die Versionsverwaltung?*
 
+*2. Was unterscheidet die pessimistische von der optimistischen Versionsverwaltung?*
+
+*3. Wann entsteht beim Mischen von Versionen ein Konflikt?*
+
+*4. In welcher Idee unterscheiden sich zentrale und dezentrale Versionsverwaltungssysteme? Nennen Sie Beispiele!*
+
+*5. Wann ist es sinnvoll mit Branches zu arbeiten?*
+
+*6. Welche Elemente umfasst die Idee der Continuous Integration (CI)?*
 ---------------------------------------------------------------------
 
 ## 0. Beispielprojekt

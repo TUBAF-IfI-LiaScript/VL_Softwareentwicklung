@@ -48,7 +48,22 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
 ## Kontrollfragen
 
-*1. Hier stehen jetzt Ihre Fragen ...*
+*1. Welche Fehlertypen können vom Compiler erkannt werden?*
+
+Ein lexikalischer Fehler liegt dann vor, wenn Sie im Programm eine Typo
+einbauen. Vone einem syntaktischen Fehler wird gesprochen, wenn die Worte zwar
+korrekt aber falsch angeordnet sind. Beide Fälle können vom Compiler
+identifiziert werden.
+
+*2. Auf welchen Ebenen sollten Tests in den Projektentwicklung integriert werden?*
+
++ Modultests (isolierte Evaluation einzelner Teile des Projektes)
++ Integrationstests (übergreifende Tests zwischen Modulen)
++ Systemtests (ganzheitliche Untersuchung der Anwendung)
+
+*3. Welcher Ablauf wird bei Unittests realisiert*
+
+Entwerfen von Testfällen --> Erstellen von Testdaten --> Testausführung --> Vergleich der erwarteten und Testergebnisse --> Protokollierung und Dokumentation
 
 ---------------------------------------------------------------------
 

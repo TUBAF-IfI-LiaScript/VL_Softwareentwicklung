@@ -290,7 +290,6 @@ Use-Case Diagrammer erlaube die Abstraktion von Elementen auf der Basis von Gene
 [Possel] Heiko Possel, https://www.programmwechsel.de/lustig/management/schaukel-baum.html
 
 [Jeckle]  Mario Jeckle, Christine Rupp, Jürgen Hahn, Barbara Zengler, Stefan Queins, UML 2 glasklar, Hanser Verlag, 2004
-von
 
 [WikiUMLHistory] https://commons.wikimedia.org/w/index.php?curid=7892951, Autor GuidoZockoll, Mitarbeiter der oose.de Dienstleistungen für Innovative Informatik GmbH -
 derivative work: File:OO-historie.svg : AxelScheithauer, oose.de Dienstleistungen für Innovative Informatik GmbH -
