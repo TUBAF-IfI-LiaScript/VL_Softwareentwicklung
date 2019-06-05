@@ -19,9 +19,9 @@ class SortedList <K, V>  #green
 class SortedDict <K, V>  #green
 
 IEnumerable *-> IEnumerator
-ICollection --> IEnumerable
-IDictionary --> ICollection
-IList --> ICollection
+ICollection --|> IEnumerable
+IDictionary --|> ICollection
+IList --|> ICollection
 
 Dictionary ..|> IDictionary
 SortedDict ..|> IDictionary

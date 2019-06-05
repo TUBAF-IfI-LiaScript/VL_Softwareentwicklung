@@ -10,15 +10,15 @@ import: https://raw.githubusercontent.com/LiaTemplates/Rextester/master/README.m
 import: https://raw.githubusercontent.com/LiaTemplates/WebDev/master/README.md
 -->
 
-# Vorlesung Softwareentwicklung - 16 - Generics
+# Vorlesung Softwareentwicklung - 17 - Generics II
 
 --------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/liaScript/CsharpCourse/blob/master/16_Generics.md
+https://github.com/liaScript/CsharpCourse/blob/master/17_GenericsII.md
 
 Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 16](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/16_Generics.md#1)
+[LiaScript Vorlesung 17](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/17_GenericsII.md#1)
 
 ---------------------------------------------------------------------
 
@@ -455,9 +455,10 @@ Programmiersprachen  und sind wegen der häufigen Verwendung Bestandteil der
 entsprechenden Bibliotheken. An dieser Stelle sollen zunächst einzelne
 Datenstrukturen gegenübergestellt werden.
 
-Folgendes Klassendiagramm zeigt die Generischen
+Folgendes Klassendiagramm zeigt die Teile der in C# implementierten Collection-Types
+und deren Relationen zu den entsprechenden Interfaces.
 
-![Collections](http://www.plantuml.com/plantuml/png/TP5FImCn4CNlyoa2tiGMFy2oLFm3nNgGYlSqEzfXiubC9WV53s_DjcNOT6_3-xrv36zMIInB7ZoadiANPJiOvsrATo9CkoouTZ5iwGVDBUofG-E8dSTnVa7PnswSdmXz1r2MpVenv07PIcJJlBMcQIW8yeTrsBPcOjfvh4qdpttq7frG3FEU3IKfz39-eB9l-TiqppVcVPfoz9rJhZuPCHpLrumPQtahrlMrlA7GOtSvgJvZ4XbPJhlp_91IST1DNYzQNJ_e1XS7fhoWgYbCUQ6qMgcWDfRBtrQt2-h26LOoAwRK_n5KYqeTFr44VL7vH2slC7Hvy7y0)<!-- size="350px" -->
+![Collections](http://www.plantuml.com/plantuml/png/VP5FIyD04CNlyoaMl8afVe0GAlw1OZr8nVjsCzeXcrsPp1uKFxma4tN9jhqDx_VcCRnP3s9PKkzXw2XyMBQzSTuEmuq8qpu9RbmCE_f2Smq7Qj4uOkTHvoUKGsnrVY3qBS2qR3Rt8VN8LYAR-gKnTKr1aD-imwOn2zFUOsdwzTn6xz49nN3QiwL19deStz6qR_dJr8zNvdMPCll-KYxU6J7CwdF2XAMy4-kwKjvIwB0zdbIUiOYCBBfxZeyfImvvavTLazSFUODLzQrmDaFMZSBC3Tfh8KEsirgDy5-0xCWJR0mjMQQE8sYHIrMVeK9saJwZaDSOsjJx7m00)<!-- size="350px" -->
 
 | Schnittstelle | Spezifizierte Funktionen        |
 | ------------- | ------------------------------- |
