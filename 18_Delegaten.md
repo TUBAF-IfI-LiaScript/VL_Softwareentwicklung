@@ -18,7 +18,7 @@ Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 https://github.com/liaScript/CsharpCourse/blob/master/18_Delegaten.md
 
 Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 17](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/18_Delegaten.md#1)
+[LiaScript Vorlesung 18](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/18_Delegaten.md#1)
 
 ---------------------------------------------------------------------
 
@@ -516,7 +516,6 @@ namespace Rextester
         // gleichermaßen aber auch mit impliziter Typauswahl möglich
         // Utility.Transform(values, Square);
         printArray(values);
-
       }
     }
 }
@@ -550,6 +549,59 @@ delegate void Action<in T1>(T1 arg1);
 delegate void Action<in T1, in T2>(T1 arg1, T2);
 delegate void Action<in T1, in T2, in T3>(T1 arg1, T2 arg2, T3 arg3);
 ```
+
+Im folgenden Beispiel wir die Anwendung illustriert. Dabei werden 3 Delegates
+genutzt um die Funktionen `PrintHello` und `Square()` zu referenzieren.
+
+| Delegate-Variante | Bedeutung                                                                  |
+| ----------------- | -------------------------------------------------------------------------- |
+| myOutput          | C#1.0 Version mit konkreter Methode und individuellem Delegaten (Zeile 8) |
+| myActionOutput    | Generischer Delegatentyp ohne Rückgabewert                                 |
+| myFuncOutput                  |    Generischer Delegatentyp mit Rückgabewert                                                                        |
+
+
+```csharp           ActionUndFunc
+using System;
+using System.Reflection;
+using System.Collections.Generic;
+
+namespace Rextester
+{
+
+    public delegate void Output(string text);
+
+    public class Program{
+
+      static void PrintHello(string text){
+          Console.WriteLine(text);
+      }
+
+      static int Square(int x){
+          Console.WriteLine("This is method Square(int x)");
+          return x*x;
+      }
+
+      static float Square(float x){
+          Console.WriteLine("This is method Square(float x)");
+          return x*x;
+      }
+
+      public static void Main(string[] args){
+         Output myOutput = PrintHello;
+         myOutput("Das ist eine Textausgabe");
+
+         Action<string> myActionOutput = PrintHello;
+         myActionOutput("Das ist eine Action-Testausgabe!");
+
+         Func<float, float> myFuncOutput = Square;
+         Console.WriteLine(myFuncOutput(5));
+      }
+    }
+}
+```
+@Rextester.eval(@CSharp)
+
+
 
 ## Anhang
 
