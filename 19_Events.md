@@ -15,10 +15,10 @@ import: https://raw.githubusercontent.com/LiaTemplates/WebDev/master/README.md
 --------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/liaScript/CsharpCourse/blob/master/18_DelegatenUndEvents.md
+https://github.com/liaScript/CsharpCourse/blob/master/19_Events.md
 
 Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 17](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/18_DelegatenUndEvents.md#1)
+[LiaScript Vorlesung 19](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/19_Events.md#1)
 
 ---------------------------------------------------------------------
 
