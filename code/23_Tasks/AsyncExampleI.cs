@@ -1,3 +1,5 @@
+// Example found at http://openbook.rheinwerk-verlag.de/visual_csharp_2012/1997_15_004.html
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
