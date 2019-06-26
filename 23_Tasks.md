@@ -490,15 +490,81 @@ fort und wartet auf dessen Beendigung.
 aync void DoAsync(){
   Task<int> task = Task.Run(() => {int i;
                                    // Berechnungen
-                                   return i;})
+                                   return i;}
+  // Instruktionen I
   // Methoden, die nach der Rückkehr nach DoAsync ausgeführt werden.
   int result = await task;
+  // Instruktionen II
   // Hier wird nun mit dem Ergebnis result weitergearbeitet
 }
 ```
 
 Das Ergebnis der Operation hängt dabei davon ab, welche Zeitabläufe sich im
 Programmablauf ergeben.
+
+**Fall I** Das Ergebnis der Lambdafunktion liegt vor, bevor DoAsync die Zeile
+mit await erreicht hat (Quasi-Synchroner Fall)
+
+<!--
+style="width: 100%; max-width: 760px; display: block; margin-left: auto; margin-right: auto;"
+-->
+````````````
+      Rufer(main)                                                                    
+        |                                                                           
+        v     
+                           DoAnsync()
+      DoAsync() - - - - - - - >|                                         
+                               |
+                               v
+                                                    ()=＞{..}
+                      task=Task.Run(()=＞{..};   - - - >|
+                               |                       |
+              Instruktionen I  |        results        v
+                               | < - - - - - - - - - - -
+              Instruktionen II |
+                               v
+         < - - - - - - - - - - -                       
+        |
+        v
+````````````
+
+**Fall II** Das Ergebnis der Lambdafunktion liegt erst später, nachdem DoAsync die Zeile mit await erreicht hat (und bereits nach main zurückgekehrt ist)
+
+<!--
+style="width: 100%; max-width: 760px; display: block; margin-left: auto; margin-right: auto;"
+-->
+````````````
+      Rufer(main)                                                                    
+        |                                                                           
+        v     
+                           DoAnsync()
+      DoAsync() - - - - - - - >|                                         
+                               |
+                               v
+                                                    ()=＞{..}
+                      task=Task.Run(()=＞{..}; - - - - >|
+                               |                       |
+              Instruktionen I  |        results        |
+                               |                       |
+         < - - - - - - - - - - -                       |
+        |                                              |
+        |                                              |
+        |                      |<----------------------|
+        |     Instruktionen II |
+        |                      |
+        |                      v
+        v
+````````````
+
+
+
+Zwei sehr anschauliche Beispiele finden sich im code Ordner des Projekts.
+
+| Beispiel | Bemerkung |
+| -------- | --------- |
+| [AsyncExampleI.cs](https://github.com/liaScript/CsharpCourse/blob/master/code/23_Tasks/AsyncExampleI.cs) | Generelle Einbettung des asynchronen Tasks |
+| [AsyncExampleII.cs](https://github.com/liaScript/CsharpCourse/blob/master/code/23_Tasks/AsyncExampleII.cs) | Illustration der Interaktionsfähigkeit eines asynchronen Programmes, das Berechnungen und Nutzereingaben gleichermaßen realisiert. |
+
 
 ## Anhang
 
