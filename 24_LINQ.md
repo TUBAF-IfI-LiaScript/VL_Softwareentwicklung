@@ -141,7 +141,7 @@ MatrNr, Name
 
 ``` sql
 CREATE TABLE hoert;
-INSERT INTO Student SELECT * from ?;
+INSERT INTO hoert SELECT * from ?;
 ```
 ``` text -data.csv
 MatrNr, VorlNr
@@ -154,7 +154,7 @@ MatrNr, VorlNr
 
 ``` sql
 CREATE TABLE Vorlesung;
-INSERT INTO Student SELECT * from ?;
+INSERT INTO Vorlesung SELECT * from ?;
 ```
 ``` text -data.csv
 VorlNr, Titel, PersNr
@@ -166,7 +166,7 @@ VorlNr, Titel, PersNr
 
 ``` sql
 CREATE TABLE Professor;
-INSERT INTO Student SELECT * from ?;
+INSERT INTO Professor SELECT * from ?;
 ```
 ``` text -data.csv
 PersNr, Name
