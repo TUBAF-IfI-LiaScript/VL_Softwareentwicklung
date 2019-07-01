@@ -228,7 +228,7 @@ ON Professor.PersNr = Vorlesung.PersNr;
 
 *Language Integrated Query* (LINQ) umfasst ein Konzept in .NET, dass auf der
 direkte Integration von Abfragefunktionen abzielt. Dafür definieren die C#, VB.NET und F# eigene Schlüsselwörter sowie eine Menge an vorbestimten LINQ-Methoden.
-Diese können durch den Anwender erweitert werden.
+Diese können aber durch den Anwender in der jeweiligen Sprache erweitert werden.
 
 LINQ-Anweisungen sind unmittelbar als Quelltext in .NET-Programme eingebettet.
 Somit kann der Code durch den Compiler auf Fehler geprüft werden. Andere
@@ -236,12 +236,9 @@ Verfahren wie *ActiveX Data Objects* ADO und *Open Database Connectivity* ODBC
 hingegen verwenden Abfragestrings. Diese können erst zur Laufzeit interpretiert
 werden; dann wirken Fehler gravierender und sind schwieriger zu analysieren.
 
-### Aufbau
-
 Innerhalb des Quellprogramms in C# oder VB.NET präsentiert LINQ die Abfrage-Ergebnisse als streng typisierte Aufzählungen. Somit gewährleistet es Typsicherheit bereits zur Übersetzungszeit wobei ein minimaler Codeeinsatz zur Realisierung von Filter-, Sortier- und Gruppiervorgänge in Datenquellen investiert wird.
 
 ![OOPGeschichte](/img/24_LINQ/AnbieterLINQ.png)<!-- width="80%" --> [LINQEbenen](#7)
-
 
 Merkmale von LINQ
 
@@ -256,7 +253,7 @@ Merkmale von LINQ
 + LINQ kombiniert Abfrageausdrücke und Methodenaufrufe (`count` oder `max`). Hierin liegt die Flexibilität des Konzeptes.
 
 Diese Veranstaltung konzentriert sich auf die *LINQ to Objects* Realisierung von
-LINQ. Dabei können Abfragen mit einer beliebigen `IEnumerable`- oder `IEnumerable<T>`-Auflistungen angewand werden.
+LINQ. Dabei können Abfragen mit einer beliebigen `IEnumerable`- oder `IEnumerable<T>`-Auflistungen angewandt werden.
 
 ### Exkurs "Enumarables"
 
@@ -354,13 +351,12 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-![Protected](http://www.plantuml.com/plantuml/png/bLB1JiCm3BtdAtpSDBNYN5NL422qmn1Yko4qfQaPWJQfadGQZFqxJKf9H0Q8KzNt_FoUxSoreSfqJKsUU8N0k68r0j4lNBHKqGPOJRK-DqRniZEuO5Ai-1l26I6EWUPrrNDYgmy4Pg2Dsb2bCj0EXFi7iF0rcYlHDQYeaMeopM3XV_EXj002oHTUrfZ-9YB7qNzmzqmV0nBWei9zrdyCk7_TPZwfXMQH42Q-m8uXo-UfqmQswKMd50fZq_GyCkDQ1UWmZ8tNUwDwf0p3eV9r0Nc-6AcYi77RhgmvWpNgliMFqit_X3xq2U4CbdA7DxXtcKifQmVUeKQ7x2Ilm46NNBTIumX-CnbOcoxs-4lh0yPB2RUQmTfV-rR9hNsLXy-hncSzQ4CDPqU09UKYz1wrIL9u4Gas3FbxcfwcDWCN82GOm97HWmehlDwpVdanwOVARToezHn5rJNr1m00)<!-- width="80%" --> [PublicPrivate.plantUML]()
+![Protected](http://www.plantuml.com/plantuml/png/bLBFIyCm5BxdhtZ7ZR7YkPGmKP4T9k9wKnbf-vpHDXb9EgPp_xjfkffWrE6fzFlo_NWlcMd3b6cRcZpp2g7aggmHY7xbOiCKQw2icTRdnYXUj0RdfHHB_evmHeXZe7bRMawizPx01BHHAwPK2jg1SFy87NoDvagq3Ifcf1gDKvZxtwm_Ie70z0ilQap-4f73aD-dUyRMi3vSLBXBxSU0-zURr3Vje4aaX94_q8qXYvUnqmQnoKMh50hJjR4ybiPP1MW_J5VFPgDwOYM6GsKvXIoR3nIbjkwf_UJqLxlLVyqYfu7uqMaXjtY3EpTO8MNjm3lKw92jv1Kuw9BhZTGuWDz2UhQh6sMSrFg2yUR2rQUG-oTng-IwUxhxuzN7Tx_NXXbU7W0MZ8imUz1EfzIBIB1oo3wI9F1BRQk2YuhI1m5PRcN7znoALhqgG4WmcYFZztZQsPuQd3r2WeN7f2-UsH6ZK393KRLD_Ga0)<!-- width="80%" --> [PublicPrivate.plantUML]()
 
 Welchen Vorteil habe ich verglichen mit einer nicht-enumerate Datenstruktur, zum Beispiel einem array? Im Hinblick auf eine konkrete Implementierung ist zwischen dem Komfort der erweiterten API und den Performance-Eigenschaften abzuwägen.
 
 Einen Überblick dazu bietet unter anderem die Diskussion unter
 https://stackoverflow.com/questions/169973/when-should-i-use-a-list-vs-a-linkedlist/29263914#29263914
-
 
 ### Grundlagen
 
@@ -462,13 +458,78 @@ IEnumerable<Student> result = from s in students
 ```
 
 Im vorangehenden Beispiel ist `students` die Datenquelle, über der die Abfrage
-bearbeitet wird. Der List-Datentyp implmentiert das Interface `IEnumerable<T>`. Die letzte Zeile bildet das Ergebnis auf die Rückgabe ab, dem Interface entsprechen
-auf ein `IEnumerable<Student>` mit den Feldern Name und Id.
+bearbeitet wird. Der List-Datentyp implementiert das Interface `IEnumerable<T>`.
+Die letzte Zeile bildet das Ergebnis auf die Rückgabe ab, dem Interface
+entsprechen auf ein `IEnumerable<Student>` mit den Feldern Name und Id.
 
-Die Berechnung der Folge wird nicht als Ganzes realisiert sondern bei einer Interation durch den Datentyp `List<Student>`.
+Die Berechnung der Folge wird nicht als Ganzes realisiert sondern bei einer
+Iteration durch den Datentyp `List<Student>`.
 
+Für nicht-generische Typen (die also IEnumerable anstatt IEnumerable<T> unmittelbar)
+implementieren, muss zusätzlich der Typ der Laufvariable angegeben werden,
+da diese nicht aus der Datenquelle ermittelt werden kann.
 
-###asdfa
+```csharp           ArrayListExample
+using System;
+using System.Collections;
+using System.Linq;
+
+namespace Rextester
+{
+  public class Student  
+  {  
+      public string FirstName { get; set; }  
+      public string LastName { get; set; }  
+      public int[] Scores { get; set; }  
+  }
+
+   class Program {  
+      public static void Main(string[] args){
+        ArrayList arrList = new ArrayList();  
+        arrList.Add(  
+            new Student{  
+                FirstName = "Svetlana", LastName = "Omelchenko", Scores = new int[] { 98, 92, 81, 60 }  
+                });  
+        arrList.Add(  
+            new Student {  
+                FirstName = "Claire", LastName = "O’Donnell", Scores = new int[] { 75, 84, 91, 39 }  
+                });    
+
+        var query = from student in arrList  
+                    where student.Scores[0] > 95  
+                    select student;  
+
+        foreach (Student s in query)  
+            Console.WriteLine(s.LastName + ": " + s.Scores[0]);
+      }  
+   }
+}
+```
+@Rextester.eval(@CSharp)
+
+Welche Struktur ergibt sich dabei generell für eine LINQ-Abfrage? Ein Query
+beginnt immer mit einer `from`-Klausel und endet mit einer `select` oder `group`-Klausel.
+
+Allgemeingültig lässt sich, entsprechend den Ausführungen in [Mössenböck](#12) folgende Syntax ableiten:
+
+```
+QueryExpr =
+   "from" [Type] variable "in" SrcExpr
+   QueryBody
+QueryBody =
+   { "from" [Type] variable "in" SrcExpr
+   | "where" BoolExpr
+   | "orderby" Expr ["ascending" | "descending"] {"," Expr ["ascending" | "descending"]}
+   | "join" [Type] variable "in" SrcExpr "on" Expr "equals" Expr ["into" variable]
+   | "let" variable "=" Expr
+   }
+   ( "select" ProjectionExpr ["into" variable QueryBody]
+   | "group" ProjectionExpr "by" Expr ["into" variable QueryBody]
+   ).   
+```
+
+### Beispiele
+
 ```csharp
 using System;
 using System.Threading;
@@ -494,8 +555,6 @@ namespace Rextester
 }
 ```
 @Rextester.eval(@CSharp)
-
-
 
 
 ## Anwendung
@@ -534,6 +593,8 @@ namespace Rextester
 **Referenzen**
 
 [DatenbankSchema] Wikipedia "SQL", Nils Boßung, https://de.wikipedia.org/wiki/SQL#/media/Datei:SQL-Beispiel.svg
+
+[Mössenböck] Mössenböck, Hanspeter, "Kompaktkurs C#", dpunkt.verlag, 2019
 
 **Autoren**
 
