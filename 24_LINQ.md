@@ -53,6 +53,8 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
 ## Ankündigung
 
+0. **Die Klausur findet am 23.07.2019, von 12:30 bis 14:30 statt.**
+
 1. **Bitte senden Sie bis zum Freitag Abend Fragen an die Tutoren, die Sie mit Blick auf die Klausur noch mal besprochen haben wollen.**
 
     Dieses Angebot sollte Teil Ihrer Vorbereitungen auf die Prüfung sein und nicht deren Beginn!
@@ -61,40 +63,188 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
     Welcher Art Ihre Notizen sind, ist Ihnen überlassen. Sie sollten sich dafür entscheiden aussagekräftige Beispiele vorzubereiten, die Ihnen  Anleitung für die Lösung der Aufgaben gibt.
 
+3. **Studentische Mitarbeiter als Tutoren gesucht!**
+
 ## Motivation
 
-Filtern Sie die Liste der Zoo-Tiere nach dem Alter und sortieren Sie diese
-in Gruppen nach der Zahl der Beine.
+Gegeben sei das Datenset eines Comic-Begeisterten in Form einer generischen
+Liste `List<T>`.
 
-BEISPIEL TRADITIONELL
+1. Bestimmen Sie die Zahl der Einträge unseres Datensatzes
+2. Filtern Sie die Liste der Comic Figuren nach dem Alter und
+3. Sortieren Sie die Liste nach dem Anfangsbuchstaben des Namens.
 
+```csharp    conventionalFiltering
+using System;
+using System.Collections.Generic;
 
-Der Verarbeitung auf Daten innerhalb eines Programms setzt sich zusammen aus dem
-Lesen der Informationen, der Definition einer Kette von Verarbeitungsanweisungen
-und dem Ausführen dieser. Dabei sind die Methoden für den Datenzugriff und die
-Manipulation abhängig vom Datentyp (Felder, Objektlisten) und der Herkunft
-(XML-Dokumente, Datenbanken, Excel-Dateien, usw.).
+namespace Rextester
+{
+  public class Character{
+    protected string name;             
+    public int geburtsjahr;
 
-LINQ versucht dieses Problem zu beseitigen, indem es innerhalb der
-Entwicklungsplattform .NET eine einheitliche Methode für jeglichen Datenzugriff
-zur Verfügung stellt. Die Syntax der Abfragen in LINQ orientiert sich dabei an
-der *Structured Query Language* (SQL).
+    public Character(string name, int geburtsjahr){
+      this.name = name;
+      this.geburtsjahr = geburtsjahr;
+    }
+  }
+
+  public class ListedCharacter: Character{
+      public static int Count;
+      int index;
+
+      public ListedCharacter(string name, int geburtsjahr):
+                        base(name, geburtsjahr){
+        index = Count;
+        Count = Count + 1;
+      }
+
+      public override string ToString(){
+         string row = string.Format("|{0,6} | {1,-15} | {2,8} |",
+                                      index, name, geburtsjahr);
+         return row;
+      }
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args){
+      List<ListedCharacter> ComicHeros = new List<ListedCharacter>{
+         new ListedCharacter("Spiderman", 1962),
+         new ListedCharacter("Donald Duck", 1931),
+         new ListedCharacter("Superman", 1938)
+      };
+      Console.WriteLine("Alle Einträge in der Datenbank:");
+      Console.WriteLine("| Index | Name            | Ursprung |");
+      foreach (ListedCharacter c in ComicHeros){
+        Console.WriteLine(c);
+      }
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+                    {{1}}
+********************************************************************************
+
+Die Lösung könnte folgendermaßen daher kommen:
+
+Die Dokumentation von `List<T>` findet sich unter folgendem [Link](https://docs.microsoft.com/de-de/dotnet/api/system.collections.generic.list-1?view=netframework-4.8)
+
+1. Bei der Konsultation der Dokumentation von List "entdecken" Sie die Methode Count.
+2. Für die Filteroperation implementieren Sie eine Loop. Sie können dazu `foreach` verwenden, weil `List<T>` das Interface `IEnumerable` implementiert.
+3. Die Sortieroperation bedingt die Anwendung einer Vergleichsoperation zwischen den Elementen der Liste. Eine Variante ist die Implementierung des Interfaces `IComparable` zu diesem Zweck.
+
+```csharp    Solution
+using System;
+using System.Collections.Generic;
+
+namespace Rextester
+{
+  public class Character{
+    protected string name;             
+    public int geburtsjahr;
+
+    public Character(string name, int geburtsjahr){
+      this.name = name;
+      this.geburtsjahr = geburtsjahr;
+    }
+  }
+
+  public class ListedCharacter: Character, IComparable{
+      public static int Count;
+      int index;
+
+      public ListedCharacter(string name, int geburtsjahr): base(name, geburtsjahr){
+        index = Count;
+        Count = Count + 1;
+      }
+
+      public override string ToString(){
+         string row = string.Format("|{0,6} | {1,-15} | {2,8} |", index, name, geburtsjahr);
+         return row;
+      }
+
+      public int CompareTo(object obj){
+        if (obj == null) return 1;
+
+        ListedCharacter otherCharacter = obj as ListedCharacter;
+        return string.Compare(this.name, otherCharacter.name);
+      }
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args){
+      List<ListedCharacter> ComicHeros = new List<ListedCharacter>{
+         new ListedCharacter("Spiderman", 1962),
+         new ListedCharacter("Donald Duck", 1931),
+         new ListedCharacter("Superman", 1938)
+      };
+      Console.WriteLine("Alle Einträge in der Datenbank:");
+      Console.WriteLine("| Index | Name            | Ursprung |");
+      foreach (ListedCharacter c in ComicHeros){
+        Console.WriteLine(c);
+      }
+
+      Console.WriteLine("Gefilterte Einträge in der Datenbank:");
+      Console.WriteLine("| Index | Name            | Ursprung |");
+      List<ListedCharacter> ComicHerosFiltered = new List<ListedCharacter>();
+      foreach (ListedCharacter c in ComicHeros){
+        if (c.geburtsjahr < 1950) ComicHerosFiltered.Add(c);
+      }
+      foreach (ListedCharacter c in ComicHerosFiltered){
+        Console.WriteLine(c);
+      }
+
+      Console.WriteLine("Sortierte Einträge in der Datenbank:");
+      Console.WriteLine("| Index | Name            | Ursprung |");
+      ComicHeros.Sort();
+      foreach (ListedCharacter c in ComicHeros){
+        Console.WriteLine(c);
+      }
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+Eine Menge Aufwand für einen simple Operation! Welche zusätzlichen Probleme
+werden auftreten, wenn Sie eine solche Kette aus Datenerfassung, Verarbeitung
+und Ausgabe in realen Anwendungen umsetzen?
+
+********************************************************************************
+
+                        {{2}}
+********************************************************************************
+
+Die Methoden für den Datenzugriff und die Manipulation abhängig vom Datentyp
+(Felder, Objektlisten) und der Herkunft (XML-Dokumente, Datenbanken,
+Excel-Dateien, usw.).LINQ versucht dieses Problem zu beseitigen, indem es
+innerhalb der Entwicklungsplattform .NET eine einheitliche Methode für jeglichen
+Datenzugriff zur Verfügung stellt. Die Syntax der Abfragen in LINQ orientiert
+sich dabei an der *Structured Query Language* (SQL).
+
+********************************************************************************
 
 ### Exkurs SQL
 
-Hier folgt ein kurzer Einschub zum Thema SQL, da die Veranstaltung "Datenbanken"
-erst im nächsten Semester gelesen wird.
+Hier folgt ein kurzer Einschub zum Thema SQL ... um allen Teilnehmern eine sehr
+grundlegende Sicht zu vermitteln:
 
 SQL ist eine Datenbanksprache zur Definition von Datenstrukturen in relationalen
 Datenbanken sowie zum Bearbeiten (Einfügen, Verändern, Löschen) und Abfragen von
 darauf basierenden Datenbeständen.
 
 Ausgangspunkt sind Datenbanktabellen, die Abfragen dienen dabei der Generierung  
-spezifischer Informationssets.
+spezifischer Informationssets:
 
-"Alle Bücher mit Buchnummern von 123400 bis 123500"
-"Alle Buchnummern mit Autoren, die im 19. Jahrhundert erschienen."
-"In welchem Jahrhundert veröffentlichte welcher Verlag die meisten Bücher?"
++ "Alle Bücher mit Buchnummern von 123400 bis 123500"
++ "Alle Buchnummern mit Autoren, die im 19. Jahrhundert erschienen."
++ "In welchem Jahrhundert veröffentlichte welcher Verlag die meisten Bücher?"
++ ...
 
 | Buchnummer | Autor              | Verlag                    | Datum | Titel                  |
 | ---------- | ------------------ | ------------------------- | ----- | ---------------------- |
@@ -103,7 +253,7 @@ spezifischer Informationssets.
 | 123458     | Galileo Galilei    | Inquisition International | 1640  | Eppur si muove         |
 | 123459     | Charles Darwin     | Vatikan Verlag            | 1860  | Adam und Eva           |
 
-Die Sprache basiert auf der relationalen Algebra, ihre Syntax ist relativ
+SQL basiert auf der relationalen Algebra, ihre Syntax ist relativ
 einfach aufgebaut und semantisch an die englische Umgangssprache angelehnt. Die
 Bezeichnung SQL bezieht sich auf das englische Wort “query” (deutsch:
 „Abfrage“). Mit Abfragen werden die in einer Datenbank gespeicherten Daten
@@ -111,8 +261,8 @@ abgerufen, also dem Benutzer oder einer Anwendersoftware zur Verfügung gestellt
 Durch den Einsatz von SQL strebt man die Unabhängigkeit der Anwendungen vom
 eingesetzten Datenbankmanagementsystem an.
 
-SQL-Aufrufe sind deklarativ, weil der Entwickler hier nur das WAS und nicht das WIE festlegt.
-Dabei strukturieren sich die Befehle in 4 Kategorien:
+SQL-Aufrufe sind deklarativ, weil der Entwickler hier nur das WAS und nicht das
+WIE festlegt. Dabei strukturieren sich die Befehle in 4 Kategorien:
 
 + Befehle zur Abfrage und Aufbereitung der gesuchten Informationen
 + Befehle zur Datenmanipulation (Ändern, Einfügen, Löschen)
@@ -123,19 +273,26 @@ Eine Datenbanktabelle stellt eine Datenbank-Relation dar. Die Relation ist Namen
 
 ![OOPGeschichte](/img/24_LINQ/SQL-Beispiel.png)<!-- width="80%" --> [DatenbankSchema](#7)
 
-**Beispiele**
+                                  {{1-2}}
+*******************************************************************************
+**Erzeugung der Tabellen**
 
-Erzeugung der Tabellen
+``` text -student.csv
+MatrNr,Name
+26120,Fichte
+25403,Jonas
+27103,Fauler
+```
 
 ``` sql
 CREATE TABLE Student;
 INSERT INTO Student SELECT * from ?;
 ```
-``` text -data.csv
-MatrNr, Name
-26120, Fichte
-25403, Jonas
-27103, Fauler
+``` text -student.csv
+MatrNr,Name
+26120,Fichte
+25403,Jonas
+27103,Fauler
 ```
 @AlaSQL.eval_with_csv
 
@@ -143,11 +300,11 @@ MatrNr, Name
 CREATE TABLE hoert;
 INSERT INTO hoert SELECT * from ?;
 ```
-``` text -data.csv
-MatrNr, VorlNr
-26120, 5001
-25403, 5001
-27103, 5045
+``` text -hoert.csv
+MatrNr,VorlNr
+26120,5001
+25403,5001
+27103,5045
 ```
 @AlaSQL.eval_with_csv
 
@@ -156,11 +313,11 @@ MatrNr, VorlNr
 CREATE TABLE Vorlesung;
 INSERT INTO Vorlesung SELECT * from ?;
 ```
-``` text -data.csv
-VorlNr, Titel, PersNr
-5001, ET, 15
-5022, IT, 12
-5045, DB, 12
+``` text -vorlesung.csv
+VorlNr,Titel,PersNr
+5001,ET,15
+5022,IT,12
+5045,DB,12
 ```
 @AlaSQL.eval_with_csv
 
@@ -168,43 +325,41 @@ VorlNr, Titel, PersNr
 CREATE TABLE Professor;
 INSERT INTO Professor SELECT * from ?;
 ```
-``` text -data.csv
-PersNr, Name
-12, Wirth
-15, Tesla
-20, Urlauber
+``` text -prof.csv
+PersNr,Name
+12,Wirth
+15,Tesla
+20,Urlauber
 ```
 @AlaSQL.eval_with_csv
 
-**Auslesen aller Spalten und aller Zeilen aus der Tabelle Student**
+*******************************************************************************
 
-``` sql
+                                {{2}}
+*******************************************************************************
+
+**Beispiele**
+
+``` sql    Auslesen aller Spalten und aller Zeilen
 SELECT *
 FROM Student;
 ```
 @AlaSQL.eval
 
 
-**Abfrage mit Spaltenauswahl**
-
-``` sql
+``` sql     Abfrage mit Spaltenauswahl
 SELECT VorlNr, Titel
 FROM Vorlesung;
 ```
 @AlaSQL.eval
 
-
-**Abfrage mit eindeutigen Werten**
-
-``` sql
+``` sql      Abfrage mit eindeutigen Werten
 SELECT DISTINCT MatrNr
 FROM hoert;
 ```
 @AlaSQL.eval
 
-**Abfrage mit Filter und Sortierung**
-
-``` sql
+``` sql        Abfrage mit Filter und Sortierung
 SELECT VorlNr, Titel
 FROM Vorlesung
 WHERE Titel = 'ET';
@@ -215,20 +370,30 @@ WHERE Titel = 'ET';
 
 `ORDER BY` öffnet die Möglichkeit die Reihung anzupassen.
 
-**Linker äußerer Verbund**
-
-``` sql
+``` sql   Linker äußerer Verbund
 SELECT Vorlesung.VorlNr, Vorlesung.Titel, Professor.PersNr, Professor.Name
 FROM Professor LEFT OUTER JOIN Vorlesung
 ON Professor.PersNr = Vorlesung.PersNr;
 ```
 @AlaSQL.eval
 
+``` sql   Gruppierung mit Aggregat-Funktionen
+SELECT COUNT(Vorlesung.PersNr) AS Anzahl, Professor.PersNr, Professor.Name
+FROM Professor LEFT OUTER JOIN Vorlesung
+ON Professor.PersNr = Vorlesung.PersNr
+GROUP BY Professor.Name, Professor.PersNr;
+```
+@AlaSQL.eval
+
+****************************************************************
+
 ## LINQ
 
 *Language Integrated Query* (LINQ) umfasst ein Konzept in .NET, dass auf der
-direkte Integration von Abfragefunktionen abzielt. Dafür definieren die C#, VB.NET und F# eigene Schlüsselwörter sowie eine Menge an vorbestimten LINQ-Methoden.
-Diese können aber durch den Anwender in der jeweiligen Sprache erweitert werden.
+*direkte Integration von Abfragefunktionen abzielt. Dafür definieren die C#,
+*VB.NET und F# eigene Schlüsselwörter sowie eine Menge an vorbestimten
+*LINQ-Methoden. Diese können aber durch den Anwender in der jeweiligen Sprache
+*erweitert werden.
 
 LINQ-Anweisungen sind unmittelbar als Quelltext in .NET-Programme eingebettet.
 Somit kann der Code durch den Compiler auf Fehler geprüft werden. Andere
@@ -236,7 +401,11 @@ Verfahren wie *ActiveX Data Objects* ADO und *Open Database Connectivity* ODBC
 hingegen verwenden Abfragestrings. Diese können erst zur Laufzeit interpretiert
 werden; dann wirken Fehler gravierender und sind schwieriger zu analysieren.
 
-Innerhalb des Quellprogramms in C# oder VB.NET präsentiert LINQ die Abfrage-Ergebnisse als streng typisierte Aufzählungen. Somit gewährleistet es Typsicherheit bereits zur Übersetzungszeit wobei ein minimaler Codeeinsatz zur Realisierung von Filter-, Sortier- und Gruppiervorgänge in Datenquellen investiert wird.
+Innerhalb des Quellprogramms in C# oder VB.NET präsentiert LINQ die
+Abfrage-Ergebnisse als streng typisierte Aufzählungen. Somit gewährleistet es
+Typsicherheit bereits zur Übersetzungszeit wobei ein minimaler Codeeinsatz zur
+Realisierung von Filter-, Sortier- und Gruppiervorgänge in Datenquellen
+investiert wird.
 
 ![OOPGeschichte](/img/24_LINQ/AnbieterLINQ.png)<!-- width="80%" --> [LINQEbenen](#7)
 
@@ -353,7 +522,9 @@ namespace Rextester
 
 ![Protected](http://www.plantuml.com/plantuml/png/bLBFIyCm5BxdhtZ7ZR7YkPGmKP4T9k9wKnbf-vpHDXb9EgPp_xjfkffWrE6fzFlo_NWlcMd3b6cRcZpp2g7aggmHY7xbOiCKQw2icTRdnYXUj0RdfHHB_evmHeXZe7bRMawizPx01BHHAwPK2jg1SFy87NoDvagq3Ifcf1gDKvZxtwm_Ie70z0ilQap-4f73aD-dUyRMi3vSLBXBxSU0-zURr3Vje4aaX94_q8qXYvUnqmQnoKMh50hJjR4ybiPP1MW_J5VFPgDwOYM6GsKvXIoR3nIbjkwf_UJqLxlLVyqYfu7uqMaXjtY3EpTO8MNjm3lKw92jv1Kuw9BhZTGuWDz2UhQh6sMSrFg2yUR2rQUG-oTng-IwUxhxuzN7Tx_NXXbU7W0MZ8imUz1EfzIBIB1oo3wI9F1BRQk2YuhI1m5PRcN7znoALhqgG4WmcYFZztZQsPuQd3r2WeN7f2-UsH6ZK393KRLD_Ga0)<!-- width="80%" --> [PublicPrivate.plantUML]()
 
-Welchen Vorteil habe ich verglichen mit einer nicht-enumerate Datenstruktur, zum Beispiel einem array? Im Hinblick auf eine konkrete Implementierung ist zwischen dem Komfort der erweiterten API und den Performance-Eigenschaften abzuwägen.
+Welchen Vorteil habe ich verglichen mit einer nicht-enumerate Datenstruktur, zum
+Beispiel einem array? Im Hinblick auf eine konkrete Implementierung ist zwischen
+dem Komfort der erweiterten API und den Performance-Eigenschaften abzuwägen.
 
 Einen Überblick dazu bietet unter anderem die Diskussion unter
 https://stackoverflow.com/questions/169973/when-should-i-use-a-list-vs-a-linkedlist/29263914#29263914
@@ -471,7 +642,7 @@ da diese nicht aus der Datenquelle ermittelt werden kann.
 
 ```csharp           ArrayListExample
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Rextester
@@ -485,17 +656,18 @@ namespace Rextester
 
    class Program {  
       public static void Main(string[] args){
-        ArrayList arrList = new ArrayList();  
-        arrList.Add(  
+        //ArrayList StudentList = new ArrayList();  <-- Nicht mehr benutzen
+        List<Student> StudentList = new List<Student>();
+        StudentList.Add(  
             new Student{  
                 FirstName = "Svetlana", LastName = "Omelchenko", Scores = new int[] { 98, 92, 81, 60 }  
                 });  
-        arrList.Add(  
+        StudentList.Add(  
             new Student {  
                 FirstName = "Claire", LastName = "O’Donnell", Scores = new int[] { 75, 84, 91, 39 }  
                 });    
 
-        var query = from student in arrList  
+        var query = from student in StudentList  
                     where student.Scores[0] > 95  
                     select student;  
 
@@ -528,36 +700,8 @@ QueryBody =
    ).   
 ```
 
-### Beispiele
-
-```csharp
-using System;
-using System.Threading;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Rextester
-{
-    class Program {  
-        public static void Main(string[] args){
-
-          var numbers = new List<int>() {1,2,3,4};
-          var strings = new List<string>() {"eins","zwei", "drei", "vier"};
-
-          var query = from i in numbers
-                      from s in strings
-                      select new{i, s};
-
-          foreach (var x in query)
-            Console.WriteLine(x);
-        }  
-    }
-}
-```
-@Rextester.eval(@CSharp)
-
-
-## Anwendung
+Mit der isolierten Definition der Abfragen können diese mehrfach auf die Daten
+angewandt werden.
 
 ```csharp           DelayedEvaluation
 using System;
@@ -571,13 +715,17 @@ namespace Rextester
         public static void Main(string[] args){
 
           var numbers = new List<int>() {1,2,3,4};
+
+          // Spezifikation der Anfrage
           var query = from x in numbers
                       select x;
 
           Console.WriteLine(query.GetType());
 
+          // Manipulation der Daten
           numbers.Add(5);
-          Console.WriteLine(query.Count()); // 5
+          Console.WriteLine(query.Count());
+          // Manipulation und erneute Anwendung der Abfrage
           numbers.Add(6);
           Console.WriteLine(query.Count()); // 6
 
@@ -587,6 +735,108 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
+### Hinter den Kulissen
+
+verschiedene Formen
+
+
+### Filtern
+
+Das Beispiel zur Filterung einer Customer-Tablle wurde der C# Dokumentation
+unter https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations
+entnommen.
+
+Die üblichste Abfrageoperation ist das Anwenden eines Filters in Form eines
+booleschen Ausdrucks. Das Filtern bewirkt, dass im Ergebnis nur die Elemente
+enthalten sind, für die der Ausdruck eine wahre Aussage liefert.
+
+Das Ergebnis wird durch Verwendung der `where`-Klausel erzeugt. Faktisch gibt
+der Filter an, welche Elemente nicht in die Quellsequenz eingeschlossen werden
+sollen. In folgendem Beispiel werden nur die customers zurückgegeben, die eine
+Londoner Adresse haben.
+
+```
+var queryLondonCustomers = from customer in customers
+                           where customer.City == "London"
+                           select customer;
+```
+
+Sie können die logischen AND und OR verwenden, um so viele Filterausdrücke wie
+benötigt in der where-Klausel anzuwenden.
+
+```csharp        WhereExample
+using System;
+using System.Threading;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Rextester
+{
+    class Program {  
+        public static void Main(string[] args){
+
+          var numbers = new List<int>() {-1, 7,11,21,32,42};
+
+          var query = from i in numbers
+                      where i < 40 && i > 0
+                      select i;
+
+          foreach (var x in query)
+            Console.WriteLine(x);
+        }  
+    }
+}
+```
+@Rextester.eval(@CSharp)
+
+Die entsprechenden Operatoren können aber auch um eigenständige Methoden ergänzt
+werden. Versuchen Sie zum Beispiel die Bereichsabfrage um eine Prüfung zu
+erweitern, ob der Zahlenwert gerade ist.
+
+
+### Sortieren
+
+
+
+### Gruppieren
+
+Die group-Klausel ermöglicht es, die Ergebnisse auf der Basis eines Merkmals
+zusammenzufassen. Die group-Klausel gibt entsprechend eine Sequenz von
+`IGrouping<TKey,TElement>`-Objekten zurück, die null oder mehr Elemente
+enthalten, die mit dem Schlüsselwert `TKey` für die Gruppe übereinstimmen. Der
+Compiler leiten den Typ des Schlüssels anhand der Parameter von `group` her.
+IGrouping selbst implementiert das Interface `IEnumerable` und kann damit
+iteriert werden.
+
+```
+var queryCustomersByCity =
+    from customer in customers
+    group customer by customer.City;
+
+// customerGroup is an IGrouping<string, Customer> now!
+foreach (var customerGroup in queryCustomersByCity)   // Iteration 1
+{
+    Console.WriteLine(customerGroup.Key);
+    foreach (Customer customer in customerGroup)      // Iteration 2
+    {
+        Console.WriteLine("    {0}", customer.Name);
+    }
+}
+```
+
+Dabei können die Ergebnisse einer Gruppierung wiederum Ausgangsbasis für eine
+weitere Abfrage sein, wenn das Resultat mit `into` in einem Zwischenergebnis
+gespeichert wird.
+
+### Ausgaben
+
+
+## Erweitern von LINQ
+
+
+## Anwendung auf SQL Datenbank
+
+Visual Studio Projekt
 
 ## Anhang
 
