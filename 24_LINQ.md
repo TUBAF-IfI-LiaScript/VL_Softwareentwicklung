@@ -133,7 +133,7 @@ Die Lösung könnte folgendermaßen daher kommen:
 
 Die Dokumentation von `List<T>` findet sich unter folgendem [Link](https://docs.microsoft.com/de-de/dotnet/api/system.collections.generic.list-1?view=netframework-4.8)
 
-1. Bei der Konsultation der Dokumentation von List "entdecken" Sie die Methode Count.
+1. Bei der Konsultation der Dokumentation von List "entdecken" Sie die Eigenschaft `Count`.
 2. Für die Filteroperation implementieren Sie eine Loop. Sie können dazu `foreach` verwenden, weil `List<T>` das Interface `IEnumerable` implementiert.
 3. Die Sortieroperation bedingt die Anwendung einer Vergleichsoperation zwischen den Elementen der Liste. Eine Variante ist die Implementierung des Interfaces `IComparable` zu diesem Zweck.
 
