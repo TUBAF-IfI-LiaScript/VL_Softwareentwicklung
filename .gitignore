@@ -10,9 +10,14 @@
 *.txt
 *.odt
 *.json
-
+*.props
+*.dll
+*.pptx
+*.targets
+*AssemblyInfo.*
 
 /code/01_EinordnungCsharp/VS_Example/
 /code/01_EinordnungCsharp/gtkExample/
 /code/09_OOP_CsharpIII/Interface/bin
 /code/09_OOP_CsharpIII/Interface/obj
+/code/25_LINQII/bin/

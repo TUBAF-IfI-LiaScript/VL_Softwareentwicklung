@@ -10,7 +10,7 @@ import: https://raw.githubusercontent.com/LiaTemplates/Rextester/master/README.m
 import: https://raw.githubusercontent.com/LiaTemplates/WebDev/master/README.md
 -->
 
-# Vorlesung Softwareentwicklung - 18 - Delegaten und Events
+# Vorlesung Softwareentwicklung - 19 - Events
 
 --------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
