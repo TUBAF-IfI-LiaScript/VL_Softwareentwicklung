@@ -16,10 +16,10 @@ import: https://raw.githubusercontent.com/liaTemplates/AlaSQL/master/README.md
 --------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/liaScript/CsharpCourse/blob/master/24_LINQ.md
+https://github.com/liaScript/CsharpCourse/blob/master/25_LINQII.md
 
 Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 24](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/24_LINQ.md#1)
+[LiaScript Vorlesung 25](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/25_LINQII.md#1)
 
 ---------------------------------------------------------------------
 
