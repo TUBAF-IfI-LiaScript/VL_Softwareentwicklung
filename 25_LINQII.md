@@ -11,7 +11,7 @@ import: https://raw.githubusercontent.com/LiaTemplates/WebDev/master/README.md
 import: https://raw.githubusercontent.com/liaTemplates/AlaSQL/master/README.md
 -->
 
-# Vorlesung Softwareentwicklung - 24 - Language-Integrated Query (LINQ)
+# Vorlesung Softwareentwicklung - 25 - Language-Integrated Query (LINQ)
 
 --------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
@@ -53,7 +53,7 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 *1. Welche Programmierparadigment werden durch C# abgedeckt. In wieweit ist das LINQ Konzept hier eine wichtige Ergänzung?*
 
 <!--
-style="width: 85%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 75%; max-width: 460px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ````````````
                          Programmierparadigmen
@@ -98,7 +98,7 @@ Typsicherheit bereits zur Übersetzungszeit wobei ein minimaler Codeeinsatz zur
 Realisierung von Filter-, Sortier- und Gruppiervorgänge in Datenquellen
 investiert wird.
 
-![OOPGeschichte](/img/24_LINQ/AnbieterLINQ.png)<!-- width="80%" --> [LINQEbenen](#7)
+![OOPGeschichte](/img/24_LINQ/AnbieterLINQ.png)<!-- width="80%", max-width="360px";  --> [LINQEbenen](#7)
 
 ### Grundlagen
 
@@ -272,7 +272,8 @@ QueryBody =
 ```
 
 Mit der isolierten Definition der Abfragen können diese mehrfach auf die Daten
-angewandt werden. Man spricht dabei von einer "verzögerten Ausführung".
+angewandt werden. Man spricht dabei von einer "verzögerten Ausführung" - jeder
+Aufruf der Ausgabe generiert eine neue Abfrage.
 
 ```csharp           DelayedEvaluation
 using System;
@@ -358,7 +359,6 @@ ergänzt werden:
 ```csharp
 public static class MyStringExtensions
 {
-
   //                               zu erweiternder Typ
   //                                      |
   public static string MySubstring(this string me, int position, int length)
@@ -577,7 +577,7 @@ var queryLondonCustomers = from customer in customers
                            select customer;
 ```
 
-```csharp        FilterExample
+```csharp        SortExample
 using System;
 using System.Threading;
 using System.Collections.Generic;
@@ -633,7 +633,7 @@ definiert damit das Format jedes zurückgegebenen Elements. Dies kann
 Wenn die select-Klausel etwas anderes als eine Kopie des Quellelements erzeugt,
 wird dieser Vorgang als Projektion bezeichnet.
 
-```csharp        FilterExample
+```csharp        SelectExample
 using System;
 using System.Threading;
 using System.Collections.Generic;
@@ -704,6 +704,8 @@ bereit.
 
 Lesen Sie aus den Daten die jeweils am häufigsten vergebenen Vornamen aus und
 bestimmen Sie deren Anteil innerhalb des Jahrganges.
+
+https://github.com/liaScript/CsharpCourse/tree/master/code/25_LINQII
 
 ## Anhang
 
