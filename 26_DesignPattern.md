@@ -55,6 +55,12 @@ Auf die Auführung der kontextabhängigen Schlüsselwörter wie `where` oder
 
 ---------------------------------------------------------------------
 
+## Wiederholung
+
+Boxing unboxing
+
+
+
 ## Design Pattern
 
 
@@ -177,7 +183,58 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
+Als Lösungsansatz können die Synchronisationsmethoden aus der Laufzeitumgebung
+nutzen. `lock` garantiert, dass lediglich ein Thread einen bestimmten Codeabschnitt betreten hat und blockiert alle anderen. Eine mögliche Lösung könnte wie folgt aussehen:
 
+
+```csharp    SingletonPatternWithoutThreadSafety
+using System;
+using System.Threading;
+
+namespace Rextester
+{
+
+  public class PrinterDriver{
+    private PrinterDriver(){}
+    private static PrinterDriver printerDriverInstance;
+    // Zusätzliches Feld "padlock"
+    private static readonly object padlock = new object();
+
+    public static int InstanceCount = 0;
+
+    public static PrinterDriver getInstance(){
+        Thread.Sleep(100);
+        lock (padlock)
+        {
+           if (printerDriverInstance == null){
+              printerDriverInstance = new PrinterDriver();
+              InstanceCount ++;
+              System.Console.WriteLine("New Driver instantiated!");
+        }
+        }
+        return printerDriverInstance;
+    }
+    public void print(string text){
+       Console.WriteLine("!PRINT {0}", text);
+    }
+  }
+
+  public class Program {
+    public static void CheckInitialization() {
+        PrinterDriver localInstance = PrinterDriver.getInstance();
+    }
+
+    public static void Main(string[] args){
+      for (int i = 0; i < 10; i++){
+          new Thread(CheckInitialization).Start();
+      }
+      Thread.Sleep(1000);
+      Console.WriteLine("{0} Instances of PrinterDriver established!", arg0: PrinterDriver.InstanceCount);
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
 
 
 
