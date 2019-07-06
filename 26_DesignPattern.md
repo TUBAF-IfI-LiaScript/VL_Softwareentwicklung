@@ -8,6 +8,7 @@ narrator: Deutsch Female
 
 import: https://raw.githubusercontent.com/LiaTemplates/Rextester/master/README.md
 import: https://raw.githubusercontent.com/LiaTemplates/WebDev/master/README.md
+import: https://raw.githubusercontent.com/liaTemplates/AlaSQL/master/README.md
 -->
 
 # Vorlesung Softwareentwicklung - 26 - Design Patterns
@@ -96,6 +97,164 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
+
+Von *Lazy Creation* spricht man, wenn das einzige Objekt der Klasse erst erzeugt
+wird, wenn es benötigt wird. Ziel ist, dass der Speicherbedarf und die
+Rechenzeit für die Instanziierung des Objektes nur dann aufgewendet werden, wenn
+das Objekt wirklich benötigt wird. Hierzu wird der Konstruktor ausschließlich
+beim ersten Aufruf der Funktion getInstance() aufgerufen.
+
+ACHTUNG: Auf den ersten Blick mag die folgende Lösung plausibel erscheinen, sie
+hat aber einen zentralen Markel! Welche Einschränkung sehen Sie?
+
+```csharp    SingletonPatternStart
+using System;
+
+namespace Rextester
+{
+  public class PrinterDriver{
+  private PrinterDriver(){}
+  private static PrinterDriver printerDriverInstance;
+
+  public static PrinterDriver getInstance(){
+      if (printerDriverInstance == null){
+          printerDriverInstance = new PrinterDriver();
+      }
+      return printerDriverInstance;
+  }
+  public void print(string text){
+     Console.WriteLine("!PRINT {0}", text);
+  }
+}
+
+public class Program {
+  public static void Main(string[] args){
+    PrinterDriver MyPrinter = PrinterDriver.getInstance();
+    PrinterDriver FaultyPrinterInstance = PrinterDriver.getInstance();
+    Console.WriteLine(MyPrinter.GetHashCode());
+    Console.WriteLine(FaultyPrinterInstance.GetHashCode());
+  }
+}
+}
+```
+@Rextester.eval(@CSharp)
+
+```csharp    SingletonPatternWithoutThreadSafety
+using System;
+using System.Threading;
+
+namespace Rextester
+{
+
+  public class PrinterDriver{
+    private PrinterDriver(){}
+    private static PrinterDriver printerDriverInstance;
+
+    public static int InstanceCount = 0;
+
+    public static PrinterDriver getInstance(){
+        Thread.Sleep(100);
+        if (printerDriverInstance == null){
+            printerDriverInstance = new PrinterDriver();
+            InstanceCount ++;
+            System.Console.WriteLine("New Driver instantiated!");
+        }
+        return printerDriverInstance;
+    }
+    public void print(string text){
+       Console.WriteLine("!PRINT {0}", text);
+    }
+  }
+
+  public class Program {
+    public static void CheckInitialization() {
+        PrinterDriver localInstance = PrinterDriver.getInstance();
+    }
+
+    public static void Main(string[] args){
+      for (int i = 0; i < 10; i++){
+          new Thread(CheckInitialization).Start();
+      }
+      Thread.Sleep(1000);
+      Console.WriteLine("{0} Instances of PrinterDriver established!", arg0: PrinterDriver.InstanceCount);
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+Als Lösungsansatz können die Synchronisationsmethoden aus der Laufzeitumgebung
+nutzen. `lock` garantiert, dass lediglich ein Thread einen bestimmten Codeabschnitt betreten hat und blockiert alle anderen. Eine mögliche Lösung könnte wie folgt aussehen:
+
+
+```csharp    SingletonPatternWithoutThreadSafety
+using System;
+using System.Threading;
+
+namespace Rextester
+{
+
+  public class PrinterDriver{
+    private PrinterDriver(){}
+    private static PrinterDriver printerDriverInstance;
+    // Zusätzliches Feld "padlock"
+    private static readonly object padlock = new object();
+
+    public static int InstanceCount = 0;
+
+    public static PrinterDriver getInstance(){
+        Thread.Sleep(100);
+        lock (padlock)
+        {
+           if (printerDriverInstance == null){
+              printerDriverInstance = new PrinterDriver();
+              InstanceCount ++;
+              System.Console.WriteLine("New Driver instantiated!");
+        }
+        }
+        return printerDriverInstance;
+    }
+    public void print(string text){
+       Console.WriteLine("!PRINT {0}", text);
+    }
+  }
+
+  public class Program {
+    public static void CheckInitialization() {
+        PrinterDriver localInstance = PrinterDriver.getInstance();
+    }
+
+    public static void Main(string[] args){
+      for (int i = 0; i < 10; i++){
+          new Thread(CheckInitialization).Start();
+      }
+      Thread.Sleep(1000);
+      Console.WriteLine("{0} Instances of PrinterDriver established!", arg0: PrinterDriver.InstanceCount);
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+
+<div class="persistent" id="pipe_chart" style="position: relative; width:100%; height:400px;"></div>
+
+<script>
+var chartOptions = {
+  xAxis: [{
+    type: 'value'
+  }],
+  yAxis: [{
+    type: 'value'
+  }],
+  series: [{
+    type: "line",
+    data: [[0, 4], [1, 3], [2, 2], [3, 4], [4, 1], [5, 2]],
+  }],
+};
+let chart = echarts.init(document.getElementById('pipe_chart'));
+chart.setOption(option);
+</script>
 
 ## Anhang
 
