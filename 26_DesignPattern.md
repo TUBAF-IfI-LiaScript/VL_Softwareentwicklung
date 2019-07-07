@@ -1,5 +1,4 @@
 <!--
-
 author:   Sebastian Zug & André Dietrich
 email:    zug@ovgu.de   & andre.dietrich@ovgu.de
 version:  0.0.1
@@ -9,7 +8,10 @@ narrator: Deutsch Female
 import: https://raw.githubusercontent.com/LiaTemplates/Rextester/master/README.md
 import: https://raw.githubusercontent.com/LiaTemplates/WebDev/master/README.md
 import: https://raw.githubusercontent.com/liaTemplates/AlaSQL/master/README.md
+
+script:  https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.min.js
 -->
+
 
 # Vorlesung Softwareentwicklung - 26 - Design Patterns
 
@@ -186,7 +188,6 @@ namespace Rextester
 Als Lösungsansatz können die Synchronisationsmethoden aus der Laufzeitumgebung
 nutzen. `lock` garantiert, dass lediglich ein Thread einen bestimmten Codeabschnitt betreten hat und blockiert alle anderen. Eine mögliche Lösung könnte wie folgt aussehen:
 
-
 ```csharp    SingletonPatternWithoutThreadSafety
 using System;
 using System.Threading;
@@ -236,8 +237,10 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
+### Plot Duration
 
-<div class="persistent" id="pipe_chart" style="position: relative; width:100%; height:400px;"></div>
+
+<div class="persistent" id="chart" style="position: relative; width:100%; height:400px;"></div>
 
 <script>
 var chartOptions = {
@@ -252,9 +255,13 @@ var chartOptions = {
     data: [[0, 4], [1, 3], [2, 2], [3, 4], [4, 1], [5, 2]],
   }],
 };
-let chart = echarts.init(document.getElementById('pipe_chart'));
-chart.setOption(option);
+let chart = echarts.init(document.getElementById('chart'));
+chart.setOption(chartOptions);
 </script>
+
+
+Integration der LAZY struktur
+
 
 ## Anhang
 
