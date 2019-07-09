@@ -1,0 +1,29 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+class Shape{
+ # x_pos: int
+ # y_pos: int
+ + Shape()
+ + Shape(int x, int y)
+ + {abstract} Draw(): void
+}
+
+class Circle{
+ + Circle()
+ + Circle(int x, int y)
+ + Draw(): void
+ + CalcCircumference(): void
+}
+
+class Square{
+ + Square()
+ + Square(int x, int y)
+ + Draw(): void
+ + CalcCircumference(): void
+}
+
+Circle --|> Shape
+Square --|> Shape
+@enduml
