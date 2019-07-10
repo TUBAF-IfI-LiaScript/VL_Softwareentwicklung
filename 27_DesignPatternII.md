@@ -13,15 +13,15 @@ script:  https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.min.js
 -->
 
 
-# Vorlesung Softwareentwicklung - 26 - Design Patterns
+# Vorlesung Softwareentwicklung - 27 - Design Patterns II
 
 --------------------------------------------------------------------
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/liaScript/CsharpCourse/blob/master/26_DesignPattern.md
+https://github.com/liaScript/CsharpCourse/blob/master/27_DesignPatternII.md
 
 Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 26](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/26_DesignPattern.md#1)
+[LiaScript Vorlesung 27](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/CsharpCourse/master/27_DesignPatternII.md#1)
 
 ---------------------------------------------------------------------
 
@@ -221,7 +221,7 @@ ist ein Entwurfsmuster das zur Übersetzung einer Schnittstelle in eine andere
 dient. Dadurch wird die Kommunikation von Klassen mit zueinander inkompatiblen
 Schnittstellen ermöglich.
 
-![Adapter](./img/26_DesignPattern/ObjektAdapter.png)<!-- width="50%" -->  [WikipediaAdapter](#7)
+![Adapter](./img/27_DesignPatternII/ObjektAdapter.png)<!-- width="50%" -->  [WikipediaAdapter](#7)
 
 ```csharp    Adapter
 // Das Beispiel ist motiviert durch den Code auf der Seite
@@ -300,8 +300,45 @@ namespace Rextester
 
 ### Erzeugungsmuster (Abstract) Factory Pattern
 
+Der Begriff Factory Pattern bezeichnet ein Entwurfsmuster, das beschreibt, wie
+ein Objekt durch Aufruf einer Methode anstatt durch direkten Aufruf eines
+Konstruktors erzeugt wird.
+
+Eine abstrakte "Fabrikmethode" dient dabei als Schnittstelle zur Erstellung
+eines Objektes. Die konkrete Implementierung der Erzeugung neuer Objekte findet
+jedoch nicht in der Oberklasse statt, sondern in von ihr abgeleiteten
+Unterklassen, die die besagte abstrakte Methode implementieren.
+
+Das Muster beschreibt somit die Erzeugung von Produktobjekten, deren konkreter
+Typ ein Untertyp einer abstrakten Produktklasse ist, welcher von Unterklassen
+einer Erzeugerklasse bestimmt wird. Es wird manchmal auch als „virtueller
+Konstruktor“ bezeichnet.
+
+![Adapter](./img/27_DesignPatternII/Fabrikmethode.png)<!-- width="50%" -->  [WikipediaFactory](#7)
+
+Der Begriff Fabrikmethode wird in der Praxis auch oft einfach nur für eine statische Methode verwendet, die ein neues Objekt erzeugt, vergleichbar einem Konstruktor.
 
 
+```csharp
+// SomeObject o = new SomeObject();
+// Aufruf einer Fabrikmethode statt des Konstruktors
+SomeObject o = SomeObjectFactory.createNewInstance();
+```
+
+Fabrikmethoden entkoppeln ihre Aufrufer von Implementierungen konkreter Produkt-Klassen:
+
++ leichtere Anpassbarkeit bei Veränderungen
++ der fest definierte Name des Konstruktors kann durch eine aussagekräftigere Methode ersetzt werden.
+
+Dabei können zwei grundsätzliche Varianten unterschieden werden:
+
+| Pattern | Bedeutung |
+| ------- | --------- |
+| Factory pattern  | Implementiert den Zugriff auf eine Familie von Produkten über einen Konkreten Erzeuger. |
+| Abstract Factory pattern | Implementiert den Zugriff auf unterschiedliche Produktklassen über eine Familie von Erzeugern. |
+
+
+![Adapter](./img/27_DesignPatternII/AbstractFactory.png)<!-- width="60%" -->  [StackOverflow](#7)
 
 
 ### Verhaltensmuster State Pattern
@@ -324,7 +361,6 @@ In einer tabellarischen State-Maschine Darstellung ergibt sich dann folgendes Bi
 
 Und wie implementieren wir das Ganze? Zunächst intuitiv mittels einer einzigen
 Klasse und switch-case Statements.
-
 
 ```csharp    StateMachineSwitchCase
 using System;
@@ -563,6 +599,10 @@ namespace Rextester
 **Referenzen**
 
 [WikipediaAdapter] Wikipedia "Entwurfsmuster Objektadapter", Autor jarling, https://commons.wikimedia.org/wiki/File:Objektadapter.svg
+
+[WikipediaFactory] Wikipedia "Entwurfsmuster Fabrikmethode", Autor jarling, https://de.wikipedia.org/wiki/Fabrikmethode#/media/Datei:Fabrikmethode.svg
+
+[StackOverflow] Diskussion zum Unterschied zwischen Factory Pattern, vermeindlicher Autor des Bildes Tyring, https://stackoverflow.com/questions/1001767/what-is-the-basic-difference-between-the-factory-and-abstract-factory-design-pat
 
 **Autoren**
 
