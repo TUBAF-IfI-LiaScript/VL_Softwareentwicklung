@@ -394,8 +394,11 @@ namespace Rextester
         get;
         set;
       }
-
-      public Wrapper(int newWrapped) => Wrapped = newWrapped;
+      
+      public Wrapper(int newWrapped)
+      { 
+         Wrapped = newWrapped;
+      }
     }
 
     static void Test1(Wrapper w)
@@ -410,7 +413,7 @@ namespace Rextester
       w = new Wrapper(999);
     }
 
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
       //Test1:
       Wrapper myWrapper = new Wrapper(42);
