@@ -656,9 +656,19 @@ public decimal Worth
 }
 ```
 
+`set` verwendet dabei einen impliziten Parameter mit dem Namen `value`, dessen Typ der Typ der Eigenschaft ist.
+
 Und wie sieht es mit dem Zugriffsschutz der Eigenschaften aus? Insbesondere
 `set` sollte soweit wie möglich eingeschränkt werden. Dafür können `internal`,
 `private` und `protected` genutzt werden.
+
+Wenn in den Eigenschaftenzugriffsmethoden keine zusätzliche Logik erforderlich ist, bietet sich die Verwendung von automatisch implementierten Eigenschaften.
+
+```csharp
+public int CustomerID { get; set; }
+```
+
+In diesem Fall erstellt der Compiler ein privates, anonymes, dahinter liegendes Feld, auf das nur über `get` und `set`-Accessoren zugegriffen werden kann.
 
 ### Indexer
 
@@ -679,6 +689,9 @@ public string this [int index]{
 }
 ```
 
+Auch hier wird das Schlüsselwort `value` verwendet, um den Wert zu definieren, der zugewiesen wird.
+
+Indexer müssen nicht durch einen Ganzzahlwert indiziert werden, es können auch andere Typen verwendet werden.
 
 ```csharp    IndexerExample
 using System;
