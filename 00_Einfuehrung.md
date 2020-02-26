@@ -14,6 +14,15 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 ** TU Bergakademie Freiberg - Sommersemester 2019**
 
+Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
+
+https://github.com/SebastianZug/CsharpCourse/blob/master/00_Einfuehrung.md
+
+Die interaktive Form ist unter diese Link zu finden ->
+[LiaScript Vorlesung 1](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/master/00_Einfuehrung.md#1)
+
+---------------------------------------------------------------------
+
 ```csharp    HelloWorld.cs
 using System;
 
@@ -142,7 +151,7 @@ gehalten hat.
 
 ![Atom IDE Screenshot](./img/00_Einfuehrung/screenShotAtom.png)<!-- width="100%" -->
 
-Link auf den GitHub: https://github.com/liaScript/CCourse
+Link auf den GitHub: https://github.com/SebastianZug/CsharpCourse
 
 *******************************************************************************
 
