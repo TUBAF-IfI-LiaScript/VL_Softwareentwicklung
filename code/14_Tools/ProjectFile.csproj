@@ -1,8 +1,0 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Target Name="A">
-    <Message Text="Hello World A!"/>
-  </Target>
-  <Target Name="B" DependsOnTargets ="A">
-    <Message Text="Hello World B!"/>
-  </Target>
-</Project>
