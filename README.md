@@ -10,7 +10,7 @@ Der Master zeigt jeweils den Foliensatz des vergangenen Jahres, die Dokumente de
 | SoSe 2020 | SoSe2020 | SoSe2020dev |
 
 
-# Übersicht zur Vorlesung (SoSe 2020)
+# Übersicht zur Vorlesung (SoSe 2019)
 
 | Woche | Tag       | Inhalt der Vorlesung             |                                                                                             |                                                                                                                                                |
 |:----- | --------- |:-------------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
