@@ -1,4 +1,16 @@
-# Übersicht zur Vorlesung
+# Inhalt
+
+In diesem Repository werden die LiaScript basierten Unterlagen der Vorlesung "Softwareentwicklung" an der TU Bergakademie Freiberg gehostet. Die Veranstaltung umfasst wöchentlich 2 Vorlesungen und zugehörige Übungen.
+
+Der Master zeigt jeweils den Foliensatz des vergangenen Jahres, die Dokumente der aktuellen Vorlesung sind in eigenen branches enthalten.
+
+| Semester  | Branch   | dev Branch  |
+| --------- | -------- | ----------- |
+| SoSe 2019 | master   |             |
+| SoSe 2020 | SoSe2020 | SoSe2020dev |
+
+
+# Übersicht zur Vorlesung (SoSe 2020)
 
 | Woche | Tag       | Inhalt der Vorlesung             |                                                                                             |                                                                                                                                                |
 |:----- | --------- |:-------------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -29,5 +41,5 @@
 |       | 25. Juni  | Tasks                            | [Github](https://github.com/SebastianZug/CsharpCourse/blob/master/23_Tasks.md)                | [LiaScript](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/master/23_Tasks.md#1)                |
 | 14.   | 2. Juli   | LINQ                            | [Github](https://github.com/SebastianZug/CsharpCourse/blob/master/24_LINQ.md)                | [LiaScript](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/master/24_LINQ.md#1)                 |
 |       | 3. Juli   | LINQ II                       | [Github](https://github.com/SebastianZug/CsharpCourse/blob/master/25_LINQII.md)                | [LiaScript](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/master/25_LINQII.md#1)                 |
-| 15.   | 9. Juli   |                                  |                                                                                             |                                                                                                                                                |
-|       | 10. Juli  |                                  |                                                                                             |                                                                                                                                                |
+| 15.   | 9. Juli   | Design Pattern                 | [Github](https://github.com/SebastianZug/CsharpCourse/blob/master/ 	26_DesignPattern.md)                | [LiaScript](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/master/26_DesignPattern.md#1)                 |
+|       | 10. Juli  | Design Pattern II                 | [Github](https://github.com/SebastianZug/CsharpCourse/blob/master/27_DesignPatternII.md)                |[LiaScript](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/master/27_DesignPatternII.md#1)               |

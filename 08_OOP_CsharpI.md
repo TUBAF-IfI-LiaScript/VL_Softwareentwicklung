@@ -443,6 +443,10 @@ Auch für Klassen selbst können Zugriffsattribute das Verhalten bestimmen:
 > **Merke** Polymorphie bezeichnet die Tatsache, dass Klassenmember ausgehend
 > von Ihrer Nutzung ein unterschiedliches Verhalten erzeugen.
 
+Das heißt, die Methoden der Klassen einer Vererbungshierarchie können auf
+verschiedenen Ebenen gleiche Signatur, aber unterschiedliche Implementierungen
+haben. Welche der Methoden für ein gegebenes Objekt aufgerufen wird, wird erst
+zur Laufzeit bestimmt (dynamische Bindung).
 
 > **Merke** Dynamische Bindung bezeichnet die Tatsache, dass bei Aufruf einer
 > überschriebenen Methode über eine Basisklassenreferenz oder ein
@@ -476,8 +480,7 @@ erneutes Deklarieren ermöglicht:
 public override void makeSound() => Console.WriteLine("Quack!");
 ```
 
-Dabei müssen beide Methoden die gleiche Signatur haben. Ansonsten
-ist es nur Überladung!
+Dabei müssen beide Methoden die gleiche Signatur haben, d.h. sie sollen die den gleichen Namen und eine identische Parameterliste besitzen. Ansonsten ist es nur Überladung!
 
 ```csharp    privateConstructors
 using System;
@@ -552,8 +555,8 @@ werden
 
 Sollen die spezifischen Methoden aber nur im Kontext der Klasse realisierbar
 sein, so werden sie vor der Basisklasse "verdeckt". Dazu ist das Schlüsselwort
-`new` erforderlich. In diesem Fall wird keine dynmische Bindung realisiert,
-sondern die virtuelle Methode der Basisklasse aufgerufen.
+`new` erforderlich. In diesem Fall wird keine dynamische Bindung realisiert,
+sondern die Methode der Basisklasse aufgerufen.
 
 ```csharp    newOperator
 using System;
@@ -662,7 +665,7 @@ namespace Rextester
       Name = name;
     }
     public virtual void makeSound(){
-      Console.WriteLine("I'm an Animal");
+      Console.WriteLine("I'm a Crocodile");   
     }
   }
 
@@ -728,9 +731,11 @@ namespace Rextester
     public Animal(string name){
       Name = name;
     }
-    public virtual void makeSound(){
-      Console.WriteLine("I'm an Animal");
-    }
+//    public virtual void makeSound(){
+//      Console.WriteLine("I'm an Animal");
+//    }
+
+    public abstract void makeSound();
   }
 
   public class Corcodile : Animal{

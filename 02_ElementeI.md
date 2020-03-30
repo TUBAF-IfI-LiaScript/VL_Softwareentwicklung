@@ -421,11 +421,22 @@ Da die Konvertierung von Ganzkommazahlen in Gleitkommazahlen in jedem Fall
 umgesetzt werden kann, sieht C# hier eine implizite Konvertierung vor. Umgekehrt
 muss diese explizit realisiert werden.
 
+Explizite Konvertiering mit dem Typkonvertierungsoperator (runde Klammern) ist
+ebenfalls nicht immer möglich. Zusätzliche Möglichkeiten der Typkonvertierung
+bietet für elementare Datentypen die Klasse **Convert** durch zahlreiche Methoden
+wie z.B.:
+
+```csharp
+int wert=Convert.ToInt32(Console.ReadLine());//string to int
+```
+
 ### Exkurs: Gleitkommazahlen
 
 Gleitkommazahlen? Wie funktioniert das eigentlich?
 
 Welche Probleme treten ggf. auf?
+
+**Rundungsfehler**
 
 Ungenaue Darstellungen bei der Zahlenrepräsentation führen zu:
 
@@ -464,7 +475,34 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-### 3. Arithmetische Operatoren
+**Dezimal-Trennzeichen**
+
+Im Beispielprogramm wird ein Dezimalpunkt als Trennzeichen verwendet. Diese
+Darstellung ist jedoch kulturspezifisch. In Deutschland gelten das Komma als
+Dezimaltrennzeichen und der Punkt als Tauschender-Trennzeichen. Speziell bei
+Ein- und Ausgaben kann das zu Irritationen führen. Diese können durch die
+Verwendung der Klasse **System.Globalization.CultureInfo** beseitigt werden.
+
+Zum Beispiel wird mit der folgenden Anweisung die Eingabe eines
+Dezimalpunkt statt Dezimalkomma erlaubt.
+
+```csharp
+double wert = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+```
+
+**Division durch Null**
+
+Die Datentypen `float` und `double` kennen die Werte *NegativeInfinity*
+(*-1.#INF*) und *PositiveInfinity* (*1.#INF*), die bei Division durch Null
+entstehen können. Ausserdem gibt es den Wert *NaN* (*not a number*, *1.#IND*), der
+einen irregulären Zustand repräsentiert. Mit Hilfe der Methoden
+*IsInfinity()* bzw. *IsNaN()* kann überprüft werden, ob diese Werte vorliegen.
+
+```csharp
+Console.WriteLine(Double.IsNaN(0.0/0.0));//gibt true aus
+```
+
+### Arithmetische Operatoren
 
                                  {{0-1}}
 ********************************************************************************
@@ -592,8 +630,53 @@ namespace Rextester
 @Rextester.eval(@CSharp)
 
 ********************************************************************************
+### Bitweise Operatoren
 
-## 4. Beispiel der Woche ... Primzahlenbestimmung
+                                 {{0-1}}
+********************************************************************************
+Bitweise Operatoren verknüpfen Zahlen auf der Ebene einzelnen Bits, analog
+anderen Programmiersprachen stellt C# foldende Operatoren zur Verfügung:
+
+| ~  |invertiert jedes Bit                       |      
+| \| |verknüpft korrespondierende Bits mit ODER  |
+| &  |verknüpft korrespondierende Bits mit UND   |
+| ^  |verknüpft korrespondierende Bits mit XOR   |
+| << |bitweise Verschiebung nach links           |
+| >> |bitweise Verschiebung nach rechts          |
+
+```csharp   
+using System;
+
+namespace Rextester
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+          int x = 21, y = 12;
+           Console.WriteLine("dezimal:{0:D}, hexadezimal:{0:X}", x );
+           Console.WriteLine("dezimal:{0:D}, hexadezimal:{0:X}", y);
+           Console.WriteLine("dezimal:{0:D}, hexadezimal:{0:X}", x & y );
+           Console.WriteLine("dezimal:{0:D}, hexadezimal:{0:X}", x | y);
+           Console.WriteLine("dezimal:{0:D}, hexadezimal:{0:X}", x << 1);
+           Console.WriteLine("dezimal:{0:D}, hexadezimal:{0:X}", y >> 2);
+        }
+    }
+}
+```
+@Rextester.eval(@CSharp)
+
+```text
+20 = 0000 0000 0001 0101
+12 = 0000 0000 0000 1100
+ 4 = 0000 0000 0000 0100
+29 = 0000 0000 0001 1101
+42 = 0000 0000 0010 1010
+ 3 = 0000 0000 0000 0011
+```
+********************************************************************************
+
+## 3. Beispiel der Woche ... Primzahlenbestimmung
 
 Dieses Beispiel richtet sich insbesondere an diejenigen, die noch wenig
 Erfahrung bei der Programmierung haben. Experimentieren Sie selbstständig

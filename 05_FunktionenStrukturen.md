@@ -26,7 +26,7 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 c# Schlüsselwörter:
 
-| abstract    | as       | base     |`bool`      |`break`     |`byte`     |  
+| abstract    | as       | base     |`bool`      |`break`     |`byte`     |
 |`case`       |`catch`   |`char`    |`checked`   |`class`     | const     |
 |`continue`   |`decimal` | default  | delegate   |`do`        |`double`   |
 |`else`       |`enum`    | event    | explicit   | extern     |`false`    |
@@ -111,7 +111,7 @@ style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-r
 
                   .- 'a' -. .- 'c' -. .- 'd' -.
             .-.   |       | |       | |       |   .--.
-            |  \  |       v |       v |       v  /   |  
+            |  \  |       v |       v |       v  /   |
             |   v.-.      .-.       .-.       .-.    |
           !'a'  ( A )    ( B )     ( C )     ( D )  !'f'
             |   /'-'      '-'      ^'-'\\     '-'^   |
@@ -125,7 +125,7 @@ style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-r
 
 ````
 
-```csharp   
+```csharp
 using System;
 
 namespace Rextester
@@ -226,7 +226,7 @@ public override string ToString()
 
 Damit lassen sich einfache Funktionen sehr kompakt darstellen.
 
-```csharp  
+```csharp
 public class Program
 {
   static void Print(int p)  => Console.WriteLine(p);    // Prozedur
@@ -234,7 +234,7 @@ public class Program
 
   public static void Main(string[] args){
     int p = 6, result;
-    result = Calc(p);  
+    result = Calc(p);
     print(result);
   }
 }
@@ -262,7 +262,7 @@ namespace Rextester
 {
   public class Program
   {
-    static void Calc(int p)  
+    static void Calc(int p)
     {
       p = p + 1;
       Console.WriteLine("Innerhalb von Calc {0}", p);
@@ -270,8 +270,8 @@ namespace Rextester
 
     public static void Main(string[] args){
       int p = 6;
-      Calc(p);  
-      Console.WriteLine("Innerhalb von Main {0}", p);              
+      Calc(p);
+      Console.WriteLine("Innerhalb von Main {0}", p);
     }
   }
 }
@@ -309,9 +309,9 @@ namespace Rextester
        Counter.globalCounter++;
     }
     public static void Main(string[] args){
-      Console.WriteLine(Counter.globalCounter);   
+      Console.WriteLine(Counter.globalCounter);
       IncrementsCounter();
-      Console.WriteLine(Counter.globalCounter);               
+      Console.WriteLine(Counter.globalCounter);
     }
   }
 }
@@ -325,8 +325,8 @@ namespace Rextester
 
 **Ansatz 1 - Rückgabe des modifizierten Wertes**
 
-```csharp   
-static int Calc( int input)  
+```csharp
+static int Calc( int input)
 {
   // operationen über P
   int output = ... input
@@ -336,7 +336,7 @@ static int Calc( int input)
 public static void Main(string[] args){
   ...
   int p = 5;
-  p = Calc(p);  
+  p = Calc(p);
   ...
 }
 ```
@@ -352,7 +352,6 @@ Bei der Angabe des `ref`-Attributes wird statt der Variablen in jedem Fall die
 Adresse übergeben. Es ist aber lediglich ein Attribut der Parameterübergabe und
 kann isoliert nicht genutzt werden, um die Adresse einer Variablen zu bestimmen
 (vgl C: `int a=5; int *b=&a`).
-`ref` kann auch auf Referenzdatentypen angewendet werden, der Compiler löscht es entsprechend.
 
 Vorteil: auf beliebig viele Parameter ausweisbar, keine Synchronisation der
 Variablennamen zwischen Übergabeparameter und Rückgabewert notwendig.
@@ -370,9 +369,63 @@ namespace Rextester
     }
     public static void Main(string[] args){
       int p = 1;
-      Console.WriteLine(p);   
+      Console.WriteLine(p);
       Calc(ref p);
-      Console.WriteLine(p);               
+      Console.WriteLine(p);
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+`ref` kann auch auf Referenzdatentypen angewendet werden. Dort wirkt es sich nur dann aus, wenn an den betreffenden Parameter zugewiesen wird.
+
+```csharp         UsageOfRefWithClasses
+using System;
+
+namespace Rextester
+{
+  public class Program
+  {
+    class Wrapper
+    {
+      public int Wrapped
+      {
+        get;
+        set;
+      }
+      
+      public Wrapper(int newWrapped)
+      { 
+         Wrapped = newWrapped;
+      }
+    }
+
+    static void Test1(Wrapper w)
+    {
+      w.Wrapped = 666;
+      w = new Wrapper(999);
+    }
+
+    static void Test2(ref Wrapper w)
+    {
+      w.Wrapped = 666;
+      w = new Wrapper(999);
+    }
+
+    public static void Main(string[] args)
+    {
+      //Test1:
+      Wrapper myWrapper = new Wrapper(42);
+      Test1(myWrapper);
+
+      Console.WriteLine("Test1() without ref: myWrapper.Wrapped = {0}", myWrapper.Wrapped); //Prints 666
+
+      //Test2:
+      myWrapper = new Wrapper(42);
+      Test2(ref myWrapper);
+
+      Console.WriteLine("Test2() with ref: myWrapper.Wrapped = {0}", myWrapper.Wrapped); //Prints 999
     }
   }
 }
@@ -389,7 +442,7 @@ namespace Rextester
 
 `out` erlaubt die Übernahme von Rückgabewerten aus der aufgerufenen Methode.
 
-```csharp   
+```csharp
 using System;
 
 namespace Rextester
@@ -403,8 +456,8 @@ namespace Rextester
 
     public static void Main(string[] args){
       int p = 6, r;
-      Calc(p, out r);  
-      Console.WriteLine(r);                
+      Calc(p, out r);
+      Console.WriteLine(r);
     }
   }
 }
@@ -419,7 +472,7 @@ entgegennehmen.
 Zudem sollte für eine sehr umfangreiches Set von Rückgabewerten geprüft werden,
 ob diese wirklich alle benötig werden. Mit dem *discard* Platzhalter `out _` werden unnötige Deklarationen eingespart.
 
-```csharp  
+```csharp
 // Defintion
 static void SuperComplexMethod(out string result,
                                out int countA,
@@ -437,7 +490,7 @@ SuperComplexMethod(out _, out _, out int count);
 ### Parameterlisten
 
 C# erlaubt es Methoden zu definieren, die eine variable Zahl von Parametern
-haben. Dabei wird der letzte Parameter als Array deklariert, so dass die  
+haben. Dabei wird der letzte Parameter als Array deklariert, so dass die
 Informationen dann systematisch zu evaluieren sind. Dafür wird der `params`
 Modifikator eingefügt.
 
@@ -473,7 +526,7 @@ wird auf der einen Seite Flexibilität über ein breites Interface garantiert,
 auf der anderen aber lästige Tipparbeit vermieden. Der Code bleibt damit
 übersichtlich.
 
-```csharp   
+```csharp
 static void Sort(string [] s, int from, int to,
                  bool ascending, bool ignoreCases){}
 
@@ -487,7 +540,7 @@ static void Sort(string [] s,
 Die *default*-Werte müssen aber der Reihenfolge nach "abgearbeitet" werden.
 eine partielle Auswahl bestimmter Werte ist nicht möglich.
 
-```csharp   
+```csharp
 string [] s = {'Rotkäpchen', 'Hänsel', 'Gretel', 'Hexe'};
 //Aufruf     // implizit
 Sort(s);     // from=0, to=-1, ascending = true, ignoreCases= false
@@ -498,9 +551,9 @@ Darüber hinaus lässt sich die Reihenfolge der Parameter aber auch auflösen. D
 Variablenname wird dann explizit angegeben `,variablenname:Wert, `.
 
 <!-- --{{1}}-- Idee des Beispiels:
-          PrintDate(1, year:2019, month:12);  
+          PrintDate(1, year:2019, month:12);
 -->
-```csharp   
+```csharp
 using System;
 
 namespace Rextester
@@ -512,7 +565,7 @@ namespace Rextester
     }
 
     public static void Main(string[] args){
-      PrintDate(year:2019);           
+      PrintDate(year:2019);
     }
   }
 }
@@ -664,7 +717,7 @@ namespace Rextester
     public static void Main(string[] args){
       Animal kitty;
       kitty.name = "Kitty";
-      kitty.sound = "Miau";     
+      kitty.sound = "Miau";
       kitty.MakeNoise();
     }
   }
@@ -733,8 +786,8 @@ namespace Rextester
 {
   public struct Animal
   {
-    public string name;   
-    public string sound;  
+    public string name;
+    public string sound;
 
     public void MakeNoise() {
     	Console.WriteLine("{0} makes {1}", name, sound);
@@ -766,7 +819,7 @@ die Standardeinstellung von geschachtelten Typen private. Sie sind nur über
 ihren enthaltenden Typ zugänglich. Es können aber auch weitere
 Zugriffsmodifizierer angeben werden.
 
-```csharp                   NestedStructs                    
+```csharp                   NestedStructs
 public struct Container
 {
     public struct Nested
@@ -872,9 +925,9 @@ namespace Rextester
 {
   public struct Animal
   {
-    public string name;   
+    public string name;
     internal string sound;
-    private byte age;       
+    private byte age;
 
     public Animal(string name, uint born, string sound = "Miau"){
       this.name = name;
@@ -939,8 +992,8 @@ namespace Rextester
 {
   public struct Animal
   {
-    public string name;   
-    public string sound;  
+    public string name;
+    public string sound;
 
     public Animal(string name, string sound = "Miau"){
       this.name = name;

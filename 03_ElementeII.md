@@ -483,8 +483,23 @@ int [][] = jaggedMatrix ={
 
 ### Implizit typisierte Variablen
 
-Seit der Version 3.0 unterstützt C# implizite Typzuordnungen. In diesem Fall
-ordnet der Compiler den Daten automatisch einen passenden Typ zu.
+C# erlaubt bei den lokalen Variablen eine Definition ohne der expliziten Angabe
+des Datentyps. Die Variablen werden in diesem Fall mit dem Schlüsselwort `var`
+definiert, der Typ ergibt sich infolge der Auswertung des Ausdrucks auf der
+rechten Seite der Initialisierungsanweisung zur Compilierzeit.
+
+```csharp
+var i = 10; // i compiled as an int
+var s = "untypisch"; // s is compiled as a string
+var a = new[] {0, 1, 2}; // a is compiled as int[]
+```
+`var`-Variablen sind trotzdem typisierte Variablen, nur der Typ wird vom
+Compiler zugewissen.
+
+Vielfach werden `var`-Variablen im Initialisierungteil von `for`- und `foreach`-
+Anweisungen bzw. in der `using`-Anweisung verwendet. Eine wesentliche Rolle
+spielen sie bei der Verwendung von anonymen Typen. Aber Vorsicht: `var`
+kann nur mit lokalen Variablen verwendet werden.
 
 <!-- --{{1}}-- Idee des Codefragments:
   * Statische Beschränkung der Loop! Fehler generieren
