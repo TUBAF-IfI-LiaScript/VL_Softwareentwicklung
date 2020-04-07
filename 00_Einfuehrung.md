@@ -85,7 +85,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 -->
 ```ascii
                | Mittwoch   |     +-------------------------------------------+
-vorangegangene | Donnerstag | <-- | Bis Donnerstag sin die Materialien        |
+vorangegangene | Donnerstag | <-- | Bis Donnerstag sind die Materialien       |
 Woche          | Freitag    |     | der kommenden Woche auf github hinterlegt |
                | ...        |     +-------------------------------------------+
                |------------|
