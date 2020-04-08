@@ -1,7 +1,7 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
-email:    zug@ovgu.de   & andre.dietrich@ovgu.de
+author:   Sebastian Zug & André Dietrich & Christoph Pooch
+email:    Sebastian.Zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & christoph-paul.pooch@student.tu-freiberg.de
 version:  0.0.1
 language: de
 narrator: Deutsch Female
