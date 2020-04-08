@@ -12,7 +12,7 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 # Vorlesung Softwareentwicklung - 1 - Softwareentwicklung als Prozess
 
-** TU Bergakademie Freiberg - Sommersemester 2020**
+**TU Bergakademie Freiberg - Sommersemester 2020**
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
@@ -153,7 +153,7 @@ motiviert aus [Lemburg2](#7)
 7. Eine Abnahme der Phasenergebnisse erfolgt nicht
 8. Schlechte Namensvergabe wie z.B. File-, Klassen-, Methoden- und Variablennamen
 9. Die Systemarchitektur ist nicht oder nur sehr umständlich erweiterbar (fehlende Datenkapselung, fehlende Modularität)
-10. Die Schulung für die Software-Ersteller und -Anwender wird vernachlässigt oder als nichtnotwendig angesehe7
+10. Die Schulung für die Software-Ersteller und -Anwender wird vernachlässigt oder als nichtnotwendig angesehen
 11. Die Terminvorgaben sind unrealistisch
 12. Begriffe werden nicht definiert
 13. Die Auswahl der Werkzeuge/Methoden ist unzureichend vorbereitet
@@ -276,6 +276,7 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 
                                     {{5-6}}
 | Aspekt                 | Bewertung |
+| ---------------------- | --------- |
 | Funktionalität         | ?         |
 | Zuverlässigkeit        |           |
 | Benutzbarkeit          |           |
@@ -284,13 +285,14 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 | Übertragbarkeit        |           |
 
                                      {{6}}
-| Aspekt                 | Bewertung                                                         |
-| Funktionalität         | feste Feldlänge, das Programm stürzt bei mehr als 10 Einträgen ab |
-| Zuverlässigkeit        | mehrfaches Öffnen ein und der selben Datei, keine Überprüfung der Exisitenz der Datei                        |
-| Benutzbarkeit          | im Programmcode enthaltene Dateinamen, feste Feldlänge            |
-| Effizienz              | quadratischer Aufwand der Sortierung                              |
-| Wartungsfreundlichkeit | fehlende Dokumentation, unverständliche Variablenbezeichner       |
-| Übertragbarkeit        |                                                                   |
+| Aspekt                 | Bewertung                                                                             |
+| ---------------------- | ------------------------------------------------------------------------------------- |
+| Funktionalität         | feste Feldlänge, das Programm stürzt bei mehr als 10 Einträgen ab                     |
+| Zuverlässigkeit        | mehrfaches Öffnen ein und der selben Datei, keine Überprüfung der Exisitenz der Datei |
+| Benutzbarkeit          | im Programmcode enthaltene Dateinamen, feste Feldlänge                                |
+| Effizienz              | quadratischer Aufwand der Sortierung                                                  |
+| Wartungsfreundlichkeit | fehlende Dokumentation, unverständliche Variablenbezeichner                           |
+| Übertragbarkeit        |                                                                                       |
 
 ## 3. Struktuierung des Entwicklungsprozesses und Einordnung
 
@@ -324,7 +326,7 @@ Eigenschaften des Wasserfallmodells:
 * Es ist einfach, verständlich und benötigt nur wenig Managementaufwand.
 
 Vorteile:
-* klare Abgrenzung der Phasen–einfache Möglichkeiten der Planung und Kontrolle
+* klare Abgrenzung der Phasen – einfache Möglichkeiten der Planung und Kontrolle
 * bei stabilen Anforderungen und klarer Abschätzung von Kosten und Umfang ein sehr effektives Modell
 
 Nachteile:
@@ -337,7 +339,7 @@ Nachteile:
 
 ![V-Modell](./img/01_Software/VModell.png)<!-- width="80%" --> [Lemburg2](#7)
 
-Tätigkeitsbereiche des V-Modell: SoftwareErstellung, Qualitätssicherung, Konfigurationsmanagement, Projektmanagement
+Tätigkeitsbereiche des V-Modell: Softwareerstellung, Qualitätssicherung, Konfigurationsmanagement, Projektmanagement
 
 Vorteile:
 * Integrierte und detaillierte Darstellung von den Tätigkeitsbereichen
