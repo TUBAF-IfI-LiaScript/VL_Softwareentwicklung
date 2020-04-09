@@ -122,7 +122,7 @@ Steigende Komplexität der Softwareprodukte ...
 > **Merke:** Die Entwicklung kleiner Programme unterscheidet sich von der
 > Entwicklung großer Programme!
 
-| Kriterium                | Kleine Programme                                        | Große  Programme                                                           |
+| Kriterium                | Kleine Programme                                        | Große  Programme                                                          |
 | ------------------------ | ------------------------------------------------------- | ------------------------------------------------------------------------- |
 | Zeilenzahl               | bis zu ein paar 1000 Zeilen                             | Millionen von LOC                                                         |
 | Einsatz                  | "Eigengebrauch"                                         | kommerzieller Einsatz von Dritten                                         |
@@ -298,8 +298,8 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 
 **Warum ist Softwareentwicklung so herausfordernd**
 
-*  Die Größe der zu lösenden Probleme. Software ist nicht einfacher, als die Probleme die sie löst. Je größer und schwieriger die Software, desto aufwendiger und schwieriger ist die Entwicklung.
-* Die Tatsache, das Software ein immaterielles Produkt ist. Die Immaterialität macht das Arbeitenmit Software schwieriger als dasjenige mit materiellen Produkten vergleichbarer Komplexität, da die Risiken auch schwerer zu erkennen sind.
+* Die Größe der zu lösenden Probleme. Software ist nicht einfacher, als die Probleme die sie löst. Je größer und schwieriger die Software, desto aufwendiger und schwieriger ist die Entwicklung.
+* Die Tatsache, dass Software ein immaterielles Produkt ist. Die Immaterialität macht das Arbeiten mit Software schwieriger als dasjenige mit materiellen Produkten vergleichbarer Komplexität, da die Risiken auch schwerer zu erkennen sind.
 * Sich permanent verändernde Ziele aufgrund der Evolution. Schon das Bestimmen und Erreichen fixierter Ziele bei der Entwicklung ist keine leichte Aufgabe. Sich verändernde Ziele machen das ganze nochmal um eine Größenordnung schwieriger.
 * Fehler infolge von Fehleinschätzungen zur Skalierung ("was im Kleinen geht, geht genauso im Großen"). Software-Entwicklung wird daher unbewusst meist als viel einfacher eingeschätzt, als sie tatsächlich ist. Dies führt zu unrealistischen Erwartungen und zu von Beginn an zu tiefen Kosten- und Terminschätzungen.
 * Funktionierende Einzelkomponenten stellen noch lange kein funktionierendes Gesamtsystem sicher.
