@@ -1,0 +1,33 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# This is a basic workflow to help you get started with Actions
+
+name: GeneratePdf
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ SoSe2020 ]
+
+jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker://pandoc/latex:2.9
+        with: 
+          args: "--pdf-engine=xelatex --output script.pdf *.md"
+      - uses: actions/upload-artifact@master
+        with:
+          name: script.pdf
