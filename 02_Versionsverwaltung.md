@@ -27,7 +27,7 @@ Die interaktive Form ist unter diese Link zu finden ->
 ## 7 Fragen in 7 Minuten
 
 
-**1. Bewerten Sie die Aussage: GitHub und git sind im Grunde das gleiche!**
+**1. Bewerten Sie die Aussage: GitHub und git sind im Grunde das Gleiche!**
 
 [( )] Die Aussage stimmt.
 [(X)] Die Aussage ist falsch
@@ -125,6 +125,9 @@ Ein Beispiel, wie ein Versionsmanagementsystem die Arbeit von verteilten Autoren
 
 ![VersionsmanagementWikipedia](./img/02_Versionsverwaltung/VersionenVonVersionsverwaltung.png)<!-- width="100%" -->
 
+                                {{1-2}}
+******************************************************************************
+
 Hauptaufgaben:
 
 + Protokollierungen der Änderungen: Es kann jederzeit nachvollzogen werden, wer wann was geändert hat.
@@ -133,11 +136,8 @@ Hauptaufgaben:
 + Koordinierung des gemeinsamen Zugriffs von mehreren Entwicklern auf die Dateien.
 + Gleichzeitige Entwicklung mehrerer Entwicklungszweige (engl. Branch) eines Projektes, was nicht mit der Abspaltung eines anderen Projekts (engl. Fork) verwechselt werden darf.
 
-Dabei unterscheiden wir 3 typen von Repositories:
+******************************************************************************
 
-+ lokale Versionsverwaltungen auf dem Rechner des Entwicklers
-+ zentrale Versionsverwaltungen auf einem Server
-+ verteilte Versionsverwaltungen
 
 ### Strategien zur Konfliktvermeidung
 
@@ -506,7 +506,11 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
 ###Git
 
-**Basisbefehle**
+                                {{0-1}}
+******************************************************************************
+
+
+**Geschichte und Einsatz**
 
 Die Entwicklungsgeschichte von git ist mit der des Linux Kernels verbunden:
 
@@ -518,9 +522,9 @@ Die Entwicklungsgeschichte von git ist mit der des Linux Kernels verbunden:
 
 > Git dominiert entweder als einzelne Installation oder aber eingebettet in verschiedene Entwicklungsplattform die Softwareentwicklung!
 
-Wie bekommen sie Git auf Ihren Windows-Rechner?
+**Wie bekommen sie Git auf Ihren Windows-Rechner?**
 
-1. Variante 1: als Integralen Bestandteil in Ihrer Entwicklungsumgebung**
+1. Variante 1: als Integralen Bestandteil in Ihrer Entwicklungsumgebung
 Die großen IDEs umfassen einen eigenen Git-Client, für einfachere Editoren muss dieser meist nachinstalliert werden.
 
 2. Variante 2: als unabhänigige Installation
@@ -530,6 +534,11 @@ Unter [Link](https://phoenixnap.com/kb/how-to-install-git-windows) findet sich e
 Cygwin emuliert Linuxbefehle und Tools der Shell. Neben Compilern und einer Vielzahl von Entwicklertools können auch verschiedene Versionsverwaltungen installiert werden.
 
 Eine übergreifende Erklärung für die Installation gibt zum Beispiel dieses [Tutorial](https://www.youtube.com/watch?v=Fk12ELJ9Bww).
+
+******************************************************************************
+
+                                {{1-2}}
+******************************************************************************
 
 **Einfache Anwendungsfälle**
 
@@ -613,6 +622,11 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 | git checkout | Wechsel zwischen Branches oder Zugriff auf Version des Projektes             |
 | git merge    | Mischt die Änderungen des lokalen Repositories mit der aktullen Arbeitskopie |
 
+******************************************************************************
+
+                                {{2-3}}
+******************************************************************************
+
 Wie sieht ein üblicher Ablauf bei der Bearbeitung eines Projektes aus?
 
 ```console
@@ -659,6 +673,7 @@ Completing recent commit object name
 99861ba  -- [HEAD~17] Includiert erweiterte before_script Anweisungen (5 days ago)
 ```
 
+******************************************************************************
 
 ## Anhang
 
