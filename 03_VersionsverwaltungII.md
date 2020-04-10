@@ -1,7 +1,7 @@
 <!--
 
 author:   Sebastian Zug & André Dietrich
-email:    zug@ovgu.de   & andre.dietrich@ovgu.de
+email:    Sebastian.Zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de
 version:  0.0.1
 language: de
 narrator: Deutsch Female
@@ -170,12 +170,15 @@ SoSe2020dev    O->O---->O---->O->O---->O-->O->O      ....
 Ein Branch in Git ist einfach ein Zeiger auf einen Commit zeigt. Der zentrale Branch wird zumeist als `master` bezeichnet.
 
 ### Generieren und Navigation über Branches
-
-@@ Hinweis
+<!--
+@@ Hinweis für die Realisierung
     git branch feature
     git checkout feature
     git checkout 0e8bf9e
     git branch newFeature
+-->
+
+Wie navigieren wir nun konkret über den verschiedenen Entwicklungszweigen.
 
 ``` text @ExplainGit.eval
 git commit -m V1
@@ -241,7 +244,7 @@ git commit -m V1
 ```
 
 
-## Typische Abläufe
+## 3. Typische Abläufe
 
 **Ergänzen eines Commits um zusätzliche Dateien**
 
@@ -336,7 +339,7 @@ aa04051 - Sebastian Zug, 23 hours ago : Restart action activities
 Unser lokaler Branch liegt nach dem Löschen aber um einiges hinter dem auf GitHub entsprechend müssen wir mit `git push --force` das Überschreiben erzwingen.
 
 
-## Ein Wort zur Zusammenarbeit
+## 4. Ein Wort zur Zusammenarbeit
 
 Bitte haben Sie immer den spezifischen Kontext Ihres Projektes vor Augen. Üblicherweise legt man am Anfang, bei einem "kleinen Hack" keinen Wert auf formelle Abläufe und Stukturen. Diese sind
 aber in großen Projekten unablässig.
@@ -360,27 +363,15 @@ Folgende Regeln sollte man für die Beschreibung eines Commits berücksichtigen:
 
 Eine weiterführende Diskussion zum Thema bietet zum Beispiel die Webseite [TheServerSide](https://www.theserverside.com/video/Follow-these-git-commit-message-guidelines).
 
-## Automatisierung der Arbeit
+## 5. Automatisierung der Arbeit
 
 TODO
 
 
 
-## 1. Aufgaben
+## 6. Aufgaben
 
-1. Recherchieren Sie die Methode des "Myers-diff-Algorithmus"
-https://blog.jcoglan.com/2017/02/12/the-myers-diff-algorithm-part-1/
-
-Erzeugen Sie ein Issue "Rechtschreibprüfung"
-Erzeugen Sie ein Issue "Dokument in Markdown übertragen"
-Erzeugen Sie ein Issue "Bilder ergänzen"
-Ordnen Sie die Aufgaben zu!
-Eröffnen Sie einen neuen Feature-Branch "SwitchToMarkdown"
-Werfen Sie alle Rechtschreibfehler aus den Dokumenten. Dafür ist einer von Ihnen verantwortlich. Bitte lassen Sie den "KAUDERWELSCH" Eintrag im Text bestehen.
-Bitten Sie Ihren Mitstreiter um ein Review. "Zufällig" findet er den oben genannten Eintrag und macht Sie per Issue Diskussion und Permalink drauf aufmerksam.
-Sie korrieren diesen Fehler und
-Stellen Sie die Dokumente auf eine Markdownsyntax um
-"Simulieren" Sie weitere Aktivitäten, in dem Sie Grafiken einfügen.
-Mergen Sie den Branch mit "master"
-Schließen Sie die Issues, referenzieren Sie diese in Ihren Commits
-Zusatzaufgabe: Integrieren Sie eine GitHub Action, die aus den Dokumenten die zugehörigen pdfs (nutzen Sie dafür das pandoc tool und ein entsprechendes Plugin) erzeugt.
+1. Recherchieren Sie die Methode des "Myers-diff-Algorithmus" https://blog.jcoglan.com/2017/02/12/the-myers-diff-algorithm-part-1/
+2. Ermitteln Sie, wie sie eine lokale Instanz eines Repositories auf Ihrem Rechner aufsetzen, ohne, dass Sie auf einen Remote-Server zurückgreifen.
+3. Legen Sie sich ein eigenes Repository unter GitHub an und experimentieren Sie damit. Richten Sie sich insbesondere auch den SSH basierten Zugriff ein (erspart einem das fortwährende eingeben eines Passwortes).
+3. Sie erhalten im Laufe der Woche Ihre erste Einladung für einen GitHub Classroom. Ausgehend davon werden Sie aufgefordert sich in Zweierteams zu organiseren und werden dann gemeinsam erste Gehversuche unter git zu unternehmen.
