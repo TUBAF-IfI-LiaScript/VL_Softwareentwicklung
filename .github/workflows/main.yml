@@ -22,6 +22,8 @@ jobs:
         run : |
           ls -all
           mkdir output
+          filelist = (${prefix}*.md)
+          echo $filelist
       - name: Run Pandoc for a specific file
         uses: docker://pandoc/latex:2.9
         with:
@@ -29,7 +31,7 @@ jobs:
       - name: Run Pandoc for all md files
         uses: docker://pandoc/latex:2.9
         with:
-          args: "--standalone --output=output/README.pdf *.md"  
+          args: "--standalone --output=output/README.pdf $filelist"
       - uses: actions/upload-artifact@master
         with:
           name: output
