@@ -148,17 +148,96 @@ defekten Master(-Branch) die Arbeit sämtlicher Beteiligter unterbrochen wird. B
 schaffen einen eignen (temporären) Raum für die Entwicklung neuer Features, ohne
 die Stabilität des Gesamtsystems zu gefährden. Gleichzeitig haben die Entwickler den gesamten Verlauf eines Projekts in strukturierter Art zur Hand.
 
-![GitWorkFlow](./img/02_Versionsverwaltung/Gitflow-Workflow.png)<!-- height="300px" --> [seibert](#7)
+Wie sieht das zum Beispiel für unsere Kursmaterialien aus?
 
-git branch feature
-git checkout feature
-git checkout 0e8bf9e
-git branch newFeature
+<!--
+style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+-->
+```ascii
+
+        vSoSe2019                                                   vSoSe2020
+Master   O-----------------------------------------  ....  ---------O
+          \                                                        ^
+           \               Offizielle Versionen                   /
+SoSe2020    \              O-->O                 O          ---->O
+             \            ^     \               /
+              v          /       v             /
+SoSe2020dev    O->O---->O---->O->O---->O-->O->O      ....
+               Vorlesung      Vorlesung
+               00             01
+```
+
+Ein Branch in Git ist einfach ein Zeiger auf einen Commit zeigt. Der zentrale Branch wird zumeist als `master` bezeichnet.
+
+### Generieren und Navigation über Branches
+
+@@ Hinweis
+    git branch feature
+    git checkout feature
+    git checkout 0e8bf9e
+    git branch newFeature
 
 ``` text @ExplainGit.eval
 git commit -m V1
 git commit -m V2
 git commit -m V3
+```
+
+
+### Mergoperationen über Branches
+<!--
+@@ Hinweis für die Realisierung
+    git checkout master
+    git branch hotfix
+    git checkout hotfix
+    git commit -m "Solve bug"
+    git checkout master
+    git merge hotfix
+    You have performed a fast-forward merge.
+    git branch -d hotfix
+    git checkout newFeature
+    git commit -m FeatureV3
+    git checkout master
+    git merge newFeature
+    Beim fast-forward merge gibt es keine nachfolgende Version. Der master wird
+    einfach auf den anderen branch verschoben.
+    Im zweiten Fall läuft ein 3 Wege Merge ab
+-->
+Nehmen wir folgendes Scenario an. Sie arbeiten an einem Issue, dafür haben Sie
+einen separaten Branch (newFeature) erzeugt und haben bereits einige Commits
+realisiert. Beim Kaffeetrinken denken Sie über den Code von letzter Woche nach und Ihnen fällt ein Bug ein, den Sie noch nicht behoben haben. Jetzt aber schnell!
+
+Legen Sie dafür einen neuen Branch an, commiten Sie eine Version und mergen
+Sie diese mit dem Master. Kehren Sie dann in den Feature-Branch zurück und
+beenden Sie die Arbeit. Mergen Sie auch diesen Branch mit dem Master.
+Worin unterscheiden sich beide Vorgänge?
+
+``` text @ExplainGit.eval
+git branch newFeature
+git checkout newFeature
+git commit -m FeatureV1
+git commit -m FeatureV2
+```
+
+Mergen ist eine nicht-destruktive Operation. Die bestehenden Branches werden auf keine Weise verändert. Das Ganze "bläht" aber den Entwicklungsbaum auf.
+
+### Rebase mit einem Branche
+<!--
+@@ Hinweis für die Realisierung
+    git checkout master
+    git rebase newFeature
+    git branch -d newFeature
+-->
+
+Zum `merge` exisitert auch noch eine alternative Operation. Mit `rebase` werden die Änderungen eins branches in einem Patch zusammengefasst. Dieser wird dann auf head angewandt.
+
+``` text @ExplainGit.eval
+git branch newFeature
+git checkout newFeature
+git commit -m FeatureV1
+git commit -m FeatureV2
+git checkout master
+git commit -m V1
 ```
 
 
@@ -198,7 +277,64 @@ git commit -m V2
 git commit -m V3
 ```
 
-Leider fehlt in ExplainGit die Möglichkeit
+ExplainGit kann den Vorgang des `reset --soft` aus nachvollziehbaren gründen nicht abbilden.
+
+**Umgestalten der History**
+
+Ein sehr mächtiges Werkzeug ist der interaktive Modus von `git rebase`. Damit kann die
+Geschichte neugeschrieben werden, wie es die git Dokumentation beschreibt. Im Grund können Sie damit Ihre Versionsgeschichte "aufräumen". Einzelne Commits umbenennen, löschen oder fusionieren. Dafür besteht ein eigenes Interface, dass Sie mit dem folgenden Befehl aufrufen können:
+
+```console
+▶git rebase -i HEAD~5
+
+pick d2a06e4 Update main.yml
+pick 78839b0 Reconfigures checkout
+pick f70cfc7 Replaces wildcard by specific filename
+pick 05b76f3 New pandoc command line
+pick c56a779 Corrects md filename
+
+# Rebase a3b07d4..c56a779 onto a3b07d4 (5 commands)
+#
+# Commands:
+# p, pick = use commit
+# r, reword = use commit, but edit the commit message
+# e, edit = use commit, but stop for amending
+# s, squash = use commit, but meld into previous commit
+# f, fixup = like "squash", but discard this commit's log message
+# x, exec = run command (the rest of the line) using shell
+# d, drop = remove commit
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+# Note that empty commits are commented out
+```
+
+Als Anwendungsfall habe ich mir meine Aktivitäten im Kontext einiger Experimente
+mit den GitHub Actions, die im nächsten Abschnitt kurz eingeführt werden, ausgesucht.
+Schauen wir zunächst auf den ursprünglichen Stand. Alle Experimente drehten sich darum, eine Datei anzupassen und dann auf dem Server die Korrektheit zu testen.
+
+```console
+▶
+c56a779 - Sebastian Zug, 7 hours ago : Corrects md filename
+05b76f3 - Sebastian Zug, 7 hours ago : New pandoc command line
+f70cfc7 - Sebastian Zug, 8 hours ago : Replaces wildcard by specific filename
+78839b0 - Sebastian Zug, 21 hours ago : Reconfigures checkout
+d2a06e4 - Sebastian Zug, 22 hours ago : Update main.yml
+...
+aa04051 - Sebastian Zug, 23 hours ago : Restart action activities
+4b22d12 - Sebastian Zug, 23 hours ago : Deleting old state
+64075cc - Sebastian Zug, 24 hours ago : Update main.yml
+01f341b - Sebastian Zug, 24 hours ago : Missing links added
+...
+29c8e68 - Sebastian Zug, 11 days ago : Update README.md
+```
+
+Unser lokaler Branch liegt nach dem Löschen aber um einiges hinter dem auf GitHub entsprechend müssen wir mit `git push --force` das Überschreiben erzwingen.
+
 
 ## Ein Wort zur Zusammenarbeit
 
@@ -225,6 +361,9 @@ Folgende Regeln sollte man für die Beschreibung eines Commits berücksichtigen:
 Eine weiterführende Diskussion zum Thema bietet zum Beispiel die Webseite [TheServerSide](https://www.theserverside.com/video/Follow-these-git-commit-message-guidelines).
 
 ## Automatisierung der Arbeit
+
+TODO
+
 
 
 ## 1. Aufgaben
