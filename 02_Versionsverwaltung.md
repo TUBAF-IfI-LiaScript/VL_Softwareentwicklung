@@ -13,7 +13,7 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 # Vorlesung Softwareentwicklung - 2 - Versionsverwaltung
 
-** TU Bergakademie Freiberg - Sommersemester 2020**
+**TU Bergakademie Freiberg - Sommersemester 2020**
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
@@ -565,7 +565,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 ```
 
 
-Nehmen wir nun an, dass Ihr Kollege in dieser Zeit selbst das Remote Repository fortgeschrieben hat. In diesem Fall bekommen Sie bei Ihrem `push` eine Fehlermeldung, die sie auf die neuere Version hinweist. Nun "ziehen" Sie sich den aktuellen
+_Kooperatives Arbeiten:_ Nehmen wir nun an, dass Ihr Kollege in dieser Zeit selbst das Remote Repository fortgeschrieben hat. In diesem Fall bekommen Sie bei Ihrem `push` eine Fehlermeldung, die sie auf die neuere Version hinweist. Nun "ziehen" Sie sich den aktuellen
 Stand in Ihr Repository und kombinieren die Änderungen. Sofern keine Konflikte
 entstehen, wird daraus ein neuer Commit generiert, den Sie dann mit Ihren Anpassungen an das Remote-Repository senden.
 
@@ -657,45 +657,6 @@ Completing recent commit object name
 9bfb686  -- [9bfb686] Replaces wrong path reference (50 minutes ago)
 9757c47  -- [9757c47] Replaces cd.. by referencing project files directly (55 minutes ago)
 99861ba  -- [HEAD~17] Includiert erweiterte before_script Anweisungen (5 days ago)
-```
-
-**Arbeiten mit Branches**
-
-Die Organisation von Versionen in unterschiedlichen Branches ist ein zentrales
-Element der Arbeit mit git. Branches sind Verzweigungen des Codes, die bestimmte
-Entwicklungsziele kapseln.
-
-![GitWorkFlow](./img/02_Versionsverwaltung/Gitflow-Workflow.png)<!-- height="300px" --> [seibert](#7)
-
-Der größte Nachteil bei der Arbeit mit nur einem Branch liegt darin, dass bei einem
-defekten Master(-Branch) die Arbeit sämtlicher Beteiligter unterbrochen wird. Branches
-schaffen einen eignen (temporären) Raum für die Entwicklung neuer Features, ohne
-die Stabilität des Gesamtsystems zu gefährden. Gleichzeitig haben die Entwickler den gesamten Verlauf eines Projekts in strukturierter Art zur Hand.
-
-Nehmen wir an, dass Sie einen neuen Branch "feature_x" anlegen wollen, um eine
-zusätzliche Klasse "newClass.cs" zu realisieren.
-
-```
-▶git checkout -b feature_x
-▶touch newFile.txt
-▶git add newClass.cs
-▶git commit -m "Adds a new fancy feature"
-▶git checkout master
-▶git merge feature_x
-```
-
-
-## Git Einführung
-
-
-``` text @ExplainGit.eval
-git commit
-git commit -m Hello World
-git branch dev
-git checkout dev
-git commit -m dev commit
-git checkout master
-git commit -m master commit
 ```
 
 
