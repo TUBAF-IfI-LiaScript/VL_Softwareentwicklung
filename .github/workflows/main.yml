@@ -27,7 +27,7 @@ jobs:
       - name: Run Pandoc for a specific file
         uses: docker://pandoc/latex:2.9
         with:
-          args: "--standalone --output=output/script.pdf $filelist"
+          args: "--standalone --output=output/script.pdf 00_Einfuehrung.md 01_Software.md"
       - uses: actions/upload-artifact@master
         with:
           name: output
