@@ -26,7 +26,7 @@ jobs:
         env:
           COMMAND : "--standalone -f markdown --output=output/script.pdf 00_Einfuehrung.md"
         with:
-          args: ${{ COMMAND }}
+          args: ${{ FILELIST }}
       - uses: actions/upload-artifact@master
         with:
           name: output
