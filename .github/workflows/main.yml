@@ -21,18 +21,10 @@ jobs:
       - name: Show variable
         run : |
           echo $FILELIST
-      - name: Run Pandoc for a specific file
+      - name: Run Pandoc for all lecture files
         uses: docker://pandoc/latex:2.9
         with:
-          args: |
-            --standalone
-            --toc
-            --top-level-division=chapter
-            --pdf-engine=xelatex
-            -V geometry:margin=2cm
-            -V linkcolor:blue
-            -f markdown
-            --output=output/script.pdf ${{ env.FILELIST }}
+          args: --toc --top-level-division=chapter -V geometry:margin=2cm -V linkcolor:blue --pdf-engine=xelatex --output=output/script.pdf ${{ env.FILELIST }}
       - uses: actions/upload-artifact@master
         with:
           name: output
