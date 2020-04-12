@@ -23,7 +23,7 @@ jobs:
           ls -all
           mkdir output
           echo $0
-          filelist = (${prefix}*.md)
+          filelist=$(ls *.md)
           echo $filelist
       - name: Run Pandoc for a specific file
         uses: docker://pandoc/latex:2.9
