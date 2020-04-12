@@ -20,7 +20,7 @@ jobs:
           FILELIST: $(ls *.md)
       - name: Show variable
         run : |
-          echo $FILELIST
+          echo ${FILELIST}
       - name: Run Pandoc for a specific file
         uses: docker://pandoc/latex:2.9
         with:
