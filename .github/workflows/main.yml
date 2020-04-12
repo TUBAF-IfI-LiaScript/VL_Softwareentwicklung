@@ -24,7 +24,15 @@ jobs:
       - name: Run Pandoc for a specific file
         uses: docker://pandoc/latex:2.9
         with:
-          args: --standalone -f markdown --output=output/script.pdf ${{ env.FILELIST }}
+          args: |
+          --standalone
+          --toc
+          --top-level-division=chapter
+          --pdf-engine=xelatex
+          -V geometry:margin=2cm
+          -V linkcolor:blue
+          -f markdown
+          --output=output/script.pdf ${{ env.FILELIST }}
       - uses: actions/upload-artifact@master
         with:
           name: output
