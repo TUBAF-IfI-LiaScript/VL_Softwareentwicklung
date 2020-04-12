@@ -33,6 +33,9 @@ jobs:
         uses: docker://pandoc/latex:2.9
         with:
           args: "--standalone --output=output/README.pdf $filelist"
+      - name: Show variable
+        run : |
+          echo $filelist
       - uses: actions/upload-artifact@master
         with:
           name: output
