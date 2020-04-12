@@ -12,29 +12,28 @@ on:
 
 jobs:
   convert_via_pandoc:
+    env:
+
     runs-on: ubuntu-18.04
     steps:
       - name: Check out current repository
         uses: actions/checkout@v2
         with:
           ref: SoSe2020
-      - name: Show files
+      - name: Show all current files
         run : |
           ls -all
           mkdir output
-          echo $0
-          filelist=$(ls *.md)
+          echo $filelist
+        env :
+          filelist: $(ls *.md)
+      - name: Show variable
+        run : |
           echo $filelist
       - name: Run Pandoc for a specific file
         uses: docker://pandoc/latex:2.9
         with:
           args: "--standalone --output=output/README1.pdf 00_Einfuehrung.md"
-      - name: Show variable
-        run : echo $filelist
-      - name: Pandoc Document Converter
-        uses: Ender-events/pandoc@master
-        with:
-          args: '-s -o README2.pdf *.md'
       - uses: actions/upload-artifact@master
         with:
           name: output
