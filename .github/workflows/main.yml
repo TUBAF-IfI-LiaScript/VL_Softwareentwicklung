@@ -14,16 +14,13 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: SoSe2020
-      - name: Show all current files
-        run : |
-          ls -all
-          mkdir output
-          echo $filelist
-        env :
-          filelist: $(ls *.md)
+      - name: Set environment variables
+        uses: allenevans/set-env@v1.0.0
+        with:
+          FILELIST: $(ls *.md)
       - name: Show variable
         run : |
-          echo $filelist
+          echo $FILELIST
       - name: Run Pandoc for a specific file
         uses: docker://pandoc/latex:2.9
         with:
