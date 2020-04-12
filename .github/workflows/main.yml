@@ -15,16 +15,16 @@ jobs:
         with:
           ref: SoSe2020
       - name: Set environment variables
-        uses: allenevans/set-env@v1.0.0
-        with:
-          FILELIST: ${ls *.md}
+        run : |
+          echo ::set-env name=FILELIST::$(ls *.md)
+          mkdir output
       - name: Show variable
         run : |
-          echo ${FILELIST}
+          echo $FILELIST
       - name: Run Pandoc for a specific file
         uses: docker://pandoc/latex:2.9
         with:
-          args: "--standalone --output=output/script.pdf 00_Einfuehrung.md 01_Software.md"
+          args: "--standalone --output=output/script.pdf $FILELIST"
       - uses: actions/upload-artifact@master
         with:
           name: output
