@@ -28,14 +28,13 @@ jobs:
       - name: Run Pandoc for a specific file
         uses: docker://pandoc/latex:2.9
         with:
-          args: "--standalone --output=output/README.pdf 00_Einfuehrung.md"
-      - name: Run Pandoc for all md files
-        uses: docker://pandoc/latex:2.9
-        with:
-          args: "--standalone --output=output/README.pdf $filelist"
+          args: "--standalone --output=output/README1.pdf 00_Einfuehrung.md"
       - name: Show variable
-        run : |
-          echo $filelist
+        run : echo $filelist
+      - name: Pandoc Document Converter
+        uses: Ender-events/pandoc@master
+        with:
+          args: '-s -o README2.pdf *.md'
       - uses: actions/upload-artifact@master
         with:
           name: output
