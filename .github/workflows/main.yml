@@ -23,8 +23,10 @@ jobs:
           echo $FILELIST
       - name: Run Pandoc for a specific file
         uses: docker://pandoc/latex:2.9
+        env:
+          COMMAND = "--standalone -f markdown --output=output/script.pdf 00_Einfuehrung.md"
         with:
-          args: "--standalone -f markdown --output=output/script.pdf ${{FILELIST}}"
+          args: "$COMMAND"
       - uses: actions/upload-artifact@master
         with:
           name: output
