@@ -24,7 +24,8 @@ jobs:
       - name: Run Pandoc for a specific file
         uses: docker://pandoc/latex:2.9
         with:
-          args: "--standalone --output=output/script.pdf $FILELIST"
+          FILELIST: ${{FILELIST}}
+          args: "--standalone -f markdown --output=output/script.pdf $FILELIST"
       - uses: actions/upload-artifact@master
         with:
           name: output
