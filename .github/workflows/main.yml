@@ -24,7 +24,7 @@ jobs:
       - name: Run Pandoc for a specific file
         uses: docker://pandoc/latex:2.9
         with:
-          args: |>
+          args: |
             --standalone
             --toc
             --top-level-division=chapter
