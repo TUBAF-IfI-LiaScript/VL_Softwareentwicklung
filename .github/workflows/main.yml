@@ -2,9 +2,8 @@ name: GeneratePdf
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches:
+      - SoSe2020Actions
 
 jobs:
   convert_via_pandoc:
@@ -13,7 +12,7 @@ jobs:
       - name: Check out current repository
         uses: actions/checkout@v2
         with:
-          ref: SoSe2020
+          ref: SoSe2020Actions
       - name: Set environment variables
         run : |
           python3 .github/workflows/preprocessing.py
