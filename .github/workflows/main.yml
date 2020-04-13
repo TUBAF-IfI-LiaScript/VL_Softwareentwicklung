@@ -1,0 +1,29 @@
+name: GeneratePdf
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check out current repository
+        uses: actions/checkout@v2
+        with:
+          ref: SoSe2020
+      - name: Set environment variables
+        run : |
+          python3 .github/workflows/preprocessing.py
+          echo ::set-env name=FILELIST::$(ls *.mdx)
+          mkdir output
+      - name: Run Pandoc for all lecture files
+        uses: docker://pandoc/latex:2.9
+        with:
+          args: -f markdown --toc --top-level-division=chapter -V geometry:margin=2cm -V linkcolor:blue --pdf-engine=xelatex --listings -H .github/workflows/listings.tex --output=output/script.pdf ${{ env.FILELIST }}
+      - uses: actions/upload-artifact@master
+        with:
+          name: output
+          path: output
