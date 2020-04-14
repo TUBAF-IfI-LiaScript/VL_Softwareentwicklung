@@ -23,6 +23,37 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ---------------------------------------------------------------------
 
+
+## 7 Fragen in 7 Minuten
+
+
+**1. Der Befehl `git pull` realisiert zwei Schritte:**
+
+[( )] `git branch` und `git merge`
+[(X)] `git fetch` und `git merge`
+[[?]] Der kombinierte Befehl bezieht sich auf die Interaktion mit dem Remote-Repository und dessen ggf. vor dem aktuellen lokalen Repository liegenden Versionen.
+***********************************************************************
+
+                                {{1}}
+Mit `git pull` werden die aktuellen Änderungen des Branches, die auf dem Remote-Repository
+liegen abgerufen und in das lokale Repository mit `git merge` übernommen.
+
+***********************************************************************
+
+__2. Jetzt sind Sie dran ...__
+
+__3. ...__
+
+__4. ...__
+
+__5. ...__
+
+__6. ...__
+
+__7. ...__
+
+
+
 ## Zustände einer Datei im git-Kontext
 
 Sie kennen bereits die möglichen Zuständer einer Datei innerhalb der GitHub-Welt.
