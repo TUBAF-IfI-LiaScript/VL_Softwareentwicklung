@@ -217,7 +217,7 @@ Eine gute Einführung zu Markdown finden Sie zum Beispiel unter
 
 Mit einem entsprechenden Editor und einigen Paketen macht das Ganze dann auch Spaß
 
-* Wichtigstes Element ist ein Previewer, der es Ihnen erlaubt "online" die Korrktheit der Eingaben zu prüfen
+* Wichtigstes Element ist ein Previewer, der es Ihnen erlaubt "online" die Korrektheit der Eingaben zu prüfen
 * Tools zur Unterstützung komplexerer Eingaben wie zum Beispiel der Tabellen (zum Beispiel für Atom mit [markdown-table-editor](https://atom.io/packages/markdown-table-editor))
 * Visualisierungsmethoden, die schon bei der Eingabe unterstützen
 * Rechtschreibprüfung (!)
