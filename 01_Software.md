@@ -1,7 +1,7 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Christoph Pooch
-email:    Sebastian.Zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & christoph-paul.pooch@student.tu-freiberg.de
+author:   Sebastian Zug & André Dietrich & Christoph Pooch & Johanna Klinke
+email:    Sebastian.Zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & christoph-paul.pooch@student.tu-freiberg.de & -  &
 version:  0.0.1
 language: de
 narrator: Deutsch Female
@@ -16,7 +16,7 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/01_Software.md
+[https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/01_Software.md](https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/01_Software.md)
 
 Die interaktive Form ist unter diese Link zu finden ->
 [LiaScript Vorlesung 01](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/SoSe2020/01_Software.md#1)
