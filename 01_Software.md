@@ -57,7 +57,7 @@ Die interaktive Form ist unter diese Link zu finden ->
 2. Analyse Entwurf
 3. Implementierung
 4. Test
-5. Markeinführung
+5. Markteinführung
 6. Pflege/Wartung
 
 Welche Querbeziehungen ("Während der Tests wird erkannt, dass die Implementierung Mängel aufweist.") zwischen den einzelenn Stufen sehen Sie?
@@ -214,7 +214,7 @@ http://people.cs.ksu.edu/~hatcliff/842/Docs/Course-Overview/pathfinder-robotmag.
 **Toll Connect**
 
 Die Gebührenerhebung für LKW funktioniert auf deutschen Autobahn nach drei Methoden:
-1. Buchung über das Internet vor Fahrtantritt gebucht werden,
+1. Buchung über das Internet vor Fahrtantritt,
 2. Bezahlung an sogenannten „Mautstellen-Terminals“ oder
 3. vollautomatische Abrechnung durch den Einsatz des GPS-Systems, die den Einbau von sogenannten On-Board-Units (OBU) erforderlich macht.
 
@@ -228,7 +228,7 @@ Um eine Kontrolle sicherzustellen wurden  werden zum einen Lkws an den ca. 300 K
 Softwaretechnische Probleme bei der Einführung 2003:
 
 * Die Maut-Terminals stürzten aufgrund von Software-Fehlern ab.
-* Systemfehler in den Onboard-Units
+* Systemfehler in den On-Board-Units
 * Schwierigkeiten bei der Systemintegration, dem korrekten Zusammenspiel aller Hardware- und Software-Komponenten.
 * Fehler bei der Erfassung der Kennzeichen
 
@@ -331,7 +331,7 @@ Vorteile:
 
 Nachteile:
 * Das Modell ist nur bei einfachen Projekten anwendbar – Unflexibel gegenüber Änderungen und im Vorgehen
-* Frühes festschreiben der Anforderungen ist sehr problematisch und kann zu teuren Änderungenführen
+* Frühes festschreiben der Anforderungen ist sehr problematisch und kann zu teuren Änderungen führen
 * Fehler werden eventuell erst sehr spät erkannt und müssen mit erheblichen Aufwand  entfernt werden
 
 ------------------------------------------------------------------------
