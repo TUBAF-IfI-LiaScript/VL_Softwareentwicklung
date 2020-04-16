@@ -11,7 +11,8 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 -->
 
-# Vorlesung Softwareentwicklung - 3 - Versionsverwaltung II
+# Softwareentwicklung - 3 - Versionsverwaltung II
+
 **TU Bergakademie Freiberg - Sommersemester 2020**
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
@@ -29,91 +30,89 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 **1. Der Befehl `git pull` realisiert zwei Schritte:**
 
-[( )] `git branch` und `git merge`
-[(X)] `git fetch` und `git merge`
-[[?]] Der kombinierte Befehl bezieht sich auf die Interaktion mit dem Remote-Repository und dessen ggf. vor dem aktuellen lokalen Repository liegenden Versionen.
-***********************************************************************
+    [( )] `git branch` und `git merge`
+    [(X)] `git fetch` und `git merge`
+    [[?]] Der kombinierte Befehl bezieht sich auf die Interaktion mit dem Remote-Repository und dessen ggf. vor dem aktuellen lokalen Repository liegenden Versionen.
+    ***********************************************************************
 
-                                {{1}}
-Mit `git pull` werden die aktuellen Änderungen des Branches, die auf dem Remote-Repository
-liegen abgerufen und in das lokale Repository mit `git merge` übernommen.
+                                    {{1}}
+    Mit `git pull` werden die aktuellen Änderungen des Branches, die auf dem Remote-Repository
+    liegen abgerufen und in das lokale Repository mit `git merge` übernommen.
 
-***********************************************************************
+    ***********************************************************************
 
-**2. Exklusives Bearbeiten (Sequentialisierung): Kreuze in der richtigen Reihenfolge an!** 
+**2. Exklusives Bearbeiten (Sequentialisierung): Kreuze in der richtigen Reihenfolge an!**
 
-[[1.] [2.] [3.]]
-[( )  (X)  ( ) ]       Modify
-[(X)  ( )  ( ) ]       Lock
-[( )  ( )  (X) ]       Unlock
-***********************************************************************
+    [[1.] [2.] [3.]]
+    [( )  (X)  ( ) ]       Modify
+    [(X)  ( )  ( ) ]       Lock
+    [( )  ( )  (X) ]       Unlock
+    ***********************************************************************
 
-Bei der Sequentialisierung handelt es sich um die pessimistische Versionsverwaltung, bei der einzelne Dateien vor einer Änderung durch den Benutzer gesperrt und nach Abschluss selbiger wieder freigegeben werden. 
+    Bei der Sequentialisierung handelt es sich um die pessimistische Versionsverwaltung, bei der einzelne Dateien vor einer Änderung durch den Benutzer gesperrt und nach Abschluss selbiger wieder freigegeben werden.
 
-***********************************************************************
-
-
-**3. Kollaboratives Arbeiten mit Mischen: Kreuze in der richtigen Reihenfolge an!** 
-
-[[1.] [2.] [3.]]
-[(X)  ( )  ( ) ]       Copy
-[( )  ( )  (X) ]       Merge
-[( )  (X)  ( ) ]       Modify
-***********************************************************************
-
-Hierbei handelt es sich um die optimistische Versionsverwaltung, bei der gleichzeitige Änderungen durch mehrere Benutzer an einer Datei möglich sind, da diese Änderungen anschließend automatisch oder manuell zusammengeführt werde (*Merge*). 
-
-***********************************************************************
+    ***********************************************************************
 
 
-**4. Vervollständige die Definition:** 
+**3. Kollaboratives Arbeiten mit Mischen: Kreuze in der richtigen Reihenfolge an!**
 
-Ein Paar von Änderung aus Dokument 1 bzw. Dokument 2 gegenüber einem Ausgangsdokument kann unverträglich sein, wenn die Abbildung beider Änderungen in einem gemeinsamen Dokument nicht möglich ist. In diesem Fall spricht man von...
+    [[1.] [2.] [3.]]
+    [(X)  ( )  ( ) ]       Copy
+    [( )  ( )  (X) ]       Merge
+    [( )  (X)  ( ) ]       Modify
+    ***********************************************************************
 
-[( )] einer Versionsdoppelung 
-[( )] einem einem Repository 
-[(X)] einem Konflikt
-***********************************************************************
+    Hierbei handelt es sich um die optimistische Versionsverwaltung, bei der gleichzeitige Änderungen durch mehrere Benutzer an einer Datei möglich sind, da diese Änderungen anschließend automatisch oder manuell zusammengeführt werde (*Merge*).
 
-Im Falle eines Konflikts muss eine der betroffenen Änderungen weggelassen werden. Welche das sein soll kann anhand von *Interaktivem* oder *Nicht-interaktivem Mischen* entschieden werden. 
-
-***********************************************************************
+    ***********************************************************************
 
 
-**5. Wobei wird ein Entwickler unmittelbar in den Mischprozess eingebunden?** 
+**4. Vervollständige die Definition:**
 
-[(X)] Interaktives Mischen
-[( )] Nicht-interaktives Mischen
-[[?]] Was bedeutet das Wort *interaktiv*?
-[[?]] *Interaktion* = Wechselbeziehung zwischen Handlungspartnern
-***********************************************************************
+    Ein Paar von Änderung aus Dokument 1 bzw. Dokument 2 gegenüber einem Ausgangsdokument kann unverträglich sein, wenn die Abbildung beider Änderungen in einem gemeinsamen Dokument nicht möglich ist. In diesem Fall spricht man von...
 
-Denkbare Entscheidungen für die Lösung eines Konflikts durch *Interaktives Mischen* wären 
-    * Übernahme einer der Änderungen
-    * Übernahme keiner Änderung
-    * Übernahme einer modifizierten Änderung
+    [( )] einer Versionsdoppelung
+    [( )] einem Repository-Fehler
+    [(X)] einem Konflikt
+    ***********************************************************************
 
-***********************************************************************
+    Im Falle eines Konflikts muss eine der betroffenen Änderungen weggelassen werden. Welche das sein soll kann anhand von *Interaktivem* oder *Nicht-interaktivem Mischen* entschieden werden.
+
+    ***********************************************************************
+
+
+**5. Wobei wird ein Entwickler unmittelbar in den Mischprozess eingebunden?**
+
+    [(X)] Interaktives Mischen
+    [( )] Nicht-interaktives Mischen
+    [[?]] Was bedeutet das Wort *interaktiv*?
+    [[?]] *Interaktion* = Wechselbeziehung zwischen Handlungspartnern
+    ***********************************************************************
+
+    Denkbare Entscheidungen für die Lösung eines Konflikts durch *Interaktives Mischen* wären die Übernahme einer der Änderungen, keiner Änderung oder die Übernahme einer modifizierten Änderung
+
+    ***********************************************************************
 
 **6. Kreuze die zugehörige Definition an!**
 
-[[2-Wege-Mischen] [3-Wege-Mischen]]
-[       ( )              (X)      ]       Mischen von Dokumenten gemeinsamen Ursprungs
-[       (X)              ( )      ]       Mischen unabhängiger Dokumente
-[[?]] Beim 2-Wege-Mischen ist die Erzeugung eines neuen Dokuments das Ziel, während beim 3-Wege-Mischen eine weiterentwickelte Version des ursprünglichen Dokuments entstehen soll. Übertrage dieses Wissen auf die Ausgangsdokumente um die richtigen Definitionen zuordnen zu können.
-***********************************************************************
+    [[2-Wege-Mischen] [3-Wege-Mischen]]
+    [       ( )              (X)      ]       Mischen von Dokumenten gemeinsamen Ursprungs
+    [       (X)              ( )      ]       Mischen unabhängiger Dokumente
+    [[?]] Beim 2-Wege-Mischen ist die Erzeugung eines neuen Dokuments das Ziel, während beim 3-Wege-Mischen eine weiterentwickelte Version des ursprünglichen Dokuments entstehen soll. Übertrage dieses Wissen auf die Ausgangsdokumente um die richtigen Definitionen zuordnen zu können.
+    ***********************************************************************
 
-Beim *2-Wege-Mischen* werden die gemeinsamen Komponenten und die individuellen Teilmengen voneinander unabhängiger Dokumente vereint. 
-Beim *3-Wege-Mischen* werden (möglichst) alle Änderungen am Ursprungsdokument in eine weiterentwickelte Version des selbigen integriert. 
+    Beim *2-Wege-Mischen* werden die gemeinsamen Komponenten und die individuellen Teilmengen voneinander unabhängiger Dokumente vereint.
+    Beim *3-Wege-Mischen* werden (möglichst) alle Änderungen am Ursprungsdokument in eine weiterentwickelte Version des selbigen integriert.
 
-***********************************************************************
+    ***********************************************************************
 
 
-**7. Welche Form der Versionsverwaltung findet noch heute in manchen Büroanwendungen (bspw. *Word*) Verwendung?** 
-[( )] Verteilte Versionsverwaltung
-[( )] Zentrale Versionsverwaltung
-[(X)] Lokale Versionsverwaltung
-[[?]] Die genannten Anwendungen speichern die Versionen eines Dokuments in der Datei des Dokuments selbst - dabei handelt es sich um eine `?` Speicherung.
+**7. Welche Form der Versionsverwaltung findet noch heute in manchen Büroanwendungen (bspw. *Word*) Verwendung?**
+
+    [( )] Verteilte Versionsverwaltung
+    [( )] Zentrale Versionsverwaltung
+    [(X)] Lokale Versionsverwaltung
+    [[?]] Die genannten Anwendungen speichern die Versionen eines Dokuments in der Datei des Dokuments selbst - dabei handelt es sich um eine `?` Speicherung.
 
 
 
