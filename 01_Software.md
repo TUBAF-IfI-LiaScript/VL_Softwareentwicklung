@@ -223,7 +223,7 @@ des Fahrzeugs mittels Satellitennavigation. Die dabei gesammelten Daten werden
 per Mobilfunk in ein Rechenzentrum übermittelt und dort für die
 Rechnungsstellung verarbeitet.
 
-Um eine Kontrolle sicherzustellen wurden  werden zum einen Lkws an den ca. 300 Kontrollbrücken fotografiert, zum anderen durch ca. 450 mobile Kontrollstellen überprüft. Die gewonnenen Daten werden mit den Daten im Zentralcomputer abgeglichen und ggf. entsprechende Maßnahmen eingeleitet.
+Um eine Kontrolle sicherzustellen wurden zum einen Lkws an den ca. 300 Kontrollbrücken fotografiert, zum anderen durch ca. 450 mobile Kontrollstellen überprüft. Die gewonnenen Daten werden mit den Daten im Zentralcomputer abgeglichen und ggf. entsprechende Maßnahmen eingeleitet.
 
 Softwaretechnische Probleme bei der Einführung 2003:
 
