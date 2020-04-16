@@ -1,7 +1,7 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
-email:    zug@ovgu.de   & andre.dietrich@ovgu.de
+author:   Sebastian Zug & André Dietrich & Christoph Pooch & Johanna Klinke
+email:    Sebastian.Zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & christoph-paul.pooch@student.tu-freiberg.de & -  &
 version:  0.0.1
 language: de
 narrator: Deutsch Female
@@ -12,11 +12,11 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 # Vorlesung Softwareentwicklung - 1 - Softwareentwicklung als Prozess
 
-** TU Bergakademie Freiberg - Sommersemester 2020**
+**TU Bergakademie Freiberg - Sommersemester 2020**
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/01_Software.md
+[https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/01_Software.md](https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/01_Software.md)
 
 Die interaktive Form ist unter diese Link zu finden ->
 [LiaScript Vorlesung 01](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/SoSe2020/01_Software.md#1)
@@ -57,7 +57,7 @@ Die interaktive Form ist unter diese Link zu finden ->
 2. Analyse Entwurf
 3. Implementierung
 4. Test
-5. Markeinführung
+5. Markteinführung
 6. Pflege/Wartung
 
 Welche Querbeziehungen ("Während der Tests wird erkannt, dass die Implementierung Mängel aufweist.") zwischen den einzelenn Stufen sehen Sie?
@@ -122,7 +122,7 @@ Steigende Komplexität der Softwareprodukte ...
 > **Merke:** Die Entwicklung kleiner Programme unterscheidet sich von der
 > Entwicklung großer Programme!
 
-| Kriterium                | Kleine Programme                                        | Große  Programme                                                           |
+| Kriterium                | Kleine Programme                                        | Große  Programme                                                          |
 | ------------------------ | ------------------------------------------------------- | ------------------------------------------------------------------------- |
 | Zeilenzahl               | bis zu ein paar 1000 Zeilen                             | Millionen von LOC                                                         |
 | Einsatz                  | "Eigengebrauch"                                         | kommerzieller Einsatz von Dritten                                         |
@@ -153,7 +153,7 @@ motiviert aus [Lemburg2](#7)
 7. Eine Abnahme der Phasenergebnisse erfolgt nicht
 8. Schlechte Namensvergabe wie z.B. File-, Klassen-, Methoden- und Variablennamen
 9. Die Systemarchitektur ist nicht oder nur sehr umständlich erweiterbar (fehlende Datenkapselung, fehlende Modularität)
-10. Die Schulung für die Software-Ersteller und -Anwender wird vernachlässigt oder als nichtnotwendig angesehe7
+10. Die Schulung für die Software-Ersteller und -Anwender wird vernachlässigt oder als nichtnotwendig angesehen
 11. Die Terminvorgaben sind unrealistisch
 12. Begriffe werden nicht definiert
 13. Die Auswahl der Werkzeuge/Methoden ist unzureichend vorbereitet
@@ -214,7 +214,7 @@ http://people.cs.ksu.edu/~hatcliff/842/Docs/Course-Overview/pathfinder-robotmag.
 **Toll Connect**
 
 Die Gebührenerhebung für LKW funktioniert auf deutschen Autobahn nach drei Methoden:
-1. Buchung über das Internet vor Fahrtantritt gebucht werden,
+1. Buchung über das Internet vor Fahrtantritt,
 2. Bezahlung an sogenannten „Mautstellen-Terminals“ oder
 3. vollautomatische Abrechnung durch den Einsatz des GPS-Systems, die den Einbau von sogenannten On-Board-Units (OBU) erforderlich macht.
 
@@ -223,12 +223,12 @@ des Fahrzeugs mittels Satellitennavigation. Die dabei gesammelten Daten werden
 per Mobilfunk in ein Rechenzentrum übermittelt und dort für die
 Rechnungsstellung verarbeitet.
 
-Um eine Kontrolle sicherzustellen wurden  werden zum einen Lkws an den ca. 300 Kontrollbrücken fotografiert, zum anderen durch ca. 450 mobile Kontrollstellen überprüft. Die gewonnenen Daten werden mit den Daten im Zentralcomputer abgeglichen und ggf. entsprechende Maßnahmen eingeleitet.
+Um eine Kontrolle sicherzustellen wurden zum einen Lkws an den ca. 300 Kontrollbrücken fotografiert, zum anderen durch ca. 450 mobile Kontrollstellen überprüft. Die gewonnenen Daten werden mit den Daten im Zentralcomputer abgeglichen und ggf. entsprechende Maßnahmen eingeleitet.
 
 Softwaretechnische Probleme bei der Einführung 2003:
 
 * Die Maut-Terminals stürzten aufgrund von Software-Fehlern ab.
-* Systemfehler in den Onboard-Units
+* Systemfehler in den On-Board-Units
 * Schwierigkeiten bei der Systemintegration, dem korrekten Zusammenspiel aller Hardware- und Software-Komponenten.
 * Fehler bei der Erfassung der Kennzeichen
 
@@ -276,6 +276,7 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 
                                     {{5-6}}
 | Aspekt                 | Bewertung |
+| ---------------------- | --------- |
 | Funktionalität         | ?         |
 | Zuverlässigkeit        |           |
 | Benutzbarkeit          |           |
@@ -284,20 +285,21 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 | Übertragbarkeit        |           |
 
                                      {{6}}
-| Aspekt                 | Bewertung                                                         |
-| Funktionalität         | feste Feldlänge, das Programm stürzt bei mehr als 10 Einträgen ab |
-| Zuverlässigkeit        | mehrfaches Öffnen ein und der selben Datei, keine Überprüfung der Exisitenz der Datei                        |
-| Benutzbarkeit          | im Programmcode enthaltene Dateinamen, feste Feldlänge            |
-| Effizienz              | quadratischer Aufwand der Sortierung                              |
-| Wartungsfreundlichkeit | fehlende Dokumentation, unverständliche Variablenbezeichner       |
-| Übertragbarkeit        |                                                                   |
+| Aspekt                 | Bewertung                                                                             |
+| ---------------------- | ------------------------------------------------------------------------------------- |
+| Funktionalität         | feste Feldlänge, das Programm stürzt bei mehr als 10 Einträgen ab                     |
+| Zuverlässigkeit        | mehrfaches Öffnen ein und der selben Datei, keine Überprüfung der Exisitenz der Datei |
+| Benutzbarkeit          | im Programmcode enthaltene Dateinamen, feste Feldlänge                                |
+| Effizienz              | quadratischer Aufwand der Sortierung                                                  |
+| Wartungsfreundlichkeit | fehlende Dokumentation, unverständliche Variablenbezeichner                           |
+| Übertragbarkeit        |                                                                                       |
 
 ## 3. Struktuierung des Entwicklungsprozesses und Einordnung
 
 **Warum ist Softwareentwicklung so herausfordernd**
 
-*  Die Größe der zu lösenden Probleme. Software ist nicht einfacher, als die Probleme die sie löst. Je größer und schwieriger die Software, desto aufwendiger und schwieriger ist die Entwicklung.
-* Die Tatsache, das Software ein immaterielles Produkt ist. Die Immaterialität macht das Arbeitenmit Software schwieriger als dasjenige mit materiellen Produkten vergleichbarer Komplexität, da die Risiken auch schwerer zu erkennen sind.
+* Die Größe der zu lösenden Probleme. Software ist nicht einfacher, als die Probleme die sie löst. Je größer und schwieriger die Software, desto aufwendiger und schwieriger ist die Entwicklung.
+* Die Tatsache, dass Software ein immaterielles Produkt ist. Die Immaterialität macht das Arbeiten mit Software schwieriger als dasjenige mit materiellen Produkten vergleichbarer Komplexität, da die Risiken auch schwerer zu erkennen sind.
 * Sich permanent verändernde Ziele aufgrund der Evolution. Schon das Bestimmen und Erreichen fixierter Ziele bei der Entwicklung ist keine leichte Aufgabe. Sich verändernde Ziele machen das ganze nochmal um eine Größenordnung schwieriger.
 * Fehler infolge von Fehleinschätzungen zur Skalierung ("was im Kleinen geht, geht genauso im Großen"). Software-Entwicklung wird daher unbewusst meist als viel einfacher eingeschätzt, als sie tatsächlich ist. Dies führt zu unrealistischen Erwartungen und zu von Beginn an zu tiefen Kosten- und Terminschätzungen.
 * Funktionierende Einzelkomponenten stellen noch lange kein funktionierendes Gesamtsystem sicher.
@@ -324,12 +326,12 @@ Eigenschaften des Wasserfallmodells:
 * Es ist einfach, verständlich und benötigt nur wenig Managementaufwand.
 
 Vorteile:
-* klare Abgrenzung der Phasen–einfache Möglichkeiten der Planung und Kontrolle
+* klare Abgrenzung der Phasen – einfache Möglichkeiten der Planung und Kontrolle
 * bei stabilen Anforderungen und klarer Abschätzung von Kosten und Umfang ein sehr effektives Modell
 
 Nachteile:
 * Das Modell ist nur bei einfachen Projekten anwendbar – Unflexibel gegenüber Änderungen und im Vorgehen
-* Frühes festschreiben der Anforderungen ist sehr problematisch und kann zu teuren Änderungenführen
+* Frühes festschreiben der Anforderungen ist sehr problematisch und kann zu teuren Änderungen führen
 * Fehler werden eventuell erst sehr spät erkannt und müssen mit erheblichen Aufwand  entfernt werden
 
 ------------------------------------------------------------------------
@@ -337,7 +339,7 @@ Nachteile:
 
 ![V-Modell](./img/01_Software/VModell.png)<!-- width="80%" --> [Lemburg2](#7)
 
-Tätigkeitsbereiche des V-Modell: SoftwareErstellung, Qualitätssicherung, Konfigurationsmanagement, Projektmanagement
+Tätigkeitsbereiche des V-Modell: Softwareerstellung, Qualitätssicherung, Konfigurationsmanagement, Projektmanagement
 
 Vorteile:
 * Integrierte und detaillierte Darstellung von den Tätigkeitsbereichen
