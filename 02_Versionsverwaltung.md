@@ -1,7 +1,7 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
-email:    Sebastian.Zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de
+author:   Sebastian Zug & André Dietrich & Johanna Klinke
+email:    Sebastian.Zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & -
 version:  0.0.1
 language: de
 narrator: Deutsch Female
@@ -11,13 +11,13 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 -->
 
-# Vorlesung Softwareentwicklung - 2 - Versionsverwaltung
+# Softwareentwicklung - 2 - Versionsverwaltung
 
 **TU Bergakademie Freiberg - Sommersemester 2020**
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/02_Versionsverwaltung.md
+[https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/02_Versionsverwaltung.md](https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/02_Versionsverwaltung.md)
 
 Die interaktive Form ist unter diese Link zu finden ->
 [LiaScript Vorlesung 02](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/SoSe2020/02_Versionsverwaltung.md#1)
@@ -29,30 +29,30 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 **1. Bewerten Sie die Aussage: GitHub und git sind im Grunde das Gleiche!**
 
-[( )] Die Aussage stimmt.
-[(X)] Die Aussage ist falsch
-[[?]] Lassen Sie sich nicht von der Ähnlichkeit der Namen täuschen und recherchieren Sie noch mal!
-***********************************************************************
+    [( )] Die Aussage stimmt.
+    [(X)] Die Aussage ist falsch
+    [[?]] Lassen Sie sich nicht von der Ähnlichkeit der Namen täuschen und recherchieren Sie noch mal!
+    ***********************************************************************
 
-                                {{1}}
-GitHub implementiert einen git-Server, bietet aber gleichzeit g
+                                    {{1}}
+    GitHub implementiert einen git-Server, bietet aber gleichzeit weitere Services für den Entwicklungsprozess, die sich auf die Git-Aktivitäten beziehen. Das sind zum Beispiel die Verwaltung von Issues und Meilensteinen oder die Automatisierten Tests.
 
-***********************************************************************
+    ***********************************************************************
 
-__2. Jetzt sind Sie dran ...__
+**2. Jetzt sind Sie dran ...**
 
-__3. ...__
+**3. Jetzt sind Sie dran ...**
 
-__4. ...__
+**4. Jetzt sind Sie dran ...**
 
-__5. ...__
+**5. Jetzt sind Sie dran ...**
 
-__6. ...__
+**6. Jetzt sind Sie dran ...**
 
-__7. ...__
+**7. Jetzt sind Sie dran ...**
 
 
-## 1. Motivation
+## Motivation
 
                                    {{0-2}}
 ******************************************************************************
@@ -242,7 +242,7 @@ Welche Aspekte sehen Sie an dieser Lösung kritisch?
 
 **Lösung II - Kollaboratives Arbeiten mit Mischen (Mergen)**
 
-Optimistische Versionsverwaltungen (*Copy Modify Merge*) versuchen die die Schwächen der pessimistischen Versionsverwaltung zu beheben, in dem siegleichzeitige Änderungen durch mehrere Benutzer an einer Datei zu lassen und anschließend diese Änderungen automatisch oder manuell zusammen führen (Merge).
+Optimistische Versionsverwaltungen (*Copy Modify Merge*) versuchen die die Schwächen der pessimistischen Versionsverwaltung zu beheben, in dem sie gleichzeitige Änderungen durch mehrere Benutzer an einer Datei zu lassen und anschließend diese Änderungen automatisch oder manuell zusammen führen (Merge).
 
 <!--
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
@@ -388,13 +388,13 @@ In der Praxis wird zwischen zwei Szenarien unterschieden:
 
 1. Mischen unabhäniger Dokumente (2-Wege-Mischen) - Ziel ist die Erzeugung eines neuen Dokumentes, dass die gemeinsamen Komponenten und individuelle Teilmengen vereint.
 
-2. Mischen von Dokumenten mit gemeinsamer Ursprung (3-Wege-Mischen) - Ziel ist die Integration möglichst aller Änderungen der neuen Dokumente in eine weiterentwickelte Version der des Ursprungsdokumentes
+2. Mischen von Dokumenten mit gemeinsamen Ursprung (3-Wege-Mischen) - Ziel ist die Integration möglichst aller Änderungen der neuen Dokumente in eine weiterentwickelte Version des Ursprungsdokumentes
 
-> Ein Paar von Änderung aus D1 bzw. D2 gegenüber einen Ausgangsdokument D0 kann unverträglich sein, wenn die Abbildung beiden Änderungen in einem gemeinsamen Dokument nicht möglich ist. In diesem Fall spricht man von einem Konflikt.
+> Ein Paar von Änderung aus D1 bzw. D2 gegenüber einen Ausgangsdokument D0 kann unverträglich sein, wenn die Abbildung beider Änderungen in einem gemeinsamen Dokument nicht möglich ist. In diesem Fall spricht man von einem Konflikt.
 
-Bei einem Konflikt muss eine der beiden ̈Änderungen weggelassen werden. Die Entscheidung darüber kann anhand von zwei vorgehensweisen realisiert werden:
+Bei einem Konflikt muss eine der beiden ̈Änderungen weggelassen werden. Die Entscheidung darüber kann anhand von zwei Vorgehensweisen realisiert werden:
 
-1. Nicht-interaktives Mischen: Es wird zunächst ein Mischergebnis erzeugt, das beide Änderungen umfasst. Über eine entsprechend Semantik werden die notwendigerweise dublizierten Stellen hervorgehoben. Ein Vorteil dieser Vorgehensweise ist, dass eine beliebige weitergehende Editierung zur Konfliktauflosung möglich ist.
+1. Nicht-interaktives Mischen: Es wird zunächst ein Mischergebnis erzeugt, das beide Änderungen umfasst. Über eine entsprechende Semantik werden die notwendigerweise dublizierten Stellen hervorgehoben. Ein Vorteil dieser Vorgehensweise ist, dass eine beliebige weitergehende Editierung zur Konfliktauflosung möglich ist.
 2. Interaktives Mischen: Ein Entwickler wird unmittelbar in den Mischprozess eingebunden und um "Schritt-für-Schritt" Entscheidungen gebeten. Denkbare Entscheidungen dabei sind:
 
     + Übernahme der Änderung gemäß D1 oder D2,
@@ -405,11 +405,11 @@ Bei einem Konflikt muss eine der beiden ̈Änderungen weggelassen werden. Die En
 
 ### Revisionen
 
-Bislang haben wir lediglich einzelne Dateien betrachtet. Logischerweise muss ein übergreifender Ansatz auf Ordnerstrukturen integrieren.
+Bislang haben wir lediglich einzelne Dateien betrachtet. Logischerweise muss ein übergreifender Ansatz auch Ordnerstrukturen integrieren.
 
 ![ProblemKollaborativesArbeiten](./img/02_Versionsverwaltung/Versionsverlauf.png)<!-- width="70%" --> [](#7)
 
-Damit werden sowohl die Ordnerstruktur als auch die Dokumente als Struktur, wie auch deren Inhalte erfasst.
+Damit werden sowohl die Ordnerstruktur als auch die Dokumente als Struktur, wie auch deren Inhalte, erfasst.
 
 > Wichtig für die Nachvollziehbarkeit der Entwicklung ist somit die Kontinuität der Erfassung!
 
@@ -504,7 +504,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 | Konflikte bei Manipulation eines Dokumentes durch mehrere Autoren | Existenz paralleler  Versionen eines Dokumentes abgesichert |
 | Sequenz von Versionen                                             | gerichteter azyklischer Graph                               |
 
-###Git
+## Git
 
                                 {{0-1}}
 ******************************************************************************
@@ -514,11 +514,13 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
 Die Entwicklungsgeschichte von git ist mit der des Linux Kernels verbunden:
 
-| 1991 | 2002 | 2005 |
-| ---- | ---- | ---- |
-| Änderungen am Linux Kernel via patches und archive files      | Linux Kernel mit dem Tool BitKeeper verwaltet      | Bruch zwischen der vertreibenden Firma und der Linux Community     |
+| Jahr | Methode der Versionsverwaltungen                               |
+| ---- | -------------------------------------------------------------- |
+| 1991 | Änderungen am Linux Kernel via patches und archive files       |
+| 2002 | Linux Kernel mit dem Tool BitKeeper verwaltet                  |
+| 2005 | Bruch zwischen der vertreibenden Firma und der Linux Community |
 
-2005 wurde einen Anforderungsliste für eine Neuentwicklung definiert. Dabei wurde hervorgehoben, das insbesondere sehr große Projekte (Zahl der Entwickler, Features und Codezeilen, Dateien) unterstützen können muss. Daraus entstand `Git` als freie Software zur verteilten Versionsverwaltung von Dateien.
+2005 wurde einen Anforderungsliste für eine Neuentwicklung definiert. Dabei wurde hervorgehoben, dass sie insbesondere sehr große Projekte (Zahl der Entwickler, Features und Codezeilen, Dateien) unterstützen können muss. Daraus entstand `Git` als freie Software zur verteilten Versionsverwaltung von Dateien.
 
 > Git dominiert entweder als einzelne Installation oder aber eingebettet in verschiedene Entwicklungsplattform die Softwareentwicklung!
 

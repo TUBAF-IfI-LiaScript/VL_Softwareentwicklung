@@ -23,7 +23,7 @@ script: https://cdn.jsdelivr.net/gh/liaTemplates/DigiSim/js/parser.min.js
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/00_Einfuehrung.md
+[https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/00_Einfuehrung.md](https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/00_Einfuehrung.md)
 
 Die interaktive Form ist unter diese Link zu finden ->
 [LiaScript Vorlesung 00](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/SoSe2020/00_Einfuehrung.md#1)
@@ -46,7 +46,7 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-## 0 - Organisatorisches
+## Organisatorisches
 
                                     {{0-1}}
 *******************************************************************************
@@ -217,7 +217,7 @@ Eine gute Einführung zu Markdown finden Sie zum Beispiel unter
 
 Mit einem entsprechenden Editor und einigen Paketen macht das Ganze dann auch Spaß
 
-* Wichtigstes Element ist ein Previewer, der es Ihnen erlaubt "online" die Korrktheit der Eingaben zu prüfen
+* Wichtigstes Element ist ein Previewer, der es Ihnen erlaubt "online" die Korrektheit der Eingaben zu prüfen
 * Tools zur Unterstützung komplexerer Eingaben wie zum Beispiel der Tabellen (zum Beispiel für Atom mit [markdown-table-editor](https://atom.io/packages/markdown-table-editor))
 * Visualisierungsmethoden, die schon bei der Eingabe unterstützen
 * Rechtschreibprüfung (!)

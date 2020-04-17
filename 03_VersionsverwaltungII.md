@@ -11,19 +11,113 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 -->
 
-# Vorlesung Softwareentwicklung - 3 - Versionsverwaltung II
+# Softwareentwicklung - 3 - Versionsverwaltung II
+
 **TU Bergakademie Freiberg - Sommersemester 2020**
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/03_VersionsverwaltungII.md
+[https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/03_VersionsverwaltungII.md](https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/03_VersionsverwaltungII.md)
 
 Die interaktive Form ist unter diese Link zu finden ->
 [LiaScript Vorlesung 03](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/SoSe2020/03_VersionsverwaltungII.md#1)
 
 ---------------------------------------------------------------------
 
-## 1. Zustände einer Datei im git-Kontext
+
+## 7 Fragen in 7 Minuten
+
+
+**1. Der Befehl `git pull` realisiert zwei Schritte:**
+
+    [( )] `git branch` und `git merge`
+    [(X)] `git fetch` und `git merge`
+    [[?]] Der kombinierte Befehl bezieht sich auf die Interaktion mit dem Remote-Repository und dessen ggf. vor dem aktuellen lokalen Repository liegenden Versionen.
+    ***********************************************************************
+
+                                    {{1}}
+    Mit `git pull` werden die aktuellen Änderungen des Branches, die auf dem Remote-Repository
+    liegen abgerufen und in das lokale Repository mit `git merge` übernommen.
+
+    ***********************************************************************
+
+**2. Exklusives Bearbeiten (Sequentialisierung): Kreuze in der richtigen Reihenfolge an!**
+
+    [[1.] [2.] [3.]]
+    [( )  (X)  ( ) ]       Modify
+    [(X)  ( )  ( ) ]       Lock
+    [( )  ( )  (X) ]       Unlock
+    ***********************************************************************
+
+    Bei der Sequentialisierung handelt es sich um die pessimistische Versionsverwaltung, bei der einzelne Dateien vor einer Änderung durch den Benutzer gesperrt und nach Abschluss selbiger wieder freigegeben werden.
+
+    ***********************************************************************
+
+
+**3. Kollaboratives Arbeiten mit Mischen: Kreuze in der richtigen Reihenfolge an!**
+
+    [[1.] [2.] [3.]]
+    [(X)  ( )  ( ) ]       Copy
+    [( )  ( )  (X) ]       Merge
+    [( )  (X)  ( ) ]       Modify
+    ***********************************************************************
+
+    Hierbei handelt es sich um die optimistische Versionsverwaltung, bei der gleichzeitige Änderungen durch mehrere Benutzer an einer Datei möglich sind, da diese Änderungen anschließend automatisch oder manuell zusammengeführt werde (*Merge*).
+
+    ***********************************************************************
+
+
+**4. Vervollständige die Definition:**
+
+    Ein Paar von Änderung aus Dokument 1 bzw. Dokument 2 gegenüber einem Ausgangsdokument kann unverträglich sein, wenn die Abbildung beider Änderungen in einem gemeinsamen Dokument nicht möglich ist. In diesem Fall spricht man von...
+
+    [( )] einer Versionsdoppelung
+    [( )] einem Repository-Fehler
+    [(X)] einem Konflikt
+    ***********************************************************************
+
+    Im Falle eines Konflikts muss eine der betroffenen Änderungen weggelassen werden. Welche das sein soll kann anhand von *Interaktivem* oder *Nicht-interaktivem Mischen* entschieden werden.
+
+    ***********************************************************************
+
+
+**5. Wobei wird ein Entwickler unmittelbar in den Mischprozess eingebunden?**
+
+    [(X)] Interaktives Mischen
+    [( )] Nicht-interaktives Mischen
+    [[?]] Was bedeutet das Wort *interaktiv*?
+    [[?]] *Interaktion* = Wechselbeziehung zwischen Handlungspartnern
+    ***********************************************************************
+
+    Denkbare Entscheidungen für die Lösung eines Konflikts durch *Interaktives Mischen* wären die Übernahme einer der Änderungen, keiner Änderung oder die Übernahme einer modifizierten Änderung
+
+    ***********************************************************************
+
+**6. Kreuze die zugehörige Definition an!**
+
+    [[2-Wege-Mischen] [3-Wege-Mischen]]
+    [       ( )              (X)      ]       Mischen von Dokumenten gemeinsamen Ursprungs
+    [       (X)              ( )      ]       Mischen unabhängiger Dokumente
+    [[?]] Beim 2-Wege-Mischen ist die Erzeugung eines neuen Dokuments das Ziel, während beim 3-Wege-Mischen eine weiterentwickelte Version des ursprünglichen Dokuments entstehen soll. Übertrage dieses Wissen auf die Ausgangsdokumente um die richtigen Definitionen zuordnen zu können.
+    ***********************************************************************
+
+    Beim *2-Wege-Mischen* werden die gemeinsamen Komponenten und die individuellen Teilmengen voneinander unabhängiger Dokumente vereint.
+    Beim *3-Wege-Mischen* werden (möglichst) alle Änderungen am Ursprungsdokument in eine weiterentwickelte Version des selbigen integriert.
+
+    ***********************************************************************
+
+
+**7. Welche Form der Versionsverwaltung findet noch heute in manchen Büroanwendungen (bspw. *Word*) Verwendung?**
+
+    [( )] Verteilte Versionsverwaltung
+    [( )] Zentrale Versionsverwaltung
+    [(X)] Lokale Versionsverwaltung
+    [[?]] Die genannten Anwendungen speichern die Versionen eines Dokuments in der Datei des Dokuments selbst - dabei handelt es sich um eine `?` Speicherung.
+
+
+
+
+## Zustände einer Datei im git-Kontext
 
 Sie kennen bereits die möglichen Zuständer einer Datei innerhalb der GitHub-Welt.
 
@@ -35,7 +129,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 ```ascii
 
 unbeobachtet                           "beobachtet"
-=============  ============================================================
+=============  ========================================================
    nicht              nicht            modifiziert            staged
   erfasst          modifiziert
     |                   |       edit        |                   |
@@ -137,7 +231,20 @@ doc/**/*.pdf
 
 Unter [gitIgnoreBeispiele](https://github.com/github/gitignore) gibt es eine ganze Sammlung von Konfigurationen für bestimmte Projekttypen.
 
-## 2. Arbeiten mit Branches
+## Interaktion mit dem Remote-Repository
+<!--
+@@ Hinweis für die Realisierung
+    git commit -m "Test"
+-->
+
+Versuchen wir das ganze noch mal etwas plastischer nachzuvollziehen. Rechts oben sehen Sie unser Remote-Repository auf dem Server. Im mittleren Bereich den Status unseres lokalen Repositories.
+
+``` text @ExplainGit.eval
+create origin
+```
+
+
+## Arbeiten mit Branches
 
 Die Organisation von Versionen in unterschiedlichen Branches ist ein zentrales
 Element der Arbeit mit git. Branches sind Verzweigungen des Codes, die bestimmte
@@ -224,7 +331,7 @@ git commit -m FeatureV2
 
 Mergen ist eine nicht-destruktive Operation. Die bestehenden Branches werden auf keine Weise verändert. Das Ganze "bläht" aber den Entwicklungsbaum auf.
 
-### Rebase mit einem Branche
+### Rebase mit einem Branch
 <!--
 @@ Hinweis für die Realisierung
     git checkout master
@@ -243,8 +350,7 @@ git checkout master
 git commit -m V1
 ```
 
-
-## 3. Typische Abläufe
+## Typische Abläufe
 
 **Ergänzen eines Commits um zusätzliche Dateien**
 
@@ -338,8 +444,20 @@ aa04051 - Sebastian Zug, 23 hours ago : Restart action activities
 
 Unser lokaler Branch liegt nach dem Löschen aber um einiges hinter dem auf GitHub entsprechend müssen wir mit `git push --force` das Überschreiben erzwingen.
 
+**Pull requests und Reviews**
 
-## 4. Ein Wort zur Zusammenarbeit
+Natürlich wollen wir nicht, dass "jeder" Änderungen ungesehen in unseren Code einspeist. Entsprechend kapseln wir ja auch unseren Master-Branch. Den Zugriff regeln sowohl die Rechte der einzelnen Mitstreiter als auch die
+Pull-Request und Review Konfiguration.
+
+| Status des Beitragenden | Einreichen des Codes |
+| ----------------------- | -------------------- |
+| Collaborator            | Auschecken des aktuellen Repositories und Arbeit. Wenn die Arbeit in einem eigenen Branch erfolgt, wird diese mit einem Pull-Request angezeigt und gemerged.|
+| non Collaborator        | Keine Möglichkeit seine Änderungen unmittelbar ins Repository zu schreiben. Der Entwickler erzeugtn eine eigene Remote Kopie (_Fork_) des Repositories und dortige Realsierung der Änderungen.  Danach werden diese als Pull-Request eingereicht.                  |
+
+Wird ein Pull Request akzeptiert, so spricht man von einem _Merge_, wird er geschlossen, so spricht man von einem _Close_. Vor dem Merge sollte eine gründliche Prüfung sichergestellt werden, diese kann in Teilen automatisch erfolgen oder durch Reviews [Doku](https://github.com/features/code-review/)
+
+
+## Ein Wort zur Zusammenarbeit
 
 Bitte haben Sie immer den spezifischen Kontext Ihres Projektes vor Augen. Üblicherweise legt man am Anfang, bei einem "kleinen Hack" keinen Wert auf formelle Abläufe und Stukturen. Diese sind
 aber in großen Projekten unablässig.
@@ -363,15 +481,61 @@ Folgende Regeln sollte man für die Beschreibung eines Commits berücksichtigen:
 
 Eine weiterführende Diskussion zum Thema bietet zum Beispiel die Webseite [TheServerSide](https://www.theserverside.com/video/Follow-these-git-commit-message-guidelines).
 
-## 5. Automatisierung der Arbeit
+## Automatisierung der Arbeit
 
-TODO
+Hervorragend! Wir sind nun in der Lage die Entwicklung unseres Codes zu "verwalten". Allerdings sagt noch niemand, dass ein eingereichter Code auch lauffähig ist. Wie können wir aber möglichst schnell realisieren, dass etwas schief geht? Es wäre wünschenswert, dass wir unmittelbar mit den Aktivitäten unserer Entwickler entsprechende Tests durchführen und zum Beispiel deren Commits zurückweisen.
 
+An dieser Stelle wollen wir zunächst die Möglichkeiten des _Continuous Integration_ aufzeigen, die differenzierte Diskussion einer Folge von Build und Test-Schritten folgt später. Wir werden diese Möglichkeit im Rahmen der Übungsaufgaben nutzen, um Ihre Lösungen zu testen.
 
+GitHub stellt dafür die sogenannten _Actions_ zur Verfügung. Dies sind Verarbeitungsketten, die auf verschiedensten Architekturen, Betriebssystemen, Konfigurationen usw. laufen können. Damit haben wir die Möglichkeit einen Quellcode für verschiedene Plattformen zu bauen und zu testen oder eine Dokumentation zu erstellen.
 
-## 6. Aufgaben
+Ein _Workflow_ wird durch vordefinierten _Trigger_ ausgelöst. Dies können das Anlegen einer Datei, ein Commit oder ein Pull Request sein. Danach wird das System konfiguriert und die Folge der Verarbeitungsschritte gestartet.
+
+<!--
+style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+-->
+```ascii
+    +------+
+    |      |\           +----> Check Syntax
+  +-|      +-+          |
+  | | File.a |          |               +---> Windows 10   --+
++-| +--------+  Commit  |               |                    |
+| | File.b  |  ---------+----> Build ---+---> Ubuntu 18.04 --+
+| +---------+           |               |                    |
+| File.c   |            |               +---> MacOS ---------+
++----------+            |                                    |
+                        +----> Test <------------------------+
+                        |
+                        +----> Generierung Dokumentation                     .
+```
+
+GitHub gliedert diese Punkte in _Workflows_ und _Jobs_ in einer hierachischen Struktur, die über `yaml` Files beschrieben werden. Eine kurze Einführung zur Syntax findet sich unter [Wikipedia](https://de.wikipedia.org/wiki/YAML).
+
+```yaml   main.yaml
+name: Hello World
+on: [push]
+
+jobs:
+  build-and-run:
+    name: Print Hello World
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout files (master branch)
+        uses: actions/checkout@v2
+      - name: Show all files
+        run: pwd && whoami && ls -all
+```
+
+Spanndend wird die Sache nun dadurch, dass es eine breite Community rund um die Actions gibt. Diese stellen häufig benötigte _Steps_ bereits zur Verfügung, fertige Tools für das Bauen und Testen von .NET Code.
+
+Die Dokumentation zu den GitHub-Actions findet sich unter [https://github.com/features/actions](https://github.com/features/actions). Ein umfangreicheres Beispiel finden Sie in unserem Projektordner im aktuellen Branch `SoSe2020`. Hier werden alle LiaScript-Dateien in ein pdf umgewandelt.
+
+> **Merke** Workflow files müssen unter `.github\workflows\*.yml` abgelegt werden.
+
+## Aufgaben
 
 1. Recherchieren Sie die Methode des "Myers-diff-Algorithmus" https://blog.jcoglan.com/2017/02/12/the-myers-diff-algorithm-part-1/
-2. Ermitteln Sie, wie sie eine lokale Instanz eines Repositories auf Ihrem Rechner aufsetzen, ohne, dass Sie auf einen Remote-Server zurückgreifen.
-3. Legen Sie sich ein eigenes Repository unter GitHub an und experimentieren Sie damit. Richten Sie sich insbesondere auch den SSH basierten Zugriff ein (erspart einem das fortwährende eingeben eines Passwortes).
+2. Legen Sie sich ein lokales Repository mit git an und experimentieren Sie damit.
+3. Richten Sie sich für Ihren GitHub-Account einen SSH basierten Zugriff ein (erspart einem das fortwährende Eingeben eines Passwortes).
 3. Sie erhalten im Laufe der Woche Ihre erste Einladung für einen GitHub Classroom. Ausgehend davon werden Sie aufgefordert sich in Zweierteams zu organiseren und werden dann gemeinsam erste Gehversuche unter git zu unternehmen.
+4. Möchten Sie die Action zu Generierung des Skripts verbessern? Ich habe dazu die wünschenswerten Features in einem Issue erfasst.
