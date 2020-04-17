@@ -62,7 +62,6 @@ print(arr_squared)
     [[?]] Google mal Haskell :-D
 
 
-
 **3. Jetzt sind Sie dran ...**
 
 **4. Jetzt sind Sie dran ...**
@@ -89,11 +88,12 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 -->
 ````````````
                          Programmierparadigmen
-                                  ┃
-                ┏━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━┓
+                                  |
+                .-----------------+-----------------.
+                |                                   |
     Imperative Programmierung         Deklarative Programmierung
-                ┃                                   ┃
-      ┏━━━━━━━━━┻━━━━━━━━┓                 ┏━━━━━━━━┻━━━━━━━━━┓
+                |                                   |
+      .------------------.               .----------+---------.
   Prozedural    Objektorientiert    Funktional             Logisch
 
 Weitere Klassifikatationen: Strukturierte Programmierung, Aspektorientierte
@@ -249,7 +249,7 @@ Weitere Diskussion unter: [https://sourcemaking.com/antipatterns/golden-hammer](
 ## Warum also C#?
 
 C# wurde unter dem Codenamen *Cool* entwickelt, vor der Veröffentlichung aber
-umbenannt. Der Name C Sharp leitet sich vom Zeichen Kreuz (♯, englisch sharp)
+umbenannt. Der Name C Sharp leitet sich vom Zeichen Kreuz (#, englisch sharp)
 der Notenschrift ab, was dort für eine Erhöhung des Grundtons um einen Halbton
 steht. C sharp ist also der englische Begriff für den Ton *cis* (siehe
 Anspielung auf C++)
@@ -301,21 +301,21 @@ Programme, die das .NET Framework verwenden, werden in der Regel so ausgeliefert
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
- +------+   +------+   +------+   +------+   +------+ ┌────────────┐
+ +------+   +------+   +------+   +------+   +------+ +------------+
  | VB   |   | C++  |   | C#   |   | js   |   | ...  | | Visual     |
- └──────┘   └──────┘   └──────┘   └──────┘   └──────┘ | Studio.NET |
- ┌──────────────────────────────────────────────────┐ |            |
+ +------+   +------+   +------+   +------+   +------. | Studio.NET |
+ ---------------------------------------------------- |            |
  |            Common Language Specification         | |            |
- └──────────────────────────────────────────────────┘ |            |
- ┌───────────────────────────────┐ ┌────────────────┐ |            |
+ ---------------------------------------------------- |            |
+ +-------------------------------+ +----------------+ |            |
  | ASP.NET                       | | Windows Forms  | |            |
- └───────────────────────────────┘ └────────────────┘ |            |
- ┌──────────────────────────────────────────────────┐ |            |
+ +-------------------------------+ +----------------+ |            |
+ ---------------------------------------------------- |            |
  |           .NET Framework Base Classes            | |            |
- └──────────────────────────────────────────────────┘ |            |
- ┌──────────────────────────────────────────────────┐ |            |
+ ---------------------------------------------------- |            |
+ ---------------------------------------------------- |            |
  |             Common Language Runtime              | |            |
- └──────────────────────────────────────────────────┘ └────────────┘           .
+ ---------------------------------------------------- +------------+           .
 ```
 Abbildung der Architektur am Beispiel des .NET Frameworks nach [Bhogayta](#9)
 
@@ -415,32 +415,32 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 ```ascii
                  +--------+     +--------+      +--------+
 Source Code      | VB     |     | C++    |      | C#     |
-                 └────────┘     └────────┘      └────────┘
-                 .--------.     .--------.      .--------.
+                 +--------+     +--------+      +--------+
                  |Compiler|     |Compiler|      |Compiler|--------------+
                  .--------.     .--------.      .--------.              |
                      |              |               |                   |
                      v              v               v                   |
-Common           ┌────────┐     ┌────────┐      ┌────────┐              |
+Common           +--------+     +--------+      +--------+              |
 Intermediate     |Assembly|     |Assembly|      |Assembly|              |
-Language         └────────┘     └────────┘      └────────┘              |
+Language         +--------+     +--------+      +--------+              |
                      |              |               |                   |
                      v              v               v                   |
-                 ┌───────────────────────────────────────┐              |
+                 +---------------------------------------+              |
                  | Common Language Runtime JIT Compiler  |              |
-                 └───────────────────────────────────────┘              |
+                 +---------------------------------------+              |
                      |              |               |                   |
                      v              v               v                   |
-              ╔════════════════════════════════════════════╗            v
-              ║  ┌────────┐     ┌────────┐      ┌────────┐ ║       ┌─────────┐
-              ║  |Managed |     |Managed |      |Managed | ║       |Unmanaged|
-              ║  | Code   |     | Code   |      | Code   | ║       | Code    |
-              ║  └────────┘     └────────┘      └────────┘ ║       └─────────┘
-              ║ Common Language Runtime Services           ║
-              ╚════════════════════════════════════════════╝
-               ┌─────────────────────────────────────────────────────────────┐
+              .- - - - - - - - - - - - - - - - - - - - - - .            v
+              !  +--------+     +--------+      +--------+ !       +---------+
+              !  |Managed |     |Managed |      |Managed | !       |Unmanaged|
+              !  | Code   |     | Code   |      | Code   | !       | Code    |
+              !  +--------+     +--------+      +--------+ !       +---------+
+              ! Common Language Runtime Services           !
+              .- - - - - - - - - - - - - - - - - - - - - - .
+
+               +-------------------------------------------------------------+
                |            Operating System Services                        |
-               └─────────────────────────────────────────────────────────────┘
+               +-------------------------------------------------------------+
 ```
 
 Darstellung motiviert durch [Bhogayta](#9)
@@ -571,23 +571,23 @@ namespace HelloWorld
 
 Eine ausführliche Hilfe findet sich unter https://www.mono-project.com/docs/getting-started/mono-basics/
 
-``` bash @output
-▶ mcs --about
+``` bash
+> mcs --about
 The Turbo C# compiler is Copyright 2001-2011, Novell, Inc. 2011-2016 Xamarin Inc, 2016-2017 Microsoft Corp
 
 The compiler source code is released under the terms of the
 MIT X11 or GNU GPL licenses
 
-▶ mcs HelloWorld.cs
+> mcs HelloWorld.cs
 
-▶ ls
+> ls
 HelloWorld.cs  HelloWorld.exe
 
-▶ mono HelloWorld.exe
+> mono HelloWorld.exe
 Hello, world!
 Press any key to exit.
 
-▶ ikdasm HelloWorld.exe
+> ikdasm HelloWorld.exe
 ...
 
 ```
@@ -603,54 +603,54 @@ Bibliotheken, Laufzeitumgebung und Tools.
 
 **Variante I - Microsoft C# Compiler**
 
-``` bash @output
-▶ csc
+``` bash
+> csc
 Microsoft (R) Visual C# Compiler version 2.8.2.62916 (2ad4aabc)
 Copyright (C) Microsoft Corporation. All rights reserved.
 ```
 
 **Variante II - Microsoft Build Tools**
 
-``` bash @output
-▶ dotnet new console
-▶ dotnet build
-▶ dotnet run
+``` bash
+> dotnet new console
+> dotnet build
+> dotnet run
 ```
 
 Aus dem generieren eines neuen Konsolenprojektes ergibt sich ein beeindruckender
 Baum von Projektdateien.
 
-``` bash @output
-▶ dotnet new console
+``` bash
+> dotnet new console
 
-▶ tree
+> tree
 .
-├── bin
-│   └── Debug
-│       └── netcoreapp2.2
-│           ├── dotnet.deps.json
-│           ├── dotnet.dll
-│           ├── dotnet.pdb
-│           ├── dotnet.runtimeconfig.dev.json
-│           └── dotnet.runtimeconfig.json
-├── dotnet.csproj
-├── obj
-│   ├── Debug
-│   │   └── netcoreapp2.2
-│   │       ├── dotnet.AssemblyInfo.cs
-│   │       ├── dotnet.AssemblyInfoInputs.cache
-│   │       ├── dotnet.assets.cache
-│   │       ├── dotnet.csprojAssemblyReference.cache
-│   │       ├── dotnet.csproj.CoreCompileInputs.cache
-│   │       ├── dotnet.csproj.FileListAbsolute.txt
-│   │       ├── dotnet.dll
-│   │       ├── dotnet.pdb
-│   │       └── project.razor.json
-│   ├── dotnet.csproj.nuget.cache
-│   ├── dotnet.csproj.nuget.g.props
-│   ├── dotnet.csproj.nuget.g.targets
-│   └── project.assets.json
-└── Program.cs
++-- bin
+|   +-- Debug
+|       +-- netcoreapp2.2
+|           +-- dotnet.deps.json
+|           +-- dotnet.dll
+|           +-- dotnet.pdb
+|           +-- dotnet.runtimeconfig.dev.json
+|           +-- dotnet.runtimeconfig.json
++-- dotnet.csproj
++-- obj
+|   +-- Debug
+|   |   +-- netcoreapp2.2
+|   |       +-- dotnet.AssemblyInfo.cs
+|   |       +-- dotnet.AssemblyInfoInputs.cache
+|   |       +-- dotnet.assets.cache
+|   |       +-- dotnet.csprojAssemblyReference.cache
+|   |       +-- dotnet.csproj.CoreCompileInputs.cache
+|   |       +-- dotnet.csproj.FileListAbsolute.txt
+|   |       +-- dotnet.dll
+|   |       +-- dotnet.pdb
+|   |       +-- project.razor.json
+|   +-- dotnet.csproj.nuget.cache
+|   +-- dotnet.csproj.nuget.g.props
+|   +-- dotnet.csproj.nuget.g.targets
+|   +-- project.assets.json
++-- Program.cs
 
 ```
 

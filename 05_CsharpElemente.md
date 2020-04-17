@@ -243,23 +243,28 @@ Schaubild realisiert dies auf 2 Ebenen (nach Mössenböck, Kompaktkurs C# 7 )
 <!--
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
 -->
-```
+```ascii
                                      C# Typen
-                                         ┃
-                       ┏━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━┓
+                                         |
+                       .------------------------------------.
+                       |                                    |
                    Werttypen                           Referenztypen
-                       ┃                                    ┃
-         ┏━━━━━━━━┳━━━━┻━━━━┳━━━━━━━┓         ┏━━━━━━━━┳━━━━┻━━━━┳━━━━━━━┓
+                       |                                    |
+         .-------+-----+---+--------.        .-------+---------+-------.
+         |       |         |        |        |       |         |       |
      Vordefi-  Enumer-  Structs   Tupel   Klassen  Inter    Arrays  Delegates
  nierte Typen  ation                               -faces
-         ┃      ╰─────────────────────────┬──────────────────────────────────╯
-         ┃                                V
-         ┃                    Benutzerdefinierte Typen
-    ┏━━━━┻━━━━━━┳━━━━━━━━━━┓
+         |
+         |      ...............................................................
+         |                           Benutzerdefinierte Typen
+         |
+    .----+------+-----------.
+    |           |           |
 Character    Ganzzahl   Gleitkommazahl
-                ┃
-          ┏━━━━━┻━━━━━━┓
-      Vorzeichen   Vorzeichenlos                             vgl. Mössenböck
+                |
+        .------+---------.
+        |                |
+    Vorzeichen   vorzeichenlos                             vgl. Mössenböck
 ```
 
 |                  | Werttypen        | Referenztypen                              |
@@ -272,23 +277,23 @@ Character    Ganzzahl   Gleitkommazahl
 <!--
 style="width: 80%; max-width: 360px; display: block; margin-left: auto; margin-right: auto;"
 -->
-````````````
+```ascii
     struct Point
-   ┏━━━━━━━━━━━━━━━━━┓
-   ┃ X               ┃
-   ┠─────────────────┨     P1 (Instanz des structs)
-   ┃ Y               ┃
-   ┗━━━━━━━━━━━━━━━━━┛
+   +-----------------+
+   | X               |
+   +-----------------+     P1 (Instanz des structs)
+   | Y               |
+   +-----------------+
 
 
    Referenz P1          class Point
-   ┏━━━━━━━━━━━┓      ┏━━━━━━━━━━━━━━━━━┓
-   ┃ Reference ┠────> ┃ Object Metadata ┃
-   ┗━━━━━━━━━━━┛      ┠─────────────────┨
-                      ┃ X               ┃
-                      ┠─────────────────┨
-                      ┃ Y               ┃
-                      ┗━━━━━━━━━━━━━━━━━┛
+   +-----------+      +-----------------+
+   | Reference |───>  | Object Metadata |
+   +-----------+      +-----------------+
+                      | X               |
+                      +-----------------+
+                      | Y               |
+                      +-----------------+
 ````````````
 
 Vorliegende Implementierung realisiert ein `Point struct`. Welche Änderungen
