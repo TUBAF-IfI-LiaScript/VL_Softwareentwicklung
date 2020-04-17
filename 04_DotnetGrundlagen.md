@@ -43,7 +43,25 @@ for i in range(0, max_value + 1):
     [[?]] Wohl in der Vorlesung nicht aufgepasst? :-)
 
 
-**2. Jetzt sind Sie dran ...**
+**2. Welches eher seltene Programmierparadigma findet man in folgendem Codefragment:**
+
+```python
+def mapArr(arr, func):
+    return [func(elem) for elem in arr]
+
+print("Berechne die Quadratzahl von jeder Zahl in der Liste")
+arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+arr_squared = mapArr(arr, lambda x: x**2)
+print(arr_squared)
+```
+@Rextester.eval(@Python)
+
+    [( )] Objektorientierte Programmierung
+    [( )] Prozedurale Programmierung
+    [(X)] Funktionale Programmierung
+    [[?]] Google mal Haskell :-D
+
+
 
 **3. Jetzt sind Sie dran ...**
 
