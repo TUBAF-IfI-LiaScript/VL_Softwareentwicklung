@@ -10,7 +10,7 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 -->
 
-# Vorlesung Softwareentwicklung - 1 - Softwareentwicklung als Prozess
+# Softwareentwicklung - 1 - Softwareentwicklung als Prozess
 
 **TU Bergakademie Freiberg - Sommersemester 2020**
 
@@ -23,7 +23,7 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ---------------------------------------------------------------------
 
-## 1. Softwareentwicklung
+## Softwareentwicklung
 
 
                                     {{0-1}}
@@ -100,7 +100,7 @@ Die Norm kann als eine Art Checkliste verstanden werden.
 
 *******************************************************************************
 
-## 2. Und warum der ganze Aufwand?
+## Und warum der ganze Aufwand?
 
                                        {{0-3}}
 *******************************************************************************
@@ -108,10 +108,33 @@ Die Norm kann als eine Art Checkliste verstanden werden.
 
 Steigende Komplexität der Softwareprodukte ...
 
-![ISO 9126](./img/01_Software/LinesOfCode.jpg)<!-- width="80%" --> [Weforum](#7)
+| Projekt/Produkt      | Lines of Code | Jahr |
+| -------------------- | -------------:| ---- |
+| Unix v 1.0           |        10.000 | 1971 |
+| Win32/Smile Virus    |        10.000 | 2002 |
+| Space shuttle        |       400.000 |      |
+| Windows 3.1          |     2.300.000 | 1992 |
+| HD DVD Player (XBox) |     4.500.000 | 2001 |
+| Windows 7            |               |      |
+| Firefox              |     9.900.000 |      |
+| Android              |    12.000.000 |      |
+| F-35 Flugzeug        |    24.000.000 | 2013 |
+| Facebook             |    62.000.000 |      |
 
+Quelle unter anderem [Weforum](#7) und [Link] (https://informationisbeautiful.net/visualizations/million-lines-of-code/)
 
-![ISO 9126](./img/01_Software/AufwandsverteilungCodeentwicklung.png)<!-- width="80%" --> [Lemburg1](#7)
+Und wann entsteht der Aufwand? Wann muss ein Team Kosten in die Entwicklung investieren?
+
+| Projektphase                         |             | Relativer Kosteanteil |
+| ------------------------------------ | ----------- | --------------------- |
+| Spezifikation und Architekturentwurf | Entwicklung | 16%                   |
+| Detailentwurf und Kodierung          |             | 9%                    |
+| Test                                 |             | 16%                   |
+| Anpassung                            | Wartung     | 12%                   |
+| Erweiterung und Verbesserung         |             | 36%                   |
+| Fehlerbehebung                       |             | 12%                   |
+
+Zahlwerte aus einem Diagramm in [Lemburg1](#7)
 *******************************************************************************
 
 
@@ -208,7 +231,7 @@ des Mars eingefroren sind.
 
 ![Mars Rover](./img/01_Software/MarsRoverProblem.png)<!-- width="80%" -->
 
-http://people.cs.ksu.edu/~hatcliff/842/Docs/Course-Overview/pathfinder-robotmag.pdf
+[http://people.cs.ksu.edu/~hatcliff/842/Docs/Course-Overview/pathfinder-robotmag.pdf](http://people.cs.ksu.edu/~hatcliff/842/Docs/Course-Overview/pathfinder-robotmag.pdf)
 
 
 **Toll Connect**
@@ -234,7 +257,7 @@ Softwaretechnische Probleme bei der Einführung 2003:
 
 *******************************************************************************
 
-                                    {{5}}
+                                    {{4-6}}
 *******************************************************************************
 **Und im Kleinen ...**
 
@@ -274,7 +297,7 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 
 *******************************************************************************
 
-                                    {{5-6}}
+                                    {{4-5}}
 | Aspekt                 | Bewertung |
 | ---------------------- | --------- |
 | Funktionalität         | ?         |
@@ -284,7 +307,7 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 | Wartungsfreundlichkeit |           |
 | Übertragbarkeit        |           |
 
-                                     {{6}}
+                                     {{5}}
 | Aspekt                 | Bewertung                                                                             |
 | ---------------------- | ------------------------------------------------------------------------------------- |
 | Funktionalität         | feste Feldlänge, das Programm stürzt bei mehr als 10 Einträgen ab                     |
@@ -294,7 +317,34 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 | Wartungsfreundlichkeit | fehlende Dokumentation, unverständliche Variablenbezeichner                           |
 | Übertragbarkeit        |                                                                                       |
 
-## 3. Struktuierung des Entwicklungsprozesses und Einordnung
+## Herausforderungen
+
+**Der Faktor Mensch**
+
+In einem Projekt stellt sich die Frage wieviele Personen involviert sind und damit welche Komplexität der Entwicklungsfluss hat. In einem Team von 3 Personen wird muss sichergestellt sein, dass eine Information bei 2 Partnern ankommt. Die maximale Anzahl ergibt sich zu
+
+$$N = \frac{n\cdot(n-1)}{2}$$.
+
+<!--
+style="width: 100%; max-width: 760px; display: block; margin-left: auto; margin-right: auto;"
+-->
+```ascii
+  ^
+  | Kommunikationspfade           o
+  |
+  |
+  |
+  |                        o <- ab hier mehr Kommunikationspfade
+  |                             als involvierte Personen
+  |
+  |                 o  <- bis hierher linear
+  |          o
+  +---o--------------------------------------->                               .
+      1      2      3      4      5      6
+```
+Grafik motiviert aus [Lemburg2](#7)
+
+Hier ist eine koordinierte Interaktion und Kommunikation notwendig!
 
 **Warum ist Softwareentwicklung so herausfordernd**
 
@@ -304,32 +354,41 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 * Fehler infolge von Fehleinschätzungen zur Skalierung ("was im Kleinen geht, geht genauso im Großen"). Software-Entwicklung wird daher unbewusst meist als viel einfacher eingeschätzt, als sie tatsächlich ist. Dies führt zu unrealistischen Erwartungen und zu von Beginn an zu tiefen Kosten- und Terminschätzungen.
 * Funktionierende Einzelkomponenten stellen noch lange kein funktionierendes Gesamtsystem sicher.
 
-**Der Faktor Mensch**
-
-![FaktorMensch](./img/01_Software/Kommunikationsbedarfe.png)<!-- width="60%" --> [Lemburg2](#7)
-
-Hier ist eine koordinierte Interaktion und Kommunikation notwendig!
-
-
 ------------------------------------------------------------------------
 
-**Ansätze zur Koodination**
+## Ansätze zur Strukturierung der Aufgaben
 
 *Erweitertes Wasserfallmodell*
 
-![Wasserfallmodell](./img/01_Software/Wasserfallmodell.png)<!-- width="60%" --> [Lemburg2](#7)
+<!--
+style="width: 100%; max-width: 760px; display: block; margin-left: auto; margin-right: auto;"
+-->
+```ascii
+  Anforderungen                         Problemanalyse, Systemspezifikation
+   \
+    Entwurf                             Grobentwurf, Feinentwurf
+     \
+      Umsetzung                         Implementierung, Integration
+       \
+        Überprüfung
+         \
+          Betrieb und Wartung           Installation, Anpassung                .
+```
 
 Eigenschaften des Wasserfallmodells:
+
 * Aktivitäten sind in der vorgegebenen Reihenfolge und in der vollen Breite vollständigdurchzuführen.
 * Am Ende jeder Aktivität steht ein fertiggestelltes Dokument, d.h. das Wasserfallmodell ist ein „dokumentgetriebenes“ Modell.
 * Der Entwicklungsablauf ist sequentiell und als Top-down-Verfahren realisiert.
 * Es ist einfach, verständlich und benötigt nur wenig Managementaufwand.
 
 Vorteile:
+
 * klare Abgrenzung der Phasen – einfache Möglichkeiten der Planung und Kontrolle
 * bei stabilen Anforderungen und klarer Abschätzung von Kosten und Umfang ein sehr effektives Modell
 
 Nachteile:
+
 * Das Modell ist nur bei einfachen Projekten anwendbar – Unflexibel gegenüber Änderungen und im Vorgehen
 * Frühes festschreiben der Anforderungen ist sehr problematisch und kann zu teuren Änderungen führen
 * Fehler werden eventuell erst sehr spät erkannt und müssen mit erheblichen Aufwand  entfernt werden
@@ -337,16 +396,37 @@ Nachteile:
 ------------------------------------------------------------------------
 *V-Modell*
 
-![V-Modell](./img/01_Software/VModell.png)<!-- width="80%" --> [Lemburg2](#7)
+<!--
+style="width: 100%; max-width: 760px; display: block; margin-left: auto; margin-right: auto;"
+-->
+```ascii
+                         Szenarien
+Anforderungen        ................>              Abnahmetest
+   \ ^                                              / ^
+    v \                  Testfälle                 v /
+    Grobentwurf      ................>        Systemtest
+      \ ^                                       / ^
+       v \               Testfälle             v /
+      Feinentwurf    ................>     Integrationstest
+         \ ^                                 / ^
+          v \            Testfälle          v /
+        Modulimpl.   ................>    Modultest
+            \ \                           / /
+             \ +-------------------------+ /
+              +---------------------------+                                    .
+```
+
 
 Tätigkeitsbereiche des V-Modell: Softwareerstellung, Qualitätssicherung, Konfigurationsmanagement, Projektmanagement
 
 Vorteile:
+
 * Integrierte und detaillierte Darstellung von den Tätigkeitsbereichen
 * Generisches Modell mit definierten Möglichkeiten zur Anpassung an projektspezifische Anforderungen
 * Gut geeignet für große Projekte
 
 Nachteile:
+
 * Für kleine und mittlere Softwareentwicklungen führt das V-Modell zu einem unnötigen Overhead
 * Die im V-Modell definierten Rollen (bis zu 25) sind für gängige Softwareentwicklungen nicht realistisch
 * explizite Werkzeuge notwendig
@@ -359,7 +439,7 @@ Weitere Informationen zum Beispiel unter
 
 https://www.dev-insider.de/was-ist-agile-softwareentwicklung-a-569187/
 
-## 4. Ok, wir brauchen Unterstützung
+## Ok, wir brauchen Unterstützung
 
 > *CASE is the use of computer-based support in the software development process*
 
@@ -416,9 +496,5 @@ Texteditor vs. Integred development environment (IDE)
 *[Lemburg1]* Prof. Dr. Thorsten Lemburg, Einführung in die Softwareentwicklung,
 [Link](https://wr.informatik.uni-hamburg.de/_media/teaching/wintersemester_2010_2011/siw-2011-lemburg-einfuehrung_in_die_softwareentwicklung-druckversion.pdf)
 
-*[Lemburg2]* Prof. Dr. Thorsten Lemburg, Einführung in die Softwareentwicklung - Seminar: Softwareentwicklung in der Wissenschaft, [Link](https://wr.informatik.uni-hamburg.de/_media/teaching/wintersemester_2010_2011/siw-2011-lemburg-einfuehrung_in_die_softwareentwicklung-ausarbeitung.pdf)
-
 *[Weforum]*
 Dragan Radovanovic, Kif Leswing, "Google runs on 5000 times more code than the original space shuttle", 2016, [Link](https://www.weforum.org/agenda/2016/07/google-runs-on-5000-times-more-code-than-the-original-space-shuttle?utm_content=buffer45d4c&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer)
-
-*[WikiVModell]* Wikipedia "V Modell", Autor *Michael Pätzold*

@@ -11,7 +11,7 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 -->
 
-# Vorlesung Softwareentwicklung - 2 - Versionsverwaltung
+# Softwareentwicklung - 2 - Versionsverwaltung
 
 **TU Bergakademie Freiberg - Sommersemester 2020**
 
@@ -29,30 +29,30 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 **1. Bewerten Sie die Aussage: GitHub und git sind im Grunde das Gleiche!**
 
-[( )] Die Aussage stimmt.
-[(X)] Die Aussage ist falsch
-[[?]] Lassen Sie sich nicht von der Ähnlichkeit der Namen täuschen und recherchieren Sie noch mal!
-***********************************************************************
+    [( )] Die Aussage stimmt.
+    [(X)] Die Aussage ist falsch
+    [[?]] Lassen Sie sich nicht von der Ähnlichkeit der Namen täuschen und recherchieren Sie noch mal!
+    ***********************************************************************
 
-                                {{1}}
-GitHub implementiert einen git-Server, bietet aber gleichzeit g
+                                    {{1}}
+    GitHub implementiert einen git-Server, bietet aber gleichzeit weitere Services für den Entwicklungsprozess, die sich auf die Git-Aktivitäten beziehen. Das sind zum Beispiel die Verwaltung von Issues und Meilensteinen oder die Automatisierten Tests.
 
-***********************************************************************
+    ***********************************************************************
 
-__2. Jetzt sind Sie dran ...__
+**2. Jetzt sind Sie dran ...**
 
-__3. ...__
+**3. Jetzt sind Sie dran ...**
 
-__4. ...__
+**4. Jetzt sind Sie dran ...**
 
-__5. ...__
+**5. Jetzt sind Sie dran ...**
 
-__6. ...__
+**6. Jetzt sind Sie dran ...**
 
-__7. ...__
+**7. Jetzt sind Sie dran ...**
 
 
-## 1. Motivation
+## Motivation
 
                                    {{0-2}}
 ******************************************************************************
@@ -504,7 +504,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 | Konflikte bei Manipulation eines Dokumentes durch mehrere Autoren | Existenz paralleler  Versionen eines Dokumentes abgesichert |
 | Sequenz von Versionen                                             | gerichteter azyklischer Graph                               |
 
-###Git
+## Git
 
                                 {{0-1}}
 ******************************************************************************
@@ -514,9 +514,11 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
 Die Entwicklungsgeschichte von git ist mit der des Linux Kernels verbunden:
 
-| 1991 | 2002 | 2005 |
-| ---- | ---- | ---- |
-| Änderungen am Linux Kernel via patches und archive files      | Linux Kernel mit dem Tool BitKeeper verwaltet      | Bruch zwischen der vertreibenden Firma und der Linux Community     |
+| Jahr | Methode der Versionsverwaltungen                               |
+| ---- | -------------------------------------------------------------- |
+| 1991 | Änderungen am Linux Kernel via patches und archive files       |
+| 2002 | Linux Kernel mit dem Tool BitKeeper verwaltet                  |
+| 2005 | Bruch zwischen der vertreibenden Firma und der Linux Community |
 
 2005 wurde einen Anforderungsliste für eine Neuentwicklung definiert. Dabei wurde hervorgehoben, dass sie insbesondere sehr große Projekte (Zahl der Entwickler, Features und Codezeilen, Dateien) unterstützen können muss. Daraus entstand `Git` als freie Software zur verteilten Versionsverwaltung von Dateien.
 
