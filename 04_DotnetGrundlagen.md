@@ -491,7 +491,7 @@ vgl. Vortrag von Mössenböck ([link](https://www.dcl.hpi.uni-potsdam.de/teachin
 | JIT              | per Methoden                                | per Methode / gesamt                       |
 | Komponenten      | Beans                                       | Assemblies                                           |
 | Versionierung    | nein                                        | ja                                         |
-| Leitidee         | Eine Sprache auf vielen Plattformen         | Viele Sprachen auf einer Plattformen       |
+| Leitidee         | Eine Sprache auf vielen Plattformen         | Viele Sprachen auf einer Plattform         |
 
 Beim Punkt "Leitidee" muss man kritisch fragen ob auf der C# Seite die
 Programmiersprache oder das .NET Framework gemeint ist!
