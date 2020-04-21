@@ -43,7 +43,7 @@ for i in range(0, max_value + 1):
     [[?]] Wohl in der Vorlesung nicht aufgepasst? :-)
 
 
-**2. Welches eher seltene Programmierparadigma findet man in folgendem Codefragment:**
+**2. Welches Programmierparadigma findet man in folgendem Codefragment:**
 
 ```python
 def mapArr(arr, func):
@@ -62,35 +62,31 @@ print(arr_squared)
     [[?]] Google mal Haskell :-D
 
 
-**3. Welche der folgenden Elemente der Paradigmen wird nicht von C# unterstützt?**
+**3. Das .NET Framework beinhaltet nicht nur Common Language Runtime (CLR) sondern auch die Entwicklungswerkzeuge und Klassenbibliotheken.**
 
-[( )] procedural
-[( )]objektorientiert
-[(X)] logisch
-[( )] funktional
+    [[falsch|(richtig)]]
 
-**4. Das .NET Framework besteht aus Common Language Runtime (CLR), Klassenbibliotekt und Kompiler.**
-[[falsch|(richtig)]]
+**4. Die Ausgabe aus einem C#-Programm ist unter anderem mit der folgenden Anweisung möglich:**
 
-**5. Die Ausgabe wird in C# ausgeführt durch...**
+    [( )] System.out.print();
+    [( )] print();
+    [(X)] System.Console.WriteLine();
+    [( )] printf();
 
-[( )] System.out.print();
-[( )] print();
-[(X)] System.Console.WriteLine();
-[( )] printf();
+**5. Im Ergebnis des Comilierens eines C#-Programms entsteht**
 
-**6. Wärend der Kompilierung werden C# Programme physisch verpackt in...**
+    [( )] ein Namespace
+    [(X)] ein Assembly
+    [( )] eine ausführbare Methode
+    [( )] eine ausführbare Klasse
 
-[( )] Namespaces
-[(X)] Assemblies
-[( )] Methode
-[( )] Klasse
+**6. Bei Console.WriteLine() sind Console und WriteLine**
 
-**7. Bei Console.WriteLine() sind Console und WriteLine ...**
+    [( )] Namespace und Member
+    [(X)] Klasse und Methode
+    [( )] Assembly und Klasse
 
-[( )] Namespace und Member
-[(X)] Klasse und Methode
-[( )] Assembly und Klasse
+**7. Jetzt sind Sie dran ...**
 
 ## Einschub: Programmierparadigmen
 
