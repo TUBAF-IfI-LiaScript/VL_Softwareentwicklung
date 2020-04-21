@@ -62,13 +62,30 @@ print(arr_squared)
     [[?]] Google mal Haskell :-D
 
 
-**3. Jetzt sind Sie dran ...**
+**3. Das .NET Framework beinhaltet nicht nur Common Language Runtime (CLR) sondern 
+auch die Entwicklungswerkzeuge und Klassenbibliotheken.**
 
-**4. Jetzt sind Sie dran ...**
+    [[falsch|(richtig)]]
 
-**5. Jetzt sind Sie dran ...**
+**4. Die Ausgabe aus einem C#-Programm ist unter anderem mit der folgenden Anweisung möglich:**
 
-**6. Jetzt sind Sie dran ...**
+    [( )] System.out.print();
+    [( )] print();
+    [(X)] System.Console.WriteLine();
+    [( )] printf();
+
+**5. Im Ergebnis des Comilierens eines C#-Programms entsteht:**
+
+    [( )] ein Namespace
+    [(X)] ein Assembly
+    [( )] eine ausführbare Methode
+    [( )] eine ausführbare Klasse
+
+**6. Bei Console.WriteLine() sind Console und WriteLine:**
+
+    [( )] Namespace und Member
+    [(X)] Klasse und Methode
+    [( )] Assembly und Klasse
 
 **7. Jetzt sind Sie dran ...**
 
