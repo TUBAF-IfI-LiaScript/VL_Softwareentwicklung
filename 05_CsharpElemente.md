@@ -366,7 +366,7 @@ Numerische Suffixe
 | ------ | ------- | ---------------- | ------------------------------------- |
 | F      | float   | float f = 1.0F   |                                       |
 | D      | double  | double d = 1D    | Anwendung ?                           |
-| U      | decimal | decimal d = 1.0M | Compilerfehler bei fehlen des Suffixe |
+| U      | decimal | decimal d = 1.0M | Compilerfehler bei fehlen des Suffix  |
 | U      | uint    | uint i = 1U      |                                       |
 
 
