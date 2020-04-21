@@ -62,15 +62,35 @@ print(arr_squared)
     [[?]] Google mal Haskell :-D
 
 
-**3. Jetzt sind Sie dran ...**
+**3. Welche der folgenden Elemente der Paradigmen wird nicht von C# unterstützt?**
 
-**4. Jetzt sind Sie dran ...**
+[( )] procedural
+[( )]objektorientiert
+[(X)] logisch
+[( )] funktional
 
-**5. Jetzt sind Sie dran ...**
+**4. Das .NET Framework besteht aus Common Language Runtime (CLR), Klassenbibliotekt und Kompiler.**
+[[falsch|(richtig)]]
 
-**6. Jetzt sind Sie dran ...**
+**5. Die Ausgabe wird in C# ausgeführt durch...**
 
-**7. Jetzt sind Sie dran ...**
+[( )] System.out.print();
+[( )] print();
+[(X)] System.Console.WriteLine();
+[( )] printf();
+
+**6. Wärend der Kompilierung werden C# Programme physisch verpackt in...**
+
+[( )] Namespaces
+[(X)] Assemblies
+[( )] Methode
+[( )] Klasse
+
+**7. Bei Console.WriteLine() sind Console und WriteLine ...**
+
+[( )] Namespace und Member
+[(X)] Klasse und Methode
+[( )] Assembly und Klasse
 
 ## Einschub: Programmierparadigmen
 
