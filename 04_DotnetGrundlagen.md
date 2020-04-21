@@ -74,14 +74,14 @@ auch die Entwicklungswerkzeuge und Klassenbibliotheken.**
     [(X)] System.Console.WriteLine();
     [( )] printf();
 
-**5. Im Ergebnis des Comilierens eines C#-Programms entsteht:**
+**5. Im Ergebnis des Comilierens eines C#-Programms entsteht**
 
     [( )] ein Namespace
     [(X)] ein Assembly
     [( )] eine ausführbare Methode
     [( )] eine ausführbare Klasse
 
-**6. Bei Console.WriteLine() sind Console und WriteLine:**
+**6. Bei Console.WriteLine() sind Console und WriteLine**
 
     [( )] Namespace und Member
     [(X)] Klasse und Methode
