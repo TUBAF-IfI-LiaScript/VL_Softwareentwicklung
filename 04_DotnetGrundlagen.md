@@ -341,7 +341,7 @@ Abbildung der Architektur am Beispiel des .NET Frameworks nach [Bhogayta](#9)
 *  ActiveX Data Objects (ADO) ... ist eine auf ActiveX basierende Schnittstelle zum Datenzugriff auf Datenbanken und tabellenartige Datenquellen über eine einheitliche API.
 * Windows Forms ... ist ein GUI-Toolkit des Microsoft .NET Frameworks. Es ermöglicht die Erstellung grafischer Benutzeroberflächen (GUIs) für Windows.
 
-Neben den Aktivitäten von Mikrosoft entwickelten sich verschiedene Open Source
+Neben den Aktivitäten von Microsoft entwickelte sich verschiedene Open Source
 Implementierungen. Aus der wichtigsten, dem Mono Projekt (Linux Implementierung
 des .NET Standards) ging die Firma Xamarin hervor, die eine Ausführung auf
 Smartphones realsierte. Diese wurde 2011 von Microsoft übernommen.
