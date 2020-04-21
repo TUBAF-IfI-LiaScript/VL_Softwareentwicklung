@@ -31,17 +31,45 @@ Die interaktive Form ist unter diese Link zu finden ->
     [( )] Unterstriche vor dem Namen
     [[?]] ... , um Variablennamen, die in C# Schlüsselworte sind, aber in Assemblies enthalten sind, die mit anderen Programmiersprachen erzeugt wurden, abzudecken
 
-**2. Jetzt sind Sie dran ...**
 
-**3. Jetzt sind Sie dran ...**
+**2. Das erste Zeichen eines Variablennamens in C\# kann sein: **
+    
+    [(X)] `_`
+    [(X)] Buchstabe
+    [()] Zahl
+    [()] `§`
+    [()] `#`
+    [()] `*`
+    [(?)] genau 2 Antworten sind richtig.
 
-**4. Jetzt sind Sie dran ...**
+**3. Was gilt es (insbesondere) beim initialisieren einer Variablen als `decimal` zu beachten?**
 
-**5. Jetzt sind Sie dran ...**
+   [[suffix]]
 
-**6. Jetzt sind Sie dran ...**
 
-**7. Jetzt sind Sie dran ...**
+**4. Division durch Null ist nicht möglich und erzeugt immer einen Fehler!**
+
+[()] true
+[(X)] false
+
+**5. Welcher Schreibstil ist in C\# zu bevorzugen?**
+
+[()] `this_way_of_typing`
+[(X)] `ThisWayOfTyping`
+[(?)] "Results indicate that *camel casing* leads to higher accuracy among all subjects regardless of training, and those trained in camel casing are able to recognize identifiers in the camel case style faster than identifiers in the underscore style."
+
+**6. Was sagt die Anzahl an Schlüsselwörtern über eine Programmiersprache aus? Hat C\# mehr Schlüsselwörter als C?**
+
+[(X)] C\# > C
+[()] C > C\#
+
+**7. Datentypen werden in C\# unterschieden in:**
+
+[[Werttypen]]
+[(?)] Beispiele für diesen Typ ↑ sind: Structs , Ints, Characters
+[(?)] Beispiele für diesen Typ ↓ sind: Klassen, Arrays, Delegates
+[[Referenztypen]]
+
 
 
 ## Symbole
@@ -366,7 +394,7 @@ Numerische Suffixe
 | ------ | ------- | ---------------- | ------------------------------------- |
 | F      | float   | float f = 1.0F   |                                       |
 | D      | double  | double d = 1D    | Anwendung ?                           |
-| U      | decimal | decimal d = 1.0M | Compilerfehler bei fehlen des Suffixe |
+| U      | decimal | decimal d = 1.0M | Compilerfehler bei fehlen des Suffix  |
 | U      | uint    | uint i = 1U      |                                       |
 
 
