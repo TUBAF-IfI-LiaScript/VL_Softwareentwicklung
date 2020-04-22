@@ -36,35 +36,32 @@ Die interaktive Form ist unter diese Link zu finden ->
 
     [(X)] `_`
     [(X)] Buchstabe
-    [()] Zahl
-    [()] `§`
-    [()] `#`
-    [()] `*`
-    [(?)] genau 2 Antworten sind richtig.
+    [( )] Zahl
+    [( )] `§`
+    [( )] `#`
+    [( )] `*`
+    [[?]] genau 2 Antworten sind richtig.
 
 **3. Division durch Null ist nicht möglich und erzeugt immer einen Fehler!**
 
-[()] true
+[( )] true
 [(X)] false
 
 **4. Welcher Schreibstil ist in C\# zu bevorzugen?**
 
-[()] `this_way_of_typing`
+[( )] `this_way_of_typing`
 [(X)] `ThisWayOfTyping`
-[(?)] "Results indicate that *camel casing* leads to higher accuracy among all subjects regardless of training, and those trained in camel casing are able to recognize identifiers in the camel case style faster than identifiers in the underscore style."
+[[?]] Results indicate that *camel casing* leads to higher accuracy among all subjects regardless of training, and those trained in camel casing are able to recognize identifiers in the camel case style faster than identifiers in the underscore style.
 
 **5. Was sagt die Anzahl an Schlüsselwörtern über eine Programmiersprache aus? Hat C\# mehr Schlüsselwörter als C?**
 
-[(X)] C\# > C
-[()] C > C\#
+[(X)] C# $>$ C
+[( )] C $>$ C#
 
-**6. Datentypen werden in C\# unterschieden in:**
+**6. Die Datentypen werden in C\# in zwei grundsätzlichen Kategorien zusammengefasst. Die erste Gruppe umfasst - Structs , Ints, Characters, die zweit Klassen, Arrays, Delegates. Benennen Sie die Oberbegriffe:**
 
 [[Werttypen]]
-[(?)] Beispiele für diesen Typ ↑ sind: Structs , Ints, Characters
-[(?)] Beispiele für diesen Typ ↓ sind: Klassen, Arrays, Delegates
 [[Referenztypen]]
-
 
 
 ## Symbole
