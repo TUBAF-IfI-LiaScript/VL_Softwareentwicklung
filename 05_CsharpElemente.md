@@ -16,7 +16,7 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-[https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/04_DotnetGrundlagen.md](https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/05_CsharpElemente.md)
+[https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/05_CsharpElemente.md](https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/05_CsharpElemente.md)
 
 Die interaktive Form ist unter diese Link zu finden ->
 [LiaScript Vorlesung 05](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/SoSe2020/05_CsharpElemente.md#1)
@@ -31,17 +31,37 @@ Die interaktive Form ist unter diese Link zu finden ->
     [( )] Unterstriche vor dem Namen
     [[?]] ... , um Variablennamen, die in C# Schlüsselworte sind, aber in Assemblies enthalten sind, die mit anderen Programmiersprachen erzeugt wurden, abzudecken
 
-**2. Jetzt sind Sie dran ...**
 
-**3. Jetzt sind Sie dran ...**
+**2. Das erste Zeichen eines Variablennamens in C\# kann sein:**
 
-**4. Jetzt sind Sie dran ...**
+    [(X)] `_`
+    [(X)] Buchstabe
+    [( )] Zahl
+    [( )] `§`
+    [( )] `#`
+    [( )] `*`
+    [[?]] genau 2 Antworten sind richtig.
 
-**5. Jetzt sind Sie dran ...**
+**3. Division durch Null ist nicht möglich und erzeugt immer einen Fehler!**
 
-**6. Jetzt sind Sie dran ...**
+[( )] true
+[(X)] false
 
-**7. Jetzt sind Sie dran ...**
+**4. Welcher Schreibstil ist in C\# zu bevorzugen?**
+
+[( )] `this_way_of_typing`
+[(X)] `ThisWayOfTyping`
+[[?]] Results indicate that *camel casing* leads to higher accuracy among all subjects regardless of training, and those trained in camel casing are able to recognize identifiers in the camel case style faster than identifiers in the underscore style.
+
+**5. Was sagt die Anzahl an Schlüsselwörtern über eine Programmiersprache aus? Hat C\# mehr Schlüsselwörter als C?**
+
+[(X)] C# $>$ C
+[( )] C $>$ C#
+
+**6. Die Datentypen werden in C\# in zwei grundsätzlichen Kategorien zusammengefasst. Die erste Gruppe umfasst - Structs , Ints, Characters, die zweit Klassen, Arrays, Delegates. Benennen Sie die Oberbegriffe:**
+
+[[Werttypen]]
+[[Referenztypen]]
 
 
 ## Symbole
@@ -138,10 +158,10 @@ namespace Rextester
 Die Vergabe von Namen sollte sich an die Regeln der Klassenbibliothek halten
 um bereits aus dem Namen der Typ ersichtlich wird:
 
-+ C# bevorzugt *camel case* `MyNewClass` anstatt *underscoring* `My_new_class`.
++ C#-Community bevorzugt *camel case* `MyNewClass` anstatt *underscoring* `My_new_class`.
    (Eine engagierte Diskussion zu diesem Thema findet sich unter [Link](https://whatheco.de/2011/02/10/camelcase-vs-underscores-scientific-showdown/))
 + außer bei lokalen Variablen und Parametern oder den Feldern einer Klasse,
-      die nicht von außen sichbar sind beginnen Namen mit großen Anfangsbuchstaben
+      die nicht von außen sichtbar sind beginnen Namen mit großen Anfangsbuchstaben
       (diese Konvention wird als *pascal case* bezeichnet)
 + Methoden ohne Rückgabewert sollten mit einem Verb beginnen `PrintResult()` alles
    andere mit einem Substantiv. Boolsche Ausdrücke auch mit einem Adjektiv
@@ -243,23 +263,28 @@ Schaubild realisiert dies auf 2 Ebenen (nach Mössenböck, Kompaktkurs C# 7 )
 <!--
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
 -->
-```
+```ascii
                                      C# Typen
-                                         ┃
-                       ┏━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━┓
+                                         |
+                       .------------------------------------.
+                       |                                    |
                    Werttypen                           Referenztypen
-                       ┃                                    ┃
-         ┏━━━━━━━━┳━━━━┻━━━━┳━━━━━━━┓         ┏━━━━━━━━┳━━━━┻━━━━┳━━━━━━━┓
+                       |                                    |
+         .-------+-----+---+--------.        .-------+---------+-------.
+         |       |         |        |        |       |         |       |
      Vordefi-  Enumer-  Structs   Tupel   Klassen  Inter    Arrays  Delegates
  nierte Typen  ation                               -faces
-         ┃      ╰─────────────────────────┬──────────────────────────────────╯
-         ┃                                V
-         ┃                    Benutzerdefinierte Typen
-    ┏━━━━┻━━━━━━┳━━━━━━━━━━┓
+         |
+         |      ...............................................................
+         |                           Benutzerdefinierte Typen
+         |
+    .----+------+-----------.
+    |           |           |
 Character    Ganzzahl   Gleitkommazahl
-                ┃
-          ┏━━━━━┻━━━━━━┓
-      Vorzeichen   Vorzeichenlos                             vgl. Mössenböck
+                |
+        .------+---------.
+        |                |
+    Vorzeichen   vorzeichenlos                             vgl. Mössenböck
 ```
 
 |                  | Werttypen        | Referenztypen                              |
@@ -272,24 +297,24 @@ Character    Ganzzahl   Gleitkommazahl
 <!--
 style="width: 80%; max-width: 360px; display: block; margin-left: auto; margin-right: auto;"
 -->
-````````````
+```ascii
     struct Point
-   ┏━━━━━━━━━━━━━━━━━┓
-   ┃ X               ┃
-   ┠─────────────────┨     P1 (Instanz des structs)
-   ┃ Y               ┃
-   ┗━━━━━━━━━━━━━━━━━┛
+   +-----------------+
+   | X               |
+   +-----------------+     P1 (Instanz des structs)
+   | Y               |
+   +-----------------+
 
 
    Referenz P1          class Point
-   ┏━━━━━━━━━━━┓      ┏━━━━━━━━━━━━━━━━━┓
-   ┃ Reference ┠────> ┃ Object Metadata ┃
-   ┗━━━━━━━━━━━┛      ┠─────────────────┨
-                      ┃ X               ┃
-                      ┠─────────────────┨
-                      ┃ Y               ┃
-                      ┗━━━━━━━━━━━━━━━━━┛
-````````````
+   +-----------+      +-----------------+
+   | Reference |───>  | Object Metadata |
+   +-----------+      +-----------------+
+                      | X               |
+                      +-----------------+
+                      | Y               |
+                      +-----------------+
+```
 
 Vorliegende Implementierung realisiert ein `Point struct`. Welche Änderungen
 müssen vorgenommen werden, um einen Referenztypen zu benutzen? Welche
@@ -361,7 +386,7 @@ Numerische Suffixe
 | ------ | ------- | ---------------- | ------------------------------------- |
 | F      | float   | float f = 1.0F   |                                       |
 | D      | double  | double d = 1D    | Anwendung ?                           |
-| U      | decimal | decimal d = 1.0M | Compilerfehler bei fehlen des Suffixe |
+| U      | decimal | decimal d = 1.0M | Compilerfehler bei fehlen des Suffix  |
 | U      | uint    | uint i = 1U      |                                       |
 
 
@@ -597,7 +622,7 @@ namespace Rextester
         {
             short x = 1, y = 1;
             short z = x + y;
-            Console.WriteLine("Division von 2/3  = {0:D}", z);
+            Console.WriteLine("Die Summe ist gleich {0:D}", z);
         }
     }
 }
@@ -607,49 +632,48 @@ namespace Rextester
 ********************************************************************************
 ### Bitweise Operatoren
 
-                                 {{0-1}}
-********************************************************************************
+
 Bitweise Operatoren verknüpfen Zahlen auf der Ebene einzelnen Bits, analog
-anderen Programmiersprachen stellt C# foldende Operatoren zur Verfügung:
+anderen Programmiersprachen stellt C# folgende Operatoren zur Verfügung:
 
-| ~  |invertiert jedes Bit                       |
-| \| |verknüpft korrespondierende Bits mit ODER  |
-| &  |verknüpft korrespondierende Bits mit UND   |
-| ^  |verknüpft korrespondierende Bits mit XOR   |
-| << |bitweise Verschiebung nach links           |
-| >> |bitweise Verschiebung nach rechts          |
+| Symbol | Wirkung                                   |
+| ------ | ----------------------------------------- |
+| `~`      | invertiert jedes Bit                      |
+| `\`|     | verknüpft korrespondierende Bits mit ODER |
+| `&`      | verknüpft korrespondierende Bits mit UND  |
+| `^`      | verknüpft korrespondierende Bits mit XOR  |
+| `<<`     | bitweise Verschiebung nach links          |
+| `>>`     | bitweise Verschiebung nach rechts         |
 
-```csharp
+
+```csharp     BitOperations.cs
 using System;
 
 namespace Rextester
 {
     public class Program
     {
+        public static string printBinary(int value)
+        {
+          return Convert.ToString(value, 2).PadLeft(8,'0');
+        }
+
         public static void Main(string[] args)
         {
           int x = 21, y = 12;
-           Console.WriteLine("dezimal:{0:D}, hexadezimal:{0:X}", x );
-           Console.WriteLine("dezimal:{0:D}, hexadezimal:{0:X}", y);
-           Console.WriteLine("dezimal:{0:D}, hexadezimal:{0:X}", x & y );
-           Console.WriteLine("dezimal:{0:D}, hexadezimal:{0:X}", x | y);
-           Console.WriteLine("dezimal:{0:D}, hexadezimal:{0:X}", x << 1);
-           Console.WriteLine("dezimal:{0:D}, hexadezimal:{0:X}", y >> 2);
+          Console.WriteLine(printBinary(7));
+           Console.WriteLine("dezimal:{0:D}, binär:{1}", x, printBinary(x));
+           Console.WriteLine("dezimal:{0:D}, binär:{1}", y, printBinary(y));
+           Console.WriteLine("x & y  = {0}", printBinary(x & y));
+           Console.WriteLine("x | y  = {0}", printBinary(x | y));
+           Console.WriteLine("x << 1 = {0}", printBinary(x << 1));
+           Console.WriteLine("x >> 1 = {0}", printBinary(x >> 1));
         }
     }
 }
 ```
 @Rextester.eval(@CSharp)
 
-```text
-20 = 0000 0000 0001 0101
-12 = 0000 0000 0000 1100
- 4 = 0000 0000 0000 0100
-29 = 0000 0000 0001 1101
-42 = 0000 0000 0010 1010
- 3 = 0000 0000 0000 0011
-```
-********************************************************************************
 
 ## Beispiel der Woche ... Primzahlenbestimmung
 

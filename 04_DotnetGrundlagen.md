@@ -43,15 +43,48 @@ for i in range(0, max_value + 1):
     [[?]] Wohl in der Vorlesung nicht aufgepasst? :-)
 
 
-**2. Jetzt sind Sie dran ...**
+**2. Welches Programmierparadigma findet man in folgendem Codefragment:**
 
-**3. Jetzt sind Sie dran ...**
+```python
+def mapArr(arr, func):
+    return [func(elem) for elem in arr]
 
-**4. Jetzt sind Sie dran ...**
+print("Berechne die Quadratzahl von jeder Zahl in der Liste")
+arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+arr_squared = mapArr(arr, lambda x: x**2)
+print(arr_squared)
+```
+@Rextester.eval(@Python)
 
-**5. Jetzt sind Sie dran ...**
+    [( )] Objektorientierte Programmierung
+    [( )] Prozedurale Programmierung
+    [(X)] Funktionale Programmierung
+    [[?]] Google mal Haskell :-D
 
-**6. Jetzt sind Sie dran ...**
+
+**3. Das .NET Framework beinhaltet nicht nur Common Language Runtime (CLR) sondern auch die Entwicklungswerkzeuge und Klassenbibliotheken.**
+
+    [[falsch|(richtig)]]
+
+**4. Die Ausgabe aus einem C#-Programm ist unter anderem mit der folgenden Anweisung möglich:**
+
+    [( )] System.out.print();
+    [( )] print();
+    [(X)] System.Console.WriteLine();
+    [( )] printf();
+
+**5. Im Ergebnis des Comilierens eines C#-Programms entsteht**
+
+    [( )] ein Namespace
+    [(X)] ein Assembly
+    [( )] eine ausführbare Methode
+    [( )] eine ausführbare Klasse
+
+**6. Bei Console.WriteLine() sind Console und WriteLine**
+
+    [( )] Namespace und Member
+    [(X)] Klasse und Methode
+    [( )] Assembly und Klasse
 
 **7. Jetzt sind Sie dran ...**
 
@@ -71,11 +104,12 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 -->
 ````````````
                          Programmierparadigmen
-                                  ┃
-                ┏━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━┓
+                                  |
+                .-----------------+-----------------.
+                |                                   |
     Imperative Programmierung         Deklarative Programmierung
-                ┃                                   ┃
-      ┏━━━━━━━━━┻━━━━━━━━┓                 ┏━━━━━━━━┻━━━━━━━━━┓
+                |                                   |
+      .------------------.               .----------+---------.
   Prozedural    Objektorientiert    Funktional             Logisch
 
 Weitere Klassifikatationen: Strukturierte Programmierung, Aspektorientierte
@@ -231,7 +265,7 @@ Weitere Diskussion unter: [https://sourcemaking.com/antipatterns/golden-hammer](
 ## Warum also C#?
 
 C# wurde unter dem Codenamen *Cool* entwickelt, vor der Veröffentlichung aber
-umbenannt. Der Name C Sharp leitet sich vom Zeichen Kreuz (♯, englisch sharp)
+umbenannt. Der Name C Sharp leitet sich vom Zeichen Kreuz (#, englisch sharp)
 der Notenschrift ab, was dort für eine Erhöhung des Grundtons um einen Halbton
 steht. C sharp ist also der englische Begriff für den Ton *cis* (siehe
 Anspielung auf C++)
@@ -260,6 +294,7 @@ C#
 | 2015 | 4.6              | 6.0        | Exception Filters, Indizierte Membervariablen und Elementinitialisierer, Mehrzeilige String-Ausdrücke, Implementierung von Methoden mittels Lambda-Ausdruck |
 | 2017 | 4.6.2/ .NET Core | 7.0        | Mustervergleiche (Pattern matching),  Binärliterale 0b..., Tupel                                                                                            |
 | 2019 | .NET Core 3      | 8.0        | Standardimplementierungen in Schnittstellen, Switch Expressions, statische lokale Funktionen, Index-Operatoren für Teilmengen                                                                                                                                                            |
+
 Die Sprache selbst ist unmittelbar mit der Ausführungsumgebung, dem .NET Konzept verbunden und war ursprüngelich stark auf Windows Applikationen zugeschnitten.
 
 ### Konzepte und Einbettung
@@ -283,21 +318,21 @@ Programme, die das .NET Framework verwenden, werden in der Regel so ausgeliefert
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
- +------+   +------+   +------+   +------+   +------+ ┌────────────┐
+ +------+   +------+   +------+   +------+   +------+ +------------+
  | VB   |   | C++  |   | C#   |   | js   |   | ...  | | Visual     |
- └──────┘   └──────┘   └──────┘   └──────┘   └──────┘ | Studio.NET |
- ┌──────────────────────────────────────────────────┐ |            |
+ +------+   +------+   +------+   +------+   +------. | Studio.NET |
+ ---------------------------------------------------- |            |
  |            Common Language Specification         | |            |
- └──────────────────────────────────────────────────┘ |            |
- ┌───────────────────────────────┐ ┌────────────────┐ |            |
+ ---------------------------------------------------- |            |
+ +-------------------------------+ +----------------+ |            |
  | ASP.NET                       | | Windows Forms  | |            |
- └───────────────────────────────┘ └────────────────┘ |            |
- ┌──────────────────────────────────────────────────┐ |            |
+ +-------------------------------+ +----------------+ |            |
+ ---------------------------------------------------- |            |
  |           .NET Framework Base Classes            | |            |
- └──────────────────────────────────────────────────┘ |            |
- ┌──────────────────────────────────────────────────┐ |            |
+ ---------------------------------------------------- |            |
+ ---------------------------------------------------- |            |
  |             Common Language Runtime              | |            |
- └──────────────────────────────────────────────────┘ └────────────┘           .
+ ---------------------------------------------------- +------------+           .
 ```
 Abbildung der Architektur am Beispiel des .NET Frameworks nach [Bhogayta](#9)
 
@@ -306,7 +341,7 @@ Abbildung der Architektur am Beispiel des .NET Frameworks nach [Bhogayta](#9)
 *  ActiveX Data Objects (ADO) ... ist eine auf ActiveX basierende Schnittstelle zum Datenzugriff auf Datenbanken und tabellenartige Datenquellen über eine einheitliche API.
 * Windows Forms ... ist ein GUI-Toolkit des Microsoft .NET Frameworks. Es ermöglicht die Erstellung grafischer Benutzeroberflächen (GUIs) für Windows.
 
-Neben den Aktivitäten von Mikrosoft entwickelte sich verschiedene Open Source
+Neben den Aktivitäten von Microsoft entwickelte sich verschiedene Open Source
 Implementierungen. Aus der wichtigsten, dem Mono Projekt (Linux Implementierung
 des .NET Standards) ging die Firma Xamarin hervor, die eine Ausführung auf
 Smartphones realsierte. Diese wurde 2011 von Microsoft übernommen.
@@ -397,32 +432,32 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 ```ascii
                  +--------+     +--------+      +--------+
 Source Code      | VB     |     | C++    |      | C#     |
-                 └────────┘     └────────┘      └────────┘
-                 .--------.     .--------.      .--------.
+                 +--------+     +--------+      +--------+
                  |Compiler|     |Compiler|      |Compiler|--------------+
                  .--------.     .--------.      .--------.              |
                      |              |               |                   |
                      v              v               v                   |
-Common           ┌────────┐     ┌────────┐      ┌────────┐              |
+Common           +--------+     +--------+      +--------+              |
 Intermediate     |Assembly|     |Assembly|      |Assembly|              |
-Language         └────────┘     └────────┘      └────────┘              |
+Language         +--------+     +--------+      +--------+              |
                      |              |               |                   |
                      v              v               v                   |
-                 ┌───────────────────────────────────────┐              |
+                 +---------------------------------------+              |
                  | Common Language Runtime JIT Compiler  |              |
-                 └───────────────────────────────────────┘              |
+                 +---------------------------------------+              |
                      |              |               |                   |
                      v              v               v                   |
-              ╔════════════════════════════════════════════╗            v
-              ║  ┌────────┐     ┌────────┐      ┌────────┐ ║       ┌─────────┐
-              ║  |Managed |     |Managed |      |Managed | ║       |Unmanaged|
-              ║  | Code   |     | Code   |      | Code   | ║       | Code    |
-              ║  └────────┘     └────────┘      └────────┘ ║       └─────────┘
-              ║ Common Language Runtime Services           ║
-              ╚════════════════════════════════════════════╝
-               ┌─────────────────────────────────────────────────────────────┐
+              .- - - - - - - - - - - - - - - - - - - - - - .            v
+              !  +--------+     +--------+      +--------+ !       +---------+
+              !  |Managed |     |Managed |      |Managed | !       |Unmanaged|
+              !  | Code   |     | Code   |      | Code   | !       | Code    |
+              !  +--------+     +--------+      +--------+ !       +---------+
+              ! Common Language Runtime Services           !
+              .- - - - - - - - - - - - - - - - - - - - - - .
+
+               +-------------------------------------------------------------+
                |            Operating System Services                        |
-               └─────────────────────────────────────────────────────────────┘
+               +-------------------------------------------------------------+
 ```
 
 Darstellung motiviert durch [Bhogayta](#9)
@@ -491,7 +526,7 @@ vgl. Vortrag von Mössenböck ([link](https://www.dcl.hpi.uni-potsdam.de/teachin
 | JIT              | per Methoden                                | per Methode / gesamt                       |
 | Komponenten      | Beans                                       | Assemblies                                           |
 | Versionierung    | nein                                        | ja                                         |
-| Leitidee         | Eine Sprache auf vielen Plattformen         | Viele Sprachen auf einer Plattformen       |
+| Leitidee         | Eine Sprache auf vielen Plattformen         | Viele Sprachen auf einer Plattform         |
 
 Beim Punkt "Leitidee" muss man kritisch fragen ob auf der C# Seite die
 Programmiersprache oder das .NET Framework gemeint ist!
@@ -553,23 +588,23 @@ namespace HelloWorld
 
 Eine ausführliche Hilfe findet sich unter https://www.mono-project.com/docs/getting-started/mono-basics/
 
-``` bash @output
-▶ mcs --about
+``` bash
+> mcs --about
 The Turbo C# compiler is Copyright 2001-2011, Novell, Inc. 2011-2016 Xamarin Inc, 2016-2017 Microsoft Corp
 
 The compiler source code is released under the terms of the
 MIT X11 or GNU GPL licenses
 
-▶ mcs HelloWorld.cs
+> mcs HelloWorld.cs
 
-▶ ls
+> ls
 HelloWorld.cs  HelloWorld.exe
 
-▶ mono HelloWorld.exe
+> mono HelloWorld.exe
 Hello, world!
 Press any key to exit.
 
-▶ ikdasm HelloWorld.exe
+> ikdasm HelloWorld.exe
 ...
 
 ```
@@ -585,54 +620,54 @@ Bibliotheken, Laufzeitumgebung und Tools.
 
 **Variante I - Microsoft C# Compiler**
 
-``` bash @output
-▶ csc
+``` bash
+> csc
 Microsoft (R) Visual C# Compiler version 2.8.2.62916 (2ad4aabc)
 Copyright (C) Microsoft Corporation. All rights reserved.
 ```
 
 **Variante II - Microsoft Build Tools**
 
-``` bash @output
-▶ dotnet new console
-▶ dotnet build
-▶ dotnet run
+``` bash
+> dotnet new console
+> dotnet build
+> dotnet run
 ```
 
 Aus dem generieren eines neuen Konsolenprojektes ergibt sich ein beeindruckender
 Baum von Projektdateien.
 
-``` bash @output
-▶ dotnet new console
+``` bash
+> dotnet new console
 
-▶ tree
+> tree
 .
-├── bin
-│   └── Debug
-│       └── netcoreapp2.2
-│           ├── dotnet.deps.json
-│           ├── dotnet.dll
-│           ├── dotnet.pdb
-│           ├── dotnet.runtimeconfig.dev.json
-│           └── dotnet.runtimeconfig.json
-├── dotnet.csproj
-├── obj
-│   ├── Debug
-│   │   └── netcoreapp2.2
-│   │       ├── dotnet.AssemblyInfo.cs
-│   │       ├── dotnet.AssemblyInfoInputs.cache
-│   │       ├── dotnet.assets.cache
-│   │       ├── dotnet.csprojAssemblyReference.cache
-│   │       ├── dotnet.csproj.CoreCompileInputs.cache
-│   │       ├── dotnet.csproj.FileListAbsolute.txt
-│   │       ├── dotnet.dll
-│   │       ├── dotnet.pdb
-│   │       └── project.razor.json
-│   ├── dotnet.csproj.nuget.cache
-│   ├── dotnet.csproj.nuget.g.props
-│   ├── dotnet.csproj.nuget.g.targets
-│   └── project.assets.json
-└── Program.cs
++-- bin
+|   +-- Debug
+|       +-- netcoreapp2.2
+|           +-- dotnet.deps.json
+|           +-- dotnet.dll
+|           +-- dotnet.pdb
+|           +-- dotnet.runtimeconfig.dev.json
+|           +-- dotnet.runtimeconfig.json
++-- dotnet.csproj
++-- obj
+|   +-- Debug
+|   |   +-- netcoreapp2.2
+|   |       +-- dotnet.AssemblyInfo.cs
+|   |       +-- dotnet.AssemblyInfoInputs.cache
+|   |       +-- dotnet.assets.cache
+|   |       +-- dotnet.csprojAssemblyReference.cache
+|   |       +-- dotnet.csproj.CoreCompileInputs.cache
+|   |       +-- dotnet.csproj.FileListAbsolute.txt
+|   |       +-- dotnet.dll
+|   |       +-- dotnet.pdb
+|   |       +-- project.razor.json
+|   +-- dotnet.csproj.nuget.cache
+|   +-- dotnet.csproj.nuget.g.props
+|   +-- dotnet.csproj.nuget.g.targets
+|   +-- project.assets.json
++-- Program.cs
 
 ```
 
