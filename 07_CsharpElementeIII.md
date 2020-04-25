@@ -49,7 +49,7 @@ C# selbst besitzt keine Anweisungen für die Ein- und Ausgabe von Daten, dazu
 existieren aber mehrere Bibliotheken, die im folgenden für die Bildschirmausgabe
 und das Schreiben in Dateien vorgestellt werden sollen.
 
-Für das Schreiben stehen zwei Methoden `System.Console.Write` und `System.Console.ẀriteLine`.
+Für das Schreiben stehen zwei Methoden `System.Console.Write` und `System.Console.WriteLine`.
 
 <!-- --{{0}}-- Idee des Codeblockes
   * Erinnerung an Steuerzeichen /n /t
@@ -214,6 +214,7 @@ namespace Rextester
 }
 ```
 @Rextester.eval(@CSharp)
+
 
 Die Darstellung des Ausdrucks folgt dabei der Semantik:
 
