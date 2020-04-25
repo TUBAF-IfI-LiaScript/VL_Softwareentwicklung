@@ -3,13 +3,13 @@
 | Woche | Tag       | Inhalt der Vorlesung                              | Online Vorlesung |
 |:----- | --------- |:------------------------------------------------- | ---------------- |
 | 1     | 7. April  | Organisation, Einführung von GitHub und LiaScript | X                |
-|       | 8. April  | Softwareentwicklung als Prozess          |                  |
+|       | 8. April  | Softwareentwicklung als Prozess                   |                  |
 | 2     | 14. April | Versionsmanagement im Softwareentwicklungsprozess |                  |
 |       | 15. April | Git und Continuous integration in GitHub          | X                |
 | 3     | 21. April | Konzepte von Dotnet und C#                        |                  |
-|       | 22. April | Elemente der Sprache C#                           | X                |
-| 4     | 28. April |                                                   |                  |
-|       | 29. April |                                                   |                  |
+|       | 22. April | Elemente der Sprache C# (Datentypen)              | X                |
+| 4     | 28. April | Elemente der Sprache C# (Forts. Datentypen)       |                  |
+|       | 29. April | Elemente der Sprache C# (Ein-/Ausgaben)           | X                |
 | 5     | 5. Mai    |                                                   |                  |
 |       | 6. Mai    |                                                   |                  |
 | 6     | 12. Mai   |                                                   |                  |
