@@ -255,7 +255,7 @@ explizit adressiert.
 
 ********************************************************************************
 
-## Datentypen
+## Datentypen und Operatoren
 
 Datentypen können sehr unterschiedlich strukturiert werden. Das nachfolgende
 Schaubild realisiert dies auf 2 Ebenen (nach Mössenböck, Kompaktkurs C# 7 )
@@ -295,7 +295,7 @@ Character    Ganzzahl   Gleitkommazahl
 | Speicher         | Größe der Daten  | Größe der Daten, Objekt-Metadata, Referenz |
 
 <!--
-style="width: 80%; max-width: 360px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
     struct Point
@@ -313,7 +313,7 @@ style="width: 80%; max-width: 360px; display: block; margin-left: auto; margin-r
                       | X               |
                       +-----------------+
                       | Y               |
-                      +-----------------+
+                      +-----------------+                                      .
 ```
 
 Vorliegende Implementierung realisiert ein `Point struct`. Welche Änderungen
