@@ -23,6 +23,38 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ---------------------------------------------------------------------
 
+## Rückblick auf die GitHub-Woche
+
+**Aktivitäten**
+
+siehe Aktivitätplot ...
+
+**Actions**
+
+[https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2020_Aufgabe_01/actions?query=workflow%3A%22Evaluate+correctness+of+Temperature.cs%22](https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2020_Aufgabe_01/actions?query=workflow%3A%22Evaluate+correctness+of+Temperature.cs%22)
+
+**Issues**
+
+1. Bitte schließen Sie Issues, nachdem Sie eine Aufgabe fertiggestellt haben. Ergänzen Sie den Commit, der das Problem oder das Feature gelöst hat.
+2. Fügen Sie die URL des Commits in die schließenden Bemerkungen ein, so dass die Zuordnung offenkundig ist [Link](https://help.github.com/en/github/writing-on-github/autolinked-references-and-urls#issues-and-pull-requests).
+
+**Aufgabenblatt 1/ Teilaufgabe 1**
+
++ Lernkurve ...
++ unabhänig vom Betriebssystem ...
++ Fehlervermeidung dank Autovervollständigung ... und Syntax-Highlighting
++ Personalisierbarkeit ...
++ Integration von Git ...
++ Aktives gemeinsames Programmieren ...
+
+| Kommandozeile | leichtgewichtige IDE                                                  | schwergewichtige IDE |
+| ------------- | --------------------------------------------------------------------- | -------------------- |
+|               | Notepad++ / Developer Command Prompt von Microsoft Visual Studio 2019 | Visual Studio        |
+|               |                                                                       | IntelliJ Rider       |
+|               | Visual Studio Code / ???                                            | Visual Studio        |
+|               | Notepad++ / ???                                                     | Visual Studio        |
+|               |  Notepad++ / .Netcore                                                                     | Visual Studio                     |
+
 
 ## 7 Fragen in 7 Minuten
 
@@ -290,7 +322,7 @@ muss hinterfragt werden, ob eine Ausgabe des Zeichens oder eine Realisierung
 der Steuerzeichenbedeutung gewünscht ist. Dazu wird der *verbatim* Suffix
 genutzt.
 
-```csharp
+```csharp      StringVerbatim.cs
 using System;
 namespace Rextester
 {
@@ -318,7 +350,7 @@ die Methode `toString()` implementiert ist) bereit.
   * Integration einer ToString Methode
     public override  string ToString() {return "Der Name ist " + Name;}
 -->
-```csharp
+```csharp        ToString.cs
 using System;
 namespace Rextester
 {
@@ -365,7 +397,7 @@ auf einen ganzzahligen Typ außer char gemappt. Der Standardtyp von Enumerations
         Day startingDay = (Day) 5;
   * Darstellung der Möglichkeit Constanten zuzuordnen Sat = 5
 -->
-```csharp
+```csharp    Enumeration.cs
 using System;
 
 namespace Rextester
@@ -395,7 +427,7 @@ Attribut können wir auch Mehrfachbelegungen realisieren.
 <!-- --{{1}}-- Idee des Codefragments:
   * Hinweis auf Zahlenzuordnung mit Zweierpotenzen
 -->
-```csharp
+```csharp                EnumExample.cs
 // https://docs.microsoft.com/de-de/dotnet/api/system.flagsattribute?view=netframework-4.7.2
 
 using System;
@@ -415,7 +447,7 @@ namespace Rextester
        Console.WriteLine(
             "\nAll possible combinations of values with FlagsAttribute:");
        for( int val = 0; val <= 16; val++ )
-          Console.WriteLine( "{0,3} - {1:G}", val, (MultiHue)val);
+          Console.WriteLine( "{0,3} - {1}", val, (MultiHue)val);
     }
   }
 }
@@ -494,31 +526,6 @@ namespace Rextester
                                    {{2-3}}
 ********************************************************************************
 
-> Achtung Die unterschiedliche Initialisierung von Wert- und Referenztypen
-> generiert ggf. Fehler!
-
-Erzeugung eines Arrays von structs - Wertetypen
-
-```csharp
-public struct Point {public int X, Y;}
-....
-Point [] pointcloud = new Point[100];
-int x = pointcloud[99].X                    // x = 0
-```
-Erzeugung eines Arrays von Klasseninstanzen - Referenztypen
-
-```csharp
-public class Point {public int X, Y;}
-....
-Point [] pointcloud = new Point[100];
-int x = pointcloud[99].X                    // Runtime Error, Null-Referenz!
-```
-
-********************************************************************************
-
-                                   {{3-4}}
-********************************************************************************
-
 **Mehrdimensionale Arrays**
 
 C# unterscheidet zwei Typen mehrdimensionaler Arrays, die sich bei der
@@ -589,11 +596,6 @@ Anweisungen bzw. in der `using`-Anweisung verwendet. Eine wesentliche Rolle
 spielen sie bei der Verwendung von anonymen Typen. Aber Vorsicht: `var`
 kann nur mit lokalen Variablen verwendet werden.
 
-<!-- --{{1}}-- Idee des Codefragments:
-  * Statische Beschränkung der Loop! Fehler generieren
-  * Ersetzen durch intArray.Length
-  * Wie kann man nach mehreren Zeichen splitten?
--->
 ```csharp    UsageVar.cs
 using System;
 using System.Collections.Generic;
@@ -631,7 +633,6 @@ Weitere Infos https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/c
 
 
 Ein "leer-lassen" ist nur für Referenzdatentypen möglich, Wertedatentypen können nicht uninitialisiert bleiben (Compilerfehler)
-
 
 <!-- --{{0}}-- Idee des Codefragments:
     * Der Ausgangszustand generiert einen Fehler
@@ -695,7 +696,7 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-Jeder Typ? wird vom Compiler dazu in einen generischen Typ `Nullable<Typ>`
+Wie wird das Ganze umgesetzt? Jeder `Typ?` wird vom Compiler dazu in einen generischen Typ `Nullable<Typ>`
 transformiert, der folgende Methoden implementiert:
 
 ```csharp
