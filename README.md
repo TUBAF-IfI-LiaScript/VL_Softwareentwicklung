@@ -10,9 +10,9 @@
 |       | 22. April | Elemente der Sprache C# (Datentypen)              | X                |
 | 4     | 28. April | Elemente der Sprache C# (Forts. Datentypen)       |                  |
 |       | 29. April | Elemente der Sprache C# (Ein-/Ausgaben)           | X                |
-| 5     | 5. Mai    |                                                   |                  |
-|       | 6. Mai    |                                                   |                  |
-| 6     | 12. Mai   |                                                   |                  |
+| 5     | 5. Mai    | Programmfluss und Funktionen                      |                  |
+|       | 6. Mai    | Strukturen / Konzepte der OOP                     | X                |
+| 6     | 12. Mai   | OOP in C#                                         |                  |
 |       | 13. Mai   |                                                   |                  |
 | 7     | 19. Mai   |                                                   |                  |
 |       | 20. Mai   |                                                   |                  |
