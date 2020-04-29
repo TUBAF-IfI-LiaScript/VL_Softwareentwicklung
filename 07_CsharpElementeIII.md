@@ -23,7 +23,6 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ---------------------------------------------------------------------
 
-
 ## 7 Fragen in 7 Minuten
 
 **1. Jetzt sind Sie dran ...**
@@ -380,7 +379,7 @@ sehen Sie Verbesserungsbedarf?
                                 {{0-1}}
 *******************************************************************************
 
-Eine Grundlegende Eingabemöglichkeit ist die Übergabe von Parametern beim
+Eine grundlegende Eingabemöglichkeit ist die Übergabe von Parametern beim
 Aufruf des Programms von der Kommandozeile.
 
 ```csharp
@@ -480,10 +479,6 @@ namespace Rextester
         // Beispiel 2: Division durch Null
         int a = 0, b = 5;
         //a = b / a;
-
-        //Beispiel 3:
-        string s = "5";
-        Console.WriteLine(int.Parse(s, NumberStyles.Float));
     }
   }
 }
@@ -494,12 +489,9 @@ Dabei gelten folgende Regeln für den Umgange mit Exceptions:
 
 + Wenn für eine spezifische Ausnahme kein Ausnahmehandler existiert, beendet sich das Programm mit einer Fehlermeldung.
 + Alle Ausnahmen sind von `System.Exception` abgeleitet und enthalten detaillierte Informationen über den Fehler, z.B. den Zustand der Aufrufliste und eine Textbeschreibung des Fehlers.
-+ Ausnahmen, die innerhalb eines `try`-Blocks auftreten, werden auf einen Ausnahme
-handler, der mit dem Schlüsselwort `catch` gekennzeichnet ist, umgeleitet.
-+ Ausnahmen werden durch die CLR ausgelöst oder in Software mit dem `throw`
-Befehl.
-+ ein `finally`-Block wird im Anschluss an die Aktivierung eines `catch`
-Blockes ausgeführt, wenn eine Ausnahme ausgelöst wurde. Hier werden Ressourcen freizugeben, beispielsweise ein Stream geschlossen.
++ Ausnahmen, die innerhalb eines `try`-Blocks auftreten, werden auf einen Ausnahmehandler, der mit dem Schlüsselwort `catch` gekennzeichnet ist, umgeleitet.
++ Ausnahmen werden durch die CLR ausgelöst oder in Software mit dem `throw` Befehl.
++ ein `finally`-Block wird im Anschluss an die Aktivierung eines `catch` Blockes ausgeführt, wenn eine Ausnahme ausgelöst wurde. Hier werden Ressourcen freizugeben, beispielsweise ein Stream geschlossen.
 + Wird kein passender catch-Block gefunden, kommt es zur Behandlung in der Laufzeitumgebung.
 
 ```csharp   IndizesBreite
@@ -604,14 +596,15 @@ Welche Varianten der Eingaben müssen Sie prüfen? Erproben Sie Ihre Lösung mit
 
 ```csharp    Calculator.cs
 using System;
-namespace Calcualator
+
+namespace Rextester
 {
-  class MainClass
+  public class Program
   {
     static double Square(int num) => num * num;
     static double Reciprocal (int num) => 1f / num;
 
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
       bool Error = false;
       double result = 0;
