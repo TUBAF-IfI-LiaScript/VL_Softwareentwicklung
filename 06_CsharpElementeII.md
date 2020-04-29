@@ -688,8 +688,8 @@ namespace Rextester
   {
     public static void Main(string[] args){
       int? i = null;
-      if (i == null) Console.WriteLine("Die Variable hat keinen Wert!")
-      else Console.WriteLine("Der Wert der Variablen ist {0}", i)
+      if (i == null) Console.WriteLine("Die Variable hat keinen Wert!");
+      else Console.WriteLine("Der Wert der Variablen ist {0}", i);
     }
   }
 }
