@@ -23,7 +23,6 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ---------------------------------------------------------------------
 
-
 ## 7 Fragen in 7 Minuten
 
 **1. Jetzt sind Sie dran ...**
@@ -49,7 +48,7 @@ C# selbst besitzt keine Anweisungen für die Ein- und Ausgabe von Daten, dazu
 existieren aber mehrere Bibliotheken, die im folgenden für die Bildschirmausgabe
 und das Schreiben in Dateien vorgestellt werden sollen.
 
-Für das Schreiben stehen zwei Methoden `System.Console.Write` und `System.Console.ẀriteLine`.
+Für das Schreiben stehen zwei Methoden `System.Console.Write` und `System.Console.WriteLine`.
 
 <!-- --{{0}}-- Idee des Codeblockes
   * Erinnerung an Steuerzeichen /n /t
@@ -215,6 +214,7 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
+
 Die Darstellung des Ausdrucks folgt dabei der Semantik:
 
 ```
@@ -379,10 +379,10 @@ sehen Sie Verbesserungsbedarf?
                                 {{0-1}}
 *******************************************************************************
 
-Eine Grundlegende Eingabemöglichkeit ist die Übergabe von Parametern beim
+Eine grundlegende Eingabemöglichkeit ist die Übergabe von Parametern beim
 Aufruf des Programms von der Kommandozeile.
 
-```csharp
+```csharp      CommandlineParameter.cs
 using System;
 
 namespace Rextester
@@ -391,7 +391,7 @@ namespace Rextester
   {
     public static int Main(string[] args)
     {
-
+      System.Console.WriteLine("Geben Sie einen Ganzzahlwert und einen String als Argumente ein!");
       if (args.Length == 0)
       {
           System.Console.WriteLine("Offenbar keine Eingabe - Fehler!");
@@ -399,18 +399,29 @@ namespace Rextester
       }
       if (args.Length == 2)  // Erwartete Zahl von Parametern
       {
-          ...
-          long num = long.Parse(args[0]);
-          long num = Convert.ToInt64(s);  // Größere Spezifikationsbandbreite
-          int.TryParse(args[0], out num);
+          long num1 = long.Parse(args[0]);
+          long num2 = Convert.ToLong(args[0]);
+          long num3;
+          long.TryParse(args[0], out num3);
+          System.Console.WriteLine($"{num1} {num2} {num3}");
+
+          string text = args[1];
+          System.Console.WriteLine($"{text}");
       }
-
-      ...
-
+      return 0;
     }
-  }
-}
 ```
+
+Dabei nutzt das obige Beispiel 3 Formen der Interpretation der Daten. In den beiden ersten Fällen ist der Entwickler für das Abfangen der _Exceptions_ verantwortlich. Die letzte Variante kapselt dies intern und gibt die möglicherweise eingetretene Ausnahme über die Rückgabewerte aus. Der Code auf Seiten der Anwendung wird kompakter.
+
+1. `long.Parse` parst die Eingabe in einen ganzzahligen Wert, wirft jedoch eine Ausnahme aus, wenn dies nicht möglich ist, wenn die bereitgestellten Daten nicht numerisch sind.
+
+2. `Convert.ToInt64()` konvertiert die Zeichenkettendaten in einen korrekten echten int64-Wert und wirft eine Ausnahme aus, wenn der Wert nicht konvertiert werden kann.
+
+3. Einen alternativen Weg schlägt `int.TryParse()` ein. Die TryParse-Methode ist wie die `Parse`-Methode, außer dass die `TryParse`-Methode keine Ausnahme auslöst, wenn die Konvertierung fehlschlägt.
+
+Auf die Verwendung der Ausnahmen wird im folgenden Abschnitt eingegangen.
+
 *******************************************************************************
 
                                 {{1-2}}
@@ -479,10 +490,6 @@ namespace Rextester
         // Beispiel 2: Division durch Null
         int a = 0, b = 5;
         //a = b / a;
-
-        //Beispiel 3:
-        string s = "5";
-        Console.WriteLine(int.Parse(s, NumberStyles.Float));
     }
   }
 }
@@ -493,12 +500,9 @@ Dabei gelten folgende Regeln für den Umgange mit Exceptions:
 
 + Wenn für eine spezifische Ausnahme kein Ausnahmehandler existiert, beendet sich das Programm mit einer Fehlermeldung.
 + Alle Ausnahmen sind von `System.Exception` abgeleitet und enthalten detaillierte Informationen über den Fehler, z.B. den Zustand der Aufrufliste und eine Textbeschreibung des Fehlers.
-+ Ausnahmen, die innerhalb eines `try`-Blocks auftreten, werden auf einen Ausnahme
-handler, der mit dem Schlüsselwort `catch` gekennzeichnet ist, umgeleitet.
-+ Ausnahmen werden durch die CLR ausgelöst oder in Software mit dem `throw`
-Befehl.
-+ ein `finally`-Block wird im Anschluss an die Aktivierung eines `catch`
-Blockes ausgeführt, wenn eine Ausnahme ausgelöst wurde. Hier werden Ressourcen freizugeben, beispielsweise ein Stream geschlossen.
++ Ausnahmen, die innerhalb eines `try`-Blocks auftreten, werden auf einen Ausnahmehandler, der mit dem Schlüsselwort `catch` gekennzeichnet ist, umgeleitet.
++ Ausnahmen werden durch die CLR ausgelöst oder in Software mit dem `throw` Befehl.
++ ein `finally`-Block wird im Anschluss an die Aktivierung eines `catch` Blockes ausgeführt, wenn eine Ausnahme ausgelöst wurde. Hier werden Ressourcen freizugeben, beispielsweise ein Stream geschlossen.
 + Wird kein passender catch-Block gefunden, kommt es zur Behandlung in der Laufzeitumgebung.
 
 ```csharp   IndizesBreite
@@ -603,7 +607,8 @@ Welche Varianten der Eingaben müssen Sie prüfen? Erproben Sie Ihre Lösung mit
 
 ```csharp    Calculator.cs
 using System;
-namespace Calcualator
+
+namespace Program
 {
   class MainClass
   {
