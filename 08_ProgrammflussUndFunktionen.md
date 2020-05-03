@@ -893,11 +893,11 @@ die unabhängig vom Typ der übergebenen Variable eine entsprechende Ausgabe
 realisiert.
 
 
+
 ## Anhang
 
 **Referenzen**
 
 [MSDoku] C# Dokumentation, "Pattern Matching",  [Link](https://docs.microsoft.com/en-us/dotnet/csharp/pattern-matching)
-
 
 [WikiFlow]  Wikipedia, "Flussdiagramm" Autor "Erik Streb", [Link](https://upload.wikimedia.org/wikipedia/commons/6/6b/Flowchart_de.svg)
