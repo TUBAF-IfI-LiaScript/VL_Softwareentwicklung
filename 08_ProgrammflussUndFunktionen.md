@@ -896,7 +896,7 @@ static void Sort(string [] s,
 ```
 
 Die *default*-Werte müssen aber der Reihenfolge nach "abgearbeitet" werden.
-eine partielle Auswahl bestimmter Werte ist nicht möglich.
+Eine partielle Auswahl bestimmter Werte ist nicht möglich.
 
 ```csharp
 string [] s = {'Rotkäpchen', 'Hänsel', 'Gretel', 'Hexe'};
