@@ -25,13 +25,64 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ## 7 Fragen in 7 Minuten
 
-**1. Jetzt sind Sie dran ...**
+*1. Welches Keyword muss bei ... eingefügt werden, damit der Code die Ausgabe 2 erzeugt?*
 
-**2. Jetzt sind Sie dran ...**
+```cs
+class Program
+{
 
-**3. Jetzt sind Sie dran ...**
+    static void Sqrt(double input, ... double output)
+    {
+        output = Math.Sqrt(input);
+    }
 
-**4. Jetzt sind Sie dran ...**
+    static void Main(string[] args)
+    {
+        Sqrt(4d, ... double r);
+        Console.WriteLine(r);
+    }
+}
+```
+
+[(X)] out
+[( )] ref
+[( )] unsafe
+
+*2. Wieso kommt es zu einem Compilerfehler, wenn man versucht, dieses Programm zu kompilieren?*
+
+```cs
+class Program
+{
+    static void AddNum(int *p, int num)
+    {
+        *p = *p + num;
+    }
+
+    static void Main(string[] args)
+    {
+        int i = 10;
+        Console.WriteLine("i: \t{0}", i);
+        AddNum(&i, 10);
+        Console.WriteLine("i + 10: {0}", i);
+    }
+}
+```
+
+[( )] C# unterstüzt keine Pointer
+[(X)] Pointer ohne unsafe
+[( )] `\t` ist keine valide Escape Sequenz
+w
+*3. Welches Inteface muss ein Objekt implementieren, damit man es im `foreach`-Loop verwenden kann?*
+
+[( )] `interface ICollection`
+[(X)] `interface IEnumerable`
+[( )] `interface IQueue`
+
+*4. In welchen Fällen sollte man ein `goto`-Statement verwenden?*
+
+[( )] Niemals, `goto` ist immer bad practice
+[(X)] Fallthrough bei Switch "simulieren" / geschachtelte Loops
+[( )] geschachtelte If Blöcke / unendliche Loops
 
 **5. Jetzt sind Sie dran ...**
 
