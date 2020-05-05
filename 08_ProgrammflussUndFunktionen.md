@@ -693,21 +693,29 @@ namespace Rextester
 
 **Ansatz 1 - Rückgabe des modifizierten Wertes**
 
-```csharp
-static int Calc( int input)
-{
-  // operationen über P
-  int output = ... input
-  return output;
-}
+```csharp            ReturnValue.cs
+using System;
 
-public static void Main(string[] args){
-  ...
-  int p = 5;
-  p = Calc(p);
-  ...
+namespace Rextester
+{
+  public class Program
+  {
+    static int Calc( int input)
+    {
+      // operationen über P
+      int output = 5 * input;
+      return output;
+    }
+
+    public static void Main(string[] args){
+      int p = 5;
+      int a = Calc(p);
+      Console.WriteLine(a);
+    }
+  }
 }
 ```
+@Rextester.eval(@CSharp)
 
 ********************************************************************************
 
@@ -735,6 +743,7 @@ namespace Rextester
     {
        p = p * 2;
     }
+
     public static void Main(string[] args){
       int p = 1;
       Console.WriteLine(p);
@@ -757,12 +766,7 @@ namespace Rextester
   {
     class Wrapper
     {
-      public int Wrapped
-      {
-        get;
-        set;
-      }
-
+      public int Wrapped;
       public Wrapper(int newWrapped)
       {
          Wrapped = newWrapped;
@@ -888,7 +892,7 @@ Modifikator eingefügt.
 ```csharp    variableParameters.cs
 using System;
 
-namespace Parameters
+namespace Rextester
 {
   public class Program
   {
@@ -906,6 +910,7 @@ namespace Parameters
   }
 }
 ```
+@Rextester.eval(@CSharp)
 
 Letztendlich wird damit eine Funktionalität realisiert, wie sie für
 `Main(string[] args)` obligatorisch ist.
