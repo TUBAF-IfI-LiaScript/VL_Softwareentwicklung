@@ -155,20 +155,15 @@ Dabei können sie folgende Elemente umfassen:
 Konzentrieren wir uns zunächst auf die Felder und die Methoden. Wie sieht
 eine entsprechende Definition des Bauplanes aller Instanzen von `Animal` aus?
 
-```csharp        Struct.cs
-using System;
-
-namespace Rextester
+```csharp
+public struct Animal
 {
-  public struct Animal
-  {
-    public string name;               // Felder / Konstanten
-    public string sound;              //
-
-    public void MakeNoise() {         // Methode
-    	Console.WriteLine($"{name} makes {sound}");
-    }
+  public string name;               // Felder / Konstanten
+  public string sound;              //
+  public void MakeNoise() {         // Methode
+  	Console.WriteLine($"{name} makes {sound}");
   }
+} // <- Keine Semikolon liebe C++ Programmierer!
 ```
 
 Sowohl die ganze Struktur als auch die einzelnen Felder sind mit entsprechenden Sichtbarkeitsattributen versehen. Hier wurde explizit `public` vorgesehen, damit ist Animal aber auch alle Elemente uneingeschränkt "sichbar". In der Regel ist das aber nicht gewünscht.
@@ -263,38 +258,7 @@ wally.sound = ...;
 wally.state = State.Sleeps;
 ```
 
-Haben wir auch wirklich alle initialen Variablen gesetzt? Das Vorgehen
-scheint doch sehr unübersichtlich und fehleranfällig! Es wird etwas strukturierter, wenn wir die sogenannte Object Initialization Syntax aus C# 3.0 nutzen. Der Compiler generiert den zugehörigen Code für die spezifische Initialisierung.
-
-```csharp                                      OIS.cs
-using System;
-
-namespace Rextester
-{
-  public struct Animal
-  {
-    public string name;
-    public string sound;
-
-    public void MakeNoise() {
-    	Console.WriteLine("{0} makes {1}", name, sound);
-    }
-  }
-
-  public class Program
-  {
-    public static void Main(string[] args){
-      Animal cat = new Animal{
-        name = "Kitty",
-        sound = "Miau"
-      };
-      cat.MakeNoise();
-    }
-  }
-}
-```
-@Rextester.eval(@CSharp)
-
+Haben wir auch wirklich alle initialen Variablen gesetzt?
 
 *******************************************************************************
 
@@ -310,8 +274,7 @@ alle Felder mit den datentypspezifischen Nullwerten.
 > der Variabilität bei deren Definition zur Verfügung (Überladen, vordefinierte
 > Variablen, Parameterlisten, usw.)
 
-
-> *Anmerkung 2:* Um einen Konstruktor für die Initialisierung zu nutzen
+> *Anmerkung 2:* Um einen Konstruktor für die Initialisierung zu nutzen,
 > braucht es einen erweiterten Aufruf.
 
 Und wie erfolgt der Aufruf des Konstruktors, einer Funktion, die auf einer Datenstruktur wirkt, die es noch gar nicht gibt? Das Schlüsselwort `new` übernimmt diese Aufgabe für uns.
@@ -337,7 +300,6 @@ public struct Animal
 | Aufruf des (impliziten) Standardkonstruktors | `Animal kitty = new Animal()`               |
 | `public Animal(name, sound)`                 | `Animal kitty = new Animal("kitty","Miau")` |
 | `public Animal(name, sound = "Miau")`        | `Animal kitty = new Animal("kitty")`        |
-
 
 <!-- --{{1}}-- Idee des Beispiels:
        + Deklaration eines parameterlosen Konstruktors
@@ -366,23 +328,16 @@ namespace Rextester
       cat.name = "Kitty";
       cat.sound = "Miau";
       cat.MakeNoise();
-      Animal cat = new Animal{name = "Wally"};
-      cat.name = "Kitty";
-      cat.sound = "Miau";
-      cat.MakeNoise();
     }
   }
 }
 ```
 @Rextester.eval(@CSharp)
 
-*******************************************************************************
+Ein alternatives Vorgehen bietet die sogenannte Object Initialization Syntax aus C# 3.0 nutzen. Der Compiler generiert den zugehörigen Code für die spezifische Initialisierung.
 
-### Initialisierung von Struct-Arrays
+Dies kann zum Beispiel ein Array mit allen Tieren unseres virtuellen Bauernhofes sein. Wie werden diese dann initialisiert?
 
-Häufig werden Instanzen gleicher Typen in Sammlungen erfasst. Dies kann zum Beispiel ein Array mit allen Tieren unseres virtuellen Bauernhofes sein. Wie werden diese dann initialisiert?
-
-Das folgende Beispiel nutzt die Object Initialization Syntax für die individuellen Instanzen.
 
 ```csharp                                      Constructors
 using System;
@@ -403,7 +358,7 @@ namespace Rextester
   {
     public static void Main(string[] args){
        Animal[] myAnimals = new Animal[]{
-        new Animal{ name = "Kitty", sound = "Miau"},
+        new Animal{ name = "Kitty", sound = "Miau"},    // Object Initialization Syntax
         new Animal{ name = "Wally", sound = "Wuff"},
         new Animal{ name = "Berta", sound = "Muuuh"}
       };
@@ -416,7 +371,38 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-Versuchen Sie das Beispiel um einen Konstruktor und einen zugehörigen Aufruf für die Initalisierung zu ergänzen.
+Versuchen Sie das Beispiel um einen Konstruktor und einen zugehörigen Aufruf für die Initalisierung zu ergänzen!
+
+In Ergänzung sei auch noch auf die kompakte _Fat Arrow_ Darstellung im Zusammenhang mit Konstruktoren, die ja Funktionen wie alle anderen sind verwiesen. Wenn nur
+eine Anweisung ausgeführt wird kann dies in einer Zeile realisiert werden.
+
+```csharp                                      Constructors
+using System;
+
+namespace Rextester
+{
+  public struct Animal
+  {
+    public string name;
+    public Animal(string name) => this.name = name;
+
+    public void MakeNoise() {
+    	Console.WriteLine("{0} makes Miau", name);
+    }
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args){
+      Animal cat = new Animal("Kitty");
+      cat.MakeNoise();
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+*******************************************************************************
 
 ### Embedded Structs
 
@@ -438,6 +424,7 @@ public struct Container
         public Nested()
         {
         }
+
         public Nested(Container parent)
         {
             this.parent = parent;
@@ -450,15 +437,6 @@ Container.Nested nest = new Container.Nested();
 ```
 
 zum Beispiel vgl. [C# Programmierhandbuch](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/classes-and-structs/nested-types)
-
-### Strukturtypvariablen als Verweis
-
-ToDo
-
-### Boxing and Unboxing
-
-ToDo
-
 
 ### Sichtbarkeitsattribute
 
@@ -680,8 +658,8 @@ namespace Rextester
   public class Program
   {
     public static void Main(string[] args){
-      Animal Wally = new Animal ("Wally","Wau");
-      Animal Kitty = new Animal ("Kitty","Miau");
+      Animal Wally = new Animal ("Wally", "Wau");
+      Animal Kitty = new Animal ("Kitty", "Miau");
       Farm myFarm = new Farm("Biobauernhof Freiberg");
       myFarm.AddAnimal(Wally);
       myFarm.AddAnimal(Kitty);
