@@ -57,7 +57,7 @@ Beim aktuellen Aufgabenblatt 02 folgen wir der Vorlesung inhaltlich und integrie
 
 Einen Überblick zu den Review-Mechanismen gibt das Video [Link](https://www.youtube.com/watch?v=HW0RPaJqm4g).
 
-Fügen Sie doch auch Actions ein, die die Korrektheit jedes Branches bestätigen. Das Muster finden Sie in der Aufgabe 01.
+Fügen Sie doch auch Actions ein, die die Korrektheit jedes Branches bestätigen. Ein Muster dafür finden Sie in der Aufgabe 01.
 
 ## 7 Fragen in 7 Minuten
 
