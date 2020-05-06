@@ -47,12 +47,17 @@ Letztendlich lassen sich dabei folgen Konfigurationen ablesen:
 + Einzelkämpfer, die mit GitHub und git arbeiten
 + Teams / Einzelkämpfer, die GitHub nutzen, um Issues zu verwalten, nicht aber den Code
 
-**Fehlersuche und die Verwendung der Actions**
+**Codekommentierung und die Verwendung der Actions**
 
 vgl. Temperature.cs beim Team "speed-rabbit14"
 
+**Aktuelles Aufgabenblatt **
 
-## 7 Fragen in 7 Minuten
+Beim aktuellen Aufgabenblatt 02 folgen wir der Vorlesung inhaltlich und integrieren die kleinen Programmieraufgaben in den Git-Workflow. Dabei steht diesmal das Review-Konzept im Vordergrund.
+
+Einen Überblick zu den Review-Mechanismen gibt das Video [Link](https://www.youtube.com/watch?v=HW0RPaJqm4g).
+
+Fügen Sie doch auch Actions ein, die die Korrektheit jedes Branches bestätigen. Das Muster finden Sie in der Aufgabe 01.
 
 ## 7 Fragen in 7 Minuten
 
