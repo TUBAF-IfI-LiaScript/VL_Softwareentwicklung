@@ -109,11 +109,11 @@ class Program
 [(X)] Pointer ohne unsafe
 [( )] `\t` ist keine valide Escape Sequenz
 
-*3. Welches Inteface muss ein Objekt implementieren, damit man es im `foreach`-Loop verwenden kann?*
+*3. Die Verwendung von `foreach`-Statement ist mit Elementen einer Klasse möglich, wenn diese*
 
-[( )] `interface ICollection`
-[(X)] `interface IEnumerable`
-[( )] `interface IQueue`
+[( )] von Klasse `Object` abgeleitet ist
+[(X)] `interface IEnumerable` implementiert
+[( )] implizit in `int` konvertiert werden kann
 
 *4. In welchen Fällen sollte man ein `goto`-Statement verwenden?*
 
