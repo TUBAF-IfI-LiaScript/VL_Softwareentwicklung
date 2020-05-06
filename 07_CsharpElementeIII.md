@@ -25,19 +25,57 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ## 7 Fragen in 7 Minuten
 
-**1. Jetzt sind Sie dran ...**
+1. Die Konsole als Ausgabegerät kann in C# nicht angepasst werden?
 
-**2. Jetzt sind Sie dran ...**
+  [( )] wahr  
+  [(X)] falsch  
 
-**3. Jetzt sind Sie dran ...**
+2. Welche Methoden kann man z.B. auf der Konsole schreiben?
 
-**4. Jetzt sind Sie dran ...**
+  [(X)] System.Console.Write  
+  [( )] Console.Write (ohne das vorher im Programm etwas ergänzt werden muss)   
+  [( )] Console.PrintOut   
+  [(X)] System.Console.WriteLine   
+  [( )] System.Console.PrintOut   
+  [[?]] Gerne auch mal ausprobieren und dann erst lösen   
 
-**5. Jetzt sind Sie dran ...**
+3. Für was braucht man try und catch?   
+  [(X)] Um Exceptions abzufangen   
+  [( )] Um ein Programm mehrmals mit hintereinander mit verschiedenen Werten durchlaufen zu lassen   
+  [( )] Um Anzahl an Durchläufen in einer Schleife zu zählen   
 
-**6. Jetzt sind Sie dran ...**
+4. Was für eine Ausgabe erzeugt dieses Programm? (In der "Deutschen" Variante)
+```C#
+using System;
+namespace HelloWorld
+{
+    class Program
+    {
+        static void Main()
+        {
+            var n = 0.36789;
+            Console.WriteLine($"{ n, 3 :p}");
+        }
+    }
+}
+```
+[[36,79%]]   
+[[?]] Komma statt Punkt   
+[[?]] Hinten %   
 
-**7. Jetzt sind Sie dran ...**
+5. Was ändert ein Dollarzeichen im Ausdruck Console.Write($"blabla {var1} blabla \n")?   
+  [( )] ergänzt einen Zeilenumbruch am Anfang   
+  [( )] entfernt den Zeilenumbruch am Ende   
+  [(X)] ohne diese könnte var1 nicht direkt in den {} stehen    
+  [( )] $ ändert den Cultural Ausdruck auf Englisch      
+
+6. Nur bei der Eingabe kümmert sich das Programm um Exceptions.   
+  [( )] wahr   
+  [(X)] falsch   
+
+7. Da ein Int? den Wert NULL annehmen kann, führt eine Division durch 0 nie zu einer Exception.   
+  [(X)] falsch   
+  [( )] wahr
 
 
 
