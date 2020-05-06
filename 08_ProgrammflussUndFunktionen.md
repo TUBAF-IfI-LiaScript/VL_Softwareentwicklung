@@ -51,7 +51,8 @@ Letztendlich lassen sich dabei folgen Konfigurationen ablesen:
 
 vgl. Temperature.cs beim Team "speed-rabbit14"
 
-**Aktuelles Aufgabenblatt **
+
+**Aktuelles Aufgabenblatt**
 
 Beim aktuellen Aufgabenblatt 02 folgen wir der Vorlesung inhaltlich und integrieren die kleinen Programmieraufgaben in den Git-Workflow. Dabei steht diesmal das Review-Konzept im Vordergrund.
 
