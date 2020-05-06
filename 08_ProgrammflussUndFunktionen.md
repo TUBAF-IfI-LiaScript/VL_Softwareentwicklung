@@ -178,7 +178,7 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-Warum brauche sollte ich in jedem Fall Klammern um Anweisungen setzen, gerade
+Warum sollte ich in jedem Fall Klammern um Anweisungen setzen, gerade
 wenn diese nur ein Zeile umfasst?
 
 <!-- --{{1}}-- Idee des Codefragments:
@@ -482,7 +482,7 @@ namespace Rextester
 
 ### Sprünge
 
-Während  bestimmte Positionen im Code adressiert, lassen sich mit
+Während `label` bestimmte Positionen im Code adressiert, lassen sich mit
 `break` Schleifen beenden, dient `continue` der Unterbrechung des aktuellen
 Blockes.
 
