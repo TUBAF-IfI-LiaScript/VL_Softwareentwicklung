@@ -56,7 +56,7 @@ Ideen der OOP:
 
 > **Merke** Wir haben zwei Herausforderungen zu meistern - Modellierung und Realisierung.
 
-![OOPGeschichte](./img/10_OOP_Csharp/OOPHistory.png)<!-- width="60%" --> [WikiOOP](Wikimedia, Autor Nepomuk Frädrich)
+![OOPGeschichte](./img/10_OOP_Csharp/OOPHistory.png)<!-- width="70%" --> [WikiOOP](Wikimedia, Autor Nepomuk Frädrich)
 
 
 *******************************************************************************
