@@ -16,22 +16,110 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-[https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/07_CsharpElementeIII.md](https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/08_ProgrammflussUndFunktionen.md)
+[https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/08_ProgrammflussUndFunktionen.md](https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/08_ProgrammflussUndFunktionen.md)
 
 Die interaktive Form ist unter diese Link zu finden ->
 [LiaScript Vorlesung 08](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/SoSe2020/08_ProgrammflussUndFunktionen.md#1)
 
 ---------------------------------------------------------------------
 
+## Rückblick auf die GitHub-Woche
+
+**Welchen Aktivitäten waren mit Blick auf die Aufgabe 1 (5. Mai 2020, 12 Uhr) realisiert worden?**
+
+| teamKey | authorKey | commits_0 | commits_1 | additions_0 | additions_1 | deletions_0 | deletions_1 | openedIssues | closedIssues | pullRequests |
+| ------- | --------- | --------- | --------- | ----------- | ----------- | ----------- | ----------- | ------------ | ------------ | ------------ |
+| 0       | {1}       | 19        | 0         | 679         | 0           | 122         | 0           |              |              | 1            |
+| 6       | {6, 7}    | 36        | 14        | 844         | 229         | 309         | 97          | 2            | 2            | 2            |
+| 8       | {10}      | 13        | 0         | 206         | 0           | 60          | 0           | 2            |              |              |
+| 9       | {12}      | 20        | 0         | 496         | 0           | 126         | 0           | 2            | 1            | 2            |
+| 11      | {18}      | 7         | 0         | 96          | 0           | 20          | 0           | 2            | 2            | 1            |
+| 13      | {14}      | 9         | 0         | 138         | 0           | 74          | 0           | 3            |              |              |
+| 18      | {16, 17}  | 10        | 16        | 200         | 286         | 16          | 43          | 5            | 2            | 4            |
+| 10      |           |           |           |             |             |             |             | 1            |              |              |
+| 17      |           |           |           |             |             |             |             | 1            |              |              |
+| 5       |           |           |           |             |             |             |             | 4            | 2            | 1            |
+| 19      |           |           |           |             |             |             |             | 3            | 1            |              |
+
+Letztendlich lassen sich dabei folgen Konfigurationen ablesen:
+
++ Teams, die mehr oder minder intensiv mit GitHub und git arbeiten
++ Einzelkämpfer, die mit GitHub und git arbeiten
++ Teams / Einzelkämpfer, die GitHub nutzen, um Issues zu verwalten, nicht aber den Code
+
+**Codekommentierung und die Verwendung der Actions**
+
+vgl. Temperature.cs beim Team "speed-rabbit14"
+
+
+**Aktuelles Aufgabenblatt**
+
+Beim aktuellen Aufgabenblatt 02 folgen wir der Vorlesung inhaltlich und integrieren die kleinen Programmieraufgaben in den Git-Workflow. Dabei steht diesmal das Review-Konzept im Vordergrund.
+
+Einen Überblick zu den Review-Mechanismen gibt das Video [Link](https://www.youtube.com/watch?v=HW0RPaJqm4g).
+
+Fügen Sie doch auch Actions ein, die die Korrektheit jedes Branches bestätigen. Ein Muster dafür finden Sie in der Aufgabe 01.
+
 ## 7 Fragen in 7 Minuten
 
-**1. Jetzt sind Sie dran ...**
+*1. Welches Keyword muss bei ... eingefügt werden, damit der Code die Ausgabe 2 erzeugt?*
 
-**2. Jetzt sind Sie dran ...**
+```cs
+class Program
+{
 
-**3. Jetzt sind Sie dran ...**
+    static void Sqrt(double input, ... double output)
+    {
+        output = Math.Sqrt(input);
+    }
 
-**4. Jetzt sind Sie dran ...**
+    static void Main(string[] args)
+    {
+        Sqrt(4d, ... double r);
+        Console.WriteLine(r);
+    }
+}
+```
+
+[(X)] out
+[( )] ref
+[( )] unsafe
+
+*2. Wieso kommt es zu einem Compilerfehler, wenn man versucht, dieses Programm zu kompilieren?*
+
+```cs
+class Program
+{
+    static void AddNum(int *p, int num)
+    {
+        *p = *p + num;
+    }
+
+    static void Main(string[] args)
+    {
+        int i = 10;
+        Console.WriteLine("i: \t{0}", i);
+        AddNum(&i, 10);
+        Console.WriteLine("i + 10: {0}", i);
+    }
+}
+```
+
+[( )] C# unterstüzt keine Pointer
+[(X)] Pointer ohne unsafe
+[( )] `\t` ist keine valide Escape Sequenz
+
+*3. Welches Inteface muss ein Objekt implementieren, damit man es im `foreach`-Loop verwenden kann?*
+
+[( )] `interface ICollection`
+[(X)] `interface IEnumerable`
+[( )] `interface IQueue`
+
+*4. In welchen Fällen sollte man ein `goto`-Statement verwenden?*
+
+[( )] Niemals, `goto` ist immer bad practice
+[(X)] Fallthrough bei Switch "simulieren" / geschachtelte Loops
+[( )] geschachtelte If Blöcke / unendliche Loops
 
 **5. Jetzt sind Sie dran ...**
 
@@ -41,7 +129,7 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ## Anweisungen
 
-In den vorangegegangenen Beispielen haben wir zu Illustrationszwecken bereits mehrfach
+In den vorangegangenen Beispielen haben wir zu Illustrationszwecken bereits mehrfach
 auf Kontrollstrukturen, die den Programmfluss steuern zurückgegriffen. Nunmehr
 sollen diese in einem kurzen Überblick systematisch eingeführt werden.
 
@@ -90,7 +178,7 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-Warum brauche sollte ich in jedem Fall Klammern um Anweisungen setzen, gerade
+Warum sollte ich in jedem Fall Klammern um Anweisungen setzen, gerade
 wenn diese nur ein Zeile umfasst?
 
 <!-- --{{1}}-- Idee des Codefragments:
@@ -138,13 +226,13 @@ namespace Rextester
       char ch = (char)Console.Read();
 
       if (Char.IsUpper(ch))
-          Console.WriteLine("The character is an uppercase letter.");
+        Console.WriteLine("The character is an uppercase letter.");
       else if (Char.IsLower(ch))
-          Console.WriteLine("The character is a lowercase letter.");
+        Console.WriteLine("The character is a lowercase letter.");
       else if (Char.IsDigit(ch))
-          Console.WriteLine("The character is a number.");
+        Console.WriteLine("The character is a number.");
       else
-          Console.WriteLine("The character is not alphanumeric.");
+        Console.WriteLine("The character is not alphanumeric.");
     }
   }
 }
@@ -220,10 +308,10 @@ style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-r
                   |                        \   |
                   |------- !'c' & !'d' -----'  |
                   |                            |
-                  .------------- 'f' ----------.
-
-
+                  .------------- 'f' ----------.                               .
 ````
+
+Wir nutzen dafür ein `enum`, dessen Inhalt mittels `switch` ausgewertet und fortgeschrieben wird. Das `enum` umfasst die vier Zustände A-D.
 
 ```csharp        StateMachine.cs
 using System;
@@ -307,6 +395,8 @@ public static double ComputeArea_Version(object shape)
 ```
 
 Codebeispiel aus [MSDoku](#11)
+
+> **Achtung**: C# 8.0 erweitert das Spektrum hier noch einmal mit einen `is` Keyword, dass die Lesbarkeit und Eindeutigkeit erhöht. Zudem wird `switch` mit der _fat arrow_ Syntax erweitert und kann unmittelbar Werte zurückgeben.
 
 ********************************************************************************
 
@@ -392,7 +482,7 @@ namespace Rextester
 
 ### Sprünge
 
-Während  bestimmte Positionen im Code adressiert, lassen sich mit
+Während `label` bestimmte Positionen im Code adressiert, lassen sich mit
 `break` Schleifen beenden, dient `continue` der Unterbrechung des aktuellen
 Blockes.
 
@@ -486,11 +576,11 @@ namespace Rextester
 {
   public class Program
   {
-    public static string CombineNames(string fname, string lname) => $"{fname.Trim()} {lname.Trim()}";
+    public static string Combine(string fname, string lname) => $"{fname.Trim()} {lname.Trim()}";
 
     public static void Main(string[] args)
     {
-      Console.WriteLine(CombineNames("Sebastian", "Zug     "));
+      Console.WriteLine(Combine("Sebastian", "Zug     "));
     }
   }
 }
@@ -609,21 +699,29 @@ namespace Rextester
 
 **Ansatz 1 - Rückgabe des modifizierten Wertes**
 
-```csharp
-static int Calc( int input)
-{
-  // operationen über P
-  int output = ... input
-  return output;
-}
+```csharp            ReturnValue.cs
+using System;
 
-public static void Main(string[] args){
-  ...
-  int p = 5;
-  p = Calc(p);
-  ...
+namespace Rextester
+{
+  public class Program
+  {
+    static int Calc( int input)
+    {
+      // operationen über P
+      int output = 5 * input;
+      return output;
+    }
+
+    public static void Main(string[] args){
+      int p = 5;
+      int a = Calc(p);
+      Console.WriteLine(a);
+    }
+  }
 }
 ```
+@Rextester.eval(@CSharp)
 
 ********************************************************************************
 
@@ -651,6 +749,7 @@ namespace Rextester
     {
        p = p * 2;
     }
+
     public static void Main(string[] args){
       int p = 1;
       Console.WriteLine(p);
@@ -673,12 +772,7 @@ namespace Rextester
   {
     class Wrapper
     {
-      public int Wrapped
-      {
-        get;
-        set;
-      }
-
+      public int Wrapped;
       public Wrapper(int newWrapped)
       {
          Wrapped = newWrapped;
@@ -804,7 +898,7 @@ Modifikator eingefügt.
 ```csharp    variableParameters.cs
 using System;
 
-namespace Parameters
+namespace Rextester
 {
   public class Program
   {
@@ -822,6 +916,7 @@ namespace Parameters
   }
 }
 ```
+@Rextester.eval(@CSharp)
 
 Letztendlich wird damit eine Funktionalität realisiert, wie sie für
 `Main(string[] args)` obligatorisch ist.
@@ -845,7 +940,7 @@ static void Sort(string [] s,
 ```
 
 Die *default*-Werte müssen aber der Reihenfolge nach "abgearbeitet" werden.
-eine partielle Auswahl bestimmter Werte ist nicht möglich.
+Eine partielle Auswahl bestimmter Werte ist nicht möglich.
 
 ```csharp
 string [] s = {'Rotkäpchen', 'Hänsel', 'Gretel', 'Hexe'};
@@ -855,12 +950,12 @@ Sort(s, 3);  // to=-1, ascending = true, ignoreCases= false
 ```
 
 Darüber hinaus lässt sich die Reihenfolge der Parameter aber auch auflösen. Der
-Variablenname wird dann explizit angegeben `,variablenname:Wert, `.
+Variablenname wird dann explizit angegeben `variablenname:Wert, `.
 
 <!-- --{{1}}-- Idee des Beispiels:
           PrintDate(1, year:2019, month:12);
 -->
-```csharp
+```csharp              ExpliciteParameterSetting.cs
 using System;
 
 namespace Rextester
@@ -891,8 +986,6 @@ Namens auftreten, wenn diese sich in ihren Parametern unterscheiden:
 Ein bereits mehrfach genutztes Beispiel dafür ist die `System.Write`-Methode,
 die unabhängig vom Typ der übergebenen Variable eine entsprechende Ausgabe
 realisiert.
-
-
 
 ## Anhang
 
