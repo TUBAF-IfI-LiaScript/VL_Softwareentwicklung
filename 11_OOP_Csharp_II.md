@@ -61,7 +61,7 @@ Klasse als **abgeleitete Klasse** bezeichnet.
 | Nachricht   | Email, SMS, Chatmessage             | Adressat, Inhalt, Datum der Versendung                           |
 
 
-![Vererbungsbeispiel](/img/11_OOP_CsharpII/Vererbungsbeispiel.png)<!-- width="70%" --> [WikiInheri](#7)
+![Vererbungsbeispiel](./img/11_OOP_CsharpII/Vererbungsbeispiel.png)<!-- width="70%" --> [WikiInheri](#7)
 
 *****************************************************************************
 
