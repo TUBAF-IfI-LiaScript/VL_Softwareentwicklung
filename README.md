@@ -12,8 +12,8 @@
 |       | 29. April | Elemente der Sprache C# (Ein-/Ausgaben)           | X                |
 | 5     | 5. Mai    | Programmfluss und Funktionen                      |                  |
 |       | 6. Mai    | Strukturen / Konzepte der OOP                     | X                |
-| 6     | 12. Mai   | OOP in C#                                         |                  |
-|       | 13. Mai   |                                                   |                  |
+| 6     | 12. Mai   | Säulen Objektorientierter Programmierung          |                  |
+|       | 13. Mai   | Klassenelemente in C#  / Vererbung                | X                |
 | 7     | 19. Mai   |                                                   |                  |
 |       | 20. Mai   |                                                   |                  |
 | 8     | 26. Mai   |                                                   |                  |
