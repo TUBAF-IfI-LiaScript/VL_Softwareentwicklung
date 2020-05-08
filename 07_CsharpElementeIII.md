@@ -63,7 +63,7 @@ namespace HelloWorld
 [[?]] Komma statt Punkt   
 [[?]] Hinten %   
 
-5. Was ändert ein Dollarzeichen im Ausdruck Console.Write($"blabla {var1} blabla \n")?   
+5. Was ändert ein Dollarzeichen im Ausdruck `Console.Write($"blabla {var1} blabla \n")`?   
   [( )] ergänzt einen Zeilenumbruch am Anfang   
   [( )] entfernt den Zeilenumbruch am Ende   
   [(X)] ohne diese könnte var1 nicht direkt in den {} stehen    
