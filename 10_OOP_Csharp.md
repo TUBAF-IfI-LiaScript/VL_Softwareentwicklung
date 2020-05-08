@@ -56,7 +56,7 @@ Ideen der OOP:
 
 > **Merke** Wir haben zwei Herausforderungen zu meistern - Modellierung und Realisierung.
 
-![OOPGeschichte](./img/10_OOP_Csharp/OOPHistory.png)<!-- width="60%" --> [WikiOOP](Wikimedia, Autor Nepomuk Frädrich)
+![OOPGeschichte](./img/10_OOP_Csharp/OOPHistory.png)<!-- width="70%" --> [WikiOOP](Wikimedia, Autor Nepomuk Frädrich)
 
 
 *******************************************************************************
@@ -184,7 +184,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
 Die vererbende Klasse wird meist Basisklasse (auch Super-, Ober- oder Elternklasse) genannt, die erbende abgeleitete Klasse (auch Sub-, Unter- oder Kindklasse). Den Vorgang des Erbens nennt man meist Ableitung oder Spezialisierung.
 
-![Vererbungsbeispiel](/img/06_OOPI/Vererbungsbeispiel.png)<!-- width="60%" --> [WikiInheri](#7)
+![Vererbungsbeispiel](/img/11_OOP_CsharpII/Vererbungsbeispiel.png)<!-- width="70%" --> [WikiInheri](#7)
 
 
 **Vorteile**

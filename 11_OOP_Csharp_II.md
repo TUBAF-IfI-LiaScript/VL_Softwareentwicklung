@@ -61,7 +61,7 @@ Klasse als **abgeleitete Klasse** bezeichnet.
 | Nachricht   | Email, SMS, Chatmessage             | Adressat, Inhalt, Datum der Versendung                           |
 
 
-![Vererbungsbeispiel](/img/06_OOPI/Vererbungsbeispiel.png)<!-- width="60%" --> [WikiInheri](#7)
+![Vererbungsbeispiel](/img/11_OOP_CsharpII/Vererbungsbeispiel.png)<!-- width="70%" --> [WikiInheri](#7)
 
 *****************************************************************************
 
@@ -208,15 +208,9 @@ Die Konzepte von `internal` setzen diese Überlegung fort und kontrollieren den 
 ### Member der Klasse
 
 <!--
-<<<<<<< HEAD
 style="width: 100%; max-width: 720px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
-=======
-style="width: 100%; display: block; margin-left: auto; margin-right: auto;"
--->
-````ascii
->>>>>>> 5da031de0edac33f83a2ea6bf06a5f3361a3db99
                                       :  Variante I                       Variante II
                                       :  Übergreifendes gemeinsames       Separate Assemblies via
                                       :  Assembly                         dll-Referenz
@@ -255,11 +249,7 @@ style="width: 100%; display: block; margin-left: auto; margin-right: auto;"
   +------------------------------+    :  |                                 |
                                       : -'                                -'
 
-<<<<<<< HEAD
 ```
-=======
-````
->>>>>>> 5da031de0edac33f83a2ea6bf06a5f3361a3db99
 
 
 ```csharp    Accesscontrol
