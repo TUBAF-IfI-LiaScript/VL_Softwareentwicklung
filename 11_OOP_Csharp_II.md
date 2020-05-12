@@ -10,7 +10,7 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 -->
 
-# Softwareentwicklung - 10 - OOP Implementierung in Csharp
+# Softwareentwicklung - 11 - OOP Implementierung in Csharp
 
 **TU Bergakademie Freiberg - Sommersemester 2020**
 
