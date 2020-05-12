@@ -377,7 +377,7 @@ namespace Rextester
 
   public class Zuschauer: Person {
     public override void setAge(int alter) {
-        // hier wird noch getestet on ein Zuschauer jünger als 6 ist und
+        // hier wird noch getestet ob ein Zuschauer jünger als 6 ist und
         // kostenlos ins Stadion darf
     }
   }
@@ -549,7 +549,7 @@ namespace Rextester
     }
 
     public override string ToString(){
-       return name + " ist die " + index.ToString() + " von " + Count.ToString() + " Personen";
+       return name + " ist die " + (index+1).ToString() + " von " + Count.ToString() + " Personen";
     }
   }
 
@@ -875,7 +875,7 @@ Der Finalizer ruft implizit die Methode `Finalize` aus der Basisklasse des Typs
 
 Eigenschaft (Properties) organisieren den Zugriff auf private Felder über einen
 flexiblen Mechanismus zum Lesen, Schreiben oder Berechnen des Wertes. Entsprechend
-können Eigenschaften können wie öffentliche Datenmember verwendet werden. Damit
+können Eigenschaften wie öffentliche Datenmember verwendet werden. Damit
 wird das Konzept der Kapselung auf effiziente Zugriffsmethoden abgebildet.
 
 Ausgangspunkt:
@@ -1104,6 +1104,7 @@ namespace Rextester
        uid = globalerZähler;
        fächer = new List<string>();
        Console.WriteLine("Der Student {0} (Nr. {1}) ist angelegt!", Name, uid);
+       globalerZähler++;
      }
 
      public bool Eingeschrieben
