@@ -16,7 +16,7 @@ import: https://raw.githubusercontent.com/liaScript/rextester_template/master/RE
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-[https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/10_OOP_Csharp.md](https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/11_OOP_Csharp_II.md)
+[https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/11_OOP_Csharp_II.md](https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/11_OOP_Csharp_II.md)
 
 Die interaktive Form ist unter diese Link zu finden ->
 [LiaScript Vorlesung11](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/SoSe2020/11_OOP_Csharp_II.md#1)
