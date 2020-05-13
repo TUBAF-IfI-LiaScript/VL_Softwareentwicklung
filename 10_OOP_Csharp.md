@@ -23,6 +23,35 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ---------------------------------------------------------------------
 
+## Rückblick auf die GitHub-Woche
+
+**Wie können Sie zusätzlich einen Überblick über Ihre Aufgaben behalten?**
+
++ persönliche Issue-Liste
++ Kanban Diagramme
+
+Bei der Kanban-Tafel werden Magnete oder Post-Its (mit unterschiedlichen Farben für Arbeitsgruppen, einzelne Entwickler usw.) verwendet, um Arbeitselemente darzustellen. Jedes dieser Objekte repräsentiert einen Teil in einem Herstellungsprozess und durchläuft Abschnitte der Tafel. Die Bewegungen korrespondieren mit dem "Fertigungsprozess".
+
+<!--
+style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+-->
+````ascii
+
+    Geplant      In Vorbereitung       In Arbeit       Abgeschlossen           .
+  ----------        ----------        ----------         ----------
+
++-----------+                       +-----------+
+| Aufgabe 2 |                       | Aufgabe 1 |
++-----------+                       +-----------+
+
++-----------+
+| Aufgabe 3 |
++-----------+
+````
+
+Github integriert eine automatisierte Kanban-Tafel über den Issues.
+
+
 ## 7 Fragen in 7 Minuten
 
 **1. Jetzt sind Sie dran ...**
@@ -150,7 +179,7 @@ sowie weitere programmiersprachenspezifische Realisierungen (`internal`, `protec
 2. Die konkrete Implementierung der "Foul" oder "SchießtDenBall"-Methode bleibt geheim :-)
 
 <!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
                                  public struct Position{float x; float y};
@@ -212,29 +241,29 @@ style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-r
 -->
 ````ascii
 
-   Erbende Klasse                  Höherabstrakte Klasse
+   Erbende Klasse                  Höherabstrakte Klasse                       .
 
   +-----------------------+
   | Spieler               |
   +-----------------------+
-  | + Position            |
+  | - Position            |
   | ...                   | --.
   +-----------------------+   |
-  | + FängtDenBall()      |   |   +------------------------+
-  | + SchießtDenBall()    |   |   | Person                 |
-  | + Foul()              |   |   +------------------------+
-  | ...                   |   '-->| Name                   |
-  +-----------------------+       | Alter                  |
+  | ✛ FängtDenBall()      |   |   +------------------------+
+  | ✛ SchießtDenBall()    |   |   | Person                 |
+  | ✛ Foul()              |   |   +------------------------+
+  | ...                   |   '-->| - Name                 |
+  +-----------------------+       | - Alter                |
                                   | ...                    |
   +-----------------------+       +------------------------+
-  | Schiedsrichter        |       | SetName()              |
-  +-----------------------+   .-->| SetAge()               |
-  | + Rolle               |   |   | ...                    |
-  | + ...                 |   |   +------------------------+
+  | Schiedsrichter        |       | ✛ SetName()            |
+  +-----------------------+   .-->| ✛ SetAge()             |
+  | ✛ Rolle               |   |   | ...                    |
+  | ✛ ...                 |   |   +------------------------+
   +-----------------------+   |
-  | + StartedSpiel()      |   |
-  | + BeendetDasSpiel()   | --'
-  | + ErkenntFoul()       |
+  | ✛ StartedSpiel()      |   |
+  | ✛ BeendetDasSpiel()   | --'
+  | ✛ ErkenntFoul()       |
   | ...                   |
   +-----------------------+
 
@@ -294,11 +323,6 @@ namespace Rextester
       System.Reflection.MethodInfo[] methodInfo = t.GetMethods();
 
       foreach (System.Reflection.MethodInfo mInfo in methodInfo)
-        Console.WriteLine(mInfo.ToString());
-
-      Console.WriteLine("------  Members ------");
-      System.Reflection.MemberInfo[] memberInfo = t.GetMembers();
-      foreach (System.Reflection.MemberInfo mInfo in methodInfo)
         Console.WriteLine(mInfo.ToString());
     }
   }
@@ -508,7 +532,7 @@ style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-r
 -->
 ```ascii
 
-  +-----------------+   +-----------------+  +-----------------+
+  +-----------------+   +-----------------+  +-----------------+               .
   | Instanz 0       |   | Instanz 1       |  | Instanz 2       |
   +-----------------+   +-----------------+  +-----------------+
   | - Intanzfeld0   |   | - Intanzfeld0   |  | - Intanzfeld0   |
@@ -523,7 +547,7 @@ style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-r
   +-----------------+   +-----------------+  +-----------------+
 ```
 
-Instanzenfelder beziehen sich als Datensat individuell auf die "eigene" Instanz,
+Instanzenfelder beziehen sich als Datensatz individuell auf die "eigene" Instanz,
 statisches Felder gehören zur Klasse selbst und werden von allen Instanzen einer
 Klasse gemeinsam verwendet. "Lokale" Änderungen, werden somit übergreifend
 sichtbar.
@@ -608,7 +632,6 @@ Varianten "konstanter" Variablen in C#
 | Attribute           | `const`      | `readonly`            | `readonly static`     |
 | Veränderbar bis ... | Kompilierung | Ende des Konstruktors | Ende des Konstruktors |
 | Statisch            | Standard, ja | Nein                  | Ja                    |
-| Individuelle Kopien | Ja           | Ja                    | Nein                  |
 | Zugriff             | Klasse       | Instanz               | Instanz               |
 
 <!-- --{{0}}-- Idee des Codefragments:
