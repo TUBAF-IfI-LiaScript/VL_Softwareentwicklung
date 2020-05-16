@@ -56,7 +56,7 @@ Ideen der OOP:
 
 > **Merke** Wir haben zwei Herausforderungen zu meistern - Modellierung und Realisierung.
 
-![OOPGeschichte](./img/10_OOP_Csharp/OOPHistory.png)<!-- width="60%" --> [WikiOOP](Wikimedia, Autor Nepomuk Frädrich)
+![OOPGeschichte](./img/10_OOP_Csharp/OOPHistory.png)<!-- width="70%" --> [WikiOOP](Wikimedia, Autor Nepomuk Frädrich)
 
 
 *******************************************************************************
@@ -184,7 +184,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
 Die vererbende Klasse wird meist Basisklasse (auch Super-, Ober- oder Elternklasse) genannt, die erbende abgeleitete Klasse (auch Sub-, Unter- oder Kindklasse). Den Vorgang des Erbens nennt man meist Ableitung oder Spezialisierung.
 
-![Vererbungsbeispiel](/img/06_OOPI/Vererbungsbeispiel.png)<!-- width="60%" --> [WikiInheri](#7)
+![Vererbungsbeispiel](./img/11_OOP_CsharpII/Vererbungsbeispiel.png)<!-- width="70%" --> [WikiInheri](#7)
 
 
 **Vorteile**
@@ -212,7 +212,7 @@ style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-r
 -->
 ````ascii
 
-   Erbende Klasse                  Höherabstrakte Klasse
+   Erbende Klasse                  Höherabstrakte Klasse                       .
 
   +-----------------------+
   | Spieler               |
@@ -295,11 +295,6 @@ namespace Rextester
 
       foreach (System.Reflection.MethodInfo mInfo in methodInfo)
         Console.WriteLine(mInfo.ToString());
-
-      Console.WriteLine("------  Members ------");
-      System.Reflection.MemberInfo[] memberInfo = t.GetMembers();
-      foreach (System.Reflection.MemberInfo mInfo in methodInfo)
-        Console.WriteLine(mInfo.ToString());
     }
   }
 }
@@ -377,7 +372,7 @@ namespace Rextester
 
   public class Zuschauer: Person {
     public override void setAge(int alter) {
-        // hier wird noch getestet on ein Zuschauer jünger als 6 ist und
+        // hier wird noch getestet ob ein Zuschauer jünger als 6 ist und
         // kostenlos ins Stadion darf
     }
   }
@@ -508,7 +503,7 @@ style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-r
 -->
 ```ascii
 
-  +-----------------+   +-----------------+  +-----------------+
+  +-----------------+   +-----------------+  +-----------------+               .
   | Instanz 0       |   | Instanz 1       |  | Instanz 2       |
   +-----------------+   +-----------------+  +-----------------+
   | - Intanzfeld0   |   | - Intanzfeld0   |  | - Intanzfeld0   |
@@ -523,7 +518,7 @@ style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-r
   +-----------------+   +-----------------+  +-----------------+
 ```
 
-Instanzenfelder beziehen sich als Datensat individuell auf die "eigene" Instanz,
+Instanzenfelder beziehen sich als Datensatz individuell auf die "eigene" Instanz,
 statisches Felder gehören zur Klasse selbst und werden von allen Instanzen einer
 Klasse gemeinsam verwendet. "Lokale" Änderungen, werden somit übergreifend
 sichtbar.
@@ -549,7 +544,7 @@ namespace Rextester
     }
 
     public override string ToString(){
-       return name + " ist die " + index.ToString() + " von " + Count.ToString() + " Personen";
+       return name + " ist die " + (index+1).ToString() + " von " + Count.ToString() + " Personen";
     }
   }
 
@@ -608,7 +603,6 @@ Varianten "konstanter" Variablen in C#
 | Attribute           | `const`      | `readonly`            | `readonly static`     |
 | Veränderbar bis ... | Kompilierung | Ende des Konstruktors | Ende des Konstruktors |
 | Statisch            | Standard, ja | Nein                  | Ja                    |
-| Individuelle Kopien | Ja           | Ja                    | Nein                  |
 | Zugriff             | Klasse       | Instanz               | Instanz               |
 
 <!-- --{{0}}-- Idee des Codefragments:
@@ -875,7 +869,7 @@ Der Finalizer ruft implizit die Methode `Finalize` aus der Basisklasse des Typs
 
 Eigenschaft (Properties) organisieren den Zugriff auf private Felder über einen
 flexiblen Mechanismus zum Lesen, Schreiben oder Berechnen des Wertes. Entsprechend
-können Eigenschaften können wie öffentliche Datenmember verwendet werden. Damit
+können Eigenschaften wie öffentliche Datenmember verwendet werden. Damit
 wird das Konzept der Kapselung auf effiziente Zugriffsmethoden abgebildet.
 
 Ausgangspunkt:
@@ -1104,6 +1098,7 @@ namespace Rextester
        uid = globalerZähler;
        fächer = new List<string>();
        Console.WriteLine("Der Student {0} (Nr. {1}) ist angelegt!", Name, uid);
+       globalerZähler++;
      }
 
      public bool Eingeschrieben
