@@ -357,8 +357,181 @@ Auch für Klassen selbst können Zugriffsattribute das Verhalten bestimmen:
 + Jede Klasse kann entweder als `public` oder `internal` deklariert sein (Standard: `internal`)
 + Klassen können mit `sealed` versiegelt werden. Damit ist das Erben davon ausgeschlossen (Bsp.: System.String)
 
-
 ## Polymorphie in C#
+
+                                   {{0-2}}
+******************************************************************************
+
+Strukturieren Sie die Klassen "Zug", "GüterZug", "PersonenZug" und "ICE" in einer
+sinnvolle Vererbungshierarchie. Wie setzen Sie diese in C# Code um?
+
+******************************************************************************
+
+                                  {{1-2}}
+******************************************************************************
+
+```csharp    Constructors
+using System;
+using System.Reflection;
+using System.ComponentModel.Design;
+
+namespace Rextester
+{
+  class Zug
+  {
+    string nummer;
+    public Zug()
+    {
+      Console.WriteLine("Zug-ctor");
+    }
+    public Zug(string nummer)
+    {
+      this.nummer = nummer;
+      Console.WriteLine("Spezifischer Zug-ctor");
+    }
+  }
+
+  class PersonenZug : Zug
+  {
+    public PersonenZug() : base("Freiberg")
+    {
+      Console.WriteLine("PersonenZug-ctor");
+    }
+  }
+
+  class Ice : PersonenZug
+  {
+    public Ice()
+    {
+      Console.WriteLine("ICE-ctor");
+    }
+  }
+
+  class GueterZug : Zug
+  {
+    public GueterZug()
+    {
+      Console.WriteLine("GueterZug-ctor");
+    }
+  }
+
+
+  public class Program
+  {
+    public static void Main(string[] args)
+    {
+      Console.WriteLine("Generiere neuen ICE ");
+      Ice ice = new Ice();
+      Console.WriteLine("Generieren neuen Güterzug");
+      GueterZug gueter = new GueterZug();
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+> **Merke:** Konstruktoren werden nicht geerbt! Jede Unterklasse deklariert (implizit) eigene Konstrukturen.
+
+Die Konstruktoren der Basisklasse können jeweils mit `base()` aufgerufen werden. Erfolgt dies nicht, wird der parameterlose Konstruktor der Basisklasse automatisch aufgerufen.
+
+Die Ausgabe des oben aufgeführten Beispiels illustriert diese Aufrufhierachie. Entfernen Sie dem `base` Aufruf in Zeile 23 und erklären Sie den Unterschied.
+
+
+******************************************************************************
+
+                                   {{2-3}}
+******************************************************************************
+
+In diesem Fall ist Zug die Basisklasse und `PersonenZug`, `GueterZug` und `ICE` sind
+abgeleitete Klassen.
+
+Eine Variablen vom Basisdatentyp kann immer eine Instanz einer abgeleiteten
+Klasse zugewiesen werden. Entsprechend unterscheidet man dann zwischen dem
+statischen und dem dynamischen Typ der Variablen. Der statische Typ ist
+immer der, der auch deklariert wurde. Der dynamische Typ wird durch die aktuelle
+Referenz einer Instanz einer abgeleiteten Klasse von Zug bestimmt und ist
+veränderlich.
+
+| Zuweisung                  | statischer Typ von Zug | dynamischer Typ von Zug |
+| -------------------------- | ---------------------- | ----------------------- |
+| `Zug RB51 = new Zug()`     | Zug                    | Zug                     |
+| `RB51 = new PersonenZug()` | Zug                    | PersonenZug             |
+| `RB51 = new Ice`           | Zug                    | ICE                     |
+
+******************************************************************************
+
+### Laufzeitprüfung
+
+Entsprechend brauchen wir eine Typprüfung, die untersucht, ob die Variable von
+einem bestimmten dynamischen Typ  oder einem daraus abgeleiteten Typ ist.
+
+
++ der dynamische Typ einer Klasse kann zur Laufzeit geprüft werden
++ Typtest liefert bei null-Werten immer false
+
+```csharp    Typprüfung
+using System;
+using System.Reflection;
+using System.ComponentModel.Design;
+
+namespace Rextester
+{
+  class Zug
+  {
+    public Zug()
+    {
+      Console.WriteLine("Zug-ctor");
+    }
+  }
+
+  class PersonenZug : Zug
+  {
+    public PersonenZug() : base()
+    {
+      Console.WriteLine("PersonenZug-ctor");
+    }
+  }
+
+  class Ice : PersonenZug
+  {
+    public Ice()
+    {
+      Console.WriteLine("ICE-ctor");
+    }
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args)
+    {
+      Zug IC239 = new Ice();
+      Console.WriteLine("IC239 ist ein Zug? " + (IC239 is Zug)); // true
+      Console.WriteLine("IC239 ist ein PersonenZug? " + (IC239 is PersonenZug)); // true
+      Console.WriteLine("IC239 ist ein Ice? " + (IC239 is Ice)); // true
+      IC239 = null;
+      Console.WriteLine("IC239 ist ein Ice? " + (IC239 is Ice)); // false
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+
+### Grundidee der Polymorphie
+
+                             {{0-1}}
+*******************************************************************************
+
+Objekte einer Basisklasse können somit Instanzen einer abgeleiteten Klassen
+umfassen. Damit lassen sich ähnlich einem Container sehr unterschiedliche
+Objekte einer Vererbungslinie bündeln. Welche Frage ergibt sich dann?
+
+**Wir haben schon gesehen, dass die Vererbung unter anderem Funktionen umfasst. Auf welche Klassenmember greife ich überhaupt zurück?**
+
+*******************************************************************************
+
+                            {{1-2}}
+*******************************************************************************
 
 > **Merke** Polymorphie bezeichnet die Tatsache, dass Klassenmember ausgehend
 > von Ihrer Nutzung ein unterschiedliches Verhalten erzeugen.
@@ -373,15 +546,11 @@ zur Laufzeit bestimmt (dynamische Bindung).
 > Interface trotzdem die Implementierung der abgeleiteten Klasse zum
 > Einsatz kommt.
 
-Abgeleitete Klassen können aus der Basisklasse geerbte Methoden neu deklarieren.
-Dabei kann gewählt werden, ob die Methode verdeckt oder überschrieben werden soll.
-In beiden Fällen wird die ursprüngliche Methode durch eine neue ersetzt.
-
 Dynamische Bindung erlaubt den Aufruf von überschriebenen Methoden aus der
 Basisklasse heraus, wobei das Überschreiben muss in der Basisklasse explizit
 erlaubt werden muss.
 
-Siehe Beispielcode Polymorphie
+*******************************************************************************
 
 ### Überschreiben von Methoden
 
@@ -402,7 +571,7 @@ public override void makeSound() => Console.WriteLine("Quack!");
 
 Dabei müssen beide Methoden die gleiche Signatur haben, d.h. sie sollen die den gleichen Namen und eine identische Parameterliste besitzen. Ansonsten ist es nur Überladung!
 
-```csharp    privateConstructors
+```csharp    Polymorphy.cs
 using System;
 
 namespace Rextester
@@ -435,8 +604,8 @@ namespace Rextester
   public class Program
   {
     public static void Main(string[] args){
-      Animal[] animals = new Animal[3];
-      animals[0] = new Duck("Alfred");
+      Animal[] animals = new Animal[3]; // <- Statischer Typ  Animal
+      animals[0] = new Duck("Alfred");  // <- Dynamischer Typ Duck
       animals[1] = new Cow("Hilde");
       animals[2] = new Animal("Bernd");
       foreach (Animal anim in animals)
@@ -521,8 +690,10 @@ Verdeckt werden können alle Klassenmember einer Basisklasse:
 + Properties und Indexer
 + Methoden usw.
 
-Wenn kein Schlüsselwort angegeben ist, wird implizit `new` angenommen. Allerdings
-ist das explizite Verdecken hat nur äußerst selten eine sinnvolle Anwendung.
+Wenn kein Schlüsselwort angegeben ist, wird implizit `new` angenommen. Im oben
+genannten Beispiel folgt daraus, dass die in `Cat` implementierte Ausgabe ausschließlich
+von Objekten des statischen Typs `Cat` aufgerufen werden kann. Testen Sie die
+Wirkung und ersetzen Sie `new` durch `override`.
 
 Das folgende Beispiel entstammt dem C# Programmierhandbuch und kann unter
 [Link](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/classes-and-structs/versioning-with-the-override-and-new-keywords) nachgelesen werden.
@@ -556,7 +727,7 @@ der DrawRectangle-Methode in Ihrer Anwendung bestimmen müssen.  Welche
 Möglichkeiten haben Sie - override oder new oder umbenennen? Welche Konsequenzen
 ergeben sich daraus?
 
-### Versiegeln von Klassen oder Membern
+## Versiegeln von Klassen oder Membern
 
 Die Mechanismen der Vererbung und Polymorphie können aber auch aufgehoben werden,
 wenn ein Schutz notwendig ist. Das Schlüsselwort `sealed` ermöglicht es sowohl
@@ -571,7 +742,7 @@ sealed class B : A {}
 Im Beispiel erbt die Klasse B von der Klasse A, allerdings kann keine Klasse von
 der Klasse B erben.
 
-Da Strukturen implizit versiegelt sind, können sie nicht geerbt werden.
+> **Merke:** Da Strukturen implizit versiegelt sind, können sie nicht geerbt werden.
 
 ```csharp    sealedMethods
 using System;
@@ -616,71 +787,149 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-### Abstrakte Klassen / Abstrakte Methoden
+## Casts über Klassen
 
-Mit `virtual` werden einzelne Methoden spezifiziert, die durch die abgeleiteten
-Klassen implmentiert werden. Die Basisklasse hält aber eine "default" Implementierung
-bereit. Letztendich kann man diesen Gedanken konsequent weiter treiben und die
-Methoden der Basisklasse auf ein reines Muster reduzieren, dass keine eigenen Implementierungen
-umfasst.
+Konvertierungen zwischen nterschiedlichen Datentypen lassen sich auch
+auf Klassen anwenden, allerdings sind hier einige Besonderheiten zu beachten.
 
-Diese Aufgabe übernehmen abstrakte Klassen und abstrakte Methoden. Eine abstrakte
-Klasse:
++ implizit auf die Basisklasse  (upcast)
++ explizit auf die abgeleitete Klasse (downcast)
 
-+ kann nicht instanziiert werden
-+ kann abstrakte Methoden umfassen
-+ ist oft als Startpunkt(e) einer Vererbungshierarchie gedacht sind.
+gekastet werden. Zunächst ein Beispiel für einen *upcast* anhand unseres
+Fußballbeispiels. Zugriffe auf Member, die  in der Basisklasse nicht enthalten
+sind führen logischerweise zum Fehler.
 
-Innerhalb der Klasse können abstrakte Methoden integriert werden, die
-
-+ implizit als virtuelle Methode implementiert angelegt werden
-+ entsprechend keinen Methodenkörper umfassen
-
-Eine nicht abstrakte Klasse, die von einer abstrakten Klasse abgeleitet wurde,
-muss Implementierungen aller geerbten abstrakten Methoden und Accessoren
-enthalten.
-
-```csharp    abstractClass
+```csharp    Upcast
 using System;
+using System.Reflection;
+using System.ComponentModel.Design;
 
 namespace Rextester
 {
-  public abstract class Animal
-  {
-    public string Name;
-    public Animal(string name){
-      Name = name;
-    }
-//    public virtual void makeSound(){
-//      Console.WriteLine("I'm an Animal");
-//    }
-
-    public abstract void makeSound();
+  public class Person {
+    public int geburtsjahr;
+    public string name;
   }
 
-  public class Corcodile : Animal{
-
-    public Corcodile(string name) : base(name){
-      Name = name;
-    }
-
-    public override void makeSound(){
-      Console.WriteLine("I'm a Crocodile");
-    }
+  public class Fußballspieler : Person {
+    public byte rückennummer;
   }
 
   public class Program
   {
-    public static void Main(string[] args){
-      Corcodile A = new Corcodile("Tuffy");
-      A.makeSound();
+    public static void Main(string[] args)
+    {
+      Fußballspieler champ = new Fußballspieler {geburtsjahr = 1956,
+                                                 name = "Maier",
+                                                 rückennummer = 13};
+
+      Console.WriteLine("Felder in der Instanz '{0}' von '{1}'", champ.name, champ);
+      var fields = champ.GetType().GetFields();
+      foreach (FieldInfo field in fields){
+        Console.WriteLine(" x " + field.Name);
+      }
+
+      Person human = champ;     // Castoperation Fußballspieler -> Person
+      Console.WriteLine("human ist ein Fußballspieler? " + (human is Fußballspieler));
+      //Console.WriteLine(human.rückennummer);
     }
   }
 }
 ```
 @Rextester.eval(@CSharp)
 
-Warum macht es keinen Sinn eine abstrakte Klasse als `sealed` zu deklarieren?
+In umgekehrter Richtung vollzieht sich der *Downcast*, eine Instanz der
+Basisklasse wird auf einen abgeleiteten Typ gemappt.
+
+```csharp    Downcast
+using System;
+using System.Reflection;
+using System.ComponentModel.Design;
+
+namespace Rextester
+{
+  public class Person {
+    public int geburtsjahr;
+    public string name;
+  }
+
+  public class Fußballspieler : Person {
+    public byte rückennummer;
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args)
+    {
+      Person Mensch = new Person {geburtsjahr = 1956,
+                                  name = "Maier"};
+
+      //Fußballspieler champ = Mensch; // Fehler wird zur Compilezeit erkannt
+      Fußballspieler champ = (Fußballspieler) Mensch; // Fehler zur Laufzeit erkannt
+
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+### Beispiel
+
+*Upcast* und *Downcast* ...  wozu brauche ich das den? Nehmen wir an, dass wir
+eine Ausgabemethode für beide Typen - Person und Fußballspieler - benötigen.
+Ja, es wäre möglich diese als Memberfunktion zu implementieren, problematisch
+wäre aber dann, dass wir an unterschiedlichen Stellen im Code spezifische
+Befehle für die Ausgabe in der Konsole zu stehen haben. Sollen die Log-Daten
+nun plötzlich in eine Datei ausgegeben werden, müsste diese Anpassung überall
+vollzogen werden. Entsprechend ist eine externe (statische) Logger-Klasse
+wesentlich geeigneter diese Funktionalität zu kapseln. Allerdings wäre dann ein
+überladen der entsprechenden Ausgabefunktion mit allen vorkommenden Typen notwendig.
+Dies kann durch entsprechende Casts umgangen werden.
+
+```csharp    UpCastExample
+using System;
+using System.Reflection;
+using System.ComponentModel.Design;
+
+namespace Rextester
+{
+  public class Person
+  {
+    public int geburtsjahr;
+    public string name;
+  }
+
+  public class Fußballspieler : Person
+  {
+    public byte rückennummer;
+  }
+
+  public static class Logger
+  {
+    public static void printPerson(Person person){
+        Console.WriteLine("{0} - {1}", person.name, person.geburtsjahr);
+        if (person is Fußballspieler)
+          Console.WriteLine("{0} - {1}", person.name, (person as Fußballspieler).rückennummer);
+    }
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args)
+    {
+       Person Mensch = new Person {geburtsjahr = 1956,
+                                  name = "Maier"};
+       Logger.printPerson(Mensch);
+
+       Fußballspieler Champ = new Fußballspieler{geburtsjahr = 1967,
+                                                 name = "Müller",
+                                                 rückennummer = 13};
+       Logger.printPerson(Champ);
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
 
 ## Beispiel der Woche ...
 
