@@ -23,35 +23,6 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ---------------------------------------------------------------------
 
-## Rückblick auf die GitHub-Woche
-
-**Wie können Sie zusätzlich einen Überblick über Ihre Aufgaben behalten?**
-
-+ persönliche Issue-Liste
-+ Kanban Diagramme
-
-Bei der Kanban-Tafel werden Magnete oder Post-Its (mit unterschiedlichen Farben für Arbeitsgruppen, einzelne Entwickler usw.) verwendet, um Arbeitselemente darzustellen. Jedes dieser Objekte repräsentiert einen Teil in einem Herstellungsprozess und durchläuft Abschnitte der Tafel. Die Bewegungen korrespondieren mit dem "Fertigungsprozess".
-
-<!--
-style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
-````ascii
-
-    Geplant      In Vorbereitung       In Arbeit       Abgeschlossen           .
-  ----------        ----------        ----------         ----------
-
-+-----------+                       +-----------+
-| Aufgabe 2 |                       | Aufgabe 1 |
-+-----------+                       +-----------+
-
-+-----------+
-| Aufgabe 3 |
-+-----------+
-````
-
-Github integriert eine automatisierte Kanban-Tafel über den Issues.
-
-
 ## 7 Fragen in 7 Minuten
 
 **1. Jetzt sind Sie dran ...**
@@ -179,7 +150,7 @@ sowie weitere programmiersprachenspezifische Realisierungen (`internal`, `protec
 2. Die konkrete Implementierung der "Foul" oder "SchießtDenBall"-Methode bleibt geheim :-)
 
 <!--
-style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
                                  public struct Position{float x; float y};
@@ -246,24 +217,24 @@ style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-r
   +-----------------------+
   | Spieler               |
   +-----------------------+
-  | - Position            |
+  | + Position            |
   | ...                   | --.
   +-----------------------+   |
-  | ✛ FängtDenBall()      |   |   +------------------------+
-  | ✛ SchießtDenBall()    |   |   | Person                 |
-  | ✛ Foul()              |   |   +------------------------+
-  | ...                   |   '-->| - Name                 |
-  +-----------------------+       | - Alter                |
+  | + FängtDenBall()      |   |   +------------------------+
+  | + SchießtDenBall()    |   |   | Person                 |
+  | + Foul()              |   |   +------------------------+
+  | ...                   |   '--▷| Name                   |
+  +-----------------------+       | Alter                  |
                                   | ...                    |
   +-----------------------+       +------------------------+
-  | Schiedsrichter        |       | ✛ SetName()            |
-  +-----------------------+   .-->| ✛ SetAge()             |
-  | ✛ Rolle               |   |   | ...                    |
-  | ✛ ...                 |   |   +------------------------+
+  | Schiedsrichter        |       | SetName()              |
+  +-----------------------+   .--▷| SetAge()               |
+  | + Rolle               |   |   | ...                    |
+  | + ...                 |   |   +------------------------+
   +-----------------------+   |
-  | ✛ StartedSpiel()      |   |
-  | ✛ BeendetDasSpiel()   | --'
-  | ✛ ErkenntFoul()       |
+  | + StartedSpiel()      |   |
+  | + BeendetDasSpiel()   | --'
+  | + ErkenntFoul()       |
   | ...                   |
   +-----------------------+
 
@@ -1063,38 +1034,200 @@ namespace Rextester
 Was ist der Vorteil der Klasse + Indexer Lösung? Wie würden Sie die Indizierung
 noch absichern?
 
-## Besondere Konfigurationsmöglichkeiten
+### Operatorenüberladung in C\#
 
-Eine statische Klasse kann im Unterschied zu einer nicht statischen Klasse nicht
-instanziiert werden. Der Zugriff erfolgt immer über den Klassennamen.
+                                         {{0-1}}
+******************************************************************************
 
-Eine statische Klasse:
+Operatoren sind ein Set von Tokens, die grundlegende Operationen für
+Grunddatentypen beschreiben.
 
-+ enthält nur statische Member
-+ kann nicht instantiiert werden
-+ ist versiegelt
-+ darf keine Instanzkonstruktoren enthalten
+```csharp
+int a = 4;
+int b = 7;
+int c = a + b;                   // + Addition
+
+string s1 = "Hello";
+string s2 = "World";
+string s3 = s1 + " " + s2;       // + für String Konkatenation
+```
+
+Analog zu Methoden werden können Operatoren überladen werden. Entsprechend wird
+den Operatoren eine spezifische Bedeutung für die Klassen gegeben.
+
++ Operatoren werden in der Klasse überladen
++ Operatoren-Überladung ist immer static
++ Nutzung des Schlüsselwortes `operator`
+
+**Überladbare Operatoren**
+
+| Opererator                           | Bedeutug                                                                |
+| ------------------------------------ | ----------------------------------------------------------------------- |
+| +, -, !, ~, ++, --, true, false      | unäre Operatoren, überladbar                                            |
+| +, -, \*, /, %, &, ^, <<, >>          | binäre Operatoren, überladbar                                           |
+| ==, !=, <, >, <=, >=                 | Vergleichsoperatoren, überladbar                                        |
+| []                                   | nicht überladbar, aber selbe Funktion mit Indexern                      |
+| ()                                   | nicht überladbar, aber mittels custom conversion gleiche Funktionalität |
+| +=, -=, \*=, /=, %=, &=, ^=, <<=, >>= | Werden durch die zugehörigen Operatoren automatisch überladen           |
 
 
-```csharp    StaticClass
+******************************************************************************
+
+                                       {{1-2}}
+******************************************************************************
+
+**Beispiel**
+
+```csharp    Operatoren
 using System;
+using System.Reflection;
+using System.ComponentModel.Design;
 
 namespace Rextester
 {
+  public class Vector {
+    public double X;
+    public double Y;
+
+    public Vector (double x, double y){
+      this.X = x;
+      this.Y = y;
+    }
+
+    //public static Vector operator +(Vector p1, Vector p2){
+    //  return new Vector(p1.X + p2.X, p1.Y + p2.Y);
+    //}
+
+    public static Vector operator -(Vector p1, Vector p2){
+      return new Vector(p1.X - p2.X, p1.Y - p2.Y);
+    }
+
+    public override string ToString(){
+      return "x = " + X.ToString() + ", y = " + Y.ToString();
+    }
+  }
+
   public class Program
   {
     public static void Main(string[] args)
     {
-      double number = -3.14;
-      Console.WriteLine(Math.Abs(number));
-      Console.WriteLine(Math.Floor(number));
-      Console.WriteLine(Math.Round(Math.Abs(number)));
-      //var a = new Math();
+      Vector a = new Vector (3,4);
+      Vector b = new Vector (9,6);
+      Console.WriteLine (a+b);
     }
   }
 }
 ```
 @Rextester.eval(@CSharp)
+
+Die Operatoren += und -= werden dabei automatisch mit überladen.
+
+
+******************************************************************************
+
+                                       {{2-3}}
+******************************************************************************
+
+> **Merke:** Die Typen beim Überladen von Operatoren müssen nicht übereinstimmen!
+
+Nehmen wir an, dass wir eine Skalierung $r$ unseres Vektors einfügen wollen und dafür
+dessen Länge manipulieren.
+
+```csharp
+// Es müssen beide Varianten implementiert werden!
+public static Point operator *(Point p1, double ratio)
+{
+  new Point(p1.X * ratio, p1.Y * ratio);
+}
+
+public static Point operator *(int ratio, Point p1)
+{
+  new Point(p1.X * ratio, p1.Y * ratio);
+}
+
+static void Main(string[] args)
+{
+  Point ptOne = new Point(100, 100);
+  Point ptTwo = new Point(40, 40);
+}
+Console.WriteLine((ptOne * 2.5));
+Console.WriteLine((1 * ptOne));
+```
+
+Unäre Operatoren (++, --) können in gleicher Art und Weise überschrieben werden.
+
+
+******************************************************************************
+
+                                       {{3-4}}
+******************************************************************************
+
+Wann sind zwei Klasseninstanzen gleich? Müssen alle Inhalte übereinstimmen?
+Gibt es besondere Felder, deren Übereinstimmung relevanter sind?
+
+| class | Felder                                               |
+| ----- | ---------------------------------------------------- |
+| Haus  | Farbe der Fenster, Markise (ja/nein), Zahl der Räume |
+| Tier  | Art, Rasse, Geschlecht                               |
+| Datei | Typ, Inhalt, Namen                                   |
+
+```csharp    Upcast
+using System;
+using System.Reflection;
+using System.ComponentModel.Design;
+
+namespace Rextester
+{
+  public class Vector {
+    public double X;
+    public double Y;
+
+    public Vector (double x, double y){
+      this.X = x;
+      this.Y = y;
+    }
+
+    public static bool operator ==(Vector p1, Vector p2){
+      return (p1.X == p2.X) && (p1.Y == p2.Y);
+    }
+
+    public static bool operator !=(Vector p1, Vector p2){
+      return (p1.X != p2.X) || (p1.Y != p2.Y);
+    }
+
+    //public override bool Equals(object p){
+    //  return ???
+    //}
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args)
+    {
+      Vector a = new Vector (3,4);
+      Vector b = new Vector (9,6);
+      Console.WriteLine (a == b);
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+Die unären Operatoren `True` und `False` nehmen eine kleine Sonderrolle
+ein:
+
+```csharp
+public static bool operator true(Point p1) => (p1.X>0) && (p1.Y>0);
+public static bool operator false(Point p1) => (p1.X < 0) && (p1.Y < 0);
+
+Point pt1 = new Point(10, 10);
+if (pt1) Console.WriteLine("true"); // true
+
+// Point is neither true nor false:
+Point pt2 = new Point(10, -10);
+```
+
+******************************************************************************
 
 ## Beispiel der Woche ...
 
