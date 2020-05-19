@@ -14,8 +14,8 @@
 |       | 6. Mai    | Strukturen / Konzepte der OOP                     | X                |
 | 6     | 12. Mai   | Säulen Objektorientierter Programmierung          |                  |
 |       | 13. Mai   | Klassenelemente in C#  / Vererbung                | X                |
-| 7     | 19. Mai   |                                                   |                  |
-|       | 20. Mai   |                                                   |                  |
+| 7     | 19. Mai   | Klassenelemente in C#  / Vererbung                |                  |
+|       | 20. Mai   | Interfaces                                        | X                |
 | 8     | 26. Mai   |                                                   |                  |
 |       | 27. Mai   |                                                   |                  |
 | 9     | 2. Juni   |                                                   |                  |
