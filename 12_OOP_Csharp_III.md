@@ -24,14 +24,6 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ---------------------------------------------------------------------
 
-## Rückblick auf die GitHub-Woche
-
-TODO - Diagramm der Aktivitäten einfügen
-
-TODO - Vorstellung PlantUML
-
-TODO - Wiederholung git Projektfluss
-
 ## 7 Fragen in 7 Minuten
 
 **1. Jetzt sind Sie dran ...**
