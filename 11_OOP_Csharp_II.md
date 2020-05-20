@@ -861,11 +861,12 @@ namespace Rextester
   {
     public static void Main(string[] args)
     {
-      Person Mensch = new Person {geburtsjahr = 1956,
-                                  name = "Maier"};
+      Fußballspieler champ = new Fußballspieler {geburtsjahr = 1956,
+                                                 name = "Maier",
+                                                 rückennummer = 13};
 
-      //Fußballspieler champ = Mensch; // Fehler wird zur Compilezeit erkannt
-      Fußballspieler champ = (Fußballspieler) Mensch; // Fehler zur Laufzeit erkannt
+      Person mensch = champ;
+      Fußballspieler champ2 = (Fußballspieler) mensch;
 
     }
   }
