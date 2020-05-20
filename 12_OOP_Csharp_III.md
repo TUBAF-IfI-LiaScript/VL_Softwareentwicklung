@@ -52,7 +52,7 @@ umfasst.
 Diese Aufgabe übernehmen abstrakte Klassen und abstrakte Methoden. Eine abstrakte
 Klasse:
 
-+ kann nicht instanziiert werden
++ kann nicht instantiiert werden
 + kann abstrakte Methoden umfassen
 + ist oft als Startpunkt(e) einer Vererbungshierarchie gedacht sind.
 
@@ -223,7 +223,7 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-Es besteht keine Vererbungshierachie zwischen den beiden Klassen `A` und `B`! Vielmehr ergibt sich ein neuer Zusammenhang, die gemeinsame Implementierung eines Musters an Membern.
+Es besteht keine Vererbungshierarchie zwischen den beiden Klassen `A` und `B`! Vielmehr ergibt sich ein neuer Zusammenhang, die gemeinsame Implementierung eines Musters an Membern.
 
 ```
 @startuml
@@ -257,7 +257,7 @@ hide circle
 @plantUML.eval
 
 Die Visualisierung von Klassen und deren Abhängigkeiten mit plantUML ist eine
-Möglichkeit einen raschen Überblick über bestimmte Zusammehänge zu gewinnen.
+Möglichkeit einen raschen Überblick über bestimmte Zusammenhänge zu gewinnen.
 In den folgenden Materialien wird dies intensiv genutzt.
 
 *******************************************************************************
@@ -296,32 +296,32 @@ using System.ComponentModel.Design;
 
 namespace Rextester
 {
-  public class Cat: IComparable  
-  {  
-      public string Name {get; set;}  
+  public class Cat: IComparable
+  {
+      public string Name {get; set;}
 
-      public int CompareTo(object obj)  
-      {  
-          if (!(obj is Cat))  
-          {  
-              throw new ArgumentException("Compared Object is not of Cat");  
-          }  
-          Cat cat = obj as Cat;  
-          return Name.CompareTo(cat.Name);  
-      }  
+      public int CompareTo(object obj)
+      {
+          if (!(obj is Cat))
+          {
+              throw new ArgumentException("Compared Object is not of Cat");
+          }
+          Cat cat = obj as Cat;
+          return Name.CompareTo(cat.Name);
+      }
   }
 
   public class Program
   {
     public static void Main(string[] args)
     {
-      Cat[] cats = new Cat[]  
-      {  
+      Cat[] cats = new Cat[]
+      {
           new Cat()  {Name = "Mizekatze"},
           new Cat()  {Name = "Beethoven"},
           new Cat()  {Name = "Alex"},
-      };  
-      Array.Sort(cats);  
+      };
+      Array.Sort(cats);
       Array.ForEach(cats, x => Console.WriteLine(x.Name));
     }
   }

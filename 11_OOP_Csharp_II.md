@@ -46,7 +46,7 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 > Vererbung bildet neben Kapselung und Polymorphie die zentrale Säule des
 > objektorientierten Programmierens. Die Vererbung ermöglicht die Erstellung
-> neuer Klassen, die ein in exisitierenden Klassen definiertes Verhalten
+> neuer Klassen, die ein in existierenden Klassen definiertes Verhalten
 > wieder verwenden, erweitern und ändern. [MS.NET Programmierhandbuch]
 
 **Beispiele**
@@ -203,7 +203,7 @@ style="width: 100%; max-width: 720px; display: block; margin-left: auto; margin-
 bei geerbten Elementen uneingeschränkt zugegriffen werden kann, bleiben diese bei der
 bloßenn Anwendung geschützt.
 
-Die Konzepte von `internal` setzen diese Überlegung fort und kontrollieren den Zugriff über Assemblygrenzen.
+Die Konzepte von `internal` setzen diese Überlegung fort und kontrollieren den Zugriff über Assembly-Grenzen.
 
 ### Member der Klasse
 
@@ -442,7 +442,7 @@ Die Ausgabe des oben aufgeführten Beispiels illustriert diese Aufrufhierachie. 
                                    {{2-3}}
 ******************************************************************************
 
-In diesem Fall ist Zug die Basisklasse und `PersonenZug`, `GueterZug` und `ICE` sind
+In diesem Fall ist `Zug` die Basisklasse und `PersonenZug`, `GueterZug` und `ICE` sind
 abgeleitete Klassen.
 
 Eine Variablen vom Basisdatentyp kann immer eine Instanz einer abgeleiteten
@@ -467,7 +467,7 @@ einem bestimmten dynamischen Typ  oder einem daraus abgeleiteten Typ ist.
 
 
 + der dynamische Typ einer Klasse kann zur Laufzeit geprüft werden
-+ Typtest liefert bei null-Werten immer false
++ Typtest liefert bei null-Werten immer `false`
 
 ```csharp    Typprüfung
 using System;
@@ -719,7 +719,7 @@ class YourDerivedGraphicsClass : GraphicsClass
 }
 ```
 
-Nun eintwickelt der Hersteller eine neue Version von GraphicsClass und
+Nun entwickelt der Hersteller eine neue Version von GraphicsClass und
 integriert eine eigene Realisierung von `DrawRectangle`. Sobald Sie Ihre
 Anwendung neu gegen die Bibliothek kompilieren, erhalten Sie vom Compiler eine
 Warnung. Diese Warnung informiert Sie darüber, dass Sie das gewünschte Verhalten
@@ -789,13 +789,13 @@ namespace Rextester
 
 ## Casts über Klassen
 
-Konvertierungen zwischen nterschiedlichen Datentypen lassen sich auch
+Konvertierungen zwischen unterschiedlichen Datentypen lassen sich auch
 auf Klassen anwenden, allerdings sind hier einige Besonderheiten zu beachten.
 
 + implizit auf die Basisklasse  (upcast)
 + explizit auf die abgeleitete Klasse (downcast)
 
-gekastet werden. Zunächst ein Beispiel für einen *upcast* anhand unseres
+gecastet werden. Zunächst ein Beispiel für einen *upcast* anhand unseres
 Fußballbeispiels. Zugriffe auf Member, die  in der Basisklasse nicht enthalten
 sind führen logischerweise zum Fehler.
 

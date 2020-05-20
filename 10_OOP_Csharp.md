@@ -95,9 +95,9 @@ Einige der Eigenschaften:
 
 **Welche Methoden sollten über dem Objekt "Spieler" erlaubt sein und wie verändert dies deren Zustand**
 
-+ "FängtDenBall()" -> Wirkt sich auf den Zustand von Ball aus, die Position des Balles ist identisch mit der des Spielers ... und es gibt nur einen Ball!
-+ "WirftDenBall()"
-+ "Foul(Spieler gefoulterSpieler)" -> Wirkt sich auf die Fitness von gefoulterSpieler aus
++ `FängtDenBall()` -> Wirkt sich auf den Zustand von Ball aus, die Position des Balles ist identisch mit der des Spielers ... und es gibt nur einen Ball!
++ `WirftDenBall()`
++ `Foul(Spieler gefoulterSpieler)` -> Wirkt sich auf die Fitness von `gefoulterSpieler` aus
 
 
 
@@ -147,7 +147,7 @@ sowie weitere programmiersprachenspezifische Realisierungen (`internal`, `protec
 **Beispiel Fußballsimulation**
 
 1. Die Position x,y eines jeden Spielers und des Balls sollte nur über entsprechende Zugriffsmethoden manipuliert werden.
-2. Die konkrete Implementierung der "Foul" oder "SchießtDenBall"-Methode bleibt geheim :-)
+2. Die konkrete Implementierung der `Foul` oder `SchießtDenBall`-Methode bleibt geheim :-)
 
 <!--
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
@@ -1063,12 +1063,12 @@ den Operatoren eine spezifische Bedeutung für die Klassen gegeben.
 
 | Opererator                           | Bedeutug                                                                |
 | ------------------------------------ | ----------------------------------------------------------------------- |
-| +, -, !, ~, ++, --, true, false      | unäre Operatoren, überladbar                                            |
-| +, -, \*, /, %, &, ^, <<, >>          | binäre Operatoren, überladbar                                           |
-| ==, !=, <, >, <=, >=                 | Vergleichsoperatoren, überladbar                                        |
-| []                                   | nicht überladbar, aber selbe Funktion mit Indexern                      |
-| ()                                   | nicht überladbar, aber mittels custom conversion gleiche Funktionalität |
-| +=, -=, \*=, /=, %=, &=, ^=, <<=, >>= | Werden durch die zugehörigen Operatoren automatisch überladen           |
+| `+`, `-`, `!`, `~`, `++`, `--`, `true`, `false`      | unäre Operatoren, überladbar                                            |
+| `+`, `-`, `\*`, `/`, `%`, `&`, `^`, `<<`, `>>`          | binäre Operatoren, überladbar                                           |
+| `==`, `!=`, `<`, `>`, `<=`, `>=`                   | Vergleichsoperatoren, überladbar                                        |
+| `[]`                                   | nicht überladbar, aber selbe Funktion mit Indexern                      |
+| `()`                                   | nicht überladbar, aber mittels custom conversion gleiche Funktionalität |
+| `+=`, `-=`, `\*=`, `/=`, `%=`, `&=`, `^=`, `<<=`, `>>=` | Werden durch die zugehörigen Operatoren automatisch überladen           |
 
 
 ******************************************************************************
