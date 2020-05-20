@@ -182,7 +182,7 @@ Schnittstellen werden verwendet:
 
                             {{1-2}}
 *******************************************************************************
-**Anwendung**
+**Vererbung**
 
 ```csharp    UpCastExample
 using System;
@@ -219,7 +219,7 @@ namespace Rextester
     public static void Main(string[] args)
     {
       IBaseInterface t1 = new A();    // Statischer Typ IBaseInterface, dynamischer class A
-      IBaseInterface t2 = new B();    // Statischer Typ IBaseInterface, dynamischer class A
+      IBaseInterface t2 = new B();    // Statischer Typ IBaseInterface, dynamischer class B
       t1.M();
       t2.M();
       Console.WriteLine(t2 is IDerivedInterface);
@@ -233,9 +233,41 @@ namespace Rextester
 
 Es besteht keine Vererbungshierachie zwischen den beiden Klassen `A` und `B`! Vielmehr ergibt sich ein neuer Zusammenhang, die gemeinsame Implementierung eines Musters an Membern.
 
-*******************************************************************************
+```
+@startuml
+left to right direction
+class IBaseInterface <<Interface>>  {
+    M()
+}
+class IDerivedInterface <<Interface>>{
+    N()
+}
 
-                              {{2-3}}
+class A {
+    M()
+}
+
+class B {
+    M()
+    N()
+}
+
+
+
+IDerivedInterface <|.. B : Implementiert
+IBaseInterface <|.. A
+IBaseInterface <|-- IDerivedInterface : Erbt
+
+hide circle
+
+@enduml
+```
+@plantUML.eval
+
+Die Visualisierung von Klassen und deren Abhängigkeiten mit plantUML ist eine
+Möglichkeit einen raschen Überblick über bestimmte Zusammehänge zu gewinnen.
+In den folgenden Materialien wird dies intensiv genutzt.
+
 *******************************************************************************
 
 ### Interfaces vs. Abstrakte Klassen
@@ -251,71 +283,119 @@ Es besteht keine Vererbungshierachie zwischen den beiden Klassen `A` und `B`! Vi
 
 > Merke: Interfaces geben keine Struktur vor, sondern nur ein Verhalten!
 
-### Anwendung
+### Bedeutung von Interfaces
 
-Klassen können nunmehr erben und gleichzeitig Interfaces implementieren:
+Die C# Bibliothek implementiert eine Vielzahl von Interfaces, die insbesondere
+für die Handhabung von Datenstrukturen in jedem Fall genutzt werden sollten.
 
-```csharp
-interface INewInterface { }
-interface IAnotherInterface { }
+Informieren Sie sich unter [Link](https://docs.microsoft.com/de-de/dotnet/api/system.collections.ilist?view=netcore-3.1) über die wichtigsten davon wie:
 
-class Base { }
-class Derived : Base, INewInterface { }
-class Another : Base, INewInterface, IAnotherInterface { }
-```
++ IEnumerable, IEnuerator
++ IList
++ IComparable
++ ICollection
++ ...
 
-Insbesondere ist es möglich verschiedenen Klassen ein gleiches Verhalten zu geben,
-sie fungieren dabei als Platzhalter. Wenn eine Anwendung nicht gegen Einkaufsliste.Add()
-oder Studenten.Remove() entwickelt wird, sondern gegen IList.Remove() und IList.Add()
-wird die Verbindung entkoppelt.
 
-```csharp
-interface IList {              // interface für Geräusche
-public Add();
-public Remove();
+```csharp    UpCastExample
+using System;
+using System.Reflection;
+using System.ComponentModel.Design;
+
+namespace Rextester
+{
+  public class Cat: IComparable  
+  {  
+      public string Name {get; set;}  
+
+      public int CompareTo(object obj)  
+      {  
+          if (!(obj is Cat))  
+          {  
+              throw new ArgumentException("Compared Object is not of Cat");  
+          }  
+          Cat cat = obj as Cat;  
+          return Name.CompareTo(cat.Name);  
+      }  
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args)
+    {
+      Cat[] cats = new Cat[]  
+      {  
+          new Cat()  {Name = "Mizekatze"},
+          new Cat()  {Name = "Beethoven"},
+          new Cat()  {Name = "Alex"},
+      };  
+      Array.Sort(cats);  
+      Array.ForEach(cats, x => Console.WriteLine(x.Name));
+    }
+  }
 }
-
-class Einkaufsliste : IList { }
-class Studenten : IList { }
-class Material : IList { }
 ```
-
-Ein Interface beschreibt Teile des Verhaltens einer Klasse und fungiert dabei
-wie ein Platzhalter.
-
-### Erweiterung von Interfaces
-
-TODO Beispiel
-
-```
-@startuml
-
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-  Object[] elementData
-  size()
-}
-
-annotation SuppressWarnings
-
-@enduml
-```
-@plantUML.eval
-
+@Rextester.eval(@CSharp)
 
 ### Auflösung von Namenskonflikten
 
-TODO Beispiel
+```csharp    UpCastExample
+using System;
 
-*******************************************************************************
+namespace Rextester
+{
+  interface IInterfaceA{
+    void M();
+  }
+
+  interface IInterfaceB{
+    void M();
+  }
+
+  public class SampleClass : IInterfaceA, IInterfaceB
+  {
+      // Hier ist die zuordnung nicht eindeutig
+      public void M()
+      {
+          Console.WriteLine("Gib irgendwas aus!");
+      }
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args)
+    {
+      SampleClass sample = new SampleClass();
+      sample.M();
+      IInterfaceA A = sample;
+      IInterfaceB B = sample;
+      A.M();
+      B.M();
+    }
+  }
+}
+```
+@Rextester.eval(@CSharp)
+
+Wenn zwei Schnittstellenmember nicht dieselbe Funktion durchführen sollen
+muss diese separat implementiert werden. Hierzu wird ein Klassenmember erstellt,
+der sich explizit auf das Interface bezieht und den Namen der Schnittstelle
+benennt.
+
+```csharp
+public class SampleClass : IInterfaceA, IInterfaceB
+{
+    // Hier ist die zuordnung nicht eindeutig
+    void IInterfaceA.M()
+    {
+        Console.WriteLine("IInterfaceA - Gib irgendwas aus!");
+    }
+
+    void IInterfaceB.M()
+    {
+        Console.WriteLine("IInterfaceB - Gib irgendwas aus!");
+    }
+}
+```
+
+Allerdings kann diese Funktion dann nur über die Schnittstelle und nicht über die Klasse aufgerufen werden.
