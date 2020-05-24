@@ -159,7 +159,7 @@ class ObservableList<T> : List<T>
 
 Beispiel: Grafische Darstellung von verschiedenen Primitiven
 
-![Liskov](http://www.plantuml.com/plantuml/png/SoWkIImgAStDuN8lIapBB4xEI2rspKdDJSqhKR2fqTLL24fDpYX9JSx69U-QavDPK9oAIpeajQA42we68k9Tb9fPp8L5lPL2LMfcSaPUgeOcbqDgNWhGKG00)<!-- width="60%" -->
+![Liskov](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuN8lIapBB4xEI2rspKdDJSqhKR2fqTLL24fDpYX9JSx69U-QavDPK9oAIpeajQA42we68k9Tb9fPp8L5lPL2LMfcSaPUgeOcbqDgNWhGKG00)<!-- width="60%" -->
 
 Beispiel: Vögel / Flugunfähgige Vögel
 
@@ -622,11 +622,12 @@ Ein UML-Modell ergibt sich aus der Menge aller seiner Diagramme. Entsprechend
 werden verschiedene Diagrammtypen genutzt um unterschiedliche Perspektiven auf
 ein realweltliches Problem zu entwickeln.
 
-![Modelle](http://www.plantuml.com/plantuml/png/JSj1oi9030NW_PmYpFA7ARG7-Ed2fLrwW3WJsq3IWIIzlwAYhXxlVRpP0oqEbIHq2uWEnkiMqDYe1lSzRTm8bFHAvgzIsQfGIbNG7V9bEPUbDnB9W0xFTVh54-DggFhbyNsU88yPIlb_v33yvO_EjBT3vGu0)<!-- width="40%" --> [ModelvsDiagramm.plantUML]
+![Modelle](https://www.plantuml.com/plantuml/png/JSj1oi9030NW_PmYpFA7ARG7-Ed2fLrwW3WJsq3IWIIzlwAYhXxlVRpP0oqEbIHq2uWEnkiMqDYe1lSzRTm8bFHAvgzIsQfGIbNG7V9bEPUbDnB9W0xFTVh54-DggFhbyNsU88yPIlb_v33yvO_EjBT3vGu0)<!-- width="40%" --> [ModelvsDiagramm.plantUML]
 
 ## Anhang
 
 **Referenzen**
+
 
 [Martin] Robert Cecil Martin "Clean Code: Refactoring, Patterns, Testen und Techniken für sauberen Code" mitp-Verlag, 2009, ISBN 978-0-13-235088-4.
 
