@@ -454,7 +454,7 @@ Welche Fragen sollten Sie dem Kunden stellen, bevor Sie sich daran machen und mu
 ****************************************************************************
                                         {{1}}
 ****************************************************************************
-![OOPGeschichte](/img/13_UML/cartoon-projekte.png)<!-- width="80%" --> [^1] Possel
+![OOPGeschichte](./img/13_UML/cartoon-projekte.png)<!-- width="80%" --> [^1] Possel
 
 
 [^1]Heiko Possel, https://www.programmwechsel.de/lustig/management/schaukel-baum.html
@@ -524,7 +524,7 @@ Was ist UML nicht:
 
 UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die ISO (ISO/IEC 19505 für Version 2.4.1) genormt.
 
-![OOPGeschichte](/img/13_UML/OO-historie.png)<!-- width="70%" --> [^2] WikiUMLHistory
+![OOPGeschichte](./img/13_UML/OO-historie.png)<!-- width="70%" --> [^2] WikiUMLHistory
 
 [^2] https://commons.wikimedia.org/w/index.php?curid=7892951, Autor GuidoZockoll, Mitarbeiter der oose.de Dienstleistungen für Innovative Informatik GmbH -
 derivative work: File:OO-historie.svg : AxelScheithauer, oose.de Dienstleistungen für Innovative Informatik GmbH -
@@ -591,7 +591,7 @@ WB is Waiting
 
 ### Diagramm-Typen
 
-![OOPGeschichte](/img/13_UML/UML-Diagrammhierarchie.png)<!-- width="90%" --> [^5] WikiUMLDiagrammTypes
+![OOPGeschichte](./img/13_UML/UML-Diagrammhierarchie.png)<!-- width="90%" --> [^5] WikiUMLDiagrammTypes
 
 [^5] https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/UML-Diagrammhierarchie.svg/1200px-UML-Diagrammhierarchie.svg.png, Autor "Stkl"- derivative work: File: UML-Diagrammhierarchie.png: Sae1962, CC BY-SA 4.0
 
