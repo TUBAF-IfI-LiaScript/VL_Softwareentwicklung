@@ -402,7 +402,12 @@ dass Sie ein „Eigenleben führen“. Unmittelbar wenn eine Instanz einer aktiv
 
 **Objekte vs. Klassen**
 
-![OOPGeschichte](/img/14_UML_II/ObjectVsClass.png)<!-- width="90%" --> [VisualParadigm](#7)
+| Klassendiagramm                                                                                                                                                                                                                                                                                                                                   | Beispielhaftes Objektdiagramm                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| <img src="http://www.plantuml.com/plantuml/png/TP2zJYmn38NxF8KrrRsWaQ1558kWsGQAUG9lOXQBn1av3WK_xywI2IWKbFcEp-V8ksAeLbDqvPbbHSK4Fc8fDsRAXsgqzraMVYMuS2s0srei9r9uSm0p22Q2ArXCMOwDnEpHECj8pw6GX0SDfF_-jxUI9twXR_JXkhw1xWveN-uxDDfsrNGWFP6z61r9cyXdUMHDNUjZBZJwxhCcZDtQHWAN5Sq__Vf8x_JIifBdFrfjRakkt-TvN33YKU5-RZPTJd0AfxC9jcH74cgAdm00" width="228"> | <img src="http://www.plantuml.com/plantuml/png/TSwnJiCm4CRntKznojvWEss7gaIL8h4HaF84RdmK8pj6b_DKyMPil1WnY10ARDRdltwwmyY6E0KlF3umS0HofqS6wmXxTd4G8XwVfYSK-rGtQUGOa7PmZuoqlqfr0MQ4vYm64n2kFtUuVNlr7adus9kCJ1ytXEw8T18lFyGsKZ3-Zcn6LQNqUaPRTHRMS5OBfKkvARNKiX132XCqhHzvzlu7rzKIrD-Wbd-1ERyui7l6tisWtcotizSj3wnAMLrwkSvS0wjL3Qs27SJieFsQzA-fMrO776mA_Xq0" width="300">  |
+
+
+Darstellung motiviert nach _What is Object Diagram?_, https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-object-diagram/, Autor unbekannt
 
 **Attribute**
 
@@ -520,7 +525,7 @@ Dabei ist die Parameterliste durch folgende Elemente definiert:
 
     + *Übergaberichtung* ... Spezifiziert die Form des Zugriffes (`in` = nur lesender Zugriff, `out` = nur schreibend (reiner Rückgabewert), `inout` = lesender und schreibender Zugriff)
 
-    + *Vorgabewert* ... default-Wert einer Übergabevariablen
+  + *Vorgabewert* ... default-Wert einer Übergabevariablen
 
 + *Rückgabetyp* ... Datentyp oder Klasse, der nach der Operationsausführung zurückgegeben wird.
 
@@ -611,5 +616,3 @@ derivative work: Chris828 (talk) - File:Objektorientieren methoden historie.png 
 [WikiUMLDiagrammTypes] https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/UML-Diagrammhierarchie.svg/1200px-UML-Diagrammhierarchie.svg.png, Autor "Stkl"- derivative work: File: UML-Diagrammhierarchie.png: Sae1962, CC BY-SA 4.0
 
 [WikiDoxygen] https://commons.wikimedia.org/w/index.php?curid=24966914, Doxygen-Beispielwebseite, Autor Der Messer - Eigenes Werk, CC BY-SA 3.0
-
-[VisualParadigm] What is Object Diagram?, https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-object-diagram/, Autor unbekannt
