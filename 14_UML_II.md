@@ -349,7 +349,7 @@ Elemente der Darstellung :
 Wenn die Klasse keine Eigenschaften oder Operationen besitzt, kann die unterste
 horizontale Linie entfallen.
 
-![OOPGeschichte](/img/14_UML_II/ClassTypes.png)<!-- width="70%" --> [WikiUMLHistory](#7)
+![OOPGeschichte](./img/14_UML_II/ClassTypes.png)<!-- width="70%" --> [WikiUMLHistory](#7)
 
 **Sichtbarkeitsattribute**
 
