@@ -43,7 +43,7 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ## UML Diagrammtypen
 
-![OOPGeschichte](/img/13_UML/UML-Diagrammhierarchie.png)<!-- width="90%" --> [^5] WikiUMLDiagrammTypes
+![OOPGeschichte](./img/13_UML/UML-Diagrammhierarchie.png)<!-- width="90%" --> [^5] WikiUMLDiagrammTypes
 
 ### Use-Case Diagramm
 
@@ -212,7 +212,7 @@ style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-r
 
 **Beispiel**
 
-![Aktivitätsdiagramme](/img/14_UML_II/ActivityDiagram.png)<!-- width="70%" --> [WikiActivityDiagram]
+![Aktivitätsdiagramme](./img/14_UML_II/ActivityDiagram.png)<!-- width="70%" --> [WikiActivityDiagram]
 
 Beispiels auf Anwendungsfall [Link](https://www.youtube.com/watch?v=VaKCZOhVJkQ)
 
@@ -243,7 +243,7 @@ Die schmalen Rechtecke, die auf den Lebenslinien liegen, sind Aktivierungsbalken
 
 **Beispiel**
 
-![Aktivitätsdiagramme](/img/14_UML_II/SequenzCheckEmail.png)<!-- width="60%" --> [WikiSequenceDiagram](#7)
+![Aktivitätsdiagramme](./img/14_UML_II/SequenzCheckEmail.png)<!-- width="60%" --> [WikiSequenceDiagram](#7)
 
 **Bestandteile**
 
