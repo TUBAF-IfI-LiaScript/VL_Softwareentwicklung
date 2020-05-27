@@ -40,6 +40,35 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 **7. Jetzt sind Sie dran ...**
 
+## Neues aus der GitHub-Woche
+
+Welche Commit-Strategie ist eigentlich hilfreich? schauen wir uns zunächst Ihre
+Aktivitäten aus einer statistischen Sicht an. Das folgende Diagramm zeigt die
+maximal ergänzte Zeilenzahl pro Entwickler.
+
+![alt-text](./img/13_UML/UebersichtCommits.png)<!-- width="100%" -->
+
+Und was steckt hinter den Aktivitäten von Nutzer '17'?
+
+```
+message          Hab mal versucht die Projekte zu erstellen
+additions                                               805
+deletions                                                14
+total                                                   819
+timestamp                               2020-05-12 15:00:03
+involvedfiles                                             7
+sha                4f8975466036799afbddfc4721f84c773aa178e6
+parents          [f376ebe3f93ba945d0d549db519fc05f1c8b7246]
+task                                                      1
+initialCommit                                         False
+patentsCount                                              1
+authorKey                                                17
+teamKey                                                  13
+Name: 318, dtype: object
+```
+
+Ein genauer Blick in die Repositories zeigt, das in dieser spezifischen Situation
+die Visual Studio Projektdateien für das Aufgabenblatt 1 angelegt wurde.
 
 ## Prinzipien des (objektorientierten) Softwareentwurfs
 
@@ -51,19 +80,24 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 Robert C. Martin [Link](https://de.wikipedia.org/wiki/Robert_Cecil_Martin)
 fasste eine wichtige Gruppe von Prinzipien zur Erzeugung wartbarer und
-erweiterbarer Software unter dem Begriff "SOLID" zusammen [Martin](#10). Robert
+erweiterbarer Software unter dem Begriff "SOLID" zusammen [^UncleBob]. Robert
 C. Martin erklärte diese Prinzipien zu den wichtigsten Entwurfsprinzipien. Die
 SOLID-Prinzipien bestehen aus:
 
-* Single Responsibility Prinzip
-* Open-Closed Prinzip
-* Liskovsches Substitutionsprinzip
-* Interface Segregation Prinzip
-* Dependency Inversion Prinzip
+* **S** ingle Responsibility Prinzip
+* **O** pen-Closed Prinzip
+* **L** iskovsches Substitutionsprinzip
+* **I** nterface Segregation Prinzip
+* **D** ependency Inversion Prinzip
 
-Die folgende Darstellung basiert auf den Referenzen [Just](#10) [](#10). Eine
-sehr gute, an einem Beispiel vorangetrieben Erläuterung ist unter [Krämer](#10)
+Die folgende Darstellung basiert auf den Referenzen [Just]. Eine
+sehr gute, an einem Beispiel vorangetrieben Erläuterung ist unter [Krämer] zu finden.
 
+[Krämer] Andre Krämer, "SOLID - Die 5 Prinzipien für objektorientiertes Softwaredesign", [Link](https://www.informatik-aktuell.de/entwicklung/methoden/solid-die-5-prinzipien-fuer-objektorientiertes-softwaredesign.html)
+
+[Just] Markus Just, IT Designers Gruppe, "Entwurfsprinzipien", Foliensatz Fachhochschule Esslingen [Link](http://www.it-designers-gruppe.de/fileadmin/Inhalte/Studentenportal/Die_SOLID-Prinzipien__Folien___1_.pdf)
+
+[^UncleBob]: Robert C. Martin, Webseite "The principles of OOD", http://www.butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod
 
 ### Prinzip einer einzigen Verantwortung (Single-Responsibility-Prinzip SRP)
 
@@ -71,41 +105,42 @@ In der objektorientierten Programmierung sagt das SRP aus, dass jede Klasse nur
 eine fest definierte Aufgabe zu erfüllen hat. In einer Klasse sollten lediglich
 Funktionen vorhanden sein, die direkt zur Erfüllung dieser Aufgabe beitragen.
 
-> “There should never be more than one reason for a class to change. [Robert C. Martin]
+> “There should never be more than one reason for a class to change. [^UncleBob]
 
 +  Verantwortlichkeit = Grund für eine Änderung (multiple Veränderungen == multiple Verantwortlichkeiten)
 
 ```csharp
-class Employee
+public class Employee
 {
-  public Money calculatePay()
-  public void save()
-  public String reportHours()
+  public Money calculatePay() ...
+  public void save() ...
+  public String reportHours() ...
 }
 ```
 
 * Mehrere Verantwortlichkeiten innerhalb eines Software-Moduls führen zu zerbrechlichem Design, da Wechselwirkungen bei den Verantwortlichkeit nicht ausgeschlossen werden können
 
 
-```java                       SpaceStation
-class SpaceStation{}
-  public initialize()
-  public void run_sensors()
-  public void load_supplies(type, quantity)
-  public void use_supplies(type, quantity)
-  public void report_supplies ()
-  public void load_fuel(quantity)
-  public void report_fuel()
-  public void activate_thrusters()
+```csharp                       SpaceStation
+public class SpaceStation{
+  public initialize() ...
+  public void run_sensors() ...
+  public void show_sensors() ...
+  public void load_supplies(type, quantity) ...
+  public void use_supplies(type, quantity) ...
+  public void report_supplies () ...
+  public void load_fuel(quantity) ...
+  public void report_fuel() ...
+  public void activate_thrusters() ...
 }
 ```
 
 Eine mögliche Realisierung zum Beispiel findet sich unter https://medium.com/@severinperez/writing-flexible-code-with-the-single-responsibility-principle-b71c4f3f883f
 
-> **Merke:** Vermeiden Sie "God"-Objekte
+> **Merke:** Vermeiden Sie "God"-Objekte, die alles wissen.
 
 
-**Verallgemeinerung [WikiSRP]**
+**Verallgemeinerung**
 
 Eine Verallgemeinerung des SRP stellt Curly’s Law [CodingHorror](https://blog.codinghorror.com/curlys-law-do-one-thing/) dar, welches das Konzept
 "methods should do one thing" bis "single source of truth" zusammenfasst und
@@ -120,14 +155,14 @@ var numbers = new [] { 5,8,4,3,1 };
 var orderedNumbers = numbers.OrderBy(i => i);
 ```
 
-Da die Variable `numbers` zuerst die unsortierten Zahlen repräsentiert und nachher
+Da die Variable `numbers` zuerst die unsortierten Zahlen repräsentiert und später
 die sortierten Zahlen, wird Curly’s Law verletzt. Dies lässt sich auflösen,
 indem eine zusätzliche Variable eingeführt wird.
 
 ### Open-Closed Prinzip
 
 Bertrand Meyer beschreibt das Open-Closed-Prinzip durch:
-*Module sollten sowohl offen (für Erweiterungen) als auch verschlossen (für Modifikationen) sein.* [[Meyer](#11)]
+*Module sollten sowohl offen (für Erweiterungen) als auch verschlossen (für Modifikationen) sein.* [^Meyer]
 
 Eine Erweiterung im Sinne des Open-Closed-Prinzips ist beispielsweise die
 Vererbung. Diese verändert das vorhandene Verhalten der Einheit nicht, erweitert
@@ -135,21 +170,44 @@ aber die Einheit um zusätzliche Funktionen oder Daten. Überschriebene Methoden
 verändern auch nicht das Verhalten der Basisklasse, sondern nur das der
 abgeleiteten Klasse.
 
-Beispiel: Etablierung einer `ObservableList` auf der Basis der generischen .NET
-`List` Klasse:
+Gegenbeispiel: Ausgangspunkt ist eine Klasse `Employee`, die für unterschiedliche
+Angestelltentypen um verschiedenen Algorithmen zur Bonusberechnung versehen werden soll.
+Intuitiv ist der Ansatz ein weiteres Feld einzufügen, dass den Typ des Angestellten
+erfasst und dazu eine entsprechende Verzweigung zu realisieren ... ein schöner Verstoß gegen das OCP, der sich über eine Vererbungshierachie deutlich wartungsfreundlicher realisieren lässt!
 
-```csharp
-class List<T>{
-  public bool Contains (T item);
-  public void Sort (Comparison<T> comparison);
-}
+```csharp                                      Iniitalisation
+using System;
 
-class ObservableList<T> : List<T>
+namespace Rextester
 {
-  public event Action CollectionChanged;
+  public class Employee
+  {
+    public string Name {set; get;}
+    public int ID {set; get;}
+
+    public Employee(int id, string name){
+       this.ID = id; this.Name = name;
+    }
+
+    public decimal CalculateBonus(decimal salary){
+      return salary * 0.1M;
+    }
+  }
+
+  public class Program
+  {
+    public static void Main(string[] args){
+       Employee Bernhard = new Employee(1, "Bernhard");
+       Console.WriteLine($"Bonus = {Bernhard.CalculateBonus(11234)}");
+    }
+  }
 }
 ```
+@Rextester.eval(@CSharp)
 
+Achtung: Die Einbettung der `CalculateBonus()` Methode in die jeweiligen `Employee` Klassen ist selbst fragwürdig! Dadurch wird eine Funktion an verschiedenen Stellen realisiert, so dass pro Klasse unterschiedliche "Zwecke" umgesetzt werden. Damit liegt ein Verstoß gegen die Idee des SRP vor.
+
+[^Meyer]: Bertrand Meyer, "Object Oriented Software Construction" Prentice Hall, 1988,
 
 ###  Liskovsche Substitutionsprinzip (LSP)
 
@@ -161,8 +219,7 @@ Beispiel: Grafische Darstellung von verschiedenen Primitiven
 
 ![Liskov](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuN8lIapBB4xEI2rspKdDJSqhKR2fqTLL24fDpYX9JSx69U-QavDPK9oAIpeajQA42we68k9Tb9fPp8L5lPL2LMfcSaPUgeOcbqDgNWhGKG00)<!-- width="60%" -->
 
-Beispiel: Vögel / Flugunfähgige Vögel
-
+Entsprechend sollte eine Methode, die `GrafischesElement` verarbeitet, auch auf  `Ellipse` und `Kreis` anwendbar sein. Problematisch ist dabei allerdings deren unterschiedliches Verhalten. `Kreis` weist zwei gleich lange Halbachsen. Die zugehörigen Membervariablen sind nicht unabhängig von einander.
 
 ### Interface Segregation Prinzip
 
@@ -173,26 +230,6 @@ Methoden haben müssen. Nach erfolgreicher Anwendung dieses Entwurfprinzips wür
 ein Modul, das eine Schnittstelle benutzt, nur die Methoden implementieren
 müssen, die es auch wirklich braucht.
 
-                                     {{1-2}}
-*******************************************************************************
-
-Was sind eigentlich Interfaces oder Schnittstellen?
-
-Eine Schnittstelle enthält Definitionen für eine Gruppe von zugehörigen
-Funktionalitäten, die von einer Klasse oder einer Struktur implementiert werden
-können.
-
-Eine Schnittstelle gibt an, welche Methoden vorhanden sind oder vorhanden sein
-müssen. Zusätzlich zu dieser syntaktischen Definition sollte ein so genannter
-Kontrakt über die Bedeutung (Semantik) definiert werden.
-
-https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/interfaces/
-
-
-*******************************************************************************
-
-                                      {{2-3}}
-*******************************************************************************
 
 ```csharp
 public interface IVehicle
@@ -290,13 +327,12 @@ public class MultiFunctionalCar : IMultiFunctionalVehicle
 
 -> Das Prinzip der Schnittstellentrennung verbessert die Lesbarkeit und Wartbarkeit unseres Codes.
 
-*******************************************************************************
 
 ### Dependency Inversion Prinzip
 
 > "High-level modules should not depend on low-level modules. Both should
 > depend on abstractions. Abstractions should not depend upon details. Details
-> should depend upon abstractions" [Martin]
+> should depend upon abstractions" [UncleBob]
 
 Lösungsansatz für die Realisierung ist eine veränderte Sicht auf die
 klassischerweise hierachische Struktur von Klassen.
@@ -454,10 +490,10 @@ Welche Fragen sollten Sie dem Kunden stellen, bevor Sie sich daran machen und mu
 ****************************************************************************
                                         {{1}}
 ****************************************************************************
-![OOPGeschichte](./img/13_UML/cartoon-projekte.png)<!-- width="80%" --> [^1] Possel
+![OOPGeschichte](./img/13_UML/cartoon-projekte.png)<!-- width="80%" --> [^Possel]
 
 
-[^1]Heiko Possel, https://www.programmwechsel.de/lustig/management/schaukel-baum.html
+[^Possel]: Heiko Possel, https://www.programmwechsel.de/lustig/management/schaukel-baum.html
 
 Wie verzahnen wir den Entwicklungsprozess? Wie können wir sicherstellen,
 dass am Ende die erwartete Anwendung realisiert wird?
@@ -487,7 +523,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
          v
 ````````````
 
-> Das V-Modell ist ein Vorgehensmodell, das ähnlich dem Wasserfallmodell, den Softwareentwicklungsprozess in Phasen  organisiert. Zusätzlich zu den Entwicklungsphasen definiert das V-Modell auch das Evaluationsphasen, in welchen den einzelnen Entwicklungsphasen Testphasen gegenüber gestellt werden.
+> Das V-Modell ist ein Vorgehensmodell, das den Softwareentwicklungsprozess in Phasen organisiert. Zusätzlich zu den Entwicklungsphasen definiert das V-Modell auch das Evaluationsphasen, in welchen den einzelnen Entwicklungsphasen Testphasen gegenüber gestellt werden.
 
 vgl. zum Beispiel [Link](https://www.johner-institut.de/blog/iec-62304-medizinische-software/v-modell/)
 
@@ -500,15 +536,15 @@ vgl. zum Beispiel [Link](https://entwickler.de/online/agile/agile-methoden-einfu
 
 ## Unified Modeling Language
 
-> Die Unified Modeling Language, kurz UML, dient zur Modellierung, Dokumentation , Spezifikation und Visualisierung komplexer Softwaresysteme unabhängig von deren Fach- und Realsierungsgebiet. Sie liefert die Notationselemente gleichermaßen fpr statische und dynamische Modelle zur Analyse, Design und Architektur und unterstützt insbesondere objektorientierte Vorgehensweisen. [Jeckle]
+> Die Unified Modeling Language, kurz UML, dient zur Modellierung, Dokumentation, Spezifikation und Visualisierung komplexer Softwaresysteme unabhängig von deren Fach- und Realsierungsgebiet. Sie liefert die Notationselemente gleichermaßen für statische und dynamische Modelle zur Analyse, Design und Architektur und unterstützt insbesondere objektorientierte Vorgehensweisen. [^Jeckle]
 
 UML ist heute die dominierende Sprache für die Softwaresystem-Modellierung. Der erste Kontakt zu UML besteht häufig darin, dass Diagramme in UML im Rahmen von Softwareprojekten zu erstellen, zu verstehen oder zu beurteilen sind:
 
-+ Projektauftraggeber und Fachvertreter prüfen und bestätigen zum Beispiel Anforderungen an ein System, die Wirtschaftsanalytiker bzw. Business Analysten in Anwendungsfalldiagrammen in UML festgehalten haben;
-+ Softwareentwickler realisieren Arbeitsabläufe, die Wirtschaftsanalytiker bzw. Business Analysten in Zusammenarbeit mit Fachvertretern in Aktivitätsdiagrammen beschrieben haben;
++ Projektauftraggeber prüfen und bestätigen die Anforderungen an ein System, die Business Analysten in Anwendungsfalldiagrammen in UML festgehalten haben;
++ Softwareentwickler realisieren Arbeitsabläufe, die Wirtschaftsanalytiker in Aktivitätsdiagrammen beschrieben haben;
 + Systemingenieure implementieren, installieren und betreiben Softwaresysteme basierend auf einem Implementationsplan, der als Verteilungsdiagramm vorliegt.
 
-UML dabei Bezeichner für die meisten bei einer Modellierung wichtigen Begriffe und legt mögliche Beziehungen zwischen diesen Begriffen fest. UML definiert weiter grafische Notationen für diese Begriffe und für Modelle statischer Strukturen und dynamischer Abläufe, die man mit diesen Begriffen formulieren kann.
+UML ist dabei Bezeichner für die meisten bei einer Modellierung wichtigen Begriffe und legt mögliche Beziehungen zwischen diesen Begriffen fest. UML definiert weiter grafische Notationen für diese Begriffe und für Modelle statischer Strukturen und dynamischer Abläufe, die man mit diesen Begriffen formulieren kann.
 
 > **Merke:**  Die grafische Notation ist jedoch nur ein Aspekt, der durch UML geregelt wird. UML legt in erster Linie fest, mit welchen Begriffen und welchen Beziehungen zwischen diesen Begriffen sogenannte Modelle spezifiziert werden.
 
@@ -518,17 +554,17 @@ Was ist UML nicht:
 + keine Programmiersprache
 + keine rein formale Sprache
 + kein vollständiger Ersatz für textuelle Beschreibungen
-+ keine Methode oder Vorgehensmodell [Jeckle]
++ keine Methode oder Vorgehensmodell
+
+[^Jeckle]:  Mario Jeckle, Christine Rupp, Jürgen Hahn, Barbara Zengler, Stefan Queins, UML 2 glasklar, Hanser Verlag, 2004
 
 ### Geschichte
 
 UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die ISO (ISO/IEC 19505 für Version 2.4.1) genormt.
 
-![OOPGeschichte](./img/13_UML/OO-historie.png)<!-- width="70%" --> [^2] WikiUMLHistory
+![OOPGeschichte](./img/13_UML/OO-historie.png)<!-- width="70%" --> [^WikiUMLHist]
 
-[^2] https://commons.wikimedia.org/w/index.php?curid=7892951, Autor GuidoZockoll, Mitarbeiter der oose.de Dienstleistungen für Innovative Informatik GmbH -
-derivative work: File:OO-historie.svg : AxelScheithauer, oose.de Dienstleistungen für Innovative Informatik GmbH -
-derivative work: Chris828 (talk) - File:Objektorientieren methoden historie.png and File:OO-historie.svg, CC BY-SA 3.0
+[^WikiUMLHist]: https://commons.wikimedia.org/w/index.php?curid=7892951, Autor GuidoZockoll, Mitarbeiter der oose.de Dienstleistungen für Innovative Informatik GmbH - derivative work: File:OO-historie.svg : AxelScheithauer, oose.de Dienstleistungen für Innovative Informatik GmbH - derivative work: Chris828 (talk) - File:Objektorientieren methoden historie.png and File:OO-historie.svg, CC BY-SA 3.0
 
 ### UML Werkzeuge
 
@@ -546,9 +582,9 @@ derivative work: Chris828 (talk) - File:Objektorientieren methoden historie.png 
 
     *Herausforderungen:* Abstraktionskonzept der Modelle führt zu verallgemeinernden Darstellungen, die ggf. Konzepte des Codes nicht reflektieren.
 
-![OOPGeschichte](./img/13_UML/Doxygen.png)<!-- width="80%" --> [^2] WikiDoxygen
+![OOPGeschichte](./img/13_UML/Doxygen.png)<!-- width="80%" --> [^WikiDoxygen]
 
-[^3]  https://commons.wikimedia.org/w/index.php?curid=24966914, Doxygen-Beispielwebseite, Autor Der Messer - Eigenes Werk, CC BY-SA 3.0
+[^WikiDoxygen]:  https://commons.wikimedia.org/w/index.php?curid=24966914, Doxygen-Beispielwebseite, Autor Der Messer - Eigenes Werk, CC BY-SA 3.0
 
 
 **Darstellung von UML im Rahmen dieser Vorlesung**
@@ -591,9 +627,12 @@ WB is Waiting
 
 ### Diagramm-Typen
 
-![OOPGeschichte](./img/13_UML/UML-Diagrammhierarchie.png)<!-- width="90%" --> [^5] WikiUMLDiagrammTypes
+![OOPGeschichte](./img/13_UML/UML-Diagrammhierarchie.png)<!-- width="90%" --> [^WikiUMLDiagrammTypes]
 
-[^5] https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/UML-Diagrammhierarchie.svg/1200px-UML-Diagrammhierarchie.svg.png, Autor "Stkl"- derivative work: File: UML-Diagrammhierarchie.png: Sae1962, CC BY-SA 4.0
+[^WikiUMLDiagrammTypes]: https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/UML-Diagrammhierarchie.svg/1200px-UML-Diagrammhierarchie.svg.png, Autor "Stkl"- derivative work: File: UML-Diagrammhierarchie.png: Sae1962, CC BY-SA 4.0
+
+
+**Strukturdiagramme**
 
 | Diagrammtyp                  | Zentrale Frage                                                                                                           |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
@@ -603,6 +642,8 @@ WB is Waiting
 | Kompositionsstrukturdiagramm | Welche Elemente sind Bestandteile einer Klasse, Komponente, eines Subsystems?                                            |
 | Komponentendiagramm          | Wie lassen sich die Klassen zu wiederverwendbaren Komponenten zusammenfassen und wie werden deren Beziehungen definiert? |
 | Verteilungsdiagramm          | Wie sieht das Einsatzumfeld des Systems aus?                                                                             |
+
+**Verhaltensdiagramme**
 
 | Diagrammtyp                    | Zentrale Frage                                                                                |
 | ------------------------------ | --------------------------------------------------------------------------------------------- |
@@ -614,7 +655,7 @@ WB is Waiting
 | Timing-Diagramm                | Wie hängen die Zustände verschiedener Akteure zeitlich voneinander ab?                        |
 | Interaktionsübersichtsdiagramm | Wann läuft welche Interaktion ab?                                                             |
 
-[Jeckle]
+[^Jeckle]
 
 **Begrifflichkeiten**
 
@@ -623,28 +664,3 @@ werden verschiedene Diagrammtypen genutzt um unterschiedliche Perspektiven auf
 ein realweltliches Problem zu entwickeln.
 
 ![Modelle](https://www.plantuml.com/plantuml/png/JSj1oi9030NW_PmYpFA7ARG7-Ed2fLrwW3WJsq3IWIIzlwAYhXxlVRpP0oqEbIHq2uWEnkiMqDYe1lSzRTm8bFHAvgzIsQfGIbNG7V9bEPUbDnB9W0xFTVh54-DggFhbyNsU88yPIlb_v33yvO_EjBT3vGu0)<!-- width="40%" --> [ModelvsDiagramm.plantUML]
-
-## Anhang
-
-**Referenzen**
-
-
-[Martin] Robert Cecil Martin "Clean Code: Refactoring, Patterns, Testen und Techniken für sauberen Code" mitp-Verlag, 2009, ISBN 978-0-13-235088-4.
-
-[Jeckle]  Mario Jeckle, Christine Rupp, Jürgen Hahn, Barbara Zengler, Stefan Queins, UML 2 glasklar, Hanser Verlag, 2004
-
-[StackOverFlow] http://oi43.tinypic.com/2s7dr8y.jpg, StackOverFlow Forum, Autor unbekannt
-
-[WikiInheri]  Wikipedia, "Vererbung", Autor "cactus26", [Link](https://de.wikipedia.org/wiki/Vererbung_&28Programmierung&29\#Kovarianz_und_Kontravarianz)
-
-[Ghosh] Debasish Ghosh "Functional and Reactive Domain Modeling". Manning, 2016,
-
-[Just] Markus Just, IT Designers Gruppe, "Entwurfsprinzipien", Foliensatz Fachhochschule Esslingen [Link](http://www.it-designers-gruppe.de/fileadmin/Inhalte/Studentenportal/Die_SOLID-Prinzipien__Folien___1_.pdf)
-
-[UncleBob] Robert C. Martin, Webseite "The principles of OOD", http://www.butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod
-
-[WikiSRP] Wikipedia, "Single-Responsibility-Prinzip", [Link](https://de.wikipedia.org/wiki/Single-Responsibility-Prinzip)
-
-[Meyer] Bertrand Meyer, "Object Oriented Software Construction" Prentice Hall, 1988,
-
-[Krämer] Andre Krämer, "SOLID - Die 5 Prinzipien für objektorientiertes Softwaredesign", [Link](https://www.informatik-aktuell.de/entwicklung/methoden/solid-die-5-prinzipien-fuer-objektorientiertes-softwaredesign.html)

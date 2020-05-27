@@ -43,9 +43,24 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ## UML Diagrammtypen
 
-![OOPGeschichte](./img/13_UML/UML-Diagrammhierarchie.png)<!-- width="90%" --> [^5] WikiUMLDiagrammTypes
+![OOPGeschichte](./img/13_UML/UML-Diagrammhierarchie.png)<!-- width="90%" --> [^WikiUMLDiagrammTypes]
 
-### Use-Case Diagramm
+[^WikiUMLDiagrammTypes]: https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/UML-Diagrammhierarchie.svg/1200px-UML-Diagrammhierarchie.svg.png, Autor "Stkl"- derivative work: File: UML-Diagrammhierarchie.png: Sae1962, CC BY-SA 4.0
+
+Im folgenden werden wir uns aus den beiden Hauptkategorien jeweils folgende Diagrammtypen genauer anschauen:
+
++ Verhaltensdiagramme
+
+  + Anwendungsfall Diagramm
+  + Aktivitätsdiagramm
+  + Sequenzdiagramm
+
++ Strukturdiagramm
+
+  + Klassendiagramm
+  + Objektdiagramm
+
+### Anwendungsfall Diagramm
 
 > Das Anwendungsfalldiagramm (Use-Case Diagramm) abstrahiert das erwartete
 > Verhalten eines Systems und wird dafür eingesetzt, die Anforderungen an ein
@@ -62,18 +77,14 @@ Elemente:
 
 + Systemgrenzen werden durch Rechtecke gekennzeichnet.
 + Akteure werden als „Strichmännchen“ dargestellt, dies können sowohl Personen (Kunden, Administratoren) als auch technische Systeme sein (manchmal auch ein Bandsymbol verwendet). Sie ordnen den Symbolen Rollen zu
-+ Anwendungsfälle werden in Ellipsen dargestellt. Sie müssen beschrieben werden (z. B. in einem Kommentar oder einer eigenen Datei).
-+ Beziehungen zwischen Akteuren und Anwendungsfällen müssen durch Linien gekennzeichnet werden.
++ Anwendungsfälle werden in Ellipsen dargestellt. Üblich ist die Kombination aus Verb und ein Substantiv `Kundendaten Ändern`.
++ Beziehungen zwischen Akteuren und Anwendungsfällen müssen durch Linien gekennzeichnet werden. Man unterscheidet "Association", "Include", "Extend" und "Generalization".
 
 ![Modelle](https://www.plantuml.com/plantuml/png/RL11Rkf03DtFAInMi63n-HUWeAverGLIkpQ9IKPndCZZgGHLRzDZTCV5EY4f6gIk_6I_Pp-_TJ1KYoqxfgE1TQ2-gWrAhrIOxyI5nakFYYtqM3HOqTvEJ32CKIecXuLr2hievI_Urrt_Z9AuEdMU1ko3kPiCNeIzK4XK-700ymSrtn33WO8HCya2C40CjCL0_nmaoYQDK4eeenPrY4LzJrev66t0SlbdRtv5KgAHmEKhOPL5JiYkpTzGIP9LEdG6_P6f6gubKlxTP8gOerHmZYsyaeR1utkd1rBoDgbk2NowB8JP1gK9fs3Kml7ohV2uNUvGasWsFBQ_JbPkghd5VCaO9MpeZ3MFspBvVpVLExbRavInvHy0)<!-- width="70%" --> [UseCase.plantUML]
 
 **Verfeinerung**
 
-Use-Case Diagrammer erlaube die Abstraktion von Elementen auf der Basis von Generalisierungen. So können Akteure von einander erben und redundante Beschreibungen von Verhalten über `<<extend>>` oder `<<include>>` (unter bestimmten Bedingungen) erweitert werden.
-
-![PartyUCD](https://www.plantuml.com/plantuml/png/bPB1IWCn48RlUOfXJtfeeJtAiXH4Un2AXzQJbsnst8J6ISaa82rz6v_1Ks_xOgQnk2jLgBT_P-QR-VatCmxIX_XgXLJ1UPXB3WFPOet-zFtehDcY4SAZ2f9QYw0qghMB0NOYCYh92AlR2KY6Gen60jy24Xj7i7660ZyJBAJIh7IiOUaDhP76XHYmqylOE-OlykWHHXLSBILjaQxxmee2UYrj65QJkO6UzjFpxfq3WZOa8zVOMZGP5DyXvB7UWVCD-hnvsBz7avICBxRxuCoVGXjsQnyt0Mf4QlB86GNZyT-Mu0RAqf2oiS6g4hyl_Sy6GIuD5MNvv7oDZQ4sKbjLa0BVFNG7RLbfBsaDBMviTqZxVTWN81aM4t6UI3fzR2mcIUJ0ZzVopspIiGk0wGzWBsP9fFVv2G00)<!-- width="70%" --> [UseCase.plantUML]
-
-Beispiel motiviert aus dem Beispiel von Jeckle Seite 240 (Mario Jeckle, Christine Rupp, Jürgen Hahn, Barbara Zengler, Stefan Queins, UML 2 glasklar, Hanser Verlag, 2004)
+Use-Case Diagramme erlaube die Abstraktion von Elementen auf der Basis von Generalisierungen. So können Akteure von einander erben und redundante Beschreibungen von Verhalten über `<<extend>>` oder `<<include>>` (unter bestimmten Bedingungen) erweitert werden.
 
 |                | <img src="https://raw.githubusercontent.com/liaScript/CsharpCourse/master/img/10_UML/UseCaseInclude.png" height="42">                             | <img src="https://raw.githubusercontent.com/liaScript/CsharpCourse/master/img/10_UML/UseCaseExtend.png" height="42">         |
 | -------------- | ------------------------------------------------ | ------------------------------------------------ |
@@ -82,6 +93,13 @@ Beispiel motiviert aus dem Beispiel von Jeckle Seite 240 (Mario Jeckle, Christin
 | Anwendung      | Hierachische Zerlegung                           | Abbildung von Sonderfällen                       |
 | Abhängigkeiten | A muss B bei der Modellierung berücksichtigen    | Unabhängige Modellierung möglich                 |
 
+
+
+![PartyUCD](https://www.plantuml.com/plantuml/png/bLAnQiCm4Dtr5OUdPaWW6OinWT9cA8GEIQSkidorXTLJa4vG4l8t-OPEsVnZbPrGkqqBwVQiU-_TtJlFFKl7uSq8gTWwM4ZF0rXYZkxy_MIDtg8Mmg5YIQL1K1MgsWQ6dGWUbVG8wxifI0-9M22xva0rM5UW8p4U2tnd9AyjmSPgOlz2i9IgygeAEQoSfXffaeY1r-paTUyzqhL6aNooQHU0SGOtAqbRf57_i2P6Lqd3mzSu-G3FUlQYENX6g3J9u7ECY-jEABuIwcZz1AT1Hp_g3wWZak7LD1--qvyJ7LPp5pOCEI8L7UL21PF9toF1BQIf9cL2WLacVZVzZuCW6qb9cZvRbsEXgGnKPXd4m7UFpR4oSM4dgOOIDwOvHd_7-wGzsd8gBXE9hTl2SXf15tZRhJjc4PjT8PXz4-p5F8Buytu2)<!-- width="90%" --> [UseCase.plantUML]
+
+Beispiel motiviert aus dem Beispiel von [^Jeckle] Seite 240
+
+[^Jeckle]: Mario Jeckle, Christine Rupp, Jürgen Hahn, Barbara Zengler, Stefan Queins, UML 2 glasklar, Hanser Verlag, 2004
 
 **Anwendungsfälle**
 
@@ -226,7 +244,7 @@ Beispiels auf Anwendungsfall [Link](https://www.youtube.com/watch?v=VaKCZOhVJkQ)
 
 > Sequenzdiagramme beschreiben den Austausch von Nachrichten zwischen Objekten mittels Lebenslinien.
 
-Ein Sequenzdiagramms besteht aus einem Kopf- und einem Inhaltsbereich. Das Schlüsselwort im Kopfbereich ist bei einem Sequenzdiagramm `sd`. Von jedem Kommunikationspartner geht eine Lebenslinie (gestrichelt) aus. Es sind zwei synchrone Operationsaufrufe, erkennbar an den Pfeilen mit ausgefüllter Pfeilspitze, dargestellt. Notationsvarianten für synchrone und asynchrone Nachrichten
+Ein Sequenzdiagramms besteht aus einem Kopf- und einem Inhaltsbereich. Von jedem Kommunikationspartner geht eine Lebenslinie (gestrichelt) aus. Es sind zwei synchrone Operationsaufrufe, erkennbar an den Pfeilen mit ausgefüllter Pfeilspitze, dargestellt. Notationsvarianten für synchrone und asynchrone Nachrichten
 
 Eine Nachricht wird in einem Sequenzdiagramm durch einen Pfeil dargestellt, wobei der Name der Nachricht über den Pfeil geschrieben wird. Nachrichten können:
 
@@ -349,7 +367,9 @@ Elemente der Darstellung :
 Wenn die Klasse keine Eigenschaften oder Operationen besitzt, kann die unterste
 horizontale Linie entfallen.
 
-![OOPGeschichte](./img/14_UML_II/ClassTypes.png)<!-- width="70%" --> [WikiUMLHistory](#7)
+![OOPGeschichte](./img/14_UML_II/ClassTypes.png)<!-- width="70%" --> [^WikiUMLClass]
+
+[^WikiUMLClass]: https://de.wikipedia.org/wiki/Klassendiagramm#/media/Datei:UmlCd_Klasse-3.svg, Autor Gubaer, CC BY-SA 3.0
 
 **Sichtbarkeitsattribute**
 
@@ -404,7 +424,7 @@ dass Sie ein „Eigenleben führen“. Unmittelbar wenn eine Instanz einer aktiv
 
 | Klassendiagramm                                                                                                                                                                                                                                                                                                                                   | Beispielhaftes Objektdiagramm                                                                          |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| <img src="https://www.plantuml.com/plantuml/png/TP2zJYmn38NxF8KrrRsWaQ1558kWsGQAUG9lOXQBn1av3WK_xywI2IWKbFcEp-V8ksAeLbDqvPbbHSK4Fc8fDsRAXsgqzraMVYMuS2s0srei9r9uSm0p22Q2ArXCMOwDnEpHECj8pw6GX0SDfF_-jxUI9twXR_JXkhw1xWveN-uxDDfsrNGWFP6z61r9cyXdUMHDNUjZBZJwxhCcZDtQHWAN5Sq__Vf8x_JIifBdFrfjRakkt-TvN33YKU5-RZPTJd0AfxC9jcH74cgAdm00" width="228"> | <img src="https://www.plantuml.com/plantuml/png/TSwnJiCm4CRntKznojvWEss7gaIL8h4HaF84RdmK8pj6b_DKyMPil1WnY10ARDRdltwwmyY6E0KlF3umS0HofqS6wmXxTd4G8XwVfYSK-rGtQUGOa7PmZuoqlqfr0MQ4vYm64n2kFtUuVNlr7adus9kCJ1ytXEw8T18lFyGsKZ3-Zcn6LQNqUaPRTHRMS5OBfKkvARNKiX132XCqhHzvzlu7rzKIrD-Wbd-1ERyui7l6tisWtcotizSj3wnAMLrwkSvS0wjL3Qs27SJieFsQzA-fMrO776mA_Xq0" width="300">  |
+| <img src="https://www.plantuml.com/plantuml/png/TP2_JWCn3CRtF8Lr4r1LWXKn5C7I1OPxWjGnhKNYd1o7WJ_lJhXhInYOelm-Vpz7sHJpQZL5vyeho-JL9y3eIxatKzvLeorc6VcTuDeTE10WAqPoRfw2Xrei9rBuS01h49y8Rc5iNTdF96Rqnbbwke924fura5vSpdSb97wZ4_ewwHiukuEt7_TZEvPTDUr86zcAqPvq5c6M5zPqr6BCXNhVKzRauwzr1O7Bv0qFVn-oT8wbSIBaVrjjRadkFjVhVa6FUuKx_zbmCq0BXwi1bcH34cgAtm00" width="228"> | <img src="https://www.plantuml.com/plantuml/png/TSwnJiCm4CRntKznojvWEss7gaIL8h4HaF84RdmK8pj6b_DKyMPil1WnY10ARDRdltwwmyY6E0KlF3umS0HofqS6wmXxTd4G8XwVfYSK-rGtQUGOa7PmZuoqlqfr0MQ4vYm64n2kFtUuVNlr7adus9kCJ1ytXEw8T18lFyGsKZ3-Zcn6LQNqUaPRTHRMS5OBfKkvARNKiX132XCqhHzvzlu7rzKIrD-Wbd-1ERyui7l6tisWtcotizSj3wnAMLrwkSvS0wjL3Qs27SJieFsQzA-fMrO776mA_Xq0" width="300">  |
 
 
 Darstellung motiviert nach _What is Object Diagram?_, https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-object-diagram/, Autor unbekannt
@@ -602,17 +622,12 @@ Die Möglichkeiten der Verknüpfung zwischen Klassen und Interfaces lassen sich 
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Generalisierung                       | <img src="https://www.plantuml.com/plantuml/png/LOv12W8n40Jlyuh-m7vW3x9NRu8l2CcO7KmcC9diHVsxgoZehMcgw5ww1_DH2wsI654i5gR25uStcEJLaSGukZIbM4BlEB7rfZS2D5IUSNOJpGHipVwQnrSmsO9VXoP-MNWd7RMopJYgSsRROVhXC4ttmsU95jQqNtm2" width="228"> | gerichtete Beziehung zwischen einer generelleren und einer spezielleren Klasse (Vererbung) |
 | Assoziationen (ohne Anpassung)        | <img src="https://www.plantuml.com/plantuml/png/NOun3i9030Hxls8_a0-aIa57oGkEEvDOScp9vz2W_9q0ee1oLpEhdNgMo6rLMgGngaHL9kLR8XqXyv9e4bnJt8YgbjvnTaj_461bvH6N3B7vYBreyn4dtwxAj7_fpHg_QDmz_WnOgSjFjnEzvp4C7vCcjdOSV080"width="228">          | beschreiben die Verknüpfung allgemein                                                      |
-| Assoziationen (navigierbar)  | <img src="https://www.plantuml.com/plantuml/png/1S713SGW30J0lwjm0xHmuZf82n5iWYM39RFqdvcwUIVFT1dMeSsoESJnK1cQzWvgjqIZnHAva3kMblBJ_s58nUfd-WS0" width="128">                 | beschreiben die Verknüpfung allgemein                                                                                           |
 | Assoziation (Komposition/Aggregation) | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Komposition_Aggregation.svg/1920px-Komposition_Aggregation.svg.png"width="228">  | Bildet Beziehungen von einem Ganzen und seinen Teilen ab                                   |
 
-## Anhang
+## Aufgabe der Woche
 
-**Referenzen**
+Evaluieren Sie das Add-On "Class Designer" für die Visual Studio Umgebung oder ein vergleichbares Tool für Ihren Editor.
 
-[WikiUMLHistory] https://commons.wikimedia.org/w/index.php?curid=7892951, Autor GuidoZockoll, Mitarbeiter der oose.de Dienstleistungen für Innovative Informatik GmbH -
-derivative work: File:OO-historie.svg : AxelScheithauer, oose.de Dienstleistungen für Innovative Informatik GmbH -
-derivative work: Chris828 (talk) - File:Objektorientieren methoden historie.png and File:OO-historie.svg, CC BY-SA 3.0
+![ClassDesigner](./img/14_UML_II/ClassDesigner.png)
 
-[WikiUMLDiagrammTypes] https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/UML-Diagrammhierarchie.svg/1200px-UML-Diagrammhierarchie.svg.png, Autor "Stkl"- derivative work: File: UML-Diagrammhierarchie.png: Sae1962, CC BY-SA 4.0
-
-[WikiDoxygen] https://commons.wikimedia.org/w/index.php?curid=24966914, Doxygen-Beispielwebseite, Autor Der Messer - Eigenes Werk, CC BY-SA 3.0
+https://docs.microsoft.com/de-de/visualstudio/ide/class-designer/how-to-add-class-diagrams-to-projects?view=vs-2019
