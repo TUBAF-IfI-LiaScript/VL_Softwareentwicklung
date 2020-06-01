@@ -16,10 +16,10 @@
 |       | 13. Mai   | Klassenelemente in C#  / Vererbung                | X                |
 | 7     | 19. Mai   | Klassenelemente in C#  / Vererbung                |                  |
 |       | 20. Mai   | Interfaces                                        | X                |
-| 8     | 26. Mai   |                                                   |                  |
-|       | 27. Mai   |                                                   |                  |
-| 9     | 2. Juni   |                                                   |                  |
-|       | 3. Juni   |                                                   |                  |
+| 8     | 26. Mai   | UML Konzepte                                      |                  |
+|       | 27. Mai   | ausgewählten UML Diagrammtypen                    | X                |
+| 9     | 2. Juni   | UML Anwendungsbeispiel                            |                  |
+|       | 3. Juni   | Testen                                            | X                |
 | 10    | 9. Juni   |                                                   |                  |
 |       | 10. Juni  |                                                   |                  |
 | 11    | 16. Juni  |                                                   |                  |
