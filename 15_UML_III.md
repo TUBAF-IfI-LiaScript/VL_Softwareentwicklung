@@ -49,8 +49,6 @@ http://www.highscore.de/uml/titelseite.html
 
 von Boris Schäling beschrieben wird (CC BY-NC-ND 3.0 DE)[^UMLTutorial].
 
-[^UMLTutorial]: Boris Schäling, "Der moderne Softwareentwicklungsprozess mit UML, Kapitel 3: Das Aktivitätsdiagramm" http://www.highscore.de/uml/titelseite.html
-
 Hier sind auch weitergehende Informationen und Designdiskussionen zu finden.  Die entsprechenden
 Texte sind jeweils in kursiver Schrift gehalten, Ergänzungen für die Einbettung
 in dieser Vorlesung entsprechend hervorgehoben. Ein zusätzliches Durcharbeiten der Originalunterlagen wird empfohlen.
@@ -91,7 +89,7 @@ Nach welchen Aspekten lassen die Anforderungen des Kunden strukturieren:
 
 **Basisabläufe**
 
-![UseCaseOnlineShopII](http://www.plantuml.com/plantuml/png/TOmnJWCn44Lxd-ANKEGE8QAZeA2Zcsp-sjREZbVsM0WGj-4OTBaO2oiXWKWtUk_DtpUNwdtMe1mTNb1pJ8vJhXmy5mjjohP8bHcB39D4FlYp4bzQB2g335ugxhgT6C8FnhrfDhPK5hm6005RWzqELpVLyqI5zFPqVazAk_xjhGsfvj71R977l_vHadQBRQQdih9_Hsx5QHZF7nK7lcmV5_OER4xz3kJOkE8r26zXlvvzray0)<!-- width="40%" --> [UseCaseOnlineShop.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/12_UML/Graphs/UseCaseOnlineShopI.plantUML)
+![UseCaseOnlineShopII](https://www.plantuml.com/plantuml/png/TOmnJWCn44Lxd-ANKEGE8QAZeA2Zcsp-sjREZbVsM0WGj-4OTBaO2oiXWKWtUk_DtpUNwdtMe1mTNb1pJ8vJhXmy5mjjohP8bHcB39D4FlYp4bzQB2g335ugxhgT6C8FnhrfDhPK5hm6005RWzqELpVLyqI5zFPqVazAk_xjhGsfvj71R977l_vHadQBRQQdih9_Hsx5QHZF7nK7lcmV5_OER4xz3kJOkE8r26zXlvvzray0)<!-- width="40%" --> [UseCaseOnlineShop.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/12_UML/Graphs/UseCaseOnlineShopI.plantUML)
 
 Welche Elemente unserer Anforderungsliste werden in Bezug auf Anwendungsfälle
 mit dieser  Darstellung nicht abgedeckt?
@@ -101,13 +99,13 @@ mit dieser  Darstellung nicht abgedeckt?
 + systeminterne Prüfung der Anschriften
 + Abbildung von Alternativen und unterschiedlichen Konsequenzen bei der Wahl  der Zahlungsmethode
 
-![UseCaseOnlineShopII](http://www.plantuml.com/plantuml/png/RL19hjf05Do_KvJ-Yh_04baYos801Ia3aKWsA9l6VjWjjv-j7fG4n6ro37PSBBQ9m1bsJzKrLFNCUMLzg0mPFdhu6bRdXKUcBQTUrqAkrD8egoeqAYrLpZl_mp2wPoMvOLAfhotU1ScOw05ZAqOBkw9kS2PWDBTUbsoWWljs-raObbSeX-1ugHnFUegujB2wxS5QSZxyINa3GdUdxOtzVFF-oyUtkm_hpvljQjtHNlQgC45oLx4lwepnEoOYO3mcOFtTitIRyAdMubqBBPIKhEKKyXSY_ECQHn56A-LPSBnTBHPykcTWq72AEEREEaiIV9LbBPdkKgOuF-sHSr_7NmZFGL6K35StzdOzzfPnh2Kr8UCa8O1m_zvsnaCxn4OBTfvDNqmT7BUmlFv7D1bWVsybeWlDMccep2y0)<!-- width="90%" --> [UseCaseOnlineShopII.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/12_UML/Graphs/UseCaseOnlineShopII.plantUML)
+![UseCaseOnlineShopII](https://www.plantuml.com/plantuml/png/RP11Jnin48NlyokUSaeEh0IzHQi80b6Hsa8bsWlgnUnETgquuyWUgos8VzEVmIr_h7RIXWNbPhzvCthVEuzgWgQr8yTBXNe4s_MArWPkr7gXkBAoCS6iiJ7DodHyfxyTeuoDT8x9DEe3FYLfcUWWurQS5Owzt-29WF55KBjY1vFYp-sVth5CO29Iv4iJ-NHdaTZqmUOSRANZXxUMCnJFbL4MBBSl0ND-DBrBqk6e_mEXF9lynFt5zUVlDn_llYo-NTzUBOfhTBzVZclMthUCVwag0avE25ZyKfPI0RvwAne9c1jPiPN7r8s8y1gigcR3z9kmVLcMCDEwjjAurF9iHW1XNrE-VzWTQkCvHsMtGp8FaRCiaoDBfqFj7HeHYLV6wD9BQqlyAPvUSwFZ7QS-LpzaZnWFYDCXOEdevep6x-vFK5TL7c2AkkQotsQs_C_g-7_p4w9dEi-Zj7P_0G00)<!-- width="90%" --> [UseCaseOnlineShopII.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/12_UML/Graphs/UseCaseOnlineShopII.plantUML)
 
 Was fehlt noch?
 
 **Anwendungsfälle des Distributors**
 
-![UseCaseOnlineShopIII](http://www.plantuml.com/plantuml/png/TOz1IyD048Nl-olUiHvIi4SffTRMYmU5uCNRDfcaGpUpONQMek8_y-OVCubG2-9juBtlySqwcLVBNN3foD9xzHrwNnrzIwMz1e9IPLxQG2vGOx08vVPWg7bCE8hpbKN5bfCfx_DmEtU6y2Y1XOho47kyEs2s8SdsHYg-8q6M6ay-fLDK0x6qj2UvWazuBdTtj-NkUcGUXXf9CRKtb8n2gBsHe8ud2T4F8IwXnG31uT89HN6U_3TPm3cSQvZFLvYzv5QvQTAUbAg3SPkbHQzVdyqeUeFbagKAkQRLwfTT_B3RIP8xA4ye2UwZTjumhh5Dd_oTSHzkJLBdBdm3)<!-- width="90%" --> [UseCaseOnlineShopIII.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/12_UML/Graphs/UseCaseOnlineShopIII.plantUML)
+![UseCaseOnlineShopIII](https://www.plantuml.com/plantuml/png/TOz1IyD048Nl-olUiHvIi4SffTRMYmU5uCNRDfcaGpUpONQMek8_y-OVCubG2-9juBtlySqwcLVBNN3foD9xzHrwNnrzIwMz1e9IPLxQG2vGOx08vVPWg7bCE8hpbKN5bfCfx_DmEtU6y2Y1XOho47kyEs2s8SdsHYg-8q6M6ay-fLDK0x6qj2UvWazuBdTtj-NkUcGUXXf9CRKtb8n2gBsHe8ud2T4F8IwXnG31uT89HN6U_3TPm3cSQvZFLvYzv5QvQTAUbAg3SPkbHQzVdyqeUeFbagKAkQRLwfTT_B3RIP8xA4ye2UwZTjumhh5Dd_oTSHzkJLBdBdm3)<!-- width="90%" --> [UseCaseOnlineShopIII.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/12_UML/Graphs/UseCaseOnlineShopIII.plantUML)
 
 Welche Zusammenhänge konnten wir bisher nicht abbilden?
 
@@ -119,7 +117,7 @@ darstellen:
 
 | Variante I | Variante II |
 | ---------- | ----------- |
-|    ![UseCaseOnlineShopIII](http://www.plantuml.com/plantuml/png/PSzD2i8m40NWVKuHkimHTDFk54G5mVtOFfj2CfN9547nB6wyIIzcK3V1vNppmxmwAObECHX1gyHzWAsSQpYrNeQpMWpSumIsQ-Ugk_cCcuLjMD31qfIkyyi7y3BZSHIc2FujVN5BhV_NWmhDJnIsojTuYX5Iy7vC6Z3eZNme6ZlHejuGTyL7ISUBUPWQtEM4Rm00)<!-- width="100%" -->            | ![UseCaseOnlineShopIII](http://www.plantuml.com/plantuml/png/SoWkIImgAStDuIfAJIv9p4lFILLGqj9op2jEpYZAJ2jHICtCIqzDIirJyFJKqbAgvWAhvqhBByfMuB9ISCmhIar9LKWiBIu_l2GZ9pNFcai1B9UOdfYP1r8Hbb-KbvYRcWSp25E5Ns9o1W4bmIL5YOVdf-9MeAUdPysLcfS24GOwCh-0gvRB0IW2z1e0)<!-- width="100%" -->           |
+|    ![UseCaseOnlineShopIII](https://www.plantuml.com/plantuml/png/PSzD2i8m40NWVKuHkimHTDFk54G5mVtOFfj2CfN9547nB6wyIIzcK3V1vNppmxmwAObECHX1gyHzWAsSQpYrNeQpMWpSumIsQ-Ugk_cCcuLjMD31qfIkyyi7y3BZSHIc2FujVN5BhV_NWmhDJnIsojTuYX5Iy7vC6Z3eZNme6ZlHejuGTyL7ISUBUPWQtEM4Rm00)<!-- width="100%" -->            | ![UseCaseOnlineShopIII](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuIfAJIv9p4lFILLGqj9op2jEpYZAJ2jHICtCIqzDIirJyFJKqbAgvWAhvqhBByfMuB9ISCmhIar9LKWiBIu_l2GZ9pNFcai1B9UOdfYP1r8Hbb-KbvYRcWSp25E5Ns9o1W4bmIL5YOVdf-9MeAUdPysLcfS24GOwCh-0gvRB0IW2z1e0)<!-- width="100%" -->           |
 
 UML 2 für eine stärkere Differenzierung in die Aktivitätsdiagramme ein. Was sind
 die Hauptmerkmale?
@@ -127,9 +125,7 @@ die Hauptmerkmale?
 Leider Unterstützt *plantUML* die Features diese Feature noch nicht, so dass hier
 auf eine Grafik des Originaltutorials zurückgegriffen wird:
 
-![ActivityDiagram](./img/12_UMLIII/aktivitaet_zugriffsberechtigungueberpruefen.gif)<!-- width="70%" --> [UMLTutorial](#7)
-
-![ActivityDiagram](image-url)
+![ActivityDiagram](./img/15_UML_III/aktivitaet_zugriffsberechtigungueberpruefen.gif)<!-- width="70%" --> [^UMLTutorial].
 
 ### Klassendiagramme
 
@@ -144,7 +140,7 @@ Assoziationen und Eigenschaften sind äquivalent in der Darstellung, entsprechen
 
 | Variante I | Variante II |
 | ---------- | ----------- |
-|    ![ClassDiagramm](http://www.plantuml.com/plantuml/png/DOsnQYin44Nx-OfX-pNljIg27TAu2G53UgtsMXuiZS9er2JapzBbnnAMR3Vd39Tpx1xDHotKxw9lqMBbL6Bl9tUJPJZEgUb5ti7_gE3gx8rDyirv5KDoQKetMS59B1KGRMi-QSRIV2TpkQDy4FEyWuvQOO7FwiYmxVKSAm9Vt4Jp9buCqWC_jR4KREOLTlt-oakqm8-j5KIbJwA_7a__9vxd1_uzmk4mxJ4wGjTHomy0)<!-- width="100%" -->            | ![ClassDiagramm](http://www.plantuml.com/plantuml/png/NSknIWD14CRnVfvYk5Aue6qAoObD6X42DcAnT_TbCsHtLcPd6yKti_F5XEDI9Dt7_FwpgnxCMqvKpwAVmKBcAOLQ1tUJiJdsKz63V87lAU7ex8LDuibv5iFaKfHECeCdiIc1QFdcGIF6uj_4tFDWBcUaxMMyFsmsTn_qSudNCz4wkEyVcVVgYB0jTzole2rdM7VT7Tn4uvAzX8mRVIvjJ5ZqrI3rXfzAIGYw-1li-FSRns0TxQ1po-aV)<!-- width="100%" -->           |
+|    ![ClassDiagramm](https://www.plantuml.com/plantuml/png/DOsnQYin44Nx-OfX-pNljIg27TAu2G53UgtsMXuiZS9er2JapzBbnnAMR3Vd39Tpx1xDHotKxw9lqMBbL6Bl9tUJPJZEgUb5ti7_gE3gx8rDyirv5KDoQKetMS59B1KGRMi-QSRIV2TpkQDy4FEyWuvQOO7FwiYmxVKSAm9Vt4Jp9buCqWC_jR4KREOLTlt-oakqm8-j5KIbJwA_7a__9vxd1_uzmk4mxJ4wGjTHomy0)<!-- width="100%" -->            | ![ClassDiagramm](https://www.plantuml.com/plantuml/png/NSknIWD14CRnVfvYk5Aue6qAoObD6X42DcAnT_TbCsHtLcPd6yKti_F5XEDI9Dt7_FwpgnxCMqvKpwAVmKBcAOLQ1tUJiJdsKz63V87lAU7ex8LDuibv5iFaKfHECeCdiIc1QFdcGIF6uj_4tFDWBcUaxMMyFsmsTn_qSudNCz4wkEyVcVVgYB0jTzole2rdM7VT7Tn4uvAzX8mRVIvjJ5ZqrI3rXfzAIGYw-1li-FSRns0TxQ1po-aV)<!-- width="100%" -->           |
 
 **Integration des Warenkorbes**
 
@@ -152,7 +148,7 @@ Der Warenkorb bildet die Menge der bestellten Artikel ab, entsprechend wird hier
 
 Zudem bilden wir in der Klasse Warenkorb unsere Anforderung nach einer Bestellumfang gebundenen Versandkostenhöhe ab. Es wird davon ausgegangen, dass der Kunde hier eine Landes- und Versandart und Zahlungsmethodenunabhängige Lösung wünscht. Daher besitzt die Klasse Warenkorb neben der Assoziation zur Klasse Artikel eine statische Eigenschaft KostenfreiAb (diese ist unterstrichen). Die Membervariable gibt einen Euro-Betrag an, ab dem für die Lieferung der bestellten Ware keine Verpackungs- und Versandkosten in Rechnung gestellt werden.
 
-![](http://www.plantuml.com/plantuml/png/bP3FIiD048Vl-nH3JlunHQz1f2rUYY12GS-JP9eCtSpAxCH3QzxCcozcMHArr8kdtPdzVNmxCu-6QdtdNToolA9Y1vN761TcocLljAg2h7b7SEqyRGmiW7BJ6jIiL1a7SItN11LhvScvHCD26Yg3JPKQRydl7K0-5T9t7Ma1Ap5gIDFJ8tPKmDgKfKcD9oME1To7llIKEi-acy-FfiG3kWp14ueRHisIef7tHiS-sM7hVqHJ-WMLP1kqJB5zD3Ik1dW8qKWsIhmeVvalMnPYESC_Vty5U6mvB-0jS3s2sCV_WeDpRbmYP3SPvFaT72x5R9PD6tJZ2RVlUNuolFkUBx7PHNOQcPFKVUU_0000)<!-- width="100%" -->
+![](https://www.plantuml.com/plantuml/png/bP3FIiD048Vl-nH3JlunHQz1f2rUYY12GS-JP9eCtSpAxCH3QzxCcozcMHArr8kdtPdzVNmxCu-6QdtdNToolA9Y1vN761TcocLljAg2h7b7SEqyRGmiW7BJ6jIiL1a7SItN11LhvScvHCD26Yg3JPKQRydl7K0-5T9t7Ma1Ap5gIDFJ8tPKmDgKfKcD9oME1To7llIKEi-acy-FfiG3kWp14ueRHisIef7tHiS-sM7hVqHJ-WMLP1kqJB5zD3Ik1dW8qKWsIhmeVvalMnPYESC_Vty5U6mvB-0jS3s2sCV_WeDpRbmYP3SPvFaT72x5R9PD6tJZ2RVlUNuolFkUBx7PHNOQcPFKVUU_0000)<!-- width="100%" -->
 
 Die Klasse Bestellung umfasst zwei private Eigenschaften vom Typ Anschrift: Lieferanschrift und Rechnungsanschrift. Dabei gibt es genau eine Rechnungsanschrift, eine Lieferanschrift ist aber nicht zwingend ist. Ist keine Lieferanschrift angegeben, wird der Warenkorb an die Rechnungsanschrift ausgeliefert.
 
@@ -160,21 +156,24 @@ Bestellung fasst jeweils ein Objekt vom Typ Warenkorb und eines vom Typ Anschrif
 
 Die Klasse Anschrift enthält zahlreiche private Eigenschaften vom Typ String. Bis auf die Telefonnummer sind alle Angaben Pflicht. Hinzu kommt ein Member vom Objekttyp Land, das neben der nationalen Zuordnung auch die Höhe der Versand- und Verpackungskosten umfasst.
 
-![](http://www.plantuml.com/plantuml/png/RP6nRi9044Jx-ueLPIGZqhg8C4eJ1P4eHAI8KfpFQtpoiOVsraqGtvAFoOzbiS08Azrvni_ZcPidiIpTBfZKUjfRjZjmmQPKYB0lEy4d5sdjln5c9c0j817ORnk1oZCwyP5Cuoi4vza5DAQduSCoKXkvF1Y0xA0fujqHdcCIf9hH5sKEZx4h5JcUcGMg6K97snvQUgoHBINNiAybX-9o_9nDf_TV0pVeFLOGOuKvhFN_QNjIDf79xcwabNNDMDEJ_VsvaLvOBez3sj9IrGV1QlG1s20dTTk-v53lxEojQxLQ-iTzHrqsqciTl6iqSH5ZG4iQQQwRm5ts0DTTnyum0kGmWUmDjU0fRjXl0kRwJgR4gOYP8rLw-ty0)<!-- width="80%" -->
+![](https://www.plantuml.com/plantuml/png/RP6nRi9044Jx-ueLPIGZqhg8C4eJ1P4eHAI8KfpFQtpoiOVsraqGtvAFoOzbiS08Azrvni_ZcPidiIpTBfZKUjfRjZjmmQPKYB0lEy4d5sdjln5c9c0j817ORnk1oZCwyP5Cuoi4vza5DAQduSCoKXkvF1Y0xA0fujqHdcCIf9hH5sKEZx4h5JcUcGMg6K97snvQUgoHBINNiAybX-9o_9nDf_TV0pVeFLOGOuKvhFN_QNjIDf79xcwabNNDMDEJ_VsvaLvOBez3sj9IrGV1QlG1s20dTTk-v53lxEojQxLQ-iTzHrqsqciTl6iqSH5ZG4iQQQwRm5ts0DTTnyum0kGmWUmDjU0fRjXl0kRwJgR4gOYP8rLw-ty0)<!-- width="80%" -->
 
 **Zahlungsmethoden**
 
 Das Anforderungsset des Kunden beschreibt 3 Zahlungsmethoden für die Abbrechnung der Bestellung: Bankeinzug, Nachnahme, Vorauskasse. Lediglich im Falle des Bankeinzuges müssen weitere Daten erhoben werden. Bitte beachten Sie, das die Basisklasse Zahlungsmethode als abstrakte Klasse definiert wurde, um zu vermeiden, dass davon (sinnlose) Instanzen gebildet werden können.
 
-![](http://www.plantuml.com/plantuml/png/TOxFIWCn4CRlUOe1RyAMUYqYRHMaABqKF2WUPhFJPjXa8fF9fTety-QBwLfgfT1RliptvpSjXcerHLTwbZTKJE0ZbZ8pKswhqS9dMV6MOEmYhGqiW_8c67Iiv8spkC0TWMVraPpxJSESYb6CLJRl3g1vP5gJeXGVbDSsWTdX-J8UZQvUtSvXMqpHstuUdZ4CwPB8GkveQBc0Usg_FeDEu2xNDfBR_SsXzCIohVkvXooMfQP4FzwLASjc-5xCPyl_UhwuFSYXoXsXuRAvWLC6TwBX-gDfO8a-28PqvloK5MlfiPGpXYEwcv9qDSLl)<!-- width="60%" -->
+![](https://www.plantuml.com/plantuml/png/TOxFIWCn4CRlUOe1RyAMUYqYRHMaABqKF2WUPhFJPjXa8fF9fTety-QBwLfgfT1RliptvpSjXcerHLTwbZTKJE0ZbZ8pKswhqS9dMV6MOEmYhGqiW_8c67Iiv8spkC0TWMVraPpxJSESYb6CLJRl3g1vP5gJeXGVbDSsWTdX-J8UZQvUtSvXMqpHstuUdZ4CwPB8GkveQBc0Usg_FeDEu2xNDfBR_SsXzCIohVkvXooMfQP4FzwLASjc-5xCPyl_UhwuFSYXoXsXuRAvWLC6TwBX-gDfO8a-28PqvloK5MlfiPGpXYEwcv9qDSLl)<!-- width="60%" -->
 
 **Und nun alles zusammen**
 
 Was bisher fehlte, war der Distributor, der, wie in unserem Use-Case Diagramm modelliert, per Benutzername und Kennwort auf den Online-Shop zugreifen möchte, um Bestell- und Kundendaten herunterzuladen. Die Klasse Distributor ist entsprechend mit den Klassen Bestellung und Land verknüpft. Diese Assoziationen drücken aus, dass der Distributor auf beliebig viele Bestellungen zugreifen kann und für mindestens ein Land verantwortlich ist, in das er Bestellungen auszuliefern hat. Die Klasse Format umfasst die Methoden zur Generierung der Ausgabeformate für die Daten, da davon ausgegangen wird, die dass die weitere Bearbeitung mit alternativen Programmen realisiert wird.
 
-![](http://www.plantuml.com/plantuml/png/RP51IyD048Nl-ok67WjRz2fIcYA281uK5BnDDcDtoMPMPcOlfJzUIsW3IQ_lUxmtZzcfeLWTijC-yIyA3X0ogZPcajfgz18AVwGZmPsBgIC8IK8cvx1L4mmssk4ROwvyq84ibexSgBuYTyxjIOto6SFQRm6-K8Zx8ksSDAmXIlenU80L-7SAaS-XUD5Nu2QFzzkneE43jMKK6h7KKpu7t6yswzMbmkX27hrVNZ1XVxg6pC-RRtp341dZGF_DfmK6zra4g_QeUjlXziWz9JxMmst-b7JyGf7hscdPd3uN6T0MyZJ2xOYxEkG_)<!-- width="100%" -->
+![](https://www.plantuml.com/plantuml/png/RP51IyD048Nl-ok67WjRz2fIcYA281uK5BnDDcDtoMPMPcOlfJzUIsW3IQ_lUxmtZzcfeLWTijC-yIyA3X0ogZPcajfgz18AVwGZmPsBgIC8IK8cvx1L4mmssk4ROwvyq84ibexSgBuYTyxjIOto6SFQRm6-K8Zx8ksSDAmXIlenU80L-7SAaS-XUD5Nu2QFzzkneE43jMKK6h7KKpu7t6yswzMbmkX27hrVNZ1XVxg6pC-RRtp341dZGF_DfmK6zra4g_QeUjlXziWz9JxMmst-b7JyGf7hscdPd3uN6T0MyZJ2xOYxEkG_)<!-- width="100%" -->
 
 ## Verwendung von Klassendiagrammen unter Microsoft Studio
 
 vgl. Vorgehen auf dem Foliensatz von Herrn Dr. Reinhardt (Vorlesung "Softwareentwicklung SoSe 2018")
 [Link](https://github.com/liaScript/CsharpCourse/blob/master/documents/FolieReinhardt_VSExample.pdf)
+
+
+[^UMLTutorial]: Boris Schäling, "Der moderne Softwareentwicklungsprozess mit UML, Kapitel 3: Das Aktivitätsdiagramm" http://www.highscore.de/uml/titelseite.html
