@@ -51,14 +51,13 @@ Bekannte Softwarefehler und deren Folgen:
 
 + Beim Kampfflugzeug F-16 brachte der Autopilot das Flugzeug in Rückenlage, wenn der Äquator überflogen wurde. Dies kam daher, dass man keine „negativen“ Breitengrade als Eingabedaten bedacht hatte. Dieser Fehler wurde sehr spät während der Entwicklung der F-16 anhand eines Simulators entdeckt und beseitigt.
 
-+ 1999 verpasste die NASA-Sonde Mars Climate Orbiter den Landeanflug auf den Mars, weil die Programmierer unterschiedliche Maßsysteme verwendeten (ein Team verwendete das metrische und das andere das angloamerikanische) und beim Datenaustausch es so zu falschen Berechnungen kam. Eine Software wurde so programmiert, dass sie sich nicht an die vereinbarte Schnittstelle hielt, in der die metrische Einheit Newton × Sekunde festgelegt war. Die NASA verlor dadurch die Sonde
++ 1999 verpasste die NASA-Sonde Mars Climate Orbiter den Landeanflug auf den Mars, weil die Programmierer unterschiedliche Maßsysteme verwendeten (ein Team verwendete das metrische und das andere das angloamerikanische) und beim Datenaustausch es so zu falschen Berechnungen kam. Eine Software wurde so programmiert, dass sie sich nicht an die vereinbarte Schnittstelle hielt, in der die metrische Einheit Newton × Sekunde festgelegt war. Die NASA verlor dadurch die Sonde.
 
-+ Zwischen 1985 und 1987 gab es mehrere Unfälle[8] mit dem medizinischen Bestrahlungsgerät Therac-25. Infolge einer Überdosis, die durch fehlerhafte Programmierung und fehlende Sicherungsmaßnahmen verursacht wurde, mussten Organe entfernt werden, und es verstarben drei Patienten.
++ Zwischen 1985 und 1987 gab es mehrere Unfälle mit dem medizinischen Bestrahlungsgerät Therac-25. Infolge einer Überdosis, die durch fehlerhafte Programmierung und fehlende Sicherungsmaßnahmen verursacht wurde, mussten Organe entfernt werden, und es verstarben drei Patienten.
 
 + Das Jahr-2000-Problem, auch als Millennium-Bug (zu deutsch „Millennium-Fehler“) oder Y2K-Bug bezeichnet, ist ein Computer­problem, das im Wesentlichen durch die Behandlung von Jahreszahlen als zweistellige Angabe innerhalb von Computersystemen entstanden ist.
 
-
-Softwarefehler sind sowohl Sicherheitstechnisch wie ökonomisch ein erhebliches Risiko. Die IX-Studie ermittelte für Deutschland folgende Werte:
+Softwarefehler sind sowohl sicherheitstechnisch wie ökonomisch ein erhebliches Risiko. Eine Studie der Zeitschrift iX ermittelte 2013 für Deutschland folgende Werte:
 
 + Ca. 84,4 Mrd. Euro betragen die jährlichen Verluste durch Softwarefehler in Mittelstands- und Großunternehmen
 + Ca. 14,4 Mrd. Euro jährlich (35,9 % des IT-Budgets) werden für die Beseitigung von Programmfehlern verwendet;
@@ -82,10 +81,13 @@ Konkret definiert sich der Fehler danach als
 
 Im Rahmen dieser Veranstaltung lassen wir Lexikalische Fehler und Syntaxfehler außen vor. Diese sind in der Regel über den Compiler identifizierbar. Darüber hinaus existieren aber :
 
-| Semantische Fehler      | Anweisung ist zwar syntaktisch fehlerfrei, aber inhaltlich trotzdem fehlerhaft                                                 |
-| Logische Fehler         | Algorithmus weißt inhaltliche Fehler auf (plus stat minus, kleiner statt kleiner gleich, fehlende Synchronisation, usw.)       |
-| Designfehler            | Strukturelle Mängel auf der Modul oder Systemebene, die das Zusammenspiel der Komponenten, deren Erweiterung, usw. verhindern. |
-| Fehler im Bedienkonzept | Unintuitive Benutztung, das Programm "fühlt sich komisch an"                                                                   |
+| Fehlertyp               | Folgen                                                                                                                                                          |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Logisch/semantische Fehler      | Anweisung ist zwar syntaktisch fehlerfrei, aber inhaltlich trotzdem fehlerhaft (plus statt minus, kleiner statt kleiner gleich, fehlende Synchronisation, usw.) |
+| Designfehler            | Strukturelle Mängel auf der Modul oder Systemebene, die das Zusammenspiel der Komponenten, deren Erweiterung, usw. verhindern.                                  |
+| Fehler im Bedienkonzept | Unintuitive Benutztung, das Programm "fühlt sich komisch an"                                                                                                    |
+
+Darüber hinaus ist es wichtig zwischen Laufzeit- und Designzeitfehlern zu unterscheiden.
 
 *******************************************************************************
 
@@ -168,8 +170,8 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
          |        Grobentwurf                   Systemtests        |
          |             \                             ^             |
          |              v                           /              |
-         |           Feinentwurf             Integrationstests     \  ENTWICKLER
- Detail- |                \                       ^                /
+         |           Feinentwurf             Integrationstests      \  ENTWICKLER
+ Detail- |                \                       ^                 /
  grad    |                 v                     /                 |
          |             Implementierung  --> Modultests             |
          |                                                        -'
@@ -177,13 +179,10 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 ````````````
 
 Der Modultest, auch Komponententest oder Unittest genannt, ist ein Test auf der Ebene der einzelnen Module der Software. Testgegenstand ist die Funktionalität innerhalb einzelner abgrenzbarer Teile der Software (Module, Programme oder Unterprogramme, Units oder Klassen). Testziel dieser häufig durch den Softwareentwickler selbst durchgeführten Tests ist der Nachweis der technischen Lauffähigkeit und korrekter fachlicher (Teil-) Ergebnisse.
-Integrationstest
 
 Der Integrationstest bzw. Interaktionstest testet die Zusammenarbeit voneinander abhängiger Komponenten. Der Testschwerpunkt liegt auf den Schnittstellen der beteiligten Komponenten und soll korrekte Ergebnisse über komplette Abläufe hinweg nachweisen.
-Systemtest
 
 Der Systemtest ist die Teststufe, bei der das gesamte System gegen die gesamten Anforderungen (funktionale und nicht-funktionale Anforderungen) getestet wird. Gewöhnlich findet der Test auf einer Testumgebung statt und wird mit Testdaten durchgeführt. Die Testumgebung soll die Produktivumgebung des Kunden simulieren, d. h. ihr möglichst ähnlich sein. In der Regel wird der Systemtest durch die realisierende Organisation durchgeführt.
-Abnahmetest
 
 Ein Abnahmetest, Verfahrenstest, Akzeptanztest oder auch User Acceptance Test (UAT) ist das Testen der gelieferten Software durch den Kunden. Der erfolgreiche Abschluss dieser Teststufe ist meist Voraussetzung für die rechtswirksame Übernahme der Software und deren Bezahlung. Dieser Test kann unter Umständen (z. B. bei neuen Anwendungen) bereits auf der Produktionsumgebung mit Kopien aus Echtdaten durchgeführt werden.
 
@@ -263,11 +262,12 @@ style="width: 100%; display: block; margin-left: auto; margin-right: auto;"
     |                |              |                |                |
   verifi-         analy-         struktur-     spezifikations-    diversifi-
   zierend         sierend        orientiert    orientiert         zierend
+                               (white box)     (black box)
                                     |
                             +-------+--------+
                             |                |
                       kontrollfluss-     datenfluss-
-                      orientiert         bezogen
+                      orientiert         bezogen                               .
 
 
 ````````````
@@ -292,7 +292,9 @@ bestimmt.
     initiale Implementierung einer Konsolenanwendung unter Visual Studio 2017. Welche
     Fehler können Sie ausmachen?
 
-![instruction-set](./img/13_Testen/SonarLinterVS.png)<!-- width="100%" -->
+![instruction-set](./img/16_Testen/SonarLinterVS.png)<!-- width="100%" -->
+
+Eine Übersicht zu den Standard-Regeln findet sich unter [Link](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/DOCUMENTATION.md).
 
 + Codereviews ... Reviews sind manuelle Überprüfungen der Arbeitsergebnisse der Softwareentwicklung. Jedes Arbeitsergebnis kann einer Durchsicht durch eine andere Person unterzogen werden.
 
@@ -325,7 +327,7 @@ static class MyMathFunctions{
   //Fakultät der Zahl i
   public int fak(int i) {...}
   // Grösstergemeinsamer Teiler von i, j und k
-  public int ggt(inti, intj, intk) {...}
+  public int ggt(int i, int j, int k) {...}
 }
 ```
 
@@ -342,12 +344,12 @@ der Eingangsparameter.
 
 Für Black-Box-Testing existieren unterschiedliche Ausprägungen:
 
-+ Äquivalenzklassenanalyse [Link](https://de.wikipedia.org/wiki/%C3%84quivalenzklassentest)
++ Äquivalenzklassenanalyse
 + Grenzwertanalyse [Link](https://www.youtube.com/watch?v=GshMbff3mzw)
 + Ursache Wirkungsgraphen
 + Zustandsbasierte Testmethoden
 
-Problematisch ist dabei, dass spezifische Lösungen, wie zum Beispiel in folgendem Fall
+Problematisch ist dabei, dass spezifische Lösungen, wie zum Beispiel in folgendem Fall. Der Entwickler hat hier beschlossen die Performance der Berechnung der Fakultät zu steigern, um die Performance des Algorithmus für Werte kleiner 5 zu verbessern (hypothetisches Beispiel!).
 
 ```csharp
 static class MyMathFunctions{
@@ -361,8 +363,7 @@ static class MyMathFunctions{
 }
 ```
 
-mit Testfällen `fak(5)==120`, `fak(6)==720` und `fak(10)==3628800` verborgen
-bleiben. Die Fehler für `fak(1)` und `fak(2)` bleiben verborgen.
+Mit den alleinigen Testfällen `fak(5)==120`, `fak(6)==720` und `fak(10)==3628800` bleiben mögliche Fehler für `fak(1)` und `fak(2)` verborgen.
 
 ### White-Box-Testing / Strukturorientiert
 
@@ -370,8 +371,8 @@ bleiben. Die Fehler für `fak(1)` und `fak(2)` bleiben verborgen.
 > getesteten Softwareelements bekannt und werden zur Bestimmung der Testfälle
 > verwendet
 
-White-Box-Testing-Verfahrend zerlegen das Programm (statisch oder dynamisch)
-entsprechend dem Kontrollfluß. Die Güte der Testfälle wird danach beurteilt,
+White-Box-Testing-Verfahren zerlegen das Programm (statisch oder dynamisch)
+entsprechend dem Kontrollfluss. Die Güte der Testfälle wird danach beurteilt,
 wie groß der Anteil der abgedeckten Programmpfade ist. Die Bewertung kann dabei
 anhand differenzierter Metriken erfolgen:
 
@@ -404,7 +405,7 @@ static class MyMathFunctions{
 }
 ```
 
-Der oben genannten Black-Box-Test $i = {5, 6, 10}$ adressierte lediglich 2
+Der oben genannten Black-Box-Test $i = \{5, 6, 10\}$ adressierte lediglich 2
 der Anweisungen und generiert damit ein $C_0 = \frac{2}{6} = 0.33$. Mit dem Wissen
 um die Codestruktur, kann der White-Box-Test sehr schnell den Nachweis erbringen,
 dass das gezeigte Black-Box-Vorgehen nur unzureichend die Qualität des Codes
@@ -469,7 +470,7 @@ Mit dem Testfall $i = 1$ ergibt sich eine $C_1$-Abdeckung von $0.5$.
 
 Das $C_1$ Kriterium berücksichtigt keine Schleifen im zu untersuchenden Code.
 Der "Pfad" beschreibt gegenüber dem "Zweig" aber eben auch die mehrfache
-Ausfühung ein und des selben Zweiges. Diese Untersuchung muss entsprechend
+Ausführung ein und des selben Zweiges. Diese Untersuchung muss entsprechend
 Schleifen in variabler Durchlaufzahl umsetzten.
 
 **C_3 Bedingungsüberdeckungstest**
@@ -477,9 +478,27 @@ Schleifen in variabler Durchlaufzahl umsetzten.
 $C_3$ Tests extrahieren die Bedingungen die zum Eintritt in die Schleifen führen
 und generieren Testfälle, die alle Kombinationen abdecken.
 
+```csharp
+static class MyMathFunctions{
+  public int fak (int i){                    // Verzweigungen
+    boolean a, b;
+    if (a || b) { ... }
+    else { ... }
+  }
+}
+```
+
+|      | Test                              | Testfälle im Beispiel                            |
+| ---- | --------------------------------- | ------------------------------------ |
+| C_3a | Einfachbedingungsüberdeckungstest | 2 (a = b = true sowie a = b = false) |
+| C_3b | Mehrfachbedingungsüberdeckungstest                                  |                                     $2^n$ |
+| C_3c | minimaler Mehrfachbedingungsüberdeckungstest                                  |                                     $<=2^n$ |
+
+> Merke:
+
 ## Und jetzt konkret!
 
-Idee 1: Wir implementieren unsere eigenen Testmethoden.
+**Idee 1: Wir implementieren unsere eigenen Testmethoden**
 
 ```csharp          ManuellesTesten
 using System;
@@ -520,7 +539,7 @@ namespace Rextester
     {
       //double result = 0;
       //int state = Calculator.DivideTwoValues(3,4, ref result);
-      //Console.WriteLine(state);
+      //Console.WriteLine($"Das Ergebnis lautet {result}, der State {state}.");
 
       TestCalculator.Test_DivideMethod();
     }
@@ -533,7 +552,7 @@ Welche Funktionalität fehlt Ihnen in diesem Setup? Welche weitergehenden Featur
 würden Sie für unsere Testmethoden vorschlagen.
 
 
-Idee 2: Wir nutzen ein Test-Framework
+**Idee 2: Wir nutzen ein Test-Framework**
 
 ```csharp    TestCase MStest
 [TestClass]   // <-- Framework specifisch
@@ -571,3 +590,64 @@ Nachteil:
 Die wichtigsten Tools unter C# sind xUnit, nunit, MSTest. Einen guten Überblick zum Vergleich der Schlüsselworte liefert [Link](http://www.anarsolutions.com/automated-unit-testing-tools-comparison/)
 
 > Demo zur Anwendung des Testing-Frameworks unter Visual Studio
+
+Hierzu nutzen wir das xunit Framework. Eine Folge von Tests für unsere `DivideTwoValues()` Methode könnte dann wie folgt aussehen.
+
+```csharp
+using Xunit;
+
+namespace MyMathMethods.Test
+{
+    public class Test_DivideTwoValues
+    {
+        [Fact]
+        public void Check_StateEqualPositiveInputs()
+        {
+            // Arrange
+            double result = 0;
+            double dividend = 5;
+            double divisor = dividend;
+            int expected = 0;
+
+            // Act
+            var state = Calculator.DivideTwoValues(dividend, divisor, ref result);
+
+            // Assert
+            Assert.Equal(expected, state);
+        }
+
+        [Fact]
+        public void Check_StateZeroAsDivended()
+        {
+            // Arrange
+            double result = 0;
+            double dividend = 5;
+            double divisor = 0;
+            int expected = -1;
+
+            // Act
+            var state = Calculator.DivideTwoValues(dividend, divisor, ref result);
+
+            // Assert
+            Assert.True(expected == state);
+        }
+
+        [Theory]                                             // Übergabe von variablen Parametersets
+        [InlineData(10, 2, 5)]
+        [InlineData(5, 2, 2.5)]
+        [InlineData(double.MaxValue, double.MaxValue, 1)]    // Edge Cases
+        [InlineData(double.MaxValue, 1, double.MaxValue)]
+        public void Check_ResultCalculation(double dividend, double divisor, double expected)
+        {
+            // Arrange
+            double result = 0;
+
+            // Act
+            var state = Calculator.DivideTwoValues(dividend, divisor, ref result);
+
+            // Assert
+            Assert.Equal(expected, result);
+        }
+    }
+}
+```
