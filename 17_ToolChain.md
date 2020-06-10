@@ -167,6 +167,7 @@ public class Vector {
   public static bool operator !=(Vector p1, Vector p2){
     // hier hatte ich keine Lust mehr
     // TODO die Methode müsste noch implemenntiert werden.
+    return true;
   }
 }
 
@@ -310,7 +311,7 @@ Aufbauend auf den Inhalten der XML Datei ist IntelliSense in Visual Studio dann
 in der Lage, die Textinformationen zu Klassen und Membern bei der Eingabe
 anzuzeigen.
 
-![OOPGeschichte](/img/14_Tools/vs_intelliSense.png)<!-- width="80%" --> [^MS_VisualStudio]
+![OOPGeschichte](/img/17_ToolChain/vs_intelliSense.png)<!-- width="80%" --> [^MS_VisualStudio]
 
 [^MS_VisualStudio]: Dokumentation Microsoft Visual Studio, https://docs.microsoft.com/de-de/visualstudio/ide/using-intellisense?view=vs-2019
 
@@ -318,7 +319,7 @@ Sie können die Parameterinformation manuell aufrufen, indem Sie
 STRG+UMSCHALT+LEERTASTE drücken (die alternativen Methoden mit der Maus braucht
 ohnehin niemand).
 
-**Anwendung 2:** Die XML basierten Dokumentationsinhalte können in html oder pdf Dokumente Transformiert werden, um eine losgelöste Dokumentation darzustellen. Hierfür können externe Tools herangezogen werden. Beispiele dafür sind [Javadoc](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html), [Sphinx](http://www.sphinx-doc.org/en/master/) oder [Doxygen](http://www.doxygen.nl/index.html). Ursprünglich bot Microsoft eine eigene
+**Anwendung 2:** Die XML basierten Dokumentationsinhalte können in html oder pdf Dokumente transformiert werden, um eine losgelöste Dokumentation darzustellen. Hierfür können externe Tools herangezogen werden. Beispiele dafür sind [Javadoc](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html), [Sphinx](http://www.sphinx-doc.org/en/master/) oder [Doxygen](http://www.doxygen.nl/index.html). Ursprünglich bot Microsoft eine eigene
 Toolchain für die Code-Generierung an, diese wird gegenwärtig unter dem Projektnamen
 Sandcastle als Open-Source Projekt weitergeführt.
 
@@ -326,16 +327,14 @@ https://github.com/EWSoftware/SHFB
 
 Im folgenden soll beispielhaft auf die Anwendung von Doxygen eingegangen werden.
 
-![OOPGeschichte](img/14_Tools/Doyxgen_infoflow.png)<!-- width="80%" --> [^Doxygen]
+![OOPGeschichte](img/17_ToolChain/Doyxgen_infoflow.png)<!-- width="80%" --> [^Doxygen]
 
 [^Doxygen]: Manual - Getting started, http://www.doxygen.nl/manual/starting.html
 
-Die Anwendung von Doxygen wird im Beipielprojekt https://gitlab.com/Sebastian_Zug/CsharpCIExample
+Die Anwendung von Doxygen wird im folgenden Foliensatz anhand eines Beipielprojektes
 gezeigt. Dabei werden zwei Verbesserungen der Darstellung realisiert.
 
 1. Auswertung der Doxygen Ausgaben im Hinblick auf die Abdeckung der Dokumentation.
-
-   Wir integrieren eine Ergänzung für `IPet`.
 
 2. Einbindung des Quellcodes über das SOURCE_BROWSER Flag.
 
@@ -383,9 +382,7 @@ Ein `NuGet`-Paket ist eine gepackte Datei mit der Erweiterung `.nupkg` die:
 enthalten sind
 Ein Entwickler, der seinen Code veröffentlichen möchte generiert die zugehörige Struktur und läd diese auf einen `NuGet` Server. Unter dem [Link](https://www.nuget.org/) kann dieser durchsucht werden.
 
-Anwendungsbeispiele:
-
-**1. Symbolisches Lösen von Mathematischen Gleichungen**
+**Anwendungsbeispiele: Symbolisches Lösen von Mathematischen Gleichungen**
 
 vgl. [Projektwebseite](https://symbolics.mathdotnet.com/)
 
@@ -419,9 +416,6 @@ namespace TestMathSolver
 }
 ```
 
-**2. Logging**
-
-ToDo
 
 ## Build Tools
 
@@ -552,9 +546,7 @@ könnte folgende Konfiguration haben:
 </Project>
 ```
 
-Ein Beispiel für eigene Experimente findet sich unter
-
-https://github.com/liaScript/CsharpCourse/tree/master/code/14_Tools/msbuildProject
+Ein Beispiel für eigene Experimente findet sich unter 'code/17_ToolChain/msbuildProject'
 
 Die zuvor besprochenen dotnet Befehle bauen auf MSBuild auf und kapseln diese.
 Die Ausführung von `dotnet build` entspricht `dotnet msbuild -restore -target:Build`.
