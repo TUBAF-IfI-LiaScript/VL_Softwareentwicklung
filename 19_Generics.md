@@ -252,6 +252,10 @@ Die Vorteile des Konzepts sind offensichtlich:
 
 Generische Klassen und Methoden vereinen Wiederverwendbarkeit, Typsicherheit und Effizienz so, wie es ihre nicht generischen Gegenstücke nicht können. Generics werden am häufigsten für Auflistungen und deren Methoden verwendet.
 
+Was passiert eigentlich hinter den Kulissen? Im Unterschied zu C++ Templates werden
+C# Generics nicht zur Compile-Zeit konkretisiert, sondern zunächst in einen generischen Zwischencode übersetzt. Die eigentliche Konkretisierung findet zur Laufzeit statt, wobei
+Referenz- und Wertdatentypen unterschiedlich behandelt werden. Für jeden Werttyp, der den Platzhalter ersetzt wird eine konkrete Klasse erzeugt, während sich alle Referenztypen eine einzige Konkretisierung teilen. Das Laufzeitsystem erzeugt den typentsprechenden Code erst erst mit ersten Instanzierung der konkreten Klasse.
+
 Die Parameterisierung eines generischen Typs beschränkt sich nicht nur auf einen Typ sondern kann mehrere Typen umfassen.
 
 ```csharp
@@ -552,7 +556,6 @@ beschränken. Man definiert Beschänkungen oder *Constraints*, die die Breite de
 | `where T : <Basisklasse>`   | ... die Basisklasse sein oder von ihr abgeleitete sein. |
 | `where T : <Schnittstelle>` | ... die Schnittstelle sein oder diese  implementieren.  |
 
-
 Das folgende Beispiel setzt die Möglichkeiten der Beschränkung konsequent um und lässt nur
 `Employee` selbst oder abgeleitete Typen zu. Damit wird sichergestellt, dass die Methoden,
 die in GenericList verwendet werden, im Parametertypen auch existieren.
@@ -627,7 +630,7 @@ namespace Rextester
 
 ## Vererbung bei generischen Typen
 
-In der UML werden generische Typen über eine sepeate Box in der oberen linken Ecke
+In der UML werden generische Typen über eine separate Box in der oberen linken Ecke
 der Klassendarstellung im Klassendiagramm realisiert.
 
 ![UseCaseOnlineShopII](https://www.plantuml.com/plantuml/png/BSqn2i9048NXVaunfNOUG2I2ZNLEC6uUEBYxaPaN2yMx6yNoUppuXwG5brObRzxl5jQqLCiyak6NXJYNkO_-XExawXEqU9GAaTzBHt1_Cjf1NwBgFH7SV8Vjoa2R7_ZpBGFwj9O-)<!-- width="30%" -->
@@ -648,9 +651,9 @@ Beispiele
 class BaseNode { }
 class BaseNodeGeneric<T> { }
 
-class NodeConcrete<T> : BaseNode { }  // concrete type
+class NodeConcrete<T> : BaseNode { }            // concrete type
 class NodeClosed<T> : BaseNodeGeneric<int> { }  //closed constructed type
-class NodeOpen<T> : BaseNodeGeneric<T> { }  //open constructed type
+class NodeOpen<T> : BaseNodeGeneric<T> { }      //open constructed type
 ```
 
 Spannend wird die Typparameterisierung für generische Klassen, die von offenen konstruierten Typen erben. Hier müssen für sämtliche Basisklassen-Typparameter Typargumente bereitgestellt werden.
@@ -676,17 +679,6 @@ Erläutern Sie die Anwendung von generischen Typen anhand des folgenden UML-Diag
 
 ![ObjectBasedList](https://www.plantuml.com/plantuml/png/PP3FQlCm4CJlUeezVX_5eMTXH5nwQ6aQ0abllSZMaYoHraLQK-YVTwyKXReXjvtP-OqMBPFOA5FmAXs9tsoq0GPlK-f48lMJuECmyfO-46xLWHp2G77mgDGf1IlY8xeL9Mbty7x0Y1eUfc3PmAS2QE20rcbOZmwpl87EkN-x_wTn4ucbYEzpMGMXRMsV9Df1Z2aTiBO1DMIBU5zqvmMZXdihEBCTxp49-h8xKNT8BvmIacWWbZdvDB734gdJzZUHdGr62bFGq8-ZBuWwt_JLD1TF_F5hZPf_8hkBHNNPPuq06jgs9tR6l6PervYwDbVKCucDFP9WhEWLUN66KKjaDmN_0m00)<!-- width="70%" -->
 
-
-********************************************************************************
-
-                                 {{2-3}}
-********************************************************************************
-
-Was passiert eigentlich hinter den Kulissen? Im Unterschied zu C++ Templates werden
-C# Generics nicht zur Compile-Zeit konkretisiert, sondern zunächst in einen generischen Zwischencode übersetzt. Die eigentliche Konkretisierung findet zur Laufzeit statt, wobei
-Referenz- und Wertdatentypen unterschiedlich behandelt werden. Für jeden Werttyp, der den Platzhalter ersetzt wird eine konkrete Klasse erzeugt, während sich alle Referenztypen eine einzige Konkretisierung teilen. Das Laufzeitsystem erzeugt den typentsprechenden Code erst erst mit ersten Instanzierung der konkreten Klasse.
-
-********************************************************************************
 
 Im folgenden Beispiel soll eine Liste für zwei Klassen dienen, die
 unterschiedliche Felder umfassen. Die Werte der Felder und die Feldnamen sollen

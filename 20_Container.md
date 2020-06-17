@@ -258,9 +258,7 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-Die Methoden für das Handling der Daten beschränken sich aber auf ein `add()`, hier braucht es noch deutlich mehr um anwendbar zu sein.
-
-An dieser Stelle greift das Interface `ICollection` und definiert die Methoden `Add`, `Clear`, `Contains`, `CopyTo` und `Remove`. Mit `Contains` kann geprüft werden, ob ein bestimmter Wert im Container enthalten ist. `CopyTo` extrahiert die Werte des Containers in ein Array. Dabei können bestimmte Ranges definiert werden. Die anderen Methoden sind selbsterklärend.
+Die Methoden für das Handling der Daten beschränken sich aber auf ein `add()`, hier braucht es noch deutlich mehr um anwendbar zu sein. Um diese Funktionalität umzusetzen greift die C#-Collections Implementierung auf eine ganze Reihe von Interfaces zurück, die den einzelnen Containern die notwendige Funktion geben.
 
 <!--
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
@@ -289,6 +287,8 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
  | IDictionary    |  | IList          |   | IDictionary﹤T﹥ |  | IList﹤T﹥       |
  .----------------.  .----------------.   .----------------.  .----------------.
 ````````````
+
+An dieser Stelle greift das Interface `ICollection` und definiert die Methoden `Add`, `Clear`, `Contains`, `CopyTo` und `Remove`. Mit `Contains` kann geprüft werden, ob ein bestimmter Wert im Container enthalten ist. `CopyTo` extrahiert die Werte des Containers in ein Array. Dabei können bestimmte Ranges definiert werden. Die anderen Methoden sind selbsterklärend.
 
 | Schnittstelle | Spezifizierte Funktionen        |
 | ------------- | ------------------------------- |
@@ -439,4 +439,5 @@ namespace Rextester
 ## Aufgaben der Woche
 
 + Erklären Sie, warum `Array` keine `Add`-Methode umfasst, obwohl es das Interface `IList` implementiert, dass wiederum diese einschließt. Tipp: Rufen Sie Ihr wissen um die explizite Methodenimplementierung noch mal auf.
++ Die Erläuterung zu den Beschränkungen beim Einsatz von Generics im Dokumemt 19 basiert auf der nicht generischen Implementierung des Interfaces `IComparable`. Ersetzen Sie diese im Codebeispiel durch die  generische Variante.
 + Evaluieren Sie verschiedene Container in Bezug auf Methoden zum Einfügen, Löschen, etc. Generieren Sie dazu entsprechende künstliche Objekte, die Sie manipulieren "Füge 100.000 int Werte in eine Liste ein.". Messen Sie die dafür benötigten Zeiten.
