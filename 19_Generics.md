@@ -331,6 +331,17 @@ namespace Rextester
            temp = lhs;
            lhs = rhs;
            rhs = temp;
+           Console.WriteLine("Hier wurde die generische Methode aufgerufen");
+      }
+
+      // Tauscht zwei Variablen lhs und rhs
+      static void Swap(ref int lhs, ref int rhs)
+      {
+           int temp;
+           temp = lhs;
+           lhs = rhs;
+           rhs = temp;
+           Console.WriteLine("Hier wurde die konkrete Methode aufgerufen");
       }
 
       public static void Main(string[] args){
@@ -340,6 +351,9 @@ namespace Rextester
         //    ------ Abstimmung der Typen
         //    v
             Swap<int>(ref a, ref b);
+            System.Console.WriteLine("a=" + a + " ,b=" + b);
+
+            Swap(ref a, ref b);
             System.Console.WriteLine("a=" + a + " ,b=" + b);
 
             float x = 99F;
@@ -363,7 +377,7 @@ einen analogen Aufruf.
 
 Welches Fragestellungen ergeben sich aus dem Codefragment:
 
-+ Was passiert, wenn eine "identische" nicht-generische Methode bereitsteht?
++ Was passiert, wenn eine "identische" nicht-generische Methode bereitsteht? (vgl. Zeile 18 in obigem Beispiel)
 + Welche Probleme entstehen, wenn die generische Methode in eine generische Klasse eingefügt wird?
 + Wie stellen wir sicher, dass spezifische Methoden für den Datentyp überhaupt existieren?
 
