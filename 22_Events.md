@@ -90,7 +90,7 @@ gekoppelt. Welche Konzepte lassen sich damit umsetzen?
 
 ### Publish-Subscribe Prinzip
 
-![OOPGeschichte](img/19_Events/Publish-Subscribe-Architekturstil.png)<!-- width="500px" --> [^HKoziolek](#10)
+![OOPGeschichte](img/22_Events/Publish-Subscribe-Architekturstil.png)<!-- width="500px" --> [^HKoziolek](#10)
 
 [^HKoziolek]: Wikipedia Publish/Subscribe Architekturstil für Software, Autor HKoziolek, https://de.wikipedia.org/wiki/Datei:Publish-Subscribe-Architekturstil.png
 
@@ -218,7 +218,9 @@ Das Beispiel vereinfacht das Vorgehen, in dem es Publisher und Subscriber in
 einer Funktion zusammenfasst. Damit kann auf das Event uneingeschränkt zurückgegriffen werden.
 Dazu gehört auch, dass das Event mit `Invoke` ausgelöst wird.
 
-```csharp           ActionUndFunc
+
+
+```csharp           MinimalEvent.cs
 using System;
 using System.Reflection;
 using System.Collections.Generic;
@@ -229,13 +231,13 @@ namespace Rextester
 
     class Program
     {
-        public static event DelEventHandler add;
+        public static event DelEventHandler myEvent;
 
         public static void Main(string[] args){
-            add += new DelEventHandler(Fak1);
-            add += new DelEventHandler(Fak2);
-            add += new DelEventHandler(Fak3);
-            add.Invoke();
+            myEvent += new DelEventHandler(Fak1);
+            myEvent += Fak2;
+            myEvent += () => {Console.WriteLine("Fakultät 3");};
+            myEvent.Invoke();
         }
         static void Fak1()
         {
@@ -245,11 +247,6 @@ namespace Rextester
         static void Fak2()
         {
             Console.WriteLine("Fakultät 2");
-        }
-
-        static void Fak3()
-        {
-            Console.WriteLine("Fakultät 3");
         }
     }
 }
@@ -308,12 +305,10 @@ namespace Rextester
         public static void Main(string[] args){
             Stock GoogleStock = new Stock();
 
-            GoogleStock.OnPropertyPriceChanged += new
-                    DelPriceChangedHandler(MailService.stock_OnPropertyChanged);
-            GoogleStock.OnPropertyPriceChanged += new
-                    DelPriceChangedHandler(Logging.stock_OnPropertyChanged);
+            GoogleStock.OnPropertyPriceChanged += MailService.stock_OnPropertyChanged;
+            GoogleStock.OnPropertyPriceChanged += Logging.stock_OnPropertyChanged;
 
-            Console.WriteLine("We manipulate the stock price now!");
+            Console.WriteLine("We change the stock price now!");
             GoogleStock.Price = 10;
         }
     }
@@ -333,6 +328,8 @@ Die Implementierung wäre nicht so robust, da folgende Möglichkeiten offen stä
 | `GoogleStock.OnPropertyPriceChanged.Invoke();`                                                      | Auslösen des Events innerhalb eines Subscribers                                                       | ja         |
 
 Was fehlt Ihnen an der Implementierung?
+
+Richtig, die Möglichkeit auf die Daten zurückzugreifen.
 
 ********************************************************************************
 
@@ -403,7 +400,7 @@ namespace Rextester
             GoogleStock.OnPropertyPriceChanged += new
                     EventHandler(MailService.stock_OnPropertyChanged);
 
-            Console.WriteLine("We manipulate the stock price now!");
+            Console.WriteLine("We changed the stock price now!");
             GoogleStock.Price = 10;
         }
     }

@@ -42,7 +42,7 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ## Neues aus der GitHub-Woche
 
-???
+![OOPGeschichte](./img/21_Delegaten/StudentActivities.png)<!-- width="80%" -->
 
 ## Motivation und Konzept der Delegaten
 
@@ -87,7 +87,7 @@ namespace Rextester
     }
 }
 ```
-@LIA.eval({'main.cs':`@input`},"main.cs",mono main.cs,mono main.exe)
+@Rextester.eval(@CSharp)
 
 Gegen das Hinzufügen weiterer Ausgabemethoden in die Klasse `VideoEncodingService` spricht
 die Tatsache, dass dies nicht deren zentrale Aufgabe ist. Eigentlich sollte
@@ -103,7 +103,9 @@ definiert haben.
     // TODO
   }
 
-  VideoEncodingService myMovie = new VideoEncodingService("007.mpeg", "12321", triggerMe);
+  VideoEncodingService myMovie = new VideoEncodingService("007.mpeg",
+                                                          "12321",
+                                                          triggerMe);
 ```
 
 ### Grundidee
@@ -114,10 +116,10 @@ definiert haben.
 Für die Anwendung sind drei Vorgänge nötig:
 
 1. Anlegen des Delegaten (Spezifikation einer Signatur)
-2. Instanzierung (Zuweisung einer signaturkorrekten Methode)
+2. Instantiierung (Zuweisung einer signaturkorrekten Methode)
 3. Aufruf der Instanz
 
-```csharp
+```csharp  Concept.cs
 // Schritt 1
 //[Zugriffsattribut] delegate Rückgabewert DelegatenName(Parameterliste);
 public delegate int Rechenoperation(int x, int y);
@@ -204,18 +206,23 @@ Delegattypen werden von der `Delegate`-Klasse im .NET Framework abgeleitet.
 
 https://docs.microsoft.com/de-de/dotnet/api/system.delegate?view=netframework-4.8
 
-Die Delegattypen sind versiegelt, es ist nicht möglich benutzerdefinierte Klassen von `Delegate` Klasse abzuleiten. Dies ermöglicht es einer Methode, einen Delegaten als Parameter zu akzeptieren und den Delegaten zu einem späteren Zeitpunkt aufzurufen. Dies wird als asynchroner Rückruf bezeichnet und ist eine häufig verwendete Methode, um einen Aufrufer darüber zu benachrichtigen, dass ein langer Prozess abgeschlossen wurde. Wenn ein Delegat auf diese Weise verwendet wird, benötigt der Code, der den Delegaten verwendet, keine Kenntnisse über die Implementierung der verwendeten Methode. Die Funktion ähnelt den bereitgestellten Kapselungsschnittstellen.
+Wenn der C#-Compiler Delegiertentypen verarbeitet, erzeugt er automatisch eine versiegelte Klassenableitung aus `System.MulticastDelegate`. Diese Klasse (in Verbindung mit ihrer Basisklasse, `System.Delegate`) stellt die notwendige Infrastruktur zur Verfügung, damit der Delegierte eine Liste von Methoden vorhalten kann. Der Compiler erzeugt insbesondere drei Methoden, um diese  aufzurufen:
+
++ die synchrone Invoke()-Methode, die aber nicht explizit von Ihrem C#-Code aufgerufen wird
++ die asynchrone `BeginInvoke()` und
++ `EndInvoke()` als Methoden, die die Möglichkeit bieten, die die eigentliche Methode in einem separaten Ausführungsthread zu handhaben.
 
 Entsprechend der Codezeile `delegate int Transformer(int x);` generiert der
 Compiler eine spezielle `sealed class Transformers`
 
 ```csharp
-sealed class Transform : System.MulticastDelegate
+sealed class Transformer : System.MulticastDelegate
 {
+  ...
   public int Invoke(int x);
-  public IAsyncResult BeginInvoke(int x,
-    AsyncCallback cb, object state);
+  public IAsyncResult BeginInvoke(int x, AsyncCallback cb, object state);
   public int EndInvoke(IAsyncResult resut);
+  ...
 }
 ```
 *******************************************************************************
@@ -253,39 +260,41 @@ namespace Rextester
 {
     public class Program{
 
-      delegate int Transformer(int x);
+      delegate int Calc(int x, int y);
 
-      static int Square(int x){
-          Console.WriteLine("This is method Square(int x)");
-          return x*x;
+      static int Add(int x, int y){
+          Console.WriteLine("x + y");
+          return x + y;
       }
 
-      static int Square(int x, int y){
-          Console.WriteLine("This is method Square(int x, int y)");
-          return x * x + y * y;
+      static int Multiply(int x, int y){
+          Console.WriteLine("x * y");
+          return x * y;
       }
 
-      static int Cube(int x){
-          Console.WriteLine("This is method Cube(int x)");
-          return x * x * x;
+      static int Divide(int x, int y){
+          Console.WriteLine("x / y");
+          return x / y;
       }
 
       public static void Main(string[] args){
         // alte Variante
-        Transformer transform1 = new Transformer(Square);
+        // Calc computer1 = new Calc(Divide);
         // neue Variante:
-        Transformer transform2 = Square;
+        // Calc computer2 = Divide;
 
-        Transformer transformer = Square;
-        transformer += Cube;
-        transformer += Cube;
-        transformer -= Cube;
-        transformer -= Square;
+        Calc computer3 = Add;
+        computer3 += Multiply;
+        computer3 += Multiply;
+        computer3 += Divide;
+        computer3 -= Add;
 
         Console.WriteLine("Zahl von eingebundenen Delegates {0}",
-                          transformer.GetInvocationList().GetLength(0));
+                          computer3.GetInvocationList().GetLength(0));
 
-        transformer(5);
+        Console.WriteLine("Ergebnis des letzten Methodenaufrufes {0}",
+                                                          computer3(15, 5));
+
       }
     }
 }
@@ -366,11 +375,11 @@ umgesetzt werden, die die Anwendung flexibler bzw. effizienter machen.
 
 Entwicklungshistorie von C# in Bezug auf Delegaten
 
-| Version | Delegatendefinition |
-| ------- | ------------------- |
-| <2.0    | benannte Methoden   |
-| >= 2.0  | anonyme Methoden    |
-| ab 3.0  | Lambdaausdrücke     |
+| Version  | Delegatendefinition |
+| -------- | ------------------- |
+| $<2.0$   | benannte Methoden   |
+| $>= 2.0$ | anonyme Methoden    |
+| ab $3.0$ | Lambdaausdrücke     |
 
 Dabei lösen Lambdaausdrücke die anonymen Methoden als bevorzugten Weg zum Schreiben von Inlinecode ab. Allerdings bieten anonyme Methode eine Funktion, über die Lambdaausdrücke nicht verfügen. Anonyme Methoden ermöglichen das Auslassen der Parameterliste. Das bedeutet, dass eine anonyme Methode in Delegaten mit verschiedenen Signaturen konvertiert werden kann.
 
@@ -430,7 +439,7 @@ namespace Rextester
 
 Ein Lambdaausdruck ist ein Codeblock, der wie ein Objekt behandelt wird. Er kann als Argument an eine Methode übergeben werden und er kann auch von Methodenaufrufen zurückgegeben werden.
 
-```
+```csharp
 (<Paramter>) => { expression or statement; }
 
 (int a) => { return a * 2; }; // Anweisungsblock
@@ -452,8 +461,8 @@ namespace Rextester
 
       public static void Main(string[] args){
           Del obj = (Value) => {
-                int x=Value*2;
-                return x;
+                  int x=Value*2;
+                  return x;
           };
           Console.WriteLine(obj(5));
       }
@@ -462,9 +471,7 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-Anonyme Methoden ermöglichen das Auslassen der Parameterliste. Das bedeutet, dass eine anonyme Methode in Delegaten mit verschiedenen Signaturen konvertiert werden kann. Dies ist bei Lambdaausdrücken nicht möglich.
-
-### Generische Delgaten
+### Generische Delegaten
 
 Delegaten können auch als Generics realisiert werden. Das folgende Beispiel
 wendet ein Delegate "Transformer" auf ein Array von Werten an. Dabei stellt
@@ -497,8 +504,8 @@ namespace Rextester
           return x*x;
       }
 
-      static float Square(float x){
-          Console.WriteLine("This is method Square(float x)");
+      static double Square(double x){
+          Console.WriteLine("This is method Square(double x)");
           return x*x;
       }
 
@@ -582,8 +589,8 @@ namespace Rextester
           return x*x;
       }
 
-      static float Square(float x){
-          Console.WriteLine("This is method Square(float x)");
+      static double Square(double x){
+          Console.WriteLine("This is method Square(double x)");
           return x*x;
       }
 
