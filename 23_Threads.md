@@ -42,7 +42,9 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ## Neues aus der GitHub-Woche
 
+1. Erläuterungen Frau Dr. Hawlitschek (OVGU Magdeburg)
 
+2. ... für diejenigen, die im Sommer "noch nichts vorhaben" ... Wir suchen motivierte studentische Mitstreiter in diversen Projekten.
 
 
 ## Motivation - Threads
