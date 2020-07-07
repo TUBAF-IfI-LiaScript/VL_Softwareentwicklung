@@ -20,15 +20,15 @@
 |       | 27. Mai   | ausgewählten UML Diagrammtypen                    | X                |
 | 9     | 2. Juni   | UML Anwendungsbeispiel                            |                  |
 |       | 3. Juni   | Testen                                            | X                |
-| 10    | 9. Juni   |                                                   |                  |
-|       | 10. Juni  |                                                   |                  |
-| 11    | 16. Juni  |                                                   |                  |
-|       | 17. Juni  |                                                   |                  |
-| 12    | 23. Juni  |                                                   |                  |
-|       | 24. Juni  |                                                   |                  |
-| 13    | 30. Juni  |                                                   |                  |
-|       | 1. Juli   |                                                   |                  |
-| 14    | 7. Juli   |                                                   |                  |
-|       | 8. Juli   |                                                   |                  |
-| 15    | 14. Juli  |                                                   |                  |
-|       | 15. Juli  |                                                   |                  |
+| 10    | 9. Juni   | Dokumentation                                     |                  |
+|       | 10. Juni  | Build Toolchains und ihr Einsatz                  | X                |
+| 11    | 16. Juni  | Generics                                          |                  |
+|       | 17. Juni  | Container                                         | X                |
+| 12    | 23. Juni  | Delegaten                                         |                  |
+|       | 24. Juni  | Events                                            | X                |
+| 13    | 30. Juni  | Threadkonzepte in C#                              |                  |
+|       | 1. Juli   | Taskmodell                                        | X                |
+| 14    | 7. Juli   | Language Integrated Query                         |                  |
+|       | 8. Juli   | Language Integrated Query Beispiele               | X                |
+| 15    | 14. Juli  | Entwurfsmuster                                    |                  |
+|       | 15. Juli  |                                                   | X                |
