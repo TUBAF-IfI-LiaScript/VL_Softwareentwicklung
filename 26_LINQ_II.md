@@ -148,9 +148,7 @@ entsprechen auf ein `IEnumerable<Student>` mit den Feldern Name und Id.
 Die Berechnung der Folge wird nicht als Ganzes realisiert sondern bei einer
 Iteration durch den Datentyp `List<Student>`.
 
-Für nicht-generische Typen (die also IEnumerable anstatt IEnumerable<T> unmittelbar)
-implementieren, muss zusätzlich der Typ der Laufvariable angegeben werden,
-da diese nicht aus der Datenquelle ermittelt werden kann.
+Für nicht-generische Typen (die also `IEnumerable` anstatt `IEnumerable<T>` unmittelbar) implementieren, muss zusätzlich der Typ der Laufvariable angegeben werden, da diese nicht aus der Datenquelle ermittelt werden kann.
 
 ```csharp           StudentListExample
 using System;
@@ -523,10 +521,6 @@ oder mehrerer Attribute sortiert. Mit dem ersten Sortierkriterium wird eine
 primäre Sortierung der Elemente ausgeführt. Sie können die Elemente innerhalb
 jeder primären Sortiergruppe sortieren, indem Sie ein zweites Sortierkriterium
 angeben.
-
-In Beispiel unserer customer-Daten sortieren wir diese anhand der Wohnorte in
-absteigender Reihenfolge. Als zweites Sortierkriterium werden dann die
-Straßennamen herangezogen.
 
 ```csharp
 var queryLondonCustomers = from customer in customers

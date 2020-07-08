@@ -40,19 +40,11 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 **7. Jetzt sind Sie dran ...**
 
-## Ankündigung
+## Neues aus der GitHub-Woche
 
-0. **Die Klausur findet am 23.07.2019, von 12:30 bis 14:30 statt.**
 
-1. **Bitte senden Sie bis zum Freitag Abend Fragen an die Tutoren, die Sie mit Blick auf die Klausur noch mal besprochen haben wollen.**
 
-    Dieses Angebot sollte Teil Ihrer Vorbereitungen auf die Prüfung sein und nicht deren Beginn!
 
-2. **In die Klausur dürfen Sie einen Notizzettel A4 (bedruckt, beschrieben) mitbringen.**
-
-    Welcher Art Ihre Notizen sind, ist Ihnen überlassen. Sie sollten sich dafür entscheiden aussagekräftige Beispiele vorzubereiten, die Ihnen  Anleitung für die Lösung der Aufgaben gibt.
-
-3. **Studentische Mitarbeiter als Tutoren gesucht!**
 
 ## Motivation
 
@@ -63,7 +55,7 @@ Liste `List<T>`.
 2. Filtern Sie die Liste der Comic Figuren nach dem Alter und
 3. Sortieren Sie die Liste nach dem Anfangsbuchstaben des Namens.
 
-<!-- data-marker="45 5 45 10 error;" -->
+<!-- data-marker="45 0 45 50 error;" -->
 ```csharp    conventionalFiltering
 using System;
 using System.Collections.Generic;
@@ -121,6 +113,7 @@ Die Dokumentation von `List<T>` findet sich unter folgendem [Link](https://docs.
 2. Für die Filteroperation implementieren Sie eine Loop. Sie können dazu `foreach` verwenden, weil `List<T>` das Interface `IEnumerable` implementiert.
 3. Die Sortieroperation bedingt die Anwendung einer Vergleichsoperation zwischen den Elementen der Liste. Eine Variante ist die Implementierung des Interfaces `IComparable` zu diesem Zweck.
 
+<!-- data-marker="41 0 41 50 info; 43 0 51 50 info; 53 0 58 50 info;" -->
 ```csharp    Solution
 using System;
 using System.Collections.Generic;
@@ -285,7 +278,7 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-Allerdings bleibt die Darstellung von komplexeren Abfragen wie "filtere die Helden heraus, die vor 1950 geboren sind, extrahiere die Vornamen und sortiere diese in Aufsteigender alphabetischer Folge" zu einem unübersichtlichen Darstellungsformat.
+Allerdings bleibt die Darstellung von komplexeren Abfragen wie `filtere die Helden heraus, die vor 1950 geboren sind, extrahiere die Vornamen und sortiere diese in Aufsteigender alphabetischer Folge` zu einem unübersichtlichen Darstellungsformat.
 
 ********************************************************************************
 
@@ -295,16 +288,19 @@ Allerdings bleibt die Darstellung von komplexeren Abfragen wie "filtere die Held
 
 Die Methoden für den Datenzugriff und die Manipulation abhängig vom Datentyp
 (Felder, Objektlisten) und der Herkunft (XML-Dokumente, Datenbanken,
-Excel-Dateien, usw.).LINQ versucht dieses Problem zu beseitigen, indem es
-innerhalb der Entwicklungsplattform .NET eine einheitliche Methode für jeglichen
-Datenzugriff zur Verfügung stellt. Die Syntax der Abfragen in LINQ orientiert
-sich dabei an der *Structured Query Language* (SQL).
+Excel-Dateien, usw.).
+
+Welche alternativen Konzepte bestehen für die Verarbeitung
+von datengetriebenen Anfragen?
 
 ********************************************************************************
 
 ### Exkurs SQL
 
-Hier folgt ein kurzer Einschub zum Thema SQL ... um allen Teilnehmern eine sehr
+                                  {{0-1}}
+*******************************************************************************
+
+Hier folgt ein kurzer Einschub zum Thema *Structured Query Language* (SQL) ... um allen Teilnehmern eine sehr
 grundlegende Sicht zu vermitteln:
 
 SQL ist eine Datenbanksprache zur Definition von Datenstrukturen in relationalen
@@ -314,17 +310,17 @@ darauf basierenden Datenbeständen.
 Ausgangspunkt sind Datenbanktabellen, die Abfragen dienen dabei der Generierung
 spezifischer Informationssets:
 
-+ "Alle Bücher mit Buchnummern von 123400 bis 123500"
-+ "Alle Buchnummern mit Autoren, die im 19. Jahrhundert erschienen."
-+ "In welchem Jahrhundert veröffentlichte welcher Verlag die meisten Bücher?"
-+ ...
-
 | Buchnummer | Autor              | Verlag                    | Datum | Titel                  |
 | ---------- | ------------------ | ------------------------- | ----- | ---------------------- |
 | 123456     | Hans Vielschreiber | Musterverlag              | 2007  | Wir lernen SQL         |
 | 123457     | J. Gutenberg       | Gutenberg und Co.         | 1452  | Drucken leicht gemacht |
 | 123458     | Galileo Galilei    | Inquisition International | 1640  | Eppur si muove         |
 | 123459     | Charles Darwin     | Vatikan Verlag            | 1860  | Adam und Eva           |
+
++ "Alle Bücher mit Buchnummern von 123400 bis 123500"
++ "Alle Buchnummern mit Autoren, die im 19. Jahrhundert erschienen."
++ "In welchem Jahrhundert veröffentlichte welcher Verlag die meisten Bücher?"
++ ...
 
 SQL basiert auf der relationalen Algebra, ihre Syntax ist relativ
 einfach aufgebaut und semantisch an die englische Umgangssprache angelehnt. Die
@@ -347,9 +343,11 @@ Eine Datenbanktabelle stellt eine Datenbank-Relation dar. Die Relation ist Namen
 ![OOPGeschichte](/img/25_LINQ/SQL-Beispiel.png)<!-- width="80%" --> [^DatenbankSchema]
 
 [^DatenbankSchema]: Wikipedia "SQL", Nils Boßung, https://de.wikipedia.org/wiki/SQL#/media/Datei:SQL-Beispiel.svg
+*******************************************************************************
 
                                   {{1-2}}
 *******************************************************************************
+
 **Erzeugung der Tabellen**
 
 ``` text -student.csv
@@ -445,16 +443,18 @@ WHERE Titel = 'ET';
 
 `ORDER BY` öffnet die Möglichkeit die Reihung anzupassen.
 
-``` sql   Linker äußerer Verbund
+``` sql   Verbund
 SELECT Vorlesung.VorlNr, Vorlesung.Titel, Professor.PersNr, Professor.Name
-FROM Professor LEFT OUTER JOIN Vorlesung
-ON Professor.PersNr = Vorlesung.PersNr;
+FROM Professor
+INNER JOIN Vorlesung ON Professor.PersNr = Vorlesung.PersNr;
 ```
 @AlaSQL.eval
 
+`JOIN` erlaubt es die Relationen zwischen einzelnen Datenbanktabellen aufzulösen. Dabei kann mit `INNER` und `OUTER` bzw `LEFT` und `RIGHT` die Auswahl über der Schnittmenge beschrieben werden.
+
 ``` sql   Gruppierung mit Aggregat-Funktionen
 SELECT COUNT(Vorlesung.PersNr) AS Anzahl, Professor.PersNr, Professor.Name
-FROM Professor LEFT OUTER JOIN Vorlesung
+FROM Professor LEFT JOIN Vorlesung
 ON Professor.PersNr = Vorlesung.PersNr
 GROUP BY Professor.Name, Professor.PersNr;
 ```
@@ -578,7 +578,7 @@ integrieren und gleichzeitig Datenobjekte durch eine Verarbeitungskette "hindurc
 Das Ganze ist natürlich noch recht behäbig, weil wir zwingend von einem bestimmten Typen ausgehen. Dies lässt sich über eine generische Implementierung lösen.
 
 <!-- data-marker="27 5 27 10 error;" -->
-```csharp           Extensions.cs
+```csharp           GenericExtensions.cs
 using System;
 
 namespace Rextester
@@ -649,7 +649,7 @@ namespace Rextester
           Console.WriteLine($"type = {v.GetType().Name}");
 
           var myPropertyInfo = v.GetType().GetProperties();
-          Console.WriteLine("Properties sind:");
+          Console.WriteLine("\nProperties:");
           for (int i = 0; i < myPropertyInfo.Length; i++)
           {
               Console.WriteLine(myPropertyInfo[i].ToString());
@@ -759,7 +759,7 @@ namespace Rextester
 ```
 @Rextester.eval(@CSharp)
 
-![Protected](http://www.plantuml.com/plantuml/png/bLBFIyCm5BxdhtZ7ZR7YkPGmKP4T9k9wKnbf-vpHDXb9EgPp_xjfkffWrE6fzFlo_NWlcMd3b6cRcZpp2g7aggmHY7xbOiCKQw2icTRdnYXUj0RdfHHB_evmHeXZe7bRMawizPx01BHHAwPK2jg1SFy87NoDvagq3Ifcf1gDKvZxtwm_Ie70z0ilQap-4f73aD-dUyRMi3vSLBXBxSU0-zURr3Vje4aaX94_q8qXYvUnqmQnoKMh50hJjR4ybiPP1MW_J5VFPgDwOYM6GsKvXIoR3nIbjkwf_UJqLxlLVyqYfu7uqMaXjtY3EpTO8MNjm3lKw92jv1Kuw9BhZTGuWDz2UhQh6sMSrFg2yUR2rQUG-oTng-IwUxhxuzN7Tx_NXXbU7W0MZ8imUz1EfzIBIB1oo3wI9F1BRQk2YuhI1m5PRcN7znoALhqgG4WmcYFZztZQsPuQd3r2WeN7f2-UsH6ZK393KRLD_Ga0)<!-- width="80%" --> [PublicPrivate.plantUML]()
+![Protected](https://www.plantuml.com/plantuml/png/bLBFIyCm5BxdhtZ7ZR7YkPGmKP4T9k9wKnbf-vpHDXb9EgPp_xjfkffWrE6fzFlo_NWlcMd3b6cRcZpp2g7aggmHY7xbOiCKQw2icTRdnYXUj0RdfHHB_evmHeXZe7bRMawizPx01BHHAwPK2jg1SFy87NoDvagq3Ifcf1gDKvZxtwm_Ie70z0ilQap-4f73aD-dUyRMi3vSLBXBxSU0-zURr3Vje4aaX94_q8qXYvUnqmQnoKMh50hJjR4ybiPP1MW_J5VFPgDwOYM6GsKvXIoR3nIbjkwf_UJqLxlLVyqYfu7uqMaXjtY3EpTO8MNjm3lKw92jv1Kuw9BhZTGuWDz2UhQh6sMSrFg2yUR2rQUG-oTng-IwUxhxuzN7Tx_NXXbU7W0MZ8imUz1EfzIBIB1oo3wI9F1BRQk2YuhI1m5PRcN7znoALhqgG4WmcYFZztZQsPuQd3r2WeN7f2-UsH6ZK393KRLD_Ga0)<!-- width="80%" --> [PublicPrivate.plantUML]()
 
 Welchen Vorteil habe ich verglichen mit einer nicht-enumerate Datenstruktur, zum
 Beispiel einem array? Im Hinblick auf eine konkrete Implementierung ist zwischen
