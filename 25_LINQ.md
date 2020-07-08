@@ -42,8 +42,7 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ## Neues aus der GitHub-Woche
 
-
-
+![OOPGeschichte](./img/25_LINQ/StudentActivities.png)<!-- width="80%" -->
 
 
 ## Motivation
