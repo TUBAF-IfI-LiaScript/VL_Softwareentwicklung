@@ -17,10 +17,10 @@ import:  https://raw.githubusercontent.com/liaScript/rextester_template/master/R
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-[https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/25_LINQ.md](https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/27_DesignPattern.md)
+[https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/27_DesignPattern.md](https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/27_DesignPattern.md)
 
 Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 25](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/SoSe2020/27_DesignPattern.md#1)
+[LiaScript Vorlesung 27](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/SoSe2020/27_DesignPattern.md#1)
 
 ---------------------------------------------------------------------
 
