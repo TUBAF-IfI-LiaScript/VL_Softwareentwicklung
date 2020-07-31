@@ -14,7 +14,7 @@ jobs:
   convert_via_pandoc:
     runs-on: ubuntu-18.04
     container: 
-      image: docker://mirisbowring/texlive_ctan_full:latest
+      image: docker://mirisbowring/texlive_ctan_full:2019
     steps:
       - name: Check out current repository
         uses: actions/checkout@v2
