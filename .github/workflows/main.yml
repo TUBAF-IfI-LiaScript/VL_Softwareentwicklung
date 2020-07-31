@@ -8,7 +8,7 @@ name: GeneratePdf
 on:
   push:
     branches:
-      - SoSe2020_generation
+      - SoSe2020
 
 jobs:
   convert_via_pandoc:
