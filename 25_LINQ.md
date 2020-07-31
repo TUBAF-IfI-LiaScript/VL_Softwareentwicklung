@@ -339,7 +339,7 @@ WIE festlegt. Dabei strukturieren sich die Befehle in 4 Kategorien:
 
 Eine Datenbanktabelle stellt eine Datenbank-Relation dar. Die Relation ist Namensgeber und Grundlage der relationalen Datenbanken.
 
-![OOPGeschichte](/img/25_LINQ/SQL-Beispiel.png)<!-- width="80%" --> [^DatenbankSchema]
+![OOPGeschichte](./img/25_LINQ/SQL-Beispiel.png)<!-- width="80%" --> [^DatenbankSchema]
 
 [^DatenbankSchema]: Wikipedia "SQL", Nils Boßung, https://de.wikipedia.org/wiki/SQL#/media/Datei:SQL-Beispiel.svg
 *******************************************************************************
@@ -489,7 +489,7 @@ Typsicherheit bereits zur Übersetzungszeit wobei ein minimaler Codeeinsatz zur
 Realisierung von Filter-, Sortier- und Gruppiervorgänge in Datenquellen
 investiert wird.
 
-![OOPGeschichte](/img/25_LINQ/AnbieterLINQ.png)<!-- width="50%" --> [^LinqAnbieter]
+![OOPGeschichte](./img/25_LINQ/AnbieterLINQ.png)<!-- width="50%" --> [^LinqAnbieter]
 
 [^LinqAnbieter]: Wikimedia https://commons.wikimedia.org/wiki/File:AnbieterLINQ.png, Author 'Mussklprozz'
 
