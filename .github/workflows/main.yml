@@ -13,7 +13,8 @@ on:
 jobs:
   convert_via_pandoc:
     runs-on: ubuntu-18.04
-    container: mirisbowring/texlive_ctan_full
+    container: 
+      image: mirisbowring/texlive_ctan_full
     steps:
       - name: Check out current repository
         uses: actions/checkout@v2
