@@ -193,15 +193,15 @@ geben, die eine entsprechende Gliederung und Zuordnung erlaubt:
 
 | Tag           | Erlärung                                                                              |
 | ------------- | ------------------------------------------------------------------------------------- |
-| `〈summary〉`   | Umfasst kurze Informationen über einen Typ oder Member.                               |
-| `〈remarks〉`   | Ergänzt weiterführende Informationen zu Typen und Membern.                            |
-| `〈returns〉`   | Beschreibt den Rückgabewert einer Methode                                             |
-| `〈value〉`     | Beschreibt Bedeutung einer Eigenschaft                                                |
-| `〈example〉`   | Ermöglicht mit `〈code〉` die Einbettung von (Code-)Beispielen.                         |
-| `〈para〉`      | Ermöglicht die Beschreibung der Eingabeparameter einer Methode                        |
-| `〈c〉`         | Indikator für Inline-Codefragmente                                                    |
-| `〈exception〉` | Erlaubt die Beschreibung möglicher Exceptions, die in einer Methode auftreten können. |
-| `〈see〉`       | Klickbare Links in Verbindung mit `〈cref〉`                                             |
+| `<summary>`   | Umfasst kurze Informationen über einen Typ oder Member.                               |
+| `<remarks>`   | Ergänzt weiterführende Informationen zu Typen und Membern.                            |
+| `<returns>`   | Beschreibt den Rückgabewert einer Methode                                             |
+| `<value>`     | Beschreibt Bedeutung einer Eigenschaft                                                |
+| `<example>`   | Ermöglicht mit `<code>` die Einbettung von (Code-)Beispielen.                         |
+| `<para>`      | Ermöglicht die Beschreibung der Eingabeparameter einer Methode                        |
+| `<c>`         | Indikator für Inline-Codefragmente                                                    |
+| `<exception>` | Erlaubt die Beschreibung möglicher Exceptions, die in einer Methode auftreten können. |
+| `<see>`       | Klickbare Links in Verbindung mit `<cref>`                                             |
 
 Was lässt sich damit umsetzen?
 
