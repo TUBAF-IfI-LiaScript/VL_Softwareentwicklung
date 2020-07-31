@@ -28,8 +28,7 @@ jobs:
           python3 .github/workflows/preprocessing.py
           echo ::set-env name=FILELIST::$(ls *.mdx)
           mkdir output
-        # Aufruf eines Standard-Docker Containers, in dem pandoc (und Latex)
-        # läuft.
+        # Installation der notwendigen Pandoc tools
       - name: Install pandoc
         run: |
           sudo apt install pandoc
