@@ -311,7 +311,7 @@ Aufbauend auf den Inhalten der XML Datei ist IntelliSense in Visual Studio dann
 in der Lage, die Textinformationen zu Klassen und Membern bei der Eingabe
 anzuzeigen.
 
-![OOPGeschichte](/img/17_ToolChain/vs_intelliSense.png)<!-- width="80%" --> [^MS_VisualStudio]
+![OOPGeschichte](./img/17_ToolChain/vs_intelliSense.png)<-- width="80%" --> [^MS_VisualStudio]
 
 [^MS_VisualStudio]: Dokumentation Microsoft Visual Studio, https://docs.microsoft.com/de-de/visualstudio/ide/using-intellisense?view=vs-2019
 
@@ -327,7 +327,7 @@ https://github.com/EWSoftware/SHFB
 
 Im folgenden soll beispielhaft auf die Anwendung von Doxygen eingegangen werden.
 
-![OOPGeschichte](img/17_ToolChain/Doyxgen_infoflow.png)<!-- width="80%" --> [^Doxygen]
+![OOPGeschichte](./img/17_ToolChain/Doyxgen_infoflow.png)<!-- width="80%" --> [^Doxygen]
 
 [^Doxygen]: Manual - Getting started, http://www.doxygen.nl/manual/starting.html
 
