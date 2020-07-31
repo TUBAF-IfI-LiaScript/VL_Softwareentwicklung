@@ -48,7 +48,7 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 3. Wann erledigen Sie denn üblicherweise Ihre Aufgaben?
 
-  ![OOPGeschichte](/img/19_Generics/ActivityDistribution.png)<!-- width="80%" -->
+  ![OOPGeschichte](./img/19_Generics/ActivityDistribution.png)<!-- width="80%" -->
 
 
 ## Motivation
