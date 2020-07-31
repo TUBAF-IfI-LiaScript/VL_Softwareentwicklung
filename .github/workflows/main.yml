@@ -35,7 +35,7 @@ jobs:
           sudo apt install pandoc
       - name: Run pandoc
         run: |
-          pandoc --toc --top-level-division=chapter -V geometry:margin=2cm -V linkcolor:blue --pdf-engine=xelatex --listings -H .github/workflows/listings.tex --include-in-header=.github/workflows/header.tex -o --output=output/script.pdf *.mdx
+          pandoc --toc --top-level-division=chapter -V geometry:margin=2cm -V linkcolor:blue --pdf-engine=xelatex --listings -H .github/workflows/listings.tex --include-in-header=.github/workflows/header.tex -o --output=output/script.tex *.mdx
       - uses: actions/upload-artifact@master
         with:
           name: output
