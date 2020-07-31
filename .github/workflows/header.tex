@@ -1,6 +1,7 @@
 \usepackage{pmboxdraw}
 \usepackage{amssymb}
 \usepackage{newunicodechar}
+
 \newunicodechar{└}{\textSFii}
 \newunicodechar{├}{\textSFviii}
 \newunicodechar{─}{\textSFx}
@@ -22,3 +23,5 @@
 \newunicodechar{┓}{\pmboxdrawuni{2513}}
 \newunicodechar{┻}{\pmboxdrawuni{253B}}
 \newunicodechar{♯}{\#}
+
+\newcommand{\passthrough}[1]{\lstset{mathescape=false}#1\lstset{mathescape=true}}
