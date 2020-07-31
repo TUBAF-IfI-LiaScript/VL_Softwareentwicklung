@@ -8,28 +8,36 @@ name: GeneratePdf
 on:
   push:
     branches:
-      - SoSe2020_generation
+      - SoSe2020
 
 jobs:
   convert_via_pandoc:
     runs-on: ubuntu-18.04
-    container: mirisbowring/texlive_ctan_full
+    container: 
+      image: docker://mirisbowring/texlive_ctan_full:2019
     steps:
       - name: Check out current repository
         uses: actions/checkout@v2
         with:
           ref: SoSe2020
-        # Hier ist es jetzt etwas kniffliger. Wir wollen an pandoc eine Liste
-        # alle relevanten Dateien übergeben. Dazu brauchen wir eine sogenannte
-        # Umgebungsvariable die wir FILELIST nennen. Ihr werden alle Dateinamen
-        # zugewiesen, die auf mdx enden.
-      - name: Run preprocessing and set environment variables
+        # Ausführen des Parsers, der bestimmte Elemente im LiaCode entfernt
+      - name: Run preprocessing
         run : |
           python3 .github/workflows/preprocessing.py
-          echo ::set-env name=FILELIST::$(ls *.mdx)
           mkdir output
-        # Aufruf eines Standard-Docker Containers, in dem pandoc (und Latex)
-        # läuft.
+        # Installation der notwendigen Pandoc tools
       - name: Install pandoc
         run: |
           sudo apt install pandoc
+      # Generierungsprozess
+      - name: Run pandoc markdown to tex
+        run: |
+          pandoc --toc --top-level-division=chapter -V geometry:margin=2cm -V linkcolor:blue --pdf-engine=xelatex --listings -H .github/workflows/listings.tex --include-in-header=.github/workflows/header.tex -f markdown -t latex -o output/script.tex *.mdx
+      - name: Run pandoc markdown to pdf
+        run: |
+          pandoc --toc --top-level-division=chapter -V geometry:margin=2cm -V linkcolor:blue --pdf-engine=xelatex --listings -H .github/workflows/listings.tex --include-in-header=.github/workflows/header.tex -o output/script.pdf *.mdx
+      # Speichern als Artifact
+      - uses: actions/upload-artifact@master
+        with:
+          name: output
+          path: output
