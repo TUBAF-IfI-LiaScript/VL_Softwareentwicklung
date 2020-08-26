@@ -22,7 +22,7 @@ for file in glob.glob("*.mdx"):
     with open(file, "w") as outfile:
         if file.endswith("00_Einfuehrung.mdx"):  # insert metadata for pandoc in first md file
             title = "C# Kurs TU Freiberg"
-            outfile.write("---\ntitle:\n  - {title}\nauthor:\n")
+            outfile.write(f"---\ntitle:\n  - {title}\nauthor:\n")
             os.system("git shortlog -ns --all > authors.txt")
             with open("authors.txt", "r") as authors:  # read in authors and write them into the yaml code
                 for line in authors:
