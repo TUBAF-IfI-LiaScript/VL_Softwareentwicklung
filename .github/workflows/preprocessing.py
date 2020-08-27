@@ -2,7 +2,7 @@ import glob, os
 import shutil
 import re
 
-blackList = ["{{", "******", "@Rextester"]
+blackList = ["{{", "******", "@Rextester", "@Tau"]
 
 for file in glob.glob("*.md"):
     if file != "README.md":
@@ -21,8 +21,8 @@ for file in glob.glob("*.mdx"):
 
     with open(file, "w") as outfile:
         if file.endswith("00_Einfuehrung.mdx"):  # insert metadata for pandoc in first md file
-            title = "C# Kurs TU Freiberg"
-            outfile.write(f"---\ntitle:\n  - {title}\nauthor:\n")
+            title = "**C# Kurs TU Freiberg**"
+            outfile.write(f"---\ntitle: |\n  {title}\n  https://github.com/SebastianZug/CsharpCourse\nauthor:\n")
             os.system("git shortlog -ns --all > authors.txt")
             with open("authors.txt", "r") as authors:  # read in authors and write them into the yaml code
                 for line in authors:
@@ -30,7 +30,8 @@ for file in glob.glob("*.mdx"):
                     name = line.split("\t")[1]
                     outfile.write(f"  - {name}\n")
 
-            outfile.write("papersize:\n  - a4\ngeometry:\n  - margin=2cm\n---\n\\maketitle")
+            outfile.write("papersize:\n  - a4\ngeometry:\n  - margin=2cm\n")
+            outfile.write("header-includes:\n  - \\usepackage{titling}\n  - \\pretitle{\\begin{center}\n    \\includegraphics[width=2cm]{img/Logo_TU_Freiberg.png}\\LARGE\\\\}\n  - \\posttitle{\\end{center}}\n---\n")
         outfile.write("".join(filtered))
 
 # pandoc  --toc --top-level-division=chapter -V geometry:margin=2cm --listings -H listings.tex -V linkcolor:blue --pdf-engine=xelatex -o doc.pdf *.mdx
