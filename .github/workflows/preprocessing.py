@@ -24,10 +24,9 @@ for file in glob.glob("*.mdx"):
             title = "**C# Kurs TU Freiberg**"
             outfile.write(f"---\ntitle: |\n  {title}\n  https://github.com/SebastianZug/CsharpCourse\nauthor:\n")
             with open("authors.txt", "r") as authors:  # read in authors and write them into the yaml code
-                print("Recognies authors: ")
+                print("Recognised authors: ")
                 for line in authors:
-                    line = line.strip()
-                    name = line.split("\t")[1]
+                    name = line.strip()
                     outfile.write(f"  - {name}\n")
                     print(name)
 
