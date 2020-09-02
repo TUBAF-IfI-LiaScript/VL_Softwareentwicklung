@@ -23,6 +23,8 @@ jobs:
         # Ausführen des Parsers, der bestimmte Elemente im LiaCode entfernt
       - name: Run preprocessing
         run : |
+          git shortlog -ns --all > authors.txt         # get all authors of git repository
+          cp authors.txt output/authors.txt
           python3 .github/workflows/preprocessing.py
           mkdir output
         # Installation der notwendigen Pandoc tools
