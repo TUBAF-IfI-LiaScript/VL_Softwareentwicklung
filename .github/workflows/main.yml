@@ -24,7 +24,7 @@ jobs:
       - name: Run preprocessing
         run : |
           mkdir output
-          git shortlog -ns --all | cut -c8- > authors.txt         # get all authors of git repository
+          git log --format='%aN' | sort -u  > authors.txt         # get all authors of git repository
           cp authors.txt output/authors.txt
           python3 .github/workflows/preprocessing.py
         # Installation der notwendigen Pandoc tools
