@@ -24,6 +24,7 @@ jobs:
       - name: Run preprocessing
         run : |
           mkdir output
+          git checkout SoSe2020
           git log --format='%aN' | sort -u  > authors.txt         # get all authors of git repository
           cp authors.txt output/authors.txt
           python3 .github/workflows/preprocessing.py
