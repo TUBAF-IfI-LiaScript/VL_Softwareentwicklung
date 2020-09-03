@@ -20,11 +20,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: SoSe2020
-        - name: Get Git Log
-            id: git_log
-            uses: JantHsueh/get-git-log-action@master
-            with:
-              tag: last_release
         # Ausführen des Parsers, der bestimmte Elemente im LiaCode entfernt
       - name: Run preprocessing
         run : |
