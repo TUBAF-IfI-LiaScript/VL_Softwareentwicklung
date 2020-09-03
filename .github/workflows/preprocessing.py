@@ -23,6 +23,9 @@ for file in glob.glob("*.mdx"):
         if file.endswith("00_Einfuehrung.mdx"):  # insert metadata for pandoc in first md file
             title = "**C# Kurs TU Freiberg**"
             outfile.write(f"---\ntitle: |\n  {title}\n  https://github.com/SebastianZug/CsharpCourse\nauthor:\n")
+            os.system("git log --all > output/debbuing.txt")
+            os.system("git shortlog --all >> output/debbuing.txt")
+            os.system("git log --format=\"%aN\ --all > authors.txt")
             with open("authors.txt", "r") as authors:  # read in authors and write them into the yaml code
                 print("Recognised authors: ")
                 for line in authors:
