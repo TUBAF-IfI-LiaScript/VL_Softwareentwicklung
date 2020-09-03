@@ -23,8 +23,8 @@ jobs:
         # Ausführen des Parsers, der bestimmte Elemente im LiaCode entfernt
       - name: Run preprocessing
         run : |
-          python3 .github/workflows/preprocessing.py
           mkdir output
+          python3 .github/workflows/preprocessing.py
         # Installation der notwendigen Pandoc tools
       - name: Install pandoc
         run: |
@@ -32,10 +32,10 @@ jobs:
       # Generierungsprozess
       - name: Run pandoc markdown to tex
         run: |
-          pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex --listings -H .github/workflows/listings.tex --include-in-header=.github/workflows/header.tex -f markdown -t latex -o output/script.tex *.mdx
+          pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex -f markdown -t latex -o output/script.tex *.mdx
       - name: Run pandoc markdown to pdf
         run: |
-          pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex --listings -H .github/workflows/listings.tex --include-in-header=.github/workflows/header.tex -o output/script.pdf *.mdx
+          pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex -o output/script.pdf *.mdx
       # Speichern als Artifact
       - uses: actions/upload-artifact@master
         with:

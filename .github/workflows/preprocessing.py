@@ -23,11 +23,9 @@ for file in glob.glob("*.mdx"):
         if file.endswith("00_Einfuehrung.mdx"):  # insert metadata for pandoc in first md file
             title = "**C# Kurs TU Freiberg**"
             outfile.write(f"---\ntitle: |\n  {title}\n  https://github.com/SebastianZug/CsharpCourse\nauthor:\n")
-            os.system("git shortlog -ns --all > authors.txt")
-            with open("authors.txt", "r") as authors:  # read in authors and write them into the yaml code
+            with open(".github/workflows/authors.txt", "r") as authors:  # read in authors and write them into the yaml code
                 for line in authors:
-                    line = line.strip()
-                    name = line.split("\t")[1]
+                    name = line.strip()
                     outfile.write(f"  - {name}\n")
 
             outfile.write("papersize:\n  - a4\ngeometry:\n  - margin=2cm\n")
