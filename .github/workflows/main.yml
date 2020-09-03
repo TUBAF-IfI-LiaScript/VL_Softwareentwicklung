@@ -26,6 +26,7 @@ jobs:
           mkdir output
           git checkout SoSe2020
           git log --format='%aN' --all | sort -u  > authors.txt   # get all authors of git repository
+          git log > output/debug.txt
           cp authors.txt output/authors.txt
           python3 .github/workflows/preprocessing.py
         # Installation der notwendigen Pandoc tools
