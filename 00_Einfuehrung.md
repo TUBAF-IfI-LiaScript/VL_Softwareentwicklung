@@ -6,10 +6,9 @@ version:  0.0.1
 language: de
 narrator: Deutsch Female
 
-import: https://raw.githubusercontent.com/liaScript/rextester_template/master/README.md
-        https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
+import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
         https://raw.githubusercontent.com/liaTemplates/DigiSim/master/README.md
-
+        https://github.com/liascript/CodeRunner
 script: https://cdn.jsdelivr.net/gh/liaTemplates/DigiSim/js/parser.min.js
         https://tilk.github.io/digitaljs/main.js
         https://s.plantuml.com/synchro2.min.js
@@ -44,7 +43,7 @@ namespace Rextester
     }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 ## Organisatorisches
 
