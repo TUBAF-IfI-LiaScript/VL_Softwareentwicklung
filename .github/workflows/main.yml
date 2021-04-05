@@ -1,19 +1,19 @@
-# GitHub Action, die aus den LiaScript-Materialien des Sommersemester 2020 ein
+# GitHub Action, die aus den LiaScript-Materialien des Sommersemester 2021 ein
 # Skript generiert
 name: GeneratePdf
 
 # Hier legen wir den Trigger für die Action fest.
-# "Wenn ein Push auf dem branch SoSe2020 realisert wird, werden die
+# "Wenn ein Push auf dem branch master realisert wird, werden die
 # nachfolgenden Schritte ausgeführt"
 on:
   push:
     branches:
-      - SoSe2020
+      - master
 
 jobs:
   convert_via_pandoc:
     runs-on: ubuntu-18.04
-    container: 
+    container:
       image: docker://mirisbowring/texlive_ctan_full:2019
     steps:
       - name: Check out current repository
