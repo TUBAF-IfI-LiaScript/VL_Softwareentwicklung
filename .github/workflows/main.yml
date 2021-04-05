@@ -19,7 +19,7 @@ jobs:
       - name: Check out current repository
         uses: actions/checkout@v2
         with:
-          ref: SoSe2020
+          ref: master
         # Ausführen des Parsers, der bestimmte Elemente im LiaCode entfernt
       - name: Run preprocessing
         run : |
