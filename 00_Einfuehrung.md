@@ -316,7 +316,7 @@ Prüfungsvorbereitung.
 + Stellen Sie Fragen, seinen Sie kommunikativ!
 + Geben Sie uns Rückmeldungen in Bezug auf die Geschwindigkeit, Erklärmuster, etc.
 + Organisieren Sie sich in *interdisziplinären* Arbeitsgruppen!
-+ Lösen Sie sich von vermeindlichen Grundwahrheiten *"in Python wäre ich drei mal schneller gewesen"*, *"VIM ... mehr Editor braucht kein Mensch!"* zu finden
++ Lösen Sie sich von vermeindlichen Grundwahrheiten *"in Python wäre ich drei mal schneller gewesen"*, *"VIM ... mehr Editor braucht kein Mensch!"*!
 
 *******************************************************************************
 
