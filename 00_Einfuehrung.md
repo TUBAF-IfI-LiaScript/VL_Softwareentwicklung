@@ -372,7 +372,7 @@ Und noch eine Zeile mit einer mathematischen Notation $a=cos(b)$!
 ```
 
 ----------------------------------------------------------------------------<h1>Überschrift</h1>
-<i>eine <em>Hervorhebung</em> in kursiver Umgebung</i>
+<i>eine <b>Hervorhebung</b> in kursiver Umgebung</i>
 <ul>
 <li>Punkt 1</li>
 <li>Punkt 2</li>
