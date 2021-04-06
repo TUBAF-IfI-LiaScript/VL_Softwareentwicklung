@@ -9,10 +9,8 @@ narrator: Deutsch Female
 import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
         https://raw.githubusercontent.com/liaTemplates/DigiSim/master/README.md
         https://github.com/liascript/CodeRunner
-script: https://cdn.jsdelivr.net/gh/liaTemplates/DigiSim/js/parser.min.js
-        https://tilk.github.io/digitaljs/main.js
-        https://s.plantuml.com/synchro2.min.js
-        https://github.com/liascript/CodeRunner`
+
+icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_Freiberg.svg
 -->
 
 # Einführung
@@ -132,6 +130,7 @@ Eine Baustelle waren die On-Board-Units (OBU), diese wurden zunächst nicht in a
 
 Jetzt wird es etwas komplizierter ... die Veranstaltung kombiniert nämlich zwei Vorlesungen:
 
+<!--data-type="none"-->
 |                 | _Softwareentwicklung (SEW)_            | _Einführung in die Softwareentwicklung (EiS)_ |
 | --------------- | -------------------------------- | --------------------------------------- |
 | Hörerkreis      | Fakultät 1 + interessierte Hörer | Fakultät 4 - Studiengang Engineering    |
@@ -149,6 +148,7 @@ Jetzt wird es etwas komplizierter ... die Veranstaltung kombiniert nämlich zwei
 
 **Struktur der Vorlesungen**
 
+<!--data-type="none"-->
 | Woche | Tag       | Inhalt der Vorlesung                              | Bemerkung            |
 |:----- | --------- |:------------------------------------------------- | -------------------- |
 | 1     | 5. April  | _Ostermontag_                                     |                      |
@@ -216,11 +216,11 @@ Die Übungen beginnen in der Woche zum 3. Mai! Dafür werden wir Aufgaben vorber
 Wie bringen Sie sich ein:
 
 > Wie können Sie sich einbringen?
-> * __Allgemeine praktische Fragen/Antworten__
+> * __Allgemeine praktische Fragen/Antworten__ ... in den genannten Foren bzw. in den Übungsveranstaltungen
 > * __Eigene Lösungen__ ... Präsentation der Implementierungen in den Übungen
-> * __Individuelle Fragen__ ... an die Übungsleiter
+> * __Individuelle Fragen__ ... an die Übungsleiter per Mail oder in einer individuellen Session
 
-
+<!--data-type="none"-->
 | Index | C#     | GitHub | Teamarbeit | Inhalte / Teilaufgaben                                                     | Woche |
 | ----- | ------ | ------ | ---------- | -------------------------------------------------------------------------- | ----- |
 | 1     | Basics | nein   | nein       | Toolchain, Entwicklungsfluss, Datentypen, Fehler, Ausdrücke, Programmfluss | 5-6   |
@@ -276,15 +276,25 @@ _Lösen Sie folgende Aufgabe mit Ihrem Team: ... _
 + Wie können wir sicherstellen, dass Code in jedem Fall kompiliert und Grundfunktionalitäten korrekt ausführt?
 + ...
 
+*******************************************************************************
+
+                                  {{5-6}}
+*******************************************************************************
+
 **Prüfungen**
 
 + Softwareentwicklung - Konventionelle Klausur / Programmieraufgabe in Zweier-Team
 + Einführung in die Softwareentwicklung - Teamprojekt und Projektpräsentationen
 
+> **In der Klausur werden neben den Programmierfähigkeiten und dem konzeptionellen Verständnis auch die Werkzeuge der Softwareentwicklung adressiert!**
+
+![Klausurergebnisse](./img/00_Einleitung/Klausur2020.png)
+
+
 
 *******************************************************************************
 
-                                    {{5-6}}
+                                    {{6-7}}
 *******************************************************************************
 
 **Zeitaufwand und Engagement**
@@ -303,15 +313,14 @@ Prüfungsvorbereitung.
 
 **Wie können Sie zum Gelingen der Veranstaltung beitragen**
 
-* Stellen Sie Fragen, seinen Sie kommunikativ!
-* Geben Sie uns Rückmeldungen in Bezug auf die Geschwindigkeit, Erklärmuster, etc.
-* Organisieren Sie sich in *interdisziplinären* Arbeitsgruppen!
-* Lösen Sie sich von vermeindlichen Grundwahrheiten _"in Python wäre ich drei mal schneller gewesen"_, _"VIM ... mehr Editor braucht kein Mensch"_.
-  zu finden
++ Stellen Sie Fragen, seinen Sie kommunikativ!
++ Geben Sie uns Rückmeldungen in Bezug auf die Geschwindigkeit, Erklärmuster, etc.
++ Organisieren Sie sich in *interdisziplinären* Arbeitsgruppen!
++ Lösen Sie sich von vermeindlichen Grundwahrheiten *"in Python wäre ich drei mal schneller gewesen"*, *"VIM ... mehr Editor braucht kein Mensch!"* zu finden
 
 *******************************************************************************
 
-                                    {{6-7}}
+                                    {{7-8}}
 *******************************************************************************
 
 **Literaturhinweise**
@@ -432,7 +441,7 @@ Beispiele:
 
 **Generierung von UML Diagrammen mit Hilfe von PlantUML**
 
-```
+```code Example.plantUML
 @startuml
 
 abstract class AbstractList
@@ -517,16 +526,18 @@ using System;
 
 namespace Rextester
 {
-    public class Program
+  public class Program
+  {
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
-        {
-            Console.WriteLine("Glück auf!");
-        }
+        Console.WriteLine("Glück auf!");
     }
+  }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+> **Frage:** Welche Unterschiede sehen Sie zwischen C#8 und C#9 Code schon jetzt?
 
 ****************************************************************************
 
@@ -542,10 +553,15 @@ Für den [Atom](https://atom.io/)-Editor von GitHub sind zwei LiaScript Plugins 
 
 ### Github
 
+Der Kurs selbst wird als "Projekt" entwickelt. Neben den einzelnen Vorlesungen finden Sie dort auch ein Wiki, Issues und die aggregierten Inhalte als automatisch generiertes Skript.
+
 Link zum GitHub des Kurses
 
-[https://github.com/SebastianZug/CsharpCourse](https://github.com/SebastianZug/CsharpCourse)
+[https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung)
 
+> **Hinweis:** Mit den Features von GitHub machen wir uns nach und nach vertraut.
+
+> **Hinweis:** Natürlich bestehen neben Github auch alternative Umsetzungen für das Projektmanagement wie das Open Source Projekt GitLab oder weitere kommerzielle Tools BitBucket, Google Cloud Source Repositories etc.
 
 ### Entwicklungsumgebungen
 
