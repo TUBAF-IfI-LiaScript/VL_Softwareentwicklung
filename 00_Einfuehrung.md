@@ -576,5 +576,7 @@ Link zum GitHub des Kurses
 
 1. Legen Sie sich einen GitHub Account an (sofern dies noch nicht geschehen ist).
 2. Installieren Sie einen Editor Ihrer Wahl auf Ihrem Rechner, mit dem Sie Markdown-Dateien komfortabel bearbeiten können.
-3. Recherchieren Sie weitere Softwarebugs. Dabei interessieren uns insbesondere solche, wo der konkrete Fehler direkt am Code nachvollzogen werden konnte. Halten Sie Ihre Erkenntnisse in dem dafür vorgesehenen Wiki fest.
-4. Fügen Sie im Wiki einen Link zu Ihrem Editor ein!
+3. Nutzen Sie das Wiki der Vorlesung um Ihre neuen Markdown-Kenntnisse zu erproben:
+
+    + Recherchieren Sie weitere Softwarebugs. Dabei interessieren uns insbesondere solche, wo der konkrete Fehler direkt am Code nachvollzogen werden konnte. 
+    + Fügen Sie eine kurze Referenz auf Ihren Lieblingseditor ein und erklären Sie, warum Sie diesen anderen Systemen vorziehen. Ergänzen Sie Links auf Tutorials und Videos, die anderen nützlich sein können.
