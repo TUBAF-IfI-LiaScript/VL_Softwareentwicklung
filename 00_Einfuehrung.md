@@ -1,9 +1,9 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
+author:   Sebastian Zug & André Dietrich & Fritz Apelt & `KoKoKotlin`
 email:    sebastian.zug@informatik.tu-freiberg.de
 
-version:  0.0.1
+version:  0.0.2
 language: de
 narrator: Deutsch Female
 comment:  Motivation der Vorlesung Softwareentwicklung
@@ -65,6 +65,12 @@ Studierende sollen ...
 > Anhand der Veranstaltung entwickeln Sie ein "Gefühl" für guten und schlechten
 > Code und hinterfragen den Softwareentwicklungsprozess.
 
+      {{1-2}}
+**Beispiel 1: Mariner 1 Steuerprogramm-Bug (1962)**
+
+      {{1-2}}
+![An Atlas-Agena 5 carrying the Mariner 1 spacecraft](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Atlas_Agena_with_Mariner_1.jpg/614px-Atlas_Agena_with_Mariner_1.jpg)[Atlas-Agena](#Referenzen)
+
     --{{1}}--
 Mariner 1 ging beim Start am 22. Juli 1962 durch ein fehlerhaftes Steuerprogramm
 verloren, als die Trägerrakete vom Kurs abkam und 293 Sekunden nach dem Start
@@ -74,11 +80,11 @@ handgeschriebenen Spezifikation eines Programms zur Steuerung des Antriebs
 einer fehlerhaften und potenziell gefährlichen Fehlsteuerung des Antriebs
 führte.
 
-      {{1}}
-![An Atlas-Agena 5 carrying the Mariner 1 spacecraft](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Atlas_Agena_with_Mariner_1.jpg/614px-Atlas_Agena_with_Mariner_1.jpg)
-
-      {{1}}
+      {{1-2}}
 > **Potentieller Lösungsansatz**: Testen & Dokumentation
+
+      {{2}}
+**Beispiel 2: Toll-Collect On-Board-Units (2003)**
 
     --{{2}}--
 Das Erfassungssystem für die Autobahngebühren für Lastkraftwagen sollte
@@ -93,7 +99,7 @@ der Geräte bestanden.
       {{2}}
 ********************************************************************************
 
-Die On-Board-Units
+Die On-Board-Units des Systems
 
 - reagierten nicht auf Eingaben
 - ließen sich nicht ausschalten
@@ -178,22 +184,23 @@ Vorlesungen:
 |    15 |  13. Juli |                                                   | ?                    |
 
 
-### Durchführung der Vorlesungen
+### Durchführung
 
-    --{{0}}--
+     {{0-1}}
+************************************************************************
 Als Plattform für die Online Vorlesung nutzen wir eine lokale Instanz von
 BigBlueButton. Alle Vorlesungen werden aufgezeichnet und stehen im Nachgang zur
 Verfügung. Den zugehörigen Link finden Sie auf der OPAL Webseite des Kurses.
+
 
 - Montags, 14:00 - 15:30
 - Dienstags, 7:30 - 9:00
 
 
-    --{{1}}--
 Die Materialien der Vorlesung sind als Open-Educational-Ressources konzipiert
 und stehen unter Github bereit.
 
-      {{1}}
+
 > Wie können Sie sich einbringen?
 >
 > * __Allgemeine theoretische Fragen/Antworten__ ... Dabei können Sie sich über
@@ -204,15 +211,15 @@ und stehen unter Github bereit.
 >   dann korrigieren Sie uns. Alle Materialien sind Open-Source. Senden Sie mir
 >   einen Pull-Request und werden Sie Mitautor.
 
+************************************************************************
 
-### Durchführung der Übungen
+     {{1-2}}
+************************************************************************
 
-    --{{0}}--
 Die Übungen bestehen aus selbständig zu bearbeitenden Aufgaben, wobei einzelne
 Lösungen in Videokonferenzen besprochen werden. Wir werden die Übungsaufgaben
 über die Plattform GitHub abwickeln.
 
-     {{0-1}}
 > Wie können Sie sich einbringen?
 >
 > * __Allgemeine praktische Fragen/Antworten__ ... in den genannten Foren bzw.
@@ -223,12 +230,10 @@ Lösungen in Videokonferenzen besprochen werden. Wir werden die Übungsaufgaben
 > * __Individuelle Fragen__ ... an die Übungsleiter per Mail oder in einer
 >   individuellen Session
 
-    --{{1}}--
 Die Übungen beginnen in der Woche zum 3. Mai! Dafür werden wir Aufgaben
 vorbereiten, mit denen die Inhalte der Vorlesung vertieft werden. Wir motivieren
 Sie sich dafür ein Gruppen von 2 Studierenden zu organisieren.
 
-     {{1-2}}
 <!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 815px;" -->
 ``` ascii
                    .-.       .-.
@@ -257,8 +262,6 @@ Sie sich dafür ein Gruppen von 2 Studierenden zu organisieren.
                         '-'
 ```
 
-
-    {{1-2}}
 <!--data-type="none"-->
 | Index | C#     | GitHub | Teamarbeit | Inhalte / Teilaufgaben                                                     | Woche |
 | ----- | ------ | ------ | ---------- | -------------------------------------------------------------------------- | :---: |
@@ -273,14 +276,11 @@ Sie sich dafür ein Gruppen von 2 Studierenden zu organisieren.
 | 6     | OOP    | ja     | ja         | Genererische Collections, Delegaten, Events                                | 14-15 |
 |       |        |        |            | *Anwendungsbeispiel:* ???????                                              |       |
 
-
-    --{{2}}--
 Obwohl Einstimmigkeit darüber besteht, dass kooperative Arbeit für Ingenieure
 Grundlage der täglichen Arbeitswelt ist, bleibt die Wissensvermittlung im Rahmen
 der Ausbildung nahezu aus.
 _Deshalb, Lösen Sie die folgenden Aufgaben mit Ihrem Team: ... _
 
-      {{2}}
 > **Spezifisches Ziel:** Wir wollen Sie für die Konzepte und Werkzeuge der
 > kollaborativen Arbeit bei der Softwareentwicklung "sensibilisieren".
 >
@@ -290,20 +290,18 @@ _Deshalb, Lösen Sie die folgenden Aufgaben mit Ihrem Team: ... _
 > - Wie können wir sicherstellen, dass Code in jedem Fall kompiliert und Grundfunktionalitäten korrekt ausführt?
 > - ...
 
+************************************************************************
 
 ### Prüfungen
 
-    --{{0}}--
 In der Klausur werden neben den Programmierfähigkeiten und dem konzeptionellen
 Verständnis auch die Werkzeuge der Softwareentwicklung adressiert!
 
-     {{0-1}}
 - **Softwareentwicklung:**
   Konventionelle Klausur / Programmieraufgabe in Zweier-Team
 
 - **Einführung in die Softwareentwicklung:**
   Teamprojekt und Projektpräsentationen
-
 
 
      {{1}}
@@ -386,6 +384,7 @@ Was sind die zentralen Tools unserer Veranstaltung?
 
 ### Markdown
 
+    {{1-2}}
 > Markdown wurde von John Gruber und Aaron Swartz mit dem Ziel entworfen, die
 > Komplexität der Darstellung so weit zu reduzieren, dass schon der Code sehr
 > einfach lesbar ist. Als Auszeichnungselemente werden entsprechend möglichst
@@ -399,7 +398,7 @@ Organisation von Textelementen (Zeichen, Wörtern, Absätzen) beschrieben. Dazu
 werden entsprechende "Schlüsselelemente" verwendet um den Text zu strukturieren.
 
 
-    {{1}}
+    {{1-2}}
 ********************************************************************************
 
 ```markdown HelloWorld.md
@@ -427,21 +426,18 @@ Und noch eine Zeile mit einer mathematischen Notation $a=cos(b)$!
 
 ********************************************************************************
 
-#### Quellen & Tools
+      {{2-3}}
+********************************************************************************
 
-    --{{0}}--
 Eine gute Einführung zu Markdown finden Sie zum Beispiel unter:
 
-     {{0-1}}
 * [MarkdownGuide](https://www.markdownguide.org/getting-started/)
 * [GitHubMarkdownIntro](https://guides.github.com/features/mastering-markdown/)
 
 
-    --{{1}}--
 Mit einem entsprechenden Editor und einigen Paketen macht das Ganze dann auch
 Spaß
 
-      {{1}}
 * Wichtigstes Element ist ein Previewer, der es Ihnen erlaubt "online" die
   Korrektheit der Eingaben zu prüfen
 * Tools zur Unterstützung komplexerer Eingaben wie zum Beispiel der Tabellen
@@ -449,6 +445,7 @@ Spaß
 * Visualisierungsmethoden, die schon bei der Eingabe unterstützen
 * Rechtschreibprüfung (!)
 
+********************************************************************************
 
 #### Vergleich mit HTML
 
@@ -512,10 +509,8 @@ umsetzen kann.
 \end{document}
 ```
 
-    --{{1}}--
 Das Ergebnis sieht dann wie folgt aus:
 
-      {{1}}
 ![pdflatexScreenshoot](./img/00_Einleitung/LatexScreenshot.png)
 
 #### **LiaScript**
@@ -526,6 +521,9 @@ Inhalte nicht mehr nur für ein statisches Medium (Papier/PDF) geschrieben
 werden. Warum sollte ein Lehrinhalt (vorallem in der Informatik), der vorraning
 am Tablet/Smartphone/Notebook konsumiert wird nicht interaktiv sein?
 
+       {{0-1}}
+*******************************************************************************
+
 LiaScript erweitert Markdown um interaktive Elemente wie:
 
 * Ausführbarer Code
@@ -535,14 +533,11 @@ LiaScript erweitert Markdown um interaktive Elemente wie:
 * Erweiterbarkeit durch JavaScript und Macros
 * ...
 
-
-##### Beispiele
-
-> Die folgenden Beispiele sollen einen kleinen Einblick in die in der Vorlesung
-> genutzten Features von LiaScript geben.
+*******************************************************************************
 
 
-###### 1. PlantUML
+           {{1-2}}
+*******************************************************************************
 
 **Einbindung von PlantUML zur Generierung von UML-Diagrammen**
 
@@ -579,14 +574,16 @@ annotation SuppressWarnings
 ```
 @plantUML.eval(png)
 
+*******************************************************************************
+
+                            {{2-3}}
+*******************************************************************************
 
 
-###### 2. Ausführbarer C# Code
+**Ausführbarer C# Code**
 
-    --{{0}}--
-Wichtig für uns sind die ausführbaren Code-Blöcke, die ich in der Vorlesung
-nutze, um Beispielimplementierungen zu evaluieren. Dabei werden zwei Formen
-unterschieden:
+    --{{2}}--
+Wichtig für uns sind die ausführbaren Code-Blöcke, die ich in der Vorlesung nutze, um Beispielimplementierungen zu evaluieren. Dabei werden zwei Formen unterschieden:
 
 **C# 9 mit dotnet Unterstützung**
 
@@ -643,13 +640,15 @@ namespace HelloWorld
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
----
-
 > **Frage:**
 > Welche Unterschiede sehen Sie zwischen C#8 und C#9 Code schon jetzt?
 
+*******************************************************************************
 
-##### Quellen & Tools
+                            {{3-4}}
+*******************************************************************************
+
+** Quellen & Tools**
 
 * Das Projekt: https://github.com/liascript/liascript
 * Die Webseite: https://liascript.github.io
@@ -669,6 +668,7 @@ namespace HelloWorld
   - Für den Einsatz anderer Editoren eignet sich auch der [LiaScript-DevServer](https://github.com/LiaScript/LiaScript-DevServer)
 
 
+*******************************************************************************
 
 ### GitHub
 
@@ -696,6 +696,8 @@ https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung
 
 * [Atom](https://atom.io)
 
+  !?[Tutorial](https://www.youtube.com/watch?v=EdBqjPSx8bA)
+
 * [Visual Studio Code](https://code.visualstudio.com/)
 
   !?[Tutorial](https://www.youtube.com/watch?v=rOzXt--TXLg)
@@ -705,7 +707,6 @@ https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung
   !?[C# Vim Development Setup](https://www.youtube.com/watch?v=qGl_Mb2C87c)
 
 * weitere ...
-
 
 
 ## Aufgaben
@@ -727,7 +728,9 @@ https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung
 Referenzen
 ============
 
+*[Atlas-Agena]* Wikimedia, Autor: NASA, [Wikimedia Link](https://de.wikipedia.org/wiki/Datei:Atlas_Agena_with_Mariner_1.jpg)
 
 Autoren
 ============
 
+@author
