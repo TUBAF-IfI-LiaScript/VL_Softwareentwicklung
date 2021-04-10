@@ -1,51 +1,32 @@
 <!--
 
 author:   Sebastian Zug & André Dietrich
-email:    Sebastian.Zug@informatik.tu-freiberg.de
+email:    sebastian.zug@informatik.tu-freiberg.de
+
 version:  0.0.1
 language: de
 narrator: Deutsch Female
+comment:  Motivation der Vorlesung Softwareentwicklung
+logo:     https://liascript.github.io/img/bg-showcase-1.jpg
+icon:     https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_Freiberg.svg
 
 import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
         https://github.com/liascript/CodeRunner
 
-icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_Freiberg.svg
--->
-
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://LiaScript.github.io/course/?URL)
 
 # Einführung
 
-TU Bergakademie Freiberg - Sommersemester 2021
+| Parameter                | Kursinformationen                            |
+| ------------------------ | --------------------------------- |
+| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`   |
+| **Hochschule:**          | `Technische Universität Freiberg` |
+| **Inhalte:**             | `Motivation der Vorlesung "Softwareentwicklung" und Beschreibung der Organisation der Veranstaltung`                                  |
+| **Link auf den GitHub:** |  [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md)                                |
+
+![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
-
-- [Aktuelle Vorlesung im Versionsmanagementsystem GitHub](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md)
-
-- [Interaktive Version in LiaScript](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md)
-
----------------------------------------------------------------------
-
-  --{{1}}--
-Kompilieren Sie das folgende Beispiel, indem Sie auf den `Ausführen`-Button
-klicken. Sie können das Beispiel auch verändern ...
-
-    {{1}}
-```csharp    HelloWorld.cs
-using System;
-
-namespace HelloWorld
-{
-  public class Program
-  {
-    public static void Main(string[] args)
-    {
-      Console.WriteLine("Glück auf!");
-    }
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
-
 
 ## Zielstellung der Veranstaltung
 
@@ -729,7 +710,6 @@ https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung
 
 ## Aufgaben
 
-
 - [ ] Legen Sie sich einen GitHub Account an (sofern dies noch nicht geschehen ist).
 - [ ] Installieren Sie einen Editor Ihrer Wahl auf Ihrem Rechner, mit dem Sie Markdown-Dateien komfortabel bearbeiten können.
 - [ ] Nutzen Sie das Wiki der Vorlesung um Ihre neuen Markdown-Kenntnisse zu erproben und versuchen Sie sich an folgenden Problemen:
@@ -741,3 +721,13 @@ https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung
 - Fügen Sie eine kurze Referenz auf Ihren Lieblingseditor ein und erklären Sie,
   warum Sie diesen anderen Systemen vorziehen. Ergänzen Sie Links auf Tutorials
   und Videos, die anderen nützlich sein können.
+
+## Anhang
+
+Referenzen
+============
+
+
+Autoren
+============
+
