@@ -1,9 +1,9 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Fritz Apelt & `KoKoKotlin`
+author:   Sebastian Zug, Galina Rudolf, André Dietrich, Fritz Apelt, `KoKoKotlin`
 email:    sebastian.zug@informatik.tu-freiberg.de
 
-version:  0.0.2
+version:  1.0.2
 language: de
 narrator: Deutsch Female
 comment:  Motivation der Vorlesung Softwareentwicklung
@@ -19,12 +19,14 @@ import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/RE
 
 # Einführung
 
-| Parameter                | Kursinformationen                            |
-| ------------------------ | --------------------------------- |
-| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`   |
-| **Hochschule:**          | `Technische Universität Freiberg` |
-| **Inhalte:**             | `Motivation der Vorlesung "Softwareentwicklung" und Beschreibung der Organisation der Veranstaltung`                                  |
-| **Link auf den GitHub:** |  [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md)                                |
+| Parameter                | Kursinformationen                                                                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
+| **Semester**                         |   `Sommersemester 2021`                                                                                                                                                                                         |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
+| **Inhalte:**             | `Motivation der Vorlesung "Softwareentwicklung" und Beschreibung der Organisation der Veranstaltung`                                                                                       |
+| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md) |
+| **Autoren**              | @author                                                                                                                                                                              |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
@@ -71,7 +73,9 @@ Studierende sollen ...
 **Beispiel 1: Mariner 1 Steuerprogramm-Bug (1962)**
 
       {{1-2}}
-![An Atlas-Agena 5 carrying the Mariner 1 spacecraft](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Atlas_Agena_with_Mariner_1.jpg/614px-Atlas_Agena_with_Mariner_1.jpg)[Atlas-Agena](#Referenzen)
+![An Atlas-Agena 5 carrying the Mariner 1 spacecraft](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Atlas_Agena_with_Mariner_1.jpg/614px-Atlas_Agena_with_Mariner_1.jpg)[^Atlas-Agena]
+
+[^Atlas-Agena]: wikimedia, Autor: NASA, [Link](https://de.wikipedia.org/wiki/Datei:Atlas_Agena_with_Mariner_1.jpg)
 
     --{{1}}--
 Mariner 1 ging beim Start am 22. Juli 1962 durch ein fehlerhaftes Steuerprogramm
@@ -724,15 +728,3 @@ https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung
 - Fügen Sie eine kurze Referenz auf Ihren Lieblingseditor ein und erklären Sie,
   warum Sie diesen anderen Systemen vorziehen. Ergänzen Sie Links auf Tutorials
   und Videos, die anderen nützlich sein können.
-
-## Anhang
-
-Referenzen
-============
-
-*[Atlas-Agena]* Wikimedia, Autor: NASA, [Wikimedia Link](https://de.wikipedia.org/wiki/Datei:Atlas_Agena_with_Mariner_1.jpg)
-
-Autoren
-============
-
-@author

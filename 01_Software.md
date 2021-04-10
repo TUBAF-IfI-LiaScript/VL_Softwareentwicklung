@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
-email:    zug@ovgu.de   & andre.dietrich@ovgu.de
-version:  0.0.1
+author:   Sebastian Zug, Galina Rudolf, André Dietrich, Christoph Pooch,`KoKoKotlin` & `Lina`
+email:    sebastian.zug@informatik.tu-freiberg.de
+version:  1.0.0
 language: de
 narrator: Deutsch Female
 
@@ -13,30 +13,31 @@ import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/RE
 icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_Freiberg.svg
 -->
 
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/01_Software.md)
+
 # Softwareentwicklung als Prozess
 
-**TU Bergakademie Freiberg - Sommersemester 2021**
+| Parameter                | Kursinformationen                                                                                                                                                                    |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2021`                                                                                                                                                                |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                    |
+| **Inhalte:**             | `Definition des Softwarebegriffes und Beschreibung der praktischen Entwicklungsumgebung `                                                                                            |
+| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/01_Software.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/01_Software.md) |
+| **Autoren**              | @author                                                                                                                                                                              |
 
-Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
-
-[https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/01_Software.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/01_Software.md)
-
-Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 00](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/01_Software.md)
+![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
 
 ## Softwareentwicklung
 
 
-                                    {{0-1}}
-*******************************************************************************
-
-**Worum geht es, was ist "Software"?**
+### Begriffsdefinition
 
 | Begriff               | Definitionsansatz                                                                                                                                |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Software als "Medium" | "Software war all das, was zum Funktionieren eines Computers notwendig, aber nicht Hardware ist."                                                |
+| Software als "Medium" | *"Software war all das, was zum Funktionieren eines Computers notwendig, aber nicht Hardware ist."*                                                |
 |                       | "Software ist sinnlich nicht wahrnehmbar ... . Sie ist komplex und besteht aus umfangreichen Texten"                                             |
 | Software als Ziel     | "Software macht den Computer nutzbar"                                                                                                            |
 |                       | "Software ermöglicht die Abbildung von Prozessen auf einem Rechner"                                                                              |
@@ -44,12 +45,7 @@ Die interaktive Form ist unter diese Link zu finden ->
 |                       | "Dabei sind Computerprogramme nicht nur als Beschreibung der auszuführenden Funktionen ... Vereinbarung zur Nutzung, ... Dokumentationsinhalte." |
 
 
-*******************************************************************************
-
-                                    {{1-2}}
-*******************************************************************************
-
-**Wie sieht der Lebenszyklus einer Software aus?**
+### Lebenszyklus einer Software
 
 > Ein Software-Lebenszyklus beschreibt den gesamten Prozess der Herstellung und
 > des Betriebs Implementierung ausgehend von der kundenseitigen Problemstellung
@@ -81,17 +77,16 @@ Welche Querbeziehungen ("Während der Tests wird erkannt, dass die Implementieru
 > und Anwendung von umfangreichen Softwaresystemen.“ [Balzert, S. 36]
 
 
-*******************************************************************************
-
-                                     {{2}}
-*******************************************************************************
+### Methodische Ziele
 
 **Was heißt das, "ingenieurmäßig" oder "standardisiert"?**
 
 Gemäß ISO 9126 gibt es die sechs folgenden Qualitätsmerkmale für
 Softwareprodukte:
 
-![ISO 9126](./img/01_Software/ISO_9126_quality.png) [Wiki9126](#7)
+![ISO 9126](./img/01_Software/ISO9126.png) [^Wiki9126]
+
+[^Wiki9126]: wikimedia, Autor Sae1962, Quality criteria according to ISO 9126, [Link](https://commons.wikimedia.org/wiki/File:ISO_9126_quality_(en).svg)
 
 Nachfolger ISO 25010: Zusätzlich
 
@@ -100,14 +95,11 @@ Nachfolger ISO 25010: Zusätzlich
 
 Die Norm kann als eine Art Checkliste verstanden werden.
 
-
-*******************************************************************************
-
 ## Und warum der ganze Aufwand?
 
-                                       {{0-3}}
-*******************************************************************************
+![](https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif)
 
+### Komplexität von Software
 
 Steigende Komplexität der Softwareprodukte ...
 
@@ -125,7 +117,9 @@ Steigende Komplexität der Softwareprodukte ...
 | F-35 Flugzeug        |    24.000.000 | 2013 |
 | Facebook             |    62.000.000 |      |
 
-Quelle unter anderem [Weforum](#7) und [Link] (https://informationisbeautiful.net/visualizations/million-lines-of-code/)
+Quelle unter anderem [^Weforum] und [Link] (https://informationisbeautiful.net/visualizations/million-lines-of-code/)
+
+[^Weforum]: Dragan Radovanovic, Kif Leswing, "Google runs on 5000 times more code than the original space shuttle", 2016, [Link](https://www.weforum.org/agenda/2016/07/google-runs-on-5000-times-more-code-than-the-original-space-shuttle?utm_content=buffer45d4c&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer)
 
 Und wann entsteht der Aufwand? Wann muss ein Team Kosten in die Entwicklung investieren?
 
@@ -139,7 +133,8 @@ Und wann entsteht der Aufwand? Wann muss ein Team Kosten in die Entwicklung inve
 | Erweiterung und Verbesserung         |             | 36%                   |
 | Fehlerbehebung                       |             | 12%                   |
 
-Zahlwerte aus einem Diagramm in [Lemburg1](#7)
+Zahlwerte aus einem Diagramm in [^Lemburg]
+
 *******************************************************************************
 
 
@@ -160,37 +155,50 @@ Zahlwerte aus einem Diagramm in [Lemburg1](#7)
 | Dokumentation            | Fehlt in der Regel                                      | zwingend erforlderlich, permanente Pflege                                 |
 | Planung und Organisation | Kaum Planung und Projektorganisation                    | zwingend erforderlich                                                     |
 
-motiviert aus [Lemburg2](#7)
+Darstellung entsprechenmotiviert aus [^Lemburg2].
+
+
+[^Lemburg2]: Prof. Dr. Thorsten Lemburg, Einführung in die Softwareentwicklung - Seminar: Softwareentwicklung in der Wissenschaft, [Link](https://wr.informatik.uni-hamburg.de/_media/teaching/wintersemester_2010_2011/siw-2011-lemburg-einfuehrung_in_die_softwareentwicklung-ausarbeitung.pdf)
 
 *******************************************************************************
 
+### Fehler in der Softwareentwicklung
 
-                                       {{2-3}}
-*******************************************************************************
+Die Zusammenfassung wurde durch die Ausführungen von [^Lemburg] motiviert
+
+1. Management
+
+    + Es wird mit der Codierung sofort angefangen.
+    + Eine Festlegung der Anforderungen/Qualitätsmerkmale fehlt
+    + Eine Abnahme der Phasenergebnisse erfolgt nicht
+    + Ein Vorgehensmodell fehlt, bzw. wird nicht verfolgt
+    + Die Schulung für die Software-Ersteller und -Anwender wird vernachlässigt oder als nichtnotwendig angesehen
+    + Die Terminvorgaben sind unrealistisch und nicht koordiniert.
+    + Begriffe werden nicht definiert
+
+2. Architektur
+
+    + Die Systemarchitektur ist nicht oder nur sehr umständlich erweiterbar (fehlende Datenkapselung, fehlende Modularität)
+
+3. Entwicklungfluss
+
+    + Die Auswahl der Werkzeuge/Methoden ist unzureichend vorbereitet
+    + Es wird nicht systematisch bzw. unzureichend getestet.
+    + Standards und Richtlinien werden nicht beachtet.
+
+4. Dokumentation
+
+    + Schlechte Namensvergabe wie z.B. File-, Klassen-, Methoden- und Variablennamen
+    + Die Dokumentation fehlt bzw. ist veraltet, unzureichend oder nicht adäquat
 
 
-**Fehler in der Softwareentwicklung**
+[^Lemburg]: Prof. Dr. Thorsten Lemburg, Einführung in die Softwareentwicklung,
+[Link](https://wr.informatik.uni-hamburg.de/_media/teaching/wintersemester_2010_2011/siw-2011-lemburg-einfuehrung_in_die_softwareentwicklung-druckversion.pdf)
 
-1. Es wird mit der Codierung sofort angefangen.
-2. Es wird nicht systematisch bzw. unzureichend getestet.
-3. Eine Festlegung der Anforderungen/Qualitätsmerkmale fehlt
-4. Standards und Richtlinien werden nicht beachtet
-5. Die Dokumentation fehlt bzw. ist veraltet, unzureichend oder nicht adäquat
-6. Ein Vorgehensmodell fehlt, bzw. wird nicht verfolgt
-7. Eine Abnahme der Phasenergebnisse erfolgt nicht
-8. Schlechte Namensvergabe wie z.B. File-, Klassen-, Methoden- und Variablennamen
-9. Die Systemarchitektur ist nicht oder nur sehr umständlich erweiterbar (fehlende Datenkapselung, fehlende Modularität)
-10. Die Schulung für die Software-Ersteller und -Anwender wird vernachlässigt oder als nichtnotwendig angesehen
-11. Die Terminvorgaben sind unrealistisch
-12. Begriffe werden nicht definiert
-13. Die Auswahl der Werkzeuge/Methoden ist unzureichend vorbereitet
-
-[Lemburg1](#7)
-
-*******************************************************************************
+### Konsequenzen
 
 
-                                     {{3-4}}
+                                     {{0-1}}
 *******************************************************************************
 
 **Ariane Jungfernflug**
@@ -202,7 +210,10 @@ der Software der Steuereinheit plötzlich vom Kurs abkam und sich kurz darauf
 selbst zerstörte. Vier Cluster-Forschungssatelliten zur Untersuchung des
 Erdmagnetfelds gingen dabei verloren (Schaden 290 Millionen Euro).
 
-![Ariane](./img/01_Software/Ariane.jpg)<!-- width="80%" --> [Golem](#7)
+![Ariane](./img/01_Software/Ariane88.png) [^Ariane88]
+
+[^Ariane88]: Wikimedia, Autor Phrd, Fragment fallout zone of failed Ariane 501 launch. [Link](http://www.esa.int/esapub/bulletin/bullet89/images/dalm89f4.gif, https://commons.wikimedia.org/wiki/File:Ariane_501_Fallout_Zone.svg)
+
 
 ```ada
 -- Overflow is correctly handled for the vertical component
@@ -222,86 +233,101 @@ P_M_DERIVE(T_ALG.E_BH) := UC_16S_EN_16NS(TBD.T_ENTIER_16S
                                    G_M_INFO_DERIVE(T_ALG.E_BH));
 ```
 
+*******************************************************************************
+
+
+                                     {{1-2}}
+*******************************************************************************
+
 **Mars Rover**
 
 Mars Pathfinder war ein US-amerikanischer Mars-Lander, der 1996 von der NASA eingesetzt wurde. Er brachte 1997 den ersten erfolgreichen Mars-Rover Sojourner auf die Marsoberfläche.
 
-Bis zur letzten Übertragung am 27. September 1997 sendete Mars Pathfinder 16.500
-von der Landeeinheit und 550 vom Rover aufgenommene Bilder sowie mehr als 15
-chemische Analysen von Boden und Gestein zur Erde zurück, außerdem ausführliche
-Wetterdaten. Als wahrscheinlichste Ursache für den Ausfall der Sonde wird
-vermutet, dass die Batterien bei den tiefen Nachttemperaturen auf der Oberfläche
-des Mars eingefroren sind.
+![Mars Rover](./img/01_Software/Mars_pathfinder_panorama_large.jpg)[^NasaMars]
 
-![Mars Rover](./img/01_Software/MarsRoverProblem.png)<!-- width="80%" -->
+[^NasaMars]: wikimedia, Autor NASA/JPL, Panoramic image from Mars Pathfinder mission, public domain, as NASA is a government institution, [Link](https://commons.wikimedia.org/wiki/File:Mars_pathfinder_panorama_large.jpg)
 
-[http://people.cs.ksu.edu/~hatcliff/842/Docs/Course-Overview/pathfinder-robotmag.pdf](http://people.cs.ksu.edu/~hatcliff/842/Docs/Course-Overview/pathfinder-robotmag.pdf)
+Nach dem Beginn der Aufzeichnung von meteorologischen Daten mit dem Sojourner traten plötzlich scheinbar zufällige System-Zurücksetzungen auf. Das Betriebssystem bootete neu, was mit einem Datenverlust einher ging.
+Diese Fehler waren aber auch schon auf der Erde aufgetreten ...
 
+Durch Analyse des Logbuches zu diesem Zeitpunkt konnte festgestellt werden, dass es bei der Programmierung von "Sojourner" ein Problem gab, [Prioritäten-Inversion](https://de.wikipedia.org/wiki/Priorit%C3%A4tsinversion) genannt.
 
-**Toll Connect**
-
-Die Gebührenerhebung für LKW funktioniert auf deutschen Autobahn nach drei Methoden:
-1. Buchung über das Internet vor Fahrtantritt,
-2. Bezahlung an sogenannten „Mautstellen-Terminals“ oder
-3. vollautomatische Abrechnung durch den Einsatz des GPS-Systems, die den Einbau von sogenannten On-Board-Units (OBU) erforderlich macht.
-
-Mit dem Start des Lkw schaltet sich die OBU ein und lokalisiert die Position
-des Fahrzeugs mittels Satellitennavigation. Die dabei gesammelten Daten werden
-per Mobilfunk in ein Rechenzentrum übermittelt und dort für die
-Rechnungsstellung verarbeitet.
-
-Um eine Kontrolle sicherzustellen wurden zum einen Lkws an den ca. 300 Kontrollbrücken fotografiert, zum anderen durch ca. 450 mobile Kontrollstellen überprüft. Die gewonnenen Daten werden mit den Daten im Zentralcomputer abgeglichen und ggf. entsprechende Maßnahmen eingeleitet.
-
-Softwaretechnische Probleme bei der Einführung 2003:
-
-* Die Maut-Terminals stürzten aufgrund von Software-Fehlern ab.
-* Systemfehler in den On-Board-Units
-* Schwierigkeiten bei der Systemintegration, dem korrekten Zusammenspiel aller Hardware- und Software-Komponenten.
-* Fehler bei der Erfassung der Kennzeichen
+Weitere Informationen unter [What the media coudn't tell you about Mars Pathfinder](http://people.cs.ksu.edu/~hatcliff/842/Docs/Course-Overview/pathfinder-robotmag.pdf)
 
 *******************************************************************************
 
-                                    {{4-6}}
+
+                                     {{2-3}}
 *******************************************************************************
-**Und im Kleinen ...**
 
-Das folgende anschauliche Beispiel und die zugehörige Analyse entstammt der
-Vorlesung "Software Engineering" von Prof. Dr. Schürr, TU Darmstadt.
+**Weiteres Beispiel**
 
-```pascal
-program SORT;
-var a, b: file of integer;
-    Feld: array [ 1 .. 10 ] of integer;
-    i, j, k, l : integer
-begin
-    open ( a, ‘/Zahlen/Datei’);
-    i := 1;
-    while not eof ( a ) do
-    begin
-        read ( a, Feld [ i ] );
-        i := i + 1
-    end;
-    l := i - 1;
-    open ( b, ‘/Zahlen/Datei‘);
-    for i := 2 to l do
-    begin
-        for j := l downto i do
-            if Feld [ j - 1 ] > Feld [ j ] then
-            begin
-                k := Feld [j - 1];
-                Feld [j - 1] := Feld[ j ];
-                Feld [ j ] := k
-            end;
-        write ( b , Feld [ i - 1 ] )
-    end
-end SORT;
+
+Frank Wunderlich-Pfeiffer, "In den Neunzigern stürzte alles ab",
+[Golem](https://www.golem.de/news/softwarefehler-in-der-raumfahrt-in-den-neunzigern-stuerzte-alles-ab-1511-117537.html)
+
+*******************************************************************************
+
+### Und im Kleinen ...
+
+                                     {{0-3}}
+*******************************************************************************
+
+Das folgende anschauliche Beispiel und die zugehörige Analyse ist durch ein Beispiel der Vorlesung "Software Engineering" von Prof. Dr. Schürr, (TU Darmstadt) motiviert.
+
+> **Achtung:** Das folgende Codebeispiel enthält eine Fülle von Fehlern!
+
+```c AllesFalsch.c
+#include <stdio.h>
+
+FILE *fp;
+
+void main()
+{
+    fp = fopen("numbers.txt", "r");
+    int a[10];
+    int num = 0, l = 0;
+
+    while(1){
+      if (fscanf(fp, "%d", &num) == 1) {
+          a[l] = num;
+          l++;
+      } else {
+          break;
+      }
+    }
+    for(int i=0; i<l; i++)
+        printf("%5i ",a[i]);
+    printf("\n");
+
+    int aux;
+    for(int i=2; i<l; i++){
+      for(int j=l; j>i; j--){
+        if (a[j-1] > a[j]){
+          aux = a[j-1];
+          a[j-1] = a[j];
+          a[j] = aux;
+        }
+      }
+    }
+    for(int i=0; i<l; i++)
+        printf("%5i ",a[i]);
+
+    printf("\nAus Maus!\n");
+}
 ```
+
+> **Aufgabe:** Lesen Sie den Code, erklären Sie die Aufgabe, die er löst und identifizieren Sie Fehlerquellen.
+
+
+*******************************************************************************
+
+                                    {{1-2}}
+*******************************************************************************
 
 Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 
-*******************************************************************************
 
-                                    {{4-5}}
 | Aspekt                 | Bewertung |
 | ---------------------- | --------- |
 | Funktionalität         | ?         |
@@ -311,15 +337,21 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 | Wartungsfreundlichkeit |           |
 | Übertragbarkeit        |           |
 
-                                     {{5}}
-| Aspekt                 | Bewertung                                                                             |
-| ---------------------- | ------------------------------------------------------------------------------------- |
-| Funktionalität         | feste Feldlänge, das Programm stürzt bei mehr als 10 Einträgen ab                     |
-| Zuverlässigkeit        | mehrfaches Öffnen ein und der selben Datei, keine Überprüfung der Exisitenz der Datei |
-| Benutzbarkeit          | im Programmcode enthaltene Dateinamen, feste Feldlänge                                |
-| Effizienz              | quadratischer Aufwand der Sortierung                                                  |
-| Wartungsfreundlichkeit | fehlende Dokumentation, unverständliche Variablenbezeichner                           |
-| Übertragbarkeit        |                                                                                       |
+*******************************************************************************
+
+                                     {{2}}
+*******************************************************************************
+
+| Aspekt                 | Bewertung                                                         |
+| ---------------------- | ----------------------------------------------------------------- |
+| Funktionalität         | feste Feldlänge, das Programm stürzt bei mehr als 10 Einträgen ab |
+| Zuverlässigkeit        | keine Überprüfung der Existenz der Datei, kein Schließen der Datei                          |
+| Benutzbarkeit          | im Programmcode enthaltene Dateinamen, feste Feldlänge            |
+| Effizienz              | quadratischer Aufwand der Sortierung                              |
+| Wartungsfreundlichkeit | fehlende Dokumentation, unverständliche Variablenbezeichner, redundante Codeelemente       |
+| Übertragbarkeit        |                                                                   |
+
+*******************************************************************************
 
 ## Herausforderungen
 
@@ -352,7 +384,7 @@ Hier ist eine koordinierte Interaktion und Kommunikation notwendig!
 
 **Warum ist Softwareentwicklung so herausfordernd**
 
-* Die Größe der zu lösenden Probleme. Software ist nicht einfacher, als die Probleme die sie löst. Je größer und schwieriger die Software, desto aufwendiger und schwieriger ist die Entwicklung.
+* Die Größe der zu lösenden Probleme. Software ist nicht einfacher, als die Probleme, die sie löst. Je größer und schwieriger die Software, desto aufwendiger und schwieriger ist die Entwicklung.
 * Die Tatsache, dass Software ein immaterielles Produkt ist. Die Immaterialität macht das Arbeiten mit Software schwieriger als dasjenige mit materiellen Produkten vergleichbarer Komplexität, da die Risiken auch schwerer zu erkennen sind.
 * Sich permanent verändernde Ziele aufgrund der Evolution. Schon das Bestimmen und Erreichen fixierter Ziele bei der Entwicklung ist keine leichte Aufgabe. Sich verändernde Ziele machen das ganze nochmal um eine Größenordnung schwieriger.
 * Fehler infolge von Fehleinschätzungen zur Skalierung ("was im Kleinen geht, geht genauso im Großen"). Software-Entwicklung wird daher unbewusst meist als viel einfacher eingeschätzt, als sie tatsächlich ist. Dies führt zu unrealistischen Erwartungen und zu von Beginn an zu tiefen Kosten- und Terminschätzungen.
@@ -362,13 +394,17 @@ Hier ist eine koordinierte Interaktion und Kommunikation notwendig!
 
 ## Ansätze zur Strukturierung der Aufgaben
 
+                                     {{0}}
+*******************************************************************************
+
 *Erweitertes Wasserfallmodell*
 
 <!--
 style="width: 100%; max-width: 760px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
-  Anforderungen                         Problemanalyse, Systemspezifikation
+
+ Anforderungen                          Problemanalyse, Systemspezifikation
    \
     Entwurf                             Grobentwurf, Feinentwurf
      \
@@ -397,7 +433,11 @@ Nachteile:
 * Frühes festschreiben der Anforderungen ist sehr problematisch und kann zu teuren Änderungen führen
 * Fehler werden eventuell erst sehr spät erkannt und müssen mit erheblichen Aufwand  entfernt werden
 
-------------------------------------------------------------------------
+*******************************************************************************
+
+                                     {{1}}
+*******************************************************************************
+
 *V-Modell*
 
 <!--
@@ -435,13 +475,18 @@ Nachteile:
 * Die im V-Modell definierten Rollen (bis zu 25) sind für gängige Softwareentwicklungen nicht realistisch
 * explizite Werkzeuge notwendig
 
-------------------------------------------------------------------------
+*******************************************************************************
+
+                                     {{2}}
+*******************************************************************************
 
 Die Nachteile aus den sehr statisch ausgerichteten Modellen lassen sich für größere Projekte kaum umsetzen. Modernere Ansätze lösen den stringenten Ablauf auf und fokussieren einem schnelleren Einsatz: *Agile Softwareentwicklung*, *Rational Unified Process*, *Spiralmodell*
 
 Weitere Informationen zum Beispiel unter
 
 https://www.dev-insider.de/was-ist-agile-softwareentwicklung-a-569187/
+
+*******************************************************************************
 
 ## Ok, wir brauchen Unterstützung
 
@@ -488,20 +533,3 @@ Texteditor vs. Integred development environment (IDE)
 *******************************************************************************
 
 ## Aufgaben
-
-1.
-
-## Anhang
-
-**Referenzen**
-
-*[Golem]* Frank Wunderlich-Pfeiffer, "In den Neunzigern stürzte alles ab",
-[Golem](https://www.golem.de/news/softwarefehler-in-der-raumfahrt-in-den-neunzigern-stuerzte-alles-ab-1511-117537.html)
-
-*[Wiki9126]* Wikipedia "ISO/IEC 9126", Autor *Sae1962*
-
-*[Lemburg1]* Prof. Dr. Thorsten Lemburg, Einführung in die Softwareentwicklung,
-[Link](https://wr.informatik.uni-hamburg.de/_media/teaching/wintersemester_2010_2011/siw-2011-lemburg-einfuehrung_in_die_softwareentwicklung-druckversion.pdf)
-
-*[Weforum]*
-Dragan Radovanovic, Kif Leswing, "Google runs on 5000 times more code than the original space shuttle", 2016, [Link](https://www.weforum.org/agenda/2016/07/google-runs-on-5000-times-more-code-than-the-original-space-shuttle?utm_content=buffer45d4c&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer)

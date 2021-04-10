@@ -1,3 +1,5 @@
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://LiaScript.github.io/course/?URL) ![GitHub contributors](https://img.shields.io/github/contributors/TUBAF-IfI-LiaScript/VL_Softwareentwicklung)
+
 # Übersicht zur Vorlesung (Sommersemester 2021)
 
 | Woche | Tag       | Inhalt der Vorlesung                              |
@@ -31,4 +33,4 @@
 | 14    | 5. Juli   | Threadkonzepte in C#                              |
 |       | 6. Juli   | Taskmodell                                        |
 | 15    | 12. Juli  | Language Integrated Query                         |
-|       | 13. Juli  | Language Integrated Query Beispiele               |
+|       | 13. Juli  |                                                   |
