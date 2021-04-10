@@ -13,6 +13,8 @@ icon:     https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakadem
 import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
         https://github.com/liascript/CodeRunner
 
+-->
+
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://LiaScript.github.io/course/?URL)
 
 # Einführung
