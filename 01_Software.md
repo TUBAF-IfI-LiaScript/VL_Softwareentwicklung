@@ -22,7 +22,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                      |
 | **Semester**             | `Sommersemester 2021`                                                                                                                                                                |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                    |
-| **Inhalte:**             | `Definition des Softwarebegriffes und Beschreibung der praktischen Entwicklungsumgebung `                                                                                            |
+| **Inhalte:**             | `Definition des Softwarebegriffes und der Herausforderungen `                                                                                            |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/01_Software.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/01_Software.md) |
 | **Autoren**              | @author                                                                                                                                                                              |
 
@@ -37,12 +37,12 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 | Begriff               | Definitionsansatz                                                                                                                                |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Software als "Medium" | *"Software war all das, was zum Funktionieren eines Computers notwendig, aber nicht Hardware ist."*                                                |
-|                       | "Software ist sinnlich nicht wahrnehmbar ... . Sie ist komplex und besteht aus umfangreichen Texten"                                             |
-| Software als Ziel     | "Software macht den Computer nutzbar"                                                                                                            |
-|                       | "Software ermöglicht die Abbildung von Prozessen auf einem Rechner"                                                                              |
-| Software als Prozess  | "Software ist die Idee, die Lösung, die man sich für ein Problem ausgedacht hat, das Verfahren, das helfen soll ..."                             |
-|                       | "Dabei sind Computerprogramme nicht nur als Beschreibung der auszuführenden Funktionen ... Vereinbarung zur Nutzung, ... Dokumentationsinhalte." |
+| Software als "Medium" | *Software [ist] all das, was zum Funktionieren eines Computers notwendig, aber nicht Hardware ist.*                                                |
+|                       | *Software ist sinnlich nicht wahrnehmbar ... . Sie ist komplex und besteht aus umfangreichen Texten*                                             |
+| Software als Ziel     | *Software macht den Computer nutzbar*                                                                                                            |
+|                       | *Software ermöglicht die Abbildung von Prozessen auf einem Rechner*                                                                             |
+| Software als Prozess  | *Software ist die Idee, die Lösung, die man sich für ein Problem ausgedacht hat, das Verfahren, das helfen soll ...*                             |
+|                       | *Dabei sind Computerprogramme nicht nur als Beschreibung der auszuführenden Funktionen ... Vereinbarung zur Nutzung, ... Dokumentationsinhalte.* |
 
 
 ### Lebenszyklus einer Software
@@ -59,23 +59,23 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 5. Markteinführung
 6. Pflege/Wartung
 
-Welche Querbeziehungen ("Während der Tests wird erkannt, dass die Implementierung Mängel aufweist.") zwischen den einzelenn Stufen sehen Sie?
+Welche Querbeziehungen ("Während der Tests wird erkannt, dass die Implementierung Mängel aufweist.") zwischen den einzelnen Stufen sehen Sie?
 
 **Welche Definitionen ergeben sich daraus für den Entwicklungsprozess?**
 
-*Tessen Freund: Software Engineering durch Modellierung wissensintensiver Entwicklungsprozesse, S. 25*
-[Link google books](http://books.google.de/books?id=2HPldlxhBOkC&pg=PA25#v=onepage&q&f=false)
-
-> Unter dem Begriff Softwareentwicklung versteht man die Konzeption
+> "Unter dem Begriff Softwareentwicklung versteht man die Konzeption
 > und standardisierte Umsetzung von Softwareprojekten und die damit
-> verbundenen Prozesse.
+> verbundenen Prozesse." [^Freund, S. 25]
 
 ... oder insbesondere auf große Projekte zielend
 
 > „Zielorientierte Bereitstellung und systematische Verwendung von Prinzipien,
 > Methoden und Werkzeugen für die arbeitsteilige, ingenieurmäßige Entwicklung
-> und Anwendung von umfangreichen Softwaresystemen.“ [Balzert, S. 36]
+> und Anwendung von umfangreichen Softwaresystemen.“ [^Balzert, S. 36]
 
+[^Freund]: Tessen Freund: Software Engineering durch Modellierung wissensintensiver Entwicklungsprozesse, Dissertation, [Link google books](http://books.google.de/books?id=2HPldlxhBOkC&pg=PA25#v=onepage&q&f=false)
+
+[^Balzert]: Helmut Balzert: Lehrbuch der Softwaretechnik: Basiskonzepte und Requirements Engineering, 2009
 
 ### Methodische Ziele
 
@@ -84,9 +84,9 @@ Welche Querbeziehungen ("Während der Tests wird erkannt, dass die Implementieru
 Gemäß ISO 9126 gibt es die sechs folgenden Qualitätsmerkmale für
 Softwareprodukte:
 
-![ISO 9126](./img/01_Software/ISO9126.png) [^Wiki9126]
+![ISO 9126](./img/01_Software/ISO9126.png)
 
-[^Wiki9126]: wikimedia, Autor Sae1962, Quality criteria according to ISO 9126, [Link](https://commons.wikimedia.org/wiki/File:ISO_9126_quality_(en).svg)
+[^Wiki9126]
 
 Nachfolger ISO 25010: Zusätzlich
 
@@ -95,11 +95,16 @@ Nachfolger ISO 25010: Zusätzlich
 
 Die Norm kann als eine Art Checkliste verstanden werden.
 
+[^Wiki9126]: wikimedia: Autor Sae1962, Quality criteria according to ISO 9126, [Link](https://commons.wikimedia.org/wiki/File:ISO_9126_quality_(en).svg)
+
 ## Und warum der ganze Aufwand?
 
 ![](https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif)
 
 ### Komplexität von Software
+
+                                  {{0-1}}
+*******************************************************************************
 
 Steigende Komplexität der Softwareprodukte ...
 
@@ -111,15 +116,18 @@ Steigende Komplexität der Softwareprodukte ...
 | Space shuttle        |       400.000 |      |
 | Windows 3.1          |     2.300.000 | 1992 |
 | HD DVD Player (XBox) |     4.500.000 | 2001 |
-| Windows 7            |               |      |
-| Firefox              |     9.900.000 |      |
+| Firefox              |     9.900.000 | 2010 |
 | Android              |    12.000.000 |      |
 | F-35 Flugzeug        |    24.000.000 | 2013 |
 | Facebook             |    62.000.000 |      |
+| Autonomes Fahrzeug   |   100.000.000 |      |
 
-Quelle unter anderem [^Weforum] und [Link] (https://informationisbeautiful.net/visualizations/million-lines-of-code/)
+Quelle unter anderem [^Weforum] und [^McCandless]
 
-[^Weforum]: Dragan Radovanovic, Kif Leswing, "Google runs on 5000 times more code than the original space shuttle", 2016, [Link](https://www.weforum.org/agenda/2016/07/google-runs-on-5000-times-more-code-than-the-original-space-shuttle?utm_content=buffer45d4c&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer)
+*******************************************************************************
+
+                                  {{1-2}}
+*******************************************************************************
 
 Und wann entsteht der Aufwand? Wann muss ein Team Kosten in die Entwicklung investieren?
 
@@ -138,7 +146,7 @@ Zahlwerte aus einem Diagramm in [^Lemburg]
 *******************************************************************************
 
 
-                                       {{1-3}}
+                                       {{2-3}}
 *******************************************************************************
 
 > **Merke:** Die Entwicklung kleiner Programme unterscheidet sich von der
@@ -155,12 +163,16 @@ Zahlwerte aus einem Diagramm in [^Lemburg]
 | Dokumentation            | Fehlt in der Regel                                      | zwingend erforlderlich, permanente Pflege                                 |
 | Planung und Organisation | Kaum Planung und Projektorganisation                    | zwingend erforderlich                                                     |
 
-Darstellung entsprechenmotiviert aus [^Lemburg2].
+Darstellung entsprechen motiviert aus [^Lemburg2].
 
+
+*******************************************************************************
 
 [^Lemburg2]: Prof. Dr. Thorsten Lemburg, Einführung in die Softwareentwicklung - Seminar: Softwareentwicklung in der Wissenschaft, [Link](https://wr.informatik.uni-hamburg.de/_media/teaching/wintersemester_2010_2011/siw-2011-lemburg-einfuehrung_in_die_softwareentwicklung-ausarbeitung.pdf)
 
-*******************************************************************************
+[^McCandless] David McCandless [https://informationisbeautiful.net/visualizations/million-lines-of-code/)] (https://informationisbeautiful.net/visualizations/million-lines-of-code/)
+
+[^Weforum]: Dragan Radovanovic, Kif Leswing, "Google runs on 5000 times more code than the original space shuttle", 2016, [Link](https://www.weforum.org/agenda/2016/07/google-runs-on-5000-times-more-code-than-the-original-space-shuttle?utm_content=buffer45d4c&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer)
 
 ### Fehler in der Softwareentwicklung
 
@@ -172,7 +184,7 @@ Die Zusammenfassung wurde durch die Ausführungen von [^Lemburg] motiviert
     + Eine Festlegung der Anforderungen/Qualitätsmerkmale fehlt
     + Eine Abnahme der Phasenergebnisse erfolgt nicht
     + Ein Vorgehensmodell fehlt, bzw. wird nicht verfolgt
-    + Die Schulung für die Software-Ersteller und -Anwender wird vernachlässigt oder als nichtnotwendig angesehen
+    + Die Schulung für die Software-Ersteller und -Anwender wird vernachlässigt oder als nicht notwendig angesehen
     + Die Terminvorgaben sind unrealistisch und nicht koordiniert.
     + Begriffe werden nicht definiert
 
@@ -195,7 +207,7 @@ Die Zusammenfassung wurde durch die Ausführungen von [^Lemburg] motiviert
 [^Lemburg]: Prof. Dr. Thorsten Lemburg, Einführung in die Softwareentwicklung,
 [Link](https://wr.informatik.uni-hamburg.de/_media/teaching/wintersemester_2010_2011/siw-2011-lemburg-einfuehrung_in_die_softwareentwicklung-druckversion.pdf)
 
-### Konsequenzen
+### Konsequenzen von Fehlern im Prozess
 
 
                                      {{0-1}}
@@ -212,17 +224,14 @@ Erdmagnetfelds gingen dabei verloren (Schaden 290 Millionen Euro).
 
 ![Ariane](./img/01_Software/Ariane88.png) [^Ariane88]
 
-[^Ariane88]: Wikimedia, Autor Phrd, Fragment fallout zone of failed Ariane 501 launch. [Link](http://www.esa.int/esapub/bulletin/bullet89/images/dalm89f4.gif, https://commons.wikimedia.org/wiki/File:Ariane_501_Fallout_Zone.svg)
-
-
 ```ada
 -- Overflow is correctly handled for the vertical component
 L_M_BV_32 := TBD.T_ENTIER_16S((1.0 / C_M_LSB_BH) *
                                    G_M_INFO_DERIVE(T_ALG.E_BH));
 if L_M_BV_32 > 32767 then
- P_M_DERIVE(T_ALG.E_BV) := 16#7FFF#;
+ P_M_DERIVE(T_ALG.E_BV) := 16#7FFF#;      -- largest 16Bit number (Two's complement)
 elseif L_M_BV_32 < -32768 then
- P_M_DERIVE(T_ALG.E_BV) := 16#8000#;
+ P_M_DERIVE(T_ALG.E_BV) := 16#8000#;      -- smallest negative 16Bit number
 else
  P_M_DERIVE(T_ALG.E_BV) := UC_16S_EN_16NS(TBD.T_ENTIER_16S(L_M_BV_32));
 end if;
@@ -235,7 +244,6 @@ P_M_DERIVE(T_ALG.E_BH) := UC_16S_EN_16NS(TBD.T_ENTIER_16S
 
 *******************************************************************************
 
-
                                      {{1-2}}
 *******************************************************************************
 
@@ -245,12 +253,10 @@ Mars Pathfinder war ein US-amerikanischer Mars-Lander, der 1996 von der NASA ein
 
 ![Mars Rover](./img/01_Software/Mars_pathfinder_panorama_large.jpg)[^NasaMars]
 
-[^NasaMars]: wikimedia, Autor NASA/JPL, Panoramic image from Mars Pathfinder mission, public domain, as NASA is a government institution, [Link](https://commons.wikimedia.org/wiki/File:Mars_pathfinder_panorama_large.jpg)
-
 Nach dem Beginn der Aufzeichnung von meteorologischen Daten mit dem Sojourner traten plötzlich scheinbar zufällige System-Zurücksetzungen auf. Das Betriebssystem bootete neu, was mit einem Datenverlust einher ging.
 Diese Fehler waren aber auch schon auf der Erde aufgetreten ...
 
-Durch Analyse des Logbuches zu diesem Zeitpunkt konnte festgestellt werden, dass es bei der Programmierung von "Sojourner" ein Problem gab, [Prioritäten-Inversion](https://de.wikipedia.org/wiki/Priorit%C3%A4tsinversion) genannt.
+Durch Analyse des Logbuches zu diesem Zeitpunkt konnte festgestellt werden, dass es bei der Programmierung von "Sojourner" ein Problem gab. Dabei schlug die sogenannte [Prioritäten-Inversion](https://de.wikipedia.org/wiki/Priorit%C3%A4tsinversion) zu, die sich zeigt, wenn mehrere Prozesse ein und die selbe Ressource nutzen.
 
 Weitere Informationen unter [What the media coudn't tell you about Mars Pathfinder](http://people.cs.ksu.edu/~hatcliff/842/Docs/Course-Overview/pathfinder-robotmag.pdf)
 
@@ -260,13 +266,19 @@ Weitere Informationen unter [What the media coudn't tell you about Mars Pathfind
                                      {{2-3}}
 *******************************************************************************
 
-**Weiteres Beispiel**
+**Weiteres Beispiel aus unserem Wiki**
 
+Der als friedlich bekannte Inder Mahatma Gandhi ist im Spiele Civilization 5 dafür bekannt, besonders gerne nukleare Waffen zu nutzen. Diese Affinität ist einen Programmierfehler im ersten Teil zuzuordnen, in welchem der Agressionswert bestimmt, wie wahrscheinlich es ist, dass der Herrscher eine atomare Waffe benutzt. Gandhi startet dort mit einem Aggressionswert von 1, jedoch bekommt jede Demokratie bei Spielstart -2 Aggresionspunkte, was zu einem Wert von -1 führt. Binär betrachtet entspricht das folgender 8 Bit Zahl:
 
-Frank Wunderlich-Pfeiffer, "In den Neunzigern stürzte alles ab",
-[Golem](https://www.golem.de/news/softwarefehler-in-der-raumfahrt-in-den-neunzigern-stuerzte-alles-ab-1511-117537.html)
+1111 1111
+
+Dieser Wert wird intern aber als ein unsigned char, also wie eine 8 Bit vorzeichenlosen Ganzzahl behandelt. Dies führt dazu, dass nicht eine -1 gelesen wird, sondern der Maximalwert dieses Datentyps 255.
 
 *******************************************************************************
+
+[^Ariane88]: Wikimedia, Autor Phrd, Fragment fallout zone of failed Ariane 501 launch. [Link](http://www.esa.int/esapub/bulletin/bullet89/images/dalm89f4.gif, https://commons.wikimedia.org/wiki/File:Ariane_501_Fallout_Zone.svg)
+
+[^NasaMars]: wikimedia, Autor NASA/JPL, Panoramic image from Mars Pathfinder mission, public domain, as NASA is a government institution, [Link](https://commons.wikimedia.org/wiki/File:Mars_pathfinder_panorama_large.jpg)
 
 ### Und im Kleinen ...
 
@@ -355,9 +367,17 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 
 ## Herausforderungen
 
+**Warum ist Softwareentwicklung so herausfordernd**
+
+* Die Größe der zu lösenden Probleme. Software ist nicht einfacher, als die Probleme, die sie löst. Je größer und schwieriger die Software, desto aufwendiger und schwieriger ist die Entwicklung.
+* Die Tatsache, dass Software ein immaterielles Produkt ist. Die Immaterialität macht das Arbeiten mit Software schwieriger als dasjenige mit materiellen Produkten vergleichbarer Komplexität, da die Risiken auch schwerer zu erkennen sind.
+* Sich permanent verändernde Ziele aufgrund der Evolution. Schon das Bestimmen und Erreichen fixierter Ziele bei der Entwicklung ist keine leichte Aufgabe. Sich verändernde Ziele machen das ganze nochmal um eine Größenordnung schwieriger.
+* Fehler infolge von Fehleinschätzungen zur Skalierung ("was im Kleinen geht, geht genauso im Großen"). Software-Entwicklung wird daher unbewusst meist als viel einfacher eingeschätzt, als sie tatsächlich ist. Dies führt zu unrealistischen Erwartungen und zu von Beginn an zu tiefen Kosten- und Terminschätzungen.
+* Funktionierende Einzelkomponenten stellen noch lange kein funktionierendes Gesamtsystem sicher.
+
 **Der Faktor Mensch**
 
-In einem Projekt stellt sich die Frage wieviele Personen involviert sind und damit welche Komplexität der Entwicklungsfluss hat. In einem Team von 3 Personen wird muss sichergestellt sein, dass eine Information bei 2 Partnern ankommt. Die maximale Anzahl ergibt sich zu
+In einem Projekt stellt sich die Frage wie viele Personen involviert sind und damit welche Komplexität der Entwicklungsfluss hat. In einem Team von 3 Personen wird muss sichergestellt sein, dass eine Information bei 2 Partnern ankommt. Die maximale Anzahl ergibt sich zu
 
 $$N = \frac{n\cdot(n-1)}{2}$$.
 
@@ -378,19 +398,12 @@ style="width: 100%; max-width: 760px; display: block; margin-left: auto; margin-
   +---o--------------------------------------->                               .
       1      2      3      4      5      6
 ```
-Grafik motiviert aus [Lemburg2](#7)
+Grafik motiviert aus [^Lemburg2]
 
 Hier ist eine koordinierte Interaktion und Kommunikation notwendig!
 
-**Warum ist Softwareentwicklung so herausfordernd**
 
-* Die Größe der zu lösenden Probleme. Software ist nicht einfacher, als die Probleme, die sie löst. Je größer und schwieriger die Software, desto aufwendiger und schwieriger ist die Entwicklung.
-* Die Tatsache, dass Software ein immaterielles Produkt ist. Die Immaterialität macht das Arbeiten mit Software schwieriger als dasjenige mit materiellen Produkten vergleichbarer Komplexität, da die Risiken auch schwerer zu erkennen sind.
-* Sich permanent verändernde Ziele aufgrund der Evolution. Schon das Bestimmen und Erreichen fixierter Ziele bei der Entwicklung ist keine leichte Aufgabe. Sich verändernde Ziele machen das ganze nochmal um eine Größenordnung schwieriger.
-* Fehler infolge von Fehleinschätzungen zur Skalierung ("was im Kleinen geht, geht genauso im Großen"). Software-Entwicklung wird daher unbewusst meist als viel einfacher eingeschätzt, als sie tatsächlich ist. Dies führt zu unrealistischen Erwartungen und zu von Beginn an zu tiefen Kosten- und Terminschätzungen.
-* Funktionierende Einzelkomponenten stellen noch lange kein funktionierendes Gesamtsystem sicher.
-
-------------------------------------------------------------------------
+[^Lemburg2]: Prof. Dr. Thorsten Lemburg, Einführung in die Softwareentwicklung - Seminar: Softwareentwicklung in der Wissenschaft, [Link](https://wr.informatik.uni-hamburg.de/_media/teaching/wintersemester_2010_2011/siw-2011-lemburg-einfuehrung_in_die_softwareentwicklung-ausarbeitung.pdf)
 
 ## Ansätze zur Strukturierung der Aufgaben
 
@@ -417,7 +430,7 @@ style="width: 100%; max-width: 760px; display: block; margin-left: auto; margin-
 
 Eigenschaften des Wasserfallmodells:
 
-* Aktivitäten sind in der vorgegebenen Reihenfolge und in der vollen Breite vollständigdurchzuführen.
+* Aktivitäten sind in der vorgegebenen Reihenfolge und in der vollen Breite vollständig durchzuführen.
 * Am Ende jeder Aktivität steht ein fertiggestelltes Dokument, d.h. das Wasserfallmodell ist ein „dokumentgetriebenes“ Modell.
 * Der Entwicklungsablauf ist sequentiell und als Top-down-Verfahren realisiert.
 * Es ist einfach, verständlich und benötigt nur wenig Managementaufwand.
@@ -533,3 +546,5 @@ Texteditor vs. Integred development environment (IDE)
 *******************************************************************************
 
 ## Aufgaben
+
+- [ ] Betrachten Sie die Darstellung unter [Webseite Programmwechsel](https://www.programmwechsel.de/lustig/management/schaukel-baum.html) und versuchen Sie die überspitzten Missverständnisse der einzelnen Protagonisten im Kontext eines Softwareprojektes zu stellen.
