@@ -252,10 +252,9 @@ Die Sprache selbst ist unmittelbar mit der Ausführungsumgebung, dem .NET Konzep
 
 Ab November 2021 sollen die .NET 6.0 Klassenbibliotheken und das SDK gemeinsam auch für Mono genutzt werden.
 
-    --{{0}}--
-Mono ist eine alternative, ursprünglich unabhängige Implementierungvon Microsofts .NET Standards. Sie ermöglicht die Entwicklung von plattformunabhängiger Software auf den Standards der Common Language Infrastructure und der Programmiersprache C#. Entstanden ist das Mono-Projekt 2001 unter Führung von Miguel de Icaza von der Firma Ximian, die 2003 von Novell aufgekauft wurde. Die Entwickler wurden 2011 in eine neue Firma Xamarin übernommen, die im Jahr 2016 eine Microsoft-Tochtergesellschaft wurde. In der Folge wurde Microsoft Hauptsponsor des Projektes.
+Mono ist eine alternative, ursprünglich unabhängige Implementierung von Microsofts .NET Standards. Sie ermöglicht die Entwicklung von plattformunabhängiger Software auf den Standards der Common Language Infrastructure und der Programmiersprache C#. Entstanden ist das Mono-Projekt 2001 unter Führung von Miguel de Icaza von der Firma Ximian, die 2003 von Novell aufgekauft wurde. Die Entwickler wurden 2011 in eine neue Firma namens Xamarin übernommen, die im Jahr 2016 eine Microsoft-Tochtergesellschaft wurde. In der Folge wurde Microsoft Hauptsponsor des Projektes.
 
-    --{{0}}--
+
 Mono "hinkt" als Open Source Projekt der eigentlichen Entwicklung etwas nach, für unsere Beispiele ist dies aber nicht von Bedeutung.
 
 ********************************************************************************
@@ -575,7 +574,7 @@ für verschiedene Betriebssystem heruntergeladen werden. Das SDK umfasst sowohl 
 > dotnet run
 ```
 
-Aus dem generieren eines neuen Konsolenprojektes ergibt sich ein beeindruckender
+Aus dem Generieren eines neuen Konsolenprojektes ergibt sich ein beeindruckender
 Baum von Projektdateien.
 
 ``` bash
