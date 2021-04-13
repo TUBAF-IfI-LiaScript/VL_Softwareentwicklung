@@ -28,6 +28,7 @@ jobs:
         run: |
           sudo apt update -y
           sudo apt-get install pandoc
+          sudo apt-get install texlive-xetex 
           sudo apt-get install librsvg2-bin
       # Generierungsprozess
       - name: Run pandoc markdown to tex
