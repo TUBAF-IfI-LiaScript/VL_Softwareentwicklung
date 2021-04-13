@@ -356,12 +356,10 @@ die eigenständige Lösung von Übungsaufgaben sowie die Prüfungsvorbereitung.
 > Literaturhinweise werden zu verschiedenen Themen als Links oder Referenzen
 > in die Unterlagen integriert.
 
-    --{{1}}--
 Es existiert eine Vielzahl kommerzielle Angebote, die aber einzelne Aspekte
 in freien Tutorial vorstellen. In der Regel gibt es keinen geschlossenen Kurs
 sondern erfordert eine individuelle Suche nach spezifischen Inhalten.
 
-      {{1}}
 - **Online-Kurse:**
 
   + [Leitfaden von Microsoft für C# aber auch die Werkzeuge](https://docs.microsoft.com/de-de/dotnet/csharp/)
@@ -371,7 +369,7 @@ sondern erfordert eine individuelle Suche nach spezifischen Inhalten.
 
 - **Video-Tutorials:**
 
-  + !?[Umfangreicher C# Kurs mit guten konzeptionellen Anmerkungen](https://www.youtube.com/watch?v=M3lqkuZQBcM)
+  + !?[Umfangreicher C# Kurs mit guten konzeptionellen Anmerkungen](https://www.youtube.com/watch?v=GhQdlIFylQ8)
   + !?[Einsteigerkurs als Ausgangspunkt für eine Tutorienreihe](https://www.youtube.com/watch?v=gfkTfcpWqAY)
   + !?[Absoluter Einsteigerkurs](https://www.youtube.com/watch?v=l0aKBziWBH8)
 
