@@ -505,6 +505,9 @@ https://www.dev-insider.de/was-ist-agile-softwareentwicklung-a-569187/
 
 > *CASE is the use of computer-based support in the software development process*
 
+                                    {{0}}
+*******************************************************************************
+
 **Klassifikation nach dem Einsatzzweck**
 
 Anforderungsanalyse
@@ -526,6 +529,8 @@ Koordination Entwicklungsprozess
 * Deployment
 * Support
 
+*******************************************************************************
+
                                    {{1}}
 *******************************************************************************
 **Spezifische Werkzeuge oder eine geschlossene Suite?**
@@ -535,7 +540,7 @@ Koordination Entwicklungsprozess
 * Environments - Kombination mehrerer Workbenches und Werkzeuge zur
   Unterstützung des kompletten Software Life-cycle
 
-Texteditor vs. Integred development environment (IDE)
+Texteditor vs. Integrated Development Environment (IDE)
 
 * Analyse des Workflows und der Formen der Zusammenarbeit
 * Analyse der verwendeten Spezifikations und Modellierungstechniken,
@@ -549,4 +554,3 @@ Texteditor vs. Integred development environment (IDE)
 
 - [ ] Betrachten Sie die Darstellung unter [Webseite Programmwechsel](https://www.programmwechsel.de/lustig/management/schaukel-baum.html) und versuchen Sie die überspitzten Missverständnisse der einzelnen Protagonisten im Kontext eines Softwareprojektes zu stellen.
 - [ ] Korrigieren Sie das `allesFalsch.c` Beispiel, verbessern Sie die Lesbarkeit des Codes.
-
