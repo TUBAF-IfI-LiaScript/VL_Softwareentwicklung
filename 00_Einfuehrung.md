@@ -364,13 +364,18 @@ sondern erfordert eine individuelle Suche nach spezifischen Inhalten.
 - **Online-Kurse:**
 
   + [Leitfaden von Microsoft für C# aber auch die Werkzeuge](https://docs.microsoft.com/de-de/dotnet/csharp/)
-  + [C# Tutorial for Beginners: Learn in 7 Days](https://www.guru99.com/c-sharp-tutorial.html)
+  + [C# Tutorial for Beginners: Learn in 7 Days](https://www.guru99.com/c-sharp-tutorial.html) [englisch]
+  + [Einsteiger Tutorials](https://docs.microsoft.com/de-de/dotnet/csharp/tour-of-csharp/tutorials/) [deutsch]
   + [Programmierkonzepte von C#](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/)
 
 - **Video-Tutorials:**
 
   + !?[Umfangreicher C# Kurs mit guten konzeptionellen Anmerkungen](https://www.youtube.com/watch?v=M3lqkuZQBcM)
   + !?[Einsteigerkurs als Ausgangspunkt für eine Tutorienreihe](https://www.youtube.com/watch?v=gfkTfcpWqAY)
+  + !?[Absoluter Einsteigerkurs](https://www.youtube.com/watch?v=l0aKBziWBH8)
+
+  **Algorithmen**
+  + [Codebeispiele](http://www.rosettacode.org/wiki/Category:Programming_Tasks)
 
 - **Bücher:**
 
@@ -389,7 +394,6 @@ Was sind die zentralen Tools unserer Veranstaltung?
 
 
 ### Markdown
-
     {{1-2}}
 > Markdown wurde von John Gruber und Aaron Swartz mit dem Ziel entworfen, die
 > Komplexität der Darstellung so weit zu reduzieren, dass schon der Code sehr
@@ -402,7 +406,6 @@ Markdown ist eine Auszeichnungssprache für die Gliederung und Formatierung von
 Texten und anderen Daten. Analog zu HTML oder LaTex werden die Eigenschaften und
 Organisation von Textelementen (Zeichen, Wörtern, Absätzen) beschrieben. Dazu
 werden entsprechende "Schlüsselelemente" verwendet um den Text zu strukturieren.
-
 
     {{1-2}}
 ********************************************************************************
