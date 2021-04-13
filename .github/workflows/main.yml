@@ -12,7 +12,7 @@ on:
 
 jobs:
   convert_via_pandoc:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container:
       image: docker://mirisbowring/texlive_ctan_full:2019
     steps:
@@ -28,8 +28,9 @@ jobs:
         # Installation der notwendigen Pandoc tools
       - name: Install pandoc
         run: |
-          sudo apt install pandoc
-          sudo apt install librsvg2-bin
+          sudo apt-get update
+          sudo apt-get install pandoc
+          sudo apt-get install librsvg2-bin
       # Generierungsprozess
       - name: Run pandoc markdown to tex
         run: |
