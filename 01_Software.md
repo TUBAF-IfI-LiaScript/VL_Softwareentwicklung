@@ -540,7 +540,7 @@ Koordination Entwicklungsprozess
 * Environments - Kombination mehrerer Workbenches und Werkzeuge zur
   Unterstützung des kompletten Software Life-cycle
 
-Texteditor vs. Integred development environment (IDE)
+Texteditor vs. Integrated Development Environment (IDE)
 
 * Analyse des Workflows und der Formen der Zusammenarbeit
 * Analyse der verwendeten Spezifikations und Modellierungstechniken,

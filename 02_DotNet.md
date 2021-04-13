@@ -39,7 +39,7 @@ Das Programmierparadigma:
 
 * beschreibt den fundamentalen Programmierstil bzw. Eigenschaften von Programmiersprachen
 * unterscheidet sich durch die Repräsentation der statischen und dynamischen Programmelemente
-* Paradigma beruht auf Sprache, aber auch auf individuellem Stil.
+* beruht auf Sprache, aber auch auf individuellem Stil.
 
 <!--
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
@@ -191,10 +191,10 @@ print("Result in functional style      :" + str(result))
 **"Das ist ja alles gut und schön, aber ich ich bin C Programmierer!"**
 
 > **Anti-Pattern "Golden Hammer"**:
-> *if all you have is a hammer, everything looks like a nail.*
+> *If all you have is a hammer, everything looks like a nail.*
 
 Lösungsansätze:
-* Individuell - Hinterfragen des Vorgehens und der Intuition, bewusste Weiterentwicklung des eigenen Horizontes (ohne auf jeden Zug auf zuspringen)
+* Individuell - Hinterfragen des Vorgehens und der Intuition, bewusste Weiterentwicklung des eigenen Horizontes (ohne auf jeden Zug aufzuspringen)
 * im Team - Teilen Sie Ihre Erfahrungen im Team / der Community, besetzen Sie Teams mit Mitarbeitern unterschiedlichen Backgrounds (Technical Diversity)
 
 Weitere Diskussion unter: [https://sourcemaking.com/antipatterns/golden-hammer](https://sourcemaking.com/antipatterns/golden-hammer)
@@ -312,7 +312,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
  +--------------------------------------------------+
  |    Common Language Runtime (Laufzeitumgebung)    |
- +--------------------------------------------------+  
+ +--------------------------------------------------+
 
  +--------------------------------------------------+
  |   Betriebssystem (Windows, Linux, macOS)         |
@@ -321,14 +321,14 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
 * die Laufzeitumgebung (CLR) implementiert die Ausführungsplattform des .NET Codes. Sie umfasst die Sicherheitsmechanismen, Versionierung, automatische Speicherbereinigung und vor allem die Entkopplung der Programmausführung vom Betriebssystem.
 
-* die Klassenbibliothek gliedern sich intern in Basisklassen und eigenen Bibliotheken für verschiedene Anwendungstypen:
+* die Klassenbibliotheken gliedern sich intern in Basisklassen und eigenen Bibliotheken für verschiedene Anwendungstypen:
 
   * ASP.NET ... ist ein Web Application Framework, mit dem sich dynamische Webseiten, Webanwendungen und Webservices entwickeln lassen.
   * Windows Forms/ WPF ... ist ein GUI-Toolkit des Microsoft .NET Frameworks. Es ermöglicht die Erstellung grafischer Benutzeroberflächen (GUIs) für Windows.
   * ...
 
-    --{{2}}--
-Die Open Source Community stand dem .NET Konzept kritisch gegenüber, da eine "unklare Lage" im Hinblick auf die Lizenzen bestand. Aufgrund der Gefahr durch Patentklagen seitens Microsoft warnte Richard Stallman davor Mono in die Standardkonfiguration von Linuxdistributionen aufzunehme. Ab 2013 änderte Microsoft aber seine Strategie und veröffentlichte den Quellcode von .NET komplett als Open Source unter einer MIT-Lizenz bzw. Apache-2.0-Lizenz.
+
+Die Open Source Community stand dem .NET Konzept kritisch gegenüber, da eine "unklare Lage" im Hinblick auf die Lizenzen bestand. Aufgrund der Gefahr durch Patentklagen seitens Microsoft warnte Richard Stallman davor Mono in die Standardkonfiguration von Linuxdistributionen aufzunehmen. Ab 2013 änderte Microsoft aber seine Strategie und veröffentlichte den Quellcode von .NET komplett als Open Source unter einer MIT-Lizenz bzw. Apache-2.0-Lizenz.
 
 
 ********************************************************************************
@@ -344,7 +344,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 ```ascii
 Sourccode (.c, .cpp, .h)             |
                                      v
-                                Preprocessing  Schritt 1: Preprozessor (cpp)
+                                Preprocessing  Schritt 1: Präprozessor (cpp)
 Erweiterer Sourcecode                |
                                      v
                                 Compilation    Schritt 2: Compiler (gcc, g++)
@@ -439,9 +439,9 @@ Ein Assembly umfasst:
 * den CIL-Code
 * Links auf mögliche Ressourcen.
 
-Ein Assembly bildet:
+Ein Assembly:
 
-* **bildet eine Sicherheitsgrenze** - Eine Assembly ist die Einheit, bei der Berechtigungen angefordert und erteilt werden.
+* **bildet eine Sicherheitsgrenze** - Ein Assembly ist die Einheit, bei der Berechtigungen angefordert und erteilt werden.
 * **bildet eine Typgrenze** - Die Identität jedes Typs enthält den Namen der Assembly, in der dieser sich befindet. Wenn der Typ `MyType` in den Gültigkeitsbereich einer Assembly geladen wird, ist dieser nicht derselbe wie der Typ `MyType`, der in den Gültigkeitsbereich einer anderen Assembly geladen wurde.
 * **bildet eine Versionsgrenze** - Die Assembly ist die kleinste, in verschiedenen Versionen verwendbare Einheit in der Common Language Runtime. Alle Typen und Ressourcen in derselben Assembly bilden eine Einheit mit derselben Version.
 * **bildet eine Bereitstellungseinheit** - Beim Starten einer Anwendung müssen nur die von der Anwendung zu Beginn aufgerufenen Assemblys vorhanden sein. Andere Assemblys, z. B. Lokalisierungsressourcen oder Assemblys mit Hilfsklassen, können bei Bedarf abgerufen werden. Dadurch ist die Anwendung beim ersten Herunterladen einfach und schlank.
@@ -469,12 +469,12 @@ vgl. Vortrag von Mössenböck ([link](https://www.dcl.hpi.uni-potsdam.de/teachin
 
 Die organisatorischen Schlüsselkonzepte in C# sind: **Programme**, **Namespaces**,
 **Typen**, **Member** und **Assemblys**. C#-Programme bestehen aus mindestens einer
-Quelldatei, von denen mindestens eine `Main` als einen Methodennamen hat
+Quelldatei, von denen mindestens eine `Main` als einen Methodennamen hat.
 Programme deklarieren Typen, die Member enthalten, und können in Namespaces
 organisiert werden.
 
 Wenn C#-Programme kompiliert werden, werden sie physisch in Assemblys verpackt.
-Assemblys haben diese unter Windows Betriebssystemen die Erweiterung .exe oder
+Assemblys haben unter Windows Betriebssystemen die Erweiterung .exe oder
 .dll, je nachdem, ob sie Anwendungen oder Bibliotheken implementieren.
 
 <!--
@@ -484,7 +484,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
                                      C# Plattformen
                                            |
              .-----------------------------+------------------------.
-             |                             |                        |  
+             |                             |                        |
    A) Vorlesungsmaterialien          B) Webseiten               C) Lokal
              |                             |
     .--------+---------.         .---------+---------.
@@ -631,4 +631,3 @@ https://code.visualstudio.com/docs/languages/csharp
 - [ ] Installieren Sie das .NET 5 auf Ihrem Rechner und erfreuen Sie sich an einem ersten "Hello World"
 - [ ] Testen Sie mit einem Kommilitonen die Features von repl.it! Arbeiten Sie probeweise an einem gemeinsamen Dokument.
 - [ ] Legen Sie sich einen GitHub-Account an.
-
