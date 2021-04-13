@@ -29,13 +29,14 @@ jobs:
       - name: Install pandoc
         run: |
           sudo apt install pandoc
+          sudo apt install librsvg2-bin
       # Generierungsprozess
       - name: Run pandoc markdown to tex
         run: |
-          pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex -f markdown -t latex -o output/script.tex *.mdx
+          pandoc --toc --top-level-division=chapter -V linkcolor:blue .github/workflows/header-includes.yaml --pdf-engine=xelatex -f markdown -t latex -o output/script.tex *.mdx
       - name: Run pandoc markdown to pdf
         run: |
-          pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex -o output/script.pdf *.mdx
+          pandoc --toc --top-level-division=chapter -V linkcolor:blue .github/workflows/header-includes.yaml --pdf-engine=xelatex -o output/script.pdf *.mdx
       # Speichern als Artifact
       - uses: actions/upload-artifact@master
         with:
