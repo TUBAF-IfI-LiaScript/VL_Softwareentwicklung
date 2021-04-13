@@ -45,6 +45,7 @@ Das Programmierparadigma:
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
+
                          Programmierparadigmen
                                   |
                 .-----------------+-----------------.
@@ -56,6 +57,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
   Prozedural    Objektorientiert    Funktional             Logisch             .
 
 ```
+
 
 Weitere Klassifikationsansätze:
 
@@ -79,8 +81,8 @@ Weitere Klassifikationsansätze:
 * **Deklarative Programmierung** ... es wird kein Lösungsweg implementiert, sondern nur angegeben, was gesucht ist.
 
   + **Funktionale Sprachen** ... Abbildung der Algorithmen auf funktionale Darstellungen
-
   + **Logische Sprachen** ... Ableitung einer Lösung aus einer Menge von Fakten, Generierung einer Auswahl von Daten
+
 
 ```prolog    Prolog.pro
 % Prolog Text mit Fakten
@@ -119,6 +121,7 @@ grossvater(adam,frank).
   + **Strukturierte  Programmierung** ... Verzicht bzw. Einschränkung des `Goto` Statements zugunsten von Kontrollstrukturen (Kernkonzepte: Verzweigungen,
      Schleifen)
   + **Nebenläufig**, **Reflektiv**, **Generisch**, ...
+
 
 *******************************************************************************
 
@@ -327,6 +330,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
     --{{2}}--
 Die Open Source Community stand dem .NET Konzept kritisch gegenüber, da eine "unklare Lage" im Hinblick auf die Lizenzen bestand. Aufgrund der Gefahr durch Patentklagen seitens Microsoft warnte Richard Stallman davor Mono in die Standardkonfiguration von Linuxdistributionen aufzunehme. Ab 2013 änderte Microsoft aber seine Strategie und veröffentlichte den Quellcode von .NET komplett als Open Source unter einer MIT-Lizenz bzw. Apache-2.0-Lizenz.
 
+
 ********************************************************************************
 
                                    {{3-5}}
@@ -410,6 +414,7 @@ bereit:
 * Code Execution und Debugging
 * Garbage Collection ... der GC ist für die Bereinigung von Referenz-Objekten auf dem Heap verantwortlich und wird von der CLR zu nicht-deterministischen Zeitpunkten gestartet.
 
+
 ********************************************************************************
 
                                    {{5}}
@@ -435,6 +440,7 @@ Ein Assembly umfasst:
 * Links auf mögliche Ressourcen.
 
 Ein Assembly bildet:
+
 * **bildet eine Sicherheitsgrenze** - Eine Assembly ist die Einheit, bei der Berechtigungen angefordert und erteilt werden.
 * **bildet eine Typgrenze** - Die Identität jedes Typs enthält den Namen der Assembly, in der dieser sich befindet. Wenn der Typ `MyType` in den Gültigkeitsbereich einer Assembly geladen wird, ist dieser nicht derselbe wie der Typ `MyType`, der in den Gültigkeitsbereich einer anderen Assembly geladen wurde.
 * **bildet eine Versionsgrenze** - Die Assembly ist die kleinste, in verschiedenen Versionen verwendbare Einheit in der Common Language Runtime. Alle Typen und Ressourcen in derselben Assembly bilden eine Einheit mit derselben Version.
@@ -457,6 +463,7 @@ vgl. Vortrag von Mössenböck ([link](https://www.dcl.hpi.uni-potsdam.de/teachin
 | Komponenten      | Beans                                       | Assemblies                                           |
 | Versionierung    | nein                                        | ja                                         |
 | Leitidee         | Eine Sprache auf vielen Plattformen         | Viele Sprachen auf vielen Plattform         |
+
 
 ## Es wird konkret ... Hello World
 
@@ -560,8 +567,7 @@ Eine gute Hilfestellung zur Analyse von Assemblies findet sich unter [codeprojec
 *C) .NET Kommandozeile*
 
 Das .NET Core Framework kann unter [.NET](https://dotnet.microsoft.com/download/linux-package-manager/rhel/sdk-current)
-für verschiedene Betriebssystem heruntergeladen werden. Das SDK umfasst sowohl die
-Bibliotheken, Laufzeitumgebung und Tools. An dieser Stelle sei nur auf die `dotnet` Tools verwiesen, die anderen Werkzeuge werden zu einem späteren Zeitpunk eingeführt.
+für verschiedene Betriebssystem heruntergeladen werden. Das SDK umfasst sowohl die Bibliotheken, Laufzeitumgebung und Tools. An dieser Stelle sei nur auf die `dotnet` Tools verwiesen, die anderen Werkzeuge werden zu einem späteren Zeitpunk eingeführt.
 
 ``` bash
 > dotnet new console
@@ -625,3 +631,4 @@ https://code.visualstudio.com/docs/languages/csharp
 - [ ] Installieren Sie das .NET 5 auf Ihrem Rechner und erfreuen Sie sich an einem ersten "Hello World"
 - [ ] Testen Sie mit einem Kommilitonen die Features von repl.it! Arbeiten Sie probeweise an einem gemeinsamen Dokument.
 - [ ] Legen Sie sich einen GitHub-Account an.
+
