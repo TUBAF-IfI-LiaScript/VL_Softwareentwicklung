@@ -525,7 +525,7 @@ Koordination Entwicklungsprozess
 * Code-Base Management und Versionierung
 * Deployment
 * Support
- 
+.
 
                                    {{1}}
 *******************************************************************************
