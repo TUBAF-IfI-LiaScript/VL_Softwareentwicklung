@@ -505,6 +505,9 @@ https://www.dev-insider.de/was-ist-agile-softwareentwicklung-a-569187/
 
 > *CASE is the use of computer-based support in the software development process*
 
+                                    {{0}}
+*******************************************************************************
+
 **Klassifikation nach dem Einsatzzweck**
 
 Anforderungsanalyse
@@ -525,7 +528,8 @@ Koordination Entwicklungsprozess
 * Code-Base Management und Versionierung
 * Deployment
 * Support
-.
+
+*******************************************************************************
 
                                    {{1}}
 *******************************************************************************
