@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug, Galina Rudolf, André Dietrich, Christoph Pooch,`KoKoKotlin` & `Lina`
+author:   Sebastian Zug, Galina Rudolf, André Dietrich, Christoph Pooch,`KoKoKotlin`, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.0
 language: de
