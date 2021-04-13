@@ -1,29 +1,32 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
-email:    zug@ovgu.de   & andre.dietrich@ovgu.de
-version:  0.0.1
+author:   Sebastian Zug, Galina Rudolf, André Dietrich, `fjangfaragesh`, `KoKoKotlin` & `Lina`
+email:    sebastian.zug@informatik.tu-freiberg.de
+version:  1.0.0
 language: de
 narrator: Deutsch Female
 
-import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
-        https://raw.githubusercontent.com/liaTemplates/DigiSim/master/README.md
+import: https://github.com/LiaTemplates/Pyodide
         https://github.com/liascript/CodeRunner
-        https://github.com/LiaTemplates/Pyodide
+        https://raw.githubusercontent.com/liaTemplates/tau-prolog/master/README.md
 
 icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_Freiberg.svg
 -->
 
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/02_DotNet.md)
+
 # .NET und Einordnung der Sprache C#
 
-**TU Bergakademie Freiberg - Sommersemester 2021**
+| Parameter                | Kursinformationen                                                                                                                                                                    |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2021`                                                                                                                                                                |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                    |
+| **Inhalte:**             | `Basiskonzepte von C# und dotnet `                                                                                            |
+| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/02_DotNet.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/02_DotNet.md) |
+| **Autoren**              | @author                                                                                                                                                                              |
 
-Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
-
-[https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/02_DotNet.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/02_DotNet.md)
-
-Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 00](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/02_DotNet.md)
+![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
 
@@ -41,7 +44,7 @@ Das Programmierparadigma:
 <!--
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
 -->
-````````````
+```ascii
                          Programmierparadigmen
                                   |
                 .-----------------+-----------------.
@@ -49,8 +52,10 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
     Imperative Programmierung         Deklarative Programmierung
                 |                                   |
       .------------------.               .----------+---------.
-  Prozedural    Objektorientiert    Funktional             Logisch
-````````````
+      |                  |               |                    |
+  Prozedural    Objektorientiert    Funktional             Logisch             .
+
+```
 
 Weitere Klassifikationsansätze:
 
@@ -64,9 +69,8 @@ Weitere Klassifikationsansätze:
 *******************************************************************************
 * **Imperative Programmierung** ... Quellcode besteht aus einer Folge von Befehlen die in einer festen Reihenfolge abgearbeitet werden.
 
-    + **Prozedurale Programmierung** ... Zerlegung von Programmen in überschaubare Teile, die durch eine definierte Schnittstelle aufrufbar sind (Kernkonzepte: Funktion, Prozedur, Routine, Unterprogramm)
-
-    + **Objektorientierte Programmierung** ... Kapselung von Daten und Funktionen in einem Konzept
+  + **Prozedurale Programmierung** ... Zerlegung von Programmen in überschaubare Teile, die durch eine definierte Schnittstelle aufrufbar sind (Kernkonzepte: Funktion, Prozedur, Routine, Unterprogramm)
+  + **Objektorientierte Programmierung** ... Kapselung von Daten und Funktionen in einem Konzept
 
 *******************************************************************************
 
@@ -74,19 +78,9 @@ Weitere Klassifikationsansätze:
 *******************************************************************************
 * **Deklarative Programmierung** ... es wird kein Lösungsweg implementiert, sondern nur angegeben, was gesucht ist.
 
-     + **Funktionale Sprachen** ... Abbildung der Algorithmen auf funktionale Darstellungen
+  + **Funktionale Sprachen** ... Abbildung der Algorithmen auf funktionale Darstellungen
 
-```haskell  Haskell.hs
--- Definition einer Funktion
-fac 0 = 1
-fac n = n * fac (n-1)
-
--- Berechnung eines Ergebnisses
-main = print (fac 42)
-```
-@Rextester.Haskell
-
-     + **Logische Sprachen** ... Ableitung einer Lösung aus einer Menge von Fakten, Generierung einer Auswahl von Daten
+  + **Logische Sprachen** ... Ableitung einer Lösung aus einer Menge von Fakten, Generierung einer Auswahl von Daten
 
 ```prolog    Prolog.pro
 % Prolog Text mit Fakten
@@ -122,9 +116,9 @@ grossvater(adam,frank).
 
 * **Weiter Konzepte** ... keine spezifische Zuordenbarkeit
 
-     + **Strukturierte  Programmierung** ... Verzicht bzw. Einschränkung des `Goto` Statements zugunsten von Kontrollstrukturen (Kernkonzepte: Verzweigungen,
+  + **Strukturierte  Programmierung** ... Verzicht bzw. Einschränkung des `Goto` Statements zugunsten von Kontrollstrukturen (Kernkonzepte: Verzweigungen,
      Schleifen)
-     + **Nebenläufig**, **Reflektiv**, **Generisch**, ...
+  + **Nebenläufig**, **Reflektiv**, **Generisch**, ...
 
 *******************************************************************************
 
@@ -190,9 +184,9 @@ print("Result in functional style      :" + str(result))
 
                                   {{5}}
 *******************************************************************************
-"Das ist ja alles gut und schön, aber ich ich bin C Programmierer!"
 
-{{3}}
+**"Das ist ja alles gut und schön, aber ich ich bin C Programmierer!"**
+
 > **Anti-Pattern "Golden Hammer"**:
 > *if all you have is a hammer, everything looks like a nail.*
 
@@ -237,72 +231,49 @@ C#
 | 2015 | 4.6              | 6.0        | Exception Filters, Indizierte Membervariablen und Elementinitialisierer, Mehrzeilige String-Ausdrücke, Implementierung von Methoden mittels Lambda-Ausdruck |
 | 2017 | 4.6.2/ .NET Core | 7.0        | Mustervergleiche (Pattern matching),  Binärliterale 0b..., Tupel                                                                                            |
 | 2019 | .NET Core 3      | 8.0        | Standardimplementierungen in Schnittstellen, Switch Expressions, statische lokale Funktionen, Index-Operatoren für Teilmengen                               |
-| 2020     |                  |            |                                                                                                                                                             |
+| 2020 | .NET 5.0         | 9.0        | Datensatztypen (Records),   Eigenschafteninitialisierung, Anweisungen außerhalb von Klassen, Verbesserungen beim Pattern Matching                           |
 
-Die Sprache selbst ist unmittelbar mit der Ausführungsumgebung, dem .NET Konzept verbunden und war ursprüngelich stark auf Windows Applikationen zugeschnitten.
+Die Sprache selbst ist unmittelbar mit der Ausführungsumgebung, dem .NET Konzept verbunden und war ursprünglich stark auf Windows Applikationen zugeschnitten.
 
 ### Konzepte und Einbettung
 
-                                        {{0-1}}
+                                        {{0-2}}
 ********************************************************************************
 
-**.NET**
 
-> *.NET Framework/ .NET Core ist eine __Ausführungsumgebung__ für die Laufzeit, die Apps für*
-> *.NET Framework/ .NET Core verwaltet. Sie besteht aus der __Common Language Runtime__, die*
-> *Speicherverwaltung und andere Systemdienste bereitstellt, und einer*
-> *umfangreichen __Klassenbibliothek__, die Programmierern stabilen, zuverlässigen*
-> *Code für alle wesentlichen Bereiche der App-Entwicklung zur Verfügung stellt.* [MSNET](#9)
+.NET ist ein Sammelbegriff für mehrere von Microsoft/Dritten herausgegebene Software-Plattformen, die der Entwicklung und Ausführung von Anwendungsprogrammen dienen. Dabei erlebt die Plattform einen permanenten Wandel. Die Bedeutung der einzelnen Teile und Technologien, die .NET umfasst, hat sich im Laufe der Zeit gewandelt. Stand November 2020 spielen folgende Frameworks eine herausgehobene Rolle in der Praxis:
 
-Ziel des .NET-Ökosystems ist die Erhöhung der Anwendungskompatibilität zwischen verschiedenen Systemen und Plattformen.
++ das nur unter Windows unterstützte klassische .NET Framework, das mit der Version 4.8 in der letzten Version vorliegt.
++ das als dessen Nachfolger positionierte, auf verschiedenen Plattformen unterstützte Framework .NET 5 (bei dem auch einige Techniken gekündigt wurden). Es wurde mehrere Jahre parallel unter der Bezeichnung .NET Core entwickelt.
++ die Plattform Mono und darauf basierende Techniken (von Microsoft meist als Xamarin bezeichnet). Diese unterstützt seit längerem .NET auf verschiedenen Plattformen (in der Vergangenheit jedoch oft unvollständig implementiert).
 
-Programme, die das .NET Framework verwenden, werden in der Regel so ausgeliefert, dass benötigte Komponenten des Frameworks automatisch mitinstalliert werden.
+Ab November 2021 sollen die .NET 6.0 Klassenbibliotheken und das SDK gemeinsam auch für Mono genutzt werden.
 
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
-```ascii
- +------+   +------+   +------+   +------+   +------+ +------------+
- | VB   |   | C++  |   | C#   |   | js   |   | ...  | | Visual     |
- +------+   +------+   +------+   +------+   +------. | Studio.NET |
- ---------------------------------------------------- |            |
- |            Common Language Specification         | |            |
- ---------------------------------------------------- |            |
- +-------------------------------+ +----------------+ |            |
- | ASP.NET                       | | Windows Forms  | |            |
- +-------------------------------+ +----------------+ |            |
- ---------------------------------------------------- |            |
- |           .NET Framework Base Classes            | |            |
- ---------------------------------------------------- |            |
- ---------------------------------------------------- |            |
- |             Common Language Runtime              | |            |
- ---------------------------------------------------- +------------+           .
-```
-Abbildung der Architektur am Beispiel des .NET Frameworks nach [Bhogayta](#9)
+    --{{0}}--
+Mono ist eine alternative, ursprünglich unabhängige Implementierungvon Microsofts .NET Standards. Sie ermöglicht die Entwicklung von plattformunabhängiger Software auf den Standards der Common Language Infrastructure und der Programmiersprache C#. Entstanden ist das Mono-Projekt 2001 unter Führung von Miguel de Icaza von der Firma Ximian, die 2003 von Novell aufgekauft wurde. Die Entwickler wurden 2011 in eine neue Firma Xamarin übernommen, die im Jahr 2016 eine Microsoft-Tochtergesellschaft wurde. In der Folge wurde Microsoft Hauptsponsor des Projektes.
 
-
-* ASP.NET ... ist ein Web Application Framework, mit dem sich dynamische Webseiten, Webanwendungen und Webservices entwickeln lassen.
-*  ActiveX Data Objects (ADO) ... ist eine auf ActiveX basierende Schnittstelle zum Datenzugriff auf Datenbanken und tabellenartige Datenquellen über eine einheitliche API.
-* Windows Forms ... ist ein GUI-Toolkit des Microsoft .NET Frameworks. Es ermöglicht die Erstellung grafischer Benutzeroberflächen (GUIs) für Windows.
-
-Neben den Aktivitäten von Microsoft entwickelte sich verschiedene Open Source
-Implementierungen. Aus der wichtigsten, dem Mono Projekt (Linux Implementierung
-des .NET Standards) ging die Firma Xamarin hervor, die eine Ausführung auf
-Smartphones realsierte. Diese wurde 2011 von Microsoft übernommen.
-
-Die Open Source Community stand dem .NET Konzept kritisch gegenüber, da eine
-"unklare Lage" im Hinblick auf die Lizenzen bestand. Aufgrund der Gefahr durch Patentklagen seitens Microsoft warnte Richard Stallman davor Mono in die
-Standardkonfiguration von Linuxdistributionen aufzunehme. Ab 2013 änderte Microsoft aber seine Strategie und veröffentlichte den Quellcode von .NET komplett als Open Source unter einer MIT-Lizenz bzw. Apache-2.0-Lizenz.
+    --{{0}}--
+Mono "hinkt" als Open Source Projekt der eigentlichen Entwicklung etwas nach, für unsere Beispiele ist dies aber nicht von Bedeutung.
 
 ********************************************************************************
-
 
                                         {{1-2}}
 ********************************************************************************
 
-*Frage: Des öfteren wird von .NET Framework und .NET Core gesprochen, was sind die Unterschiede?*
 
-Zunächst unterliegen beide dem .NET Standard und umfassen einen Satz von APIs, die durch die Basisklassenbibliothek einer .NET-Implementierung implementiert werden. Die dominierende Implementierung .NET Framework litt aber unter der Beschränkung auf bestimmte Betriebssysteme:
+
+```ascii
+       .NET Core 3.1
+       Teile von .NET Framework
+       Teile von Mono
+    +  neue Features
+    ------------------                                                         .
+       .NET 5.0
+```
+
+Der Artikel in [heise](https://www.heise.de/developer/meldung/NET-5-Zweite-Preview-bringt-viel-Feinschliff-4696009.html) fasst diesen Status gut zusammen.
+
+Zum Vergleich sei auf eine Darstellung der **vor dem Erscheinen von .NET 5** verwiesen:
 
 | Betriebssystem           | .NET Framework | .NET Core | Xamarin |
 | ------------------------ | -------------- | --------- | ------- |
@@ -315,26 +286,46 @@ Zunächst unterliegen beide dem .NET Standard und umfassen einen Satz von APIs, 
 
 Einen guten Überblick über das historische Nebeneinander gibt das Video von Tim Corey (Achtung, die Darstellung greift den Stand von 2017 auf!) [Link](https://www.youtube.com/watch?v=Ph_jSGq6vIA)
 
-> *Think of .NET Core as a subset of .NET Framework that makes sense to be*
-> *cross-platform, redesigned in a much more granular fashion. Microsoft .NET*
-> *Core is the future of .NET and we are happy it has become open source now.* [BlogNET](#9)
-
-Zukünftig wird das .NET Framework nicht mehr weiterentwickelt. Die Portierung von .NET Framework Anwendungen auf .NET Core ist dabei eine Herausforderung, da viele Bibliotheken noch nicht umgesetzt wurden.
-
-Nun erwartet die Community eine vereinheitlichung der .NET Implementierungen
-[https://www.heise.de/developer/meldung/Build-2019-Microsoft-fuehrt-Mono-und-NET-Core-zusammen-zu-NET-5-0-4414166.html](https://www.heise.de/developer/meldung/Build-2019-Microsoft-fuehrt-Mono-und-NET-Core-zusammen-zu-NET-5-0-4414166.html)
+> .NET 5 ist keine Long Term Support (LTS)-Version und wird nur bis 3 Monate nach dem nächsten Major Release unterstützt. Die .NET Release Cycles sind nun aber planbar,  .NET 6 als nächste LTS-Version im November 2021 erscheinen, wodurch .NET 5 bis Februar 2022 unterstützt wird.
 
 ********************************************************************************
 
                                       {{2-3}}
 ********************************************************************************
-*Frage: Was sind Alternativen?*
 
-Mono, DotGNU und Portable.NET sind Implementierungen der CLR.
+Ziel des .NET-Ökosystems ist die Erhöhung der Anwendungskompatibilität zwischen verschiedenen Systemen und Plattformen. Programme, die das .NET Framework verwenden, werden in der Regel so ausgeliefert, dass benötigte Komponenten des Frameworks automatisch mit installiert werden.
 
-Mono ist eine alternative, ursprünglich unabhängige Implementierungvon Microsofts .NET Standards. Sie ermöglicht die Entwicklung von plattformunabhängiger Software auf den Standards der Common Language Infrastructure und der Programmiersprache C#. Entstanden ist das Mono-Projekt 2001 unter Führung von Miguel de Icaza von der Firma Ximian, die 2003 von Novell aufgekauft wurde. Die Entwickler wurden 2011 in eine neue Firma Xamarin übernommen, die im Jahr 2016 eine Microsoft-Tochtergesellschaft wurde. In der Folge wurde Microsoft Hauptsponsor des Projektes.
+<!--
+style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+-->
+```ascii
+ +--------------------------------------------------+
+ |               .NET Anwendungen                   |
+ +--------------------------------------------------+
 
-Mono "hinkt" als Open Source Projekt der eigentlichen Entwicklung etwas nach, für unsere Beispiele ist dies aber nicht von Bedeutung.
+ +--------------------------------------------------+
+ |               Klassenbibliothek                  |
+ +--------------------------------------------------+
+
+ +--------------------------------------------------+
+ |    Common Language Runtime (Laufzeitumgebung)    |
+ +--------------------------------------------------+  
+
+ +--------------------------------------------------+
+ |   Betriebssystem (Windows, Linux, macOS)         |
+ +--------------------------------------------------+                         .
+```
+
+* die Laufzeitumgebung (CLR) implementiert die Ausführungsplattform des .NET Codes. Sie umfasst die Sicherheitsmechanismen, Versionierung, automatische Speicherbereinigung und vor allem die Entkopplung der Programmausführung vom Betriebssystem.
+
+* die Klassenbibliothek gliedern sich intern in Basisklassen und eigenen Bibliotheken für verschiedene Anwendungstypen:
+
+  * ASP.NET ... ist ein Web Application Framework, mit dem sich dynamische Webseiten, Webanwendungen und Webservices entwickeln lassen.
+  * Windows Forms/ WPF ... ist ein GUI-Toolkit des Microsoft .NET Frameworks. Es ermöglicht die Erstellung grafischer Benutzeroberflächen (GUIs) für Windows.
+  * ...
+
+    --{{2}}--
+Die Open Source Community stand dem .NET Konzept kritisch gegenüber, da eine "unklare Lage" im Hinblick auf die Lizenzen bestand. Aufgrund der Gefahr durch Patentklagen seitens Microsoft warnte Richard Stallman davor Mono in die Standardkonfiguration von Linuxdistributionen aufzunehme. Ab 2013 änderte Microsoft aber seine Strategie und veröffentlichte den Quellcode von .NET komplett als Open Source unter einer MIT-Lizenz bzw. Apache-2.0-Lizenz.
 
 ********************************************************************************
 
@@ -404,8 +395,6 @@ Language         +--------+     +--------+      +--------+              |
                +-------------------------------------------------------------+
 ```
 
-Darstellung motiviert durch [Bhogayta](#9)
-
 Die spezifischen Compiler der einzelnen .NET Sprachen (C#. Visual Basic, F#) bilden den Quellcode
 auf einen Zwischencode ab. Die Common Language Infrastructure (CLI) ist eine von ISO und ECMA
 standardisierte offene Spezifikation (technischer Standard), die ausführbaren
@@ -416,13 +405,10 @@ Code und eine Laufzeitumgebung beschreibt.
 Für die *Managed Code Execution* stellt die CLR ein entsprechendes Set von Komponenten
 bereit:
 
-* Class Loader ... Einlesen der Assemblies in die CLR Ausführungsumgebung unter
-Beachtung der Sicherheits-, Versions-, Typinformationen usw.
+* Class Loader ... Einlesen der Assemblies in die CLR Ausführungsumgebung unter Beachtung der Sicherheits-, Versions-, Typinformationen usw.
 * Just-in-Time Compiler ... Abbildung der CIL auf den ausführbaren Maschinencode
 * Code Execution und Debugging
-* Garbage Collection ... der GC ist für die Bereinigung von Referenz-Objekten auf
-dem Heap verantwortlich und wird von der CLR zu nicht-deterministischen Zeitpunkten
-gestartet.
+* Garbage Collection ... der GC ist für die Bereinigung von Referenz-Objekten auf dem Heap verantwortlich und wird von der CLR zu nicht-deterministischen Zeitpunkten gestartet.
 
 ********************************************************************************
 
@@ -449,11 +435,10 @@ Ein Assembly umfasst:
 * Links auf mögliche Ressourcen.
 
 Ein Assembly bildet:
-* bildet eine Sicherheitsgrenze. Eine Assembly ist die Einheit, bei der Berechtigungen angefordert und erteilt werden. Weitere Informationen über Sicherheitsgrenzen bei Assemblys finden Sie unter Überlegungen zur Assemblysicherheit.
-* bildet eine Typgrenze. Die Identität jedes Typs enthält den Namen der Assembly, in der dieser sich befindet. Wenn der Typ MyType in den Gültigkeitsbereich einer Assembly geladen wird, ist dieser nicht derselbe wie der Typ MyType, der in den Gültigkeitsbereich einer anderen Assembly geladen wurde.
-* bildet eine Versionsgrenze. Die Assembly ist die kleinste, in verschiedenen Versionen verwendbare Einheit in der Common Language Runtime. Alle Typen und Ressourcen in derselben Assembly bilden eine Einheit mit derselben Version. Das Assemblymanifest beschreibt die von Ihnen für abhängige Assemblys angegebenen Versionsabhängigkeiten. Weitere Informationen über die Versionen finden Sie unter Assemblyversionen.
-* bildet eine Bereitstellungseinheit. Beim Starten einer Anwendung müssen nur die von der Anwendung zu Beginn aufgerufenen Assemblys vorhanden sein. Andere Assemblys, z. B. Lokalisierungsressourcen oder Assemblys mit Hilfsklassen, können bei Bedarf abgerufen werden. Dadurch ist die Anwendung beim ersten Herunterladen einfach und schlank. Weitere Informationen über die Bereitstellung von Assemblys finden Sie unter Bereitstellung von Anwendungen.
-* stellt die Einheit dar, in der die parallele Ausführung unterstützt wird. Weitere Informationen über das Ausführen mehrerer Versionen einer Assembly finden Sie unter Assemblys und parallele Ausführung.
+* **bildet eine Sicherheitsgrenze** - Eine Assembly ist die Einheit, bei der Berechtigungen angefordert und erteilt werden.
+* **bildet eine Typgrenze** - Die Identität jedes Typs enthält den Namen der Assembly, in der dieser sich befindet. Wenn der Typ `MyType` in den Gültigkeitsbereich einer Assembly geladen wird, ist dieser nicht derselbe wie der Typ `MyType`, der in den Gültigkeitsbereich einer anderen Assembly geladen wurde.
+* **bildet eine Versionsgrenze** - Die Assembly ist die kleinste, in verschiedenen Versionen verwendbare Einheit in der Common Language Runtime. Alle Typen und Ressourcen in derselben Assembly bilden eine Einheit mit derselben Version.
+* **bildet eine Bereitstellungseinheit** - Beim Starten einer Anwendung müssen nur die von der Anwendung zu Beginn aufgerufenen Assemblys vorhanden sein. Andere Assemblys, z. B. Lokalisierungsressourcen oder Assemblys mit Hilfsklassen, können bei Bedarf abgerufen werden. Dadurch ist die Anwendung beim ersten Herunterladen einfach und schlank.
 
 ********************************************************************************
 
@@ -471,10 +456,7 @@ vgl. Vortrag von Mössenböck ([link](https://www.dcl.hpi.uni-potsdam.de/teachin
 | JIT              | per Methoden                                | per Methode / gesamt                       |
 | Komponenten      | Beans                                       | Assemblies                                           |
 | Versionierung    | nein                                        | ja                                         |
-| Leitidee         | Eine Sprache auf vielen Plattformen         | Viele Sprachen auf einer Plattform         |
-
-Beim Punkt "Leitidee" muss man kritisch fragen ob auf der C# Seite die
-Programmiersprache oder das .NET Framework gemeint ist!
+| Leitidee         | Eine Sprache auf vielen Plattformen         | Viele Sprachen auf vielen Plattform         |
 
 ## Es wird konkret ... Hello World
 
@@ -488,11 +470,30 @@ Wenn C#-Programme kompiliert werden, werden sie physisch in Assemblys verpackt.
 Assemblys haben diese unter Windows Betriebssystemen die Erweiterung .exe oder
 .dll, je nachdem, ob sie Anwendungen oder Bibliotheken implementieren.
 
-*A) LiaScript Umgebung*
+<!--
+style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+-->
+```ascii
+                                     C# Plattformen
+                                           |
+             .-----------------------------+------------------------.
+             |                             |                        |  
+   A) Vorlesungsmaterialien          B) Webseiten               C) Lokal
+             |                             |
+    .--------+---------.         .---------+---------.
+    |                  |         |                   |
+  mono (C#7)    dotnet (C#9)     |                   |
+                                 |                   |
+                          dotnetfiddle.net        repl.it
+                             bis C#9                C#7                        .
+```
+
+
+*A) Vorlesungsmaterialien - LiaScript Umgebung*
 
 Die LiaScript basierte Komplierung und Ausführung kann wie bereits erläutert auf der Basis von mono und dem dotnet Framework umgesetzt werden.
 
-```csharp    HelloWorld_rex.cs
+```csharp    HelloWorld.cs
 using System;
 
 public class Program
@@ -505,8 +506,11 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
+*B) Repl.it*
 
-*B) Mono Kommandozeile*
+https://replit.com/
+
+*C) Mono Kommandozeile*
 
 Die Webseite des Mono Projekts ist unter [MonoProject](https://www.mono-project.com/) zu finden.
 
@@ -532,7 +536,7 @@ Eine ausführliche Hilfe findet sich unter https://www.mono-project.com/docs/get
 
 ``` bash
 > mcs --about
-The Turbo C# compiler is Copyright 2001-2011, Novell, Inc. 2011-2016 Xamarin Inc, 2016-2017 Microsoft Corp
+Turbo C# compiler, Copyright 2001-2011 Novell, Inc., 2011-2016 Xamarin, Inc, 2016-2017 Microsoft Corp
 
 The compiler source code is released under the terms of the
 MIT X11 or GNU GPL licenses
@@ -553,22 +557,11 @@ Press any key to exit.
 
 Eine gute Hilfestellung zur Analyse von Assemblies findet sich unter [codeproject](https://www.codeproject.com/Articles/362076/Understanding-Common-Intermediate-Language-CIL)
 
-
 *C) .NET Kommandozeile*
 
 Das .NET Core Framework kann unter [.NET](https://dotnet.microsoft.com/download/linux-package-manager/rhel/sdk-current)
 für verschiedene Betriebssystem heruntergeladen werden. Das SDK umfasst sowohl die
-Bibliotheken, Laufzeitumgebung und Tools.
-
-**Variante I - Microsoft C# Compiler**
-
-``` bash
-> csc
-Microsoft (R) Visual C# Compiler version 2.8.2.62916 (2ad4aabc)
-Copyright (C) Microsoft Corporation. All rights reserved.
-```
-
-**Variante II - Microsoft Build Tools**
+Bibliotheken, Laufzeitumgebung und Tools. An dieser Stelle sei nur auf die `dotnet` Tools verwiesen, die anderen Werkzeuge werden zu einem späteren Zeitpunk eingeführt.
 
 ``` bash
 > dotnet new console
@@ -584,33 +577,40 @@ Baum von Projektdateien.
 
 > tree
 .
-+-- bin
-|   +-- Debug
-|       +-- netcoreapp2.2
-|           +-- dotnet.deps.json
-|           +-- dotnet.dll
-|           +-- dotnet.pdb
-|           +-- dotnet.runtimeconfig.dev.json
-|           +-- dotnet.runtimeconfig.json
-+-- dotnet.csproj
-+-- obj
-|   +-- Debug
-|   |   +-- netcoreapp2.2
-|   |       +-- dotnet.AssemblyInfo.cs
-|   |       +-- dotnet.AssemblyInfoInputs.cache
-|   |       +-- dotnet.assets.cache
-|   |       +-- dotnet.csprojAssemblyReference.cache
-|   |       +-- dotnet.csproj.CoreCompileInputs.cache
-|   |       +-- dotnet.csproj.FileListAbsolute.txt
-|   |       +-- dotnet.dll
-|   |       +-- dotnet.pdb
-|   |       +-- project.razor.json
-|   +-- dotnet.csproj.nuget.cache
-|   +-- dotnet.csproj.nuget.g.props
-|   +-- dotnet.csproj.nuget.g.targets
-|   +-- project.assets.json
-+-- Program.cs
-
+├── bin
+│   └── Debug
+│       └── net5.0
+│           ├── ref
+│           │   └── visual_studio_code.dll
+│           ├── visual_studio_code
+│           ├── visual_studio_code.deps.json
+│           ├── visual_studio_code.dll
+│           ├── visual_studio_code.pdb
+│           ├── visual_studio_code.runtimeconfig.dev.json
+│           └── visual_studio_code.runtimeconfig.json
+├── obj
+│   ├── Debug
+│   │   └── net5.0
+│   │       ├── apphost
+│   │       ├── ref
+│   │       │   └── visual_studio_code.dll
+│   │       ├── visual_studio_code.AssemblyInfo.cs
+│   │       ├── visual_studio_code.AssemblyInfoInputs.cache
+│   │       ├── visual_studio_code.assets.cache
+│   │       ├── visual_studio_code.csprojAssemblyReference.cache
+│   │       ├── visual_studio_code.csproj.CoreCompileInputs.cache
+│   │       ├── visual_studio_code.csproj.FileListAbsolute.txt
+│   │       ├── visual_studio_code.dll
+│   │       ├── visual_studio_code.GeneratedMSBuildEditorConfig.editorconfig
+│   │       ├── visual_studio_code.genruntimeconfig.cache
+│   │       └── visual_studio_code.pdb
+│   ├── project.assets.json
+│   ├── project.nuget.cache
+│   ├── visual_studio_code.csproj.nuget.dgspec.json
+│   ├── visual_studio_code.csproj.nuget.g.props
+│   └── visual_studio_code.csproj.nuget.g.targets
+├── Program.cs
+└── visual_studio_code.csproj
 ```
 
 *C) .NET Visual Code*
@@ -618,22 +618,10 @@ Baum von Projektdateien.
 Alternativ können Sie auch die Microsoft Visual Studio oder Visual Code Suite nutzen.
 Diese kann man zum Beispiel auf unser gerade erstelltes Projekt anwenden
 
-Evaluieren Sie auch den interaktiven Modus mit gsharp, csharp oder dem .NET
-Interpreter unter Visual Studio.
-
-
-## Anhang
+https://code.visualstudio.com/docs/languages/csharp
 
 ### Aufgaben
 
-###  Referenzen
-
-[BlogNET] "What’s the difference Between .NET Core vs .NET Framework", https://www.amarinfotech.com/difference-between-net-core-2-0-vs-net-framework.html
-
-[Thong] J. Thong, "What happens when you type GCC main.c", [Link](https://medium.com/@vietkieutie/what-happens-when-you-type-gcc-main-c-2a136896ade3)
-
-[WikiCLI] Wikipedia "Visual overview of the Common Language Infrastructure (CLI)", Autor *Jarkko Piiroinen*
-
-[MSNET] "Erste Schritte mit .NET Framework", [Link](https://docs.microsoft.com/de-de/dotnet/framework/get-started/)
-
-[Bhogayta]  S. Bhogayta, "Introduction To Dotnet", [Link](https://www.slideshare.net/samirbhogayta/introduction-to-dotnet)
+- [ ] Installieren Sie das .NET 5 auf Ihrem Rechner und erfreuen Sie sich an einem ersten "Hello World"
+- [ ] Testen Sie mit einem Kommilitonen die Features von repl.it! Arbeiten Sie probeweise an einem gemeinsamen Dokument.
+- [ ] Legen Sie sich einen GitHub-Account an.

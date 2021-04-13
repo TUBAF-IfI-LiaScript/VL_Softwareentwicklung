@@ -364,13 +364,18 @@ sondern erfordert eine individuelle Suche nach spezifischen Inhalten.
 - **Online-Kurse:**
 
   + [Leitfaden von Microsoft für C# aber auch die Werkzeuge](https://docs.microsoft.com/de-de/dotnet/csharp/)
-  + [C# Tutorial for Beginners: Learn in 7 Days](https://www.guru99.com/c-sharp-tutorial.html)
+  + [C# Tutorial for Beginners: Learn in 7 Days](https://www.guru99.com/c-sharp-tutorial.html) [englisch]
+  + [Einsteiger Tutorials](https://docs.microsoft.com/de-de/dotnet/csharp/tour-of-csharp/tutorials/) [deutsch]
   + [Programmierkonzepte von C#](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/)
 
 - **Video-Tutorials:**
 
   + !?[Umfangreicher C# Kurs mit guten konzeptionellen Anmerkungen](https://www.youtube.com/watch?v=M3lqkuZQBcM)
   + !?[Einsteigerkurs als Ausgangspunkt für eine Tutorienreihe](https://www.youtube.com/watch?v=gfkTfcpWqAY)
+  + !?[Absoluter Einsteigerkurs](https://www.youtube.com/watch?v=l0aKBziWBH8)
+
+  **Algorithmen**
+  + [Codebeispiele](http://www.rosettacode.org/wiki/Category:Programming_Tasks)
 
 - **Bücher:**
 
