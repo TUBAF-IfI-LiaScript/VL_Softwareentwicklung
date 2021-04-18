@@ -516,18 +516,15 @@ Die Webseite des Mono Projekts ist unter [MonoProject](https://www.mono-project.
 
 ```csharp    HelloWorld.cs
 using System;
-namespace HelloWorld
-{
-    class Hello
-    {
-        static void Main()
-        {
-            Console.WriteLine("Hello World!");
 
-            // Keep the console window open in debug mode.
-            Console.WriteLine("Press any key to exit.");
-            Console.ReadKey();
-        }
+class Hello
+{
+    static void Main()
+    {
+        Console.WriteLine("Hello World!");
+        // Keep the console window open in debug mode.
+        Console.WriteLine("Press any key to exit.");
+        Console.ReadKey();
     }
 }
 ```
@@ -620,7 +617,7 @@ Diese kann man zum Beispiel auf unser gerade erstelltes Projekt anwenden
 
 https://code.visualstudio.com/docs/languages/csharp
 
-### Aufgaben
+## Aufgaben
 
 - [ ] Installieren Sie das .NET 5 auf Ihrem Rechner und erfreuen Sie sich an einem ersten "Hello World"
 - [ ] Testen Sie mit einem Kommilitonen die Features von repl.it! Arbeiten Sie probeweise an einem gemeinsamen Dokument.

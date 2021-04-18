@@ -4,11 +4,9 @@
 *.tex
 *.dll
 *.exe
-*/bin/
-*/obj/
+a.out
 
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+bin/
+obj/
+
+.vscode/
