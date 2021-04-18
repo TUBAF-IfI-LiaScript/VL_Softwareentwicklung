@@ -394,7 +394,6 @@ Was sind die zentralen Tools unserer Veranstaltung?
 
 
 ### Markdown
-
     {{1-2}}
 > Markdown wurde von John Gruber und Aaron Swartz mit dem Ziel entworfen, die
 > Komplexität der Darstellung so weit zu reduzieren, dass schon der Code sehr
@@ -407,7 +406,6 @@ Markdown ist eine Auszeichnungssprache für die Gliederung und Formatierung von
 Texten und anderen Daten. Analog zu HTML oder LaTex werden die Eigenschaften und
 Organisation von Textelementen (Zeichen, Wörtern, Absätzen) beschrieben. Dazu
 werden entsprechende "Schlüsselelemente" verwendet um den Text zu strukturieren.
-
 
     {{1-2}}
 ********************************************************************************
