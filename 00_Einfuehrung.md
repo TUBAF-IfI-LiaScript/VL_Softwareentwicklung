@@ -15,7 +15,8 @@ import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/RE
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://LiaScript.github.io/course/?URL)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md)
+
 
 # Einführung
 
@@ -69,38 +70,26 @@ Studierende sollen ...
 > Anhand der Veranstaltung entwickeln Sie ein "Gefühl" für guten und schlechten
 > Code und hinterfragen den Softwareentwicklungsprozess.
 
-      {{1-2}}
+      {{1}}
+********************************************************************************
+
 **Beispiel 1: Mariner 1 Steuerprogramm-Bug (1962)**
 
-      {{1-2}}
-![An Atlas-Agena 5 carrying the Mariner 1 spacecraft](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Atlas_Agena_with_Mariner_1.jpg/614px-Atlas_Agena_with_Mariner_1.jpg)[^Atlas-Agena]
-
-[^Atlas-Agena]: wikimedia, Autor: NASA, [Link](https://de.wikipedia.org/wiki/Datei:Atlas_Agena_with_Mariner_1.jpg)
+      {{1}}
+![An Atlas-Agena 5 carrying the Mariner 1 spacecraft](./img/00_Einleitung/Atlas_Agena_with_Mariner_1.jpg)[^Atlas-Agena]
 
     --{{1}}--
-Mariner 1 ging beim Start am 22. Juli 1962 durch ein fehlerhaftes Steuerprogramm
-verloren, als die Trägerrakete vom Kurs abkam und 293 Sekunden nach dem Start
-gesprengt werden musste. Ein Entwickler hatte einen Überstrich in der
-handgeschriebenen Spezifikation eines Programms zur Steuerung des Antriebs
-übersehen und dadurch statt geglätteter Messwerte Rohdaten verwendet, was zu
-einer fehlerhaften und potenziell gefährlichen Fehlsteuerung des Antriebs
-führte.
+Mariner 1 ging beim Start am 22. Juli 1962 durch ein fehlerhaftes Steuerprogramm verloren, als die Trägerrakete vom Kurs abkam und 293 Sekunden nach dem Start gesprengt werden musste. Ein Entwickler hatte einen Überstrich in der handgeschriebenen Spezifikation eines Programms zur Steuerung des Antriebs übersehen und dadurch statt geglätteter Messwerte Rohdaten verwendet, was zu einer fehlerhaften und potenziell gefährlichen Fehlsteuerung des Antriebs führte.
 
-      {{1-2}}
 > **Potentieller Lösungsansatz**: Testen & Dokumentation
+
+********************************************************************************
 
       {{2}}
 **Beispiel 2: Toll-Collect On-Board-Units (2003)**
 
     --{{2}}--
-Das Erfassungssystem für die Autobahngebühren für Lastkraftwagen sollte
-ursprünglich zum 31. August 2003 gestartet werden. Nachdem die organisatorischen
-und technischen Mängel offensichtlich geworden waren, erfolgte eine mehrfache
-Restrukturierung. Seit 1. Januar 2006 läuft das System, mit einer Verzögerung
-von über zwei Jahren, mit der vollen Funktionalität. Eine Baustelle war die
-On-Board-Units (OBU), diese konnte zunächst nicht in ausreichender Stückzahl
-geliefert und eingebaut werden, da Schwierigkeiten mit der komplexen Software
-der Geräte bestanden.
+Das Erfassungssystem für die Autobahngebühren für Lastkraftwagen sollte ursprünglich zum 31. August 2003 gestartet werden. Nachdem die organisatorischen und technischen Mängel offensichtlich geworden waren, erfolgte eine mehrfache Restrukturierung. Seit 1. Januar 2006 läuft das System, mit einer Verzögerung von über zwei Jahren, mit der vollen Funktionalität. Eine Baustelle war die On-Board-Units (OBU), diese konnte zunächst nicht in ausreichender Stückzahl geliefert und eingebaut werden, da Schwierigkeiten mit der komplexen Software der Geräte bestanden.
 
       {{2}}
 ********************************************************************************
@@ -117,6 +106,7 @@ Die On-Board-Units des Systems
 
 *******************************************************************************
 
+[^Atlas-Agena]: wikimedia, Autor: NASA, [Link](https://de.wikipedia.org/wiki/Datei:Atlas_Agena_with_Mariner_1.jpg)
 
 ## Organisatorisches
 
@@ -355,12 +345,10 @@ die eigenständige Lösung von Übungsaufgaben sowie die Prüfungsvorbereitung.
 > Literaturhinweise werden zu verschiedenen Themen als Links oder Referenzen
 > in die Unterlagen integriert.
 
-    --{{1}}--
 Es existiert eine Vielzahl kommerzielle Angebote, die aber einzelne Aspekte
 in freien Tutorial vorstellen. In der Regel gibt es keinen geschlossenen Kurs
 sondern erfordert eine individuelle Suche nach spezifischen Inhalten.
 
-      {{1}}
 - **Online-Kurse:**
 
   + [Leitfaden von Microsoft für C# aber auch die Werkzeuge](https://docs.microsoft.com/de-de/dotnet/csharp/)
@@ -370,7 +358,7 @@ sondern erfordert eine individuelle Suche nach spezifischen Inhalten.
 
 - **Video-Tutorials:**
 
-  + !?[Umfangreicher C# Kurs mit guten konzeptionellen Anmerkungen](https://www.youtube.com/watch?v=M3lqkuZQBcM)
+  + !?[Umfangreicher C# Kurs mit guten konzeptionellen Anmerkungen](https://www.youtube.com/watch?v=GhQdlIFylQ8)
   + !?[Einsteigerkurs als Ausgangspunkt für eine Tutorienreihe](https://www.youtube.com/watch?v=gfkTfcpWqAY)
   + !?[Absoluter Einsteigerkurs](https://www.youtube.com/watch?v=l0aKBziWBH8)
 

@@ -5,8 +5,8 @@
 *.dll
 *.exe
 a.out
+*.out
 
 bin/
 obj/
-
 .vscode/
