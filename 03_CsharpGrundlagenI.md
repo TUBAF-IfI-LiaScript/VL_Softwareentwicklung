@@ -131,7 +131,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 ```
 
 Variablennamen umfassen Buchstaben, Ziffern oder `_`. Das erste Zeichen eines Namens muss ein Buchstabe (des Unicode-Zeichensatzes) oder ein `_` sein. Der C# Compiler ist
-*case sensitive*
+*case sensitive* (Unterschied zwischen Groß- und Kleinschreibung, z.B. Test != test).
 
 ```csharp    GreekSymbols.cs
 using System;
@@ -148,8 +148,8 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-Die Vergabe von Namen sollte sich an die Regeln der Klassenbibliothek halten
-um bereits aus dem Namen der Typ ersichtlich wird:
+Die Vergabe von Namen sollte sich an die Regeln der Klassenbibliothek halten,
+damit bereits aus dem Namen der Typ ersichtlich wird:
 
 + C#-Community bevorzugt *camel case* `MyNewClass` anstatt *underscoring* `My_new_class`.
    (Eine engagierte Diskussion zu diesem Thema findet sich unter [Link](https://whatheco.de/2011/02/10/camelcase-vs-underscores-scientific-showdown/))
@@ -183,7 +183,7 @@ public class Program
   {
     Console.WriteLine(0xFF);
     Console.WriteLine(0b1111_1111);  // ab C#7 unterstützt
-    Console.WriteLine(100_000_000);  
+    Console.WriteLine(100_000_000);
     Console.WriteLine(1.3454E06);
   }
 }
@@ -299,7 +299,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
          |       |         |        |        |       |         |       |
      Vordefi-  Enumer-  Structs   Tupel   Klassen  Inter    Arrays  Delegates
  nierte Typen  ation                     (String) -faces
-         |      
+         |
          |      ...............................................................
          |                           Benutzerdefinierte Typen
          |
@@ -359,7 +359,7 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-Neben der unmittelbaren Eingabe über die Buchstaben und Zeichen kann die Eingabe entsprechend  
+Neben der unmittelbaren Eingabe über die Buchstaben und Zeichen kann die Eingabe entsprechend
 
 + einer Escapesequenz für Unicodezeichen, d. h. `\u` gefolgt von der aus vier(!) Symbolen bestehenden Hexadezimaldarstellung eines Zeichencodes.
 + einer Escapesequenz für Hexadezimalzahlen, d. h. `\x` gefolgt von der Hexadezimaldarstellung eines Zeichencodes.
@@ -463,7 +463,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 ```ascii
   +-+---- ~ -----+----- ~ ----+
   |V|  Mantisse  |  Exponent  |   V=Vorzeichenbit
-  +-+---- ~ -----+----- ~ ----+   
+  +-+---- ~ -----+----- ~ ----+
 
    1      23           8          = 32 Bit (float)
    1      52          11          = 64 Bit (double)                            .
