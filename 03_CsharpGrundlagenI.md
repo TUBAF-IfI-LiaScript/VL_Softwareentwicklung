@@ -228,8 +228,8 @@ public class Program
 ### Kommentare
 
 C# unterscheidet zwischen *single-line* und *multi-line* Kommentaren. Diese
-können mit XML-Tags versehen werden, um die automatische Generation einer
-Dokumentation zu unterstützen. Wir werden in zu einem späteren Zeitpunkt
+können mit XML-Tags versehen werden, um die automatische Generierung einer
+Dokumentation zu unterstützen. Wir werden zu einem späteren Zeitpunkt
 explizit auf die Kommentierung und Dokumentation von Code eingehen.
 
 Kommentare werden vor der Kompilierung aus dem Quellcode gelöscht.
@@ -341,7 +341,7 @@ char secondChar = '\n';
 char thirdChar = (char) 65;  // Referenz auf ASCII Tabelle
 ```
 
-Die Eingabe erfolgt entsprechend den Konzepten von C mit einfachen Anführungszeichen. Doppelte Anführungsstricht implizieren `String`-Variablen!
+Die Eingabe erfolgt entsprechend den Konzepten von C mit einfachen Anführungszeichen. Doppelte Anführungsstriche implizieren `String`-Variablen!
 
 ```csharp            FancyCharacters.cs
 using System;
@@ -391,10 +391,10 @@ notwendig.
 | --------------------------- | ------ | ------- | -------- | --- | -------------------------------- |
 | Ganzzahl vorzeichenbehaftet |        | sbyte   | SByte    | 8   | –128 bis 127                     |
 |                             |        | short   | Int16    | 16  | –32.768 bis 32.767               |
-|                             |        | int     | Int32    | 32  | -2,147,483,648 bis 2,147,483,647 |
-|                             | `L`    | long    | Int64    | 64  |                                  |
+|                             |        | int     | Int32    | 32  | -2.147.483.648 bis 2.147.483.647 |
+|                             | `L`    | long    | Int64    | 64  |-9.223.372.036.854.775.808 bis 9.223.372.036.854.775.807                                  |
 | Ganzzahl ohne Vorzeichen    |        | byte    | Byte     | 8   | 0 bis 255                                 |
-|                             |        | ushort  | UInt16   | 16  |                                  |
+|                             |        | ushort  | UInt16   | 16  |0 bis 65.535                                  |
 |                             | `U`    | uint    | UInt32   | 32  | 0 bis 4.294.967.295              |
 |                             | `UL`   | ulong   | UInt64   | 64  | 0 bis 18.446.744.073.709.551.615                                 |
 | Gleitkommazahl              | `F`    | float   | Single   | 32  |                                  |
@@ -412,7 +412,7 @@ Numerische Suffixe
 | ------ | ------- | ---------------- | ------------------------------------ |
 | F      | float   | float f = 1.0F   |                                      |
 | D      | double  | double d = 1D    |                                      |
-| U      | decimal | decimal d = 1.0M | Compilerfehler bei Fehlen des Suffix |
+| M      | decimal | decimal d = 1.0M | Compilerfehler bei Fehlen des Suffix |
 | U      | uint    | uint i = 1U      |                                      |
 
 
