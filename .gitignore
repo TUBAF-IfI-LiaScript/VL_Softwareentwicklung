@@ -4,6 +4,7 @@
 *.tex
 *.dll
 *.exe
+a.out
 *.out
 
 bin/

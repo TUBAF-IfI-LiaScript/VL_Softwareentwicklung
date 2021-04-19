@@ -252,8 +252,8 @@ Die Sprache selbst ist unmittelbar mit der Ausführungsumgebung, dem .NET Konzep
 
 Ab November 2021 sollen die .NET 6.0 Klassenbibliotheken und das SDK gemeinsam auch für Mono genutzt werden.
 
+    --{{0}}--
 Mono ist eine alternative, ursprünglich unabhängige Implementierung von Microsofts .NET Standards. Sie ermöglicht die Entwicklung von plattformunabhängiger Software auf den Standards der Common Language Infrastructure und der Programmiersprache C#. Entstanden ist das Mono-Projekt 2001 unter Führung von Miguel de Icaza von der Firma Ximian, die 2003 von Novell aufgekauft wurde. Die Entwickler wurden 2011 in eine neue Firma namens Xamarin übernommen, die im Jahr 2016 eine Microsoft-Tochtergesellschaft wurde. In der Folge wurde Microsoft Hauptsponsor des Projektes.
-
 
 Mono "hinkt" als Open Source Projekt der eigentlichen Entwicklung etwas nach, für unsere Beispiele ist dies aber nicht von Bedeutung.
 
@@ -261,8 +261,6 @@ Mono "hinkt" als Open Source Projekt der eigentlichen Entwicklung etwas nach, f�
 
                                         {{1-2}}
 ********************************************************************************
-
-
 
 ```ascii
        .NET Core 3.1
@@ -311,7 +309,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
  +--------------------------------------------------+
  |    Common Language Runtime (Laufzeitumgebung)    |
- +--------------------------------------------------+
+ +--------------------------------------------------+  
 
  +--------------------------------------------------+
  |   Betriebssystem (Windows, Linux, macOS)         |
@@ -320,14 +318,15 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
 * die Laufzeitumgebung (CLR) implementiert die Ausführungsplattform des .NET Codes. Sie umfasst die Sicherheitsmechanismen, Versionierung, automatische Speicherbereinigung und vor allem die Entkopplung der Programmausführung vom Betriebssystem.
 
-* die Klassenbibliotheken gliedern sich intern in Basisklassen und eigenen Bibliotheken für verschiedene Anwendungstypen:
+* die Klassenbibliothek gliedern sich intern in Basisklassen und eigenen Bibliotheken für verschiedene Anwendungstypen:
+
 
   * ASP.NET ... ist ein Web Application Framework, mit dem sich dynamische Webseiten, Webanwendungen und Webservices entwickeln lassen.
   * Windows Forms/ WPF ... ist ein GUI-Toolkit des Microsoft .NET Frameworks. Es ermöglicht die Erstellung grafischer Benutzeroberflächen (GUIs) für Windows.
   * ...
 
-
-Die Open Source Community stand dem .NET Konzept kritisch gegenüber, da eine "unklare Lage" im Hinblick auf die Lizenzen bestand. Aufgrund der Gefahr durch Patentklagen seitens Microsoft warnte Richard Stallman davor Mono in die Standardkonfiguration von Linuxdistributionen aufzunehmen. Ab 2013 änderte Microsoft aber seine Strategie und veröffentlichte den Quellcode von .NET komplett als Open Source unter einer MIT-Lizenz bzw. Apache-2.0-Lizenz.
+    --{{2}}--
+Die Open Source Community stand dem .NET Konzept kritisch gegenüber, da eine "unklare Lage" im Hinblick auf die Lizenzen bestand. Aufgrund der Gefahr durch Patentklagen seitens Microsoft warnte Richard Stallman davor Mono in die Standardkonfiguration von Linuxdistributionen aufzunehme. Ab 2013 änderte Microsoft aber seine Strategie und veröffentlichte den Quellcode von .NET komplett als Open Source unter einer MIT-Lizenz bzw. Apache-2.0-Lizenz.
 
 
 ********************************************************************************
@@ -438,9 +437,9 @@ Ein Assembly umfasst:
 * den CIL-Code
 * Links auf mögliche Ressourcen.
 
-Ein Assembly:
+Ein Assembly bildet:
 
-* **bildet eine Sicherheitsgrenze** - Ein Assembly ist die Einheit, bei der Berechtigungen angefordert und erteilt werden.
+* **bildet eine Sicherheitsgrenze** - Eine Assembly ist die Einheit, bei der Berechtigungen angefordert und erteilt werden.
 * **bildet eine Typgrenze** - Die Identität jedes Typs enthält den Namen der Assembly, in der dieser sich befindet. Wenn der Typ `MyType` in den Gültigkeitsbereich einer Assembly geladen wird, ist dieser nicht derselbe wie der Typ `MyType`, der in den Gültigkeitsbereich einer anderen Assembly geladen wurde.
 * **bildet eine Versionsgrenze** - Die Assembly ist die kleinste, in verschiedenen Versionen verwendbare Einheit in der Common Language Runtime. Alle Typen und Ressourcen in derselben Assembly bilden eine Einheit mit derselben Version.
 * **bildet eine Bereitstellungseinheit** - Beim Starten einer Anwendung müssen nur die von der Anwendung zu Beginn aufgerufenen Assemblys vorhanden sein. Andere Assemblys, z. B. Lokalisierungsressourcen oder Assemblys mit Hilfsklassen, können bei Bedarf abgerufen werden. Dadurch ist die Anwendung beim ersten Herunterladen einfach und schlank.
@@ -483,6 +482,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
                                      C# Plattformen
                                            |
              .-----------------------------+------------------------.
+             |                             |                        |  
              |                             |                        |
    A) Vorlesungsmaterialien          B) Webseiten               C) Lokal
              |                             |
@@ -522,18 +522,15 @@ Die Webseite des Mono Projekts ist unter [MonoProject](https://www.mono-project.
 
 ```csharp    HelloWorld.cs
 using System;
-namespace HelloWorld
-{
-    class Hello
-    {
-        static void Main()
-        {
-            Console.WriteLine("Hello World!");
 
-            // Keep the console window open in debug mode.
-            Console.WriteLine("Press any key to exit.");
-            Console.ReadKey();
-        }
+class Hello
+{
+    static void Main()
+    {
+        Console.WriteLine("Hello World!");
+        // Keep the console window open in debug mode.
+        Console.WriteLine("Press any key to exit.");
+        Console.ReadKey();
     }
 }
 ```
@@ -625,7 +622,9 @@ Diese kann man zum Beispiel auf unser gerade erstelltes Projekt anwenden
 
 https://code.visualstudio.com/docs/languages/csharp
 
-### Aufgaben
+
+## Aufgaben
+=======
 
 - [ ] Installieren Sie das .NET 5 auf Ihrem Rechner und erfreuen Sie sich an einem ersten "Hello World"
 - [ ] Testen Sie mit einem Kommilitonen die Features von repl.it! Arbeiten Sie probeweise an einem gemeinsamen Dokument.
