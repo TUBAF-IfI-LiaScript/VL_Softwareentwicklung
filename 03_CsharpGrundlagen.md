@@ -322,7 +322,14 @@ grundlegenden Organisationsformen im Arbeitsspeicher.
 | Zuweisung        | kopiert den Wert | kopiert die Referenz                       |
 | Speicher         | Größe der Daten  | Größe der Daten, Objekt-Metadata, Referenz |
 
-> Wir werden in der kommenden Vorlesung noch mal explizit auf den Unterschied eingehen und die Konsequenzen diskutieren.
+## Wertdatentypen
+
+Im Folgenden werden die Werttypen und deren Operatoren besprochen, bevor in der nächsten Veranstaltung auf die Referenztypen konzeptionell eingegangen wird.
+
+<!--
+style="width: 100%; max-width: 560px;"
+-->
+![](https://media.giphy.com/media/1lvotGQwhzi6O0gQtV/giphy-downsized.gif)
 
 ### Character Datentypen
 
@@ -415,11 +422,11 @@ using System;
 
 public class Program
 {
-public static void Main(string[] args)
-{
-float f = 5.1F;
-Console.WriteLine(f.GetType());
-}
+  public static void Main(string[] args)
+  {
+    float f = 5.1F;
+    Console.WriteLine(f.GetType());
+  }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
@@ -459,7 +466,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
   +-+---- ~ -----+----- ~ ----+   
 
    1      23           8          = 32 Bit (float)
-   1      52          11          = 64 Bit (double)                                    .
+   1      52          11          = 64 Bit (double)                            .
 ```
 
 Welche Probleme treten bei der Verwendung von `float`, `double` und `decimal` ggf. auf?
@@ -488,17 +495,15 @@ public class Program
      double fnumber = 123456784649577.0;
      double additional = 0.0000001;
      Console.WriteLine("Experiment 1");
-     Console.WriteLine("{0} + {1} = {2}", fnumber, additional,
+     Console.WriteLine("{0} + {1} = {2:R}", fnumber, additional,
                                           fnumber + additional);
      double value = .1;
-     double result1 = value * 10;
-     double result2 = 0;
-     for (int ctr = 1; ctr <= 10; ctr++){
-          result2 += value;
+     double result = 0;
+     for (int ctr = 1; ctr <= 10000; ctr++){
+          result += value;
      }
      Console.WriteLine("\nExperiment 2");
-     Console.WriteLine(".1 * 10:           {0:R}", result1);
-     Console.WriteLine(".1 Added 10 times: {0:R}", result2);
+     Console.WriteLine(".1 Added 10000 times: {0:R}", result);
     }
 }
 ```
@@ -737,38 +742,3 @@ public class Program
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
-
-
-## Aufgaben
-
-- [ ] Dieses Aufgabe richtet sich insbesondere an diejenigen, die noch wenig
-Erfahrung bei der Programmierung haben. Welche Funktion realisiert das folgende
-Codebeispiel.
-
-```csharp   PrimeNumbers.cs
-using System;
-
-public class Program
-{
-  public static void Main(string[] args)
-  {
-    for (int number = 0; number < 20; number ++)
-    {
-      bool prime = true;
-      for (int i = 2; i <= number / 2; i++)
-      {
-        if(number % i == 0)
-        {
-          prime = false;
-          break;
-        }
-      }
-      if (prime == true) Console.Write("{0}, ", number);
-    }
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
-
-Einen guten Startpunkt bieten zum Beispiel die "1000 C# Examples" unter
-https://www.sanfoundry.com/csharp-programming-examples/
