@@ -441,9 +441,9 @@ public class Program
 > **Frage:** Gleitkommazahlen, wie funktioniert das eigentlich und wie lässt sich das Format auf den Speicher abbilden?
 
 Ein naheliegender und direkt zu Gleitkommazahlen führender Gedanke ist der Ansatz neben dem Zahlenwert auch die Position des Kommas abzuspeichern. In der "ingenieurwissenschaftlichen Schreibweise" ist diese Information aber an zwei Stellen
-verborgen, zum einen im Zahlenwert und zum anderen im Exponenten
+verborgen, zum einen im Zahlenwert und zum anderen im Exponenten.
 
-Beispiel: Der Wert der [[Lichtgeschwindigkeit]] beträgt
+**Beispiel:** Der Wert der *Lichtgeschwindigkeit* beträgt
 $$
 \begin{aligned}
 c &= 299\,792\,458 \; \text{m/s} \\
@@ -453,7 +453,7 @@ c &= 299\,792\,458 \; \text{m/s} \\
 \end{aligned}
 $$
 
-Um diese zusätzliche Information eindeutig abzulegen, müssen normieren wir die Darstellung - die Mantisse in einen festgelegten Wertebereich, zum Beispiel $1 \le m < 10$ gebracht.
+Um diese zusätzliche Information eindeutig abzulegen, normieren wir die Darstellung - die Mantisse wird in einen festgelegten Wertebereich, zum Beispiel $1 \le m < 10$ gebracht.
 
 Die Gleitkommadarstellung besteht dann aus dem Vorzeichen, der Mantisse und dem Exponenten. Für binäre Zahlen ist diese Darstellung in der [IEEE 754](https://de.wikipedia.org/wiki/IEEE_754) genormt.
 
@@ -523,10 +523,10 @@ Ein- und Ausgaben kann das zu Irritationen führen. Diese können durch die
 Verwendung der Klasse **System.Globalization.CultureInfo** beseitigt werden.
 
 Zum Beispiel wird mit der folgenden Anweisung die Eingabe eines
-Dezimalpunkt statt Dezimalkomma erlaubt.
+Dezimalpunkts statt Dezimalkomma erlaubt.
 
 ```csharp
-double wert = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+double wert = double.Parse(Console.ReadLine(), System.Globalization.CultureInfo.InvariantCulture);
 ```
 
 ********************************************************************************
@@ -596,8 +596,8 @@ int wert=Convert.ToInt32(Console.ReadLine());//string to int
 **Alle Numerischen Datentypen**
 
 Die arithmetischen Operatoren `+`, `-`, `*`, `/`, `%` sind für alle numerischen
-Typen mit Ausnahme der 8 und 16-Bit breiten Typen als Addition, Subtraktion,
-Multiplikation, Division und Modulo.
+Datentypen die bekannten Operationen Addition, Subtraktion,
+Multiplikation, Division und Modulo, mit Ausnahme der 8 und 16-Bit breiten Typen (byte und short). Diese werden vorher implizit zu einem `int` konvertiert und dann wird die bekannte Operation durchgeführt (Siehe Folie 2/2).
 
 Die Addition und Subtraktion kann mit Inkrement und Dekrement-Operatoren
 abgebildet werden.
@@ -712,7 +712,7 @@ anderen Programmiersprachen stellt C# folgende Operatoren zur Verfügung:
 | Symbol | Wirkung                                   |
 | ------ | ----------------------------------------- |
 | `~`    | invertiert jedes Bit                      |
-| `\`    | verknüpft korrespondierende Bits mit ODER |
+| `|`    | verknüpft korrespondierende Bits mit ODER |
 | `&`    | verknüpft korrespondierende Bits mit UND  |
 | `^`    | verknüpft korrespondierende Bits mit XOR  |
 | `<<`   | bitweise Verschiebung nach links          |
