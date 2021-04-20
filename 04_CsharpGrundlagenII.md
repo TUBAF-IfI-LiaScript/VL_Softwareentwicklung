@@ -621,7 +621,7 @@ int [][] jaggedMatrix ={ //entspricht int[3][]
 
                               {{0-1}}
 ********************************************************************************
-Als Referenztyp verweisen `string` Instanzen auf Folgen von Unicodezeichen abgeschlossen durch ein Null `\0`. Bei der Interpretation der Steuerzeichen
+Als Referenztyp verweisen `string` Instanzen auf Folgen von Unicodezeichen, die durch ein Null `\0` abgeschlossen sind. Bei der Interpretation der Steuerzeichen
 muss hinterfragt werden, ob eine Ausgabe des Zeichens oder eine Realisierung
 der Steuerzeichenbedeutung gewünscht ist.
 
@@ -679,13 +679,13 @@ Ausgabe und entsprechend den Methoden der String Generierung beschäftigen.
 
 ## Umgang mit Variablen
 
-Wie sollten wir die variable benennbaren Komponenten unseres Programms bezeichnen [Naming guidelines](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/general-naming-conventions?redirectedfrom=MSDN)?
+Wie sollten wir die variablen benennbaren Komponenten unseres Programms bezeichnen [Naming guidelines](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/general-naming-conventions?redirectedfrom=MSDN)?
 
 * Nutzen Sie sinnvolle, selbsterklärende Variablennamen!
 
 * Vermeiden Sie Abkürzungen abgesehen von verbreiteten Bezeichnungen.
 
-* camelCasing für Methodenargumente und lokale Variablen um konsitent mit dem .NET Framework zu sein
+* camelCasing für Methodenargumente und lokale Variablen um konsistent mit dem .NET Framework zu sein
 
 ```csharp
 public class UserLog
@@ -722,7 +722,7 @@ Ihre IDE bzw. ein Linterprogramm sollte die Einhaltung dieser Regularien überpr
 
 ### Konstante Werte
 
-Konstanten sind unveränderliche Werte, die zur Kompilzeit bekannt sind und sich während der Lebensdauer des Programms nicht ändern. Der Versuch einer Änderung wird durch den Compiler überwacht.
+Konstanten sind unveränderliche Werte, die zur Compilezeit bekannt sind und sich während der Lebensdauer des Programms nicht ändern. Der Versuch einer Änderung wird durch den Compiler überwacht.
 
 ```csharp        ToString.cs
 using System;
@@ -732,7 +732,7 @@ public class Program
   public static void Main(string[] args)
   {
      const double pi = 3.14;
-     pi = 5;
+     pi = 5; //erzeugt Fehlermeldung, da pi konstant ist
      Console.WriteLine(pi);
   }
 }
@@ -755,7 +755,7 @@ var a = new[] {0, 1, 2}; // a is compiled as int[]
 `var`-Variablen sind trotzdem typisierte Variablen, nur der Typ wird vom
 Compiler zugewissen.
 
-Vielfach werden `var`-Variablen im Initialisierungteil von `for`- und `foreach`-
+Vielfach werden `var`-Variablen im Initialisierungsteil von `for`- und `foreach`-
 Anweisungen bzw. in der `using`-Anweisung verwendet. Eine wesentliche Rolle
 spielen sie bei der Verwendung von anonymen Typen.
 
@@ -797,7 +797,7 @@ using System;
 public class Program
 {
   public static void Main(string[] args){
-    string text = null;   // Die Referenz zeigt auf keine Objekt im Heap
+    string text = null;   // Die Referenz zeigt auf kein Objekt im Heap
     //int i = null;
     if (text == null) Console.WriteLine("Die Variable hat keinen Wert!");
     else Console.WriteLine("Der Wert der Variablen ist {0}", text);
@@ -806,10 +806,10 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-Aus der Definition heraus kann zum beispiel eine `int` Variable nur einen Wert zwischen int.MinValue und int.MaxValue annehmen. Eine `null` ist nicht vorgesehen und eine `0` gehört zum "normalen" Wertebereich.
+Aus der Definition heraus kann zum Beispiel eine `int` Variable nur einen Wert zwischen int.MinValue und int.MaxValue annehmen. Eine `null` ist nicht vorgesehen und eine `0` gehört zum "normalen" Wertebereich.
 
 Um gleichermaßen "nicht-besetzte" Werte-Variablen zu ermöglichen integriert C#
-das Konzept der sogenannte null-fähige Typen (*nullable types*) ein. Dazu wird
+das Konzept der sogenannte null-fähigen Typen (*nullable types*) ein. Dazu wird
 dem Typnamen ein  Fragezeichen angehängt. Damit ist es möglich diesen auch den
 Wert `null` zuzuweisen bzw. der Compiler realisiert dies.
 
@@ -882,4 +882,4 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-- [ ] Studieren Sie C# Codebeispiele. Einen guten Startpunkt bieten zum Beispiel die "1000 C# Examples" unter [https://www.sanfoundry.com/csharp-programming-examples/](https://www.sanfoundry.com/csharp-programming-examples/)
+- [ ] Studieren Sie C# Codebeispiele. Einen guten Startpunkt bieten zum Beispiel die ''1000 C# Examples'' unter https://www.sanfoundry.com/csharp-programming-examples/
