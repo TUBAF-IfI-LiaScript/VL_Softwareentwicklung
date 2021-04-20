@@ -76,7 +76,8 @@ Nutzen Sie `checked{ }`, um eine Überprüfung der Konvertierung zur Laufzeit vo
 
 **2. Was hat es mit der Ausgabespezifikation `R` auf sich?**
 
-Der Formatbezeichner für "Roundtrips" `R` stellt sicher, dass bei der Konvertierung einer Zahl in eine Zeichenfolge die umgekehrte Abbildung wieder auf den gleichen Zahlenwert zurück führt. Dieses Format wird nur für folgende Typen unterstützt: Single, Double und BigInteger.
+
+Der Formatbezeichner für ''Roundtrips'' `R` stellt sicher, dass bei der Konvertierung einer Zahl in eine Zeichenfolge die umgekehrte Abbildung wieder auf den gleichen Zahlenwert zurück führt. Dieses Format wird nur für folgende Typen unterstützt: Single, Double und BigInteger.
 [Dokumentation der Ausgabenspezifikation](https://docs.microsoft.com/de-de/dotnet/standard/base-types/standard-numeric-format-strings#RFormatString)
 
 ********************************************************************************
@@ -184,7 +185,7 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-> Merke: Für Referenztypen evaluiert `==` die Addressen der Objekte, für Wertetype die spezifischen Daten. (Es sei denn, Sie haben den Operator überladen.)
+> Merke: Für Referenztypen evaluiert `==` die Addressen der Objekte, für Wertetypen die spezifischen Daten. (Es sei denn, Sie haben den Operator überladen.)
 
 Die Gleichheits- und Vergleichsoperationen  `==`, `!=`, `>=`, `>` usw. sind auf
 alle  numerischen Typen anwendbar.
@@ -196,7 +197,7 @@ alle  numerischen Typen anwendbar.
 
 In der Vorlesung 3 war bereits über die bitweisen boolschen Operatoren gesprochen worden. Diese verknüpfen Zahlenwerte auf Bitniveau. Die gleiche Notation (einzelne Operatorsymbole `&`, `|`) kann auch zur Verknüpfung von Boolschen Aussagen genutzt werden.
 
-Darüber hinaus existieren die doppelten Schreibweise als eigenständige Operatorkonstrukte - `&&`, , `||`. Bei der Anwendung auf boolsche Variablen wird
+Darüber hinaus existieren die doppelten Schreibweisen als eigenständige Operatorkonstrukte - `&&`, , `||`. Bei der Anwendung auf boolsche Variablen wird
 dabei zwischen "nicht-konditionalen" und "konditionalen" Operatoren
 unterschieden.
 
@@ -237,6 +238,38 @@ Console.WriteLine(a || (b && c)); // short-circuit evaluation
 // alternativ
 Console.WriteLine(a | (b & c));   // keine short-circuit evaluation
 ```
+Hier ein kleines Beispiel für die Optimierung der Konditionalen Operatoren:
+
+```csharp
+using System;
+
+public class Program
+{
+    public static void Main(){
+
+            bool a=false, b= true, c=false;
+
+            //Nicht-Konditionales UND
+            DateTime start = DateTime.Now;
+            for(int i=0; i<1000; i++){
+                if(a & (b | c)){}
+            }
+            DateTime end = DateTime.Now;
+            Console.WriteLine("Mit Nicht-Konditionalen Operatoren dauerte es: {0} Millisekunden", (end-start).TotalMilliseconds);
+
+
+            //Konditionales UND
+            start = DateTime.Now;
+            for(int i=0; i<1000; i++){
+                if(a && (b || c)){}
+            }
+            end = DateTime.Now;
+            Console.WriteLine("Mit Konditionalen Operatoren dauerte es nur: {0} Millisekunden, da vereinfacht wurde.", (end-start).TotalMilliseconds);
+    }
+}
+
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 **********************************************************************
 
@@ -246,7 +279,7 @@ Console.WriteLine(a | (b & c));   // keine short-circuit evaluation
 ********************************************************************************
 
 Enumerationstypen erlauben die Auswahl aus einer Aufstellung von Konstanten, die
-als Enumeratorlisten bezeichnet wird. Was passiert intern? Die Konstanten werden
+als Enumeratorliste bezeichnet wird. Was passiert intern? Die Konstanten werden
 auf einen ganzzahligen Typ gemappt. Der Standardtyp von Enumerationselementen ist `int`. Um eine Enumeration eines anderen ganzzahligen Typs, z. B. `byte` zu deklarieren, setzen Sie einen Doppelpunkt hinter dem Bezeichner, auf den der Typ folgt.
 
 <!-- --{{1}}-- Idee des Codefragments:
@@ -305,7 +338,7 @@ public class Program
   {
      Console.WriteLine(
           "\nAll possible combinations of values with FlagsAttribute:");
-     for( int val = 0; val <= 16; val++ )
+     for( int val = 0; val < 16; val++ )
         Console.WriteLine( "{0,3} - {1}", val, (MultiHue)val);
   }
 }
@@ -324,7 +357,7 @@ public class Program
 
 ### Weitere Wertdatentypen
 
-Für die Einführung der weiteren Wertdatentypen müssen wir noch einige Grundlagen erarbeiten. Entsprechend wird an dieser Stelle noch nicht auf `struct` und `tupel` eingangen. Vielmehr sei dazu auf nachfolgende Vorlesungen verwiesen.
+Für die Einführung der weiteren Wertdatentypen müssen wir noch einige Grundlagen erarbeiten. Entsprechend wird an dieser Stelle noch nicht auf `struct` und `tupel` eingegangen. Vielmehr sei dazu auf nachfolgende Vorlesungen verwiesen.
 
 ## Referenzdatentypen
 
@@ -355,14 +388,14 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
           STACK                        HEAP
    +-----------------+         +-----------------+
-   | 5               |         | ...             |   
+   | 5               |         | ...             |
    +-----------------+         +-----------------+
    | 6               |   +-->  | 4               |  0x1234
    +-----------------+   |     +-----------------+
    | ...             |   |     | 5               |
    +-----------------+   |     +-----------------+
    | 0x1234          | --+     | 7               |
-   +-----------------+         +-----------------+  
+   +-----------------+         +-----------------+
                                | ...             |
                                +-----------------+                             .
 ```
@@ -405,14 +438,14 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
                     STACK                        HEAP
              +-----------------+         +-----------------+
-x            | 5               |         | ...             |   
+x            | 5               |         | ...             |
              +-----------------+         +-----------------+
 y            | 6               |   +-->  | 55              |  0x1234
              +-----------------+   |     +-----------------+
              | ...             |   |     | 2               |
              +-----------------+   |     +-----------------+
 intArrayA    | 0x1234          | --+     | 3               |
-             +-----------------+   |     +-----------------+  
+             +-----------------+   |     +-----------------+
 intArrayB    | 0x1234          | --+     | ...             |
              +-----------------+         +-----------------+                   .
 ```
@@ -561,21 +594,21 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
                     +---+       +-------+-------+-------+-------+
    a[index] ──>     |[0]| ──>   |[0],[0]│[0],[1]│[0],[2]│[0],[3]|
                     +---+       +-------+-------+-------+-------+
-                    |[1]|       |[0],[0]│[0],[0]|
+                    |[1]|       |[1],[0]│[1],[1]|
                     +---+       +-------+-------+-------+
-                    |[2]|       |[0],[0]│[0],[1]│[0],[1]|
+                    |[2]|       |[2],[0]│[2],[1]│[2],[2]|
                     +---+       +-------+-------+-------+                      .
 ```
 
 ```csharp
-int[,] =  rectangularMatrix =
+int[,]  rectangularMatrix = //entspricht int[3,3]
 {
   {1,2,3},
   {0,1,2},
   {0,0,1}
 };
 
-int [][] = jaggedMatrix ={
+int [][] jaggedMatrix ={ //entspricht int[3][]
     new int[] {1,2,3},
     new int[] {0,1,2},
     new int[] {0,0,1}
@@ -588,7 +621,7 @@ int [][] = jaggedMatrix ={
 
                               {{0-1}}
 ********************************************************************************
-Als Referenztyp verweisen `string` Instanzen auf Folgen von Unicodezeichen abgeschlossen durch ein Null `\0`. Bei der Interpretation der Steuerzeichen
+Als Referenztyp verweisen `string` Instanzen auf Folgen von Unicodezeichen, die durch ein Null `\0` abgeschlossen sind. Bei der Interpretation der Steuerzeichen
 muss hinterfragt werden, ob eine Ausgabe des Zeichens oder eine Realisierung
 der Steuerzeichenbedeutung gewünscht ist.
 
@@ -646,13 +679,13 @@ Ausgabe und entsprechend den Methoden der String Generierung beschäftigen.
 
 ## Umgang mit Variablen
 
-Wie sollten wir die variable benennbaren Komponenten unseres Programms bezeichnen [Naming guidelines](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/general-naming-conventions?redirectedfrom=MSDN)?
+Wie sollten wir die variablen benennbaren Komponenten unseres Programms bezeichnen [Naming guidelines](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/general-naming-conventions?redirectedfrom=MSDN)?
 
 * Nutzen Sie sinnvolle, selbsterklärende Variablennamen!
 
 * Vermeiden Sie Abkürzungen abgesehen von verbreiteten Bezeichnungen.
 
-* camelCasing für Methodenargumente und lokale Variablen um konsitent mit dem .NET Framework zu sein
+* camelCasing für Methodenargumente und lokale Variablen um konsistent mit dem .NET Framework zu sein
 
 ```csharp
 public class UserLog
@@ -670,7 +703,7 @@ public class UserLog
 ```csharp
 // Correct
 int counter;
-string name;    
+string name;
 // Avoid
 int iCounter;
 string strName;
@@ -685,11 +718,11 @@ public const string UniName = "TU Freiberg";
 public const string UNINAME = "TU Freiberg";
 ```
 
-Ihre IDE bzw. ein Linterprogramm sollte die Einhaltung dieser Regularien überprüfen.  
+Ihre IDE bzw. ein Linterprogramm sollte die Einhaltung dieser Regularien überprüfen.
 
 ### Konstante Werte
 
-Konstanten sind unveränderliche Werte, die zur Kompilzeit bekannt sind und sich während der Lebensdauer des Programms nicht ändern. Der Versuch einer Änderung wird durch den Compiler überwacht.
+Konstanten sind unveränderliche Werte, die zur Compilezeit bekannt sind und sich während der Lebensdauer des Programms nicht ändern. Der Versuch einer Änderung wird durch den Compiler überwacht.
 
 ```csharp        ToString.cs
 using System;
@@ -699,7 +732,7 @@ public class Program
   public static void Main(string[] args)
   {
      const double pi = 3.14;
-     pi = 5;
+     pi = 5; //erzeugt Fehlermeldung, da pi konstant ist
      Console.WriteLine(pi);
   }
 }
@@ -722,7 +755,7 @@ var a = new[] {0, 1, 2}; // a is compiled as int[]
 `var`-Variablen sind trotzdem typisierte Variablen, nur der Typ wird vom
 Compiler zugewissen.
 
-Vielfach werden `var`-Variablen im Initialisierungteil von `for`- und `foreach`-
+Vielfach werden `var`-Variablen im Initialisierungsteil von `for`- und `foreach`-
 Anweisungen bzw. in der `using`-Anweisung verwendet. Eine wesentliche Rolle
 spielen sie bei der Verwendung von anonymen Typen.
 
@@ -764,7 +797,7 @@ using System;
 public class Program
 {
   public static void Main(string[] args){
-    string text = null;   // Die Referenz zeigt auf keine Objekt im Heap
+    string text = null;   // Die Referenz zeigt auf kein Objekt im Heap
     //int i = null;
     if (text == null) Console.WriteLine("Die Variable hat keinen Wert!");
     else Console.WriteLine("Der Wert der Variablen ist {0}", text);
@@ -773,10 +806,10 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-Aus der Definition heraus kann zum beispiel eine `int` Variable nur einen Wert zwischen int.MinValue und int.MaxValue annehmen. Eine `null` ist nicht vorgesehen und eine `0` gehört zum "normalen" Wertebereich.
+Aus der Definition heraus kann zum Beispiel eine `int` Variable nur einen Wert zwischen int.MinValue und int.MaxValue annehmen. Eine `null` ist nicht vorgesehen und eine `0` gehört zum "normalen" Wertebereich.
 
 Um gleichermaßen "nicht-besetzte" Werte-Variablen zu ermöglichen integriert C#
-das Konzept der sogenannte null-fähige Typen (*nullable types*) ein. Dazu wird
+das Konzept der sogenannte null-fähigen Typen (*nullable types*) ein. Dazu wird
 dem Typnamen ein  Fragezeichen angehängt. Damit ist es möglich diesen auch den
 Wert `null` zuzuweisen bzw. der Compiler realisiert dies.
 
@@ -849,4 +882,4 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-- [ ] Studieren Sie C# Codebeispiele. Einen guten Startpunkt bieten zum Beispiel die "1000 C# Examples" unter [https://www.sanfoundry.com/csharp-programming-examples/](https://www.sanfoundry.com/csharp-programming-examples/)
+- [ ] Studieren Sie C# Codebeispiele. Einen guten Startpunkt bieten zum Beispiel die ''1000 C# Examples'' unter https://www.sanfoundry.com/csharp-programming-examples/
