@@ -1,6 +1,7 @@
 <!--
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `snikker123` & `Florian2501`
+
 email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.0
 language: de
@@ -401,7 +402,6 @@ notwendig.
 | Gleitkommazahl              | `F`    | float   | Single   | 32   |                                                          |
 |                             | `D`    | double  | Double   | 64   |                                                          |
 |                             | `M`    | decimal | Decimal  | 128  |                                                          |
-
 
 {{1-2}}
 ********************************************************************************
