@@ -131,7 +131,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 ```
 
 Variablennamen umfassen Buchstaben, Ziffern oder `_`. Das erste Zeichen eines Namens muss ein Buchstabe (des Unicode-Zeichensatzes) oder ein `_` sein. Der C# Compiler ist
-*case sensitive*
+*case sensitive* (Unterschied zwischen Groß- und Kleinschreibung, z.B. Test != test).
 
 ```csharp    GreekSymbols.cs
 using System;
@@ -148,8 +148,8 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-Die Vergabe von Namen sollte sich an die Regeln der Klassenbibliothek halten
-um bereits aus dem Namen der Typ ersichtlich wird:
+Die Vergabe von Namen sollte sich an die Regeln der Klassenbibliothek halten,
+damit bereits aus dem Namen der Typ ersichtlich wird:
 
 + C#-Community bevorzugt *camel case* `MyNewClass` anstatt *underscoring* `My_new_class`.
    (Eine engagierte Diskussion zu diesem Thema findet sich unter [Link](https://whatheco.de/2011/02/10/camelcase-vs-underscores-scientific-showdown/))
@@ -183,7 +183,7 @@ public class Program
   {
     Console.WriteLine(0xFF);
     Console.WriteLine(0b1111_1111);  // ab C#7 unterstützt
-    Console.WriteLine(100_000_000);  
+    Console.WriteLine(100_000_000);
     Console.WriteLine(1.3454E06);
   }
 }
@@ -228,8 +228,8 @@ public class Program
 ### Kommentare
 
 C# unterscheidet zwischen *single-line* und *multi-line* Kommentaren. Diese
-können mit XML-Tags versehen werden, um die automatische Generation einer
-Dokumentation zu unterstützen. Wir werden in zu einem späteren Zeitpunkt
+können mit XML-Tags versehen werden, um die automatische Generierung einer
+Dokumentation zu unterstützen. Wir werden zu einem späteren Zeitpunkt
 explizit auf die Kommentierung und Dokumentation von Code eingehen.
 
 Kommentare werden vor der Kompilierung aus dem Quellcode gelöscht.
@@ -299,7 +299,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
          |       |         |        |        |       |         |       |
      Vordefi-  Enumer-  Structs   Tupel   Klassen  Inter    Arrays  Delegates
  nierte Typen  ation                     (String) -faces
-         |      
+         |
          |      ...............................................................
          |                           Benutzerdefinierte Typen
          |
@@ -341,7 +341,7 @@ char secondChar = '\n';
 char thirdChar = (char) 65;  // Referenz auf ASCII Tabelle
 ```
 
-Die Eingabe erfolgt entsprechend den Konzepten von C mit einfachen Anführungszeichen. Doppelte Anführungsstricht implizieren `String`-Variablen!
+Die Eingabe erfolgt entsprechend den Konzepten von C mit einfachen Anführungszeichen. Doppelte Anführungsstriche implizieren `String`-Variablen!
 
 ```csharp            FancyCharacters.cs
 using System;
@@ -359,7 +359,7 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-Neben der unmittelbaren Eingabe über die Buchstaben und Zeichen kann die Eingabe entsprechend  
+Neben der unmittelbaren Eingabe über die Buchstaben und Zeichen kann die Eingabe entsprechend
 
 + einer Escapesequenz für Unicodezeichen, d. h. `\u` gefolgt von der aus vier(!) Symbolen bestehenden Hexadezimaldarstellung eines Zeichencodes.
 + einer Escapesequenz für Hexadezimalzahlen, d. h. `\x` gefolgt von der Hexadezimaldarstellung eines Zeichencodes.
@@ -391,10 +391,10 @@ notwendig.
 | --------------------------- | ------ | ------- | -------- | --- | -------------------------------- |
 | Ganzzahl vorzeichenbehaftet |        | sbyte   | SByte    | 8   | –128 bis 127                     |
 |                             |        | short   | Int16    | 16  | –32.768 bis 32.767               |
-|                             |        | int     | Int32    | 32  | -2,147,483,648 bis 2,147,483,647 |
-|                             | `L`    | long    | Int64    | 64  |                                  |
+|                             |        | int     | Int32    | 32  | -2.147.483.648 bis 2.147.483.647 |
+|                             | `L`    | long    | Int64    | 64  |-9.223.372.036.854.775.808 bis 9.223.372.036.854.775.807                                  |
 | Ganzzahl ohne Vorzeichen    |        | byte    | Byte     | 8   | 0 bis 255                                 |
-|                             |        | ushort  | UInt16   | 16  |                                  |
+|                             |        | ushort  | UInt16   | 16  |0 bis 65.535                                  |
 |                             | `U`    | uint    | UInt32   | 32  | 0 bis 4.294.967.295              |
 |                             | `UL`   | ulong   | UInt64   | 64  | 0 bis 18.446.744.073.709.551.615                                 |
 | Gleitkommazahl              | `F`    | float   | Single   | 32  |                                  |
@@ -412,7 +412,7 @@ Numerische Suffixe
 | ------ | ------- | ---------------- | ------------------------------------ |
 | F      | float   | float f = 1.0F   |                                      |
 | D      | double  | double d = 1D    |                                      |
-| U      | decimal | decimal d = 1.0M | Compilerfehler bei Fehlen des Suffix |
+| M      | decimal | decimal d = 1.0M | Compilerfehler bei Fehlen des Suffix |
 | U      | uint    | uint i = 1U      |                                      |
 
 
@@ -441,9 +441,9 @@ public class Program
 > **Frage:** Gleitkommazahlen, wie funktioniert das eigentlich und wie lässt sich das Format auf den Speicher abbilden?
 
 Ein naheliegender und direkt zu Gleitkommazahlen führender Gedanke ist der Ansatz neben dem Zahlenwert auch die Position des Kommas abzuspeichern. In der "ingenieurwissenschaftlichen Schreibweise" ist diese Information aber an zwei Stellen
-verborgen, zum einen im Zahlenwert und zum anderen im Exponenten
+verborgen, zum einen im Zahlenwert und zum anderen im Exponenten.
 
-Beispiel: Der Wert der [[Lichtgeschwindigkeit]] beträgt
+**Beispiel:** Der Wert der *Lichtgeschwindigkeit* beträgt
 $$
 \begin{aligned}
 c &= 299\,792\,458 \; \text{m/s} \\
@@ -453,7 +453,7 @@ c &= 299\,792\,458 \; \text{m/s} \\
 \end{aligned}
 $$
 
-Um diese zusätzliche Information eindeutig abzulegen, müssen normieren wir die Darstellung - die Mantisse in einen festgelegten Wertebereich, zum Beispiel $1 \le m < 10$ gebracht.
+Um diese zusätzliche Information eindeutig abzulegen, normieren wir die Darstellung - die Mantisse wird in einen festgelegten Wertebereich, zum Beispiel $1 \le m < 10$ gebracht.
 
 Die Gleitkommadarstellung besteht dann aus dem Vorzeichen, der Mantisse und dem Exponenten. Für binäre Zahlen ist diese Darstellung in der [IEEE 754](https://de.wikipedia.org/wiki/IEEE_754) genormt.
 
@@ -463,7 +463,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 ```ascii
   +-+---- ~ -----+----- ~ ----+
   |V|  Mantisse  |  Exponent  |   V=Vorzeichenbit
-  +-+---- ~ -----+----- ~ ----+   
+  +-+---- ~ -----+----- ~ ----+
 
    1      23           8          = 32 Bit (float)
    1      52          11          = 64 Bit (double)                            .
@@ -523,10 +523,10 @@ Ein- und Ausgaben kann das zu Irritationen führen. Diese können durch die
 Verwendung der Klasse **System.Globalization.CultureInfo** beseitigt werden.
 
 Zum Beispiel wird mit der folgenden Anweisung die Eingabe eines
-Dezimalpunkt statt Dezimalkomma erlaubt.
+Dezimalpunkts statt Dezimalkomma erlaubt.
 
 ```csharp
-double wert = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+double wert = double.Parse(Console.ReadLine(), System.Globalization.CultureInfo.InvariantCulture);
 ```
 
 ********************************************************************************
@@ -596,8 +596,8 @@ int wert=Convert.ToInt32(Console.ReadLine());//string to int
 **Alle Numerischen Datentypen**
 
 Die arithmetischen Operatoren `+`, `-`, `*`, `/`, `%` sind für alle numerischen
-Typen mit Ausnahme der 8 und 16-Bit breiten Typen als Addition, Subtraktion,
-Multiplikation, Division und Modulo.
+Datentypen die bekannten Operationen Addition, Subtraktion,
+Multiplikation, Division und Modulo, mit Ausnahme der 8 und 16-Bit breiten Typen (byte und short). Diese werden vorher implizit zu einem `int` konvertiert und dann wird die bekannte Operation durchgeführt (Siehe Folie 2/2).
 
 Die Addition und Subtraktion kann mit Inkrement und Dekrement-Operatoren
 abgebildet werden.
@@ -712,7 +712,7 @@ anderen Programmiersprachen stellt C# folgende Operatoren zur Verfügung:
 | Symbol | Wirkung                                   |
 | ------ | ----------------------------------------- |
 | `~`    | invertiert jedes Bit                      |
-| `\`    | verknüpft korrespondierende Bits mit ODER |
+| `|`    | verknüpft korrespondierende Bits mit ODER |
 | `&`    | verknüpft korrespondierende Bits mit UND  |
 | `^`    | verknüpft korrespondierende Bits mit XOR  |
 | `<<`   | bitweise Verschiebung nach links          |
