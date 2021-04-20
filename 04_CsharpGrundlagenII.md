@@ -76,7 +76,8 @@ Nutzen Sie `checked{ }`, um eine Überprüfung der Konvertierung zur Laufzeit vo
 
 **2. Was hat es mit der Ausgabespezifikation `R` auf sich?**
 
-Der Formatbezeichner für "Roundtrips" `R` stellt sicher, dass bei der Konvertierung einer Zahl in eine Zeichenfolge die umgekehrte Abbildung wieder auf den gleichen Zahlenwert zurück führt. Dieses Format wird nur für folgende Typen unterstützt: Single, Double und BigInteger.
+
+Der Formatbezeichner für ''Roundtrips'' `R` stellt sicher, dass bei der Konvertierung einer Zahl in eine Zeichenfolge die umgekehrte Abbildung wieder auf den gleichen Zahlenwert zurück führt. Dieses Format wird nur für folgende Typen unterstützt: Single, Double und BigInteger.
 [Dokumentation der Ausgabenspezifikation](https://docs.microsoft.com/de-de/dotnet/standard/base-types/standard-numeric-format-strings#RFormatString)
 
 ********************************************************************************
@@ -355,14 +356,14 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
           STACK                        HEAP
    +-----------------+         +-----------------+
-   | 5               |         | ...             |   
+   | 5               |         | ...             |
    +-----------------+         +-----------------+
    | 6               |   +-->  | 4               |  0x1234
    +-----------------+   |     +-----------------+
    | ...             |   |     | 5               |
    +-----------------+   |     +-----------------+
    | 0x1234          | --+     | 7               |
-   +-----------------+         +-----------------+  
+   +-----------------+         +-----------------+
                                | ...             |
                                +-----------------+                             .
 ```
@@ -405,14 +406,14 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
                     STACK                        HEAP
              +-----------------+         +-----------------+
-x            | 5               |         | ...             |   
+x            | 5               |         | ...             |
              +-----------------+         +-----------------+
 y            | 6               |   +-->  | 55              |  0x1234
              +-----------------+   |     +-----------------+
              | ...             |   |     | 2               |
              +-----------------+   |     +-----------------+
 intArrayA    | 0x1234          | --+     | 3               |
-             +-----------------+   |     +-----------------+  
+             +-----------------+   |     +-----------------+
 intArrayB    | 0x1234          | --+     | ...             |
              +-----------------+         +-----------------+                   .
 ```
@@ -670,7 +671,7 @@ public class UserLog
 ```csharp
 // Correct
 int counter;
-string name;    
+string name;
 // Avoid
 int iCounter;
 string strName;
@@ -685,7 +686,7 @@ public const string UniName = "TU Freiberg";
 public const string UNINAME = "TU Freiberg";
 ```
 
-Ihre IDE bzw. ein Linterprogramm sollte die Einhaltung dieser Regularien überprüfen.  
+Ihre IDE bzw. ein Linterprogramm sollte die Einhaltung dieser Regularien überprüfen.
 
 ### Konstante Werte
 
