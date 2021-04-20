@@ -279,7 +279,7 @@ public class Program
 ********************************************************************************
 
 Enumerationstypen erlauben die Auswahl aus einer Aufstellung von Konstanten, die
-als Enumeratorlisten bezeichnet wird. Was passiert intern? Die Konstanten werden
+als Enumeratorliste bezeichnet wird. Was passiert intern? Die Konstanten werden
 auf einen ganzzahligen Typ gemappt. Der Standardtyp von Enumerationselementen ist `int`. Um eine Enumeration eines anderen ganzzahligen Typs, z. B. `byte` zu deklarieren, setzen Sie einen Doppelpunkt hinter dem Bezeichner, auf den der Typ folgt.
 
 <!-- --{{1}}-- Idee des Codefragments:
@@ -338,7 +338,7 @@ public class Program
   {
      Console.WriteLine(
           "\nAll possible combinations of values with FlagsAttribute:");
-     for( int val = 0; val <= 16; val++ )
+     for( int val = 0; val < 16; val++ )
         Console.WriteLine( "{0,3} - {1}", val, (MultiHue)val);
   }
 }
@@ -357,7 +357,7 @@ public class Program
 
 ### Weitere Wertdatentypen
 
-Für die Einführung der weiteren Wertdatentypen müssen wir noch einige Grundlagen erarbeiten. Entsprechend wird an dieser Stelle noch nicht auf `struct` und `tupel` eingangen. Vielmehr sei dazu auf nachfolgende Vorlesungen verwiesen.
+Für die Einführung der weiteren Wertdatentypen müssen wir noch einige Grundlagen erarbeiten. Entsprechend wird an dieser Stelle noch nicht auf `struct` und `tupel` eingegangen. Vielmehr sei dazu auf nachfolgende Vorlesungen verwiesen.
 
 ## Referenzdatentypen
 
