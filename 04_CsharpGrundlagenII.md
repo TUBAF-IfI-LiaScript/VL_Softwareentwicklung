@@ -185,7 +185,7 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-> Merke: Für Referenztypen evaluiert `==` die Addressen der Objekte, für Wertetype die spezifischen Daten. (Es sei denn, Sie haben den Operator überladen.)
+> Merke: Für Referenztypen evaluiert `==` die Addressen der Objekte, für Wertetypen die spezifischen Daten. (Es sei denn, Sie haben den Operator überladen.)
 
 Die Gleichheits- und Vergleichsoperationen  `==`, `!=`, `>=`, `>` usw. sind auf
 alle  numerischen Typen anwendbar.
@@ -197,7 +197,7 @@ alle  numerischen Typen anwendbar.
 
 In der Vorlesung 3 war bereits über die bitweisen boolschen Operatoren gesprochen worden. Diese verknüpfen Zahlenwerte auf Bitniveau. Die gleiche Notation (einzelne Operatorsymbole `&`, `|`) kann auch zur Verknüpfung von Boolschen Aussagen genutzt werden.
 
-Darüber hinaus existieren die doppelten Schreibweise als eigenständige Operatorkonstrukte - `&&`, , `||`. Bei der Anwendung auf boolsche Variablen wird
+Darüber hinaus existieren die doppelten Schreibweisen als eigenständige Operatorkonstrukte - `&&`, , `||`. Bei der Anwendung auf boolsche Variablen wird
 dabei zwischen "nicht-konditionalen" und "konditionalen" Operatoren
 unterschieden.
 
@@ -238,6 +238,38 @@ Console.WriteLine(a || (b && c)); // short-circuit evaluation
 // alternativ
 Console.WriteLine(a | (b & c));   // keine short-circuit evaluation
 ```
+Hier ein kleines Beispiel für die Optimierung der Konditionalen Operatoren:
+
+```csharp
+using System;
+
+public class Program
+{
+    public static void Main(){
+
+            bool a=false, b= true, c=false;
+
+            //Nicht-Konditionales UND
+            DateTime start = DateTime.Now;
+            for(int i=0; i<1000; i++){
+                if(a & (b | c)){}
+            }
+            DateTime end = DateTime.Now;
+            Console.WriteLine("Mit Nicht-Konditionalen Operatoren dauerte es: {0} Millisekunden", (end-start).TotalMilliseconds);
+
+
+            //Konditionales UND
+            start = DateTime.Now;
+            for(int i=0; i<1000; i++){
+                if(a && (b || c)){}
+            }
+            end = DateTime.Now;
+            Console.WriteLine("Mit Konditionalen Operatoren dauerte es nur: {0} Millisekunden, da vereinfacht wurde.", (end-start).TotalMilliseconds);
+    }
+}
+
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 **********************************************************************
 
