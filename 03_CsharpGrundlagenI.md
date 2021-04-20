@@ -1,6 +1,7 @@
 <!--
 
-author:   Sebastian Zug, Galina Rudolf, André Dietrich & `snikker123`
+author:   Sebastian Zug, Galina Rudolf, André Dietrich, `snikker123` & `Florian2501`
+
 email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.0
 language: de
@@ -93,6 +94,7 @@ Auf die Auführung der 40 kontextabhängigen Schlüsselwörter wie `where` oder
 
 Ist das viel oder wenig, welche Bedeutung hat die Zahl der Schlüsselwörter?
 
+<!-- data-type="none" -->
 | Sprache    | Schlüsselwörter | Bemerkung                                             |
 | ---------- | --------------- | ----------------------------------------------------- |
 | F#         | 98              | 64 + 8 from ocaml + 26 future                         |
@@ -387,20 +389,19 @@ notwendig.
 ### Zahlendatentypen und Operatoren
 
 <!-- data-type="none" -->
-| Type                        | Suffix | Name    | .NET Typ | Bits |   Wertebereich                               |
-| --------------------------- | ------ | ------- | -------- | --- | -------------------------------- |
-| Ganzzahl vorzeichenbehaftet |        | sbyte   | SByte    | 8   | –128 bis 127                     |
-|                             |        | short   | Int16    | 16  | –32.768 bis 32.767               |
-|                             |        | int     | Int32    | 32  | -2.147.483.648 bis 2.147.483.647 |
-|                             | `L`    | long    | Int64    | 64  |-9.223.372.036.854.775.808 bis 9.223.372.036.854.775.807                                  |
-| Ganzzahl ohne Vorzeichen    |        | byte    | Byte     | 8   | 0 bis 255                                 |
-|                             |        | ushort  | UInt16   | 16  |0 bis 65.535                                  |
-|                             | `U`    | uint    | UInt32   | 32  | 0 bis 4.294.967.295              |
-|                             | `UL`   | ulong   | UInt64   | 64  | 0 bis 18.446.744.073.709.551.615                                 |
-| Gleitkommazahl              | `F`    | float   | Single   | 32  |                                  |
-|                             | `D`    | double  | Double   | 64  |                                  |
-|                             | `M`    | decimal | Decimal  | 128 |                                  |
-
+| Type                        | Suffix | Name    | .NET Typ | Bits | Wertebereich                                             |
+| --------------------------- | ------ | ------- | -------- | ---- | -------------------------------------------------------- |
+| Ganzzahl vorzeichenbehaftet |        | sbyte   | SByte    | 8    | –128 bis 127                                             |
+|                             |        | short   | Int16    | 16   | –32.768 bis 32.767                                       |
+|                             |        | int     | Int32    | 32   | -2.147.483.648 bis 2.147.483.647                         |
+|                             | `L`    | long    | Int64    | 64   | -9.223.372.036.854.775.808 bis 9.223.372.036.854.775.807 |
+| Ganzzahl ohne Vorzeichen    |        | byte    | Byte     | 8    | 0 bis 255                                                |
+|                             |        | ushort  | UInt16   | 16   | 0 bis 65.535                                             |
+|                             | `U`    | uint    | UInt32   | 32   | 0 bis 4.294.967.295                                      |
+|                             | `UL`   | ulong   | UInt64   | 64   | 0 bis 18.446.744.073.709.551.615                         |
+| Gleitkommazahl              | `F`    | float   | Single   | 32   |                                                          |
+|                             | `D`    | double  | Double   | 64   |                                                          |
+|                             | `M`    | decimal | Decimal  | 128  |                                                          |
 
 {{1-2}}
 ********************************************************************************
@@ -495,7 +496,7 @@ public class Program
      double fnumber = 123456784649577.0;
      double additional = 0.0000001;
      Console.WriteLine("Experiment 1");
-     Console.WriteLine("{0} + {1} = {2:R}", fnumber, additional,
+     Console.WriteLine("{0} + {1} = {2:G17}", fnumber, additional,
                                           fnumber + additional);
      double value = .1;
      double result = 0;
@@ -503,7 +504,7 @@ public class Program
           result += value;
      }
      Console.WriteLine("\nExperiment 2");
-     Console.WriteLine(".1 Added 10000 times: {0:R}", result);
+     Console.WriteLine(".1 Added 10000 times: {0:G17}", result);
     }
 }
 ```
