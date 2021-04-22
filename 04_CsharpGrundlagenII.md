@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug, Galina Rudolf, André Dietrich & `Lina`
+author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
 
