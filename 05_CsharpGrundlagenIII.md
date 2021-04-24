@@ -45,7 +45,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     Console.Write("One");
     Console.Write("Two");
@@ -118,7 +118,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
 		double[] values = new double[] {43.2234, 1.23123243, -123234.09};
 		for (int index = 0; index < values.Length; index++)
@@ -159,7 +159,7 @@ using System.Threading;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
   	DateTime thisDate = new DateTime(2020, 3, 12);
     Console.WriteLine(thisDate.ToString("d"));   // d = kurzes Datum
@@ -191,7 +191,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     // Composite formatting:
     var date = DateTime.Now;
@@ -226,7 +226,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
      Console.WriteLine("Ausgabe auf das Standard-Gerät");
      Console.Out.WriteLine("Ausgabe nach Out (default die Konsole)");
@@ -340,7 +340,7 @@ using System;
 
   public class Program
   {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
       string [] clubs = {"Blau Weiß", "Grün Gelb 1905", "Borussia Tralla Trulla", "Eintracht"};
       int [] punkte = {12, 10, 9, 5};
@@ -480,7 +480,7 @@ using System;
 
   public class Program
   {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
       char ch;
       int x;
@@ -550,7 +550,7 @@ using System.Globalization;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
       // Beispiel 1: Zugriff auf das Filesystem eines Rechners aus dem Netz
       System.IO.FileStream file = null;
@@ -591,7 +591,7 @@ public class Program
     }
 }
 
-public static void Main(string[] args)
+static void Main(string[] args)
 {
     try
     {

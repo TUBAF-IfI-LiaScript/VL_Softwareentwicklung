@@ -48,7 +48,7 @@ using System;
 
 public class Program
 {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
         byte x = 0;
         ushort y = 65535;
@@ -128,7 +128,7 @@ using System;
 
 public class Program
 {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
         bool x = true;
         Console.WriteLine(x);
@@ -175,7 +175,7 @@ public class Person{
 
 public class Program
 {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
         Person student1 = new Person("Sebastian");
         Person student2 = new Person("Sebastian");
@@ -217,7 +217,7 @@ using System;
 
 public class Program
 {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
         int a =  6; // 0110
         int b = 10; // 1010
@@ -295,7 +295,7 @@ public class Program
   enum Day {Sat, Sun, Mon, Tue, Wed, Thu, Fri};
   //enum Day : byte {Sat, Sun, Mon, Tue, Wed, Thu, Fri};
 
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     Day startingDay = Day.Wed;
     Console.WriteLine(startingDay);
@@ -334,7 +334,7 @@ public class Program
      Blue  = 0b_0000_1000,  // 8
   };
 
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
      Console.WriteLine(
           "\nAll possible combinations of values with FlagsAttribute:");
@@ -409,7 +409,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     // Zuweisung für Wertetypen
     int x = 5;
@@ -457,7 +457,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     int [] intArrayA = new int[]{1,2,3};
     int [] intArrayB;
@@ -522,7 +522,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     int [] intArray = new int [5];
     short [] shortArray = new short[] { 1, 3, 5, 7, 9 };
@@ -550,7 +550,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     int [] intArray = new int [5];
     short [] shortArray = new short[] { 1, 3, 5, 7, 9 };
@@ -630,7 +630,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     string text1 = "Das ist ein \n Test der \t über mehrere Zeilen geht!";
     string text2 = @"Das ist ein
@@ -659,7 +659,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     Console.WriteLine("String + String = " + "StringString" );
     Console.WriteLine("String + Zahl 5 = " + 5); // Implizites .ToString()
@@ -729,7 +729,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
      const double pi = 3.14;
      pi = 5; //erzeugt Fehlermeldung, da pi konstant ist
@@ -765,7 +765,7 @@ using System.Collections.Generic;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     //int num = 123;
     //string str = "asdf";
@@ -796,7 +796,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args){
+  static void Main(string[] args){
     string text = null;   // Die Referenz zeigt auf kein Objekt im Heap
     //int i = null;
     if (text == null) Console.WriteLine("Die Variable hat keinen Wert!");
@@ -821,7 +821,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args){
+  static void Main(string[] args){
     int? i = null;
     if (i == null) Console.WriteLine("Die Variable hat keinen Wert!");
     else Console.WriteLine("Der Wert der Variablen ist {0}", i);
@@ -862,7 +862,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     for (int number = 0; number < 20; number ++)
     {

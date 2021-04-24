@@ -39,7 +39,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     // Print Hello World message
     Console.WriteLine("Glück auf" + " Freiberg");
@@ -140,7 +140,7 @@ using System;
 
 public class Program
 {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
       var Δ = 1;
       Δ++;
@@ -181,7 +181,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     Console.WriteLine(0xFF);
     Console.WriteLine(0b1111_1111);  // ab C#7 unterstützt
@@ -210,7 +210,7 @@ using System;
 
 public class Program
 {
-   public static void Main(string[] args)
+   static void Main(string[] args)
    {
        Console.WriteLine("Das ist ein ganzer Satz");
        Console.WriteLine('e');   // <- einzelnes Zeichen
@@ -242,7 +242,7 @@ using System;
 // <summary> Diese Klasse gibt einen konstanten Wert aus </summary>
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
       // Das ist ein Kommentar
       System.Console.WriteLine("Hier passiert irgendwas ...");
@@ -350,7 +350,7 @@ using System;
 
 public class Program
 {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
         var myChar = 'A';
         var myString = "A";
@@ -373,7 +373,7 @@ using System;
 
 public class Program
 {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
       Console.WriteLine('\u2328' + " Unicodeblock Miscellaneous Technical");
       Console.WriteLine('\u2F0C' + " Unicodeblock Kangxi Radicals");
@@ -423,7 +423,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     float f = 5.1F;
     Console.WriteLine(f.GetType());
@@ -491,7 +491,7 @@ using System;
 
 public class Program
 {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
      double fnumber = 123456784649577.0;
      double additional = 0.0000001;
@@ -608,7 +608,7 @@ using System;
 
 public class Program
 {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
         int result = 101;
         for (int i = 0; i<100; i++ ){ // Anwendung des Inkrement Operators
@@ -640,7 +640,7 @@ using System;
 
 public class Program
 {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
         Console.WriteLine("Division von 2/3  = {0:D}", 2/3);
     }
@@ -659,7 +659,7 @@ using System;
 
 public class Program
 {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
         int a = int.MinValue;
         Console.WriteLine("Wert von a                = {0}", a);
@@ -694,7 +694,7 @@ using System;
 
 public class Program
 {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
         short x = 1, y = 1;
         short z = x + y;
@@ -729,7 +729,7 @@ public class Program
     {
       return Convert.ToString(value, 2).PadLeft(8,'0');
     }
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
       int x = 21, y = 12;
       Console.WriteLine(printBinary(7));

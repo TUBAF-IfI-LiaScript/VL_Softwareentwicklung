@@ -62,7 +62,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
       int a = 23, b = 3;
       if (a > 20 && b < 5)
@@ -91,7 +91,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
       bool A = true, B = false;
       if (A)
@@ -115,7 +115,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     Console.WriteLine("Enter a character: ");
     char ch = (char)Console.Read();
@@ -157,7 +157,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     string day = "Sonntag";
     string output;
@@ -209,7 +209,7 @@ using System;
 public class Program
 {
   enum states {A, B, C, D};
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     string inputs;
     states state = states.A;
@@ -314,7 +314,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     for (int i = 0, j = 10;
          i<10 && j>5;
@@ -349,7 +349,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     int [] array = new int [] {1,2,3,4,5,6};
     foreach (int entry in array){
@@ -380,7 +380,7 @@ using System;
 
 public class Program
 {
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     int dummy = 0;
     for (int y = 0; y < 10; y++)
@@ -429,7 +429,7 @@ public class Program
     p = p + 1;
     Console.WriteLine(p);
   }
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     Calc(5f);                           // Funktions / Methodenaufruf
   }
@@ -448,7 +448,7 @@ using System;
 public class Program
 {
   public static string Combine(string fname, string lname) => $"{fname.Trim()} {lname.Trim()}";
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     Console.WriteLine(Combine("Sebastian", "Zug     "));
   }
@@ -475,7 +475,7 @@ public class Program
   // Funktion
   static int Calc(int p)    => p+1;
 
-  public static void Main(string[] args){
+  static void Main(string[] args){
     int p = 6, result;
     result = Calc(p);
     print(result);
@@ -508,7 +508,7 @@ public class Program
     p = p + 1;
     Console.WriteLine("Innerhalb von Calc {0}", p);
   }
-  public static void Main(string[] args){
+  static void Main(string[] args){
     int p = 6;
     Calc(p);
     Console.WriteLine("Innerhalb von Main {0}", p);
@@ -545,7 +545,7 @@ public class Program
   static void IncrementsCounter(){
      Counter.globalCounter++;
   }
-  public static void Main(string[] args){
+  static void Main(string[] args){
     Console.WriteLine(Counter.globalCounter);
     IncrementsCounter();
     Console.WriteLine(Counter.globalCounter);
@@ -572,7 +572,7 @@ public class Program
     int output = 5 * input;
     return output;
   }
-  public static void Main(string[] args){
+  static void Main(string[] args){
     int p = 5;
     int a = Calc(p);
     Console.WriteLine(a);
@@ -605,7 +605,7 @@ public class Program
   {
      p = p * 2;
   }
-  public static void Main(string[] args){
+  static void Main(string[] args){
     int p = 1;
     Console.WriteLine(p);
     Calc(ref p);
@@ -640,7 +640,7 @@ public class Program
     w.Wrapped = 666;
     w = new Wrapper(999);
   }
-  public static void Main(string[] args)
+  static void Main(string[] args)
   {
     //Test1:
     Wrapper myWrapper = new Wrapper(42);
@@ -693,7 +693,7 @@ public class Program
   {
     output = p + 1;
   }
-  public static void Main(string[] args){
+  static void Main(string[] args){
     int p = 6, r;
     Calc(p, out r);
     Console.WriteLine(r);
@@ -742,7 +742,7 @@ public class Program
     sum = 0;
     foreach(int i in list) sum+=i;
   }
-  public static void Main(string[] args){
+  static void Main(string[] args){
     int sum = 0;
     Add(out sum, 3, 3, 5 , 6);
     Console.WriteLine(sum);
@@ -797,7 +797,7 @@ public class Program
     Console.WriteLine("Day {0} Month {1} Year {2}", day, month, year);
   }
 
-  public static void Main(string[] args){
+  static void Main(string[] args){
     PrintDate(year:2019);
   }
 }
