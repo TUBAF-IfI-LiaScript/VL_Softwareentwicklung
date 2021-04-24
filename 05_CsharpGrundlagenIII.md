@@ -28,9 +28,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 ---------------------------------------------------------------------
 
-## Ein und Ausgabe
-
-## Schreiboperation
+## I/O Schreiboperation
 
 C# selbst besitzt keine Anweisungen für die Ein- und Ausgabe von Daten, dazu
 existieren aber mehrere Bibliotheken, die im folgenden für die Bildschirmausgabe
@@ -45,36 +43,38 @@ Für das Schreiben stehen zwei Methoden `System.Console.Write` und `System.Conso
 ```csharp   Write/WriteLine
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  public static void Main(string[] args)
   {
-    public static void Main(string[] args)
-    {
-      Console.Write("One");
-      Console.Write("Two");
-      Console.WriteLine("Three");
-      Console.WriteLine();
-      Console.WriteLine("Four");
-    }
+    Console.Write("One");
+    Console.Write("Two");
+    Console.WriteLine("Three");
+    Console.WriteLine();
+    Console.WriteLine("Four");
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+<!--data-theme="chaos" -->
+```
+OneTwoThree
+
+Four
+```
 
 Diese decken erstens eine **große Bandbreite von Übergabeparametern** und bedienen
 zweitens verschiedene **Ausgabeschnittstellen**.
 
-| WriteLine() Methoden                                    | Anwendung                                 |
-| ------------------------------------------------------- | ----------------------------------------- |
-| `WriteLine()`                                             | Zeilenumbruch                             |
-| `WriteLine(UInt64), WriteLine(Double), WriteLine(Object)` | Ausgabe von Variablen der Basisdatentypen |
-| `WriteLine(Object)`                                       |                                           |
-| `WriteLine(String)`                                       | Ausgabe einer `string` Variable           |
-| `WriteLine(String, Object)`                               | String und Formatinformationen            |
-| `WriteLine(String, Object, Object)`                       |                                           |
-| `WriteLine(String, Object, Object, Object)`               |                                           |
-| `WriteLine(String, Object[])`                             |                                           |
+| WriteLine() Methoden                                      | Anwendung                                               |
+| --------------------------------------------------------- | ------------------------------------------------------- |
+| `WriteLine()`                                             | Zeilenumbruch                                           |
+| `WriteLine(UInt64), WriteLine(Double), WriteLine(Object)` | Ausgabe von Variablen der Basisdatentypen               |
+| `WriteLine(Object)`                                       |                                                         |
+| `WriteLine(String)`                                       | Ausgabe einer `string` Variable                         |
+| `WriteLine(String, Object)`                               | Kombinierte Formatierung- String mit Formatinformationen und nachfolgendes Objekt ...|
+| `WriteLine(String, Object, Object)`                       | ... nachfolgende Objekte                                |
+| `WriteLine(String, Object, Object, Object)`               | ...                                                     |
+| `WriteLine(String, Object[])`                             | ...                                                     |
 
 ### Kombinierte Formatierung von Strings
 
@@ -89,15 +89,19 @@ können auch auf:
 
 angewandt werden.
 
-Dabei sind folgende Ausdrücke möglich:
+Die Ausdrücke folgen dabei folgenden Muster. Achtung, die rechteckigen Klammern illustrieren hier optionale Elemente `[...]`!
 
 ```
-"{n}"
-"{n, width}"
-"{n, width:format}"
-"{n, width:format precision}"
-     //ohne Lehrzeichen zwischen format und precision!
+{ index [, alignment] [width][:format][precision]}
 ```
+<!-- data-type="none" -->
+| Element     | Bedeutung                                        |
+| ----------- | ------------------------------------------------ |
+| `index`     | Referenz auf die nachfolgenden Folge der Objekte |
+| `alignment` | Ausrichtung links- (`-` ) oder rechtsbündig      |
+| `width`     | Breite der Darstellung                           |
+| `format`    | siehe nachfolgende Tabellen                      |
+| `precision` | Nachkommastellen bei gebrochenen Zahlenwerten    |
 
 <!-- --{{0}}-- Idee des Codeblockes
   * Diskussion der Indizes, Durchtauschen der Indizes,
@@ -112,28 +116,27 @@ Probieren sie es doch in folgendem Beispiel mal aus:
 ```csharp   IndizesKombinierteFormatierung
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  public static void Main(string[] args)
   {
-    public static void Main(string[] args)
-    {
-       int ivalue = 56;
-       double dvalue = 43.2234;
-       bool bvalue = true;
-       Console.WriteLine("Test {0:e}, {1}", dvalue, bvalue);
-    }
+		double[] values = new double[] {43.2234, 1.23123243, -123234.09};
+		for (int index = 0; index < values.Length; index++)
+		{
+    	Console.WriteLine("{0} -> {1}", index, values[index]);
+		}
   }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
+<!-- data-type="none" -->
 | Format Symbol | Bedeutung                | Beispiel      |
 | ------------- | ------------------------ | ------------- |
 | G             | Default                  |               |
 | E, e          | Expoentiell              | 1.052033E+003 |
 | X, x          | Hexadezimal              | 1FF           |
-| P, p          | Prozent                  | -38.8         |
+| P, p          | Prozent                  | -38.8%        |
 | D, d          | Dezimal                  | 1231          |
 | N, n          | Dezimal mit Trennzeichen | 1.23432,12    |
 
@@ -154,24 +157,26 @@ using System;
 using System.Globalization;
 using System.Threading;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  public static void Main(string[] args)
   {
-    public static void Main(string[] args)
-    {
-      //Globale Definition des Kulturkreises
-      //Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-      DateTime thisDate = new DateTime(2008, 3, 15);
-      Console.WriteLine(thisDate.ToString("d"));   // d = kurzes Datum
-                                                   // D = langes Datum
-                                                   // f = vollständig
-      Console.WriteLine("{0:D}", thisDate);
-    }
+  	DateTime thisDate = new DateTime(2020, 3, 12);
+    Console.WriteLine(thisDate.ToString("d"));   // d = kurzes Datum
+                                                 // D = langes Datum
+                                                 // f = vollständig
+
+  	string[]  cultures = new string [] {"de-DE", "sq-AL", "hy-AM"};
+  	foreach(string culture in cultures){
+  		 Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
+  		 Console.WriteLine("{0:5} - {1:D}", culture, thisDate);
+  	}
   }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+https://docs.microsoft.com/de-de/openspecs/windows_protocols/ms-lcid/a9eac961-e77d-41a6-90a5-ce1a8b0cdb9c
 
 ### Zeichenfolgeninterpolation
 
@@ -184,19 +189,16 @@ solcher Ausdruck durch ein `$`.
 ```csharp   Zeichenfolgeninterpolation
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  public static void Main(string[] args)
   {
-    public static void Main(string[] args)
-    {
-      // Composite formatting:
-      var date = DateTime.Now;
-      string city = "Freiberg";
-      Console.WriteLine("Hello, {0}! Today is {1}, it's {2:HH:mm} now.", city, date.DayOfWeek, date);
-      // String interpolation:
-      Console.WriteLine($"Hello, {city}! Today is {date.DayOfWeek}, it's {date:HH:mm} now.");
-    }
+    // Composite formatting:
+    var date = DateTime.Now;
+    string city = "Freiberg";
+    Console.WriteLine("Hello, {0}! Today is {1}, it's {2:HH:mm} now.", city, date.DayOfWeek, date);
+    // String interpolation:
+    Console.WriteLine($"Hello, {city}! Today is {date.DayOfWeek}, it's {date:HH:mm} now.");
   }
 }
 ```
@@ -222,16 +224,13 @@ Standardschnittstellen.
 ```csharp
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  public static void Main(string[] args)
   {
-    public static void Main(string[] args)
-    {
-       Console.WriteLine("Ausgabe auf das Standard-Gerät");
-       Console.Out.WriteLine("Ausgabe nach Out (default die Konsole)");
-       //Console.Error.WriteLine("Ausgabe an die Fehlerschnittstelle");
-    }
+     Console.WriteLine("Ausgabe auf das Standard-Gerät");
+     Console.Out.WriteLine("Ausgabe nach Out (default die Konsole)");
+     //Console.Error.WriteLine("Ausgabe an die Fehlerschnittstelle");
   }
 }
 ```
@@ -318,32 +317,42 @@ namespace Wiki
 
 ### Beispiel
 
-In Markdown sind Tabellen nach folgendem Muster aufgebaut:
+Zur Erinnerung, in Markdown werden Tabellen nach folgendem Muster aufgebaut:
 
 ```
-| Column I | Column II | Column III      |
-|:---------|:----------|:----------------|
+| Name     | Alter     | Aufgabe         |
+|:---------|----------:|:----------------|
 | Peter    | 42        | C-Programmierer |
 | Astrid   | 23        | Level Designer  |
 ```
+
+<!-- data-type="none" -->
+| Name   | Alter | Aufgabe         |
+|:------ | -----:|:--------------- |
+| Peter  |    42 | C-Programmierer |
+| Astrid |    23 | Level Designer  |
 
 Geben Sie die Daten bestimmte Fußballvereine in einer Markdown-Tabelle aus.
 
 ```csharp   GenerateMarkDownTable
 using System;
 
-namespace Rextester
-{
+
   public class Program
   {
     public static void Main(string[] args)
     {
-      string [] clubs = {"Blau Weiß", "Grün Gelb 1905", "Borussia Tralla Trullas", "Eintracht"};
+      string [] clubs = {"Blau Weiß", "Grün Gelb 1905", "Borussia Tralla Trulla", "Eintracht"};
       int [] punkte = {12, 10, 9, 5};
+      // Wie lang ist ein Clubname maximal?
       int maxlength = 0;
-      foreach(string club in clubs)  maxlength =  club.Length < maxlength ? maxlength : club.Length ;
+      foreach(string club in clubs)
+      {
+        maxlength =  club.Length < maxlength ? maxlength : club.Length ;
+      }  
       maxlength += 1;
 
+      // Ausgabe
       string output;
       output  = "| ";
       output += "Verein".PadRight(maxlength, ' ') + "| Punkte |\n";
@@ -354,18 +363,22 @@ namespace Rextester
       Console.WriteLine(output);
     }
   }
-}
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-Welche Annahmen werden implizit bei der Erstellung der Tabelle getroffen? Wo
-sehen Sie Verbesserungsbedarf?
+> **Frage:** Welche Annahmen werden implizit bei der Erstellung der Tabelle getroffen? Wo sehen Sie Verbesserungsbedarf?
 
+## I/O Leseoperationen
 
-## Leseoperationen
+Eine Software ist zumeist von Nutzereingaben abhängig. Diese können:
 
-                                {{0-1}}
-*******************************************************************************
++ in Form von Dateiinhalten daherkommen,
++ als Eingaben beim Start des Programms vorgegeben oder
++ zur Laufzeit eingelesen werden.
+
+> Vergegenwärtigen Sie sich die Vor- und Nachteile der unterschiedlichen Formen mit Blick auf die Entwicklung einer Software!
+
+### Kommandozeilenargumente
 
 Eine grundlegende Eingabemöglichkeit ist die Übergabe von Parametern beim
 Aufruf des Programms von der Kommandozeile.
@@ -373,47 +386,86 @@ Aufruf des Programms von der Kommandozeile.
 ```csharp      CommandlineParameter.cs
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  static int Main(string[] args)
   {
-    public static int Main(string[] args)
+    System.Console.WriteLine($"How many arguments are given? - {args.Length}");
+    foreach (string argument in args)
     {
-      System.Console.WriteLine("Geben Sie einen Ganzzahlwert und einen String als Argumente ein!");
-      if (args.Length == 0)
-      {
-          System.Console.WriteLine("Offenbar keine Eingabe - Fehler!");
-          return 1;
-      }
-      if (args.Length == 2)  // Erwartete Zahl von Parametern
-      {
-          long num1 = long.Parse(args[0]);
-          long num2 = Convert.ToLong(args[0]);
-          long num3;
-          long.TryParse(args[0], out num3);
-          System.Console.WriteLine($"{num1} {num2} {num3}");
-
-          string text = args[1];
-          System.Console.WriteLine($"{text}");
-      }
-      return 0;
+      System.Console.WriteLine(argument);
     }
+    return 0;
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+Bei der Vorgabe von Commandline Parametern unterscheidet sich der Ablauf etwas, je nachdem wie Sie Ihren Code "bauen".
+
+**Kommandozeile**
+
+1. mono Compiler
+```
+mcs CmdLineParams.cs
+mono CmdLineParams.exe Das ist "ein Test"
 ```
 
-Dabei nutzt das obige Beispiel 3 Formen der Interpretation der Daten. In den beiden ersten Fällen ist der Entwickler für das Abfangen der _Exceptions_ verantwortlich. Die letzte Variante kapselt dies intern und gibt die möglicherweise eingetretene Ausnahme über die Rückgabewerte aus. Der Code auf Seiten der Anwendung wird kompakter.
+2. dotnet Umgebung
+```
+dotnet new console --name dotnet_cmdLinePara --framework net5.0
+cd dotnet_cmdLinePara
+dotnet run -- -1 -zwei -"drei vier"
+```
 
-1. `long.Parse` parst die Eingabe in einen ganzzahligen Wert, wirft jedoch eine Ausnahme aus, wenn dies nicht möglich ist, wenn die bereitgestellten Daten nicht numerisch sind.
+**Entwicklungsumgebung am Beispiel von VS Code**
 
-2. `Convert.ToInt64()` konvertiert die Zeichenkettendaten in einen korrekten echten int64-Wert und wirft eine Ausnahme aus, wenn der Wert nicht konvertiert werden kann.
+Suchen Sie den zugehörigen `.vscode` Ordner innerhalb Ihres Projektes und öffenen Sie `launch.json`. Ergänzen Sie die Kommandozeilenparameter für den Punkt `args`.
 
-3. Einen alternativen Weg schlägt `int.TryParse()` ein. Die TryParse-Methode ist wie die `Parse`-Methode, außer dass die `TryParse`-Methode keine Ausnahme auslöst, wenn die Konvertierung fehlschlägt.
+```json
+"configurations": [
+    {
+        "name": ".NET Core Launch (console)",
+        "args": [], // PUT YOUR ARGUMENTS HERE
+         ...
+    }
+]
+```
 
-Auf die Verwendung der Ausnahmen wird im folgenden Abschnitt eingegangen.
+**Auswertung der Kommandozeilenparameter**
 
-*******************************************************************************
+> **Achtung:** Im folgenden bemühen wir uns selbst um das Parsen der Kommandozeilenargumente. Dies sollte in realen Vorhaben entsprechenden Bibliotheken überlassen werden [Using System.CommandLine](https://blogs.msmvps.com/bsonnino/2020/04/12/parsing-the-command-line-for-your-application-with-system-commandline/)!
 
-                                {{1-2}}
-*******************************************************************************
+```csharp      CommandlineParameter.cs
+using System;
+
+public class Program
+{
+  static int Main(string[] args)
+  {
+    System.Console.WriteLine("Geben Sie einen Ganzzahlwert und einen String als Argumente ein!");
+    if (args.Length == 0)
+    {
+        System.Console.WriteLine("Offenbar keine Eingabe - Fehler!");
+        return 1;
+    }
+    if ((args.Length == 1) || (args.Length > 2))
+    {
+        System.Console.WriteLine("Falsche Zahl von Parametern - Fehler!");
+        return 1;
+    }
+    if (args.Length == 2)  // Erwartete Zahl von Parametern
+    {
+        // hier müssen wir jetzt die Daten parsen und die Datentypen evaluieren
+    }
+    return 0;
+  }
+}
+```
+
+Im übernächsten Abschnitt prüfen wir die Daten auf Ihre Korrektheit.
+
+### Leseoperationen von der Console
 
 Leseoperationen von der Console (oder anderen Streams) werden durch zwei Methoden abgebildet:
 
@@ -425,8 +477,7 @@ public static string ReadLine ();
 ```csharp            ReadFromConsole
 using System;
 
-namespace Rextester
-{
+
   public class Program
   {
     public static void Main(string[] args)
@@ -443,18 +494,50 @@ namespace Rextester
         } while (ch != '+');
     }
   }
-}
 ```
-``` bash stdin
-A0,12,B⺀+
-
-```
-@Rextester._eval_(@uid,@CSharp,true,`@input(1)`)
 
 Das Beispiel zeigt sehr schön, wie verschiedene Zeichensätze auf unterschiedlich
 lange Codes abgebildet werden. Das chinesische Zeichen, dass vor dem Escape-Zeichen "+" steht generiert einen 2Byte breiten Wert.
 
-*******************************************************************************
+### Transformation der Eingaben
+
+```csharp      CommandlineParameter.cs
+using System;
+
+public class Program
+{
+  public static int Main(string[] args)
+  {
+    System.Console.WriteLine("Geben Sie einen Ganzzahlwert und einen String als Argumente ein!");
+    if (args.Length == 0)
+    {
+        System.Console.WriteLine("Offenbar keine Eingabe - Fehler!");
+        return 1;
+    }
+    if (args.Length == 2)  // Erwartete Zahl von Parametern
+    {
+        long num1 = long.Parse(args[0]);
+        long num2 = Convert.ToLong(args[0]);
+        long num3;
+        long.TryParse(args[0], out num3);
+        System.Console.WriteLine($"{num1} {num2} {num3}");
+        string text = args[1];
+        System.Console.WriteLine($"{text}");
+    }
+    return 0;
+  }
+}
+```
+
+Dabei nutzt das obige Beispiel 3 Formen der Interpretation der Daten. In den beiden ersten Fällen ist der Entwickler für das Abfangen der _Exceptions_ verantwortlich. Die letzte Variante kapselt dies intern und gibt die möglicherweise eingetretene Ausnahme über die Rückgabewerte aus. Der Code auf Seiten der Anwendung wird kompakter.
+
+1. `long.Parse` parst die Eingabe in einen ganzzahligen Wert, wirft jedoch eine Ausnahme aus, wenn dies nicht möglich ist, wenn die bereitgestellten Daten nicht numerisch sind.
+
+2. `Convert.ToInt64()` konvertiert die Zeichenkettendaten in einen korrekten echten int64-Wert und wirft eine Ausnahme aus, wenn der Wert nicht konvertiert werden kann.
+
+3. Einen alternativen Weg schlägt `int.TryParse()` ein. Die TryParse-Methode ist wie die `Parse`-Methode, außer dass die `TryParse`-Methode keine Ausnahme auslöst, wenn die Konvertierung fehlschlägt.
+
+Auf die Verwendung der Ausnahmen wird im folgenden Abschnitt eingegangen.
 
 ## Ausnahmebehandlungen
 
@@ -465,20 +548,16 @@ unerwarteten oder außergewöhnlichen Situationen, die beim Ausführen von Progr
 using System;
 using System.Globalization;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  public static void Main(string[] args)
   {
-    public static void Main(string[] args)
-    {
-        // Beispiel 1: Zugriff auf das Filesystem eines Rechners aus dem Netz
-        System.IO.FileStream file = null;
-        //System.IO.FileInfo fileInfo = new System.IO.FileInfo(@"NoPermission.txt");
-
-        // Beispiel 2: Division durch Null
-        int a = 0, b = 5;
-        //a = b / a;
-    }
+      // Beispiel 1: Zugriff auf das Filesystem eines Rechners aus dem Netz
+      System.IO.FileStream file = null;
+      //System.IO.FileInfo fileInfo = new System.IO.FileInfo(@"NoPermission.txt");
+      // Beispiel 2: Division durch Null
+      int a = 0, b = 5;
+      //a = b / a;
   }
 }
 ```
@@ -496,35 +575,32 @@ Dabei gelten folgende Regeln für den Umgange mit Exceptions:
 ```csharp   IndizesBreite
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  static int Berechnung(int a, int b)
   {
-    static int Berechnung(int a, int b)
+    try
     {
-      try
-      {
-          checked {return a + b;}        // Fall 1
-          //return a / b;                // Fall 2
-      }
-      catch (OverflowException e)
-      {
-        Console.WriteLine("[ERROR] " + e.Message);
-        return -2;
-      }
-  }
+        checked {return a + b;}        // Fall 1
+        //return a / b;                // Fall 2
+    }
+    catch (OverflowException e)
+    {
+      Console.WriteLine("[ERROR] " + e.Message);
+      return -2;
+    }
+}
 
-  public static void Main(string[] args)
-  {
-      try
-      {
-        Berechnung(int.MaxValue, 1);     // Fall 1
-        //Berechnung(2, 0);              // Fall 2
-      }
-      catch (DivideByZeroException e)
-      {
-        Console.WriteLine("[ERROR] " + e.Message);
-      }
+public static void Main(string[] args)
+{
+    try
+    {
+      Berechnung(int.MaxValue, 1);     // Fall 1
+      //Berechnung(2, 0);              // Fall 2
+    }
+    catch (DivideByZeroException e)
+    {
+      Console.WriteLine("[ERROR] " + e.Message);
     }
   }
 }
@@ -572,10 +648,12 @@ Schreiben Sie die Einträge eines Arrays in eine Datei!
 
 Lösung unter [ExceptionHandling.cs](https://github.com/liaScript/CsharpCourse/blob/master/code/04_IO_Ausnahmebehandlung/ExceptionHandling.cs)
 
-| Schritt 1: Welche Fehler können auftreten? Welche Fehler werden durch die Implementierung abgefangen? |
-| Schritt 2: Wo sollen die Fehler abgefangen werden?                                                    |
-| Schritt 3: Gibt es Prioritäten bei der Abarbeitung?                                                   |
-| Schritt 4: Sind abschließende "Arbeiten" notwendig?                                                   |
+| Schritt | Fragestellungen                                                                            |
+| ------- | ------------------------------------------------------------------------------------------ |
+| 1       | Welche Fehler können überhaupt auftreten? Welche Fehler werden durch die Implementierung abgefangen? |
+| 2       | Wo sollen die Fehler abgefangen werden?                                                    |
+| 3       | Gibt es Prioritäten bei der Abarbeitung?                                                   |
+| 4       | Sind abschließende "Arbeiten" notwendig?                                                   |
 
 [Link auf die Dokumentation der StreamWriter Klasse](https://docs.microsoft.com/de-de/dotnet/api/system.io.streamwriter.-ctor?view=netframework-4.7.2#System_IO_StreamWriter__ctor_System_String_)
 
@@ -596,35 +674,30 @@ Welche Varianten der Eingaben müssen Sie prüfen? Erproben Sie Ihre Lösung mit
 ```csharp    Calculator.cs
 using System;
 
-namespace Program
+class MainClass
 {
-  class MainClass
+  static double Square(int num) => num * num;
+  static double Reciprocal (int num) => 1f / num;
+  static void Main(string[] args)
   {
-    static double Square(int num) => num * num;
-    static double Reciprocal (int num) => 1f / num;
-
-    static void Main(string[] args)
+    bool Error = false;
+    double result = 0;
+    int num = 1;
+    if (args.Length == 2)
     {
-      bool Error = false;
-      double result = 0;
-      int num = 1;
-      if (args.Length == 2)
-      {
-        // Hier geht es weiter, welche Fälle müssen Sie bedenken?
-        // int.TryParse(args[1], out num) erlaubt ein fehlertolerantes Parsen
-        // eines strings
-      }
-      else Error = true;
-
-      if (Error)
-      {
-        Console.WriteLine("Please enter a function and a numeric argument.");
-        Console.WriteLine("Usage: Square    <int> or\n       Reciprocal <int>");
-      }
-      else
-      {
-        Console.WriteLine("{0} Operation on {1} generates {2}", args[0], num, result );
-      }
+      // Hier geht es weiter, welche Fälle müssen Sie bedenken?
+      // int.TryParse(args[1], out num) erlaubt ein fehlertolerantes Parsen
+      // eines strings
+    }
+    else Error = true;
+    if (Error)
+    {
+      Console.WriteLine("Please enter a function and a numeric argument.");
+      Console.WriteLine("Usage: Square    <int> or\n       Reciprocal <int>");
+    }
+    else
+    {
+      Console.WriteLine("{0} Operation on {1} generates {2}", args[0], num, result );
     }
   }
 }
