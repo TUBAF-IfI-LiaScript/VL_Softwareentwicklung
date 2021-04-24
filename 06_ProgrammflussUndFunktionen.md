@@ -28,8 +28,6 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 ---------------------------------------------------------------------
 
-## Wertdatentypen und Operatoren (Fortsetzung)
-
 ## Anweisungen
 
 In den vorangegangenen Beispielen haben wir zu Illustrationszwecken bereits mehrfach
@@ -41,7 +39,9 @@ Sprunganweisungen und Anweisungen zur Fehlerbehandlung.
 
 Der letztgenannte Bereich wurde im Zusammenhang mit der Ein- und Ausgabe von Daten bereits thematisiert.
 
-![ISO 9126](./img/08_Progammfluss/Flowchart_de.png)<!-- width="50%" --> [WikiFlow](#13)
+![Flussdiagramm](./img/06_Progammfluss/Flowchart_de.png "Flussdiagramm [^WikiFlow]")
+
+[^WikiFlow]: Wikipedia, "Flussdiagramm" Autor "Erik Streb", [Link](https://upload.wikimedia.org/wikipedia/commons/6/6b/Flowchart_de.svg)
 
 ### Verzweigungen
 
@@ -60,22 +60,19 @@ if (BooleanExpression) Statement else Statement
 ```csharp       SimpleIf.cs
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  public static void Main(string[] args)
   {
-    public static void Main(string[] args)
-    {
-        int a = 23, b = 3;
-        if (a > 20 && b < 5)
-        {
-            Console.WriteLine("Wahre Aussage ");
-        }
-        else
-        {
-            Console.WriteLine("Falsche Aussage ");
-        }
-    }
+      int a = 23, b = 3;
+      if (a > 20 && b < 5)
+      {
+          Console.WriteLine("Wahre Aussage ");
+      }
+      else
+      {
+          Console.WriteLine("Falsche Aussage ");
+      }
   }
 }
 ```
@@ -92,21 +89,18 @@ wenn diese nur ein Zeile umfasst?
 ```csharp       BracesInIfStatements.cs
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  public static void Main(string[] args)
   {
-    public static void Main(string[] args)
-    {
-        bool A = true, B = false;
-        if (A)
-        //{
-          if (B)
-            Console.WriteLine("Fall 1");  // A & B
-        //}
-          else
-            Console.WriteLine("Fall 2");  // A & not B
-    }
+      bool A = true, B = false;
+      if (A)
+      //{
+        if (B)
+          Console.WriteLine("Fall 1");  // A & B
+      //}
+        else
+          Console.WriteLine("Fall 2");  // A & not B
   }
 }
 ```
@@ -119,24 +113,20 @@ Versuchen Sie nachzuvollziehen, welche Wirkung die Klammern in Zeile 11 und 14 h
 ```csharp       BracesInIfStatements.cs
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  public static void Main(string[] args)
   {
-    public static void Main(string[] args)
-    {
-      Console.WriteLine("Enter a character: ");
-      char ch = (char)Console.Read();
-
-      if (Char.IsUpper(ch))
-        Console.WriteLine("The character is an uppercase letter.");
-      else if (Char.IsLower(ch))
-        Console.WriteLine("The character is a lowercase letter.");
-      else if (Char.IsDigit(ch))
-        Console.WriteLine("The character is a number.");
-      else
-        Console.WriteLine("The character is not alphanumeric.");
-    }
+    Console.WriteLine("Enter a character: ");
+    char ch = (char)Console.Read();
+    if (Char.IsUpper(ch))
+      Console.WriteLine("The character is an uppercase letter.");
+    else if (Char.IsLower(ch))
+      Console.WriteLine("The character is a lowercase letter.");
+    else if (Char.IsDigit(ch))
+      Console.WriteLine("The character is a number.");
+    else
+      Console.WriteLine("The character is not alphanumeric.");
   }
 }
 ```
@@ -165,28 +155,25 @@ Möglichkeit auf `case: null` zu testen!
 ```csharp               switchExample.cs
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  public static void Main(string[] args)
   {
-    public static void Main(string[] args)
-    {
-      string day = "Sonntag";
-      string output;
-      switch (day){
-        case "Montag": case "Dienstag":
-        case "Mittwoch": case "Donnerstag": case "Freitag":
-          output = "Wochentag";
-          break;
-        case "Samstag": case "Sonntag":
-          output = "Wochenende";
-          break;
-        default:
-          output = "Kein Wochentag!";
-          break;
-      }
-      Console.WriteLine(output);
+    string day = "Sonntag";
+    string output;
+    switch (day){
+      case "Montag": case "Dienstag":
+      case "Mittwoch": case "Donnerstag": case "Freitag":
+        output = "Wochentag";
+        break;
+      case "Samstag": case "Sonntag":
+        output = "Wochenende";
+        break;
+      default:
+        output = "Kein Wochentag!";
+        break;
     }
+    Console.WriteLine(output);
   }
 }
 ```
@@ -219,46 +206,42 @@ Wir nutzen dafür ein `enum`, dessen Inhalt mittels `switch` ausgewertet und for
 ```csharp        StateMachine.cs
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  enum states {A, B, C, D};
+  public static void Main(string[] args)
   {
-    enum states {A, B, C, D};
-    public static void Main(string[] args)
-    {
-      string inputs;
-
-      states state = states.A;
-      Console.WriteLine("Geben Sie die Eingabefolge für die State-Machine vor: ");
-      inputs = Console.ReadLine();
-      bool sequence = false;
-      foreach(char sign in inputs){
-        Console.Write("{0} -> {1} ", state, sign);
-        switch (state){
-          case states.A:
-            if (sign == 'a') state = states.B;
-            break;
-          case states.B:
-            if (sign == 'c') state = states.C;
-            else state = states.A;
-            break;
-          case states.C:
-            if (sign == 'd') state = states.D;
-            else if (sign != 'c') state = states.A;
-            break;
-          case states.D:
-            if (sign == 'f') {
-              state = states.A;
-              sequence = true;
-            }
-            break;
-        }
-        Console.WriteLine("-> {0}", state);
-        if (sequence)
-        {
-          Console.WriteLine("Sequenz erkannt!");
-          sequence = false;
-        }
+    string inputs;
+    states state = states.A;
+    Console.WriteLine("Geben Sie die Eingabefolge für die State-Machine vor: ");
+    inputs = Console.ReadLine();
+    bool sequence = false;
+    foreach(char sign in inputs){
+      Console.Write("{0} -> {1} ", state, sign);
+      switch (state){
+        case states.A:
+          if (sign == 'a') state = states.B;
+          break;
+        case states.B:
+          if (sign == 'c') state = states.C;
+          else state = states.A;
+          break;
+        case states.C:
+          if (sign == 'd') state = states.D;
+          else if (sign != 'c') state = states.A;
+          break;
+        case states.D:
+          if (sign == 'f') {
+            state = states.A;
+            sequence = true;
+          }
+          break;
+      }
+      Console.WriteLine("-> {0}", state);
+      if (sequence)
+      {
+        Console.WriteLine("Sequenz erkannt!");
+        sequence = false;
       }
     }
   }
@@ -329,19 +312,16 @@ werden.
 ```csharp
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  public static void Main(string[] args)
   {
-    public static void Main(string[] args)
-    {
-      for (int i = 0, j = 10;
-           i<10 && j>5;
-           Console.WriteLine("Start: i={0}, j={1}", i, j), i++, j--)
-        {
-            //empty
-        }
-    }
+    for (int i = 0, j = 10;
+         i<10 && j>5;
+         Console.WriteLine("Start: i={0}, j={1}", i, j), i++, j--)
+      {
+          //empty
+      }
   }
 }
 ```
@@ -367,16 +347,13 @@ Elemente nacheinander aufgerufen, ohne dass eine Laufvariable nötig ist.
 ```csharp
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  public static void Main(string[] args)
   {
-    public static void Main(string[] args)
-    {
-      int [] array = new int [] {1,2,3,4,5,6};
-      foreach (int entry in array){
-          Console.Write("{0} ", entry);
-      }
+    int [] array = new int [] {1,2,3,4,5,6};
+    foreach (int entry in array){
+        Console.Write("{0} ", entry);
     }
   }
 }
@@ -401,27 +378,24 @@ Blockes.
 ```csharp   GoTo
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  public static void Main(string[] args)
   {
-    public static void Main(string[] args)
+    int dummy = 0;
+    for (int y = 0; y < 10; y++)
     {
-      int dummy = 0;
-      for (int y = 0; y < 10; y++)
+      for (int x = 0; x < 10; x++)
       {
-        for (int x = 0; x < 10; x++)
+        if (x == 5 && y == 5)
         {
-          if (x == 5 && y == 5)
-          {
-            goto Outer;
-          }
+          goto Outer;
         }
-        dummy++;
       }
-      Outer:
-          Console.WriteLine(dummy);
+      dummy++;
     }
+    Outer:
+        Console.WriteLine(dummy);
   }
 }
 ```
@@ -448,20 +422,16 @@ sie werden entsprechend als `void` deklariert.
 ```csharp                    Functions
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  static void Calc(int p)               // Funktions / Methodendefinition
   {
-    static void Calc(int p)               // Funktions / Methodendefinition
-    {
-      p = p + 1;
-      Console.WriteLine(p);
-    }
-
-    public static void Main(string[] args)
-    {
-      Calc(5f);                           // Funktions / Methodenaufruf
-    }
+    p = p + 1;
+    Console.WriteLine(p);
+  }
+  public static void Main(string[] args)
+  {
+    Calc(5f);                           // Funktions / Methodenaufruf
   }
 }
 ```
@@ -475,16 +445,12 @@ C# die Syntax von Lambda Ausdrücken, die für anonyme Funktionen verwendet werd
 ```csharp                    Functions
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  public static string Combine(string fname, string lname) => $"{fname.Trim()} {lname.Trim()}";
+  public static void Main(string[] args)
   {
-    public static string Combine(string fname, string lname) => $"{fname.Trim()} {lname.Trim()}";
-
-    public static void Main(string[] args)
-    {
-      Console.WriteLine(Combine("Sebastian", "Zug     "));
-    }
+    Console.WriteLine(Combine("Sebastian", "Zug     "));
   }
 }
 ```
@@ -535,21 +501,17 @@ Ersetzen Sie die integer Variable p durch ein Array der Größe 1 und beobachten
 ```csharp          FunctionParameters
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  static void Calc(int p)
   {
-    static void Calc(int p)
-    {
-      p = p + 1;
-      Console.WriteLine("Innerhalb von Calc {0}", p);
-    }
-
-    public static void Main(string[] args){
-      int p = 6;
-      Calc(p);
-      Console.WriteLine("Innerhalb von Main {0}", p);
-    }
+    p = p + 1;
+    Console.WriteLine("Innerhalb von Calc {0}", p);
+  }
+  public static void Main(string[] args){
+    int p = 6;
+    Calc(p);
+    Console.WriteLine("Innerhalb von Main {0}", p);
   }
 }
 ```
@@ -573,23 +535,20 @@ statische Klassen realisiert werden.
 ```csharp          staticClassAsGlobalVariableContainer
 using System;
 
-namespace Rextester
+public static class Counter
 {
-  public static class Counter
-  {
-     public static int globalCounter = 0;
-  }
+   public static int globalCounter = 0;
+}
 
-  public class Program
-  {
-    static void IncrementsCounter(){
-       Counter.globalCounter++;
-    }
-    public static void Main(string[] args){
-      Console.WriteLine(Counter.globalCounter);
-      IncrementsCounter();
-      Console.WriteLine(Counter.globalCounter);
-    }
+public class Program
+{
+  static void IncrementsCounter(){
+     Counter.globalCounter++;
+  }
+  public static void Main(string[] args){
+    Console.WriteLine(Counter.globalCounter);
+    IncrementsCounter();
+    Console.WriteLine(Counter.globalCounter);
   }
 }
 ```
@@ -605,22 +564,18 @@ namespace Rextester
 ```csharp            ReturnValue.cs
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  static int Calc( int input)
   {
-    static int Calc( int input)
-    {
-      // operationen über P
-      int output = 5 * input;
-      return output;
-    }
-
-    public static void Main(string[] args){
-      int p = 5;
-      int a = Calc(p);
-      Console.WriteLine(a);
-    }
+    // operationen über P
+    int output = 5 * input;
+    return output;
+  }
+  public static void Main(string[] args){
+    int p = 5;
+    int a = Calc(p);
+    Console.WriteLine(a);
   }
 }
 ```
@@ -644,21 +599,17 @@ Variablennamen zwischen Übergabeparameter und Rückgabewert notwendig.
 ```csharp         UsageOfRef
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  static void Calc(ref int p)
   {
-    static void Calc(ref int p)
-    {
-       p = p * 2;
-    }
-
-    public static void Main(string[] args){
-      int p = 1;
-      Console.WriteLine(p);
-      Calc(ref p);
-      Console.WriteLine(p);
-    }
+     p = p * 2;
+  }
+  public static void Main(string[] args){
+    int p = 1;
+    Console.WriteLine(p);
+    Calc(ref p);
+    Console.WriteLine(p);
   }
 }
 ```
@@ -669,45 +620,36 @@ namespace Rextester
 ```csharp         UsageOfRefWithClasses
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  class Wrapper
   {
-    class Wrapper
+    public int Wrapped;
+    public Wrapper(int newWrapped)
     {
-      public int Wrapped;
-      public Wrapper(int newWrapped)
-      {
-         Wrapped = newWrapped;
-      }
+       Wrapped = newWrapped;
     }
-
-    static void Test1(Wrapper w)
-    {
-      w.Wrapped = 666;
-      w = new Wrapper(999);
-    }
-
-    static void Test2(ref Wrapper w)
-    {
-      w.Wrapped = 666;
-      w = new Wrapper(999);
-    }
-
-    public static void Main(string[] args)
-    {
-      //Test1:
-      Wrapper myWrapper = new Wrapper(42);
-      Test1(myWrapper);
-
-      Console.WriteLine("Test1() without ref: myWrapper.Wrapped = {0}", myWrapper.Wrapped); //Prints 666
-
-      //Test2:
-      myWrapper = new Wrapper(42);
-      Test2(ref myWrapper);
-
-      Console.WriteLine("Test2() with ref: myWrapper.Wrapped = {0}", myWrapper.Wrapped); //Prints 999
-    }
+  }
+  static void Test1(Wrapper w)
+  {
+    w.Wrapped = 666;
+    w = new Wrapper(999);
+  }
+  static void Test2(ref Wrapper w)
+  {
+    w.Wrapped = 666;
+    w = new Wrapper(999);
+  }
+  public static void Main(string[] args)
+  {
+    //Test1:
+    Wrapper myWrapper = new Wrapper(42);
+    Test1(myWrapper);
+    Console.WriteLine("Test1() without ref: myWrapper.Wrapped = {0}", myWrapper.Wrapped); //Prints 666
+    //Test2:
+    myWrapper = new Wrapper(42);
+    Test2(ref myWrapper);
+    Console.WriteLine("Test2() with ref: myWrapper.Wrapped = {0}", myWrapper.Wrapped); //Prints 999
   }
 }
 ```
@@ -719,20 +661,16 @@ Sie Ihre Methoden dann explizit als `unsafe` deklarieren.
 ```csharp         Unsafe.cs
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  static unsafe void MIncrement(int* x)
   {
-    static unsafe void MIncrement(int* x)
-    {
-      *x = *x + 1;
-    }
-
-    unsafe static void Main(string[] args){
-      int i = 42;
-      MIncrement(&i);
-      Console.WriteLine(i);
-    }
+    *x = *x + 1;
+  }
+  unsafe static void Main(string[] args){
+    int i = 42;
+    MIncrement(&i);
+    Console.WriteLine(i);
   }
 }
 ```
@@ -749,20 +687,16 @@ namespace Rextester
 ```csharp
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  static void Calc(int p, out int output)
   {
-    static void Calc(int p, out int output)
-    {
-      output = p + 1;
-    }
-
-    public static void Main(string[] args){
-      int p = 6, r;
-      Calc(p, out r);
-      Console.WriteLine(r);
-    }
+    output = p + 1;
+  }
+  public static void Main(string[] args){
+    int p = 6, r;
+    Calc(p, out r);
+    Console.WriteLine(r);
   }
 }
 ```
@@ -801,21 +735,17 @@ Modifikator eingefügt.
 ```csharp    variableParameters.cs
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
+  static void Add(out int sum, params int [] list)
   {
-    static void Add(out int sum, params int [] list)
-    {
-      sum = 0;
-      foreach(int i in list) sum+=i;
-    }
-
-    public static void Main(string[] args){
-      int sum = 0;
-      Add(out sum, 3, 3, 5 , 6);
-      Console.WriteLine(sum);
-    }
+    sum = 0;
+    foreach(int i in list) sum+=i;
+  }
+  public static void Main(string[] args){
+    int sum = 0;
+    Add(out sum, 3, 3, 5 , 6);
+    Console.WriteLine(sum);
   }
 }
 ```
@@ -861,17 +791,14 @@ Variablenname wird dann explizit angegeben `variablenname:Wert, `.
 ```csharp              ExpliciteParameterSetting.cs
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
-  {
-    static void PrintDate(int day=1111, int month=2222, int year=3333 ){
-      Console.WriteLine("Day {0} Month {1} Year {2}", day, month, year);
-    }
+  static void PrintDate(int day=1111, int month=2222, int year=3333 ){
+    Console.WriteLine("Day {0} Month {1} Year {2}", day, month, year);
+  }
 
-    public static void Main(string[] args){
-      PrintDate(year:2019);
-    }
+  public static void Main(string[] args){
+    PrintDate(year:2019);
   }
 }
 ```
@@ -890,15 +817,6 @@ Ein bereits mehrfach genutztes Beispiel dafür ist die `System.Write`-Methode,
 die unabhängig vom Typ der übergebenen Variable eine entsprechende Ausgabe
 realisiert.
 
-## Anhang
-
-**Referenzen**
-
-[MSDoku] C# Dokumentation, "Pattern Matching",  [Link](https://docs.microsoft.com/en-us/dotnet/csharp/pattern-matching)
-
-[WikiFlow]  Wikipedia, "Flussdiagramm" Autor "Erik Streb", [Link](https://upload.wikimedia.org/wikipedia/commons/6/6b/Flowchart_de.svg)
-
-
 ## Aufgaben
 
-- [ ] Experimentieren Sie mit Arrays und Enumerates. Schreiben Sie Programme, die Arrays nach bestimmten Einträgen durchsuchen. Erstellen Sie Arrays aus Enum Einträgen und zählen Sie die Häufigkeit des Vorkommens.
+- [ ] Bereiten Sie die Aufgaben für die Übungen. Diese sind unter [Link]() zu finden.
