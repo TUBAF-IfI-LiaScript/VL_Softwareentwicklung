@@ -73,12 +73,8 @@ public class Program
   }
 }
 ```
-<!--data-theme="chaos" -->
-```
-OneTwoThree
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-Four
-```
 
 Achtung, für Referenzdatentypen bedeutet dies, dass die Referenz ausgegeben wird.
 
