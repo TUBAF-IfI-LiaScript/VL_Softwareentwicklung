@@ -130,10 +130,7 @@ public class Program
   }
 }
 ```
-``` bash stdin
-A
-```
-@Rextester._eval_(@uid,@CSharp,false,`@input(1)`)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 
 ********************************************************************************
@@ -214,7 +211,8 @@ public class Program
     string inputs;
     states state = states.A;
     Console.WriteLine("Geben Sie die Eingabefolge für die State-Machine vor: ");
-    inputs = Console.ReadLine();
+    inputs = "aaabccccf";
+    Console.WriteLine(inputs);
     bool sequence = false;
     foreach(char sign in inputs){
       Console.Write("{0} -> {1} ", state, sign);
@@ -247,10 +245,7 @@ public class Program
   }
 }
 ```
-``` bash stdin
-abaccdaafab
-```
-@Rextester._eval_(@uid,@CSharp,false,`@input(1)`)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 C# 7.0 führt darüber hinaus das _pattern matching_ mit switch ein. Damit werden
 komplexe Typ und Werte-Prüfungen innerhalb der case Statements möglich.
