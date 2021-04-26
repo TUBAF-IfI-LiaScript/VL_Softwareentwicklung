@@ -767,7 +767,7 @@ catch (InvalidOperationException ex)
 
 Schreiben Sie die Einträge eines Arrays in eine Datei!
 
-Lösung unter [ExceptionHandling.cs](https://github.com/liaScript/CsharpCourse/blob/master/code/04_IO_Ausnahmebehandlung/ExceptionHandling.cs)
+Lösung unter [ExceptionHandling.cs](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/mastercode/05_GrundlagenIII/ExceptionHandling/ExceptionHandling.cs)
 
 | Schritt | Fragestellungen                                                                            |
 | ------- | ------------------------------------------------------------------------------------------ |
