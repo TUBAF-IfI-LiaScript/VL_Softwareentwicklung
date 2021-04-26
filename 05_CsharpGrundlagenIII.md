@@ -408,32 +408,30 @@ Geben Sie die Daten bestimmte Fußballvereine in einer Markdown-Tabelle aus.
 ```csharp   GenerateMarkDownTable
 using System;
 
-
-  public class Program
+public class Program
+{
+  static void Main(string[] args)
   {
-    static void Main(string[] args)
+    string [] clubs = {"Blau Weiß", "Grün Gelb 1905", "Borussia Tralla Trulla", "Eintracht"};
+    int [] punkte = {12, 10, 9, 5};
+    // Wie lang ist ein Clubname maximal?
+    int maxlength = 0;
+    foreach(string club in clubs)
     {
-      string [] clubs = {"Blau Weiß", "Grün Gelb 1905", "Borussia Tralla Trulla", "Eintracht"};
-      int [] punkte = {12, 10, 9, 5};
-      // Wie lang ist ein Clubname maximal?
-      int maxlength = 0;
-      foreach(string club in clubs)
-      {
-        maxlength =  club.Length < maxlength ? maxlength : club.Length ;
-      }  
-      maxlength += 1;
-
-      // Ausgabe
-      string output;
-      output  = "| ";
-      output += "Verein".PadRight(maxlength, ' ') + "| Punkte |\n";
-      output += "|:"+ "".PadRight(maxlength, '-') + "|:-------|\n";
-      for (int i = 0; i < clubs.Length; i++){
-         output += String.Format("| {0}| {1, -7}|\n", clubs[i].PadRight(maxlength, ' '), punkte[i]);
-      }
-      Console.WriteLine(output);
+      maxlength =  club.Length < maxlength ? maxlength : club.Length ;
+    }  
+    maxlength += 1;
+    // Ausgabe
+    string output;
+    output  = "| ";
+    output += "Verein".PadRight(maxlength, ' ') + "| Punkte |\n";
+    output += "|:"+ "".PadRight(maxlength, '-') + "|:-------|\n";
+    for (int i = 0; i < clubs.Length; i++){
+       output += String.Format("| {0}| {1, -7}|\n", clubs[i].PadRight(maxlength, ' '), punkte[i]);
     }
+    Console.WriteLine(output);
   }
+}
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
@@ -596,7 +594,7 @@ public class Program
     if (param.Length == 2)  // Erwartete Zahl von Parametern
     {
         long num1 = long.Parse(param[0]);
-        long num2 = Convert.ToLong(param[0]);
+        long num2 = System.Convert.ToInt64(param[0]);
         long num3;
         long.TryParse(param[0], out num3);
         Console.WriteLine($"{num1} {num2} {num3}");
