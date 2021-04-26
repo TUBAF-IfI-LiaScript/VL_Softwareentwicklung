@@ -408,6 +408,7 @@ Geben Sie die Daten bestimmte Fußballvereine in einer Markdown-Tabelle aus.
 ```csharp   GenerateMarkDownTable
 using System;
 
+
 public class Program
 {
   static void Main(string[] args)
@@ -594,7 +595,7 @@ public class Program
     if (param.Length == 2)  // Erwartete Zahl von Parametern
     {
         long num1 = long.Parse(param[0]);
-        long num2 = System.Convert.ToInt64(param[0]);
+        long num2 = System.Convert.ToLong(param[0]);
         long num3;
         long.TryParse(param[0], out num3);
         Console.WriteLine($"{num1} {num2} {num3}");
