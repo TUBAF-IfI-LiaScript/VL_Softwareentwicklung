@@ -36,6 +36,24 @@ und das Schreiben in Dateien vorgestellt werden sollen.
 
 Für das Schreiben stehen zwei Methoden `System.Console.Write` und `System.Console.WriteLine`.
 
+Diese decken erstens eine **große Bandbreite von Übergabeparametern** und bedienen
+zweitens verschiedene **Ausgabeschnittstellen**.
+
+|     | WriteLine() Methoden                                      | Anwendung                                                                             |
+| --- | --------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| 1   | `WriteLine()`                                             | Zeilenumbruch                                                                         |
+| 2   | `WriteLine(UInt64), WriteLine(Double), WriteLine(Object)` | Ausgabe von Variablen der Basisdatentypen                                             |
+| 3   | `WriteLine(Object)`                                       |                                                                                       |
+| 4   | `WriteLine(String)`                                       | Ausgabe einer `string` Variable                                                       |
+| 5   | `WriteLine(String, Object)`                               | Kombinierte Formatierung- String mit Formatinformationen und nachfolgendes Objekt ... |
+| 6   | `WriteLine(String, Object, Object)`                       | ... nachfolgende Objekte                                                              |
+| 7   | `WriteLine(String, Object, Object, Object)`               | ...                                                                                   |
+| 8   | `WriteLine(String, Object[])`                             | ...                                                                                   |
+
+### Einzelner Datentyp
+
+Die Varianten 1-4 aus vorhergehender Tabelle übernehmen einen einzelnen Datentypen und geben dessen Wert aus. Dabei wird implizit die Methode `toString()` aufgerufen.
+
 <!-- --{{0}}-- Idee des Codeblockes
   * Erinnerung an Steuerzeichen /n /t
  -->
@@ -62,19 +80,51 @@ OneTwoThree
 Four
 ```
 
-Diese decken erstens eine **große Bandbreite von Übergabeparametern** und bedienen
-zweitens verschiedene **Ausgabeschnittstellen**.
+Achtung, für Referenzdatentypen bedeutet dies, dass die Referenz ausgegeben wird.
 
-| WriteLine() Methoden                                      | Anwendung                                               |
-| --------------------------------------------------------- | ------------------------------------------------------- |
-| `WriteLine()`                                             | Zeilenumbruch                                           |
-| `WriteLine(UInt64), WriteLine(Double), WriteLine(Object)` | Ausgabe von Variablen der Basisdatentypen               |
-| `WriteLine(Object)`                                       |                                                         |
-| `WriteLine(String)`                                       | Ausgabe einer `string` Variable                         |
-| `WriteLine(String, Object)`                               | Kombinierte Formatierung- String mit Formatinformationen und nachfolgendes Objekt ...|
-| `WriteLine(String, Object, Object)`                       | ... nachfolgende Objekte                                |
-| `WriteLine(String, Object, Object, Object)`               | ...                                                     |
-| `WriteLine(String, Object[])`                             | ...                                                     |
+```csharp   toString.cs
+using System;
+
+public class Program
+{
+  static void Main(string[] args)
+  {
+		double[] values = new double[] {43.2234, 1.23123243, -123234.09};
+    Console.WriteLine(values);
+    Console.WriteLine(values.ToString());
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+Lassen Sie uns schon mal etwas in die Zukunft schauen und die objektorientierte
+Implementierung dieser Idee erfassen:
+
+```csharp   toStringII.cs
+using System;
+
+class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+
+    public override string ToString()
+    {
+        return "Person: " + Name + " " + Age;
+    }
+}
+
+public class Program
+{
+  static void Main(string[] args)
+  {
+    Person person = new Person { Name = "Bernhard von Cotta", Age = 55 };
+    Console.WriteLine(person);
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
 
 ### Kombinierte Formatierung von Strings
 
@@ -142,7 +192,7 @@ public class Program
 
 Eine komplette Auflistung findet sich unter https://docs.microsoft.com/de-de/dotnet/standard/base-types/standard-numeric-format-strings
 
-> Achtung: Die Formatzeichen sind typspezifisch, es exisiteren analoge Zeichen
+> **Achtung:** Die Formatzeichen sind typspezifisch, es exisiteren analoge Zeichen
 > mit unterschiedlicher Bedeutung für Zeitwerte
 
 <!-- --{{0}}-- Idee des Codeblockes
@@ -152,7 +202,7 @@ Eine komplette Auflistung findet sich unter https://docs.microsoft.com/de-de/dot
   * Einführung einer cultural Instanz
 
  -->
-```csharp   WriteDate
+```csharp   WriteDate.cs
 using System;
 using System.Globalization;
 using System.Threading;
@@ -176,7 +226,7 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-https://docs.microsoft.com/de-de/openspecs/windows_protocols/ms-lcid/a9eac961-e77d-41a6-90a5-ce1a8b0cdb9c
+> **Merke:** Die kulturbezogene Ausgabe ist auch für das Komma bei den gebrochenen Zahlen relevant. Dieser Aspekt wird in den Übungen thematisiert [Link](https://docs.microsoft.com/de-de/dotnet/api/system.globalization.numberformatinfo.numberdecimalseparator?view=net-5.0).
 
 ### Zeichenfolgeninterpolation
 
@@ -186,7 +236,7 @@ von einfachen Variablennamen bis hin zu komplexen Ausdrücken. Hier bitte
 Augenmaß im Hinblick auf die Lesbarkeit walten lassen! Angeführt wird ein
 solcher Ausdruck durch ein `$`.
 
-```csharp   Zeichenfolgeninterpolation
+```csharp   Zeichenfolgeninterpolation.cs
 using System;
 
 public class Program
@@ -213,7 +263,28 @@ Die Darstellung des Ausdrucks folgt dabei der Semantik:
 
 Damit lassen sich dann sehr mächtige Ausdrücke formulieren vgl. [Link](https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/tokens/interpolated) oder aber in den Beispielen von
 
-[Interpolated.cs](https://github.com/liaScript/CsharpCourse/blob/master/code/04_IO_Ausnahmebehandlung/Interplolated.cs)
+```csharp   ZeichenfolgeninterpolationII.cs
+using System;
+
+public class Program
+{
+  static void Main(string[] args)
+  {
+    int ivalue = 33;
+    double fvalue = 43.1231;
+
+    // Berechnungen
+    Console.WriteLine($"{ivalue * 10000,20}");
+    Console.WriteLine($"{ivalue * 10000,20:E}");
+
+    // Fallunterscheidungen mit ternärem Operator
+    Console.WriteLine($"{ivalue < 5 ? ivalue.ToString() : "invalid"}");
+    Console.WriteLine($"{(fvalue < 1000 ? fvalue : fvalue/1000):f2}"+
+                      $"{fvalue < 1000 ? "Euro" : "kEuro"}");
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 ### Ziele der Schreiboperationen
 
@@ -242,7 +313,9 @@ das Stream Konzept auf, dass eine Abstraktion für verschiedene Quellen und
 Senken von Informationen bereitstellt. Darauf aufbauend sind dann Lese- /
 Schreiboperationen möglich.
 
-Einen guten Überblick dazu bietet: https://www.youtube.com/watch?v=CN5A3Q2ePak
+Einen guten Überblick dazu bietet das nachfolgende Tutorial:
+
+!?[Streams](https://www.youtube.com/watch?v=CN5A3Q2ePak)
 
 Von der Klasse `System.IO.Stream` leiten sich entsprechend [MemoryStream](https://docs.microsoft.com/de-de/dotnet/api/system.io.memorystream?view=netframework-4.7.2), [FileStream](https://docs.microsoft.com/de-de/dotnet/api/system.io.filestream?view=netframework-4.7.2), [NetworkStream](https://docs.microsoft.com/de-de/dotnet/api/system.net.sockets.networkstream?view=netframework-4.7.2) ab. Diese bringen sowohl
 eigene Lese-/Operationen mit, gleichzeitig ist aber auch das "Umlenken" von
@@ -314,6 +387,8 @@ namespace Wiki
      }
 }
 ```
+
+> **Zur Erinnerung:** Das `@` vor einen String markiert ein [verbatim string literal](https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/tokens/verbatim) - alles in der Zeichenfolge, was normalerweise als Escape-Sequenz interpretiert werden würde, wird ignoriert.
 
 ### Beispiel
 
@@ -463,7 +538,7 @@ public class Program
 }
 ```
 
-Im übernächsten Abschnitt prüfen wir die Daten auf Ihre Korrektheit.
+Im übernächsten Abschnitt prüfen wir den Datentyp und den Inhalt der Parameter auf Ihre Korrektheit.
 
 ### Leseoperationen von der Console
 
@@ -477,24 +552,25 @@ public static string ReadLine ();
 ```csharp            ReadFromConsole
 using System;
 
-
-  public class Program
+public class Program
+{
+  static void Main(string[] args)
   {
-    static void Main(string[] args)
-    {
-      char ch;
-      int x;
-      Console.WriteLine("Print Unicode-Indizes");
-      do
-        {
-          x = Console.Read();   // Lesen eines Zeichens
-          ch = Convert.ToChar(x);
-          Console.Write("{0}-", x);
-          // Hier könnte man jetzt eine Filterung realiseren
-        } while (ch != '+');
-    }
+    char ch;
+    int x;
+    Console.WriteLine("Print Unicode-Indizes");
+    do
+      {
+        x = Console.Read();   // Lesen eines Zeichens
+        ch = Convert.ToChar(x);
+        Console.Write($"Unicode {x}- Sign {Convert.ToChar(x)}\n");
+        // Hier könnte man jetzt eine Filterung realiseren
+      } while (ch != '+');
   }
+}  // 你好 zu Demonstrationszwecken
 ```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
 
 Das Beispiel zeigt sehr schön, wie verschiedene Zeichensätze auf unterschiedlich
 lange Codes abgebildet werden. Das chinesische Zeichen, dass vor dem Escape-Zeichen "+" steht generiert einen 2Byte breiten Wert.
@@ -506,28 +582,37 @@ using System;
 
 public class Program
 {
-  public static int Main(string[] args)
+  static int Main(string[] args)
   {
-    System.Console.WriteLine("Geben Sie einen Ganzzahlwert und einen String als Argumente ein!");
-    if (args.Length == 0)
+    Console.WriteLine("Geben Sie einen Ganzzahlwert und einen String als Argumente ein!");
+    string inputstring = Console.ReadLine ();
+    string[] param = inputstring.Split(' ');
+
+    foreach(string s in param){
+        Console.Write(s + " ");
+    }
+
+    if (param.Length == 0)
     {
-        System.Console.WriteLine("Offenbar keine Eingabe - Fehler!");
+        Console.WriteLine("Offenbar keine Eingabe - Fehler!");
         return 1;
     }
-    if (args.Length == 2)  // Erwartete Zahl von Parametern
+    if (param.Length == 2)  // Erwartete Zahl von Parametern
     {
-        long num1 = long.Parse(args[0]);
-        long num2 = Convert.ToLong(args[0]);
+        long num1 = long.Parse(param[0]);
+        long num2 = Convert.ToLong(param[0]);
         long num3;
-        long.TryParse(args[0], out num3);
-        System.Console.WriteLine($"{num1} {num2} {num3}");
-        string text = args[1];
-        System.Console.WriteLine($"{text}");
+        long.TryParse(param[0], out num3);
+        Console.WriteLine($"{num1} {num2} {num3}");
+        string text = param[1];
+        Console.WriteLine($"{text}");
     }
+
     return 0;
   }
 }
 ```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 Dabei nutzt das obige Beispiel 3 Formen der Interpretation der Daten. In den beiden ersten Fällen ist der Entwickler für das Abfangen der _Exceptions_ verantwortlich. Die letzte Variante kapselt dies intern und gibt die möglicherweise eingetretene Ausnahme über die Rückgabewerte aus. Der Code auf Seiten der Anwendung wird kompakter.
 
@@ -541,8 +626,8 @@ Auf die Verwendung der Ausnahmen wird im folgenden Abschnitt eingegangen.
 
 ## Ausnahmebehandlungen
 
-Die C#-Funktionen zur Ausnahmebehandlung unterstützen bei der Handhabung von
-unerwarteten oder außergewöhnlichen Situationen, die beim Ausführen von Programmen auftreten.
+Ausnahmen sind Fehler, die während der Ausführung einer Anwendung auftreten.
+Die C#-Funktionen zur Ausnahmebehandlung unterstützen bei der Handhabung von diesen unerwarteten oder außergewöhnlichen Situationen, die beim Ausführen von Programmen auftreten.
 
 ```csharp   IndizesBreite
 using System;
@@ -563,14 +648,37 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-Dabei gelten folgende Regeln für den Umgange mit Exceptions:
+> **Merke:** Wenn für eine spezifische Ausnahme kein Ausnahmehandler existiert, beendet sich das Programm mit einer Fehlermeldung.
 
-+ Wenn für eine spezifische Ausnahme kein Ausnahmehandler existiert, beendet sich das Programm mit einer Fehlermeldung.
+<!-- data-type="none" -->
+| Schlüsselwort | Bedeutung                                                                                                                                                                                           |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `try`         | Ein `try`-Block wird verwendet, um einen Bereich des Codes zu kapseln. Wenn ein Code innerhalb dieses `try`-Blocks eine Ausnahme auslöst, wird diese durch den zugehörigen `catch`-Block behandelt. |
+| `catch`       | Hier haben Sie die Möglichkeit, die (spezifische) Ausnahme zu behandeln, zu protokollieren oder zu ignorieren.                                                                                      |
+| `finally`     | Der `finally`-Block ermöglicht es Ihnen, bestimmten Code auszuführen, wenn eine Ausnahme geworfen wird oder nicht. Zum Beispiel das Entsorgen eines Objekts aus dem Speicher.                       |
+| `throw`       | Das `throw`-Schlüsselwort wird verwendet, um eine neue Ausnahme zu erzeugen, die in einem `try`-`catch`-`finally`-Block aufgefangen wird.                                                           |
+
+```csharp
+try
+{
+   // Statement which can cause an exception.
+}
+catch(Type x)
+{
+   // Statements for handling the exception
+}
+finally
+{
+   //Any cleanup code
+}
+```
+
+Dabei gelten folgende Regeln für den Umgang mit Ausnahmen:
+
 + Alle Ausnahmen sind von `System.Exception` abgeleitet und enthalten detaillierte Informationen über den Fehler, z.B. den Zustand der Aufrufliste und eine Textbeschreibung des Fehlers.
 + Ausnahmen, die innerhalb eines `try`-Blocks auftreten, werden auf einen Ausnahmehandler, der mit dem Schlüsselwort `catch` gekennzeichnet ist, umgeleitet.
 + Ausnahmen werden durch die CLR ausgelöst oder in Software mit dem `throw` Befehl.
 + ein `finally`-Block wird im Anschluss an die Aktivierung eines `catch` Blockes ausgeführt, wenn eine Ausnahme ausgelöst wurde. Hier werden Ressourcen freizugeben, beispielsweise ein Stream geschlossen.
-+ Wird kein passender catch-Block gefunden, kommt es zur Behandlung in der Laufzeitumgebung.
 
 ```csharp   IndizesBreite
 using System;
@@ -579,16 +687,23 @@ public class Program
 {
   static int Berechnung(int a, int b)
   {
+  	int c=0;
     try
     {
-        checked {return a + b;}        // Fall 1
-        //return a / b;                // Fall 2
+        checked {c = a + b;}        // Fall 1
+        // c = a / b;                // Fall 2
     }
     catch (OverflowException e)
     {
-      Console.WriteLine("[ERROR] " + e.Message);
-      return -2;
+      Console.WriteLine("[Overflow] " + e.Message);
+      //throw;
     }
+    finally
+    {
+    	Console.WriteLine("Finally Block");
+    }
+    Console.WriteLine("Hier sind wir am Ende der Funktion!");
+    return c;
 }
 
 static void Main(string[] args)
@@ -600,12 +715,18 @@ static void Main(string[] args)
     }
     catch (DivideByZeroException e)
     {
-      Console.WriteLine("[ERROR] " + e.Message);
+      Console.WriteLine("[DivideByZero] " + e.Message);
     }
+    catch (Exception e)
+    {
+    	Console.WriteLine("[GeneralExept] " + e.Message);
+    }
+    Console.WriteLine("Hier sind wir am Ende des Hauptprogrammes!");
   }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
 
 ### Best Practice
 
@@ -635,9 +756,9 @@ catch (InvalidOperationException ex)
 }
 ```
 
-* Auslösen von Ausnahmen statt Zurückgeben eines Fehlercodes
-* Verwenden der vordefinierten .NET-Ausnahmetypen
-* Enden von Ausnahmeklassen auf das Wort *Exception*
+* Nutzen Sie die Möglichkeite von Ausnahmen statt einen Fehlercode zurückzugeben
+* Verwenden Sie dafür die vordefinierten .NET-Ausnahmetypen!
+* Selbst definierte Ausnahmen enden auf das Wort *Exception*!
 * Vermeiden Sie unklare Ausgaben für den Fall einer Ausnahmebehandlung, stellen Sie alle Informationen bereit, die für die Analyse des Fehlers nötig sind
 * Stellen Sie den Status einer Methode wieder her, die von einer Ausnahmebehandlung betroffen war (Beispiel: Code für Banküberweisungen, Abbuchen von einem Konto und Einzahlung auf ein anderes. Scheitert die zweite Aktion muss auch die erste zurückgefahren werden.)
 * Testen Sie Ihre Ausnahmebehandlungsstrategie!
