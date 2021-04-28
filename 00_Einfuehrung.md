@@ -233,44 +233,46 @@ Sie sich dafür ein Gruppen von 2 Studierenden zu organisieren.
 <!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 815px;" -->
 ``` ascii
                    .-.       .-.
- Einführung C#    ( 1 )     ( 2 ) Einführung Git/ GitHub
+ Einführung C#    (1-3)     ( 4 ) Einführung Git/ GitHub
                    '-'       '-'  Teamarbeit
                      \       /
                       \     /
                        v   v
                         .-.
-                       ( 3 )  Einführung Objektorientierte Programmierung
+                       ( 5 )  Objektorientierte Programmierung
                         '-'
                          |
                          v
                         .-.
-  Alle Teilnehmer      ( 4 )  Basiselemente Objektorientierte Programmierung
+  Alle Teilnehmer      ( 6 )  Basiselemente Objektorientierte Programmierung
                         '-'
  ::::::::::::::::::::::::|:::::::::::::::::::::::::::::::::::::::::::
                          v
   Informatiker          .-.
-  Mathematiker         ( 5 )  Erweiterte OOP Konzepte, Generics
+  Mathematiker         ( 7 )  Erweiterte OOP Konzepte, Generics
                         '-'   Entwurfsmuster
                          |
                          v
                         .-.
-                       ( 6 )  Collections, Delegaten, Events
+                       ( 8 )  Collections, Delegaten, Events
                         '-'
 ```
 
 <!--data-type="none"-->
-| Index | C#     | GitHub | Teamarbeit | Inhalte / Teilaufgaben                                                     | Woche |
-| ----- | ------ | ------ | ---------- | -------------------------------------------------------------------------- | :---: |
-| 1     | Basics | nein   | nein       | Toolchain, Entwicklungsfluss, Datentypen, Fehler, Ausdrücke, Programmfluss | 5-6   |
-| 2     | -      | ja     | ja         | Github am Beispiel von Markdown                                            | 7-8   |
-| 3     | OOP    | ja     | ja         | Einführungsbeispiel OOP,                                                   | 9     |
-|       |        |        |            | *Anwendungsbeispiel:* Computersimulation                                   |       |
-| 4     | OOP    | ja     | ja         | Vererbung, virtuelle Methoden, Indexer, Überladene Operatoren,             | 10-11 |
-|       |        |        |            | *Anwendungsbeispiel:*  Smartphone (Entwurf mit UML)                        |       |
-| 5     | OOP    | ja     | ja         | Vererbung, abstract, virtuell, Generics                                    | 12-13 |
-|       |        |        |            | *Anwendungsbeispiel:* Zoo                                                  |       |
-| 6     | OOP    | ja     | ja         | Genererische Collections, Delegaten, Events                                | 14-15 |
-|       |        |        |            | *Anwendungsbeispiel:* ???????                                              |       |
+| Index | C#     | GitHub | Teamarbeit | Inhalte / Teilaufgaben                                         | Woche |
+| ----- | ------ | ------ | ---------- | -------------------------------------------------------------- |:-----:|
+| 1     | Basics | nein   | nein       | Toolchain, Datentypen, Fehler, Ausdrücke,                      |   5   |
+| 2     |        |        |            | Kontrollfluss, Arrays                                          |   6   |
+| 3     |        |        |            | static Funktionen, Klasse und Struktur, Nullables              |   7   |
+| 4     | -      | ja     | ja         | Github am Beispiel von Markdown                                |   8   |
+| 5     | OOP    | ja     | ja         | Einführungsbeispiel OOP,                                       |   9   |
+|       |        |        |            | *Anwendungsbeispiel:* Computersimulation                       |       |
+| 6     | OOP    | ja     | ja         | Vererbung, virtuelle Methoden, Indexer, Überladene Operatoren, | 10-11 |
+|       |        |        |            | *Anwendungsbeispiel:*  Smartphone (Entwurf mit UML)            |       |
+| 7     | OOP    | ja     | ja         | Vererbung, abstract, virtuell, Generics                        | 12-13 |
+|       |        |        |            | *Anwendungsbeispiel:* Zoo                                      |       |
+| 8     | OOP    | ja     | ja         | Genererische Collections, Delegaten, Events                    | 14-15 |
+|       |        |        |            | *Anwendungsbeispiel:* ???????                                  |       |
 
 Obwohl Einstimmigkeit darüber besteht, dass kooperative Arbeit für Ingenieure
 Grundlage der täglichen Arbeitswelt ist, bleibt die Wissensvermittlung im Rahmen
