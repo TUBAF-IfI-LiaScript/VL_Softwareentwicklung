@@ -255,11 +255,9 @@ Containerklassen, wenn eine Sprache keine generische Programmierung unterstützt
 ```csharp                                      Iniitalisation
 using System;
 
-namespace Rextester
-{
   public class Program
   {
-    public static void Main(string[] args){
+    static void Main(string[] args){
       Console.WriteLine(typeof(int));
       Console.WriteLine(typeof(int).BaseType);
       Console.WriteLine(typeof(int).BaseType.BaseType);
@@ -267,28 +265,24 @@ namespace Rextester
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 
 ```csharp                           AccessMethods
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
-  {
-    public static void Main(string[] args){
-      Type t = typeof(Program);
-      Console.WriteLine("------ Methods --------");
-      System.Reflection.MethodInfo[] methodInfo = t.GetMethods();
-
-      foreach (System.Reflection.MethodInfo mInfo in methodInfo)
-        Console.WriteLine(mInfo.ToString());
-    }
+  static void Main(string[] args){
+    Type t = typeof(Program);
+    Console.WriteLine("------ Methods --------");
+    System.Reflection.MethodInfo[] methodInfo = t.GetMethods();
+    foreach (System.Reflection.MethodInfo mInfo in methodInfo)
+      Console.WriteLine(mInfo.ToString());
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 *******************************************************************************
 
@@ -340,30 +334,25 @@ werden sollen.
 ```csharp
 using System;
 
-namespace Rextester
+public class Program
 {
-  public class Program
-  {
-    public class Person{
-      private int alter;
-      public virtual void setAge(int alter) {
-        this.alter = alter;
-      }
+  public class Person{
+    private int alter;
+    public virtual void setAge(int alter) {
+      this.alter = alter;
     }
   }
-
-  public class Spieler: Person {
-    public override void setAge(int alter) {
-        // hier wird noch getestet ob der Spieler älter als 16 ist
-        // und überhaupt eingesetzt werden darf
-    }
+}
+public class Spieler: Person {
+  public override void setAge(int alter) {
+      // hier wird noch getestet ob der Spieler älter als 16 ist
+      // und überhaupt eingesetzt werden darf
   }
-
-  public class Zuschauer: Person {
-    public override void setAge(int alter) {
-        // hier wird noch getestet ob ein Zuschauer jünger als 6 ist und
-        // kostenlos ins Stadion darf
-    }
+}
+public class Zuschauer: Person {
+  public override void setAge(int alter) {
+      // hier wird noch getestet ob ein Zuschauer jünger als 6 ist und
+      // kostenlos ins Stadion darf
   }
 }
 ```
@@ -439,7 +428,6 @@ class Person{
     // TODO Hausaufgabe
   }
 }
-
 ```
 
 Und wie legen wir eine Instanz an? Dazu sind mehrere Schritte notwendig:
@@ -517,39 +505,33 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Rextester
-{
-  public class Person{
-    string name;
-    int index;
-    public int Geburtsjahr;
-    public static int Count;          // <- Statische Variable Count
-
-    public Person(string name, int geburtsjahr){
-      this.name = name;
-      Geburtsjahr = geburtsjahr;
-      index = Count;
-      Count = Count + 1;
-    }
-
-    public override string ToString(){
-       return name + " ist die " + (index+1).ToString() + " von " + Count.ToString() + " Personen";
-    }
+public class Person{
+  string name;
+  int index;
+  public int Geburtsjahr;
+  public static int Count;          // <- Statische Variable Count
+  public Person(string name, int geburtsjahr){
+    this.name = name;
+    Geburtsjahr = geburtsjahr;
+    index = Count;
+    Count = Count + 1;
   }
-
-  public class Program
-  {
-    public static void Main(string[] args){
-      Person Student1 = new Person("Mickey", 1935);
-      Console.WriteLine(Student1);
-      Person Student2 = new Person("Donald", 1927);
-      Console.WriteLine(Student1);
-      Console.WriteLine(Student2);
-    }
+  public override string ToString(){
+     return name + " ist die " + (index+1).ToString() + " von " + Count.ToString() + " Personen";
+  }
+}
+public class Program
+{
+  static void Main(string[] args){
+    Person Student1 = new Person("Mickey", 1935);
+    Console.WriteLine(Student1);
+    Person Student2 = new Person("Donald", 1927);
+    Console.WriteLine(Student1);
+    Console.WriteLine(Student2);
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 ******************************************************************************
 
@@ -601,26 +583,21 @@ Varianten "konstanter" Variablen in C#
 ```csharp    ReadOnlyVsConst
 using System;
 
-namespace Rextester
-{
-  public class Person{
-    public readonly string name;
-
-    public Person(string name){
-      this.name = name;
-    }
+public class Person{
+  public readonly string name;
+  public Person(string name){
+    this.name = name;
   }
-
-  public class Program
-  {
-    public static void Main(string[] args){
-      Person Student1 = new Person("Mickey");
-      Console.WriteLine(Student1.name);
-    }
+}
+public class Program
+{
+  static void Main(string[] args){
+    Person Student1 = new Person("Mickey");
+    Console.WriteLine(Student1.name);
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 ### Konstuktoren
 
@@ -666,41 +643,34 @@ erfolgen.
 ```csharp    ReadOnlyVsConst
 using System;
 
-namespace Rextester
+class Car
 {
-  class Car
+  public readonly int NumberOfSeats;
+  public readonly int MaxSpeed;
+  private int CurrentSpeed;
+  public Car(int maxSpeed, int numberOfSeats)
   {
-    public readonly int NumberOfSeats;
-    public readonly int MaxSpeed;
-    private int CurrentSpeed;
-
-    public Car(int maxSpeed, int numberOfSeats)
-    {
-       Console.WriteLine("2 arg ctor");
-       this.MaxSpeed = maxSpeed;
-       this.NumberOfSeats = numberOfSeats;
-    }
-
-    public Car(int maxSpeed) : this(maxSpeed, 5)
-    {
-       Console.WriteLine("1 arg ctor");
-    }
-
-    public Car() : this(100)
-    {
-       Console.WriteLine("0 arg ctor");
-    }
+     Console.WriteLine("2 arg ctor");
+     this.MaxSpeed = maxSpeed;
+     this.NumberOfSeats = numberOfSeats;
   }
-
-  public class Program
+  public Car(int maxSpeed) : this(maxSpeed, 5)
   {
-    public static void Main(string[] args){
-       Car myVehicle = new Car(5);
-    }
+     Console.WriteLine("1 arg ctor");
+  }
+  public Car() : this(100)
+  {
+     Console.WriteLine("0 arg ctor");
+  }
+}
+public class Program
+{
+  static void Main(string[] args){
+     Car myVehicle = new Car(5);
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 
 ******************************************************************************
@@ -720,37 +690,31 @@ namespace Rextester
 ```csharp    StatitcConstructor
 using System;
 
-namespace Rextester
+public class BAFStudent
 {
-  public class BAFStudent
-  {
-     public static string Universität;
-     public string NameStudent;
-
-     static BAFStudent(){
-       Console.WriteLine("Universität wird initialisiert");
-       Universität = "TU BAF Freiberg";
-     }
-
-     public BAFStudent(string name){
-       Console.WriteLine("Name wird initialisiert");
-       NameStudent = name;
-     }
-  }
-
-   public class Program
-     {
-       public static void Main(string[] args){
-         BAFStudent student0 = new BAFStudent("Humboldt");
-         Console.WriteLine("{0,20} - {1,-10}", BAFStudent.Universität, student0.NameStudent);
-         BAFStudent student1 = new BAFStudent("Winkler");
-         Console.WriteLine("{0,20} - {1,-10}", BAFStudent.Universität, student1.NameStudent);
-       }
-     }
+   public static string Universität;
+   public string NameStudent;
+   static BAFStudent(){
+     Console.WriteLine("Universität wird initialisiert");
+     Universität = "TU BAF Freiberg";
    }
+   public BAFStudent(string name){
+     Console.WriteLine("Name wird initialisiert");
+     NameStudent = name;
+   }
+}
 
+public class Program
+{
+   static void Main(string[] args){
+     BAFStudent student0 = new BAFStudent("Humboldt");
+     Console.WriteLine("{0,20} - {1,-10}", BAFStudent.Universität, student0.NameStudent);
+     BAFStudent student1 = new BAFStudent("Winkler");
+     Console.WriteLine("{0,20} - {1,-10}", BAFStudent.Universität, student1.NameStudent);
+   }
+}
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 ******************************************************************************
 
@@ -764,51 +728,43 @@ direkt nach dem Konstruktoraufruf die Belegung abzubilden.
 ```csharp    ObjectInitializer
 using System;
 
-namespace Rextester
+public class Wine
 {
-  public class Wine
-  {
-     public decimal Price;
-     public int Year;
-     public string Vinyard;
-
-     public Wine () {}
-     public Wine (decimal price){Price = price;}
-     public Wine (decimal price, int year, string vinyard = "Chateau Lafite" ){
-       Price = price;
-       Year = year;
-       Vinyard = vinyard;
-     }
-     public override string ToString()
-     {
-       return String.Format("| {0,5} Euro | {1,5} | {2,-18}|", Price, Year, Vinyard );
-     }
-  }
-
-   public class Program
-     {
-       public static void Main(string[] args){
-         // Initalisierung über Standardkonstruktor und direkten Feldzugriff
-         Wine bottle0 = new Wine();
-         bottle0.Vinyard = "Chateau Latour";
-         Console.WriteLine(bottle0);
-
-         // Initialisierung über die Konstruktoren
-         Wine bottle1 = new Wine(23);
-         Console.WriteLine(bottle1);
-         Wine bottle2 = new Wine(3432, 1956);
-         Console.WriteLine(bottle2);
-
-         // Initialisierung über Initalizer
-         Wine bottle3 = new Wine() {Price = 19, Year = 1910};
-         Console.WriteLine(bottle3);
-
-       }
-     }
+   public decimal Price;
+   public int Year;
+   public string Vinyard;
+   public Wine () {}
+   public Wine (decimal price){Price = price;}
+   public Wine (decimal price, int year, string vinyard = "Chateau Lafite" ){
+     Price = price;
+     Year = year;
+     Vinyard = vinyard;
    }
+   public override string ToString()
+   {
+     return String.Format("| {0,5} Euro | {1,5} | {2,-18}|", Price, Year, Vinyard );
+   }
+}
 
+public class Program
+{
+   static void Main(string[] args){
+     // Initalisierung über Standardkonstruktor und direkten Feldzugriff
+     Wine bottle0 = new Wine();
+     bottle0.Vinyard = "Chateau Latour";
+     Console.WriteLine(bottle0);
+     // Initialisierung über die Konstruktoren
+     Wine bottle1 = new Wine(23);
+     Console.WriteLine(bottle1);
+     Wine bottle2 = new Wine(3432, 1956);
+     Console.WriteLine(bottle2);
+     // Initialisierung über Initalizer
+     Wine bottle3 = new Wine() {Price = 19, Year = 1910};
+     Console.WriteLine(bottle3);
+   }
+}
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 3 Varianten, und was ist nun besser? Der Aufruf über den Konstruktor ermöglicht
 die Initialisierung von `readonly` Variablen.
@@ -830,26 +786,24 @@ vom Garbage Collector gesammelt wird.
 ```csharp    ReadOnlyVsConst
 using System;
 
-namespace Rextester
+public class Person
 {
-  public class Person{
-    public string name;
+  public string name;
+  public Person(string name){this.name = name;}
+  ~Person() {Console.WriteLine("The {0} destructor is executing.", ToString());}
+}
 
-    public Person(string name){this.name = name;}
-    ~Person() {Console.WriteLine("The {0} destructor is executing.", ToString());}
-  }
-
-  public class Program
+public class Program
+{
+  static void Main(string[] args)
   {
-    public static void Main(string[] args){
-      Person Student1 = new Person("Mickey");
-      Console.WriteLine(Student1.name);
-      Console.WriteLine("Aus die Maus!");
-    }
+    Person Student1 = new Person("Mickey");
+    Console.WriteLine(Student1.name);
+    Console.WriteLine("Aus die Maus!");
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 Der Finalizer ruft implizit die Methode `Finalize` aus der Basisklasse des Typs
 `Objekt` auf.
@@ -870,22 +824,19 @@ Ausgangspunkt:
 ```csharp    ReadOnlyVsConst
 using System;
 
-namespace Rextester
-{
-  public class Vorlesung{
-    private byte wochentag;
-  }
+public class Vorlesung{
+  private byte wochentag;
+}
 
-  public class Program
-  {
-    public static void Main(string[] args){
-      Vorlesung SoWi = new Vorlesung();
-      SoWi.wochentag = 4;
-    }
+public class Program
+{
+  static void Main(string[] args){
+    Vorlesung SoWi = new Vorlesung();
+    SoWi.wochentag = 4;
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 C# hält, wie andere OOP Sprachen auch dafür eine eigene kompakte Syntax bereit,
 die Aspekte der Felder und der Methoden kombiniert. Der aufrufende Nutzer
@@ -898,36 +849,32 @@ Zugriff auf die Eigenschaft erfordert dieselbe Syntax.
 ```csharp    ReadOnlyVsConst
 using System;
 
-namespace Rextester
+public class Vorlesung
 {
-  public class Vorlesung
+  private byte wochentag;            // Private Variable
+  public byte Wochentag              // Öffentliche Variable
   {
-    private byte wochentag;            // Private Variable
-
-    public byte Wochentag              // Öffentliche Variable
-    {
-      get { return wochentag; }        // Property accessors
-      set {
-        if ((value < 7) & (value >= 0))
-            wochentag = value;
-        else
-          Console.WriteLine("Fehlerhafte Eingabe!");
-      }
-    }
-  }
-
-  public class Program
-  {
-    public static void Main(string[] args)
-    {
-      Vorlesung SoWi = new Vorlesung();
-      SoWi.Wochentag = 4;
-      Console.WriteLine(SoWi.Wochentag);
+    get { return wochentag; }        // Property accessors
+    set {
+      if ((value < 7) & (value >= 0))
+          wochentag = value;
+      else
+        Console.WriteLine("Fehlerhafte Eingabe!");
     }
   }
 }
+
+public class Program
+{
+  static void Main(string[] args)
+  {
+    Vorlesung SoWi = new Vorlesung();
+    SoWi.Wochentag = 4;
+    Console.WriteLine(SoWi.Wochentag);
+  }
+}
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 Die Assessoren können beliebig kombiniert werden. Eine Eigenschaft ohne einen
 `set`-Accessor ist schreibgeschützt. Eine Eigenschaft ohne einen `get`-Accessor
@@ -996,29 +943,27 @@ Indexer müssen nicht durch einen Ganzzahlwert indiziert werden, es können auch
 ```csharp    IndexerExample
 using System;
 
-namespace Rextester
+
+public class Months
 {
-  public class Months
-  {
-    string[] months = {"Jan", "Feb", "März", "April", "Mai", "Juni", "Juli",
-                       "Aug", "Sep", "Okt", "Nov", "Dez"};
+  string[] months = {"Jan", "Feb", "März", "April", "Mai", "Juni", "Juli",
+                     "Aug", "Sep", "Okt", "Nov", "Dez"};
 
-    public string this[byte index]{
-      get {return months[index];}
-    }
+  public string this[byte index]{
+    get {return months[index];}
   }
+}
 
-  public class Program
+public class Program
+{
+  static void Main(string[] args)
   {
-    public static void Main(string[] args)
-    {
-      Months MonthList = new Months();
-      Console.WriteLine(MonthList[5]);
-    }
+    Months MonthList = new Months();
+    Console.WriteLine(MonthList[5]);
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 Was ist der Vorteil der Klasse + Indexer Lösung? Wie würden Sie die Indizierung
 noch absichern?
@@ -1072,42 +1017,39 @@ using System;
 using System.Reflection;
 using System.ComponentModel.Design;
 
-namespace Rextester
-{
-  public class Vector {
-    public double X;
-    public double Y;
+public class Vector {
+  public double X;
+  public double Y;
 
-    public Vector (double x, double y){
-      this.X = x;
-      this.Y = y;
-    }
-
-    //public static Vector operator +(Vector p1, Vector p2){
-    //  return new Vector(p1.X + p2.X, p1.Y + p2.Y);
-    //}
-
-    public static Vector operator -(Vector p1, Vector p2){
-      return new Vector(p1.X - p2.X, p1.Y - p2.Y);
-    }
-
-    public override string ToString(){
-      return "x = " + X.ToString() + ", y = " + Y.ToString();
-    }
+  public Vector (double x, double y){
+    this.X = x;
+    this.Y = y;
   }
 
-  public class Program
+  //public static Vector operator +(Vector p1, Vector p2){
+  //  return new Vector(p1.X + p2.X, p1.Y + p2.Y);
+  //}
+
+  public static Vector operator -(Vector p1, Vector p2){
+    return new Vector(p1.X - p2.X, p1.Y - p2.Y);
+  }
+
+  public override string ToString(){
+    return "x = " + X.ToString() + ", y = " + Y.ToString();
+  }
+}
+
+public class Program
+{
+  static void Main(string[] args)
   {
-    public static void Main(string[] args)
-    {
-      Vector a = new Vector (3,4);
-      Vector b = new Vector (9,6);
-      Console.WriteLine (a+b);
-    }
+    Vector a = new Vector (3,4);
+    Vector b = new Vector (9,6);
+    Console.WriteLine (a+b);
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 Die Operatoren += und -= werden dabei automatisch mit überladen.
 
@@ -1165,42 +1107,38 @@ using System;
 using System.Reflection;
 using System.ComponentModel.Design;
 
-namespace Rextester
-{
-  public class Vector {
-    public double X;
-    public double Y;
-
-    public Vector (double x, double y){
-      this.X = x;
-      this.Y = y;
-    }
-
-    public static bool operator ==(Vector p1, Vector p2){
-      return (p1.X == p2.X) && (p1.Y == p2.Y);
-    }
-
-    public static bool operator !=(Vector p1, Vector p2){
-      return (p1.X != p2.X) || (p1.Y != p2.Y);
-    }
-
-    //public override bool Equals(object p){
-    //  return ???
-    //}
+public class Vector {
+  public double X;
+  public double Y;
+  public Vector (double x, double y){
+    this.X = x;
+    this.Y = y;
   }
 
-  public class Program
+  public static bool operator ==(Vector p1, Vector p2){
+    return (p1.X == p2.X) && (p1.Y == p2.Y);
+  }
+
+  public static bool operator !=(Vector p1, Vector p2){
+    return (p1.X != p2.X) || (p1.Y != p2.Y);
+  }
+
+  //public override bool Equals(object p){
+  //  return ???
+  //}
+}
+
+public class Program
+{
+  static void Main(string[] args)
   {
-    public static void Main(string[] args)
-    {
-      Vector a = new Vector (3,4);
-      Vector b = new Vector (9,6);
-      Console.WriteLine (a == b);
-    }
+    Vector a = new Vector (3,4);
+    Vector b = new Vector (9,6);
+    Console.WriteLine (a == b);
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 Die unären Operatoren `True` und `False` nehmen eine kleine Sonderrolle
 ein:
@@ -1223,77 +1161,73 @@ Point pt2 = new Point(10, -10);
 Entwickeln Sie eine Klassenstruktur für die Speicherung der Daten eines
 Studenten.
 
-
 ```csharp    StatitcConstructor
 using System;
 using System.Collections.Generic;
 
-namespace Rextester
+public class Student
 {
-  public class Student
+  private static int globalerZähler;
+  private readonly int uid;
+  public string Name { get; set; }
+  private bool eingeschrieben;
+  private List<string> fächer;
+
+  static Student(){
+    globalerZähler = 0;
+  }
+
+  public Student(string name)
   {
-     private static int globalerZähler;
-     private readonly int uid;
-     public string Name { get; set; }
-     private bool eingeschrieben;
-     private List<string> fächer;
+    Name = name;
+    Eingeschrieben = true;
+    uid = globalerZähler;
+    fächer = new List<string>();
+    Console.WriteLine("Der Student {0} (Nr. {1}) ist angelegt!", Name, uid);
+    globalerZähler++;
+  }
 
-     static Student(){
-        globalerZähler = 0;
-     }
-
-     public Student(string name)
-     {
-       Name = name;
-       Eingeschrieben = true;
-       uid = globalerZähler;
-       fächer = new List<string>();
-       Console.WriteLine("Der Student {0} (Nr. {1}) ist angelegt!", Name, uid);
-       globalerZähler++;
-     }
-
-     public bool Eingeschrieben
-     {
-       get {return eingeschrieben;}
-       set {
-          if (eingeschrieben != value)
-            eingeschrieben = value;
-          else
-          {
-            if (value) Console.WriteLine("!Student {0} ist schon eingeschrieben!", Name);
-            else Console.WriteLine("!Student {0} ist schon exmatrikuliert!", Name);
-          }
-         }
-       }
-
-      public void addTopic(string Fächername){
-          fächer.Add(Fächername);
-      }
-
-      public void printTopics(){
-          Console.WriteLine("Student {0} hat folgende Fächer absolviert:", Name);
-          foreach (string topic in fächer){
-            Console.Write(topic + " ");
-          }
-          Console.WriteLine();
+  public bool Eingeschrieben
+  {
+    get {return eingeschrieben;}
+    set
+    {
+      if (eingeschrieben != value)
+        eingeschrieben = value;
+      else
+      {
+        if (value) Console.WriteLine("!Student {0} ist schon eingeschrieben!", Name);
+        else Console.WriteLine("!Student {0} ist schon exmatrikuliert!", Name);
       }
      }
+  }
 
-   public class Program
-     {
-       public static void Main(string[] args){
-         Student student0 = new Student("Humboldt");
-         student0.addTopic("Softwareentwicklung");
-         student0.addTopic("Höhere Mathematik I");
-         student0.addTopic("Prozedurale Programmierung");
-         student0.printTopics();
-         student0.Eingeschrieben = true;
-       }
-     }
-   }
+  public void addTopic(string Fächername){
+    fächer.Add(Fächername);
+  }
 
+  public void printTopics(){
+    Console.WriteLine("Student {0} hat folgende Fächer absolviert:", Name);
+    foreach (string topic in fächer){
+      Console.Write(topic + " ");
+    }
+    Console.WriteLine();
+  }
+}
+
+public class Program
+{
+  static void Main(string[] args){
+    Student student0 = new Student("Humboldt");
+    student0.addTopic("Softwareentwicklung");
+    student0.addTopic("Höhere Mathematik I");
+    student0.addTopic("Prozedurale Programmierung");
+    student0.printTopics();
+    student0.Eingeschrieben = true;
+  }
+}
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 
 ## Aufgaben
