@@ -13,7 +13,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/08_OOPGrundlagenII.md)
 
-# OOP Konzepte II
+# OOP Motivation
 
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -43,6 +43,10 @@ Gruppe verwandter Variablen zusammenzufassen. Beispiele dafür können sein:
 Ausgangspunkt für die weiteren Überlegungen ist die Konfiguration von `structs`
 in C.
 
+> Machen Sie sich, wenn Ihnen hier die Grundidee noch unklar ist mit den `structs` anhand weiterer Materialien vertraut.
+
+!?[Einführung in Structs](https://www.youtube.com/watch?v=lxDFeuCln3Q)
+
 ```c         struct.c
 #include <stdio.h>
 #include <stdlib.h>
@@ -71,9 +75,9 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
-@Rextester.C_clang
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
-**Was fehlt uns?**
+> **Wir können also Daten unterschiedlichen Typs situationsspezifisch zusammenfassen ... Was fehlt uns?**
 
 *******************************************************************************
 
@@ -116,17 +120,18 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
-@Rextester.C_clang
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 C sieht keine Möglichkeit vor Funktion und Daten "dichter" zusammenzubringen,
 wenn man von Funktionspointern im `struct` absieht.
 
 *******************************************************************************
 
-                                 {{2-3}}
-*******************************************************************************
+### Structs in C#
 
-Und in C#? C# erweitert das Konzept in Richtung der Konzepte der objektorientierten
+> Wir fokussieren uns zunächst auf `structs` und übertragen das dabei gewonnene Verständnis dann auf die Klassen. Dabei gilt es einige Unterschiede zu beachten!
+
+Und in C#? Die Sprache erweitert das Konzept in Richtung der Konzepte der objektorientierten
 Programmierung und integriert Operationen über den Daten in das `struct`-Konzept.
 Dabei können sie folgende Elemente umfassen:
 
@@ -139,8 +144,7 @@ Dabei können sie folgende Elemente umfassen:
 * überladene Operatoren
 * geschachtelte Typen
 
-Konzentrieren wir uns zunächst auf die Felder und die Methoden. Wie sieht
-eine entsprechende Definition des Bauplanes aller Instanzen von `Animal` aus?
+Konzentrieren wir im ersten Beispiel auf die Felder und die Methoden. Wie sieht eine entsprechende Definition des Bauplanes aller Instanzen von `Animal` aus?
 
 ```csharp
 public struct Animal
@@ -155,114 +159,124 @@ public struct Animal
 
 Sowohl die ganze Struktur als auch die einzelnen Felder sind mit entsprechenden Sichtbarkeitsattributen versehen. Hier wurde explizit `public` vorgesehen, damit ist Animal aber auch alle Elemente uneingeschränkt "sichbar". In der Regel ist das aber nicht gewünscht.
 
-Weitere Modifikationen sind zum Beispiel über das Schlüsselwort `readonly` möglich, dass alle Felder als schreibgeschützt markiert.
-
-Wie legen wir nun ein Objekt entsprechend der Spezifikation an? Wir haben mit dem `struct` einen neuen Typ definiert. Der Aufruf knnn (!) anhand des Formats `<datentyp> Variablennahme` erfolgen.
+Wie legen wir nun ein Objekt entsprechend der Spezifikation an? Wir haben mit dem `struct` einen neuen Typ definiert. Der Aufruf kann (!) anhand des Formats `<datentyp> Variablenname` erfolgen.
 
 ```csharp        FirstStructExample
 using System;
 
-namespace Rextester
+public struct Animal
 {
-  public struct Animal
-  {
-    public string name;               // Felder / Konstanten
-    public string sound;              //
-
-    public void MakeNoise() {         // Methode
-    	Console.WriteLine($"{name} makes {sound}");
-    }
+  public string name;               // Felder / Konstanten
+  public string sound;              //
+  public void MakeNoise() {         // Methode
+  	Console.WriteLine($"{name} makes {sound}");
   }
-
-  public class Program
-  {
-    public static void Main(string[] args){
-      Animal kitty;
-      kitty.name = "Kitty";
-      kitty.sound = "Miau";
-      kitty.MakeNoise();
-    }
+}
+public class Program
+{
+  static void Main(string[] args){
+    Animal kitty;
+    kitty.name = "Kitty";
+    kitty.sound = "Miau";
+    kitty.MakeNoise();
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+> Erstellen Sie eine weiteres Objekt vom Typ `Animal` und erstellen Sie eine Kopie von Kitty.
+
+### Herausforderung `this`
 
 Warum nutzen einige Beispiele das Schlüsselwort `this`?  Es wird verwendet, um auf die aktuelle Instanz der Klasse zu verweisen. Obiges Beispiel kann also auch wie folgt geschrieben werden.
 
 ```csharp        FirstStructThisExample.cs
 using System;
 
-namespace Rextester
+public struct Animal
 {
-  public struct Animal
-  {
-    public string name;
-    public string sound;
-
-    public void MakeNoise() {
-    	Console.WriteLine($"{this.name} makes {this.sound}");
-    }
-
-    public  void setName(string name) {
-      this.name = name;
-      this.MakeNoise();
-    }
+  public string name;
+  public string sound;
+  public void MakeNoise() {
+    Console.WriteLine($"{this.name} makes {this.sound}");
   }
 
-  public class Program
-  {
-    public static void Main(string[] args){
-      Animal kitty;
-      kitty.name = "Kitty";
-      kitty.sound = "Miau";
-      kitty.MakeNoise();
-      kitty.setName("Tom");
-    }
+  public void setName(string name) {
+    this.name = name;
+    this.MakeNoise();
+  }
+}
+
+public class Program
+{
+  static void Main(string[] args){
+    Animal kitty;
+    kitty.name = "Kitty";
+    kitty.sound = "Miau";
+    kitty.MakeNoise();
+    kitty.setName("Tom");
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-
-*******************************************************************************
+Das Verständnis von `this` macht die grundlegende Idee deutlich. Das `struct Animal` ist ein genereller Bauplan. Die Instanzen davon haben ein "Selbstverständnis" in Form der `this` Referenz.
 
 ### Konstruktoren
 
                                  {{0-1}}
 *******************************************************************************
 
-```csharp
-Animal kitty;
-kitty.name = ... ;
-kitty.sound = ...;
-...
-kitty.state = State.Hungry;
+Nun umfasst unsere Datenstruktur möglicherweise - anders als unser Beispiel - eine große Zahl von individuellen Variablen.
 
-Animal wally;
-wally.name = ... ;
-wally.sound = ...;
-...
-wally.state = State.Sleeps;
+```csharp        NoInitalization.cs
+using System;
+
+public struct Animal
+{
+  public string name;
+  public string sound;
+}
+
+public class Program
+{
+  static void Main(string[] args){
+    Animal kitty;
+    //kitty.name = "Kitty";   // <- fehlende "manuelle" Initalisierung
+    //kitty.sound = "Miau";
+    Console.WriteLine(kitty.name);
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+Wie sieht unser Speicher nach Zeile 12 aus?
+
+<!--
+style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+-->
+```ascii
+                    STACK        
+             +-----------------+
+             | ...             |    
+             +-----------------+ -.
+ kitty.name  | undefiniert     |  |
+             +-----------------+  | Instanz von Animal
+ kitty.sound | undefiniert     |  |
+             +-----------------+ -'
+             | ...             |
+             +-----------------+                                              .
 ```
 
-Haben wir auch wirklich alle initialen Variablen gesetzt?
+Wie können wir also sicherstellen, dass die Initialisierung vollständig
+vorgenommen wurde?
 
 *******************************************************************************
 
                                  {{1-2}}
 *******************************************************************************
 
-Konstruktoren sind spezielle Methoden für die Initialisierung eines Objektes. In
-`structs` dürfen allerdings (im Unterschied zu Klassen) keine parameterlosen
-Methoden sein. Der Compiler erzeugt diese automatisch, die Methode beschreibt
-alle Felder mit den datentypspezifischen Nullwerten.
-
-> *Anmerkung 1:* Konstruktoren sind Methoden und folglich steht das gesamte Spektrum
-> der Variabilität bei deren Definition zur Verfügung (Überladen, vordefinierte
-> Variablen, Parameterlisten, usw.)
-
-> *Anmerkung 2:* Um einen Konstruktor für die Initialisierung zu nutzen,
-> braucht es einen erweiterten Aufruf.
+Konstruktoren sind spezielle Methoden für die Initialisierung eines Objektes. Sie werden einmalig aufgerufen.
 
 Und wie erfolgt der Aufruf des Konstruktors, einer Funktion, die auf einer Datenstruktur wirkt, die es noch gar nicht gibt? Das Schlüsselwort `new` übernimmt diese Aufgabe für uns.
 
@@ -270,17 +284,96 @@ Und wie erfolgt der Aufruf des Konstruktors, einer Funktion, die auf einer Daten
 <Type> <Variablenname> = new <Konstruktorsignatur>;
 ```
 
-```csharp
+
+```csharp                                     StandardConstructor
+using System;
+
 public struct Animal
 {
   public string name;
   public string sound;
 
-  public void Animal(string name, string sound = "Miau") {
-    Console.WriteLine($"{this.name} makes {this.sound}");
+  public void MakeNoise() {
+    Console.WriteLine($"->{this.name}<- makes ->{this.sound}<-");
+  }
+}
+
+public class Program
+{
+  static void Main(string[] args){
+    Animal cat = new Animal();  
+    cat.MakeNoise();
   }
 }
 ```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+Nach dem Aufruf besteht eine mit den Standardwerten der Datentypen vorinitialisierte Instanz auf dem Stack.
+
+<!--
+style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+-->
+```ascii
+                    STACK        
+             +-----------------+
+             | ...             |    
+             +-----------------+ -.
+ kitty.name  | ``              |  |
+             +-----------------+  | Instanz von Animal
+ kitty.sound | ``              |  |
+             +-----------------+ -'
+             | ...             |
+             +-----------------+                                              .
+```
+
+In `structs` dürfen allerdings (im Unterschied zu Klassen) keine parameterlosen
+Methoden sein. Der Compiler erzeugt diese automatisch, die Methode beschreibt
+alle Felder mit den datentypspezifischen Nullwerten.
+
+*******************************************************************************
+
+                                 {{2-3}}
+*******************************************************************************
+
+Der Standardkonstruktor hilft aber nur bei der Vermeidung von uninitalisierten
+Werten. In der Regel wollen wir den Feldern aber konkrete Werte zuordnen.
+
+<!-- --{{1}}-- Idee des Beispiels:
+       + Deklaration eines parameterlosen Konstruktors
+       + Deklaration eines Konstruktors mit einzelnem Parameter
+       + Überladen des Konstruktors
+-->
+```csharp               IndividualConstructor
+using System;
+
+public struct Animal
+{
+  public string name;
+  public string sound;
+
+  public Animal(string name, string sound) {
+  	this.name = name;
+    this.sound = sound;
+  }
+
+  public void MakeNoise() {
+    Console.WriteLine($"{this.name} makes {this.sound}");
+  }
+}
+
+public class Program
+{
+  static void Main(string[] args){
+    Animal dog = new Animal("Roger", "Wuff");  
+    dog.MakeNoise();
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+> *Anmerkung:* Konstruktoren sind Methoden und folglich steht das gesamte Spektrum
+> der Variabilität bei deren Definition zur Verfügung (Überladen, vordefinierte
+> Variablen, Parameterlisten, usw.)
 
 | Konstruktor                                  | Aufruf                                      |
 | -------------------------------------------- | ------------------------------------------- |
@@ -288,38 +381,42 @@ public struct Animal
 | `public Animal(name, sound)`                 | `Animal kitty = new Animal("kitty","Miau")` |
 | `public Animal(name, sound = "Miau")`        | `Animal kitty = new Animal("kitty")`        |
 
-<!-- --{{1}}-- Idee des Beispiels:
-       + Deklaration eines parameterlosen Konstruktors
-       + Deklaration eines Konstruktors mit einzelnem Parameter
-       + Überladen des Konstruktors
--->
+
+Im Hinblick auf die Verwendung des Schlüsselwortes `new` und die Konsequenzen in Bezug auf die Nutzung des Speichers, sei auf den excellenten [Beitrag](http://clarkkromenaker.com/post/csharp-structs/) von Clark Kromenaker verwiesen.
+
+*******************************************************************************
+
+                                 {{3-4}}
+*******************************************************************************
+
+In Ergänzung sei auch noch auf die kompakte _Fat Arrow_ Darstellung im Zusammenhang mit Konstruktoren, die ja Funktionen wie alle anderen sind verwiesen. Wenn nur
+eine Anweisung ausgeführt wird kann dies in einer Zeile realisiert werden.
+
 ```csharp                                      Constructors
 using System;
 
-namespace Rextester
+public struct Animal
 {
-  public struct Animal
-  {
-    public string name;
-    public string sound;
-
-    public void MakeNoise() {
-    	Console.WriteLine("{0} makes {1}", name, sound);
-    }
+  public string name;
+  public Animal(string name) => this.name = name;
+  public void MakeNoise() {
+  	Console.WriteLine("{0} makes Miau", name);
   }
-
-  public class Program
-  {
-    public static void Main(string[] args){
-      Animal cat = new Animal();
-      cat.name = "Kitty";
-      cat.sound = "Miau";
-      cat.MakeNoise();
-    }
+}
+public class Program
+{
+  static void Main(string[] args){
+    Animal cat = new Animal("Kitty");
+    cat.MakeNoise();
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+*******************************************************************************
+
+                                 {{4-5}}
+*******************************************************************************
 
 Ein alternatives Vorgehen bietet die sogenannte Object Initialization Syntax aus C# 3.0 nutzen. Der Compiler generiert den zugehörigen Code für die spezifische Initialisierung.
 
@@ -329,101 +426,109 @@ Dies kann zum Beispiel ein Array mit allen Tieren unseres virtuellen Bauernhofes
 ```csharp                                      Constructors
 using System;
 
-namespace Rextester
+public struct Animal
 {
-  public struct Animal
-  {
-    public string name;
-    public string sound;
-
-    public void MakeNoise() {
-    	Console.WriteLine("{0} makes {1}", name, sound);
-    }
-  }
-
-  public class Program
-  {
-    public static void Main(string[] args){
-       Animal[] myAnimals = new Animal[]{
-        new Animal{ name = "Kitty", sound = "Miau"},    // Object Initialization Syntax
-        new Animal{ name = "Wally", sound = "Wuff"},
-        new Animal{ name = "Berta", sound = "Muuuh"}
-      };
-      foreach(Animal animal in myAnimals){
-        animal.MakeNoise();
-      }
-    }
+  public string name;
+  public string sound;
+  public void MakeNoise() {
+  	Console.WriteLine("{0} makes {1}", name, sound);
   }
 }
+public class Program
+{
+  static void Main(string[] args){
+     Animal[] myAnimals = new Animal[]{
+      new Animal{ name = "Kitty", sound = "Miau"},    // Object Initialization Syntax
+      new Animal{ name = "Wally", sound = "Wuff"},
+      new Animal{ name = "Berta", sound = "Muuuh"}
+    };
+    foreach(Animal animal in myAnimals){
+      animal.MakeNoise();
+    }
+  }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-Versuchen Sie das Beispiel um einen Konstruktor und einen zugehörigen Aufruf für die Initalisierung zu ergänzen!
+> **Aufgabe:** Versuchen Sie das Beispiel um einen Konstruktor und einen zugehörigen Aufruf für die Initialisierung zu ergänzen!
 
-In Ergänzung sei auch noch auf die kompakte _Fat Arrow_ Darstellung im Zusammenhang mit Konstruktoren, die ja Funktionen wie alle anderen sind verwiesen. Wenn nur
-eine Anweisung ausgeführt wird kann dies in einer Zeile realisiert werden.
+*******************************************************************************
+
+### Veränderliche und nicht veränderliche Felder
+
+| Aspekt                 | `readonly`  Felder                                                              | `const`  Felder                                                       |
+| ---------------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Zweck                  | ... wird verwendet, um ein schreibgeschütztes Feld zu erstellen.                | ...  wird verwendet, um konstante Felder zu erstellen.                |
+| Typ                    | ... ist eine zur Laufzeit definierte Konstante.                                 | ... wird verwendet, um eine Konstante zur Kompilierzeit zu erstellen. |
+| Wert                   | ... kann nach der Deklaration geändert werden.                                  | ... kann nach der Deklaration nicht geändert werden.                  |
+| Wertzuweisung          | ... werden als Instanzvariable deklariert und im Konstruktor mit Werten belegt. | ...  sind zum Zeitpunkt der Deklaration zuzuweisen.                   |
+| Einbettung in Methoden | ... können nicht innerhalb einer Methode definiert werden.                      | ... können innerhalb einer Methode deklariert werden.                 |
 
 ```csharp                                      Constructors
 using System;
 
-namespace Rextester
+public struct Animal
 {
-  public struct Animal
-  {
-    public string name;
-    public Animal(string name) => this.name = name;
+  public const string name = "Kitty";
+  public string sound;
+  public readonly int age;
 
-    public void MakeNoise() {
-    	Console.WriteLine("{0} makes Miau", name);
-    }
-  }
-
-  public class Program
-  {
-    public static void Main(string[] args){
-      Animal cat = new Animal("Kitty");
-      cat.MakeNoise();
-    }
+  public Animal(string sound, int age) {
+  	this.sound = sound;
+    this.age = age;
+  }  
+}
+public class Program
+{
+  static void Main(string[] args){
+    Animal kitty = new Animal("Miau", 5);
+    //kitty.sound = "Wuff";
+    char[] char_arr = { 'W', 'u', 'f', 'f'};
+    kitty.sound = new string (char_arr);
+    Console.WriteLine(kitty.sound);
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-*******************************************************************************
+> **Achtung:** _Der readonly-Modifizierer verhindert, dass das Feld durch eine andere Instanz des Verweistyps ersetzt wird. Der Modifizierer verhindert jedoch nicht, dass die Instanzdaten des Felds durch das schreibgeschützte Feld geändert werden._
 
-### Embedded Structs
+C# 9 geht einen Schritt weiter und ermöglicht die pauschale Deklaration von `readonly` `structs`. Damit wird der Entwickler beauftragt JEDES Feld entsprechen mit `readonly` zu schützen.
 
-Eine innerhalb einer Struktur (oder Klasse) definierte Struktur (oder Klasse)
-wird als geschachtelter Typ bezeichnet.
+```csharp                                      Readonly.cs9
+using System;
 
-Unabhängig davon, ob der äußere Typ eine Klasse oder eine Struktur ist, lautet
-die Standardeinstellung von geschachtelten Typen private. Sie sind nur über
-ihren enthaltenden Typ zugänglich. Es können aber auch weitere
-Zugriffsmodifizierer angeben werden.
-
-```csharp                   NestedStructs
-public struct Container
+public readonly struct Animal
 {
-    public struct Nested
-    {
-        private Container parent;
+  public string name;
+  public string sound;
+  public int age;
 
-        public Nested()
-        {
-        }
-
-        public Nested(Container parent)
-        {
-            this.parent = parent;
-        }
-    }
+  public Animal(string name, string sound, int age) {
+    this.name = name;
+  	this.sound = sound;
+    this.age = age;
+  }  
 }
 
-// Aufruf mit
-Container.Nested nest = new Container.Nested();
+public class Program
+{
+  static void Main(string[] args){
+    Animal kitty = new Animal("Kitty", "Miau", 5);
+    Console.WriteLine(kitty.sound);
+  }
+}
 ```
+```xml   -myproject.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
-zum Beispiel vgl. [C# Programmierhandbuch](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/classes-and-structs/nested-types)
+In der nächsten Vorlesung werden die sogenannten Eigenschaften genauer untersucht. Diese eröffnen nochmals weitere Möglichkeiten der Kapselung.
 
 ### Sichtbarkeitsattribute
 
@@ -481,7 +586,7 @@ My name ist Kitty.
 
 Variante 2: Compilieren von Farmland als externe Bibliothek
 
-```bash
+```
 mcs -target:library Farmland.cs
 mcs -reference:Farmland.dll Programm.cs
 Programm.cs(8,13): error CS0122: `Farm.Animal' is inaccessible due to its protection level
@@ -503,99 +608,137 @@ ist `private`.
 ```csharp                                      Attributes
 using System;
 
-namespace Rextester
+public struct Animal
 {
-  public struct Animal
-  {
-    public string name;
-    internal string sound;
-    private byte age;
-
-    public Animal(string name, uint born, string sound = "Miau"){
-      this.name = name;
-      this.sound = sound;
-      age = (byte) (2019 - born);
-    }
-
-    public void MakeNoise() {
-    	Console.WriteLine("{0} ({1} years old) makes {2}", name, age, sound);
-    }
+  public string name;
+  internal string sound;
+  private byte age;
+  public Animal(string name, uint born, string sound = "Miau"){
+    this.name = name;
+    this.sound = sound;
+    age = (byte) (2019 - born);
   }
+  public void MakeNoise() {
+  	Console.WriteLine("{0} ({1} years old) makes {2}", name, age, sound);
+  }
+}
 
-  public class Program
-  {
-    public static void Main(string[] args){
-      Animal Wally = new Animal ("Wally", 2014, "Wau");
-      Wally.MakeNoise();
-      Wally.age = 5;
-    }
+public class Program
+{
+  static void Main(string[] args){
+    Animal Wally = new Animal ("Wally", 2014, "Wau");
+    Wally.MakeNoise();
+    Wally.age = 5;
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 
 *******************************************************************************
 
-### ... ja, aber ...
+## Vergleich mit Klassen
 
-Welche Einschränkungen haben Structs gegenüber Klassen?
+<!--
+style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+-->
+```ascii
+                                     C# Typen
+                                         |
+                       .------------------------------------.
+                       |                                    |
+                   Werttypen                           Referenztypen
+                       |                                    |
+         .-------+-----+---+--------.        .-------+---------+-------.
+         |       |         |        |        |       |         |       |
+     Vordefi-  Enumer-  Structs   Tupel   Klassen  Inter    Arrays  Delegates
+ nierte Typen  ation                     (String) -faces
+         |
+         |      ...............................................................
+         |                           Benutzerdefinierte Typen
+         |
+         .----+------+-----------+-------------.
+         |           |           |             |
+     Character    Ganzzahl   Gleitkommazahl   Bool
+                     |
+             .------+---------.
+             |                |
+     mit Vorzeichen     vorzeichenlos                                            .
+```
 
-> `struct`s kennen das Konzept der Vererbung nicht! Eine Struktur kann nicht von einer
-> anderen Struktur oder Klasse erben, und sie kann auch nicht die Basis einer Klasse
-> sein.
+Das vorangegangene Beispiel als Klassenimplementierung:
 
-https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/classes-and-structs/using-structs
+```csharp                                      Attributes
+using System;
 
-Welche Konsequenzen hat das?
+//public struct Animal
+public class Animal
+{
+  public string name;
+  private string sound;
+  private byte age;
+  public Animal(string name, uint born, string sound = "Miau"){
+    this.name = name;
+    this.sound = sound;
+    age = (byte) (2019 - born);
+  }
+  public void MakeNoise() {
+  	Console.WriteLine("{0} ({1} years old) makes {2}", name, age, sound);
+  }
+}
 
-| Structs                                         | Klassen |
-| ----------------------------------------------- | ------- |
-| Werttyp (Variablen enthalten das Objektes)      | Referenzdatentyp         |
-| Abgelegt auf dem Stack                          | Gespeichert auf dem Heap        |
-| Unterstützen keine Vererbung                    |  Unterstützen Vererbung       |
-| können Interfaces implementieren                | können Interfaces implementieren        |
-| `internal` und `public` als Struct-Attribute | `private`, `internal` und `public` als Klassenattribute |
-| `private`, `internal` und `public` als Feld und Member-Attribute| analog plus 3 weitere Attribute|
-| keine parameterlosen Konstruktoren deklarierbar |         |
+public class Program
+{
+  static void Main(string[] args){
+    Animal Wally = new Animal ("Wally", 2014, "Wau");
+    Wally.MakeNoise();
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+
+| Structs                                                          | Klassen                                                 |
+| ---------------------------------------------------------------- | ------------------------------------------------------- |
+| Werttyp (Variablen enthalten das Objektes)                       | Referenzdatentyp                                        |
+| Abgelegt auf dem Stack                                           | Gespeichert auf dem Heap                                |
+| Unterstützen keine Vererbung                                     | Unterstützen Vererbung                                  |
+| können Interfaces implementieren                                 | können Interfaces implementieren                        |
+| `internal` und `public` als Struct-Attribute                     | `private`, `internal` und `public` als Klassenattribute |
+| `private`, `internal` und `public` als Feld und Member-Attribute | analog plus 3 weitere Attribute                         |
+| keine parameterlosen Konstruktoren deklarierbar                  |                                                         |
+
+Welche Konsequenzen hat das zum Beispiel?
 
 > **Merke:** Strukturen sind Wertdatentypen!
 
 ```csharp                                      Attributes
 using System;
 
-namespace Rextester
+public class Animal
 {
-  public struct Animal
-  {
-    public string name;
-    internal string sound;
-    private byte age;
-
-    public Animal(string name, uint born, string sound = "Miau"){
-      this.name = name;
-      this.sound = sound;
-      age = (byte) (2019 - born);
-    }
-
-    public void MakeNoise() {
-    	Console.WriteLine("{0} ({1} years old) makes {2}", name, age, sound);
-    }
+  public string name;
+  ...
   }
+}
 
-  public class Program
-  {
-    public static void Main(string[] args){
-      Animal Wally = new Animal ("Wally", 2014, "Wau");
-      Wally.MakeNoise();
-      Wally.age = 5;
-    }
+public struct Human
+{
+  public string name;
+  ...
+  }
+}
+
+public class Program
+{
+  static void Main(string[] args){
+    Animal kitty = new Aninmal();  // <- Referenzvariable
+    Human farmer = new Farmer();   // <- Wertvariable
   }
 }
 ```
-@Rextester.eval(@CSharp)
 
-## Beispiel der Woche ...
+## Beispiel der Woche
 
 Im folgenden Beispiel werden Instanzen des Structs "Animal" von einem anderen
 Struct "Farm" genutzt und dort in einer (generischen) Liste gespeichert.
@@ -605,59 +748,64 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Rextester
+public struct Animal
 {
-  public struct Animal
-  {
-    public string name;
-    public string sound;
+  public string name;
+  public string sound;
 
-    public Animal(string name, string sound = "Miau"){
-      this.name = name;
-      this.sound = sound;
-    }
-
-    public void MakeNoise() {
-    	Console.WriteLine("{0} makes {1}", name, sound);
-    }
+  public Animal(string name, string sound = "Miau"){
+    this.name = name;
+    this.sound = sound;
   }
 
-  public struct Farm{
-    public string adress;
-    public List<Animal> animalList;
+  public void MakeNoise() {
+  	Console.WriteLine("{0} makes {1}", name, sound);
+  }
+}
 
-    public Farm(string adress) {
-    	animalList = new List<Animal>();
-    	this.adress = adress;
-    }
+public struct Farm{
+  public string adress;
+  public List<Animal> animalList;
 
-    public void AddAnimal(Animal newanimal){
-      animalList.Add(newanimal);
-    }
-
-    public void PrintAnimals(){
-      foreach (Animal pet in animalList){
-        pet.MakeNoise();
-      }
-    }
+  public Farm(string adress) {
+  	animalList = new List<Animal>();
+  	this.adress = adress;
   }
 
-  public class Program
-  {
-    public static void Main(string[] args){
-      Animal Wally = new Animal ("Wally", "Wau");
-      Animal Kitty = new Animal ("Kitty", "Miau");
-      Farm myFarm = new Farm("Biobauernhof Freiberg");
-      myFarm.AddAnimal(Wally);
-      myFarm.AddAnimal(Kitty);
-      myFarm.PrintAnimals();
+  public void AddAnimal(Animal newanimal){
+    animalList.Add(newanimal);
+  }
+
+  public void PrintAnimals(){
+    foreach (Animal pet in animalList){
+      pet.MakeNoise();
     }
   }
 }
+
+public class Program
+{
+  static void Main(string[] args){
+    Animal Wally = new Animal ("Wally", "Wau");
+    Animal Kitty = new Animal ("Kitty", "Miau");
+    Farm myFarm = new Farm("Biobauernhof Freiberg");
+    myFarm.AddAnimal(Wally);
+    myFarm.AddAnimal(Kitty);
+    myFarm.PrintAnimals();
+  }
+}
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 
 ## Aufgaben
 
-- [ ]
+Vollziehen Sie die Überlegungen rund um `structs` nach! Das ist Elementar für das weitere Vorgehen.
+
+!?[Konstruktoren](https://www.youtube.com/watch?v=q7aWkjH3UUI)
+
+!?[Klassen](https://www.youtube.com/watch?v=ZqDtPFrUonQ)
+
+Für diejenigen, die bei der Befragung beim letzten mal "Langweilig" ausgewählt hatten, eine Anregung für die Verwendung von C# ...
+
+!?[C# und Unity](https://www.youtube.com/watch?v=9tMvzrqBUP8)
