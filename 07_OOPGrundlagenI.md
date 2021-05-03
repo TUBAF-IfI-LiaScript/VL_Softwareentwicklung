@@ -21,7 +21,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Einführung der Konzepte OOP am Beispiel von Structs`                                                                                                                                |
-| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/08_OOPGrundlagenII.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/08_OOPGrundlagenII.md) |
+| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/07_OOPGrundlagenI.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/07_OOPGrundlagenI.md) |
 | **Autoren**              | @author                                                                                                                                                                                    |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
