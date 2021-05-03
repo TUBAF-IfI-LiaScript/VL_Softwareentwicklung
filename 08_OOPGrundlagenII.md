@@ -11,7 +11,7 @@ import: https://github.com/liascript/CodeRunner
 icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_Freiberg.svg
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/07_OOPGrundlagenI.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/08_OOPGrundlagenII.md)
 
 # OOP Konzepte I
 
@@ -21,7 +21,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Konzepte OOP Programmierung und Umsetzung in C#`                                                                                                                                |
-| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/07_OOPGrundlagenI.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/07_OOPGrundlagenI.md) |
+| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/08_OOPGrundlagenII.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/08_OOPGrundlagenII.md) |
 | **Autoren**              | @author                                                                                                                                                                                    |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
