@@ -557,7 +557,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 -->
 ```ascii
 
-            Programm.cs                       Farmland.cs
+            Program.cs                        Farmland.cs
             +-----------------------+         +-------------------------+
             | class Program{        |    .->  | internal struct Animal{ |
             |   public void Main(){ |    |    |    ...                  |
@@ -569,17 +569,17 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
             +-----------------------+         +-------------------------+      .
 
 Schritt 1                                     mcs -target:library Farmland.cs
-Schritt 2   mcs -reference:Farmland.dll Programm.cs
+Schritt 2   mcs -reference:Farmland.dll Program.cs
 ```
 
 Das struct "Animal" soll in einem anderen Assembly nicht aufrufbar sein. Wir
 wollen die Implementierung kapseln und verbergen. Folglich generiert der entsprechende
-Aufruf einen Compiler-Fehler. Zugehörige Dateien sind unter [GitHub](https://github.com/liaScript/CsharpCourse/tree/master/code/05_FunktionenStrukturen/DifferentAssemblies) zu finden.
+Aufruf einen Compiler-Fehler. Zugehörige Dateien sind unter [GitHub](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/tree/master/code/08_OOP/assemblies_mono) zu finden.
 
-Variante 1: Compilieren von Farmland und Programm in ein Assambly
+Variante 1: Compilieren von Farmland und Programm in ein Assembly
 
 ```bash
-mcs Programm.cs Farmland.cs
+mcs Program.cs Farmland.cs
 My name ist Kitty.
 ```
 
@@ -588,7 +588,7 @@ Variante 2: Compilieren von Farmland als externe Bibliothek
 
 ```
 mcs -target:library Farmland.cs
-mcs -reference:Farmland.dll Programm.cs
+mcs -reference:Farmland.dll Program.cs
 Programm.cs(8,13): error CS0122: `Farm.Animal' is inaccessible due to its protection level
 Programm.cs(9,26): error CS0841: A local variable `cat' cannot be used before it is declared
 ```
