@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.0
+version:  1.0.1
 language: de
 narrator: Deutsch Female
 
@@ -466,25 +466,25 @@ public class Program
 ```csharp                                      Constructors
 using System;
 
-public struct Animal
+public class Animal
 {
-  public const string name = "Kitty";
-  public string sound;
-  public readonly int age;
+  //public const string name = "Kitty";
+  public string name = "Kitty";
+  public readonly int[] legCount = new int[1];  // Referenzdatentyp (etwas konstruiert)
+  public readonly int age;                      // Wertdatentyp
 
-  public Animal(string sound, int age) {
-  	this.sound = sound;
+  public Animal(string name, int age, int legs) {
+  	this.name = name;
     this.age = age;
+    this.legCount[0]= legs;
   }  
 }
 public class Program
 {
   static void Main(string[] args){
-    Animal kitty = new Animal("Miau", 5);
-    //kitty.sound = "Wuff";
-    char[] char_arr = { 'W', 'u', 'f', 'f'};
-    kitty.sound = new string (char_arr);
-    Console.WriteLine(kitty.sound);
+    Animal kitty = new Animal("Miau", 5, 4);
+    kitty.legCount[0]=5;
+    Console.WriteLine(kitty.legCount[0]);
   }
 }
 ```
