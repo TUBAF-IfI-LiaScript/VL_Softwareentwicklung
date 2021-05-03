@@ -45,12 +45,11 @@ Ideen der OOP:
 
 > **Merke** Wir haben zwei Herausforderungen zu meistern - Modellierung und Realisierung.
 
-![OOPGeschichte](./img/10_OOP_Csharp/OOPHistory.png)<!-- width="70%" --> [WikiOOP](Wikimedia, Autor Nepomuk Frädrich)
-
+![OOPGeschichte](./img/08_OOP_Csharp/OOPHistory.png "Historische Entwicklung Objektorientierter Sprachen [^WikiOOP]")<!-- width="70%" -->
 
 *******************************************************************************
 
-                                     {{1-4}}
+                                     {{1-2}}
 *******************************************************************************
 
 **Beispiel - Simulationsumgebung Fußballspiel:**
@@ -61,39 +60,60 @@ Ideen der OOP:
 + 3 Objekte vom Typ "Schiedsrichter"
 + 22 Objekte vom Typ "Fußballspieler"
 
+*******************************************************************************
+
+                                     {{2-5}}
+*******************************************************************************
+
 **Welche Eigenschaften hat jedes Objekt des Typen "Spieler"?**
 
-*******************************************************************************
-
-                                     {{2-4}}
-*******************************************************************************
 + Name, Alter, Geschlecht, Gewicht, Größe
 + Position (x, y, z),
 + im Spiel, Geschwindigkeit
 + Mannschaft, Rolle (Stürmer, Tormann, Verteidiger), Nummer
 + physischer Zustand (topfit, ausgepowert, verletzt)
 
-Einige der Eigenschaften:
-- ändern sich im Spielkontext, andere bleiben konstant
-- lassen sich durchaus allen Personen zuordnen, anderen nur spezifischen Kategorien von Beteiligten.
+Einige der Eigenschaften ...
+
+- ... ändern sich im Spielkontext, andere bleiben konstant
+- ... lassen sich durchaus allen Personen zuordnen, anderen nur spezifischen Kategorien von Beteiligten.
 
 *******************************************************************************
 
-                                     {{3-4}}
+                                {{3-4}}
 *******************************************************************************
 
-**Welche Methoden sollten über dem Objekt "Spieler" erlaubt sein und wie verändert dies deren Zustand**
+**Welche Eigenschaften und Methoden (Fähigkeiten) sind für die Instanzen aller Menschen gleich?**?
+
++ Name, Alter, Geschlecht, Gewicht, Größe
++ physischer Zustand (topfit, ausgepowert, verletzt)
++ `Läuft()`
+
+
+**Welche Eigenschaften und Methoden (Fähigkeiten) sind unterschiedlich?**?
+
++ Rolle in der Mannschaft und Trikotnummer gibt es nur für Spieler
++ Mitglied einer Mannschaft bezieht Spieler und Trainer mit ein
++ ...
+
+
+*******************************************************************************
+
+                                     {{4-5}}
+*******************************************************************************
+
+**Welche Methoden sollten dem Objekt "Spieler" erlaubt sein und wie verändert dies deren Zustand**?
 
 + `FängtDenBall()` -> Wirkt sich auf den Zustand von Ball aus, die Position des Balles ist identisch mit der des Spielers ... und es gibt nur einen Ball!
 + `WirftDenBall()`
 + `Foul(Spieler gefoulterSpieler)` -> Wirkt sich auf die Fitness von `gefoulterSpieler` aus
 
-
-
 Welche Schwachstellen sehen Sie bei unserem Modellierungsansatz / der
 Realisierung?
 
 *******************************************************************************
+
+[^WikiOOP]:(Wikimedia, Autor Nepomuk Frädrich)
 
 ### Kapselung
 
@@ -173,8 +193,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
 Die vererbende Klasse wird meist Basisklasse (auch Super-, Ober- oder Elternklasse) genannt, die erbende abgeleitete Klasse (auch Sub-, Unter- oder Kindklasse). Den Vorgang des Erbens nennt man meist Ableitung oder Spezialisierung.
 
-![Vererbungsbeispiel](./img/11_OOP_CsharpII/Vererbungsbeispiel.png)<!-- width="70%" --> [WikiInheri](#7)
-
+![Vererbungsbeispiel](./img/08_OOP_Csharp/Vererbungsbeispiel.png "Beispiel einer Vererbungshierarchie in UML Notation [^WikiInheri] ")
 
 **Vorteile**
 
@@ -206,24 +225,24 @@ style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-r
   +-----------------------+
   | Spieler               |
   +-----------------------+
-  | + Position            |
+  |"+" Position           |
   | ...                   | --.
   +-----------------------+   |
-  | + FängtDenBall()      |   |   +------------------------+
-  | + SchießtDenBall()    |   |   | Person                 |
-  | + Foul()              |   |   +------------------------+
-  | ...                   |   '--▷| Name                   |
-  +-----------------------+       | Alter                  |
+  |"+" FängtDenBall()     |   |   +------------------------+
+  |"+" SchießtDenBall()   |   |   | Person                 |
+  |"+" Foul()             |   |   +------------------------+
+  | ...                   |   '--▷| - Name                 |
+  +-----------------------+       | - Alter                |
                                   | ...                    |
   +-----------------------+       +------------------------+
-  | Schiedsrichter        |       | SetName()              |
-  +-----------------------+   .--▷| SetAge()               |
-  | + Rolle               |   |   | ...                    |
-  | + ...                 |   |   +------------------------+
+  | Schiedsrichter        |       |"+"SetName()            |
+  +-----------------------+   .--▷|"+"SetAge()             |
+  |"+" ...                |   |   | ...                    |
+  |"+" ...                |   |   +------------------------+
   +-----------------------+   |
-  | + StartedSpiel()      |   |
-  | + BeendetDasSpiel()   | --'
-  | + ErkenntFoul()       |
+  |"+" StartedSpiel()     |   |
+  |"+" BeendetDasSpiel()  | --'
+  |"+" ErkenntFoul()      |
   | ...                   |
   +-----------------------+
 
@@ -285,6 +304,8 @@ public class Program
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 *******************************************************************************
+
+[^WikiInheri]: Wikimedia, Beispiel einer Vererbungshierarchie in UML Notation, Autor Cactus26, [Link](https://commons.wikimedia.org/wiki/File:InheritancePgmExample.svg)
 
 ### Polymorphie
 
