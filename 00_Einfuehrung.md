@@ -269,7 +269,7 @@ Sie sich dafür ein Gruppen von 2 Studierenden zu organisieren.
 |       |        |        |            | *Anwendungsbeispiel:* Computersimulation                       |       |
 | 5     | OOP    | ja     | ja         | Vererbung, virtuelle Methoden, Indexer, Überladene Operatoren, | 10-11 |
 |       |        |        |            | *Anwendungsbeispiel:*  Smartphone (Entwurf mit UML)            |       |
-| 5     | OOP    | ja     | ja         | Vererbung, abstract, virtuell, Generics                        | 12-13 |
+| 6     | OOP    | ja     | ja         | Vererbung, abstract, virtuell, Generics                        | 12-13 |
 |       |        |        |            | *Anwendungsbeispiel:* Zoo                                      |       |
 | 7     | OOP    | ja     | ja         | Genererische Collections, Delegaten, Events                    | 14-15 |
 |       |        |        |            | *Anwendungsbeispiel:* ???????                                  |       |
