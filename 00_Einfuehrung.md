@@ -233,45 +233,45 @@ Sie sich dafür ein Gruppen von 2 Studierenden zu organisieren.
 <!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 815px;" -->
 ``` ascii
                    .-.       .-.
- Einführung C#    (1-3)     ( 4 ) Einführung Git/ GitHub
+ Einführung C#    (0-2)     ( 3 ) Einführung Git/ GitHub
                    '-'       '-'  Teamarbeit
                      \       /
                       \     /
                        v   v
                         .-.
-                       ( 5 )  Objektorientierte Programmierung
+                       ( 4 )  Objektorientierte Programmierung
                         '-'
                          |
                          v
                         .-.
-  Alle Teilnehmer      ( 6 )  Basiselemente Objektorientierte Programmierung
+  Alle Teilnehmer      ( 5 )  Basiselemente Objektorientierte Programmierung
                         '-'
  ::::::::::::::::::::::::|:::::::::::::::::::::::::::::::::::::::::::
                          v
   Informatiker          .-.
-  Mathematiker         ( 7 )  Erweiterte OOP Konzepte, Generics
+  Mathematiker         ( 6 )  Erweiterte OOP Konzepte, Generics
                         '-'   Entwurfsmuster
                          |
                          v
                         .-.
-                       ( 8 )  Collections, Delegaten, Events
+                       ( 7 )  Collections, Delegaten, Events
                         '-'
 ```
 
 <!--data-type="none"-->
 | Index | C#     | GitHub | Teamarbeit | Inhalte / Teilaufgaben                                         | Woche |
 | ----- | ------ | ------ | ---------- | -------------------------------------------------------------- |:-----:|
-| 1     | Basics | nein   | nein       | Toolchain, Datentypen, Fehler, Ausdrücke,                      |   5   |
-| 2     |        |        |            | Kontrollfluss, Arrays                                          |   6   |
-| 3     |        |        |            | static Funktionen, Klasse und Struktur, Nullables              |   7   |
-| 4     | -      | ja     | ja         | Github am Beispiel von Markdown                                |   8   |
-| 5     | OOP    | ja     | ja         | Einführungsbeispiel OOP,                                       |   9   |
+| 0     | Basics | nein   | nein       | Toolchain, Datentypen, Fehler, Ausdrücke,                      |   5   |
+| 1     |        |        |            | Kontrollfluss, Arrays                                          |   6   |
+| 2     |        |        |            | static Funktionen, Klasse und Struktur, Nullables              |   7   |
+| 3     | -      | ja     | ja         | Github am Beispiel von Markdown                                |   8   |
+| 4     | OOP    | ja     | ja         | Einführungsbeispiel OOP,                                       |   9   |
 |       |        |        |            | *Anwendungsbeispiel:* Computersimulation                       |       |
-| 6     | OOP    | ja     | ja         | Vererbung, virtuelle Methoden, Indexer, Überladene Operatoren, | 10-11 |
+| 5     | OOP    | ja     | ja         | Vererbung, virtuelle Methoden, Indexer, Überladene Operatoren, | 10-11 |
 |       |        |        |            | *Anwendungsbeispiel:*  Smartphone (Entwurf mit UML)            |       |
-| 7     | OOP    | ja     | ja         | Vererbung, abstract, virtuell, Generics                        | 12-13 |
+| 6     | OOP    | ja     | ja         | Vererbung, abstract, virtuell, Generics                        | 12-13 |
 |       |        |        |            | *Anwendungsbeispiel:* Zoo                                      |       |
-| 8     | OOP    | ja     | ja         | Genererische Collections, Delegaten, Events                    | 14-15 |
+| 7     | OOP    | ja     | ja         | Genererische Collections, Delegaten, Events                    | 14-15 |
 |       |        |        |            | *Anwendungsbeispiel:* ???????                                  |       |
 
 Obwohl Einstimmigkeit darüber besteht, dass kooperative Arbeit für Ingenieure
