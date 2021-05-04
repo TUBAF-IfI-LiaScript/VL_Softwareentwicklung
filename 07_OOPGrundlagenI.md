@@ -256,9 +256,9 @@ Wie sieht unser Speicher nach Zeile 12 aus?
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
-                    STACK        
+                    STACK
              +-----------------+
-             | ...             |    
+             | ...             |
              +-----------------+ -.
  kitty.name  | undefiniert     |  |
              +-----------------+  | Instanz von Animal
@@ -301,7 +301,7 @@ public struct Animal
 public class Program
 {
   static void Main(string[] args){
-    Animal cat = new Animal();  
+    Animal cat = new Animal();
     cat.MakeNoise();
   }
 }
@@ -314,9 +314,9 @@ Nach dem Aufruf besteht eine mit den Standardwerten der Datentypen vorinitialisi
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
-                    STACK        
+                    STACK
              +-----------------+
-             | ...             |    
+             | ...             |
              +-----------------+ -.
  kitty.name  | ``              |  |
              +-----------------+  | Instanz von Animal
@@ -364,7 +364,7 @@ public struct Animal
 public class Program
 {
   static void Main(string[] args){
-    Animal dog = new Animal("Roger", "Wuff");  
+    Animal dog = new Animal("Roger", "Wuff");
     dog.MakeNoise();
   }
 }
@@ -472,12 +472,13 @@ public class Animal
   public string name = "Kitty";
   public readonly int[] legCount = new int[1];  // Referenzdatentyp (etwas konstruiert)
   public readonly int age;                      // Wertdatentyp
+  //public const long[] hairCount = new int[1]; //geht nicht, da const nicht auf Refernztyp verweisen darf bzw. wenn doch muss es null sein
 
   public Animal(string name, int age, int legs) {
   	this.name = name;
     this.age = age;
     this.legCount[0]= legs;
-  }  
+  }
 }
 public class Program
 {
@@ -491,6 +492,8 @@ public class Program
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 > **Achtung:** _Der readonly-Modifizierer verhindert, dass das Feld durch eine andere Instanz des Verweistyps ersetzt wird. Der Modifizierer verhindert jedoch nicht, dass die Instanzdaten des Felds durch das schreibgeschützte Feld geändert werden._
+
+> **Achtung:** _Verwendet man `const` ist dies jedoch nicht möglich, da eine Konstante nur ein Numerischer Typ, ein Boolean, ein String oder ein Enum sein kann. `const` kann also nicht auf einen Refernztyp verwendet werden (außer string -> **Ausnahme**) bzw. wenn doch, muss es dann immer **null** sein._
 
 C# 9 geht einen Schritt weiter und ermöglicht die pauschale Deklaration von `readonly` `structs`. Damit wird der Entwickler beauftragt JEDES Feld entsprechen mit `readonly` zu schützen.
 
@@ -507,7 +510,7 @@ public readonly struct Animal
     this.name = name;
   	this.sound = sound;
     this.age = age;
-  }  
+  }
 }
 
 public class Program
