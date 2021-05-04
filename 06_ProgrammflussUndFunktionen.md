@@ -64,15 +64,15 @@ public class Program
 {
   static void Main(string[] args)
   {
-      int a = 23, b = 3;
-      if (a > 20 && b < 5)
-      {
-          Console.WriteLine("Wahre Aussage ");
-      }
-      else
-      {
-          Console.WriteLine("Falsche Aussage ");
-      }
+    int a = 23, b = 3;
+    if (a > 20 && b < 5)
+    {
+        Console.WriteLine("Wahre Aussage ");
+    }
+    else
+    {
+        Console.WriteLine("Falsche Aussage ");
+    }
   }
 }
 ```
@@ -93,20 +93,28 @@ public class Program
 {
   static void Main(string[] args)
   {
-      bool A = true, B = false;
-      if (A)
-      //{
-        if (B)
-          Console.WriteLine("Fall 1");  // A & B
-      //}
-        else
-          Console.WriteLine("Fall 2");  // A & not B
+    bool A = false, B = false;
+    if (A)
+    //{
+      if (B)
+        Console.WriteLine("Fall 1");  // A & B
+    //}
+      else
+        Console.WriteLine("Fall 2");  // A & not B
+
+    Console.WriteLine("Programm abgeschlossen");
   }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-Versuchen Sie nachzuvollziehen, welche Wirkung die Klammern in Zeile 11 und 14 hätten. Wie verändert sich die Logik des Ausdruckes?
+Versuchen Sie nachzuvollziehen, welche Wirkung die Klammern in Zeile 9 und 12 hätten. Wie verändert sich die Logik des Ausdruckes?
+
+|           | Variante mit Klammern | Variante ohne Klammern |
+| --------- | --------------------- | ---------------------- |
+| Ausgabe 1 | $A \land B$           | $A \land B$            |
+| Ausgabe 2 | $\overline{A}$        | $A \land\overline{B}$  |
+
 
 > **Merke**: Das setzen der Klammern steigert die Lesbarkeit ... nur bei langen `else if` Reihen kann drauf verzichtet werden.
 
@@ -137,17 +145,53 @@ public class Program
 
                                    {{1-2}}
 ********************************************************************************
+
 **switch**
 
 Die `switch`-Anweisung ist eine Mehrfachverzweigung. Sie umfasst einen Ausdruck
 und mehrere Anweisungsfolgen, die durch `case` eingeleitet werden.
 
+```csharp               switchExample.cs
+using System;
+
+public enum Color { Red, Green, Blue }
+
+public class Program
+{
+  static void Main(string[] args)
+  {
+    Color c = (Color) (new Random()).Next(0, 3);
+    switch (c)
+    {
+       case Color.Red:
+          Console.WriteLine("The color is red");
+          break;
+       case Color.Green:
+          Console.WriteLine("The color is green");
+          break;
+       case Color.Blue:
+          Console.WriteLine("The color is blue");
+          break;
+       default:
+          Console.WriteLine("The color is unknown.");
+          break;
+    }
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+> **Aufgabe:** Realisieren Sie das Beispiel als als Folge von `if else` Anweisungen.
+
 Anders als bei vielen anderen Sprachen erlaubt C# `switch`-Verzweigungen anhand
-auch von `string`s (zusätzlich zu allen Ganzzahl-Typen, bool, char, enums). Es
-fehlt hier aber die Möglichkeit sogenannte *Fall Through*  durch das Weglassen
-von `break`-Anweisungen zu realisieren. Jeder switch muss mit einem `break`,
-`return`, `throw`, `continue` oder `goto` beendet werden. Interessant ist die
+auch von `string`s (zusätzlich zu allen Ganzzahl-Typen, bool, char, enums). Interessant ist die
 Möglichkeit auf `case: null` zu testen!
+
+Es
+fehlt hier aber die Möglichkeit sogenannte *Fall Through*  durch das Weglassen
+von `break`-Anweisungen zu realisieren.
+
+**Jeder switch muss mit einem `break`, `return`, `throw`, `continue` oder `goto` beendet werden.**
 
 ```csharp               switchExample.cs
 using System;
@@ -176,7 +220,9 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-Ein weiteres Anwendungsbeispiel ist die Implementierung eines Automaten. Nehmen wir an, dass wir einen Sequenzdetektor entwerfen wollen, der das Auftreten des Musters *a{c}df* in einem Signalverlauf erkennt!
+> **Achtung:** Beachten Sie den Unterschied zwischen dem `switch`-Ausdruck [Link](https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/operators/switch-expression) und der `switch`-Anweisung, die wir hier besprechen.
+
+Ein weiteres Anwendungsbeispiel ist die Implementierung eines Automaten. Nehmen wir an, dass wir einen Sequenzdetektor entwerfen wollen, der das Auftreten des Musters *a{c}d* in einem Signalverlauf erkennt! Der Zustand kann mit *f* verlassen werden.
 
 <!--
 style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
@@ -246,6 +292,8 @@ public class Program
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+> **Frage:** Sehen Sie in der Lösung eine gut wartbare Implementierung?
 
 C# 7.0 führt darüber hinaus das _pattern matching_ mit switch ein. Damit werden
 komplexe Typ und Werte-Prüfungen innerhalb der case Statements möglich.
@@ -322,6 +370,32 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
+Lassen Sie uns zwei ineinander verschachtelte Schleifen nutzen, um eine [mxn] Matrix mit zufälligen Werten zu befüllen.
+
+```csharp
+using System;
+
+public class Program
+{
+  static void Main(string[] args)
+  {
+    Random rnd = new Random();
+    int[,] matrix = new int[3,5];
+    for(int i=0;i<3;i++)
+    {
+        for(int j=0;j<5;j++)
+        {
+            matrix[i, j]= rnd.Next(1, 10);
+            Console.Write("{0,3}", matrix[i,j]);
+            if (j == 4) Console.WriteLine();
+        }
+     }
+     //Console.WriteLine($"{matrix.GetLength(0)}, {matrix.GetLength(1)}");
+   }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
 **Kopf- Fußgesteuerte schleife - while/do while**
 
 Eine `while`-Schleife führt eine Anweisung oder einen Anweisungsblock so lange
@@ -329,6 +403,31 @@ aus, wie ein angegebener boolescher Ausdruck gültig ist. Da der Ausdruck vor je
 Ausführung der Schleife ausgewertet wird, wird eine while-Schleife entweder nie
 oder mehrmals ausgeführt. Dies unterscheidet sich von der do-Schleife, die ein
 oder mehrmals ausgeführt wird.
+
+```csharp
+using System;
+
+public class Program
+{
+  static void Main(string[] args)
+  {
+    int counter = 0;
+    while (counter < 5)  // "Kopfgesteuert"
+    {
+        Console.WriteLine($"While counter! The counter is {counter}");
+        counter++;
+    }
+
+    //counter = 0;
+    do
+    {
+        Console.WriteLine($"Do while counter! The counter is {counter}");
+        counter++;
+    } while (counter < 5);  // "Fußgesteuert"
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 **Iteration - foreach**
 
@@ -424,6 +523,7 @@ public class Program
     p = p + 1;
     Console.WriteLine(p);
   }
+
   static void Main(string[] args)
   {
     Calc(5f);                           // Funktions / Methodenaufruf
@@ -434,7 +534,7 @@ public class Program
 
 ### Verkürzte Darstellung
 
-Methoden können in Kurzform in einer einzigen Zeile angegeben werden. Dafür nutzt
+Methoden können seit C#6 in Kurzform in einer einzigen Zeile angegeben werden (*Expression-bodied function members*). Dafür nutzt
 C# die Syntax von Lambda Ausdrücken, die für anonyme Funktionen verwendet werden. Dem `=>` entsprechend wird von der _Fat Arrow Syntax_ gesprochen.
 
 ```csharp                    Functions
@@ -442,10 +542,12 @@ using System;
 
 public class Program
 {
-  public static string Combine(string fname, string lname) => $"{fname.Trim()} {lname.Trim()}";
+  static string Combine(string fname, string lname) => $"{fname.Trim()} {lname.Trim()}";
+
   static void Main(string[] args)
   {
-    Console.WriteLine(Combine("Sebastian", "Zug     "));
+    // Nutzereingaben mit Leerzeichen
+    Console.WriteLine(Combine("      Sebastian", "Zug     "));
   }
 }
 ```
@@ -503,6 +605,7 @@ public class Program
     p = p + 1;
     Console.WriteLine("Innerhalb von Calc {0}", p);
   }
+
   static void Main(string[] args){
     int p = 6;
     Calc(p);
@@ -512,10 +615,10 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
+> **Merke:** Die Namesgleichheit der Variablennamen in der Funktion und der `Main` ist irrelevant.  
+
 Welche Lösungen sind möglich den Zugriff einer Funktion auf eine übergebene
 Variable generell sicherzustellen?
-
-********************************************************************************
 
 ********************************************************************************
 
@@ -540,6 +643,7 @@ public class Program
   static void IncrementsCounter(){
      Counter.globalCounter++;
   }
+
   static void Main(string[] args){
     Console.WriteLine(Counter.globalCounter);
     IncrementsCounter();
@@ -556,6 +660,8 @@ public class Program
 
 **Ansatz 1 - Rückgabe des modifizierten Wertes**
 
+Wir benutzen `return` um einen Wert aus der Funktion zurückzugeben. Allerdings kann dies nur ein Wert sein. Der Datentyp muss natürlich mit dem der Deklaration übereinstimmen.
+
 ```csharp            ReturnValue.cs
 using System;
 
@@ -567,6 +673,7 @@ public class Program
     int output = 5 * input;
     return output;
   }
+
   static void Main(string[] args){
     int p = 5;
     int a = Calc(p);
@@ -596,15 +703,17 @@ using System;
 
 public class Program
 {
-  static void Calc(ref int p)
+  static void Calc(ref int x)
   {
-     p = p * 2;
+    x = x + 1;
+    Console.WriteLine("Innerhalb von Calc {0}", x);
   }
+
+
   static void Main(string[] args){
     int p = 1;
-    Console.WriteLine(p);
     Calc(ref p);
-    Console.WriteLine(p);
+    Console.WriteLine("Innerhalb von Main {0}", p);
   }
 }
 ```
@@ -617,34 +726,28 @@ using System;
 
 public class Program
 {
-  class Wrapper
+  static void Test1(int []  w)
   {
-    public int Wrapped;
-    public Wrapper(int newWrapped)
-    {
-       Wrapped = newWrapped;
-    }
+    w[0] = 22;
+    w = new int [] {50,60,70};
   }
-  static void Test1(Wrapper w)
+
+  static void Test2(ref int [] w)
   {
-    w.Wrapped = 666;
-    w = new Wrapper(999);
+    w[0] = 22;
+    w = new int [] {50,60,70};
   }
-  static void Test2(ref Wrapper w)
-  {
-    w.Wrapped = 666;
-    w = new Wrapper(999);
-  }
+
   static void Main(string[] args)
   {
     //Test1:
-    Wrapper myWrapper = new Wrapper(42);
-    Test1(myWrapper);
-    Console.WriteLine("Test1() without ref: myWrapper.Wrapped = {0}", myWrapper.Wrapped); //Prints 666
+    int [] array = new int [] {1,2,3};
+    Test1(array);
+    Console.WriteLine("Test1() without ref: array[0] = {0}", array[0]);
     //Test2:
-    myWrapper = new Wrapper(42);
-    Test2(ref myWrapper);
-    Console.WriteLine("Test2() with ref: myWrapper.Wrapped = {0}", myWrapper.Wrapped); //Prints 999
+    array = new int [] {5,6,7};
+    Test2(ref array);
+    Console.WriteLine("Test2() with ref   : array[0] = {0}", array[0]);
   }
 }
 ```
@@ -702,6 +805,34 @@ dass die Deklaration beim Aufruf selbst erfolgt. Im Zusammenhang mit impliziten
 Variablendeklarationen kann man dann typunabhängig Rückgabewerte aus Funktionen
 entgegennehmen.
 
+```csharp    out.cs9
+using System;
+
+public class Program
+{
+  static void Calc(int p, out int output)
+  {
+    output = p + 1;
+  }
+  static void Main(string[] args){
+    int p = 6;
+    Calc(p, out int r);
+    Console.WriteLine(r);
+  }
+}
+```
+```xml-
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+
+
 Zudem sollte für eine sehr umfangreiches Set von Rückgabewerten geprüft werden,
 ob diese wirklich alle benötig werden. Mit dem *discard* Platzhalter `out _` werden unnötige Deklarationen eingespart.
 
@@ -717,6 +848,7 @@ static void SuperComplexMethod(out string result,
 // Aufruf der Methode
 SuperComplexMethod(out _, out _, out int count);
 ```
+
 
 ********************************************************************************
 
@@ -814,4 +946,6 @@ realisiert.
 
 ## Aufgaben
 
-- [ ] Bereiten Sie die Aufgaben für die Übungen. Diese sind unter [Link]() zu finden.
+- [ ] Bereiten Sie die Aufgaben für die Übungen. Diese sind unter [Link](https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2021_Aufgabe_00) zu finden.
+
+**Bemühen Sie sich diese vor der Veranstaltung zu realisieren, um dort über Varianten möglicher Lösungen zu sprechen!**
