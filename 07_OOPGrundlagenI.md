@@ -542,7 +542,7 @@ Kontext heraus sichtbar sind, werden diese mit Attributen versehen.
 
 **Sichtbarkeit der Stuktur**
 
-Strukturen, die innerhalb eines _Namespace_ (mit anderen Worten, die nicht in anderen Klassen oder Strukturen geschachtelt sind) direkt deklariert werden, können entweder `private, ``public` oder `internal` sein.
+Strukturen, die innerhalb eines _Namespace_ (mit anderen Worten, die nicht in anderen Klassen oder Strukturen geschachtelt sind) direkt deklariert werden, können entweder `private`, `public` oder `internal` sein.
 
 | Bezeichner | Konsequenz                                            |
 | ---------- | ----------------------------------------------------- |

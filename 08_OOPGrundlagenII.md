@@ -28,6 +28,83 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 ---------------------------------------------------------------------
 
+## Auf Nachfrage ...
+
+> **Wann machen `private` Klassen oder `structs` Sinn?**
+
+<!-- data-marker="23 0 36 200 log;" -->
+```csharp                                      Usage
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+public struct Farm{
+  public string adress;
+  public List<Animal> animalList;
+
+  public Farm(string adress) {
+  	animalList = new List<Animal>();
+  	this.adress = adress;
+  }
+
+  public void AddAnimal(string name, string sound){
+    animalList.Add(new Animal(name, sound));
+  }
+
+  public void PrintAnimals(){
+    foreach (Animal pet in animalList){
+      pet.MakeNoise();
+    }
+  }
+
+  private struct Animal
+  {
+    public string name;
+    public string sound;
+
+    public Animal(string name, string sound = "Miau"){
+      this.name = name;
+      this.sound = sound;
+    }
+
+    public void MakeNoise() {
+    	Console.WriteLine("{0} makes {1}", name, sound);
+    }
+  }
+}
+
+public class Program
+{
+  static void Main(string[] args){
+    Farm myFarm = new Farm("Biobauernhof Freiberg");
+    myFarm.AddAnimal("Wally", "Wau");
+    myFarm.AddAnimal("Kitty", "Miau");
+    myFarm.PrintAnimals();
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+
+> **Wie verhält es sich mit mehreren Dateien in einem Ordner und wie stellt man die Relationen zwischen separaten Assemblies her?**
+
+
+<!-- data-theme="chaos" -->
+```
+dotnet new sln -o assemblies_dotnet
+cd assemblies_dotnet
+dotnet new console -o MyApp
+dotnet new classlib -o MyClass
+dotnet sln add MyApp
+dotnet sln add MyClass
+cd MyApp
+dotnet add reference ../MyClass
+```
+
+Kopieren Sie noch die Dateien aus dem [Mono Verzeichnis](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/tree/master/code/08_OOP/assemblies_mono) in die entsprechenden Ordner.
+
+Starten Sie die Kompilierung, in dem Sie `dotnet run` im Ordner `MyApp` aufrufen. Was beobachten Sie?
+
 ## Visionen der Objektorientierung
 
                                      {{0-1}}
@@ -156,7 +233,7 @@ sowie weitere programmiersprachenspezifische Realisierungen (`internal`, `protec
 **Beispiel Fußballsimulation**
 
 1. Die Position x,y eines jeden Spielers und des Balls sollte nur über entsprechende Zugriffsmethoden manipuliert werden.
-2. Die konkrete Implementierung der `Foul` oder `SchießtDenBall`-Methode bleibt geheim :-)
+2. Die `Foul` kann nur aus dem Spieler heraus aufgerufen werden :-)
 
 <!--
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
@@ -173,9 +250,9 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 +---------------------------+
 | ✛ FängtDenBall(): void    |          public get ... set ...              |  Zugriffsmethoden für
 | ✛ SchießtDenBall(): Kraft |                                                  Felder
-| ✛ Foul()                  |          public void FängtDenBall();
+| - Foul()                  |          public void FängtDenBall();
 | ...                       |          public Kraft = SchießtDenBall();
-+---------------------------+          public Foul(SpielerX);              |  Event an SpielerX im
++---------------------------+          private Foul(SpielerX);             |  Event an SpielerX im
                                     }                                         "Erfolgsfall"
 ```
 
@@ -230,7 +307,7 @@ style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-r
   +-----------------------+   |
   |"+" FängtDenBall()     |   |   +------------------------+
   |"+" SchießtDenBall()   |   |   | Person                 |
-  |"+" Foul()             |   |   +------------------------+
+  |"-" Foul()             |   |   +------------------------+
   | ...                   |   '--▷| - Name                 |
   +-----------------------+       | - Alter                |
                                   | ...                    |
@@ -274,13 +351,12 @@ Containerklassen, wenn eine Sprache keine generische Programmierung unterstützt
 ```csharp                                      Iniitalisation
 using System;
 
-  public class Program
-  {
-    static void Main(string[] args){
-      Console.WriteLine(typeof(int));
-      Console.WriteLine(typeof(int).BaseType);
-      Console.WriteLine(typeof(int).BaseType.BaseType);
-    }
+public class Program
+{
+  static void Main(string[] args){
+    Console.WriteLine(typeof(int));
+    Console.WriteLine(typeof(int).BaseType);
+    Console.WriteLine(typeof(int).BaseType.BaseType);
   }
 }
 ```
@@ -309,7 +385,7 @@ public class Program
 
 ### Polymorphie
 
-> Polymorphie oder Polymorphismus (griechisch für Vielgestaltigkeit) ermöglicht, dass ein Bezeichner sich in seiner Funktionalität in Abhängigkeit von den Datentypen verändert.
+> Polymorphie oder Polymorphismus (griechisch für Vielgestaltigkeit) ermöglicht, dass ein Objekt sich in seiner Funktionalität in Abhängigkeit von den Datentypen verändert.
 
 Die Polymorphie der objektorientierten Programmierung ist eine Eigenschaft, die
 immer im Zusammenhang mit Vererbung und Schnittstellen (Interfaces) auftritt.
@@ -343,7 +419,7 @@ class Square : Shape {}
 
 ```
 In C# ist jeder Typ polymorph, da alle Typen, einschließlich
-benutzerdefinierten Typen, von Object erben.
+benutzerdefinierten Typen, von `Object` erben.
 
 Beim Vererben erhält die abgeleitete Klasse alle Methoden, Felder, Eigenschaften
 und Ereignisse der Basisklasse. Dabei gilt es zu entscheiden, welche davon
@@ -353,23 +429,20 @@ werden sollen.
 **Am Beispiel Fußballspiel**
 
 ```csharp
-using System;
-
-public class Program
-{
-  public class Person{
-    private int alter;
-    public virtual void setAge(int alter) {
-      this.alter = alter;
-    }
+public class Person{
+  private int alter;
+  public virtual void setAge(int alter) {
+    this.alter = alter;
   }
 }
+
 public class Spieler: Person {
   public override void setAge(int alter) {
       // hier wird noch getestet ob der Spieler älter als 16 ist
       // und überhaupt eingesetzt werden darf
   }
 }
+
 public class Zuschauer: Person {
   public override void setAge(int alter) {
       // hier wird noch getestet ob ein Zuschauer jünger als 6 ist und
@@ -651,6 +724,33 @@ Der Standardkonstruktor wird implizit generiert, wenn kein anderer Konstruktor
 durch den Entwickler spezifiziert wurde. Sofern das geschieht, steht dieser auch
 nicht mehr bereit.
 
+```csharp                                      missingStandardConstructor
+using System;
+
+public class Animal
+{
+  public string name;
+  public string sound;
+  public int age;
+
+  public Animal(string name, string sound, int age) {
+    this.name = name;
+  	this.sound = sound;
+    this.age = age;
+  }  
+}
+
+public class Program
+{
+  static void Main(string[] args){
+    Animal kitty = new Animal("Kitty", "Miau", 5);
+    Console.WriteLine(kitty.sound);
+    Animal tom = new Animal();
+    Console.WriteLine(tom.sound);
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 ******************************************************************************
 
@@ -669,21 +769,25 @@ class Car
   public readonly int NumberOfSeats;
   public readonly int MaxSpeed;
   private int CurrentSpeed;
+
   public Car(int maxSpeed, int numberOfSeats)
   {
      Console.WriteLine("2 arg ctor");
      this.MaxSpeed = maxSpeed;
      this.NumberOfSeats = numberOfSeats;
   }
+
   public Car(int maxSpeed) : this(maxSpeed, 5)
   {
      Console.WriteLine("1 arg ctor");
   }
+
   public Car() : this(100)
   {
      Console.WriteLine("0 arg ctor");
   }
 }
+
 public class Program
 {
   static void Main(string[] args){
@@ -1253,4 +1357,6 @@ public class Program
 
 ## Aufgaben
 
-- [ ]
+- [ ] Setzen Sie sich anhand von [Tutorials](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/classes-and-structs/) mit den Konzepten der objektorientierten Programmierung auseinander!
+
+!?[alt-text](https://www.youtube.com/watch?v=t2SPg6IuT3k)
