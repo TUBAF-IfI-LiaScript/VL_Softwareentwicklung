@@ -796,7 +796,11 @@ using System;
 
 public class Program
 {
+<<<<<<< HEAD
+  public static void Main(string[] args){
+=======
   static void Main(string[] args){
+>>>>>>> upstream/master
     string text = null;   // Die Referenz zeigt auf kein Objekt im Heap
     //int i = null;
     if (text == null) Console.WriteLine("Die Variable hat keinen Wert!");
