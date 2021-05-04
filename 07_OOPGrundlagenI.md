@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.1
+version:  1.0.2
 language: de
 narrator: Deutsch Female
 
@@ -392,7 +392,7 @@ Im Hinblick auf die Verwendung des Schlüsselwortes `new` und die Konsequenzen i
 In Ergänzung sei auch noch auf die kompakte _Fat Arrow_ Darstellung im Zusammenhang mit Konstruktoren, die ja Funktionen wie alle anderen sind verwiesen. Wenn nur
 eine Anweisung ausgeführt wird kann dies in einer Zeile realisiert werden.
 
-```csharp                                      Constructors
+```csharp                                      Constructors.cs9
 using System;
 
 public struct Animal
@@ -411,7 +411,15 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+```xml   -myproject.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
 *******************************************************************************
 
