@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug, Galina Rudolf, André Dietrich
+author:   Sebastian Zug, Galina Rudolf, André Dietrich & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.2
 language: de
@@ -501,7 +501,7 @@ public class Program
 
 > **Achtung:** _Der readonly-Modifizierer verhindert, dass das Feld durch eine andere Instanz des Verweistyps ersetzt wird. Der Modifizierer verhindert jedoch nicht, dass die Instanzdaten des Felds durch das schreibgeschützte Feld geändert werden._
 
-> **Achtung:** _Verwendet man `const` ist dies jedoch nicht möglich, da eine Konstante nur ein Numerischer Typ, ein Boolean, ein String oder ein Enum sein kann. `const` kann also nicht auf einen Refernztyp verwendet werden (außer string -> **Ausnahme**) bzw. wenn doch, muss es dann immer **null** sein._
+> **Achtung:** _Verwendet man `const` ist dies jedoch nicht möglich, da eine Konstante nur ein numerischer Typ, ein Boolean, ein String oder ein Enum sein kann. `const` kann also nicht auf einen Referenztyp verwendet werden (außer string -> **Ausnahme**) bzw. wenn doch, muss es dann immer **null** sein._
 
 C# 9 geht einen Schritt weiter und ermöglicht die pauschale Deklaration von `readonly` `structs`. Damit wird der Entwickler beauftragt JEDES Feld entsprechen mit `readonly` zu schützen.
 
