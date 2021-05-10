@@ -30,7 +30,8 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 ## Auf Nachfrage ...
 
-> Hinweis auf die Lauffähigkeit der _Fat Arrow Syntax_ unter C# 7.0.
+> Hinweis auf die Lauffähigkeit der _Fat Arrow Syntax_ unter C# 7.0. siehe [Beispiel aus Vorlesung 7](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/07_OOPGrundlagenI.md#5)
+
 
 ## Vererbung in C#
 
@@ -221,7 +222,7 @@ style="width: 100%; max-width: 720px; display: block; margin-left: auto; margin-
   | «property» Rückennummer: int |    :  |                                 |                |
   | - SendMessage()              |    :  |                                 |                |
   +------------------------------+    :  |                                 .                |
-                 ∆                     :  |                                  \   +-------------------------+
+                "^"                   :  |                                  \   +-------------------------+
                  |                    :  |                                  /   | Assembly - Programm     |
                  |                    :  |                                 '    +-------------------------+
   +------------------------------+    :  |                                 |
@@ -233,54 +234,6 @@ style="width: 100%; max-width: 720px; display: block; margin-left: auto; margin-
   +------------------------------+    :  |                                 |
                                       : -'                                -'
 ```
-
-```csharp    Accesscontrol
-using System;
-
-public class Person
-{
-  public int Geburtsjahr = 1972;
-  public string Name = "Lukas Podolski";
-  string email = "LukasPodolski@gmx.de";
-
-  public int BerechneAlter(){
-     return DateTime.Now.Year - this.Geburtsjahr;
-  }
-
-  protected void SendEmail(string text){
-     Console.WriteLine("MailTo - {0} - {1}", email, text);
-  }
-}
-
-public class Fußballspieler : Person
-{
-  private int rückennummer;
-  protected int GeschosseneTore = 0;
-
-  public int Rückennummer{
-    set {if (value < 100) rückennummer = value;
-         else Console.WriteLine("Fehler, Rückennummer ungültig");}
-    get {return rückennummer;}
-  }
-
-  internal void SendMessage(){
-    if (this.GeschosseneTore == 0) {this.SendEmail("Wohl nicht Dein Tag?");}
-    else {this.SendEmail("Super gemacht!");}
-  }
-}
-
-public class Program
-{
-  public static void Main(string[] args){
-    Fußballspieler Stürmer = new Fußballspieler();
-    Stürmer.Geburtsjahr = 1982;
-    //Stürmer.GeschosseneTore = 12;    // Compilerfehler
-    Stürmer.SendMessage();
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
-
 
                               {{2-3}}
 *****************************************************************************
