@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.1
+version:  1.0.2
 language: de
 narrator: Deutsch Female
 
@@ -944,7 +944,7 @@ Ausgangspunkt:
 
 <!-- --{{0}}-- Idee des Codefragments:
   * Fügen Sie eine Lese / Schreibmethode für die Variable Wochentag ein, die
-    Prüft, ob die Eingabe zwischen Mo = 0 und Freitag = 5 liegt.
+    Prüft, ob die Eingabe zwischen Mo = 0 und Freitag = 4 liegt.
 -->
 ```csharp    ReadOnlyVsConst
 using System;
@@ -1286,7 +1286,7 @@ Point pt2 = new Point(10, -10);
 Entwickeln Sie eine Klassenstruktur für die Speicherung der Daten eines
 Studenten.
 
-```csharp    StatitcConstructor
+```csharp    StaticConstructor
 using System;
 using System.Collections.Generic;
 
