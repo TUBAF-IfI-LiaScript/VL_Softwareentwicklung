@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 
@@ -209,34 +209,7 @@ public class Program
 
 Es besteht keine Vererbungshierarchie zwischen den beiden Klassen `A` und `B`! Vielmehr ergibt sich ein neuer Zusammenhang, die gemeinsame Implementierung eines Musters an Membern.
 
-```
-@startuml
-left to right direction
-class IBaseInterface <<Interface>>  {
-    M()
-}
-class IDerivedInterface <<Interface>>{
-    N()
-}
-
-class A {
-    M()
-}
-
-class B {
-    M()
-    N()
-}
-
-IDerivedInterface <|.. B : Implementiert
-IBaseInterface <|.. A
-IBaseInterface <|-- IDerivedInterface : Erbt
-
-hide circle
-
-@enduml
-```
-@plantUML.eval
+![ClassStructure](http://www.plantuml.com/plantuml/png/TP113e8m44NtSufPwW8EG0W1eWiMUeVQ3Z99AMOwkb7lBb5H4h6hvkUzdvyfenhHS-_1Kwke0meVEqN7GbPv262zYH6RsaHgWfAqnXBc-UTV58XNmF7jLckuJ_o6X2_a_YWlOVyKtaOrjSp3-XlEZONsMvgET8PDV_BKKr0cKPZFdgZgDqsIXS4PRkMW01qxGijYFG6K5DnuhGS0)
 
 Die Visualisierung von Klassen und deren Abhängigkeiten mit plantUML ist eine
 Möglichkeit einen raschen Überblick über bestimmte Zusammenhänge zu gewinnen.
@@ -369,4 +342,8 @@ Allerdings kann diese Funktion dann nur über die Schnittstelle und nicht über 
 
 ## Aufgaben
 
-- [ ]
+- [ ] Setzen Sie sich mit den Konzepten von Interfaces auseinander!
+
+!?[Interfaces](https://www.youtube.com/watch?v=_Zvi21_kMw4)
+
+!?[Interfaces](https://www.youtube.com/watch?v=A7qwuFnyIpM)
