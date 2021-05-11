@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 
@@ -30,6 +30,9 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 ## Auf Nachfrage ...
 
+Wozu brauche ich das? Bisher bin ich auch gut ohne OOP ausgekommen ...
+
+Nutzung von objektorientierten Konzepten im Python Projekt [github2pandas](https://github.com/TUBAF-IFI-DiPiT/github2pandas).
 
 
 ## Abstrakte Klassen / Abstrakte Methoden
@@ -109,7 +112,7 @@ Charakteristik von Interfaces:
 + Interfaces haben das Schlüsselwort `interface` und fangen im allgemeinen mit dem Buchstaben I an
 + alle Elemente sind implizit `abstract` und `public`
 
-```csharp    UpCastExample
+```csharp    InterfaceExample
 using System;
 using System.Reflection;
 using System.ComponentModel.Design;
