@@ -22,7 +22,7 @@ jobs:
       - name: Run preprocessing
         run : |
           mkdir output
-          python3 .github/workflows/config/pre_multipfd.py
+          python3 .github/workflows/config/pre_multipdf.py
         # Installation der notwendigen Pandoc tools
       - name: Install pandoc
         run: |
