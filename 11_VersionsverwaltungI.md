@@ -85,13 +85,13 @@ In jedem Fall viel manuelle Arbeit ...
 
 Und nun übertragen wir den Ansatz auf eine Softwareentwicklungsprojekt mit vielen Mitstreitern. Die Herausforderungen potenzieren sich.
 
-0. Die Erstellung der Tageskopie müsste synchron erfolgen.
-1. Ich muss in die Ordner schauen, um zu sehen welche Anpassungen vorgenommen wurden.
-1. Ich weiß nicht welche die aktuelle Version einer Datei ist.
-2. Es existieren plötzlich mehrere Varianten einer Datei mit Änderungen an unterschiedlichen Codezeilen.
-3. Ich kann den Code nicht kompilieren, weil einzelne Dateien fehlen.
-4. Ich kann eine ältere Version der Software nicht finden - "Gestern hat es noch funktioniert".
-5. Meine Änderungen wurden von einem Mitstreiter einfach überschrieben.
+1. Die Erstellung der Tageskopie müsste synchron erfolgen.
+2. Ich muss in die Ordner schauen, um zu sehen welche Anpassungen vorgenommen wurden.
+3. Ich weiß nicht welche die aktuelle Version einer Datei ist.
+4. Es existieren plötzlich mehrere Varianten einer Datei mit Änderungen an unterschiedlichen Codezeilen.
+5. Ich kann den Code nicht kompilieren, weil einzelne Dateien fehlen.
+6. Ich kann eine ältere Version der Software nicht finden - "Gestern hat es noch funktioniert".
+7. Meine Änderungen wurden von einem Mitstreiter einfach überschrieben.
 
 ******************************************************************************
 
@@ -310,7 +310,7 @@ Die Herausforderung liegt somit im Mischen von Dokumenten!
 
 [^Subversion]: Brian W. Fitzpatrick, Ben Collins-Sussman, C. Michael Pilato, Version Control with Subversion, 2nd Edition, O'Reilly Media
 
-### _Mergen_ von Dokumenten
+### Mischen von Dokumenten
 
 **Schritt 1: Identifikation von Unterschieden**
 
@@ -542,6 +542,7 @@ Die Entwicklungsgeschichte von git ist mit der des Linux Kernels verbunden:
 | 1991 | Änderungen am Linux Kernel via patches und archive files       |
 | 2002 | Linux Kernel mit dem Tool BitKeeper verwaltet                  |
 | 2005 | Bruch zwischen der vertreibenden Firma und der Linux Community |
+| 2021 | Die aktuelle Version ist 2.31.1                                |
 
 2005 wurde einen Anforderungsliste für eine Neuentwicklung definiert. Dabei wurde hervorgehoben, dass sie insbesondere sehr große Projekte (Zahl der Entwickler, Features und Codezeilen, Dateien) unterstützen können muss. Daraus entstand `Git` als freie Software zur verteilten Versionsverwaltung von Dateien.
 
@@ -549,7 +550,7 @@ Die Entwicklungsgeschichte von git ist mit der des Linux Kernels verbunden:
 
 **Wie bekommen sie Git auf Ihren Windows-Rechner?**
 
-1. Variante 1: als Integralen Bestandteil in Ihrer Entwicklungsumgebung
+1. Variante 1: als Integralen Bestandteil in Ihrer Entwicklungsumgebung (Visual Studio Code)
 Die großen IDEs umfassen einen eigenen Git-Client, für einfachere Editoren muss dieser meist nachinstalliert werden.
 
 2. Variante 2: als unabhänigige Installation
