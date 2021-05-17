@@ -7,6 +7,7 @@ blackList = ["{{", "******", "@Rextester", "@Tau"]
 for file in glob.glob("*.md"):
     if file == "README.md":
         continue
+
     content = open(file, 'r').readlines()
     filtered = []
     for line in content:
@@ -17,7 +18,7 @@ for file in glob.glob("*.md"):
             line = result.group(0) + "\n"
         filtered.append(line)
 
-    with open("output/" + file + "x", "w") as outfile:
+    with open(file + "x", "w") as outfile:
         title = "**Vorlesung Softwareentwicklung 2021**"
         outfile.write(f"---\ntitle: |\n  {title}\n  https://github.com/SebastianZug/CsharpCourse\nauthor:\n")
         with open(".github/workflows/config/authors.txt", "r") as authors:  # read in authors and write them into the yaml code
