@@ -1,6 +1,6 @@
 # GitHub Action, die aus den LiaScript-Materialien des Sommersemester 2021 ein
 # Skript generiert
-name: GeneratePdf
+name: GenerateMultiPdf
 
 # Hier legen wir den Trigger für die Action fest.
 # "Wenn ein Push auf dem branch master realisert wird, werden die
