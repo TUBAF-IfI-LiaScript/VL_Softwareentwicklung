@@ -35,7 +35,7 @@ jobs:
         run: |
           for file in *.mdx 
           do
-          pandoc -V linkcolor:blue .github/workflows/config/header-includes.yaml --pdf-engine=xelatex -o "$file".pdf "$file"
+          pandoc -V linkcolor:blue .github/workflows/config/header-includes.yaml --pdf-engine=xelatex -o "output/$file".pdf "$file"
           done
       # Speichern als Artifact
       - uses: actions/upload-artifact@master
