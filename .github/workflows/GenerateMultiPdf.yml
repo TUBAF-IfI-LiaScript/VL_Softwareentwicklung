@@ -33,8 +33,9 @@ jobs:
       # Generierungsprozess
       - name: Run pandoc markdown to pdf
         run: |
-          for file in *.mdx do
-                pandoc -V linkcolor:blue github/workflows/config/header-includes.yaml --pdf-engine=xelatex -o "$file".pdf "$file"
+          for file in *.mdx 
+          do
+          pandoc -V linkcolor:blue github/workflows/config/header-includes.yaml --pdf-engine=xelatex -o "$file".pdf "$file"
           done
       # Speichern als Artifact
       - uses: actions/upload-artifact@master
