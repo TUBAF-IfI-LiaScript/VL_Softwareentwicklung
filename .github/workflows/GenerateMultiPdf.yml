@@ -1,0 +1,44 @@
+# GitHub Action, die aus den LiaScript-Materialien des Sommersemester 2021 ein
+# Skript generiert
+name: GenerateMultiPdf
+
+# Hier legen wir den Trigger für die Action fest.
+# "Wenn ein Push auf dem branch master realisert wird, werden die
+# nachfolgenden Schritte ausgeführt"
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  convert_via_pandoc:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out current repository
+        uses: actions/checkout@v2
+        with:
+          ref: master
+        # Ausführen des Parsers, der bestimmte Elemente im LiaCode entfernt
+      - name: Run preprocessing
+        run : |
+          mkdir output
+          python3 .github/workflows/config/pre_multipdf.py
+        # Installation der notwendigen Pandoc tools
+      - name: Install pandoc
+        run: |
+          sudo apt update -y
+          sudo apt-get install pandoc
+          sudo apt-get install texlive-xetex
+          sudo apt-get install librsvg2-bin
+      # Generierungsprozess
+      - name: Run pandoc markdown to pdf
+        run: |
+          for file in *.mdx 
+          do
+          pandoc -V linkcolor:blue .github/workflows/config/header-includes.yaml --pdf-engine=xelatex -o "output/$file".pdf "$file"
+          done
+      # Speichern als Artifact
+      - uses: actions/upload-artifact@master
+        with:
+          name: output
+          path: output
