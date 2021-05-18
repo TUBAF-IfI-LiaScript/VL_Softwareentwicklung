@@ -2,7 +2,8 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich & `JohannaKlinke`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.6
+
 language: de
 narrator: Deutsch Female
 
@@ -684,11 +685,11 @@ Nun wird es aber interessanter! Lassen Sie uns jetzt aber zwischen den Varianten
 
 Wichtig sind dabei die Parameter des Aufrufes:
 
-| Attribut  | Bedeutung                                                                |
-| --------- | ------------------------------------------------------------------------ |
-| `git reset --soft` | uncommit changes, changes are left staged (index).                       |
+| Attribut            | Bedeutung                                                                |
+| ------------------- | ------------------------------------------------------------------------ |
+| `git reset --soft`  | uncommit changes, changes are left staged (index).                       |
 | `git reset --mixed` | (default): uncommit + unstage changes, changes are left in working tree. |
-| `git reset --hard` | uncommit + unstage + delete changes, nothing left.                       |
+| `git reset --hard`  | uncommit + unstage + delete changes, nothing left.                       |
 
 ``` text @ExplainGit.eval
 git commit -m V1
@@ -706,6 +707,62 @@ git commit -m V2
 git commit -m V3
 ```
 
+**Variante 3 - Rebase**
+
+Ein sehr mächtiges Werkzeug ist der interaktive Modus von `git rebase`. Damit kann die
+Geschichte neugeschrieben werden, wie es die git Dokumentation beschreibt. Im Grund können Sie damit Ihre Versionsgeschichte "aufräumen". Einzelne Commits umbenennen, löschen oder fusionieren. Dafür besteht ein eigenes Interface, dass Sie mit dem folgenden Befehl aufrufen können:
+
+```console
+▶git rebase -i HEAD~5
+
+pick d2a06e4 Update main.yml
+pick 78839b0 Reconfigures checkout
+pick f70cfc7 Replaces wildcard by specific filename
+pick 05b76f3 New pandoc command line
+pick c56a779 Corrects md filename
+
+# Rebase a3b07d4..c56a779 onto a3b07d4 (5 commands)
+#
+# Commands:
+# p, pick = use commit
+# r, reword = use commit, but edit the commit message
+# e, edit = use commit, but stop for amending
+# s, squash = use commit, but meld into previous commit
+# f, fixup = like "squash", but discard this commit's log message
+# x, exec = run command (the rest of the line) using shell
+# d, drop = remove commit
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+# Note that empty commits are commented out
+```
+
+Als Anwendungsfall habe ich mir meine Aktivitäten im Kontext einiger Experimente
+mit den GitHub Actions, die im nächsten Abschnitt kurz eingeführt werden, ausgesucht.
+Schauen wir zunächst auf den ursprünglichen Stand. Alle Experimente drehten sich darum, eine Datei anzupassen und dann auf dem Server die Korrektheit zu testen.
+
+```console
+▶
+c56a779 - Sebastian Zug, 7 hours ago : Corrects md filename
+05b76f3 - Sebastian Zug, 7 hours ago : New pandoc command line
+f70cfc7 - Sebastian Zug, 8 hours ago : Replaces wildcard by specific filename
+78839b0 - Sebastian Zug, 21 hours ago : Reconfigures checkout
+d2a06e4 - Sebastian Zug, 22 hours ago : Update main.yml
+...
+aa04051 - Sebastian Zug, 23 hours ago : Restart action activities
+4b22d12 - Sebastian Zug, 23 hours ago : Deleting old state
+64075cc - Sebastian Zug, 24 hours ago : Update main.yml
+01f341b - Sebastian Zug, 24 hours ago : Missing links added
+...
+29c8e68 - Sebastian Zug, 11 days ago : Update README.md
+```
+
+Unser lokaler Branch liegt nach dem Löschen aber um einiges hinter dem auf GitHub entsprechend müssen wir mit `git push --force` das Überschreiben erzwingen.
+
 ### Was kann schief gehen?
 
 1. **Ups, die Datei sollte im Commit nicht dabei sein (Unstage)**
@@ -719,6 +776,11 @@ git add *
 git reset
 ```
 
+``` text @ExplainGit.eval
+git commit -m V1
+git commit -m V2
+git commit -m V3
+```
 
 2. **Ups, eine Datei in der Version vergessen! (Unvollständiger Commit)**
 
@@ -733,76 +795,95 @@ git commit --amend --no-edit
 ... Hinzufügen der Datei ohne die Log Nachricht anzupassen
 ```
 
-###  Verteiltes Versionsmanagement
+### Ich sehe was, was Du nicht siehst ...
 
-_Einfaches Editieren_: Sie klonen das gesamte Repository, dass sich auf dem "Server-Rechner" befindet. Damit haben Sie eine vollständige Kopie aller Versionen in Ihrem Working Directory. Wenn wir annehmen, dass keine branches im Repository bestehen, dann können Sie direkt auf der Ihrer Arbeitskopie arbeiten und diese verändern. Danach generieren Sie einen Snappshot des Arbeitsstandes _Staging_. Ihre Version ist als relevant markiert und kann im lokalen Repository als neuer Eintrag abgelegt werden. Vielleicht wollen sie Ihren Algorithmus noch weiterentwickeln und speichern zu einem späteren Zeitpunk eine weitere Version. All diese Vorgänge betreffen aber zunächst nur Ihre Kopie, ein anderer Mitstreiter in diesem Repository kann darauf erst zurückgreifen, wenn Sie das Ganze an den Server übermittelt haben.
+Häufig bettet ein Projekt Dateien ein, die Git nicht automatisch hinzufügen oder schon gar nicht als „nicht versioniert“ anzeigen soll. Beispiele dafür sind automatisch generierte Dateien, wie Log-Dateien oder die Binaries, die von Ihrem Build-System erzeugt wurden. In solchen Fällen können Sie die Datei .gitignore erstellen, die eine Liste mit Vergleichsmustern enthält. Hier ist eine .gitignore Beispieldatei:
 
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
-```ascii
-                     lokal                           remote
-  ---------------------------------------------  --------------
-  Arbeitskopie     "Staging"        Lokales          Remote
-                                   Repository      Repository
-                       |               |                 |
-                       |               |    git clone    |
-                       |               |<----------------|
-       +-+- - - - - - -|- - - - - - - -|                 |
-       | | Änderungen  |               |                 |
-       | |             |               |                 |
-       +-+             |               |                 |
-        |   git add    |               |                 |
-        |------------->|  git commit   |                 |
-        |              |-------------->|                 |
-       +-+             |               |                 |
-       | | weitere     |               |                 |
-       | | Änderungen  |               |                 |
-       +-+             |               |                 |
-        |   git add    |               |                 |
-        +------------->|  git commit   |                 |
-                       |-------------->|   git push      |
-                       |               |---------------->|
-                       |               |                 |                     .
+```console     gitignoreExample
+# ignore all .a files
+*.a
+
+# but do track lib.a, even though you're ignoring .a files above
+!lib.a
+
+# only ignore the TODO file in the current directory, not subdir/TODO
+/TODO
+
+# ignore all files in any directory named build
+build/
+
+# ignore doc/notes.txt, but not doc/server/arch.txt
+doc/*.txt
+
+# ignore all .pdf files in the doc/ directory and any of its subdirectories
+doc/**/*.pdf
 ```
 
+Unter [gitIgnoreBeispiele](https://github.com/github/gitignore) gibt es eine ganze Sammlung von Konfigurationen für bestimmte Projekttypen.
 
-_Kooperatives Arbeiten:_ Nehmen wir nun an, dass Ihr Kollege in dieser Zeit selbst das Remote Repository fortgeschrieben hat. In diesem Fall bekommen Sie bei Ihrem `push` eine Fehlermeldung, die sie auf die neuere Version hinweist. Nun "ziehen" Sie sich den aktuellen
-Stand in Ihr Repository und kombinieren die Änderungen. Sofern keine Konflikte
-entstehen, wird daraus ein neuer Commit generiert, den Sie dann mit Ihren Anpassungen an das Remote-Repository senden.
+## Kommandozeile oder keine Kommandozeile
 
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
-```ascii
-                     lokal                           remote
-  ---------------------------------------------  --------------
-  Arbeitskopie     "Staging"        Lokales          Remote
-                                   Repository      Repository
-                       |               |                 |
-                       |               |    git clone    |
-                       |               |<----------------|
-       +-+- - - - - - -|- - - - - - - -|                 |
-       | | Änderungen  |               |                 |
-       | |             |               |                 |
-       +-+             |               |                 |
-        |   git add    |               |                 |
-        |------------->|  git commit   |                 |
-        |              |-------------->|                 |
-       +-+             |               |                 |
-       | | weitere     |               |                 |
-       | | Änderungen  |               |                 |   git push
-       +-+             |               |                 |<-------------
-        |   git add    |               |                 |
-        +------------->|  git commit   |                 |
-                       |-------------->|   git push      |
-                       |               |---------------X |
-                       |               |   git fetch     |
-                       |               |<--------------- |     git fetch
-                       |               |   git merge     |   + git merge
-                       |               |<--------------- |   = git pull
-                       |               |   git push      |
-                       |               |---------------->|                   .
+Die Editoren unterstützen den Nutzer bei der Arbeit, in dem Sie die eigentlichen Commandozeilentools rund um die Arbeitsfläche anordnen.
+
+![ScreenShot](./img/12_VersionsverwaltungII/ArbeitmitGitImEditor.png)<!-- width="100%" -->
+
+| Bereich | Bedeutung                                                                                                                                                                                                                                  |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| A       | Darstellung der Dateien im Ordner, wobei der Typ über die führenden Symbole und der Zustand über die Farbgebung hervorgehoben wird (grün untracked Files, orange getrackte Dateien mit Änderungen).                                        |
+| B       | Hier erfolgt die Darstellung der `Staged Changes` also der registrierten Änderungen. Offenbar ist die Datei `02_Versionsverwaltung.md` verändert worden, ohne dass ein entsprechendes `git add 02_Versionsverwaltung.md` ausgeführt wurde. |
+| C       | Die Übersicht der erfassten Änderngen mit einem `stage` Status übernimmt die aus der darüber geführten Liste, wenn der Befehlt ausgeführt wurde. Offenbar ist dies fr `.gitignore` der Fall.                                               |
+| D       | Die Übertragung ins lokale Repository wird gerade vorbereitet. Die Commit-Nachricht ist bereits eingegeben. Der Button zeigt den zugehörigen Branch.                                                                                       |
+|         | G                                                 An dieser Stelle wird ein kurzes Log der letzten Commits ausgeben. Dies ermöglich das effiziente Durchsuchen der nach bestimmten Veränderungen.                                                                                                                                                                                          |
+
+Die identischen Informationen lassen sich auch auf der Kommandozeile einsehen:
+
+```console
+▶git status
+On branch SoSe2020dev
+Your branch is up to date with 'origin/SoSe2020dev'.
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        modified:   .gitignore
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+
+        modified:   02_Versionsverwaltung.md
+        deleted:    03_ContinuousIntegration.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        03_VersionsverwaltungII.md
+        code/
+        img/03_VersionsverwaltungII/
+```
+
+```console
+▶git log
+commit d7603554c958c478f1ec600bd3ccea437d91ae9a (HEAD -> SoSe2020dev, origin/SoSe2020dev)
+Author: Sebastian Zug <Sebastian.Zug@informatik.tu-freiberg.de>
+Date:   Thu Apr 9 13:16:38 2020 +0200
+
+    First version of L3
+
+commit 39fc168222f4c7a7d062adcaccff17fe34bccbe3
+Author: Sebastian Zug <Sebastian.Zug@informatik.tu-freiberg.de>
+Date:   Thu Apr 9 13:16:12 2020 +0200
+
+    First version of L02
+
+commit 350c127c7dfbc61a81edc8bd148f605ee681a07a
+
+Author: Sebastian Zug <Sebastian.Zug@informatik.tu-freiberg.de>
+Date:   Tue Apr 7 07:01:02 2020 +0200
+
+    Final version of L1
+....
 ```
 
 ## Aufgaben
