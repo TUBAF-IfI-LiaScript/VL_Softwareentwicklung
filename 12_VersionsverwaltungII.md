@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich & `Lesestein`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.1
+version:  1.0.0
 language: de
 narrator: Deutsch Female
 
