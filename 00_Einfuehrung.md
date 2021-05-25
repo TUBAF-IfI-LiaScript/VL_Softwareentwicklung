@@ -1,117 +1,119 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich
-email:    zug@ovgu.de   & andre.dietrich@ovgu.de
-version:  0.0.1
+author:   Sebastian Zug, Galina Rudolf, André Dietrich, Fritz Apelt, `KoKoKotlin`
+email:    sebastian.zug@informatik.tu-freiberg.de
+
+version:  1.0.2
 language: de
 narrator: Deutsch Female
+comment:  Motivation der Vorlesung Softwareentwicklung
+logo:     https://liascript.github.io/img/bg-showcase-1.jpg
+icon:     https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_Freiberg.svg
 
 import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
-        https://raw.githubusercontent.com/liaTemplates/DigiSim/master/README.md
         https://github.com/liascript/CodeRunner
 
-icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_Freiberg.svg
 -->
+
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md)
+
 
 # Einführung
 
-**TU Bergakademie Freiberg - Sommersemester 2021**
+| Parameter                | Kursinformationen                                                                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
+| **Semester**                         |   `Sommersemester 2021`                                                                                                                                                                                         |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
+| **Inhalte:**             | `Motivation der Vorlesung "Softwareentwicklung" und Beschreibung der Organisation der Veranstaltung`                                                                                       |
+| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md) |
+| **Autoren**              | @author                                                                                                                                                                              |
 
-Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
-
-[https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md)
-
-Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 00](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md)
+![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
 
-```csharp    HelloWorld.cs
-using System;
-
-namespace Rextester
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            Console.WriteLine("Glück auf!");
-        }
-    }
-}
-```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
-
 ## Zielstellung der Veranstaltung
 
-                                   {{0-1}}
-*******************************************************************************
+![Gif einer Fahrradtour über eine Berg](https://media.giphy.com/media/3oKIP9M5hm5YxsG58I/giphy.gif)<!--style="width: 100%; max-width: 80vh;"-->
 
-Was steht im Modulhandbuch über diesen Kurs?
 
-**Qualifikationsziele /Kompetenzen:**
+### Qualifikationsziele / Kompetenzen
 
-_Studierende sollen_
+Studierende sollen ...
 
-+ _die Konzepte objektorientierten und interaktiven Programmierung verstehen,_
-+ _die Syntax und Semantik einer objektorientierten Programmiersprache beherrschen um Probleme kollaborativ bei verteilter Verantwortlichkeit von Klassen von einem Computer lösen lassen,_
-+ _in der Lage sein, interaktive Windowsprogramme unter Verwendung einer objektorientierten Klassenbibliothek zu erstellen._
+- die Konzepte objektorientierten und interaktiven Programmierung verstehen,
+
+- die Syntax und Semantik einer objektorientierten Programmiersprache
+  beherrschen um Probleme kollaborativ bei verteilter Verantwortlichkeit von
+  Klassen von einem Computer lösen lassen,
+
+- in der Lage sein, interaktive Windowsprogramme unter Verwendung einer
+  objektorientierten Klassenbibliothek zu erstellen.
 
 [Auszug aus dem Modulhandbuch 2020]
 
-*******************************************************************************
 
-                                    {{1-2}}
-*******************************************************************************
+### Zielstellung der Veranstaltung
 
-**Zielstellung der Veranstaltung**
+> _Wir lernen effizient guten Code zu schreiben._
 
-| Genereller Anspruch                                                                             | Spezifischer Anspruch                                                              |
-| ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| + Verstehen verschiedener Programmierparadigmen UNABHÄNGIG von der konkreten Programmiersprache | + Objektorientierte (und funktionale) Programmierung am Beispiel von C# |
-| + praktische Einführung in die methodische Softwareentwicklung                                  | + Arbeit mit ausgewählten UML Diagrammen und Entwurfsmustern                                                                                   |
-| + Grundlagen der kooperativ/kollaborative Programmierung und Projektentwicklung                                                   | + Verwendung von Projektmanagementtools und einer Versionsverwaltung für den Softwareentwicklungsprozess                                                                                  |
+| Genereller Anspruch                                                                           | Spezifischer Anspruch                                                                                  |
+| --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Verstehen verschiedener Programmierparadigmen UNABHÄNGIG von der konkreten Programmiersprache | Objektorientierte (und funktionale) Programmierung am Beispiel von C#                                  |
+| praktische Einführung in die methodische Softwareentwicklung                                  | Arbeit mit ausgewählten UML Diagrammen und Entwurfsmustern                                             |
+| Grundlagen der kooperativ/kollaborative Programmierung und Projektentwicklung                 | Verwendung von Projektmanagementtools und einer Versionsverwaltung für den Softwareentwicklungsprozess |
 
-> **Merke:** "Wir lernen effizient guten Code zu schreiben."
 
-*******************************************************************************
+### Wozu brauche ich das?
 
-                                  {{2-3}}
-*******************************************************************************
+> Anhand der Veranstaltung entwickeln Sie ein "Gefühl" für guten und schlechten
+> Code und hinterfragen den Softwareentwicklungsprozess.
 
-**Und wozu brauche ich das?**
+      {{1}}
+********************************************************************************
 
-Anhand der Veranstaltung entwickeln Sie ein "Gefühl" für guten und schlechten
-Code und hinterfragen den Softwareentwicklungsprozess.
+**Beispiel 1: Mariner 1 Steuerprogramm-Bug (1962)**
 
-**Beispiel 1**
+      {{1}}
+![An Atlas-Agena 5 carrying the Mariner 1 spacecraft](./img/00_Einleitung/Atlas_Agena_with_Mariner_1.jpg)[^Atlas-Agena]
 
+    --{{1}}--
 Mariner 1 ging beim Start am 22. Juli 1962 durch ein fehlerhaftes Steuerprogramm verloren, als die Trägerrakete vom Kurs abkam und 293 Sekunden nach dem Start gesprengt werden musste. Ein Entwickler hatte einen Überstrich in der handgeschriebenen Spezifikation eines Programms zur Steuerung des Antriebs übersehen und dadurch statt geglätteter Messwerte Rohdaten verwendet, was zu einer fehlerhaften und potenziell gefährlichen Fehlsteuerung des Antriebs führte.
 
 > **Potentieller Lösungsansatz**: Testen & Dokumentation
 
-**Beispiel 2**
+********************************************************************************
 
-Das Erfassungssystem für die Autobahngebühren für Lastkraftwagen sollte ursprünglich zum 31. August 2003 gestartet werden. Nachdem die organisatorischen und technischen Mängel offensichtlich geworden waren, erfolgte eine mehrfache Restrukturierung. Seit 1. Januar 2006 läuft das System, mit einer Verzögerung von über zwei Jahren, mit der vollen Funktionalität.
+      {{2}}
+**Beispiel 2: Toll-Collect On-Board-Units (2003)**
 
-Eine Baustelle waren die On-Board-Units (OBU), diese wurden zunächst nicht in ausreichender Stückzahl geliefert und eingebaut werden, da Schwierigkeiten mit der komplexen Software der Geräte bestanden. Die On-Board-Units
+    --{{2}}--
+Das Erfassungssystem für die Autobahngebühren für Lastkraftwagen sollte ursprünglich zum 31. August 2003 gestartet werden. Nachdem die organisatorischen und technischen Mängel offensichtlich geworden waren, erfolgte eine mehrfache Restrukturierung. Seit 1. Januar 2006 läuft das System, mit einer Verzögerung von über zwei Jahren, mit der vollen Funktionalität. Eine Baustelle war die On-Board-Units (OBU), diese konnte zunächst nicht in ausreichender Stückzahl geliefert und eingebaut werden, da Schwierigkeiten mit der komplexen Software der Geräte bestanden.
 
-+ reagierten nicht auf Eingaben
-+ ließen sich nicht ausschalten
-+ schalteten sich grundlos aus
-+ zeigten unterschiedliche Mauthöhen auf identischen Strecken an
-+ wiesen Autobahnstrecken fehlerhaft als mautfrei/mautpflichtig aus
+      {{2}}
+********************************************************************************
+
+Die On-Board-Units des Systems
+
+- reagierten nicht auf Eingaben
+- ließen sich nicht ausschalten
+- schalteten sich grundlos aus
+- zeigten unterschiedliche Mauthöhen auf identischen Strecken an
+- wiesen Autobahnstrecken fehlerhaft als mautfrei/mautpflichtig aus
 
 > **Potentieller Lösungsansatz**: Testen auf Integrationsebene, Projektkoordination
 
 *******************************************************************************
 
+[^Atlas-Agena]: wikimedia, Autor: NASA, [Link](https://de.wikipedia.org/wiki/Datei:Atlas_Agena_with_Mariner_1.jpg)
+
 ## Organisatorisches
 
-                                  {{0-1}}
-*******************************************************************************
+![Animation einer Ordnung auf dem Schreibtisch](https://media.giphy.com/media/uMaTkVdfhzlemBQD3g/giphy.gif)<!--style="width: 100%; max-width: 80vh;"-->
 
-**Dozenten**
+
+### Dozenten
 
 | Name            | Email                                                  |
 |:--------------- |:------------------------------------------------------ |
@@ -121,14 +123,12 @@ Eine Baustelle waren die On-Board-Units (OBU), diese wurden zunächst nicht in a
 | Nico Sonack     | nico.sonack@student.tu-freiberg.de                     |
 | Baldur Paulwitz | baldur-heinrich-eckart.paulwitz@student.tu-freiberg.de |
 
-*******************************************************************************
 
-                                  {{1-2}}
-*******************************************************************************
+### Ablauf
 
-**Ablauf**
-
-Jetzt wird es etwas komplizierter ... die Veranstaltung kombiniert nämlich zwei Vorlesungen:
+    --{{0}}--
+Jetzt wird es etwas komplizierter ... die Veranstaltung kombiniert nämlich zwei
+Vorlesungen:
 
 <!--data-type="none"-->
 |                 | _Softwareentwicklung (SEW)_            | _Einführung in die Softwareentwicklung (EiS)_ |
@@ -139,231 +139,271 @@ Jetzt wird es etwas komplizierter ... die Veranstaltung kombiniert nämlich zwei
 | Übungen         | ab Mai 2 x wöchentlich           | ab Mai 8 Übungen (nominell 14 tägig)    |
 | Prüfungsform    | Klausur oder Projekt             | maschinenbauspezifisches Software-Projekt (im Wintersemester 2021/22)                                        |
 
-> **Ermunterung an unsere EiS-Hörer**: Nehmen Sie an der ganzen Vorlesungsreihe teil. Den Einstieg haben Sie ja schon gelegt ...
+> **Ermunterung an unsere EiS-Hörer**: Nehmen Sie an der ganzen Vorlesungsreihe
+> teil. Den Einstieg haben Sie ja schon gelegt ...
 
-*******************************************************************************
 
-                                  {{2-3}}
-*******************************************************************************
-
-**Struktur der Vorlesungen**
+### Struktur der Vorlesungen
 
 <!--data-type="none"-->
-| Woche | Tag       | Inhalt der Vorlesung                              | Bemerkung            |
-|:----- | --------- |:------------------------------------------------- | -------------------- |
-| 1     | 5. April  | _Ostermontag_                                     |                      |
-|       | 6. April  | Organisation, Einführung von GitHub und LiaScript |                      |
-| 2     | 12. April | Softwareentwicklung als Prozess                   |                      |
-|       | 13. April | Konzepte von Dotnet und C#                        |                      |
-| 3     | 19. April | Elemente der Sprache C# (Datentypen)              |                      |
-|       | 20. April | Elemente der Sprache C# (Forts. Datentypen)       |                      |
-| 4     | 26. April | Elemente der Sprache C# (Ein-/Ausgaben)           |                      |
-|       | 27. April | Programmfluss und Funktionen                      |                      |
-| 5     | 3. Mai    | Strukturen / Konzepte der OOP                     | Beginn Übungen       |
-|       | 4. Mai    | Säulen Objektorientierter Programmierung          |                      |
-| 6     | 10. Mai   | Klassenelemente in C#  / Vererbung                |                      |
-|       | 11. Mai   | Klassenelemente in C#  / Vererbung                |                      |
-| 7     | 17. Mai   | Versionsmanagement im Softwareentwicklungsprozess |                      |
-|       | 18. Mai   | Git und Continuous integration in GitHub          |                      |
-| 8     | 24. Mai   | _Pfingstmontag_                                   |                      |
-|       | 25. Mai   | Interfaces                                        |                      |
-| 9     | 31. Mai   | UML Konzepte                                      | Ende EiS-Vorlesungen |
-|       | 1. Juni   | ausgewählten UML Diagrammtypen                    |                      |
-| 10    | 7. Juni   | UML Anwendungsbeispiel                            |                      |
-|       | 8. Juni   | Testen                                            |                      |
-| 11    | 14. Juni  | Dokumentation                                     |                      |
-|       | 15. Juni  | Build Toolchains und ihr Einsatz                  |                      |
-| 12    | 21. Juni  | Generics                                          |                      |
-|       | 22. Juni  | Container                                         |                      |
-| 13    | 28. Juni  | Delegaten                                         | ?                    |
-|       | 29. Juni  | Events                                            | ?                    |
-| 14    | 5. Juli   | Threadkonzepte in C#                              | ?                    |
-|       | 6. Juli   | Taskmodell                                        | ?                    |
-| 15    | 12. Juli  | Language Integrated Query                         | ?                    |
-|       | 13. Juli  |                                                   | ?                    |
+| Woche |       Tag | Inhalt der Vorlesung                              | Bemerkung            |
+| -----:| ---------:|:------------------------------------------------- | -------------------- |
+|     1 |  5. April | _Ostermontag_                                     |                      |
+|     1 |  6. April | Organisation, Einführung von GitHub und LiaScript |                      |
+|     2 | 12. April | Softwareentwicklung als Prozess                   |                      |
+|     2 | 13. April | Konzepte von Dotnet und C#                        |                      |
+|     3 | 19. April | Elemente der Sprache C# (Datentypen)              |                      |
+|     3 | 20. April | Elemente der Sprache C# (Forts. Datentypen)       |                      |
+|     4 | 26. April | Elemente der Sprache C# (Ein-/Ausgaben)           |                      |
+|     4 | 27. April | Programmfluss und Funktionen                      |                      |
+|     5 |    3. Mai | Strukturen / Konzepte der OOP                     | Beginn Übungen       |
+|     5 |    4. Mai | Säulen Objektorientierter Programmierung          |                      |
+|     6 |   10. Mai | Klassenelemente in C#  / Vererbung                |                      |
+|     6 |   11. Mai | Klassenelemente in C#  / Vererbung                |                      |
+|     7 |   17. Mai | Versionsmanagement im Softwareentwicklungsprozess |                      |
+|     7 |   18. Mai | Git und Continuous integration in GitHub          |                      |
+|     8 |   24. Mai | _Pfingstmontag_                                   |                      |
+|     8 |   25. Mai | Interfaces                                        |                      |
+|     9 |   31. Mai | UML Konzepte                                      | Ende EiS-Vorlesungen |
+|     9 |   1. Juni | ausgewählten UML Diagrammtypen                    |                      |
+|    10 |   7. Juni | UML Anwendungsbeispiel                            |                      |
+|    10 |   8. Juni | Testen                                            |                      |
+|    11 |  14. Juni | Dokumentation                                     |                      |
+|    11 |  15. Juni | Build Toolchains und ihr Einsatz                  |                      |
+|    12 |  21. Juni | Generics                                          |                      |
+|    12 |  22. Juni | Container                                         |                      |
+|    13 |  28. Juni | Delegaten                                         | ?                    |
+|    13 |  29. Juni | Events                                            | ?                    |
+|    14 |   5. Juli | Threadkonzepte in C#                              | ?                    |
+|    14 |   6. Juli | Taskmodell                                        | ?                    |
+|    15 |  12. Juli | Language Integrated Query                         | ?                    |
+|    15 |  13. Juli |                                                   | ?                    |
 
-> **Frage:** Wie steht es um Ihr Hintergrundwissen?
 
-*******************************************************************************
+### Durchführung
 
-                                  {{3-4}}
-*******************************************************************************
+     {{0-1}}
+************************************************************************
+Als Plattform für die Online Vorlesung nutzen wir eine lokale Instanz von
+BigBlueButton. Alle Vorlesungen werden aufgezeichnet und stehen im Nachgang zur
+Verfügung. Den zugehörigen Link finden Sie auf der OPAL Webseite des Kurses.
 
-**Durchführung der Vorlesungen**
 
-Als Plattform für die Online Vorlesung nutzen wir eine lokale Instanz von BigBlueButton. Alle Vorlesungen werden aufgezeichnet und stehen im Nachgang zur Verfügung. Den zugehörigen Link finden Sie auf der OPAL Webseite des Kurses.
+- Montags, 14:00 - 15:30
+- Dienstags, 7:30 - 9:00
 
-+ Montags, 14:00 - 15:30
-+ Dienstags, 7:30 - 9:00
 
-Die Materialien der Vorlesung sind als Open-Educational-Ressources konzipiert und stehen unter Github bereit.
+Die Materialien der Vorlesung sind als Open-Educational-Ressources konzipiert
+und stehen unter Github bereit.
 
-> Wie können Sie sich einbringen?
-> * __Allgemeine theoretische Fragen/Antworten__ ... Dabei können Sie sich über github/ das Opal-Forum in die Diskussion einbringen.
-> * __Rückmeldungen/Verbesserungsvorschläge zu den Vorlesungsmaterialien__ ... *"Das versteht doch keine Mensch! Ich würde vorschlagen ..."* ... dann korrigieren Sie uns. Alle Materialien sind Open Source. Senden Sie mir einen Pull-Request und werden Sie Mitautor.
-
-*******************************************************************************
-
-                                  {{4-5}}
-*******************************************************************************
-
-**Durchführung der Übungen**
-
-Die Übungen bestehen aus selbständig zu bearbeitenden Aufgaben, wobei einzelne Lösungen in Videokonferenzen besprochen werden. Wir werden die Übungsaufgaben über die Plattform GitHub abwickeln.
-
-Die Übungen beginnen in der Woche zum 3. Mai! Dafür werden wir Aufgaben vorbereiten, mit denen die Inhalte der Vorlesung vertieft werden. Wir motivieren Sie sich dafür ein Gruppen von 2 Studierenden zu organisieren.
-
-Wie bringen Sie sich ein:
 
 > Wie können Sie sich einbringen?
-> * __Allgemeine praktische Fragen/Antworten__ ... in den genannten Foren bzw. in den Übungsveranstaltungen
+>
+> * __Allgemeine theoretische Fragen/Antworten__ ... Dabei können Sie sich über
+>   github/ das Opal-Forum in die Diskussion einbringen.
+>
+> * __Rückmeldungen/Verbesserungsvorschläge zu den Vorlesungsmaterialien__ ...
+>   _"Das versteht doch keine Mensch! Ich würde vorschlagen ..."_ ...
+>   dann korrigieren Sie uns. Alle Materialien sind Open-Source. Senden Sie mir
+>   einen Pull-Request und werden Sie Mitautor.
+
+************************************************************************
+
+     {{1-2}}
+************************************************************************
+
+Die Übungen bestehen aus selbständig zu bearbeitenden Aufgaben, wobei einzelne
+Lösungen in Videokonferenzen besprochen werden. Wir werden die Übungsaufgaben
+über die Plattform GitHub abwickeln.
+
+> Wie können Sie sich einbringen?
+>
+> * __Allgemeine praktische Fragen/Antworten__ ... in den genannten Foren bzw.
+>   in den Übungsveranstaltungen
+>
 > * __Eigene Lösungen__ ... Präsentation der Implementierungen in den Übungen
-> * __Individuelle Fragen__ ... an die Übungsleiter per Mail oder in einer individuellen Session
+>
+> * __Individuelle Fragen__ ... an die Übungsleiter per Mail oder in einer
+>   individuellen Session
 
-<!--data-type="none"-->
-| Index | C#     | GitHub | Teamarbeit | Inhalte / Teilaufgaben                                                     | Woche |
-| ----- | ------ | ------ | ---------- | -------------------------------------------------------------------------- | ----- |
-| 1     | Basics | nein   | nein       | Toolchain, Entwicklungsfluss, Datentypen, Fehler, Ausdrücke, Programmfluss | 5-6   |
-| 2     | -      | ja     | ja         | Github am Beispiel von Markdown                                            | 7-8   |
-| 3     | OOP    | ja     | ja         | Einführungsbeispiel OOP,                                                   | 9     |
-|       |        |        |            | *Anwendungsbeispiel:* Computersimulation                                   |       |
-| 4     | OOP    | ja     | ja         | Vererbung, virtuelle Methoden, Indexer, Überladene Operatoren,             | 10-11 |
-|       |        |        |            | *Anwendungsbeispiel:*  Smartphone (Entwurf mit UML)                        |       |
-| 5     | OOP    | ja     | ja         | Vererbung, abstract, virtuell, Generics                                    | 12-13 |
-|       |        |        |            | *Anwendungsbeispiel:* Zoo                                                  |       |
-| 6     | OOP    | ja     | ja         | Genererische Collections, Delegaten, Events                                | 14-15 |
-|       |        |        |            | *Anwendungsbeispiel:* ???????                                              |       |
-
+Die Übungen beginnen in der Woche zum 3. Mai! Dafür werden wir Aufgaben
+vorbereiten, mit denen die Inhalte der Vorlesung vertieft werden. Wir motivieren
+Sie sich dafür ein Gruppen von 2 Studierenden zu organisieren.
 
 <!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 815px;" -->
-```    ascii
-
-                   .-.       .-.*   
- Einführung C#    ( 1 )     ( 2 ) Einführung Git/ GitHub      
+``` ascii
+                   .-.       .-.
+ Einführung C#    (0-2)     ( 3 ) Einführung Git/ GitHub
                    '-'       '-'  Teamarbeit
                      \       /
                       \     /
-                       v   v                   
-                        .-.*
-                       ( 3 )  Einführung Objektorientierte Programmierung
-                        '-'     
-                         |     
-                         v     
-                        .-.*
-  Alle Teilnehmer      ( 4 )  Basiselemente Objektorientierte Programmierung
-                        '-'       
- ::::::::::::::::::::::::|:::::::::::::::::::::::::::::::::::::::::::         
+                       v   v
+                        .-.
+                       ( 4 )  Objektorientierte Programmierung
+                        '-'
+                         |
                          v
-  Informatiker          .-.*
-  Mathematiker         ( 5 )  Erweiterte OOP Konzepte, Generics
-                        '-'   Entwurfsmuster  
-                         |     
-                         v     
-                        .-.*
-                       ( 6 )  Collections, Delegaten, Events
-                        '-'       
+                        .-.
+  Alle Teilnehmer      ( 5 )  Basiselemente Objektorientierte Programmierung
+                        '-'
+ ::::::::::::::::::::::::|:::::::::::::::::::::::::::::::::::::::::::
+                         v
+  Informatiker          .-.
+  Mathematiker         ( 6 )  Erweiterte OOP Konzepte, Generics
+                        '-'   Entwurfsmuster
+                         |
+                         v
+                        .-.
+                       ( 7 )  Collections, Delegaten, Events
+                        '-'
 ```
 
-Obwohl Einmütigkeit dazu besteht, dass kooperative Arbeit für Ingenieure Grundlage der täglichen Arbeitswelt ist, bleibt die Wissensvermittlung im Rahmen der Ausbildung nahezu aus:
+<!--data-type="none"-->
+| Index | C#     | GitHub | Teamarbeit | Inhalte / Teilaufgaben                                         | Woche |
+| ----- | ------ | ------ | ---------- | -------------------------------------------------------------- |:-----:|
+| 0     | Basics | nein   | nein       | Toolchain, Datentypen, Fehler, Ausdrücke,                      |   5   |
+| 1     |        |        |            | Kontrollfluss, Arrays                                          |   6   |
+| 2     |        |        |            | static Funktionen, Klasse und Struktur, Nullables              |   7   |
+| 3     | -      | ja     | ja         | Github am Beispiel von Markdown                                |   8   |
+| 4     | OOP    | ja     | ja         | Einführungsbeispiel OOP,                                       |   9   |
+|       |        |        |            | *Anwendungsbeispiel:* Computersimulation                       |       |
+| 5     | OOP    | ja     | ja         | Vererbung, virtuelle Methoden, Indexer, Überladene Operatoren, | 10-11 |
+|       |        |        |            | *Anwendungsbeispiel:*  Smartphone (Entwurf mit UML)            |       |
+| 6     | OOP    | ja     | ja         | Vererbung, abstract, virtuell, Generics                        | 12-13 |
+|       |        |        |            | *Anwendungsbeispiel:* Zoo                                      |       |
+| 7     | OOP    | ja     | ja         | Genererische Collections, Delegaten, Events                    | 14-15 |
+|       |        |        |            | *Anwendungsbeispiel:* ???????                                  |       |
 
-_Lösen Sie folgende Aufgabe mit Ihrem Team: ... _
+Obwohl Einstimmigkeit darüber besteht, dass kooperative Arbeit für Ingenieure
+Grundlage der täglichen Arbeitswelt ist, bleibt die Wissensvermittlung im Rahmen
+der Ausbildung nahezu aus.
+_Deshalb, Lösen Sie die folgenden Aufgaben mit Ihrem Team: ... _
 
-> **Spezifisches Ziel:** Wir wollen Sie für die Konzepte und Werkzeuge der kollaborativen Arbeit bei der Softwareentwicklung "sensibilisieren".
+> **Spezifisches Ziel:** Wir wollen Sie für die Konzepte und Werkzeuge der
+> kollaborativen Arbeit bei der Softwareentwicklung "sensibilisieren".
+>
+> - Wer definiert die Feature, die unsere Lösung ausmachen?
+> - Wie behalten wir bei synchronen Codeänderungen der Überblick?
+> - Welchen Status hat die Erfüllung der Aufgabe X erreicht?
+> - Wie können wir sicherstellen, dass Code in jedem Fall kompiliert und Grundfunktionalitäten korrekt ausführt?
+> - ...
 
-+ Wer definiert die Feature, die unsere Lösung ausmachen?
-+ Wie behalten wir bei synchronen Codeänderungen der Überblick?
-+ Welchen Status hat die Erfüllung der Aufgabe X erreicht?
-+ Wie können wir sicherstellen, dass Code in jedem Fall kompiliert und Grundfunktionalitäten korrekt ausführt?
-+ ...
+************************************************************************
 
-*******************************************************************************
+### Prüfungen
 
-                                  {{5-6}}
-*******************************************************************************
+In der Klausur werden neben den Programmierfähigkeiten und dem konzeptionellen
+Verständnis auch die Werkzeuge der Softwareentwicklung adressiert!
 
-**Prüfungen**
+- **Softwareentwicklung:**
+  Konventionelle Klausur / Programmieraufgabe in Zweier-Team
 
-+ Softwareentwicklung - Konventionelle Klausur / Programmieraufgabe in Zweier-Team
-+ Einführung in die Softwareentwicklung - Teamprojekt und Projektpräsentationen
-
-> **In der Klausur werden neben den Programmierfähigkeiten und dem konzeptionellen Verständnis auch die Werkzeuge der Softwareentwicklung adressiert!**
-
-![Klausurergebnisse](./img/00_Einleitung/Klausur2020.png)
+- **Einführung in die Softwareentwicklung:**
+  Teamprojekt und Projektpräsentationen
 
 
+     {{1}}
+![Klausurergebnisse Softwareentwicklung 2020](./img/00_Einleitung/Klausur2020.png)
 
-*******************************************************************************
 
-                                    {{6-7}}
-*******************************************************************************
+### Zeitaufwand und Engagement
 
-**Zeitaufwand und Engagement**
+Mit der Veranstaltung Softwareentwicklung verdienen Sie sich `9 CP`. Eine
+Hochrechnung mit der von der Kultusministerkonferenz vorgegebenen Formel
+`1 CP = 30 Zeitstunden` bedeutet, dass Sie dem Fach im Mittel über dem Semester
+`270 Stunden` widmen sollten ... entsprechend bleibt neben den Vorlesungen und
+Übungen genügend Zeit für die Vor- und Nachbereitung der Lehrveranstaltungen,
+die eigenständige Lösung von Übungsaufgaben sowie die Prüfungsvorbereitung.
 
-Mit der Veranstaltung Softwareentwicklung verdienen Sie sich 9CP. Eine Hochrechnung mit der von der
-Kultusministerkonferenz vorgegebenen Formel 1CP = 30 Zeitstunden bedeutet,
-dass Sie dem Fach im Mittel über dem Semester __270 Stunden__ widmen sollten ...
-entsprechend bleibt neben den Vorlesungen und Übungen genügend Zeit für die
-Vor- und Nachbereitung der
-Lehrveranstaltungen, die eigenständige Lösung von Übungsaufgaben sowie die
-Prüfungsvorbereitung.
 
-*"Erzähle mir und ich vergesse. Zeige mir und ich erinnere. Lass es mich tun und ich verstehe."*
+    {{1}}
+> "Erzähle mir und ich vergesse. Zeige mir und ich erinnere. Lass es mich tun
+> und ich verstehe."
+>
+> -- _(Konfuzius, chin. Phiolsoph 551-479 v. Chr.)_
 
-(Konfuzius, chin. Phiolsoph 551-479 v. Chr.)
 
-**Wie können Sie zum Gelingen der Veranstaltung beitragen**
+    {{2}}
+********************************************************************************
+
+**Wie können Sie zum Gelingen der Veranstaltung beitragen?**
 
 + Stellen Sie Fragen, seinen Sie kommunikativ!
+
 + Geben Sie uns Rückmeldungen in Bezug auf die Geschwindigkeit, Erklärmuster, etc.
+
 + Organisieren Sie sich in *interdisziplinären* Arbeitsgruppen!
-+ Lösen Sie sich von vermeindlichen Grundwahrheiten *"in Python wäre ich drei mal schneller gewesen"*, *"VIM ... mehr Editor braucht kein Mensch!"*!
 
-*******************************************************************************
++ Lösen Sie sich von vermeindlichen Grundwahrheiten:
 
-                                    {{7-8}}
-*******************************************************************************
+  - *"in Python wäre ich drei mal schneller gewesen"*
+  - *"VIM ... mehr Editor braucht kein Mensch!"*
 
-**Literaturhinweise**
+********************************************************************************
 
-Literaturhinweise werden zu verschiedenen Themen als Links oder Referenzen
-in die Unterlagen integriert.
+
+### Literaturhinweise
+
+> Literaturhinweise werden zu verschiedenen Themen als Links oder Referenzen
+> in die Unterlagen integriert.
 
 Es existiert eine Vielzahl kommerzielle Angebote, die aber einzelne Aspekte
 in freien Tutorial vorstellen. In der Regel gibt es keinen geschlossenen Kurs
 sondern erfordert eine individuelle Suche nach spezifischen Inhalten.
 
-| Medium         | Bemerkung                                                       | Links                                                                              |
-| -------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Online Kurse   | Leitfaden von Microsoft für C# aber auch die Werkzeuge          | [Link](https://docs.microsoft.com/de-de/dotnet/csharp/)                            |
-|                | C# Tutorial for Beginners: Learn in 7 Days                      | [Link](https://www.guru99.com/c-sharp-tutorial.html)                               |
-|                | Programmierkonzepte von C#                                      | [Link](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/) |
-| Videotutorials | Umfangreicher C# Kurs mit guten konzeptionellen Anmerkungen     | [Link](https://www.youtube.com/watch?v=M3lqkuZQBcM&t=2160s)                        |
-|                | Einsteigerkurs als Ausgangspunkt für eine Tutorienreihe         | [Link](https://www.youtube.com/watch?v=gfkTfcpWqAY&t=151s)                         |
-| Bücher         | J. Albahari, B. Albahari, "C# 7.0 in a Nutshell", O'Reilly 2017 |                                                                                    |
-|                | H. Mössenböck, "Kompaktkurs C# 7", dpunkt.verlag                                                                |                                                                                    |
-*******************************************************************************
+- **Online-Kurse:**
+
+  + [Leitfaden von Microsoft für C# aber auch die Werkzeuge](https://docs.microsoft.com/de-de/dotnet/csharp/)
+  + [C# Tutorial for Beginners: Learn in 7 Days](https://www.guru99.com/c-sharp-tutorial.html) [englisch]
+  + [Einsteiger Tutorials](https://docs.microsoft.com/de-de/dotnet/csharp/tour-of-csharp/tutorials/) [deutsch]
+  + [Programmierkonzepte von C#](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/)
+
+- **Video-Tutorials:**
+
+  + !?[Umfangreicher C# Kurs mit guten konzeptionellen Anmerkungen](https://www.youtube.com/watch?v=GhQdlIFylQ8)
+  + !?[Einsteigerkurs als Ausgangspunkt für eine Tutorienreihe](https://www.youtube.com/watch?v=gfkTfcpWqAY)
+  + !?[Absoluter Einsteigerkurs](https://www.youtube.com/watch?v=l0aKBziWBH8)
+
+  **Algorithmen**
+  + [Codebeispiele](http://www.rosettacode.org/wiki/Category:Programming_Tasks)
+
+- **Bücher:**
+
+  + [C# 7.0 in a Nutshell - _J. Albahari, B. Albahari, O'Reilly 2017_](https://www.oreilly.com/library/view/c-70-in/9781491987643/)
+  + [Kompaktkurs C# 7 - _H. Mössenböck, dpunkt.verlag_](https://dpunkt.de/produkt/kompaktkurs-c-7/)
+
 
 ## Werkzeuge der Veranstaltung
 
+    --{{0}}--
 Was sind die zentralen Tools unserer Veranstaltung?
 
 * _Vorlesungstool_ -> BigBlueButton [Introduction](https://www.youtube.com/watch?v=uYYnryIM0Uw)
-* _Entwicklungsplattform [GitHub](https://github.com/)_
-* _Beschreibungssprache für Lerninhalte_ [LiaScript](https://liascript.github.io/)
+* _Entwicklungsplattform_ -> [GitHub](https://github.com/)
+* _Beschreibungssprache für Lerninhalte_ -> [LiaScript](https://liascript.github.io/)
 
-### Markdown und LiaScript
 
-                                 {{0-1}}
-****************************************************************************
+### Markdown
+    {{1-2}}
+> Markdown wurde von John Gruber und Aaron Swartz mit dem Ziel entworfen, die
+> Komplexität der Darstellung so weit zu reduzieren, dass schon der Code sehr
+> einfach lesbar ist. Als Auszeichnungselemente werden entsprechend möglichst
+> kompakte Darstellungen genutzt.
 
-Markdown ist eine Auszeichnungssprache für die Gliederung und Formatierung von Texten und anderen Daten. Analog zu HTML oder LaTex werden die Eigenschaften und Organisation von Textelementen (Zeichen, Wörtern, Absätzen) beschrieben. Dazu werden entsprechende "Schlüsselworte", die sogenannten Tags verwandt.
 
-Markdown wurde von John Gruber und Aaron Swartz mit dem Ziel entworfen, die Komplexität der Darstellung so weit zu reduzieren, dass schon der Code sehr einfach lesbar ist. Als Auszeichnungselemente werden entsprechend möglichst kompakte Darstellungen genutzt.
+    --{{1}}--
+Markdown ist eine Auszeichnungssprache für die Gliederung und Formatierung von
+Texten und anderen Daten. Analog zu HTML oder LaTex werden die Eigenschaften und
+Organisation von Textelementen (Zeichen, Wörtern, Absätzen) beschrieben. Dazu
+werden entsprechende "Schlüsselelemente" verwendet um den Text zu strukturieren.
+
+    {{1-2}}
+********************************************************************************
 
 ```markdown HelloWorld.md
 # Überschrift
 
-_eine_ __Hervorhebung__ _in kursiver Umgebung_
+_eine **Hervorhebung** in kursiver Umgebung_
 
 * Punkt 1
 * Punkt 2
@@ -371,35 +411,88 @@ _eine_ __Hervorhebung__ _in kursiver Umgebung_
 Und noch eine Zeile mit einer mathematischen Notation $a=cos(b)$!
 ```
 
-----------------------------------------------------------------------------<h1>Überschrift</h1>
+---
+
+<div id="markdown-example">
+<h1>Überschrift</h1>
 <i>eine <b>Hervorhebung</b> in kursiver Umgebung</i>
 <ul>
-<li>Punkt 1</li>
-<li>Punkt 2</li>
+  <li>Punkt 1</li>
+  <li>Punkt 2</li>
 </ul>
 Und noch eine Zeile mit einer mathematischen Notation $a=cos(b)$!
+</div>
 
-----------------------------------------------------------------------------
+********************************************************************************
 
-Eine gute Einführung zu Markdown finden Sie zum Beispiel unter
+      {{2-3}}
+********************************************************************************
+
+Eine gute Einführung zu Markdown finden Sie zum Beispiel unter:
 
 * [MarkdownGuide](https://www.markdownguide.org/getting-started/)
 * [GitHubMarkdownIntro](https://guides.github.com/features/mastering-markdown/)
 
-Mit einem entsprechenden Editor und einigen Paketen macht das Ganze dann auch Spaß
 
-* Wichtigstes Element ist ein Previewer, der es Ihnen erlaubt "online" die Korrektheit der Eingaben zu prüfen
-* Tools zur Unterstützung komplexerer Eingaben wie zum Beispiel der Tabellen (zum Beispiel für Atom mit [markdown-table-editor](https://atom.io/packages/markdown-table-editor))
+Mit einem entsprechenden Editor und einigen Paketen macht das Ganze dann auch
+Spaß
+
+* Wichtigstes Element ist ein Previewer, der es Ihnen erlaubt "online" die
+  Korrektheit der Eingaben zu prüfen
+* Tools zur Unterstützung komplexerer Eingaben wie zum Beispiel der Tabellen
+  (zum Beispiel für Atom mit [markdown-table-editor](https://atom.io/packages/markdown-table-editor))
 * Visualisierungsmethoden, die schon bei der Eingabe unterstützen
 * Rechtschreibprüfung (!)
 
-****************************************************************************
+********************************************************************************
 
+#### Vergleich mit HTML
 
-                                 {{1-2}}
-****************************************************************************
+    --{{0}}--
+Im Grunde wurde Markdown erfunden um nich umständlich HTML schreiben zu müssen
+und wird zumeist in HTML übersetzt. Das dargestellte Beispiel zeigt den gleichen
+Inhalt wie das Beispiel zuvor, es ist jedoch direkt viel schwerer zu editieren,
+dafür bietet es weit mehr Möglichkeiten als Markdown. Aus diesem Grund erlauben
+die meisten Markdown-Dialekte auch die Nutzung von HTML.
 
-Eine vergleichbare Ausgabe unter LaTex hätte einen deutlich größeren Overhead, gleichzeitig eröffnet das Textsatzsystem (über einzubindende Pakete) aber auch ein wesentlich größeres Spektrum an Möglichkeiten und Features (automatisch erzeugte Numerierungen, komplexe Tabellen, Diagramme), die Markdown nicht umsetzen kann.
+```html HelloWorld.html
+<h1>Überschrift</h1>
+
+<i>eine <b>Hervorhebung</b> in kursiver Umgebung</i>
+
+<ul>
+  <li>Punkt 1</li>
+  <li>Punkt 2</li>
+</ul>
+
+Und noch eine Zeile mit einer mathematischen Notation
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+  <semantics>
+    <mrow>
+      <mi>a</mi>
+      <mo>=</mo>
+      <mi>c</mi>
+      <mi>o</mi>
+      <mi>s</mi>
+      <mo stretchy="false">(</mo>
+      <mi>b</mi>
+      <mo stretchy="false">)</mo>
+    </mrow>
+    <annotation encoding="application/x-tex">
+      a=cos(b)
+    </annotation>
+  </semantics>
+</math>!
+```
+
+#### Vergleich mit LaTex
+
+    --{{0}}--
+Eine vergleichbare Ausgabe unter LaTex hätte einen deutlich größeren Overhead,
+gleichzeitig eröffnet das Textsatzsystem (über einzubindende Pakete) aber auch
+ein wesentlich größeres Spektrum an Möglichkeiten und Features (automatisch
+erzeugte Numerierungen, komplexe Tabellen, Diagramme), die Markdown nicht
+umsetzen kann.
 
 ```latex  latexHelloWorld.tex
 \documentclass[12pt]{article}
@@ -415,32 +508,39 @@ Eine vergleichbare Ausgabe unter LaTex hätte einen deutlich größeren Overhead
 \end{document}
 ```
 
-Das Ergebnis sieht dann wie folgt aus
+Das Ergebnis sieht dann wie folgt aus:
 
-![pdflatexScreenshoot](./img/00_Einleitung/LatexScreenshot.png)<!-- width="70%" -->
+![pdflatexScreenshoot](./img/00_Einleitung/LatexScreenshot.png)
 
-****************************************************************************
+#### **LiaScript**
 
-                                {{2-6}}
-****************************************************************************
+    --{{0}}--
+Das Problem der meisten Markup-Sprachen und vor allem von Markdown ist, dass die
+Inhalte nicht mehr nur für ein statisches Medium (Papier/PDF) geschrieben
+werden. Warum sollte ein Lehrinhalt (vorallem in der Informatik), der vorraning
+am Tablet/Smartphone/Notebook konsumiert wird nicht interaktiv sein?
 
-Allerdings vermisst Markdown trotz seiner Einfachheit einige Features, die
-für die Anwendbarkeit in der (Informatik-)Lehre sprechen:
+       {{0-1}}
+*******************************************************************************
+
+LiaScript erweitert Markdown um interaktive Elemente wie:
 
 * Ausführbarer Code
-* Möglichkeiten zur Visualisierung
-* Quizze Tests und Aufgaben
-* spezifische Tools für die Modellierung Simulation etc.
+* Animationen & Sprachausgaben
+* Visualisierung
+* Quizze & Umfragen
+* Erweiterbarkeit durch JavaScript und Macros
+* ...
 
-****************************************************************************
+*******************************************************************************
 
-                                {{3-4}}
-****************************************************************************
 
-Beispiele:
+           {{1-2}}
+*******************************************************************************
 
-**Generierung von UML Diagrammen mit Hilfe von PlantUML**
+**Einbindung von PlantUML zur Generierung von UML-Diagrammen**
 
+    {{1}}
 ```code Example.plantUML
 @startuml
 
@@ -473,20 +573,20 @@ annotation SuppressWarnings
 ```
 @plantUML.eval(png)
 
-****************************************************************************
+*******************************************************************************
 
-                                {{4-5}}
-****************************************************************************
+                            {{2-3}}
+*******************************************************************************
 
-Beispiele:
 
 **Ausführbarer C# Code**
 
+    --{{2}}--
 Wichtig für uns sind die ausführbaren Code-Blöcke, die ich in der Vorlesung nutze, um Beispielimplementierungen zu evaluieren. Dabei werden zwei Formen unterschieden:
 
 **C# 9 mit dotnet Unterstützung**
 
-```csharp  -Coderunner.cs9
+```csharp  Coderunner.cs9
 using System;
 using System.Collections.Generic;
 using System.Collections;
@@ -519,64 +619,105 @@ foreach(int prime in primes) Console.Write($" {prime}");
 ```
 @LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
+---
+
 **C# 8 mit mono**
 
-```csharp    -HelloWorld.cs
+```csharp    HelloWorld.cs
 using System;
 
-namespace Rextester
+namespace HelloWorld
 {
   public class Program
   {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
-        Console.WriteLine("Glück auf!");
+      Console.WriteLine("Glück auf!");
     }
   }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-> **Frage:** Welche Unterschiede sehen Sie zwischen C#8 und C#9 Code schon jetzt?
+> **Frage:**
+> Welche Unterschiede sehen Sie zwischen C#8 und C#9 Code schon jetzt?
 
-****************************************************************************
+*******************************************************************************
+
+                            {{3-4}}
+*******************************************************************************
+
+** Quellen & Tools**
+
+* Das Projekt: https://github.com/liascript/liascript
+* Die Webseite: https://liascript.github.io
+* Nützliches
+
+  * [Dokumentation zu LiaScript](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md#1)
+  * [YouTube Kanal zu LiaScript](https://www.youtube.com/channel/UCyiTe2GkW_u05HSdvUblGYg)
+
+* Editoren
+
+  - Für den [Atom](https://atom.io)-Editor von GitHub exitieren derzeit zwei Plugins:
+
+    1. [liascript-preview](https://atom.io/packages/liascript-preview)
+
+    2. [liascript-snippets](https://atom.io/packages/liascript-snippets)
+
+  - Für den Einsatz anderer Editoren eignet sich auch der [LiaScript-DevServer](https://github.com/LiaScript/LiaScript-DevServer)
 
 
-                           {{5-6}}
-****************************************************************************
+*******************************************************************************
 
-Eine Reihe von Einführungsvideos findet sich unter [Youtube](https://www.youtube.com/channel/UCyiTe2GkW_u05HSdvUblGYg). Die Dokumentation von LiaScript ist hier [verlinkt](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md#1)
+### GitHub
 
-Für den [Atom](https://atom.io/)-Editor von GitHub sind zwei LiaScript Plugins verfügbar, die die Arbeit signifikant vereinfachen.
+    --{{0}}--
+Der Kurs selbst wird als "Projekt" entwickelt. Neben den einzelnen Vorlesungen
+finden Sie dort auch ein Wiki, Issues und die aggregierten Inhalte als
+automatisch generiertes Skript.
 
-****************************************************************************
+Link zum GitHub des Kurses:
+https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung
 
-### Github
 
-Der Kurs selbst wird als "Projekt" entwickelt. Neben den einzelnen Vorlesungen finden Sie dort auch ein Wiki, Issues und die aggregierten Inhalte als automatisch generiertes Skript.
-
-Link zum GitHub des Kurses
-
-[https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung)
-
-> **Hinweis:** Mit den Features von GitHub machen wir uns nach und nach vertraut.
-
-> **Hinweis:** Natürlich bestehen neben Github auch alternative Umsetzungen für das Projektmanagement wie das Open Source Projekt GitLab oder weitere kommerzielle Tools BitBucket, Google Cloud Source Repositories etc.
+> **Hinweise**
+>
+> 1. Mit den Features von GitHub machen wir uns nach und nach vertraut.
+>
+> 2. Natürlich bestehen neben Github auch alternative Umsetzungen für
+>    das Projektmanagement wie das Open Source Projekt GitLab oder weitere
+>    kommerzielle Tools BitBucket, Google Cloud Source Repositories etc.
 
 ### Entwicklungsumgebungen
 
-* Visual Studio
-* Visual Studio Code mit C# Erweiterung und .net core [Tutorial](https://www.youtube.com/watch?v=rOzXt--TXLg)
-* Atom ...
-* VIM ...
-
+    --{{0}}--
 **Seien Sie neugierig und probieren Sie verschiedene Tools und Editoren aus!**
+
+* [Atom](https://atom.io)
+
+  !?[Tutorial](https://www.youtube.com/watch?v=EdBqjPSx8bA)
+
+* [Visual Studio Code](https://code.visualstudio.com/)
+
+  !?[Tutorial](https://www.youtube.com/watch?v=rOzXt--TXLg)
+
+* [VIM/gVIM](https://www.vim.ort) / [neoVIM](https://neovim.io/)
+
+  !?[C# Vim Development Setup](https://www.youtube.com/watch?v=qGl_Mb2C87c)
+
+* weitere ...
+
 
 ## Aufgaben
 
-1. Legen Sie sich einen GitHub Account an (sofern dies noch nicht geschehen ist).
-2. Installieren Sie einen Editor Ihrer Wahl auf Ihrem Rechner, mit dem Sie Markdown-Dateien komfortabel bearbeiten können.
-3. Nutzen Sie das Wiki der Vorlesung um Ihre neuen Markdown-Kenntnisse zu erproben:
+- [ ] Legen Sie sich einen GitHub Account an (sofern dies noch nicht geschehen ist).
+- [ ] Installieren Sie einen Editor Ihrer Wahl auf Ihrem Rechner, mit dem Sie Markdown-Dateien komfortabel bearbeiten können.
+- [ ] Nutzen Sie das Wiki der Vorlesung um Ihre neuen Markdown-Kenntnisse zu erproben und versuchen Sie sich an folgenden Problemen:
 
-    + Recherchieren Sie weitere Softwarebugs. Dabei interessieren uns insbesondere solche, wo der konkrete Fehler direkt am Code nachvollzogen werden konnte. 
-    + Fügen Sie eine kurze Referenz auf Ihren Lieblingseditor ein und erklären Sie, warum Sie diesen anderen Systemen vorziehen. Ergänzen Sie Links auf Tutorials und Videos, die anderen nützlich sein können.
+
+- Recherchieren Sie weitere Softwarebugs. Dabei interessieren uns insbesondere
+  solche, wo der konkrete Fehler direkt am Code nachvollzogen werden konnte.
+
+- Fügen Sie eine kurze Referenz auf Ihren Lieblingseditor ein und erklären Sie,
+  warum Sie diesen anderen Systemen vorziehen. Ergänzen Sie Links auf Tutorials
+  und Videos, die anderen nützlich sein können.

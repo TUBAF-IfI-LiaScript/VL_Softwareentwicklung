@@ -1,4 +1,11 @@
 *.pdf
-*.txt
-*.py
-*.tex
+*.dll
+*.exe
+a.out
+*.out
+*.mdx
+
+output/
+bin/
+obj/
+.vscode/

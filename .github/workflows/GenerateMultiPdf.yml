@@ -1,6 +1,6 @@
 # GitHub Action, die aus den LiaScript-Materialien des Sommersemester 2021 ein
 # Skript generiert
-name: GeneratePdf
+name: GenerateMultiPdf
 
 # Hier legen wir den Trigger für die Action fest.
 # "Wenn ein Push auf dem branch master realisert wird, werden die
@@ -12,9 +12,7 @@ on:
 
 jobs:
   convert_via_pandoc:
-    runs-on: ubuntu-18.04
-    container:
-      image: docker://mirisbowring/texlive_ctan_full:2019
+    runs-on: ubuntu-latest
     steps:
       - name: Check out current repository
         uses: actions/checkout@v2
@@ -24,18 +22,21 @@ jobs:
       - name: Run preprocessing
         run : |
           mkdir output
-          python3 .github/workflows/preprocessing.py
+          python3 .github/workflows/config/pre_multipdf.py
         # Installation der notwendigen Pandoc tools
       - name: Install pandoc
         run: |
-          sudo apt install pandoc
+          sudo apt update -y
+          sudo apt-get install pandoc
+          sudo apt-get install texlive-xetex
+          sudo apt-get install librsvg2-bin
       # Generierungsprozess
-      - name: Run pandoc markdown to tex
-        run: |
-          pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex -f markdown -t latex -o output/script.tex *.mdx
       - name: Run pandoc markdown to pdf
         run: |
-          pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex -o output/script.pdf *.mdx
+          for file in *.mdx 
+          do
+          pandoc -V linkcolor:blue .github/workflows/config/header-includes.yaml --pdf-engine=xelatex -o "output/$file".pdf "$file"
+          done
       # Speichern als Artifact
       - uses: actions/upload-artifact@master
         with:
