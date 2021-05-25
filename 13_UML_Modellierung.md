@@ -13,7 +13,7 @@ import: https://github.com/liascript/CodeRunner
 icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_Freiberg.svg
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/13_UML.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/13_UML_Modellierung.md)
 
 # Modellierung von Software
 
@@ -22,13 +22,34 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
 | **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**             | `Versionsverwaltung mit Git und GitHub`                                                                                                                                |
-| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/13_UML.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/13_UML.md) |
+| **Inhalte:**             | `Motivation der Modellierung von Software`                                                                                                                                |
+| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/13_UML_Modellierung.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/13_UML_Modellierung.md) |
 | **Autoren**              | @author                                                                                                                                                                                    |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
+
+## Neues aus Github
+
+Die erste Aufgabe unter Zuhilfenahme von git / GitHub ist angelaufen. Setzen Sie sich in dieser Woche, soweit das noch nicht geschehen ist, intensiv damit auseinander! Die Techniken sind von zentraler Bedeutung für die weiteren Aufgabenblätter.
+
+
+Anmerkungen:
+
++ Versehen Sie Ihre Commits mit aussagekräftigen Bezeichnungen -> [Anleitung](https://t3n.de/news/schreibt-richtig-gute-1214910/)
++ Beenden Sie das Projekt mit der Veröffentlichung eines Release!
+
+> Tragen Sie bitte Ihre Fragebogenschlüssel in die Datei team.config ein. Dies hilft bei der wissenschaftlichen Aufbereitung der Daten ungemein.
+
+## Motivation des Modellierungsgedankens
+
+Um gedanklich wieder in die C# Entwicklung einzutauchen, finden Sie in dem Ordner [code](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/tree/master/code/13_UML_Modellierung) zwei Beispiele für die:
+
++ Nutzung abstrakter Klassen
++ Verwendung von Interfaces
+
+Überlegen Sie sich alternative Lösungsansätze mit Vor- und Nachteilen für die beschriebenen Implementierungen.
 
 ## Prinzipien des (objektorientierten) Softwareentwurfs
 
@@ -38,7 +59,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 + Prinzipien zum Entwurf einzelner Klassen
 + Prinzipien zum Entwurf miteinander kooperierender Klassen
 
-Robert C. Martin [Link](https://de.wikipedia.org/wiki/Robert_Cecil_Martin)
+[Robert C. Martin](https://de.wikipedia.org/wiki/Robert_Cecil_Martin)
 fasste eine wichtige Gruppe von Prinzipien zur Erzeugung wartbarer und
 erweiterbarer Software unter dem Begriff "SOLID" zusammen [^UncleBob]. Robert
 C. Martin erklärte diese Prinzipien zu den wichtigsten Entwurfsprinzipien. Die
@@ -50,12 +71,12 @@ SOLID-Prinzipien bestehen aus:
 * **I** nterface Segregation Prinzip
 * **D** ependency Inversion Prinzip
 
-Die folgende Darstellung basiert auf den Referenzen [Just]. Eine
-sehr gute, an einem Beispiel vorangetrieben Erläuterung ist unter [Krämer] zu finden.
+Die folgende Darstellung basiert auf den Referenzen [^Just]. Eine
+sehr gute, an einem Beispiel vorangetrieben Erläuterung ist unter [^Krämer] zu finden.
 
-[Krämer] Andre Krämer, "SOLID - Die 5 Prinzipien für objektorientiertes Softwaredesign", [Link](https://www.informatik-aktuell.de/entwicklung/methoden/solid-die-5-prinzipien-fuer-objektorientiertes-softwaredesign.html)
+[^Krämer]: Andre Krämer, "SOLID - Die 5 Prinzipien für objektorientiertes Softwaredesign", [Link](https://www.informatik-aktuell.de/entwicklung/methoden/solid-die-5-prinzipien-fuer-objektorientiertes-softwaredesign.html)
 
-[Just] Markus Just, IT Designers Gruppe, "Entwurfsprinzipien", Foliensatz Fachhochschule Esslingen [Link](http://www.it-designers-gruppe.de/fileadmin/Inhalte/Studentenportal/Die_SOLID-Prinzipien__Folien___1_.pdf)
+[^Just]: Markus Just, IT Designers Gruppe, "Entwurfsprinzipien", Foliensatz Fachhochschule Esslingen [Link](http://www.it-designers-gruppe.de/fileadmin/Inhalte/Studentenportal/Die_SOLID-Prinzipien__Folien___1_.pdf)
 
 [^UncleBob]: Robert C. Martin, Webseite "The principles of OOD", http://www.butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod
 
@@ -95,7 +116,7 @@ public class SpaceStation{
 }
 ```
 
-Eine mögliche Realisierung zum Beispiel findet sich unter https://medium.com/@severinperez/writing-flexible-code-with-the-single-responsibility-principle-b71c4f3f883f
+Eine mögliche separaten Realisierung findet sich unter [Link](https://medium.com/@severinperez/writing-flexible-code-with-the-single-responsibility-principle-b71c4f3f883f)
 
 > **Merke:** Vermeiden Sie "God"-Objekte, die alles wissen.
 
@@ -133,37 +154,34 @@ abgeleiteten Klasse.
 Gegenbeispiel: Ausgangspunkt ist eine Klasse `Employee`, die für unterschiedliche
 Angestelltentypen um verschiedenen Algorithmen zur Bonusberechnung versehen werden soll.
 Intuitiv ist der Ansatz ein weiteres Feld einzufügen, dass den Typ des Angestellten
-erfasst und dazu eine entsprechende Verzweigung zu realisieren ... ein schöner Verstoß gegen das OCP, der sich über eine Vererbungshierachie deutlich wartungsfreundlicher realisieren lässt!
+erfasst und dazu eine entsprechende Verzweigung zu realisieren ... ein Verstoß gegen das OCP, der sich über eine Vererbungshierachie deutlich wartungsfreundlicher realisieren lässt!
 
 ```csharp                                      Iniitalisation
 using System;
 
-namespace Rextester
+public class Employee
 {
-  public class Employee
-  {
-    public string Name {set; get;}
-    public int ID {set; get;}
+  public string Name {set; get;}
+  public int ID {set; get;}
 
-    public Employee(int id, string name){
-       this.ID = id; this.Name = name;
-    }
-
-    public decimal CalculateBonus(decimal salary){
-      return salary * 0.1M;
-    }
+  public Employee(int id, string name){
+     this.ID = id; this.Name = name;
   }
 
-  public class Program
-  {
-    public static void Main(string[] args){
-       Employee Bernhard = new Employee(1, "Bernhard");
-       Console.WriteLine($"Bonus = {Bernhard.CalculateBonus(11234)}");
-    }
+  public decimal CalculateBonus(decimal salary){
+    return salary * 0.1M;
+  }
+}
+
+public class Program
+{
+  public static void Main(string[] args){
+    Employee Bernhard = new Employee(1, "Bernhard");
+    Console.WriteLine($"Bonus = {Bernhard.CalculateBonus(11234)}");
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 Achtung: Die Einbettung der `CalculateBonus()` Methode in die jeweiligen `Employee` Klassen ist selbst fragwürdig! Dadurch wird eine Funktion an verschiedenen Stellen realisiert, so dass pro Klasse unterschiedliche "Zwecke" umgesetzt werden. Damit liegt ein Verstoß gegen die Idee des SRP vor.
 
@@ -173,7 +191,7 @@ Achtung: Die Einbettung der `CalculateBonus()` Methode in die jeweiligen `Employ
 
 > Das Liskovsche Substitutionsprinzip (LSP) oder Ersetzbarkeitsprinzip besagt, dass ein Programm, das Objekte einer Basisklasse T verwendet, auch mit Objekten der davon abgeleiteten Klasse S korrekt funktionieren muss, ohne dabei das Programm zu verändern:
 
-*"Sei $q(x)$ eine beweisbare Eigenschaft von Objekten $x$ des Typs $T$. Dann soll $q(y)$ für Objekte $y$ des Typs $S$ wahr sein, wobei $S$bein Untertyp von $T$ ist.“* [2]
+*"Sei $q(x)$ eine beweisbare Eigenschaft von Objekten $x$ des Typs $T$. Dann soll $q(y)$ für Objekte $y$ des Typs $S$ wahr sein, wobei $S$bein Untertyp von $T$ ist.“*
 
 Beispiel: Grafische Darstellung von verschiedenen Primitiven
 
@@ -271,7 +289,7 @@ public class MultiFunctionalCar : ICar, IAirplane
 Man könnte jetzt sogar ein Highlevel Interface realisieren, dass beide Aspekte
 integriert.
 
-```
+```csharp
 public interface IMultiFunctionalVehicle : ICar, IAirplane
 {
 }
@@ -371,6 +389,7 @@ public class Notification
 {
     private Email _email;
     private SMS _sms;
+
     public Notification()
     {
         _email = new Email();
@@ -420,19 +439,34 @@ public class SMS : IMessage
 // Schritt 3: Die höherwertige Klasse wird gegen das Interface implementiert
 public class Notification
 {
-    private ICollection<IMessage> _messages;
-    public Notification(ICollection<IMessage> messages)
+    private IMessage _message;
+
+    public Notification(IMessage messages)
     {
-        this._messages = messages;
+        this._message = message;
     }
     public void Send()
     {
-        foreach(var message in _messages)
-        {
-            message.SendMessage();
-        }
+        message.SendMessage();
     }
 }
+
+// Variante für multiple Messages
+//public class Notification
+//{
+//    private ICollection<IMessage> _messages;
+//    public Notification(ICollection<IMessage> messages)
+//    {
+//        this._messages = messages;
+//    }
+//    public void Send()
+//    {
+//        foreach(var message in _messages)
+//        {
+//            messages.SendMessage();
+//        }
+//    }
+//}
 ```
 
 Beispiel aus https://exceptionnotfound.net/simply-solid-the-dependency-inversion-principle/
@@ -440,7 +474,7 @@ Beispiel aus https://exceptionnotfound.net/simply-solid-the-dependency-inversion
 
 ## Herausforderungen bei der Umsetzung der Prinzipien
 
-                                       {{0}}
+                                       {{0-2}}
 ****************************************************************************
 
 Kunde TU Freiberg: *Entwickeln Sie für mich ein webbasiertes System, mit dem Sie die Anmeldung und Bewertung von Prüfungsleistung erfassen.*
@@ -448,19 +482,17 @@ Kunde TU Freiberg: *Entwickeln Sie für mich ein webbasiertes System, mit dem Si
 Welche Fragen sollten Sie dem Kunden stellen, bevor Sie sich daran machen und munter Code schreiben?
 
 ****************************************************************************
-                                        {{1}}
+                                        {{1-2}}
 ****************************************************************************
-![OOPGeschichte](./img/13_UML/cartoon-projekte.png)<!-- width="80%" --> [^Possel]
 
-
-[^Possel]: Heiko Possel, https://www.programmwechsel.de/lustig/management/schaukel-baum.html
+Betrachten Sie die Darstellung auf der [Webseite](https://www.programmwechsel.de/lustig/management/schaukel-baum.html). Welche hier scherzhaft beschriebenen Herausforderungen sehen Sie im Projekt?
 
 Wie verzahnen wir den Entwicklungsprozess? Wie können wir sicherstellen,
 dass am Ende die erwartete Anwendung realisiert wird?
 
 ****************************************************************************
 
-                                         {{2}}
+                                         {{2-3}}
 ****************************************************************************
 <!--
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
@@ -522,7 +554,7 @@ Was ist UML nicht:
 
 UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die ISO (ISO/IEC 19505 für Version 2.4.1) genormt.
 
-![OOPGeschichte](./img/13_UML/OO-historie.png)<!-- width="70%" --> [^WikiUMLHist]
+![OOPGeschichte](./img/13_UML/OO-historie.png "Darstellung der Historie von UML [^WikiUMLHist]")
 
 [^WikiUMLHist]: https://commons.wikimedia.org/w/index.php?curid=7892951, Autor GuidoZockoll, Mitarbeiter der oose.de Dienstleistungen für Innovative Informatik GmbH - derivative work: File:OO-historie.svg : AxelScheithauer, oose.de Dienstleistungen für Innovative Informatik GmbH - derivative work: Chris828 (talk) - File:Objektorientieren methoden historie.png and File:OO-historie.svg, CC BY-SA 3.0
 
@@ -534,7 +566,7 @@ UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die I
 
 * Quellcoderzeugung - Generierung von Sourcecode aus den Modellen
 
-    *Herausforderungen:* Synchronisation der beiden Repräsentationen, Abbildung wiedersprüchlicher Aussagen aus verschiedenen Diagrammtypen
+    *Herausforderungen:* Synchronisation der beiden Repräsentationen, Abbildung widersprüchlicher Aussagen aus verschiedenen Diagrammtypen
 
     (Beispiel mit Visual Studio folgt am Ende der Vorlesung.)
 
@@ -542,9 +574,7 @@ UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die I
 
     *Herausforderungen:* Abstraktionskonzept der Modelle führt zu verallgemeinernden Darstellungen, die ggf. Konzepte des Codes nicht reflektieren.
 
-![OOPGeschichte](./img/13_UML/Doxygen.png)<!-- width="80%" --> [^WikiDoxygen]
-
-[^WikiDoxygen]:  https://commons.wikimedia.org/w/index.php?curid=24966914, Doxygen-Beispielwebseite, Autor Der Messer - Eigenes Werk, CC BY-SA 3.0
+![OOPGeschichte](./img/13_UML/Doxygen.png "Nutzung einer adaptierten Variante in Doxygen [^WikiDoxygen]")
 
 
 **Darstellung von UML im Rahmen dieser Vorlesung**
@@ -553,7 +583,7 @@ Die Vorlesungsunterlagen der Veranstaltung "Softwareentwicklung" setzen auf die 
 
 http://plantuml.com/de/
 
-```ascii PlantUMLClasses
+```text ClassDiagram
 @startuml
 class Car
 
@@ -563,10 +593,10 @@ Car -- Person : < owns
 
 @enduml
 ```
-@plantUML.eval
+@plantUML.eval(png)
 
 
-```ascii PlantUMLTimings
+```text GanttChart
 @startuml
 robust "Web Browser" as WB
 concise "Web User" as WU
@@ -583,11 +613,13 @@ WB is Processing
 WB is Waiting
 @enduml
 ```
-@plantUML.eval
+@plantUML.eval(png)
+
+[^WikiDoxygen]:  https://commons.wikimedia.org/w/index.php?curid=24966914, Doxygen-Beispielwebseite, Autor Der Messer - Eigenes Werk, CC BY-SA 3.0
 
 ### Diagramm-Typen
 
-![OOPGeschichte](./img/13_UML/UML-Diagrammhierarchie.png)<!-- width="90%" --> [^WikiUMLDiagrammTypes]
+![OOPGeschichte](./img/13_UML/UML-Diagrammhierarchie.png "UML Diagramm-Typen [^WikiUMLDiagrammTypes]")
 
 [^WikiUMLDiagrammTypes]: https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/UML-Diagrammhierarchie.svg/1200px-UML-Diagrammhierarchie.svg.png, Autor "Stkl"- derivative work: File: UML-Diagrammhierarchie.png: Sae1962, CC BY-SA 4.0
 
@@ -615,7 +647,6 @@ WB is Waiting
 | Timing-Diagramm                | Wie hängen die Zustände verschiedener Akteure zeitlich voneinander ab?                        |
 | Interaktionsübersichtsdiagramm | Wann läuft welche Interaktion ab?                                                             |
 
-[^Jeckle]
 
 **Begrifflichkeiten**
 
@@ -623,8 +654,9 @@ Ein UML-Modell ergibt sich aus der Menge aller seiner Diagramme. Entsprechend
 werden verschiedene Diagrammtypen genutzt um unterschiedliche Perspektiven auf
 ein realweltliches Problem zu entwickeln.
 
-![Modelle](https://www.plantuml.com/plantuml/png/JSj1oi9030NW_PmYpFA7ARG7-Ed2fLrwW3WJsq3IWIIzlwAYhXxlVRpP0oqEbIHq2uWEnkiMqDYe1lSzRTm8bFHAvgzIsQfGIbNG7V9bEPUbDnB9W0xFTVh54-DggFhbyNsU88yPIlb_v33yvO_EjBT3vGu0)<!-- width="40%" --> [ModelvsDiagramm.plantUML]
+![Modelle](https://www.plantuml.com/plantuml/png/JSj1oi9030NW_PmYpFA7ARG7-Ed2fLrwW3WJsq3IWIIzlwAYhXxlVRpP0oqEbIHq2uWEnkiMqDYe1lSzRTm8bFHAvgzIsQfGIbNG7V9bEPUbDnB9W0xFTVh54-DggFhbyNsU88yPIlb_v33yvO_EjBT3vGu0 "Modell vs. Diagramm")
 
 ## Aufgaben
 
-- [ ]
+- [ ] Bearbeiten Sie die Aufgabe 3 im GitHub Classroom
+- [ ] Experimentieren Sie mit [Umbrello](https://umbrello.kde.org/)
