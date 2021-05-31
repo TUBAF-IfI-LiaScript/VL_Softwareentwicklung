@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.0
+version:  1.0.1
 language: de
 narrator: Deutsch Female
 
@@ -181,8 +181,7 @@ Gliederungsebene Aktivitäten ein, die Aktionen, Objektknoten sowie Kontrollelem
 Ablaufsteuerung und verbindende Kanten umfasst. Die Grundidee ist dabei, dass neben dem
 Kontrollfluss auch der Objektfluss modelliert wird.
 
-+ Aktivitäten definieren Strukturierungselemente für Aktionen, die durch Ein- und Ausgangsparameter, Bedingungen, zugehörige Aktionen und Objekte sowie einen
-Bezeichner gekennzeichnet sind.
++ Aktivitäten definieren Strukturierungselemente für Aktionen, die durch Ein- und Ausgangsparameter, Bedingungen, zugehörige Aktionen und Objekte sowie einen Bezeichner gekennzeichnet sind.
 
 <!--
 style="width: 80%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
@@ -193,11 +192,11 @@ style="width: 80%; max-width: 860px; display: block; margin-left: auto; margin-r
      | Flächenberechnung Rechteck     ≪ precondition ≫   |
      |                                   Höhe ≥ 0        |
  +---+----+                              Breite ≥ 0      |
- | Höhe   |----˃                                         |
+ | Höhe   |----ᗒ                                         |
  +---+----+                                          +---+----+
-     |                                          ----˃| Fläche |
+     |                                          ----ᗒ| Fläche |
  +---+----+                                          +---+----+
- | Breite |----˃                                         |
+ | Breite |----ᗒ                                         |
  +---+----+                                              |
      |                                                   |
      .---------------------------------------------------.
@@ -219,7 +218,7 @@ style="width: 80%; max-width: 860px; display: block; margin-left: auto; margin-r
                \
                 \
      .-----------------------.         .-------------------------.
-     | Einladung verschicken |  ----˃  | Getränke einkaufen      |
+     | Einladung verschicken |  ---->  | Getränke einkaufen      |
      .-----------------------.         .-------------------------.
                   \
                    \
@@ -248,12 +247,12 @@ style="width: 80%; max-width: 860px; display: block; margin-left: auto; margin-r
               pin                      pin
                        Objektfluss
     .-------------._                   _.-------------.
-    | Aktion      |_|----------------˃|_| Aktion      |
+    | Aktion      |_|----------------ᗒ|_| Aktion      |
     .-------------.                     .-------------.
 
 
     .-------------.   +-------------+     .-------------.
-    | Aktion      |---| Objekt      |---˃ | Aktion      |
+    | Aktion      |---| Objekt      |---ᗒ | Aktion      |
     .-------------.   +-------------+     .-------------.
 ````
 
@@ -275,13 +274,13 @@ style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-r
 
 ![Aktivitätsdiagramme](./img/14_UML_II/ActivityDiagram.png "Beispiel eines Anwendungsfall Diagramms [^WikiActivityDiagram]")
 
-Beispiels auf Anwendungsfall [Link](https://www.youtube.com/watch?v=VaKCZOhVJkQ)
-
 **Anwendungsfälle**
 
 + Verfeinerung von Anwendungsfällen (aus den Use Case Diagrammen)
 + Darstellung von Abläufen mit fachlichen Ausführungsbedingungen
 + Darstellung für Aktionen im Fehlerfall oder Ausnahmesituationen
+
+!?[Link](https://www.youtube.com/watch?v=VaKCZOhVJkQ)
 
 [^WikiActivityDiagram]: Wikimedia, Autor Gubaer, UML2 Aktivitätsdiagramm,  https://commons.wikimedia.org/wiki/File:Uml-Activity-Beispiel2.svg
 
@@ -339,6 +338,7 @@ sowohl verschieden Nutzertypen (*Customer* und *Administrator*) als auch die Obj
 
 ```text @plantUML.png
 @startuml
+left to right direction
 skinparam classAttributeIconSize 0
 abstract class User{
   -userId: string
@@ -440,6 +440,26 @@ Darstellung motiviert nach _What is Object Diagram?_, https://www.visual-paradig
 
 > **Merke:** Vermeiden Sie bei der Benennung von Klassen, Attributen, Operationen usw. sprachspezifische Zeichen
 
+Modellierung in UML
+
+```text @plantUML.png
+@startuml
+
+@enduml
+```
+
+```text @plantUML.png
+@startuml
+skinparam classAttributeIconSize 0
+
+class Zähler{
+  +i: int = 12345
+}
+@enduml
+```
+
+Ausführbarer Code in Python 2
+
 ```python KlasseMitUmlaut.py
 class Zähler:
     """A simple example class"""
@@ -450,6 +470,8 @@ print(A.i)
 ```
 @LIA.eval(`["main.py"]`, `python -m compileall .`, `python main.pyc`)
 
+
+Ausführbarer Code in C++ 20
 
 ```c KlasseMitUmlaut.cpp
 #include <iostream>
