@@ -117,6 +117,7 @@ auf eine Grafik des Originaltutorials zurückgegriffen wird:
 ### Klassendiagramme
 
 Konzentrieren wir uns zunächst auf einzelne Aspekte der Modellierung, um darauf aufbauend die
+
 das gesamte Diagramm zu entwerfen.
 
 **Ausgangspunkt Angebot / Artikel**
@@ -146,6 +147,7 @@ Die Klasse Anschrift enthält zahlreiche private Eigenschaften vom Typ `string`.
 ![](https://www.plantuml.com/plantuml/png/RP6nRi9044Jx-ueLPIGZqhg8C4eJ1P4eHAI8KfpFQtpoiOVsraqGtvAFoOzbiS08Azrvni_ZcPidiIpTBfZKUjfRjZjmmQPKYB0lEy4d5sdjln5c9c0j817ORnk1oZCwyP5Cuoi4vza5DAQduSCoKXkvF1Y0xA0fujqHdcCIf9hH5sKEZx4h5JcUcGMg6K97snvQUgoHBINNiAybX-9o_9nDf_TV0pVeFLOGOuKvhFN_QNjIDf79xcwabNNDMDEJ_VsvaLvOBez3sj9IrGV1QlG1s20dTTk-v53lxEojQxLQ-iTzHrqsqciTl6iqSH5ZG4iQQQwRm5ts0DTTnyum0kGmWUmDjU0fRjXl0kRwJgR4gOYP8rLw-ty0)<!-- width="80%" -->
 
 **Zahlungsmethoden**
+
 
 Das Anforderungsset des Kunden beschreibt 3 Zahlungsmethoden für die Abrechnung der Bestellung: Bankeinzug, Nachnahme, Vorauskasse. Lediglich im Falle des Bankeinzuges müssen weitere Daten erhoben werden. Bitte beachten Sie, das die Basisklasse Zahlungsmethode als abstrakte Klasse definiert wurde, um zu vermeiden, dass davon (sinnlose) Instanzen gebildet werden können.
 
