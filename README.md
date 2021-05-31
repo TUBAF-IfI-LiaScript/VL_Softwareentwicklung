@@ -19,18 +19,18 @@
 | 7     | 17. Mai   | Versionsmanagement im Softwareentwicklungsprozess |
 |       | 18. Mai   | Git und Continuous integration in GitHub          |
 | 8     | 24. Mai   | _Pfingstmontag_                                   |
-|       | 25. Mai   | Interfaces                                        |
-| 9     | 31. Mai   | UML Konzepte                                      |
-|       | 1. Juni   | ausgewählten UML Diagrammtypen                    |
-| 10    | 7. Juni   | UML Anwendungsbeispiel                            |
-|       | 8. Juni   | Testen                                            |
-| 11    | 14. Juni  | Dokumentation                                     |
-|       | 15. Juni  | Build Toolchains und ihr Einsatz                  |
-| 12    | 21. Juni  | Generics                                          |
-|       | 22. Juni  | Container                                         |
-| 13    | 28. Juni  | Delegaten                                         |
-|       | 29. Juni  | Events                                            |
-| 14    | 5. Juli   | Threadkonzepte in C#                              |
-|       | 6. Juli   | Taskmodell                                        |
-| 15    | 12. Juli  | Language Integrated Query                         |
+|       | 25. Mai   | UML Konzepte                                      |
+| 9     | 31. Mai   | ausgewählten UML Diagrammtypen                    |
+|       | 1. Juni   | UML Anwendungsbeispiel                            |
+| 10    | 7. Juni   | Testen                                            |
+|       | 8. Juni   | Dokumentation                                     |
+| 11    | 14. Juni  | Build Toolchains und ihr Einsatz                  |
+|       | 15. Juni  | Generics                                          |
+| 12    | 21. Juni  | Container                                         |
+|       | 22. Juni  | Delegaten                                         |
+| 13    | 28. Juni  | Events                                            |
+|       | 29. Juni  | Threadkonzepte in C#                              |
+| 14    | 5. Juli   | Taskmodell                                        |
+|       | 6. Juli   | Language Integrated Query                         |
+| 15    | 12. Juli  |                                                   | 
 |       | 13. Juli  |                                                   |
