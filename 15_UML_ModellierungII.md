@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.0
+version:  1.0.1
 language: de
 narrator: Deutsch Female
 
@@ -44,7 +44,7 @@ Der Anforderungskatalog an den beispielhaft zur realisierenden Onlineshop gliede
 
 + *Während des Bestellvorgangs geben Kunden eine Rechnungs- und Lieferanschrift ein. Grundsätzlich wird zwischen diesen beiden Anschriften nicht unterschieden. Wenn ein Kunde es verlangt, kann er jedoch unterschiedliche Adressen für Rechnung und Lieferung angeben.*
 
-+ *Die Rechnungs- und Lieferanschrift bestehen aus der Anrede, die Kunden aus einer Liste wählen, dem Vor- und Nachnamen, der Strasse, Hausnummer, Postleitzahl und dem Ort. Da Bestellungen europaweit ausgeliefert werden, wählen Kunden außerdem ihr Land aus einer Liste aus. Für die Zustellung über einen Paketdienst ins Ausland ist es notwendig, dass Kunden auch ihre Telefonnummer angeben. Darüber hinaus müssen sie ihre Email-Adresse angeben, an die am Ende des Bestellvorgangs eine Bestätigungsmail geschickt wird.*
++ *Die Rechnungs- und Lieferanschrift bestehen aus der Anrede, die Kunden aus einer Liste wählen, dem Vor- und Nachnamen, der Straße, Hausnummer, Postleitzahl und dem Ort. Da Bestellungen europaweit ausgeliefert werden, wählen Kunden außerdem ihr Land aus einer Liste aus. Für die Zustellung über einen Paketdienst ins Ausland ist es notwendig, dass Kunden auch ihre Telefonnummer angeben. Darüber hinaus müssen sie ihre Email-Adresse angeben, an die am Ende des Bestellvorgangs eine Bestätigungsmail geschickt wird.*
 
 + *Kunden dürfen wählen, auf welche Weise sie ihre Bestellung bezahlen möchten. Als Zahlungsmethoden stehen Nachnahme, Bankeinzug und Vorauskasse zur Verfügung. Je nach gewählter Zahlungsmethode fallen zusätzliche Kosten an. Außerdem muss beachtet werden, dass je nach Land, in das die Bestellung ausgeliefert werden soll, unterschiedlich hohe Kosten für Zahlungsmethoden anfallen: Zum Beispiel ist die Nachnahmegebühr im Inland geringer als die Nachnahmegebühr bei einem Versand ins Ausland.*
 
@@ -116,7 +116,8 @@ auf eine Grafik des Originaltutorials zurückgegriffen wird:
 
 ### Klassendiagramme
 
-Konzentrieren wir uns zunächst auf einzelne Aspekte der Modellieurng, um darauf aufbauend die
+Konzentrieren wir uns zunächst auf einzelne Aspekte der Modellierung, um darauf aufbauend die
+
 das gesamte Diagramm zu entwerfen.
 
 **Ausgangspunkt Angebot / Artikel**
@@ -131,7 +132,7 @@ Assoziationen und Eigenschaften sind äquivalent in der Darstellung, entsprechen
 
 **Integration des Warenkorbes**
 
-Der Warenkorb bildet die Menge der bestellten Artikel ab, entsprechend wird hier eine 1:n-Beziehung zwischen der Klasse Warenkorb und der Klasse BestellteArtikel definiert. BestellteArtikel erbt dabei von Artikel und erweitert die Felder um den Eintrag Anzahl.
+Der Warenkorb bildet die Menge der bestellten Artikel ab, entsprechend wird hier eine 1:n-Beziehung zwischen der Klasse Warenkorb und der Klasse `BestellteArtikel` definiert. `BestellteArtikel` erbt dabei von Artikel und erweitert die Felder um den Eintrag Anzahl.
 
 Zudem bilden wir in der Klasse Warenkorb unsere Anforderung nach einer Bestellumfang gebundenen Versandkostenhöhe ab. Es wird davon ausgegangen, dass der Kunde hier eine Landes- und Versandart und Zahlungsmethodenunabhängige Lösung wünscht. Daher besitzt die Klasse Warenkorb neben der Assoziation zur Klasse Artikel eine statische Eigenschaft KostenfreiAb (diese ist unterstrichen). Die Membervariable gibt einen Euro-Betrag an, ab dem für die Lieferung der bestellten Ware keine Verpackungs- und Versandkosten in Rechnung gestellt werden.
 
@@ -141,13 +142,14 @@ Die Klasse Bestellung umfasst zwei private Eigenschaften vom Typ Anschrift: Lief
 
 Bestellung fasst jeweils ein Objekt vom Typ Warenkorb und eines vom Typ Anschrift zusammen. Anhand der Komposition wird deutlich, dass eine Bestellung ohne die anderen beiden Klassen nicht existieren kann.
 
-Die Klasse Anschrift enthält zahlreiche private Eigenschaften vom Typ String. Bis auf die Telefonnummer sind alle Angaben Pflicht. Hinzu kommt ein Member vom Objekttyp Land, das neben der nationalen Zuordnung auch die Höhe der Versand- und Verpackungskosten umfasst.
+Die Klasse Anschrift enthält zahlreiche private Eigenschaften vom Typ `string`. Bis auf die Telefonnummer sind alle Angaben Pflicht. Hinzu kommt ein Member vom Objekttyp Land, das neben der nationalen Zuordnung auch die Höhe der Versand- und Verpackungskosten umfasst.
 
 ![](https://www.plantuml.com/plantuml/png/RP6nRi9044Jx-ueLPIGZqhg8C4eJ1P4eHAI8KfpFQtpoiOVsraqGtvAFoOzbiS08Azrvni_ZcPidiIpTBfZKUjfRjZjmmQPKYB0lEy4d5sdjln5c9c0j817ORnk1oZCwyP5Cuoi4vza5DAQduSCoKXkvF1Y0xA0fujqHdcCIf9hH5sKEZx4h5JcUcGMg6K97snvQUgoHBINNiAybX-9o_9nDf_TV0pVeFLOGOuKvhFN_QNjIDf79xcwabNNDMDEJ_VsvaLvOBez3sj9IrGV1QlG1s20dTTk-v53lxEojQxLQ-iTzHrqsqciTl6iqSH5ZG4iQQQwRm5ts0DTTnyum0kGmWUmDjU0fRjXl0kRwJgR4gOYP8rLw-ty0)<!-- width="80%" -->
 
 **Zahlungsmethoden**
 
-Das Anforderungsset des Kunden beschreibt 3 Zahlungsmethoden für die Abbrechnung der Bestellung: Bankeinzug, Nachnahme, Vorauskasse. Lediglich im Falle des Bankeinzuges müssen weitere Daten erhoben werden. Bitte beachten Sie, das die Basisklasse Zahlungsmethode als abstrakte Klasse definiert wurde, um zu vermeiden, dass davon (sinnlose) Instanzen gebildet werden können.
+
+Das Anforderungsset des Kunden beschreibt 3 Zahlungsmethoden für die Abrechnung der Bestellung: Bankeinzug, Nachnahme, Vorauskasse. Lediglich im Falle des Bankeinzuges müssen weitere Daten erhoben werden. Bitte beachten Sie, das die Basisklasse Zahlungsmethode als abstrakte Klasse definiert wurde, um zu vermeiden, dass davon (sinnlose) Instanzen gebildet werden können.
 
 ![](https://www.plantuml.com/plantuml/png/TOxFIWCn4CRlUOe1RyAMUYqYRHMaABqKF2WUPhFJPjXa8fF9fTety-QBwLfgfT1RliptvpSjXcerHLTwbZTKJE0ZbZ8pKswhqS9dMV6MOEmYhGqiW_8c67Iiv8spkC0TWMVraPpxJSESYb6CLJRl3g1vP5gJeXGVbDSsWTdX-J8UZQvUtSvXMqpHstuUdZ4CwPB8GkveQBc0Usg_FeDEu2xNDfBR_SsXzCIohVkvXooMfQP4FzwLASjc-5xCPyl_UhwuFSYXoXsXuRAvWLC6TwBX-gDfO8a-28PqvloK5MlfiPGpXYEwcv9qDSLl)<!-- width="60%" -->
 
@@ -158,6 +160,10 @@ Was bisher fehlte, war der Distributor, der, wie in unserem Use-Case Diagramm mo
 ![](https://www.plantuml.com/plantuml/png/RP51IyD048Nl-ok67WjRz2fIcYA281uK5BnDDcDtoMPMPcOlfJzUIsW3IQ_lUxmtZzcfeLWTijC-yIyA3X0ogZPcajfgz18AVwGZmPsBgIC8IK8cvx1L4mmssk4ROwvyq84ibexSgBuYTyxjIOto6SFQRm6-K8Zx8ksSDAmXIlenU80L-7SAaS-XUD5Nu2QFzzkneE43jMKK6h7KKpu7t6yswzMbmkX27hrVNZ1XVxg6pC-RRtp341dZGF_DfmK6zra4g_QeUjlXziWz9JxMmst-b7JyGf7hscdPd3uN6T0MyZJ2xOYxEkG_)<!-- width="100%" -->
 
 [^UMLTutorial]: Boris Schäling, "Der moderne Softwareentwicklungsprozess mit UML, Kapitel 3: Das Aktivitätsdiagramm" http://www.highscore.de/uml/titelseite.html
+
+## Verwendung von Klassendiagrammen unter Umbrello
+
+> Demo
 
 ## Verwendung von Klassendiagrammen unter Microsoft Studio
 
