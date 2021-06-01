@@ -160,12 +160,3 @@ Was bisher fehlte, war der Distributor, der, wie in unserem Use-Case Diagramm mo
 ![](https://www.plantuml.com/plantuml/png/RP51IyD048Nl-ok67WjRz2fIcYA281uK5BnDDcDtoMPMPcOlfJzUIsW3IQ_lUxmtZzcfeLWTijC-yIyA3X0ogZPcajfgz18AVwGZmPsBgIC8IK8cvx1L4mmssk4ROwvyq84ibexSgBuYTyxjIOto6SFQRm6-K8Zx8ksSDAmXIlenU80L-7SAaS-XUD5Nu2QFzzkneE43jMKK6h7KKpu7t6yswzMbmkX27hrVNZ1XVxg6pC-RRtp341dZGF_DfmK6zra4g_QeUjlXziWz9JxMmst-b7JyGf7hscdPd3uN6T0MyZJ2xOYxEkG_)<!-- width="100%" -->
 
 [^UMLTutorial]: Boris Schäling, "Der moderne Softwareentwicklungsprozess mit UML, Kapitel 3: Das Aktivitätsdiagramm" http://www.highscore.de/uml/titelseite.html
-
-## Verwendung von Klassendiagrammen unter Umbrello
-
-> Demo
-
-## Verwendung von Klassendiagrammen unter Microsoft Studio
-
-vgl. Vorgehen auf dem Foliensatz von Herrn Dr. Reinhardt (Vorlesung "Softwareentwicklung SoSe 2018")
-[Link](https://github.com/liaScript/CsharpCourse/blob/master/documents/FolieReinhardt_VSExample.pdf)

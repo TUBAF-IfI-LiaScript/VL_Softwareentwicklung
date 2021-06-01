@@ -218,7 +218,7 @@ style="width: 80%; max-width: 860px; display: block; margin-left: auto; margin-r
                \
                 \
      .-----------------------.         .-------------------------.
-     | Einladung verschicken |  ---->  | Getränke einkaufen      |
+     | Einladung verschicken |  -----ᗒ | Getränke einkaufen      |
      .-----------------------.         .-------------------------.
                   \
                    \
@@ -238,7 +238,7 @@ style="width: 80%; max-width: 860px; display: block; margin-left: auto; margin-r
 ````ascii
                       Kontrollfluss
      .-------------.                    .-------------.
-     | Aktion      |------------------> | Aktion      |
+     | Aktion      |------------------ᗒ | Aktion      |
      .-------------.                    .-------------.
 
  ---------------------------------------------------------------
@@ -265,7 +265,7 @@ style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-r
 ````ascii
 
  +--------------.       .----------------+       .------------------------.
- |    Sende      \       \  Erster Gast  |------˃| Vorbereitungen beenden |
+ |    Sende      \       \  Erster Gast  |------ᗒ| Vorbereitungen beenden |
  |    Signal     /       /  eingetroffen |       .------------------------.
  +--------------.       .----------------+
 ````
@@ -727,9 +727,21 @@ Die Möglichkeiten der Verknüpfung zwischen Klassen und Interfaces lassen sich 
 | Beziehung                             | Darstellung                                                                                                                                          | Bedeutung                                                                                  |
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Generalisierung                       | <img src="https://www.plantuml.com/plantuml/png/LOv12W8n40Jlyuh-m7vW3x9NRu8l2CcO7KmcC9diHVsxgoZehMcgw5ww1_DH2wsI654i5gR25uStcEJLaSGukZIbM4BlEB7rfZS2D5IUSNOJpGHipVwQnrSmsO9VXoP-MNWd7RMopJYgSsRROVhXC4ttmsU95jQqNtm2" width="228"> | gerichtete Beziehung zwischen einer generelleren und einer spezielleren Klasse (Vererbung) |
-| Assoziationen (ohne Anpassung)        | <img src="https://www.plantuml.com/plantuml/png/NOun3i9030Hxls8_a0-aIa57oGkEEvDOScp9vz2W_9q0ee1oLpEhdNgMo6rLMgGngaHL9kLR8XqXyv9e4bnJt8YgbjvnTaj_461bvH6N3B7vYBreyn4dtwxAj7_fpHg_QDmz_WnOgSjFjnEzvp4C7vCcjdOSV080"width="228">          | beschreiben die Verknüpfung allgemein                                                      |
+| Assoziationen (ohne Anpassung)        | <img src="https://www.plantuml.com/plantuml/png/NSon3S9038NXtbEy1LWW1Kf1Hya4nvr9B3csvFFHeEoE0550-_H_R-vP8iUcj4fZL8cgJCgtH3f2bZNH9BYck15LBRtZx9R-8C3AnXCk6M8B0Rreymad7rTbsh_riCQl6dUFFm4hTVtPTgBtFGx7ZwIPhOrDdm00"width="80">          | beschreiben die Verknüpfung allgemein                                                      |
 | Assoziation (Komposition/Aggregation) | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Komposition_Aggregation.svg/1920px-Komposition_Aggregation.svg.png"width="228">  | Bildet Beziehungen von einem Ganzen und seinen Teilen ab                                   |
 
+## Verwendung von UML Tools
+
+Verwendung von Klassendiagrammen
+
++ ... unter Umbrello (UML Diagramm Generierung / Code Generierung)
++ ... unter Microsoft Studio [Link](https://docs.microsoft.com/de-de/visualstudio/ide/class-designer/how-to-add-class-diagrams-to-projects?view=vs-2019))
+
+!?[VisualStudio](https://www.youtube.com/watch?v=syYyQ7LlcPc)
+
++ ... unter Visual Studio Code mit PlantUML
+
+> **Aufgabe:** Wer findet eine "automatisierbare" Lösung?
 
 ## Aufgaben
 
@@ -737,5 +749,3 @@ Die Möglichkeiten der Verknüpfung zwischen Klassen und Interfaces lassen sich 
 - [ ] Evaluieren Sie das Add-On "Class Designer" für die Visual Studio Umgebung
 
 ![ClassDesigner](./img/14_UML_II/ClassDesigner.png)
-
-https://docs.microsoft.com/de-de/visualstudio/ide/class-designer/how-to-add-class-diagrams-to-projects?view=vs-2019
