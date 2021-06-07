@@ -17,14 +17,14 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 # Modellierung von Software
 
-| Parameter                | Kursinformationen                                                                                                                                                                          |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**             | `Einbettung des Testens in den Softwareentwicklungsprozess`                                                                                                                                |
+| Parameter                | Kursinformationen                                                                                                                                                                |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                  |
+| **Semester**             | `Sommersemester 2021`                                                                                                                                                            |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                |
+| **Inhalte:**             | `Einbettung des Testens in den Softwareentwicklungsprozess`                                                                                                                      |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/16_Testen.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/16_Testen.md) |
-| **Autoren**              | @author                                                                                                                                                                                    |
+| **Autoren**              | @author                                                                                                                                                                          |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
@@ -32,8 +32,38 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 ## Organisatorisches
 
++ Alternative Prüfungsleistung für die Veranstaltung Softwareentwicklung
++ Prüfungsvorleistung für Einführung in die Softwareentwicklung
 
 ## Neues aus der GitHub Woche
+
+Wie stabil sind die Teams?
+
+<!--
+data-type="none"
+data-title="Commit Anzahl"
+data-transpose="false"
+-->
+| teamKey | 3          | 4          | 5       |
+| -------:|:---------- |:---------- |:------- |
+|       0 | [2 3]      |            |         |
+|       1 | [4 5]      | [4 5]      |         |
+|       2 | [6 7]      | [6 7]      |         |
+|       3 | [8 9]      | [31  8  9] | [8 9]   |
+|       4 | [10 11]    | [10 11]    | [10 11] |
+|       5 | [12 13]    | [12 13]    |         |
+|       6 | [14]       | [14]       |         |
+|       7 | [15 16]    | [15]       |         |
+|       8 | [17 18]    | [17]       |         |
+|       9 | [19 20]    | [19 20]    | [19]    |
+|      10 | [21 22]    | [21 22]    |         |
+|      11 | [23 24]    | [23 24]    |         |
+|      12 | [25 26]    | [26 25]    | [25 26] |
+|      13 | [27 28]    | [27 28]    |         |
+|      14 | [29 30 31] | [29 30]    |         |
+|      15 | [32 33]    | [32 33]    | [33 32] |
+|      16 | [34]       | [34]       | [34]    |
+|      17 |            | [ 2 15]    |         |
 
 
 ## Softwarefehler
@@ -280,7 +310,7 @@ bestimmt.
     initiale Implementierung einer Konsolenanwendung unter Visual Studio 2017. Welche
     Fehler können Sie ausmachen?
 
-![instruction-set](./img/16_Testen/SonarLinterVS.png)<!-- width="100%" -->
+![instruction-set](./img/16_Testen/SonarLinterVS.png)
 
 Eine Übersicht zu den Standard-Regeln findet sich unter [Link](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/DOCUMENTATION.md).
 
@@ -477,14 +507,13 @@ static class MyMathFunctions{
   }
 }
 ```
-
+<!-- data-type="none" -->
 |      | Test                                         | Testfälle im Beispiel                |
 | ---- | -------------------------------------------- | ------------------------------------ |
 | C_3a | Einfachbedingungsüberdeckungstest            | 2 (a = b = true sowie a = b = false) |
 | C_3b | Mehrfachbedingungsüberdeckungstest           | $2^n$                                |
 | C_3c | minimaler Mehrfachbedingungsüberdeckungstest | $<=2^n$                              |
 
-> Merke:
 
 ## Und jetzt konkret!
 
@@ -742,6 +771,4 @@ namespace MyMathMethods.Test
 }
 ```
 
-> Demo zur Anwendung des Testing-Frameworks unter Visual Studio Code.
-
-> Hinweis: Die Aufgabestellung des aktuellen Aufgabenblattes fokussiert einen manuellen Testablauf.
+> Demo zur Anwendung des Testing-Frameworks unter Visual Studio Code folgt in der kommenden Veranstaltung.
