@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.2
 language: de
 narrator: Deutsch Female
 
@@ -15,7 +15,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/16_Testen.md)
 
-# Testen
+# Modellierung von Software
 
 | Parameter                | Kursinformationen                                                                                                                                                                |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -771,4 +771,45 @@ namespace MyMathMethods.Test
 }
 ```
 
-> Demo zur Anwendung des Testing-Frameworks unter Visual Studio Code folgt in der kommenden Veranstaltung.
+Wie setzen wir das Ganze um?
+
+```
+dotnet new sln -o unit-testing-example
+cd unit-testing-example
+dotnet new classlib -o CalcService         // Code der Divisionsoperation einfügen
+mv CalcService/Class1.cs CalcService/Division.cs
+dotnet sln add ./CalcService/CalcService.csproj
+dotnet new xunit -o CalcService.Tests      // obigen Testcode einfügen
+dotnet add ./CalcService.Tests/CalcService.Tests.csproj reference ./CalcService/CalcService.csproj
+dotnet sln add ./CalcService.Tests/CalcService.Tests.csproj
+```
+
+Damit entsteht eine `solution`, die zwei `project` umfasst - die eigentliche Anwendung als `classlib` und die Testfälle.
+
+```
+.
+├── CalcService
+│   ├── CalcService.csproj
+│   ├── Division.cs
+├── CalcService.Tests
+│   ├── CalcService.Tests.csproj
+│   └── UnitTest1.cs
+└── unit-testing-example.sln
+```
+
+Das Ausführen der Tests ist nun mit `dotnet test` möglich.
+
+Eine automatische Generierung von Test Merkmalen ist mit Hilfe zusätzlicher Tools, die in dotnet integriert sind möglich.
+
+```
+dotnet add package coverlet.collector
+dotnet tool install --global dotnet-reportgenerator-globaltool
+dotnet tool install --global coverlet.console
+
+dotnet test --collect:"XPlat Code Coverage" --results-directory:"./.coverage"
+reportgenerator "-reports:.coverage/**/*.cobertura.xml" "-targetdir:.coverage-report/" "-reporttypes:HTML;"
+```
+
+Das Argument "XPlat Code Coverage" bezieht sich auf das Zwischenformat der Darstellung. Das `./.coverage` dient zur Angabe des Verzeichnisses, in dem die Ergebnisse gespeichert werden sollen. Wenn keines angegeben wird, wird standardmäßig ein TestResults-Verzeichnis innerhalb jedes Projekts verwendet. `reportgenerator` erzeugt dann die entsprechende html-Repräsentation.
+
+![instruction-set](./img/16_Testen/ReportGenerator.png)
