@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
 
@@ -118,7 +118,7 @@ Auch die Benutzerdokumentation muss einer starken Zielgruppenorientierung unterl
 + Referenzkarte (auch als Cheat-Sheets bezeichnet)
 + Benutzer-Leitfaden
 
-siehe: http://ftp.fernuni-hagen.de/ftp-dir/pub/mirrors/www.ctan.org/graphics/pgf/base/doc/pgfmanual.pdf
+vgl. zum Beispiel Python Pandas [Cheat Sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf)
 
 ### Realisierung der Dokumentation in Csharp
 
@@ -307,7 +307,9 @@ https://github.com/EWSoftware/SHFB
 
 Im folgenden soll beispielhaft auf die Anwendung von Doxygen eingegangen werden.
 
-![OOPGeschichte](./img/17_Dokumentation/Doyxgen_infoflow.png "Arbeits- und Datenfluss während der Dokumentationserzeugung mit Doxygen [^Doxygen]")
+![doxygen](./img/17_Dokumentation/Doyxgen_infoflow.png "Arbeits- und Datenfluss während der Dokumentationserzeugung mit Doxygen [^Doxygen]")
+
+!?[doxygenmovie](https://www.youtube.com/watch?v=-V_vHZPOZfY)
 
 Die Anwendung von Doxygen wird im folgenden Foliensatz anhand eines Beipielprojektes
 gezeigt. Dabei werden zwei Verbesserungen der Darstellung realisiert.
