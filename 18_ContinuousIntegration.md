@@ -39,10 +39,14 @@ Damit ist es eine interaktive Datenverarbeitung möglich, eine Umgebung, in der 
 
 Neben lokalen Jupyter Installationen bieten sich verschiedene Webdienste an:
 
-| Projekt  |  Link   |  Besonderheit |
-|---|---| --- |
-| Collaboratory-Projekt von Google  |   | Teamarbeit möglich |
-| Binder|   |   |
+| Projekt                          | Link                                        | Kernel                | Besonderheit                           |
+| -------------------------------- | ------------------------------------------- | --------------------- | -------------------------------------- |
+| Collaboratory-Projekt von Google | [colab](https://colab.research.google.com/) | Python                | GPU Unterstützung, Teamarbeit möglich  |
+| Binder                           | [binder](https://mybinder.org/)             | Python, R, Julia, ... |                                        |
+| Kaggle                           | [kaggle](https://www.kaggle.com/)           | Python, R             | Sammlung von ausführbaren Lerninhalten |
+
+
+Eine gut Übersicht zu den Features bietet die Webseite [DataSchool](https://www.dataschool.io/cloud-services-for-jupyter-notebook/).
 
 > **Nachteil 1:** Die Kombinierbarkeit von Markdown und ausführbarem Sourcecode ist die zentrale Stärke von Jupyter Notebooks aber auch ihre Schwäche!
 
@@ -300,7 +304,18 @@ Alternative Realisierungen lassen sich zum Beispiel mit [Jenkins](https://www.je
 Geben Sie die jeweiligen Anteile der verschiedenen Mitstreiter an einem Projekt
 in der README.md aus. Wer hat zum Beispiel wie viele Codezeilen realisiert.
 
+Werfen wir dazu einen Blick auf das [Anwendungsbeispiel](https://github.com/SebastianZug/test_contributor_feedback). Folgende Bearbeitungsschritte werden im zugehörigen Python Skript durchlaufen:
 
+|     | Bedeutung                                                                               |
+| --- | --------------------------------------------------------------------------------------- |
+| 1.  | Extrahieren der Informationen mit Hilfe des Paketes `github2pandas`                     |
+| 2.  | Generierung der Basisdatentabelle durch Merge von `pdEdits` und `pdCommits`             |
+| 3.  | Aggregieren der hinzugefügten und gelöschten Zeilen durch `groupby`                     |
+| 4.  | Austauschen der Daten in der `README.md` Datei                                          |
+| 5.  | Generieren eines neuen Diagramms das bereits in der `README.md` Datei  eingebunden ist. |
+| 6.  | Commit und Push Operation mit den neuen Daten                                           |
+
+Die zweimalige Ausführung der Action pro Tag wird durch einen Timer getriggert.
 
 ## Anwendungsbeispiel 2
 
@@ -532,4 +547,4 @@ jobs:
 + Klonen Sie mein Repository von [https://github.com/SebastianZug/CSharpExample](https://github.com/SebastianZug/CSharpExample)
 + Ergänzen Sie in der Build Action ein weiteres Target, zum Beispiel "Windows"
 + Erweitern Sie das Ganze um weitere Unit-Tests, ergänzen Sie den Eintrag in der README.md Datei
-+ Übernehmen Sie das Konzept der automatischen Generierung eines Klassendiagramm aus dem Übungsblatt 4, so dass auf dem Deckblatt der Dokumentation die aktuelle Klassenstruktur, die automatisch generiert wurde, sichtbar wird.
++ Übernehmen Sie das Konzept der automatischen Generierung eines Klassendiagramm aus den Übungsblättern, so dass auf dem Deckblatt der Dokumentation die aktuelle Klassenstruktur, die automatisch generiert wurde, sichtbar wird.
