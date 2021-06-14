@@ -48,6 +48,8 @@ Neben lokalen Jupyter Installationen bieten sich verschiedene Webdienste an:
 
 Eine gut Übersicht zu den Features bietet die Webseite [DataSchool](https://www.dataschool.io/cloud-services-for-jupyter-notebook/).
 
+> **Visual Studio Code integriert ein eigenes Plugin für die Ausführung von .Net Interactive Sessions [Tutorial](https://dev.to/kenakamu/time-to-learn-c-with-notebook-2gfj)**
+
 > **Nachteil 1:** Die Kombinierbarkeit von Markdown und ausführbarem Sourcecode ist die zentrale Stärke von Jupyter Notebooks aber auch ihre Schwäche!
 
 Das übergreifende Datenformat macht die Nachvollziehbarkeit von Code Änderungen schwer. Vor jedem Commit sollten entsprechend zumindest die Ausgaben gelöscht werden.
@@ -119,7 +121,7 @@ Continuous integration (CI) zielt darauf ab, die Qualität der Software zu verbe
 
 **Code in CI kompilieren** ... ein Build-Server kompiliert den Code periodisch oder sogar nach jedem Commit und meldet die Ergebnisse an die Entwickler.
 
-**Tests in CI durchführen** ... Zusätzlich zu automatisierten Unit-Tests werden  kontinuierliche Prozesse der Qualitätskontrolle implementieren, die statische Analysen durchführen, die Leistung vermessen und profilieren, Dokumenationen extrahieren, etc.
+**Tests in CI durchführen** ... Zusätzlich zu automatisierten Unit-Tests werden  kontinuierliche Prozesse der Qualitätskontrolle implementieren, die statische Analysen durchführen, die Leistung vermessen und profilieren, Dokumentationen extrahieren, etc.
 
 **Bereitstellen eines Artifacts von CI** ... Nun ist CI oft mit kontinuierlicher Bereitstellung oder kontinuierlichem Einsatz in der so genannten CI/CD-Pipeline verflochten. CI stellt sicher, dass die auf der Hauptleitung eingecheckte Software immer in einem Zustand ist, der den Benutzern zur Verfügung gestellt werden kann, und CD macht den Bereitstellungsprozess vollständig automatisiert.
 
@@ -288,7 +290,7 @@ Die Stärken von GitHub-Actions liegen in der unmittelbaren Integration in das R
 
 Welche Mängel gibt es noch im Gebrauch der GitHub-Actions?
 
-* Workflows können nicht wiederverwendet werden.
+* Workflows können nur eingeschränkt wiederverwendet werden.
 * Testergebnisse und Analyseresultate können nicht über integrierte Formate ausgegeben werden (Wir sehen es gleich bei der Visualisierung der Unit-Tests im Beispiel)
 * die Sequenz der Ausführungen mehrerer Pipelines ist nicht steuerbar
 * die Liste der verfügbaren Actions ist noch sehr überschaubar
