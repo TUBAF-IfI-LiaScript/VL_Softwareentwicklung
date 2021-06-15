@@ -13,7 +13,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/18_ContinuousIntegration.md)
 
-# Continous Integration
+# Generics
 
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -41,24 +41,21 @@ using System;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace Rextester
-{
-    public class Program{
-        public static void Main(string[] args){
-          var myArray = new[] { 1, 2, 3, 4, 5 };
-          foreach (int i in myArray)
-          {
-              System.Console.Write("{0} ", i);
-          }
-          Type valueType = myArray.GetType();
-          Console.WriteLine("\nmyArray: Type is {0}", valueType);
-          Console.WriteLine("\nmyArray is Array? {0}", valueType.IsArray);
-          //myArray.Add(7);
-        }
+public class Program{
+    public static void Main(string[] args){
+      var myArray = new[] { 1, 2, 3, 4, 5 };
+      foreach (int i in myArray)
+      {
+          System.Console.Write("{0} ", i);
+      }
+      Type valueType = myArray.GetType();
+      Console.WriteLine("\nmyArray: Type is {0}", valueType);
+      Console.WriteLine("\nmyArray is Array? {0}", valueType.IsArray);
+      //myArray.Add(7);
     }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 Die Dokumentation von `Array` findet sich unter https://docs.microsoft.com/de-de/dotnet/api/system.array?view=netcore-3.1
 
@@ -82,60 +79,57 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 ```csharp   LinkedList.cs
 using System;
 
-namespace Rextester
-{
-  public class Node{
-      public Node next;
-      public int value;
-      public Node(Node next, int value){
-          this.next = next;
-          this.value = value;
-      }
-  }
+public class Node{
+    public Node next;
+    public int value;
+    public Node(Node next, int value){
+        this.next = next;
+        this.value = value;
+    }
+}
 
-  public class LinkedList{
-      public Node head;
-      public LinkedList(int initial) {
-          head = new Node(null, initial);
-      }
-
-      public void Add(int value){
-          Node current = head;
-          while (current.next != null){
-              current = current.next;
-          }
-          current.next = new Node(null, value);
-      }
-
-      public int this[int index]{
-          get {
-              Node current = head;
-              int count = 0;
-              while (current != null){
-                  if (count == index){
-                     return current.value;
-                  }
-                  current = current.next;
-                  count++;
-              }
-              return 1;
-          }
-       }
+public class LinkedList{
+    public Node head;
+    public LinkedList(int initial) {
+        head = new Node(null, initial);
     }
 
-    public class Program{
-        public static void Main(string[] args){
-          LinkedList linkedList = new LinkedList(121);
-          linkedList.Add(140);
-          linkedList.Add(280);
-          linkedList.Add(309);
-          int i = 2;
-          Console.WriteLine($"Der Wert des {i}. Eintages ist {linkedList[i]}.");
-        }
+  public void Add(int value){
+      Node current = head;
+      while (current.next != null){
+          current = current.next;
+      }
+      current.next = new Node(null, value);
+  }
+
+  public int this[int index]{
+      get {
+          Node current = head;
+          int count = 0;
+          while (current != null){
+              if (count == index){
+                 return current.value;
+              }
+              current = current.next;
+              count++;
+          }
+          return 1;
+      }
+   }
+}
+
+public class Program{
+    public static void Main(string[] args){
+      LinkedList linkedList = new LinkedList(121);
+      linkedList.Add(140);
+      linkedList.Add(280);
+      linkedList.Add(309);
+      int i = 2;
+      Console.WriteLine($"Der Wert des {i}. Eintages ist {linkedList[i]}.");
     }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 Was sind die Nachteile in dieses Konstrukts auf der Listenebene? Welche Lösungsansätze sehen Sie?
 
@@ -143,10 +137,10 @@ Im Hinblick auf die Wiederverwendbarkeit stellt sich noch eine weiteres Problem 
 Neuimplementierung notwendig. Zählen Sie doch mal durch, wie oft wir aus dem `int` ein `float` machen müssten, um eine Übertragbarkeit auf Fließkommazahlen zu realisieren. Damit entstünde dann aber auch ein überwiegend redundanter
 Code, der eine konsistente Realisierung und Wartung erheblich erschwert.
 
-Lösungsansatz könnte die Arbeit mit dem allgemeinen `object`-Datentyp sein. Mittels
+Lösungsansatz könnte die Arbeit mit dem allgemeinen `Object`-Datentyp sein. Mittels
 Boxing und Unboxing würden die spezifischen Datentypen auf diesen abgebildet.
 
-> Merke (Wiederholung): Alle C# Datentypen sind von `Òbject` abgeleitet.
+> Merke (Wiederholung): Alle C# Datentypen sind von `Object` abgeleitet.
 
 ```csharp
 int i = 123;
@@ -165,37 +159,34 @@ Nachteilig daran ist, dass
 ```csharp   ObjectList.cs
 using System;
 
-namespace Rextester
-{
-  public class Cat{
-    public void catchMouse(){
-      Console.WriteLine("Dies kann allein die Katze!");
-    }
-    public void makeSound(){
-      Console.WriteLine("Miau");
-    }
+public class Cat{
+  public void catchMouse(){
+    Console.WriteLine("Dies kann allein die Katze!");
   }
-
-  public class Dog{
-    public void huntCat(){
-      Console.WriteLine("Dies kann allein dr Hund!");
-    }
-    public void makeSound(){
-      Console.WriteLine("Wuff");
-    }
+  public void makeSound(){
+    Console.WriteLine("Miau");
   }
+}
 
-  public class Program{
-    public static void Main(string[] args){
-      Cat Kitty = new Cat();
-      Dog Wally = new Dog();
-      Object Animal = Kitty;
-      (Animal as Cat).catchMouse();
-    }
+public class Dog{
+  public void huntCat(){
+    Console.WriteLine("Dies kann allein der Hund!");
+  }
+  public void makeSound(){
+    Console.WriteLine("Wuff");
+  }
+}
+
+public class Program{
+  public static void Main(string[] args){
+    Cat Kitty = new Cat();
+    Dog Wally = new Dog();
+    Object Animal = Kitty;
+    (Animal as Cat).catchMouse();
   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 >  *"Of course, we love bugs ... but not on run-time!"* (Youtube Tutorial Generics in .NET)
 
@@ -247,47 +238,43 @@ Hinsichtlich der Namenswahl für die generischen Typen sind sie frei, sollten ab
 ```csharp      StackExample
 using System;
 
-namespace Rextester
-{
-    public class Stack<T>{
-      int position = 0;
-      T[] data = new T[100];
+public class Stack<T>{
+  int position = 0;
+  T[] data = new T[100];
 
-      public void Push(T newObj){
-        if (position < 100){
-          data[position++] = newObj;
-        }
-        else{
-          Console.WriteLine("Array size exceeded!");
-        }
-      }
-
-      public T Pop(){
-        return data[position--];
-      }
-
-      public override string ToString(){
-        string output = "";
-        for (int i=0; i<position; i++){
-           output = output + " " + data[i].ToString();
-        }
-        return output;
-      }
+  public void Push(T newObj){
+    if (position < 100){
+      data[position++] = newObj;
     }
-
-    public class Program{
-        public static void Main(string[] args){
-          var myStack = new Stack<int>();
-          myStack.Push(3);
-          myStack.Push(12);
-          //myStack.Push("Hallo!");
-          Console.WriteLine(myStack);
-
-        }
+    else{
+      Console.WriteLine("Array size exceeded!");
     }
+  }
+
+  public T Pop(){
+    return data[position--];
+  }
+
+  public override string ToString(){
+    string output = "";
+    for (int i=0; i<position; i++){
+       output = output + " " + data[i].ToString();
+    }
+    return output;
+  }
+}
+
+public class Program{
+    public static void Main(string[] args){
+      var myStack = new Stack<int>();
+      myStack.Push(3);
+      myStack.Push(12);
+      //myStack.Push("Hallo!");
+      Console.WriteLine(myStack);
+   }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 ## Generische Methoden
 
@@ -297,51 +284,46 @@ namespace Rextester
 ```csharp      GenericMethod
 using System;
 
-namespace Rextester
-{
-    public class Program{
+public class Program{
 
-      // Tauscht zwei Variablen lhs und rhs
-      static void Swap<T>(ref T lhs, ref T rhs)
-      {
-           T temp;
-           temp = lhs;
-           lhs = rhs;
-           rhs = temp;
-           Console.WriteLine("Hier wurde die generische Methode aufgerufen");
-      }
+  // Tauscht zwei Variablen lhs und rhs
+  static void Swap<T>(ref T lhs, ref T rhs)
+  {
+     T temp;
+     temp = lhs;
+     lhs = rhs;
+     rhs = temp;
+     Console.WriteLine("Hier wurde die generische Methode aufgerufen");
+  }
 
-      // Tauscht zwei Variablen lhs und rhs
-      static void Swap(ref int lhs, ref int rhs)
-      {
-           int temp;
-           temp = lhs;
-           lhs = rhs;
-           rhs = temp;
-           Console.WriteLine("Hier wurde die konkrete Methode aufgerufen");
-      }
+  // Tauscht zwei Variablen lhs und rhs
+  static void Swap(ref int lhs, ref int rhs)
+  {
+     int temp;
+     temp = lhs;
+     lhs = rhs;
+     rhs = temp;
+     Console.WriteLine("Hier wurde die konkrete Methode aufgerufen");
+  }
 
-      public static void Main(string[] args){
-            int a = 99;
-            int b = 1;
-        //    ^
-        //    ------ Abstimmung der Typen
-        //    v
-            Swap<int>(ref a, ref b);
-            System.Console.WriteLine("a=" + a + " ,b=" + b);
-
-            Swap(ref a, ref b);
-            System.Console.WriteLine("a=" + a + " ,b=" + b);
-
-            float x = 99F;
-            float y = 1.2345F;
-            Swap<float>(ref x, ref y);
-            System.Console.WriteLine("x=" + x + " ,y=" + y);
-        }
-    }
+  public static void Main(string[] args){
+     int a = 99;
+     int b = 1;
+     //    ^
+     //    ------ Abstimmung der Typen
+     //    v
+     Swap<int>(ref a, ref b);
+     System.Console.WriteLine("a=" + a + " ,b=" + b);
+     Swap(ref a, ref b);
+     System.Console.WriteLine("a=" + a + " ,b=" + b);
+     float x = 99F;
+     float y = 1.2345F;
+     Swap<float>(ref x, ref y);
+     System.Console.WriteLine("x=" + x + " ,y=" + y);
+  }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 Sie können das Typargument auch weglassen, der Compiler löst den Typ entsprechend auf. Eine Einschränkung oder ein Rückgabewert genügen ihm zur Ableitung des Typparameters nicht. Damit ist ein Typrückschluss bei Methoden ohne Parameter nicht möglich! Damit bewirken:
 
@@ -361,8 +343,7 @@ Welches Fragestellungen ergeben sich aus dem Codefragment:
 Die erste Frage lässt sich schnell beantworten, in diesem Fall wird die nicht-generische Methode aus Effizienzgründen vorgezogen.
 
 ********************************************************************************
-                                     {{1-2}}
-********************************************************************************
+
 
 ```csharp
 public class DoAnything<T>{
@@ -381,7 +362,7 @@ public class DoAnything<T>{
 ```
 
 Wenn eine generische Methode definiert wird, die die gleichen Typparameter wie die übergeordnete Klasse verwendet (hier `T`), gibt der Compiler die Warnung CS0693 aus. Innerhalb des Gültigkeitsbereichs der Methode
-wird der "äußere Klassentyp" durch den "inneren Methodentyp" ausgeblendet. Damit soll der Entwickler, der ggf. zwei unterschiedliche Typen avisiert darauf hingewiesen werden, dass diese hier keine Berücksichtung finden.
+wird der "äußere Klassentyp" durch den "inneren Methodentyp" ausgeblendet. Damit soll der Entwickler, der ggf. zwei unterschiedliche Typen avisiert darauf hingewiesen werden, dass diese hier keine Berücksichtigung finden.
 
 
 ```     .NET Dokumentation
@@ -398,47 +379,38 @@ Methoden).
 
 Um diese Situation zu vermeiden, verwenden Sie für einen der Typparameter einen
 anderen Namen.
-
 ```
-********************************************************************************
-
-
-                                     {{2-3}}
-********************************************************************************
 
 Verwenden Sie Beschränkungen, analog zu den generischen Typen, sinnvolle Einschränkungen für die Typparametern in Methoden gewährleisten. Das folgende Beispiel gibt als Beschränkung die Implementierung des Interfaces IComparable<T> an, um unseren Vergleich zu realisieren.
 
 ```csharp      IComparable
 using System;
 
-namespace Rextester
-{
-    public class Program{
+public class Program{
 
-      static void SwapIfGreater<T>(ref T lhs, ref T rhs) where T : System.IComparable<T> {
-          T temp;
-          if (lhs.CompareTo(rhs) > 0)
-          {
-              temp = lhs;
-              lhs = rhs;
-              rhs = temp;
-          }
-      }
-
-      public static void Main(string[] args){
-            int a = 99;
-            int b = 1;
-            SwapIfGreater<int>(ref a, ref b);
-            System.Console.WriteLine("a=" + a + " ,b=" + b);
-        }
+  static void SwapIfGreater<T>(ref T lhs, ref T rhs) where T : System.IComparable<T> {
+    T temp;
+    if (lhs.CompareTo(rhs) > 0)
+    {
+        temp = lhs;
+        lhs = rhs;
+        rhs = temp;
     }
 }
+
+public static void Main(string[] args){
+    int a = 99;
+    int b = 1;
+    SwapIfGreater<int>(ref a, ref b);
+    System.Console.WriteLine("a=" + a + " ,b=" + b);
+  }
+}
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 Was verbirgt sich hinter dem Interface `IComparable`? Werfen Sie einen Blick auf die
 entsprechende Dokumentation und benennen Sie die Methoden, die in Klassen, die dieses
-Interface implementieren, exisitieren müssen.
+Interface implementieren, existieren müssen.
 
 https://docs.microsoft.com/de-de/dotnet/api/system.icomparable?view=netframework-4.8
 
@@ -450,68 +422,63 @@ https://docs.microsoft.com/de-de/dotnet/api/system.icomparable?view=netframework
 ```csharp      IComparable
 using System;
 
-namespace Rextester
-{
-    public class Animal : IComparable {
-      private string name;
-      private int weight;
+public class Animal : IComparable {
+  private string name;
+  private int weight;
 
-      public Animal(string name, int weight){
-        this.name = name;
-        this.weight = weight;
-      }
+  public Animal(string name, int weight){
+    this.name = name;
+    this.weight = weight;
+  }
 
-      public string Name{
-        get { return name;}
-      }
+  public string Name{
+    get { return name;}
+  }
 
-      public int Weight{
-        get { return weight;}
-      }
+  public int Weight{
+    get { return weight;}
+  }
 
-      public override string ToString(){
-        return name + " weights " + weight + " kg";
-      }
+  public override string ToString(){
+    return name + " weights " + weight + " kg";
+  }
 
-      public int CompareTo (object obj){
-        if (obj == null)
-           throw new ArgumentException("Object is not a valid");
-        else {
-          Animal otherAnimal = obj as Animal;
-          return (otherAnimal.weight - weight);
-        }
+  public int CompareTo (object obj){
+    if (obj == null)
+       throw new ArgumentException("Object is not a valid");
+    else {
+      Animal otherAnimal = obj as Animal;
+      return (otherAnimal.weight - weight);
       }
     }
+  }
 
-    public class Program{
+public class Program{
 
-      static void SwapIfGreater<T>(ref T lhs, ref T rhs) where T : System.IComparable{
-          T temp;
-          if (lhs.CompareTo(rhs) > 0)
-          {
-              temp = lhs;
-              lhs = rhs;
-              rhs = temp;
-          }
-      }
-
-      public static void Main(string[] args){
-            Animal AnimalA = new Animal("Kitty", 10);
-            Console.WriteLine(AnimalA);
-            Animal AnimalB = new Animal("Wally", 30);
-            Console.WriteLine(AnimalB);
-
-            SwapIfGreater<Animal>(ref AnimalA, ref AnimalB);
-            Console.WriteLine("After ordering ...");
-            Console.WriteLine(AnimalA);
-            Console.WriteLine(AnimalB);
-        }
+  static void SwapIfGreater<T>(ref T lhs, ref T rhs) where T : System.IComparable{
+    T temp;
+    if (lhs.CompareTo(rhs) > 0)
+    {
+        temp = lhs;
+        lhs = rhs;
+        rhs = temp;
     }
+  }
+
+  public static void Main(string[] args){
+    Animal AnimalA = new Animal("Kitty", 10);
+    Console.WriteLine(AnimalA);
+    Animal AnimalB = new Animal("Wally", 30);
+    Console.WriteLine(AnimalB);
+    SwapIfGreater<Animal>(ref AnimalA, ref AnimalB);
+    Console.WriteLine("After ordering ...");
+    Console.WriteLine(AnimalA);
+    Console.WriteLine(AnimalB);
+  }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-********************************************************************************
 
 ## Beschränkungen
 
@@ -520,22 +487,20 @@ Wie bereits bei den generischen Methoden angedeutet können wir mittels "Beschr�
 ```csharp          GenericCompare
 using System;
 
-namespace Rextester
-{
-    public class Program{
-      static int Plus<Element>(Element x, Element y){
-         return (x + y);
-      }
+public class Program{
 
-      public static void Main(string[] args){
-        int a = 1;
-        int b = 2;
-        Console.WriteLine(Plus<int>(a, b));
-        }
-    }
+  static int Plus<T>(T x, T y){
+     return (x + y);
+  }
+
+  public static void Main(string[] args){
+    int a = 1;
+    int b = 2;
+    Console.WriteLine(Plus<int>(a, b));
+  }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 Folglich ist es notwendig die Allgemeinheit der generischen Methoden oder Klassen zu
 beschränken. Man definiert Beschänkungen oder *Constraints*, die die Breite der verwendbaren Datentypen einschränken. Die Typprüfung bezieht diese Informationen dann ein.
@@ -577,7 +542,7 @@ public class GenericList<T> where T : Human, IComparable {
 }
 ```
 
-Da die Konkretisierung von Generics erst zur Laufzeit realisiert werden, ist  es
+Da die Konkretisierung von Generics erst zur Laufzeit realisiert werden, ist es
 ggf. notwendig die spezifischen Parameter des Datentyps zur Laufzeit
 auszuwerten. Im folgenden sollen die Beispiele die Bedeutung diese Vorgehens
 aufzeigen.
@@ -586,48 +551,44 @@ aufzeigen.
 using System;
 using System.Reflection;
 
-namespace Rextester
+public class Base {}
+
+class SampleClass<T> where T : Base
 {
-    public class Base {}
+  void Swap(ref T lhs, ref T rhs) { }
+}
 
-    class SampleClass<T> where T : Base
-    {
-        void Swap(ref T lhs, ref T rhs) { }
-    }
+public class Program{
 
-    public class Program{
+  public static void Main(string[] args){
+    Type t = typeof(SampleClass<>);
+    Console.WriteLine("Liegt ein generischer Typ vor? {0}",
+                t.IsGenericTypeDefinition);
+    Console.WriteLine("Wie ist der Typparameter benannt? {0}",
+                            t.GetGenericArguments());
 
-      public static void Main(string[] args){
-        Type t = typeof(SampleClass<>);
-        Console.WriteLine("Liegt ein generischer Typ vor? {0}",
-                    t.IsGenericTypeDefinition);
-        Console.WriteLine("Wie ist der Typparameter benannt? {0}",
-                                t.GetGenericArguments());
-
-        Type[] defparams = t.GetGenericArguments();
-        foreach (Type tp in defparams){
-          Console.WriteLine("\r\nType parameter: {0}", tp.Name);
-          Type[] tpConstraints = tp.GetGenericParameterConstraints();
-          foreach (Type constr in tpConstraints){
-          	Console.WriteLine("\t{0}", constr);
-          }
-        }
+    Type[] defparams = t.GetGenericArguments();
+    foreach (Type tp in defparams){
+      Console.WriteLine("\r\nType parameter: {0}", tp.Name);
+      Type[] tpConstraints = tp.GetGenericParameterConstraints();
+      foreach (Type constr in tpConstraints){
+      	Console.WriteLine("\t{0}", constr);
       }
     }
+  }
 }
 ```
-@Rextester.eval(@CSharp)
-
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 ## Vererbung bei generischen Typen
 
 In der UML werden generische Typen über eine separate Box in der oberen linken Ecke
 der Klassendarstellung im Klassendiagramm realisiert.
 
-![UseCaseOnlineShopII](https://www.plantuml.com/plantuml/png/BSqn2i9048NXVaunfNOUG2I2ZNLEC6uUEBYxaPaN2yMx6yNoUppuXwG5brObRzxl5jQqLCiyak6NXJYNkO_-XExawXEqU9GAaTzBHt1_Cjf1NwBgFH7SV8Vjoa2R7_ZpBGFwj9O-)<!-- width="30%" -->
+![UseCaseOnlineShopII](https://www.plantuml.com/plantuml/png/BSqn2i9048NXVaunfNOUG2I2ZNLEC6uUEBYxaPaN2yMx6yNoUppuXwG5brObRzxl5jQqLCiyak6NXJYNkO_-XExawXEqU9GAaTzBHt1_Cjf1NwBgFH7SV8Vjoa2R7_ZpBGFwj9O-)
 
 Generischen Typen können wie andere Typen von einer Klasse erben und Interfaces
-Implementieren. Die Basisklassen können dabei selbst wieder generische sein.
+implementieren. Die Basisklassen können dabei selbst wieder generische sein.
 
 | Ableitung               | Die generische Klasse A erbt ...                 | Bemerkung      |
 | ----------------------- | ------------------------------------------------ | -------------- |
@@ -668,7 +629,7 @@ Im letzten Fall kann ausgehend von der Spezifikation von `Node6<int> A = new Nod
 
 Erläutern Sie die Anwendung von generischen Typen anhand des folgenden UML-Diagramms.
 
-![ObjectBasedList](https://www.plantuml.com/plantuml/png/PP3FQlCm4CJlUeezVX_5eMTXH5nwQ6aQ0abllSZMaYoHraLQK-YVTwyKXReXjvtP-OqMBPFOA5FmAXs9tsoq0GPlK-f48lMJuECmyfO-46xLWHp2G77mgDGf1IlY8xeL9Mbty7x0Y1eUfc3PmAS2QE20rcbOZmwpl87EkN-x_wTn4ucbYEzpMGMXRMsV9Df1Z2aTiBO1DMIBU5zqvmMZXdihEBCTxp49-h8xKNT8BvmIacWWbZdvDB734gdJzZUHdGr62bFGq8-ZBuWwt_JLD1TF_F5hZPf_8hkBHNNPPuq06jgs9tR6l6PervYwDbVKCucDFP9WhEWLUN66KKjaDmN_0m00)<!-- width="70%" -->
+![ObjectBasedList](https://www.plantuml.com/plantuml/png/PP3FQlCm4CJlUeezVX_5eMTXH5nwQ6aQ0abllSZMaYoHraLQK-YVTwyKXReXjvtP-OqMBPFOA5FmAXs9tsoq0GPlK-f48lMJuECmyfO-46xLWHp2G77mgDGf1IlY8xeL9Mbty7x0Y1eUfc3PmAS2QE20rcbOZmwpl87EkN-x_wTn4ucbYEzpMGMXRMsV9Df1Z2aTiBO1DMIBU5zqvmMZXdihEBCTxp49-h8xKNT8BvmIacWWbZdvDB734gdJzZUHdGr62bFGq8-ZBuWwt_JLD1TF_F5hZPf_8hkBHNNPPuq06jgs9tR6l6PervYwDbVKCucDFP9WhEWLUN66KKjaDmN_0m00)
 
 
 Im folgenden Beispiel soll eine Liste für zwei Klassen dienen, die
@@ -683,92 +644,89 @@ Angestellter und Kunde definiert.
 using System;
 using System.Reflection;
 
-namespace Rextester
+public abstract class Human{
+   public Human (string name, int alter){
+      this.Name = name;
+      this.Alter = alter;
+   }
+   public string Name;
+   public int Alter;
+}
+
+public class Angestellter : Human{
+   public int BeiUnsSeit = 0;
+   public Angestellter(string name, int alter, int beiUnsSeit) : base(name, alter){
+     this.BeiUnsSeit = beiUnsSeit;
+   }
+}
+
+public class Kunde : Human{
+   public int KundeSeit = 0;
+   public bool Premium = true;
+   public Kunde(string name, int alter, int kundeSeit) : base(name, alter){
+     this.KundeSeit = kundeSeit;
+   }
+}
+
+class LinkedList<T> where T : Human
 {
-    public abstract class Human{
-       public Human (string name, int alter){
-          this.Name = name;
-          this.Alter = alter;
-       }
-       public string Name;
-       public int Alter;
-    }
+  private class Node{
+      public Node next;
+      public T data;
+      public Node(Node next, T data){
+          this.next = next;
+          this.data = data;
+      }
+  }
 
-    public class Angestellter : Human{
-       public int BeiUnsSeit = 0;
-       public Angestellter(string name, int alter, int beiUnsSeit) : base(name, alter){
-         this.BeiUnsSeit = beiUnsSeit;
-       }
-    }
+  private Node head;
+  public LinkedList(T initial) {
+      head = new Node(null, initial);
+  }
 
-    public class Kunde : Human{
-       public int KundeSeit = 0;
-       public bool Premium = true;
-       public Kunde(string name, int alter, int kundeSeit) : base(name, alter){
-         this.KundeSeit = kundeSeit;
-       }
-    }
+  public void Add(T value){
+      Node current = head;
+      while (current.next != null){
+          current = current.next;
+      }
+      current.next = new Node(null, value);
+  }
 
-    class LinkedList<T> where T : Human
-    {
-      public class Node{
-          public Node next;
-          public T data;
-          public Node(Node next, T data){
-              this.next = next;
-              this.data = data;
+  public void Print(){
+      Node current = head;
+      var Fields = current.data.GetType().GetFields();
+      foreach (var Field in Fields)
+        Console.Write("{0,-20}",Field.Name);
+      Console.WriteLine();
+      while (true) {
+          Fields = current.data.GetType().GetFields();
+          foreach (var Field in Fields){
+            Console.Write("{0,-20}", Field.GetValue(current.data));
           }
-      }
-
-      public Node head;
-      public LinkedList(T initial) {
-          head = new Node(null, initial);
-      }
-
-      public void Add(T value){
-          Node current = head;
-          while (current.next != null){
-              current = current.next;
-          }
-          current.next = new Node(null, value);
-      }
-      public void Print(){
-          Node current = head;
-          var Fields = current.data.GetType().GetFields();
-          foreach (var Field in Fields)
-            Console.Write("{0,-20}",Field.Name);
           Console.WriteLine();
-          while (true) {
-              Fields = current.data.GetType().GetFields();
-              foreach (var Field in Fields){
-                Console.Write("{0,-20}", Field.GetValue(current.data));
-              }
-              Console.WriteLine();
-              if (current.next == null) break;
-              current = current.next;
-          }
+          if (current.next == null) break;
+          current = current.next;
       }
-    }
+  }
+}
 
-    public class Program{
-      public static void Main(string[] args){
-        LinkedList<Angestellter> AngestelltenListe = new LinkedList<Angestellter>(new Angestellter("Peter", 42, 4));
-        AngestelltenListe.Add(new Angestellter("Viola", 39, 14));
-        AngestelltenListe.Add(new Angestellter("Miriam", 32, 5));
-        AngestelltenListe.Print();
-        Console.WriteLine();
-
-        LinkedList<Kunde> KundeListe = new LinkedList<Kunde>(new Kunde("Garfield", 12, 4));
-        KundeListe.Add(new Kunde("Bart", 5, 14));
-        KundeListe.Add(new Kunde("Tim", 19, 5));
-        KundeListe.Print();
-      }
-    }
+public class Program{
+  public static void Main(string[] args){
+    LinkedList<Angestellter> AngestelltenListe = new LinkedList<Angestellter>(new Angestellter("Peter", 42, 4));
+    AngestelltenListe.Add(new Angestellter("Viola", 39, 14));
+    AngestelltenListe.Add(new Angestellter("Miriam", 32, 5));
+    AngestelltenListe.Print();
+    Console.WriteLine();
+    LinkedList<Kunde> KundeListe = new LinkedList<Kunde>(new Kunde("Garfield", 12, 4));
+    KundeListe.Add(new Kunde("Bart", 5, 14));
+    KundeListe.Add(new Kunde("Tim", 19, 5));
+    KundeListe.Print();
+  }
 }
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 
 ## Aufgaben der Woche
 
-[ ] 
+- [ ] Integrieren Sie in die oben gezeigte Liste Suchfunktionen, die nach bestimmten Namen oder Typen filtert.
