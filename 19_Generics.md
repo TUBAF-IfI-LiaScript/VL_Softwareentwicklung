@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.1
 language: de
 narrator: Deutsch Female
 
@@ -21,7 +21,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Generics und deren Anwendung`                                                                                                                                |
-| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/18_ContinuousIntegration.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/18_ContinuousIntegration.md) |
+| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/19_Generics.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/19_Generics.md) |
 | **Autoren**              | @author                                                                                                                                                                                    |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
