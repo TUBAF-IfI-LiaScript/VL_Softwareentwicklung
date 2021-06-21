@@ -236,8 +236,6 @@ Um die Konzepte der Implementierung der Container in C# zu verstehen, versuchen 
 
 Zur Erinnerung, für die Möglichkeit der Iteration über einer Datenstruktur mittels `foreach` bedarf es der Implementierung der Interfaces `IEnumerable` und `IEnumerator`. Wir verbleiben dabei auf der generischen Seite.
 
-### asdfas
-
 ```csharp      GenericList.cs
 using System;
 using System.Collections;
@@ -317,6 +315,8 @@ class Program
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+> **Achtung:** Das Beispiel implmentiert das Iteratorkonzept mittels [`yield`](https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/keywords/yield). Damit lässt sich einige Tipparbeit sparen, die bei der konventionellen Umsetzung anfallen würde, vgl [Link](https://docs.microsoft.com/de-de/troubleshoot/dotnet/csharp/make-class-foreach-statement).
 
 Die Methoden für das Handling der Daten beschränken sich aber auf ein `Add()` und die Iteration - hier braucht es noch deutlich mehr, um anwendbar zu sein. Um diese Funktionalität umzusetzen, greift die C#-Collections Implementierung auf eine ganze Reihe von Interfaces zurück, die den einzelnen Containern die notwendige Funktion geben.
 
