@@ -40,8 +40,7 @@ using System;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace Rextester
-{
+
     public class VideoEncodingService{
 
       private string userId;
@@ -69,9 +68,8 @@ namespace Rextester
          myMovie.StartVideoEncoding();
       }
     }
-}
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 Gegen das Hinzufügen weiterer Ausgabemethoden in die Klasse `VideoEncodingService` spricht
 die Tatsache, dass dies nicht deren zentrale Aufgabe ist. Eigentlich sollte
@@ -132,8 +130,7 @@ using System;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace Rextester
-{
+
     // Schritt 1
     public delegate void NotifyUser(string userId, string filename);
 
@@ -169,9 +166,8 @@ namespace Rextester
          myMovie.StartVideoEncoding(notifyMe);
       }
     }
-}
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 ### Was passiert hinter den Kulissen?
 
@@ -240,8 +236,7 @@ using System;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace Rextester
-{
+
     public class Program{
 
       delegate int Calc(int x, int y);
@@ -281,9 +276,8 @@ namespace Rextester
 
       }
     }
-}
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 > Merke: Der Rückgabewert des Aufrufes entspricht dem der letzten Methode.
 
@@ -387,8 +381,7 @@ using System.Collections.Generic;
 // Declare a delegate.
 delegate void Printer(string s);
 
-namespace Rextester
-{
+
     public class Program{
 
       static void DoWork(string k)      {
@@ -414,9 +407,8 @@ namespace Rextester
 
       }
     }
-}
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 
 **Lambda Funktionen**
@@ -437,8 +429,7 @@ using System.Reflection;
 using System.Collections.Generic;
 
 
-namespace Rextester
-{
+
     public class Program{
 
       public delegate int Del( int Value);
@@ -451,9 +442,8 @@ namespace Rextester
           Console.WriteLine(obj(5));
       }
     }
-}
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 ### Generische Delegaten
 
@@ -467,8 +457,7 @@ using System;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace Rextester
-{
+
     // Schritt I - Generisches Delegat
     delegate T Transformer<T>(T x);
 
@@ -510,9 +499,8 @@ namespace Rextester
         printArray(values);
       }
     }
-}
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 Beachten Sie, dass Sie alle expliziten Benennungen des Datentypen in
 
@@ -557,8 +545,7 @@ using System;
 using System.Reflection;
 using System.Collections.Generic;
 
-namespace Rextester
-{
+
 
     public delegate void Output(string text);
 
@@ -589,9 +576,8 @@ namespace Rextester
          Console.WriteLine(myFuncOutput(5));
       }
     }
-}
 ```
-@Rextester.eval(@CSharp)
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 ## Aufgaben der Woche
 
