@@ -40,34 +40,33 @@ using System;
 using System.Reflection;
 using System.Collections.Generic;
 
+public class VideoEncodingService{
 
-    public class VideoEncodingService{
+  private string userId;
+  private string filename;
 
-      private string userId;
-      private string filename;
+  public VideoEncodingService(string filename, string userId){
+     this.userId = userId;
+     this.filename = filename;
+  }
 
-      public VideoEncodingService(string filename, string userId){
-         this.userId = userId;
-         this.filename = filename;
-      }
+  public void StartVideoEncoding(){
+     Console.WriteLine("The encoding job takes a while!");
+     NotifyUser();
+  }
 
-      public void StartVideoEncoding(){
-         Console.WriteLine("The encoding job takes a while!");
-         NotifyUser();
-      }
+  public void NotifyUser(){
+      Console.WriteLine("Dear user {0}, your encoding job {1} was finished",
+                          userId, filename);
+  }
+}
 
-      public void NotifyUser(){
-          Console.WriteLine("Dear user {0}, your encoding job {1} was finished",
-                            userId, filename);
-      }
-    }
-
-    public class Program{
-      public static void Main(string[] args){
-         VideoEncodingService myMovie = new VideoEncodingService("007.mpeg", "12321");
-         myMovie.StartVideoEncoding();
-      }
-    }
+public class Program{
+  public static void Main(string[] args){
+     VideoEncodingService myMovie = new VideoEncodingService("007.mpeg", "12321");
+     myMovie.StartVideoEncoding();
+  }
+}
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
@@ -89,6 +88,46 @@ definiert haben.
                                                           "12321",
                                                           triggerMe);
 ```
+
+> In C würden wir an dieser Stelle von einem Funktionspointer sprechen.
+
+```c FunktionPointer.c
+// https://www.geeksforgeeks.org/function-pointer-in-c/
+
+#include <stdio.h>
+void add(int a, int b)
+{
+    printf("Addition is %d\n", a+b);
+}
+
+void subtract(int a, int b)
+{
+    printf("Subtraction is %d\n", a-b);
+}
+
+void multiply(int a, int b)
+{
+    printf("Multiplication is %d\n", a*b);
+}
+
+int main()
+{
+    // fun_ptr_arr is an array of function pointers
+    void (*fun_ptr_arr[])(int, int) = {add, subtract, multiply};
+    unsigned int ch, a = 15, b = 10;
+
+    printf("Enter Choice: 0 for add, 1 for subtract and 2 "
+            "for multiply\n");
+    scanf("%d", &ch);
+
+    if (ch > 2) return 0;
+
+    (*fun_ptr_arr[ch])(a, b);
+
+    return 0;
+}
+```
+@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 ### Grundidee
 
@@ -131,41 +170,41 @@ using System.Reflection;
 using System.Collections.Generic;
 
 
-    // Schritt 1
-    public delegate void NotifyUser(string userId, string filename);
+// Schritt 1
+public delegate void NotifyUser(string userId, string filename);
 
-    public class VideoEncodingService{
+public class VideoEncodingService
+{
+  private string userId;
+  private string filename;
 
-      private string userId;
-      private string filename;
+  public VideoEncodingService(string filename, string userId){
+     this.userId = userId;
+     this.filename = filename;
+  }
 
-      public VideoEncodingService(string filename, string userId){
-         this.userId = userId;
-         this.filename = filename;
-      }
+  public void StartVideoEncoding(NotifyUser notifier){
+     Console.WriteLine("The encoding job takes a while!");
+      // Schritt 3
+      notifier(userId, filename);
+  }
+}
 
-      public void StartVideoEncoding(NotifyUser notifier){
-         Console.WriteLine("The encoding job takes a while!");
-          // Schritt 3
-          notifier(userId, filename);
-      }
-    }
+public class Program
+{
+  // Die Notifikationsmethode ist nun Bestandteil der "Nutzerklasse"
+  public static void NotifyUserByText(string userId, string filename){
+    Console.WriteLine("Dear user {0}, your encoding job {1} was finished",
+                      userId, filename);
+  }
 
-    public class Program{
-
-      // Die Notifikationsmethode ist nun Bestandteil der "Nutzerklasse"
-      public static void NotifyUserByText(string userId, string filename){
-        Console.WriteLine("Dear user {0}, your encoding job {1} was finished",
-                          userId, filename);
-      }
-
-      public static void Main(string[] args){
-         VideoEncodingService myMovie = new VideoEncodingService("007.mpeg", "12321");
-         // Schritt 2
-         NotifyUser notifyMe = new NotifyUser(NotifyUserByText);
-         myMovie.StartVideoEncoding(notifyMe);
-      }
-    }
+  public static void Main(string[] args){
+     VideoEncodingService myMovie = new VideoEncodingService("007.mpeg", "12321");
+     // Schritt 2
+     NotifyUser notifyMe = new NotifyUser(NotifyUserByText);
+     myMovie.StartVideoEncoding(notifyMe);
+  }
+}
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
@@ -237,45 +276,41 @@ using System.Reflection;
 using System.Collections.Generic;
 
 
-    public class Program{
+public class Program
+{
+  delegate int Calc(int x, int y);
 
-      delegate int Calc(int x, int y);
+  static int Add(int x, int y){
+      Console.WriteLine("x + y");
+      return x + y;
+  }
 
-      static int Add(int x, int y){
-          Console.WriteLine("x + y");
-          return x + y;
-      }
+  static int Multiply(int x, int y){
+      Console.WriteLine("x * y");
+      return x * y;
+  }
 
-      static int Multiply(int x, int y){
-          Console.WriteLine("x * y");
-          return x * y;
-      }
+  static int Divide(int x, int y){
+      Console.WriteLine("x / y");
+      return x / y;
+  }
 
-      static int Divide(int x, int y){
-          Console.WriteLine("x / y");
-          return x / y;
-      }
-
-      public static void Main(string[] args){
-        // alte Variante
-        // Calc computer1 = new Calc(Divide);
-        // neue Variante:
-        // Calc computer2 = Divide;
-
-        Calc computer3 = Add;
-        computer3 += Multiply;
-        computer3 += Multiply;
-        computer3 += Divide;
-        computer3 -= Add;
-
-        Console.WriteLine("Zahl von eingebundenen Delegates {0}",
-                          computer3.GetInvocationList().GetLength(0));
-
-        Console.WriteLine("Ergebnis des letzten Methodenaufrufes {0}",
-                                                          computer3(15, 5));
-
-      }
-    }
+  public static void Main(string[] args){
+    // alte Variante
+    // Calc computer1 = new Calc(Divide);
+    // neue Variante:
+    // Calc computer2 = Divide;
+    Calc computer3 = Add;
+    computer3 += Multiply;
+    computer3 += Multiply;
+    computer3 += Divide;
+    computer3 -= Add;
+    Console.WriteLine("Zahl von eingebundenen Delegates {0}",
+                      computer3.GetInvocationList().GetLength(0));
+    Console.WriteLine("Ergebnis des letzten Methodenaufrufes {0}",
+                                                      computer3(15, 5));
+  }
+}
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
@@ -312,7 +347,7 @@ kann von jeder Klasse oder Struktur geerbt und implementiert werden. Ein Delegat
 kann für eine Methode in einer beliebigen Klasse erstellt werden, sofern die
 Methode zur Methodensignatur des Delegaten passt.
 
-> Merke: In beiden Fällen kann die Schnittstellenreferenz oder ein Delegat kann
+> Merke: In beiden Fällen kann die Schnittstellenreferenz oder ein Delegat
 > von einem  Objekt verwendet werden, das keine Kenntnis von der Klasse hat, die
 > die  Schnittstellen- oder Delegatmethode implementiert.
 
@@ -332,17 +367,20 @@ Verwenden Sie eine Schnittstelle wenn:
 + Die Klasse, die die Schnittstelle verwendet, möchte diese Schnittstelle in andere Schnittstellen- oder Klassentypen umwandeln.
 + Die implementierte Methode ist mit dem Typ oder der Identität der Klasse verknüpft, z. B. mit Vergleichsmethoden.
 
-Ein Gegenbeispiel einer Einzelmethodenschnittstelle anstelle eines Delegaten ist
+Ein Beispiel für die kombinierte Anwendung eines Delegaten ist
 `IComparable` oder die generische Version `IComparable<T>`. `IComparable`
 deklariert die `CompareTo`-Methode, die eine Ganzzahl zurückgibt, die eine
 Beziehung angibt, die kleiner, gleich oder größer als zwei Objekte desselben
 Typs ist. Damit kann `IComparable` Grundlage für einen Sortieralgorithmus
-verwendet werden. Obwohl die Verwendung einer Delegatenvergleichsmethode als
-Grundlage eines Sortieralgorithmus gültig wäre, ist dies nicht ideal. Da die
+verwendet werden. Alternativ kann aber auch eine Delegatenvergleichsmethode
+übergeben werden.
+
+Obwohl die Verwendung einer Delegatenvergleichsmethode als
+Grundlage eines Sortieralgorithmus gültig ist, gestaltet sich die fehlende Zuordnung nicht ideal. Da die
 Fähigkeit zum Vergleichen zur Klasse gehört und sich der Vergleichsalgorithmus
 zur Laufzeit nicht ändert, ist eine Einzelmethodenschnittstelle ideal.
 
-(aus https://docs.microsoft.com/en-us/previous-versions/visualstudio/visual-studio-2010/ms173173(v=vs.100))
+Vergleichen Sie dazu [Link](https://docs.microsoft.com/de-de/dotnet/api/system.collections.generic.list-1.sort?view=net-5.0)!
 
 ## Praktische Implementierung
 
@@ -368,6 +406,7 @@ Das Erstellen anonymer Methoden verkürzt den Code, da nunmehr ein Codeblock als
 ```csharp
 // Declare a delegate pointing at an anonymous function.
 Del d = delegate(int k) { /* ... */ };
+
 ```
 Das folgende Codebeispiel illustriert die Verwendung. Dabei wird auch deutlich, wie
 eine Methodenreferenz durch einen anderen ersetzt werden kann.
@@ -377,36 +416,33 @@ using System;
 using System.Reflection;
 using System.Collections.Generic;
 
-
 // Declare a delegate.
 delegate void Printer(string s);
 
+public class Program{
 
-    public class Program{
+  static void DoWork(string k)
+  {
+      System.Console.WriteLine(k);
+  }
 
-      static void DoWork(string k)      {
-          System.Console.WriteLine(k);
-      }
+  public static void Main(string[] args){
+    // Anonyme Deklaration
+    Printer p = delegate(string j)
+    {
+        Console.WriteLine(j);
+    };
 
-      public static void Main(string[] args){
+    p("The delegate using the anonymous method is called.");
+    // Der existierende Delegat wird nun mit einer konkreten Methode
+    // verknüpft
+    p = DoWork;
 
-          // Anonyme Deklaration
-          Printer p = delegate(string j)
-          {
-              Console.WriteLine(j);
-          };
-          p("The delegate using the anonymous method is called.");
-
-          // Der existierende Delegat wird nun mit einer konkreten Methode
-          // verknüpft
-          p = DoWork;
-          // alternativ könnte man auch einen neuen Delegaten anlegen
-          //Printer p1 = new Printer(DoWork);
-
-          p("The delegate using the named method is called.");
-
-      }
-    }
+    // alternativ könnte man auch einen neuen Delegaten anlegen
+    //Printer p1 = new Printer(DoWork);
+    p("The delegate using the named method is called.");
+  }
+}
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
@@ -418,9 +454,9 @@ Ein Lambdaausdruck ist ein Codeblock, der wie ein Objekt behandelt wird. Er kann
 ```csharp
 (<Paramter>) => { expression or statement; }
 
-(int a) => { return a * 2; }; // Anweisungsblock
-(int a) => a * 2; // einzelner Ausdruck
-(int a) => { }; // leerer Anweisungsblock
+(int a) => a * 2;             // einzelner Ausdruck - Ausdruckslambda
+(int a) => { return a * 2; }; // Anweisungsblock    - Anweisungslambda
+
 ```
 
 ```csharp           LambdaDelegate
@@ -428,20 +464,40 @@ using System;
 using System.Reflection;
 using System.Collections.Generic;
 
+public class Program
+{
+  public delegate int Del( int Value);
+  public static void Main(string[] args){
+      Del obj = (Value) => {
+              int x=Value*2;
+              return x;
+      };
+      Console.WriteLine(obj(5));
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
+Jeder Lambdaausdruck kann in einen Delegat-Typ konvertiert werden. Der Delegattyp, in den ein Lambdaausdruck konvertiert werden kann, wird durch die Typen seiner Parameter und Rückgabewerte definiert.
 
-    public class Program{
+```csharp           LambdaDelegate
+using System;  
+using System.Collections.Generic;  
 
-      public delegate int Del( int Value);
-
-      public static void Main(string[] args){
-          Del obj = (Value) => {
-                  int x=Value*2;
-                  return x;
-          };
-          Console.WriteLine(obj(5));
-      }
-    }
+public static class demo  
+{  
+  public static void Main()  
+  {  
+      List<int> list = new List<int>() { 1, 2, 3, 4, 5, 6 };  
+      List<int> evenNumbers = list.FindAll(x => (x % 2) == 0);  
+      foreach (var num in evenNumbers)  
+      {  
+          Console.Write("{0} ", num);  
+      }  
+      Console.WriteLine();  
+      Console.Read();  
+  }  
+}
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
@@ -451,66 +507,54 @@ Delegaten können auch als Generics realisiert werden. Das folgende Beispiel
 wendet ein Delegate "Transformer" auf ein Array von Werten an. Dabei stellt
 C# sicher, dass der Typ der übergebenen Parameter in der gesamten Verarbeitungskette übernommen wird.
 
-
-```csharp           GenericDelegates
+```csharp           GenericDelegates.cs
 using System;
 using System.Reflection;
 using System.Collections.Generic;
 
+// Schritt I - Generisches Delegat
+delegate T Transformer<T>(T x);
 
-    // Schritt I - Generisches Delegat
-    delegate T Transformer<T>(T x);
+class Utility
+{
+  public static void Transform<T>(ref T[] values, Transformer<T> trans)
+  {
+      for (int i = 0; i < values.Length; ++i)
+          values[i] = trans(values[i]);
+  }
+}
 
-    class Utility{
-        public static void Transform<T>(ref T[] values, Transformer<T> trans)
-        {
-            for (int i = 0; i < values.Length; ++i)
-                values[i] = trans(values[i]);
-        }
-    }
+public class Program
+{
+  // Schritt II - Spezifische Methode, die der Delegatensignatur entspricht
+  static int Square(int x){
+      Console.WriteLine("This is method Square(int x)");
+      return x*x;
+  }
 
-    public class Program{
+  static double Square(double x){
+      Console.WriteLine("This is method Square(double x)");
+      return x*x;
+  }
 
-      // Schritt II - Spezifische Methode, die der Delegatensignatur entspricht
-      static int Square(int x){
-          Console.WriteLine("This is method Square(int x)");
-          return x*x;
-      }
+  static void printArray<T>(T[] values){
+      foreach(T i in values)
+          Console.Write(i + " ");
+      Console.WriteLine();
+  }
 
-      static double Square(double x){
-          Console.WriteLine("This is method Square(double x)");
-          return x*x;
-      }
+  public static void Main(string[] args){
+    int[] values = { 1, 2, 3 };
+    printArray<int>(values);
 
-      static void printArray<T>(T[] values){
-          foreach(T i in values)
-              Console.Write(i + " ");
-          Console.WriteLine();
-      }
-
-      public static void Main(string[] args){
-        int[] values = { 1, 2, 3 };
-        printArray<int>(values);
-
-        //
-        Utility.Transform<int>(ref values, Square);
-        // gleichermaßen aber auch mit impliziter Typauswahl möglich
-        // Utility.Transform(values, Square);
-        printArray(values);
-      }
-    }
+    Transformer <int> t = new Transformer<int>(Square);
+    Utility.Transform<int>(ref values, t);
+    printArray(values);
+  }
+}
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-Beachten Sie, dass Sie alle expliziten Benennungen des Datentypen in
-
-```
-printArray<Type>(values)
-Utility.Transform<Type>(ref values, Square);
-```
-
-entfernen können, die Ausführungsumgebung ordnet den generischen Delegaten eine
-passende Methode zu.
 
 ### Action / Func
 
@@ -533,11 +577,11 @@ delegate void Action<in T1, in T2, in T3>(T1 arg1, T2 arg2, T3 arg3);
 Im folgenden Beispiel wir die Anwendung illustriert. Dabei werden 3 Delegates
 genutzt um die Funktionen `PrintHello` und `Square()` zu referenzieren.
 
-| Delegate-Variante | Bedeutung                                                                  |
-| ----------------- | -------------------------------------------------------------------------- |
+| Delegate-Variante | Bedeutung                                                                 |
+| ----------------- | ------------------------------------------------------------------------- |
 | myOutput          | C#1.0 Version mit konkreter Methode und individuellem Delegaten (Zeile 8) |
-| myActionOutput    | Generischer Delegatentyp ohne Rückgabewert                                 |
-| myFuncOutput                  |    Generischer Delegatentyp mit Rückgabewert                                                                        |
+| myActionOutput    | Generischer Delegatentyp ohne Rückgabewert `Action`                       |
+| myFuncOutput      | Generischer Delegatentyp mit Rückgabewert `Func`                          |
 
 
 ```csharp           ActionUndFunc
@@ -545,40 +589,50 @@ using System;
 using System.Reflection;
 using System.Collections.Generic;
 
+public delegate void Output(string text);
 
+public class Program
+{
+  static void PrintHello(string text)
+  {
+      Console.WriteLine(text);
+  }
 
-    public delegate void Output(string text);
+  static int Square(int x)
+  {
+      Console.WriteLine("This is method Square(int x)");
+      return x*x;
+  }
 
-    public class Program{
+  static double Square(double x)
+  {
+      Console.WriteLine("This is method Square(double x)");
+      return x*x;
+  }
 
-      static void PrintHello(string text){
-          Console.WriteLine(text);
-      }
-
-      static int Square(int x){
-          Console.WriteLine("This is method Square(int x)");
-          return x*x;
-      }
-
-      static double Square(double x){
-          Console.WriteLine("This is method Square(double x)");
-          return x*x;
-      }
-
-      public static void Main(string[] args){
-         Output myOutput = PrintHello;
-         myOutput("Das ist eine Textausgabe");
-
-         Action<string> myActionOutput = PrintHello;
-         myActionOutput("Das ist eine Action-Testausgabe!");
-
-         Func<float, float> myFuncOutput = Square;
-         Console.WriteLine(myFuncOutput(5));
-      }
-    }
+  public static void Main(string[] args){
+     Output myOutput = PrintHello;
+     myOutput("Das ist eine Textausgabe");
+     Action<string> myActionOutput = PrintHello;
+     myActionOutput("Das ist eine Action-Testausgabe!");
+     Func<float, float> myFuncOutput = Square;
+     Console.WriteLine(myFuncOutput(5));
+  }
+}
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
+Natürlich lassen sich auf `Func` und `Action` auch anonyme Methoden und Lambda Expressions anwenden!
+
+```
+Func<string, string> MyLambdaAction = text => text + "modifed by Lambda";
+Console.WriteLine(MyLambdaAction("Tests"));
+```
+
+Warum würde die Verwendung von Action an dieser Stelle einen Fehler generieren?
+
 ## Aufgaben der Woche
 
-- [ ]
+- [ ] Vertiefen Sie das erlernte anhand von zusätzichen Materialien
+
+!?[alt-text](https://www.youtube.com/watch?v=R8Blt5c-Vi4)
