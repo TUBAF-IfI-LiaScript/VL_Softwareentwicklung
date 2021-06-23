@@ -218,7 +218,7 @@ on:
 
 **Runner**
 
-Die Ausführung des "Was" kann auf jedem Rechner in Form eines Runners erfolgen, der entweder bei GitHub oder unabhängig gehostetet wird. Wenn ein Runner einen Job aufnimmt, führt er die Aktionen des Jobs aus und meldet den Fortschritt, die Protokolle und die Endergebnisse an GitHub zurück.
+Die Ausführung des "Was" kann auf jedem Rechner in Form eines Runners erfolgen, der entweder bei GitHub oder unabhängig gehostet wird. Wenn ein Runner einen Job aufnimmt, führt er die Aktionen des Jobs aus und meldet den Fortschritt, die Protokolle und die Endergebnisse an GitHub zurück.
 
 ```yaml
 runs-on: ubuntu-latest
@@ -546,7 +546,7 @@ jobs:
 
 ## Aufgaben der Woche
 
-+ Klonen Sie mein Repository von [https://github.com/SebastianZug/CSharpExample](https://github.com/SebastianZug/CSharpExample)
-+ Ergänzen Sie in der Build Action ein weiteres Target, zum Beispiel "Windows"
-+ Erweitern Sie das Ganze um weitere Unit-Tests, ergänzen Sie den Eintrag in der README.md Datei
-+ Übernehmen Sie das Konzept der automatischen Generierung eines Klassendiagramm aus den Übungsblättern, so dass auf dem Deckblatt der Dokumentation die aktuelle Klassenstruktur, die automatisch generiert wurde, sichtbar wird.
+[ ] Klonen Sie mein Repository von [https://github.com/SebastianZug/CSharpExample](https://github.com/SebastianZug/CSharpExample)
+[ ] Ergänzen Sie in der Build Action ein weiteres Target, zum Beispiel "Windows"
+[ ] Erweitern Sie das Ganze um weitere Unit-Tests, ergänzen Sie den Eintrag in der README.md Datei
+[ ] Übernehmen Sie das Konzept der automatischen Generierung eines Klassendiagramm aus den Übungsblättern, so dass auf dem Deckblatt der Dokumentation die aktuelle Klassenstruktur, die automatisch generiert wurde, sichtbar wird.
