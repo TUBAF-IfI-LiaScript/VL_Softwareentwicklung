@@ -78,7 +78,7 @@ public sealed class Thread{
   public bool IsBackground{get;};
   public void Start();
   public void Join();
-  public void Abort();
+  public void Abort(Object);
   public static void Sleep(int milliseconds);
 }
 ```
