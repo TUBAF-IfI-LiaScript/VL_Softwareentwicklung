@@ -231,7 +231,7 @@ vorbereiten, mit denen die Inhalte der Vorlesung vertieft werden. Wir motivieren
 Sie sich dafür ein Gruppen von 2 Studierenden zu organisieren.
 
 <!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 815px;" -->
-``` ascii
+```ascii
                    .-.       .-.
  Einführung C#    (0-2)     ( 3 ) Einführung Git/ GitHub
                    '-'       '-'  Teamarbeit

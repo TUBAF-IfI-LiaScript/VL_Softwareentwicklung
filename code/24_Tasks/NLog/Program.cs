@@ -22,6 +22,7 @@ public class MyApp
         BasicConfigurator.Configure();
 
         log.Info("Entering application.");
+        log.Error("Hier passiert irgendwas");
         Bar bar = new Bar();
         bar.DoIt();
         log.Info("Exiting application.");

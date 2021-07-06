@@ -2,6 +2,7 @@
 
 using System;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace MyAsyncExample
 {
@@ -10,6 +11,7 @@ namespace MyAsyncExample
         DoSomethingAsync();
         for (int i = 0; i < 100; i++){
           Console.Write(".");
+          Thread.Sleep(1);
         }
       }
       static async void DoSomethingAsync()
