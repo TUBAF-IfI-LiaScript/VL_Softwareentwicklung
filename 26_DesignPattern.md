@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.0
+version:  1.0.1
 language: de
 narrator: Deutsch Female
 
@@ -114,7 +114,7 @@ In folgendem Beispiel wurde allein die Klasse `Circle` implementiert. Es exisiti
 
 Die Implementierung in `Square` kann die aus `Shape` ignorieren, verdecken oder überschreiben.
 
-```csharp    Polymorphie
+```csharp  Overriding
 using System;
 using System.Collections.Generic;
 
@@ -141,7 +141,15 @@ public class Program {
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+```xml--
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
 Erklären Sie die Bedeutung der Schlüsselworte `virtual` und `override`.
 
