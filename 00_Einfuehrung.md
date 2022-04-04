@@ -2,8 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, Fritz Apelt, `KoKoKotlin`
 email:    sebastian.zug@informatik.tu-freiberg.de
-
-version:  1.0.2
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 comment:  Motivation der Vorlesung Softwareentwicklung
@@ -136,13 +135,13 @@ Die On-Board-Units des Systems
 
 ### Dozenten
 
-| Name            | Email                                                  |
-|:--------------- |:------------------------------------------------------ |
-| Sebastian Zug   | sebastian.zug@informatik.tu-freiberg.de                |
-| Galina Rudolf   | galina.rudolf@informatik.tu-freiberg.de                |
-| Nico Sonack     | nico.sonack@student.tu-freiberg.de                     |
-| Baldur Paulwitz | baldur-heinrich-eckart.paulwitz@student.tu-freiberg.de |
-| Anne Gierig     | anne.gierich@student.tu-freiberg.de                    |
+| Name          | Email                                   |
+|:------------- |:--------------------------------------- |
+| Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de |
+| Galina Rudolf | galina.rudolf@informatik.tu-freiberg.de |
+| Nico Sonack   | nico.sonack@student.tu-freiberg.de      |
+| Felix Busch   | Felix.Busch@student.tu-freiberg.de      |
+| Anne Gierig   | anne.gierich@student.tu-freiberg.de     |
 
 
 ### Ablauf
@@ -152,12 +151,12 @@ Jetzt wird es etwas komplizierter ... die Veranstaltung kombiniert nämlich zwei
 Vorlesungen:
 
 <!--data-type="none"-->
-|                 | _Softwareentwicklung (SEW)_      | _Einführung in die Softwareentwicklung (EiS)_                                         |
+|                 | _Softwareentwicklung (SWE)_      | _Einführung in die Softwareentwicklung (EiS)_                                         |
 | --------------- | -------------------------------- | ------------------------------------------------------------------------------------- |
 | Hörerkreis      | Fakultät 1 + interessierte Hörer | Fakultät 4 - Studiengang Engineering                                                  |
 | Leistungspunkte | 9                                | 6                                                                                     |
 | Vorlesungen     | 28 (2 Feiertage)                 | 15 (bis 31. Mai 2021)                                                                 |
-| Übungen         | ab 25. April 2 x wöchentlich     | ab Mai 8 Übungen                                                                      |
+| Übungen         | ab Mai 2 x wöchentlich           | ab 25. April 8 Übungen                                                                |
 |                 |                                  | zusätzliches Python Tutorial ab Juni                                                  |
 | Prüfungsform    | Klausur oder Projekt             | maschinenbauspezifisches Software-Projekt (im Wintersemester 2021/22)                 |
 |                 |                                  | Prüfungsvoraussetzung: Erfolgreiche Bearbeitung der finalen Aufgabe im Sommersemester |
@@ -186,10 +185,10 @@ Vorlesungen:
 | 7     | 16. Mai   | Klassenelemente in C#  / Vererbung                |                            |
 |       | 20. Mai   | Versionsmanagement im Softwareentwicklungsprozess |                            |
 | 8     | 23. Mai   | Git und Continuous integration in GitHub          |                            |
-|       | 27. Mai   | _Pfingstmontag_                                   |                            |
-| 9     | 30. Mai   | UML Konzepte                                      | Ende EiS Vorlesungsinhalte |
-|       | 3. Juni   | ausgewählten UML Diagrammtypen                    |                            |
-| 10    | 6. Juni   | UML Anwendungsbeispiel                            |                            |
+|       | 27. Mai   | UML Konzepte                                      |                            |
+| 9     | 30. Mai   | UML Diagrammtypen                                 | Ende EiS Vorlesungsinhalte |
+|       | 3. Juni   | UML Anwendungsbeispiel                            |                            |
+| 10    | 6. Juni   | _Pfingstmontag_                                   |                            |
 |       | 10. Juni  | Testen                                            |                            |
 | 11    | 13. Juni  | Dokumentation                                     |                            |
 |       | 17. Juni  | Build Toolchains und ihr Einsatz                  |                            |
@@ -311,7 +310,7 @@ In der Klausur werden neben den Programmierfähigkeiten und dem konzeptionellen
 Verständnis auch die Werkzeuge der Softwareentwicklung adressiert!
 
 - **Softwareentwicklung:**
-  Konventionelle Klausur / Programmieraufgabe in Zweier-Team
+  Konventionelle Klausur ODER Programmieraufgabe in Zweier-Team anhand einer selbstgewählten Aufgabe
 
 - **Einführung in die Softwareentwicklung:**
   Teamprojekt und Projektpräsentationen (im Wintersemester 2022/23) bei bestandener Prüfungsvorleistung in Form einer Teamaufgabe im Sommersemester

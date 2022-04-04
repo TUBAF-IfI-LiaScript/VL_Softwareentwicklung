@@ -19,10 +19,10 @@
 | 7     | 16. Mai   | Klassenelemente in C#  / Vererbung                |
 |       | 20. Mai   | Versionsmanagement im Softwareentwicklungsprozess |
 | 8     | 23. Mai   | Git und Continuous integration in GitHub          |
-|       | 27. Mai   | _Pfingstmontag_                                   |
-| 9     | 30. Mai   | UML Konzepte                                      |
-|       | 3. Juni   | ausgewählten UML Diagrammtypen                    |
-| 10    | 6. Juni   | UML Anwendungsbeispiel                            |
+|       | 27. Mai   | UML Konzepte                                      |
+| 9     | 30. Mai   | UML Diagrammtypen                                 | 
+|       | 3. Juni   | UML Anwendungsbeispiel                            |
+| 10    | 6. Juni   | _Pfingstmontag_                                   |
 |       | 10. Juni  | Testen                                            |
 | 11    | 13. Juni  | Dokumentation                                     |
 |       | 17. Juni  | Build Toolchains und ihr Einsatz                  |
