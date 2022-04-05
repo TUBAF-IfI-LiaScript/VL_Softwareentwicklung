@@ -4,33 +4,33 @@
 
 | Woche | Tag       | Inhalt der Vorlesung                              |
 |:----- | --------- |:------------------------------------------------- |
-| 1     | 5. April  | _Ostermontag_                                     |
-|       | 6. April  | Organisation, Einführung von GitHub und LiaScript |
-| 2     | 12. April | Softwareentwicklung als Prozess                   |
-|       | 13. April | Konzepte von Dotnet und C#                        |
-| 3     | 19. April | Elemente der Sprache C# (Datentypen)              |
-|       | 20. April | Elemente der Sprache C# (Forts. Datentypen)       |
-| 4     | 26. April | Elemente der Sprache C# (Ein-/Ausgaben)           |
-|       | 27. April | Programmfluss und Funktionen                      |
-| 5     | 3. Mai    | Strukturen / Konzepte der OOP                     |
-|       | 4. Mai    | Säulen Objektorientierter Programmierung          |
-| 6     | 10. Mai   | Klassenelemente in C#  / Vererbung                |
-|       | 11. Mai   | Klassenelemente in C#  / Vererbung                |
-| 7     | 17. Mai   | Versionsmanagement im Softwareentwicklungsprozess |
-|       | 18. Mai   | Git und Continuous integration in GitHub          |
-| 8     | 24. Mai   | _Pfingstmontag_                                   |
-|       | 25. Mai   | UML Konzepte                                      |
-| 9     | 31. Mai   | ausgewählten UML Diagrammtypen                    |
-|       | 1. Juni   | UML Anwendungsbeispiel                            |
-| 10    | 7. Juni   | Testen                                            |
-|       | 8. Juni   | Dokumentation                                     |
-| 11    | 14. Juni  | Build Toolchains und ihr Einsatz                  |
-|       | 15. Juni  | Generics                                          |
-| 12    | 21. Juni  | Container                                         |
-|       | 22. Juni  | Delegaten                                         |
-| 13    | 28. Juni  | Events                                            |
-|       | 29. Juni  | Threadkonzepte in C#                              |
-| 14    | 5. Juli   | Taskmodell                                        |
-|       | 6. Juli   | Language Integrated Query                         |
-| 15    | 12. Juli  |                                                   | 
-|       | 13. Juli  |                                                   |
+| 1     | 4. April  | Organisation, Einführung von GitHub und LiaScript |
+|       | 8. April  | Softwareentwicklung als Prozess                   |
+| 2     | 11. April | Konzepte von Dotnet und C#                        |
+|       | 15. April | _Karfreitag_                                      |
+| 3     | 18. April | _Ostermontag_                                     |
+|       | 22. April | Elemente der Sprache C# (Datentypen)              |
+| 4     | 25. April | Elemente der Sprache C# (Forts. Datentypen)       |
+|       | 29. April | Elemente der Sprache C# (Ein-/Ausgaben)           |
+| 5     | 2. Mai    | Programmfluss und Funktionen                      |
+|       | 6. Mai    | Strukturen / Konzepte der OOP                     |
+| 6     | 9. Mai    | Säulen Objektorientierter Programmierung          |
+|       | 13. Mai   | Klassenelemente in C#  / Vererbung                |
+| 7     | 16. Mai   | Klassenelemente in C#  / Vererbung                |
+|       | 20. Mai   | Versionsmanagement im Softwareentwicklungsprozess |
+| 8     | 23. Mai   | Git und Continuous integration in GitHub          |
+|       | 27. Mai   | UML Konzepte                                      |
+| 9     | 30. Mai   | UML Diagrammtypen                                 | 
+|       | 3. Juni   | UML Anwendungsbeispiel                            |
+| 10    | 6. Juni   | _Pfingstmontag_                                   |
+|       | 10. Juni  | Testen                                            |
+| 11    | 13. Juni  | Dokumentation                                     |
+|       | 17. Juni  | Build Toolchains und ihr Einsatz                  |
+| 12    | 20. Juni  | Generics                                          |
+|       | 24. Juni  | Container                                         |
+| 13    | 27. Juni  | Delegaten                                         |
+|       | 1. Juli   | Events                                            |
+| 14    | 4. Juli   | Threadkonzepte in C#                              |
+|       | 8. Juli   | Taskmodell                                        |
+| 15    | 11. Juli  | Language Integrated Query                         |
+|       | 15. Juli  | Design Pattern                                    |
