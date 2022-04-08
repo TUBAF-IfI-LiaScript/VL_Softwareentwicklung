@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, Christoph Pooch,`KoKoKotlin`, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.0
+version:  1.0.1
 language: de
 narrator: Deutsch Female
 
@@ -84,7 +84,7 @@ Welche Querbeziehungen ("Während der Tests wird erkannt, dass die Implementieru
 Gemäß ISO 9126 gibt es die sechs folgenden Qualitätsmerkmale für
 Softwareprodukte:
 
-![ISO 9126](./img/01_Software/ISO9126.png)
+![ISO 9126](./img/01_Software/ISO9126.png "Die Qualitätskriterien für Software als Produkt nach ISO 9126 [Wiki9126]")<!-- style="width: 50%; max-width=315px;" -->
 
 [^Wiki9126]
 
@@ -95,7 +95,7 @@ Nachfolger ISO 25010: Zusätzlich
 
 Die Norm kann als eine Art Checkliste verstanden werden.
 
-[^Wiki9126]: wikimedia: Autor Sae1962, Quality criteria according to ISO 9126, [Link](https://commons.wikimedia.org/wiki/File:ISO_9126_quality_(en).svg)
+[^Wiki9126]: Von Sae1962 - Eigenes Werk, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=52216179
 
 ## Und warum der ganze Aufwand?
 
@@ -191,6 +191,7 @@ Die Zusammenfassung wurde durch die Ausführungen von [^Lemburg] motiviert
 2. Architektur
 
     + Die Systemarchitektur ist nicht oder nur sehr umständlich erweiterbar (fehlende Datenkapselung, fehlende Modularität)
+    + Es wird ein unnützes Maß an Komplexität in den Entwurf integriert: "_Es könnte doch sein, dass ..._"
 
 3. Entwicklungfluss
 
@@ -209,11 +210,10 @@ Die Zusammenfassung wurde durch die Ausführungen von [^Lemburg] motiviert
 
 ### Konsequenzen von Fehlern im Prozess
 
+> **Ariane Jungfernflug**
 
-                                     {{0-1}}
+                                    {{1-2}}
 *******************************************************************************
-
-**Ariane Jungfernflug**
 
 V88 war die Startnummer des Erstflugs der europäischen Schwerlast-Trägerrakete
 Ariane 5 am 4. Juni 1996. Die Rakete trug die Seriennummer 501. Der Flug endete
@@ -244,14 +244,16 @@ P_M_DERIVE(T_ALG.E_BH) := UC_16S_EN_16NS(TBD.T_ENTIER_16S
 
 *******************************************************************************
 
-                                     {{1-2}}
-*******************************************************************************
 
-**Mars Rover**
+
+> **Mars Rover**
+
+                                   {{2-3}}
+*******************************************************************************
 
 Mars Pathfinder war ein US-amerikanischer Mars-Lander, der 1996 von der NASA eingesetzt wurde. Er brachte 1997 den ersten erfolgreichen Mars-Rover Sojourner auf die Marsoberfläche.
 
-![Mars Rover](./img/01_Software/Mars_pathfinder_panorama_large.jpg)[^NasaMars]
+![Mars Rover](./img/01_Software/Mars_pathfinder_panorama_large.jpg "Blick vom Mars Lander auf die Oberfläche des Planeten [^NasaMars]")
 
 Nach dem Beginn der Aufzeichnung von meteorologischen Daten mit dem Sojourner traten plötzlich scheinbar zufällige System-Zurücksetzungen auf. Das Betriebssystem bootete neu, was mit einem Datenverlust einher ging.
 Diese Fehler waren aber auch schon auf der Erde aufgetreten ...
@@ -263,10 +265,10 @@ Weitere Informationen unter [What the media coudn't tell you about Mars Pathfind
 *******************************************************************************
 
 
-                                     {{2-3}}
-*******************************************************************************
+> **Aggressiver Gandhi**
 
-**Weiteres Beispiel aus unserem Wiki**
+                                      {{3-4}}
+*******************************************************************************
 
 Der als friedlich bekannte Inder Mahatma Gandhi ist im Spiele Civilization 5 dafür bekannt, besonders gerne nukleare Waffen zu nutzen. Diese Affinität ist einen Programmierfehler im ersten Teil zuzuordnen, in welchem der Agressionswert bestimmt, wie wahrscheinlich es ist, dass der Herrscher eine atomare Waffe benutzt. Gandhi startet dort mit einem Aggressionswert von 1, jedoch bekommt jede Demokratie bei Spielstart -2 Aggresionspunkte, was zu einem Wert von -1 führt. Binär betrachtet entspricht das folgender 8 Bit Zahl:
 
@@ -354,14 +356,14 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
                                      {{2}}
 *******************************************************************************
 
-| Aspekt                 | Bewertung                                                         |
-| ---------------------- | ----------------------------------------------------------------- |
-| Funktionalität         | feste Feldlänge, das Programm stürzt bei mehr als 10 Einträgen ab |
-| Zuverlässigkeit        | keine Überprüfung der Existenz der Datei, kein Schließen der Datei                          |
-| Benutzbarkeit          | im Programmcode enthaltene Dateinamen, feste Feldlänge            |
-| Effizienz              | quadratischer Aufwand der Sortierung                              |
-| Wartungsfreundlichkeit | fehlende Dokumentation, unverständliche Variablenbezeichner, redundante Codeelemente       |
-| Übertragbarkeit        |                                                                   |
+| Aspekt                 | Bewertung                                                                            |
+| ---------------------- | ------------------------------------------------------------------------------------ |
+| Funktionalität         | feste Feldlänge, das Programm stürzt bei mehr als 10 Einträgen ab                    |
+| Zuverlässigkeit        | keine Überprüfung der Existenz der Datei, kein Schließen der Datei                   |
+| Benutzbarkeit          | im Programmcode enthaltene Dateinamen, feste Feldlänge                               |
+| Effizienz              | quadratischer Aufwand der Sortierung                                                 |
+| Wartungsfreundlichkeit | fehlende Dokumentation, unverständliche Variablenbezeichner, redundante Codeelemente |
+| Übertragbarkeit        |                                                                                      |
 
 *******************************************************************************
 
@@ -423,7 +425,7 @@ style="width: 100%; max-width: 760px; display: block; margin-left: auto; margin-
      \
       Umsetzung                         Implementierung, Integration
        \
-        Überprüfung
+        Überprüfung                     Testen des Systems
          \
           Betrieb und Wartung           Installation, Anpassung                .
 ```
@@ -493,11 +495,9 @@ Nachteile:
                                      {{2}}
 *******************************************************************************
 
-Die Nachteile aus den sehr statisch ausgerichteten Modellen lassen sich für größere Projekte kaum umsetzen. Modernere Ansätze lösen den stringenten Ablauf auf und fokussieren einem schnelleren Einsatz: *Agile Softwareentwicklung*, *Rational Unified Process*, *Spiralmodell*
+> __Achtung:__ Die Nachteile aus den sehr statisch ausgerichteten Modellen lassen sich für größere Projekte kaum umsetzen. Modernere Ansätze lösen den stringenten Ablauf auf und fokussieren einem schnelleren Einsatz: *Agile Softwareentwicklung*, *Rational Unified Process*, *Spiralmodell* -  [Link](https://www.dev-insider.de/was-ist-agile-softwareentwicklung-a-569187/)
 
-Weitere Informationen zum Beispiel unter
 
-https://www.dev-insider.de/was-ist-agile-softwareentwicklung-a-569187/
 
 *******************************************************************************
 
@@ -510,37 +510,41 @@ https://www.dev-insider.de/was-ist-agile-softwareentwicklung-a-569187/
 
 **Klassifikation nach dem Einsatzzweck**
 
-Anforderungsanalyse
-* Spezifikation
-* Modellierung
++ Anforderungsanalyse
 
-Code-Erstellung (Editoren)
-* Editor, IDE
-* Dokumentation
+  * Spezifikation
+  * Modellierung
 
-Ausführung und Testen
-* Compiler, Interpreter
-* IDE, Build-System
-* Debugger
++ Code-Erstellung (Editoren)
 
-Koordination Entwicklungsprozess
-* Projektverwaltung
-* Code-Base Management und Versionierung
-* Deployment
-* Support
+  * Editor, IDE
+  * Dokumentation
+
++ Ausführung und Testen
+
+  * Compiler, Interpreter
+  * IDE, Build-System
+  * Debugger
+
++ Koordination Entwicklungsprozess
+
+  * Projektverwaltung
+  * Code-Base Management und Versionierung
+  * Deployment
+  * Support
 
 *******************************************************************************
 
                                    {{1}}
 *******************************************************************************
-**Spezifische Werkzeuge oder eine geschlossene Suite?**
+**Grad der Integration verschiedener Funktionalitäten**
 
 * Tools - einzelne Aktivitäten im Software Life-cycle
 * Workbenches - mehrere Werkzeuge
-* Environments - Kombination mehrerer Workbenches und Werkzeuge zur
+* Integrated Development Environments - Kombination mehrerer Workbenches und Werkzeuge zur
   Unterstützung des kompletten Software Life-cycle
 
-Texteditor vs. Integrated Development Environment (IDE)
+> Texteditor vs. Integrated Development Environment (IDE) ... worfür soll ich mich entscheiden?
 
 * Analyse des Workflows und der Formen der Zusammenarbeit
 * Analyse der verwendeten Spezifikations und Modellierungstechniken,
