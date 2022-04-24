@@ -1,6 +1,6 @@
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://LiaScript.github.io/course/?URL) ![GitHub contributors](https://img.shields.io/github/contributors/TUBAF-IfI-LiaScript/VL_Softwareentwicklung)
 
-# Übersicht zur Vorlesung (Sommersemester 2021)
+# Übersicht zur Vorlesung (Sommersemester 2022)
 
 | Woche | Tag       | Inhalt der Vorlesung                              |
 |:----- | --------- |:------------------------------------------------- |
