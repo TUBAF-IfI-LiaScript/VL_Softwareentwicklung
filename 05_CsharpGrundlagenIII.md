@@ -18,7 +18,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Einführung in die Basiselemente der Programmiersprache C# - Eingabe/Ausgabe, Ausnahmen`                                                                                                                                |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/05_CsharpGrundlagenIII.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/05_CsharpGrundlagenIII.md) |
@@ -85,7 +85,7 @@ public class Program
 {
   static void Main(string[] args)
   {
-		double[] values = new double[] {43.2234, 1.23123243, -123234.09};
+    double[] values = new double[] {43.2234, 1.23123243, -123234.09};
     Console.WriteLine(values);
     Console.WriteLine(values.ToString());
   }
@@ -180,7 +180,8 @@ public class Program
 | Format Symbol | Bedeutung                | Beispiel      |
 | ------------- | ------------------------ | ------------- |
 | G             | Default                  |               |
-| E, e          | Expoentiell              | 1.052033E+003 |
+| E, e          | Exponentiell             | 1.052033E+003 |
+| F, f          | Festkomma                | 123.45        |
 | X, x          | Hexadezimal              | 1FF           |
 | P, p          | Prozent                  | -38.8%        |
 | D, d          | Dezimal                  | 1231          |
@@ -638,6 +639,7 @@ public class Program
       // Beispiel 2: Division durch Null
       int a = 0, b = 5;
       //a = b / a;
+      //long num = long.Parse("NN");
   }
 }
 ```
@@ -682,7 +684,7 @@ public class Program
 {
   static int Berechnung(int a, int b)
   {
-  	int c=0;
+    int c=0;
     try
     {
         checked {c = a + b;}        // Fall 1
@@ -703,11 +705,12 @@ public class Program
 
 static void Main(string[] args)
 {
-    try
-    {
+    // try
+    // {
       Berechnung(int.MaxValue, 1);     // Fall 1
       //Berechnung(2, 0);              // Fall 2
-    }
+    // }
+    /*
     catch (DivideByZeroException e)
     {
       Console.WriteLine("[DivideByZero] " + e.Message);
@@ -716,6 +719,7 @@ static void Main(string[] args)
     {
     	Console.WriteLine("[GeneralExept] " + e.Message);
     }
+    */
     Console.WriteLine("Hier sind wir am Ende des Hauptprogrammes!");
   }
 }
