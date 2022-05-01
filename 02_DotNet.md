@@ -594,7 +594,6 @@ https://code.visualstudio.com/docs/languages/csharp
 
 
 ## Aufgaben
-=======
 
 - [ ] Installieren Sie das .NET 6 auf Ihrem Rechner und erfreuen Sie sich an einem ersten "Hello World"
 - [ ] Testen Sie mit einem Kommilitonen die Features von repl.it! Arbeiten Sie probeweise an einem gemeinsamen Dokument.
