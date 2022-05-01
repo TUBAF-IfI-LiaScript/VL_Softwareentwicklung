@@ -3,7 +3,7 @@
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `snikker123` & `Florian2501`
 
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.0
+version:  1.0.1
 language: de
 narrator: Deutsch Female
 
@@ -20,7 +20,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                    |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                      |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                    |
 | **Inhalte:**             | `Einführung in die Basiselemente der Programmiersprache C#`                                                                                            |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/03_CsharpGrundlagenI.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/03_CsharpGrundlagenI.md) |
@@ -42,11 +42,31 @@ public class Program
   static void Main(string[] args)
   {
     // Print Hello World message
-    Console.WriteLine("Glück auf" + " Freiberg");
+    string message = "Glück auf";
+    Console.WriteLine(message + " Freiberg");
+    Console.WriteLine(message + " Softwareentwickler");
   }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+
+```csharp  Coderunner.cs9
+using System;
+
+string message = "Glück auf";
+Console.WriteLine(message + " Freiberg");
+Console.WriteLine(message + " Softwareentwickler");
+```
+```xml   -myproject.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
 C# Programme umfassen
 
@@ -60,9 +80,18 @@ C# Programme umfassen
 
 Leerzeichen, Tabulatorsprünge oder Zeilenenden werden als Trennzeichen zwischen diesen Elementen interpretiert.
 
+```csharp    HelloWorldUgly.cs
+using System; public class Program {static void Main(string[] args){
+// Print Hello World message
+string message = "Glück auf"; Console.WriteLine(message + " Freiberg");
+Console.WriteLine(message + " Softwareentwickler");}}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+
 ### Schlüsselwörter
 
-... C# umfasst 77 Schlüsselwörter (C# 9.0), die immer klein geschrieben werden.
+... C# umfasst 77 Schlüsselwörter (C# 7.0), die immer klein geschrieben werden.
 Schlüsselwörter dürfen nicht als Namen verwendet werden. Ein vorangestelltes `@`
 ermöglicht Ausnahmen.
 
@@ -73,7 +102,7 @@ operator
 @class // class als Name !
 ```
 
-Welche Schlüsselwörter sind das?
+Welche Schlüsselwörter sind das?  (C# 7.0)
 
 | abstract    | as       | base     | bool       | break      | byte      |
 | case        | catch    | char     | checked    |`class`     | const     |
@@ -133,7 +162,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 ```
 
 Variablennamen umfassen Buchstaben, Ziffern oder `_`. Das erste Zeichen eines Namens muss ein Buchstabe (des Unicode-Zeichensatzes) oder ein `_` sein. Der C# Compiler ist
-*case sensitive* (Unterschied zwischen Groß- und Kleinschreibung, z.B. Test != test).
+*case sensitive* (Unterschied zwischen Groß- und Kleinschreibung, z.B. `Test != test`).
 
 ```csharp    GreekSymbols.cs
 using System;
@@ -205,7 +234,7 @@ public class Program
 
 ... analog zu C werden konstante Zeichen mit einfachen Hochkommas `'A'`, `'b'` und Zeichenkettenkonstanten `"Bergakademie Freiberg"` mit doppelten Hochkommas festgehalten. Es dürfen beliebige Zeichen bis auf die jeweiligen Hochkommas oder das `\` als Escape-Zeichen (wenn diese nicht mit dem Escape Zeichen kombiniert sind) eingeschlossen sein.
 
-```csharp    Print
+```csharp    StringVsChar
 using System;
 
 public class Program
@@ -214,10 +243,24 @@ public class Program
    {
        Console.WriteLine("Das ist ein ganzer Satz");
        Console.WriteLine('e');   // <- einzelnes Zeichen
+       Console.WriteLine("A" == 'A');
+   }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+```csharp    PrintLongLines
+using System;
+
+public class Program
+{
+   static void Main(string[] args)
+   {
        Console.WriteLine(@"Das ist ein ganz schön langer
                            Satz, der sich ohne die
                            Zeilenumbrüche blöd lesen
                            würde");
+      Console.WriteLine("Das ist ein ganz schön langer \nSatz, der sich ohne die \nZeilenumbrüche blöd lesen \nwürde");
        Console.WriteLine("Das ist ein ganz schön langer" +
                          "Satz, der sich ohne die" +
                          "Zeilenumbrüche blöd lesen" +
@@ -270,9 +313,10 @@ explizit adressiert.
 
 > **Frage:** Warum nutzen einige Programmiersprachen eine Typisierung, andere nicht?
 
+
 ```python    noTypes.py
 number = 5
-my_list = range(0,10)
+my_list = list(range(0,10))
 
 print(number)
 print(my_list)
@@ -280,7 +324,7 @@ print(my_list)
 #number = "Tralla Trulla"
 #print(number)
 ```
-@Pyodide.eval
+@LIA.eval(`["main.py"]`, `python3 -m compileall .`, `python3 main.py`)
 
 > **Merke:** Datentypen definieren unter anderem den möglichen "Inhalt", Speichermechanismen (Größe, Organisation).
 
@@ -403,6 +447,23 @@ notwendig.
 |                             | `D`    | double  | Double   | 64   |                                                          |
 |                             | `M`    | decimal | Decimal  | 128  |                                                          |
 
+
+```csharp    HelloWorld_rex.cs
+using System;
+
+public class Program
+{
+  static void Main(string[] args)
+  {
+    int i = 5;
+    Console.WriteLine(i.GetType());
+    Console.WriteLine(int.MinValue);
+    Console.WriteLine(int.MaxValue);
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
 {{1-2}}
 ********************************************************************************
 
@@ -498,12 +559,26 @@ public class Program
      Console.WriteLine("Experiment 1");
      Console.WriteLine("{0} + {1} = {2:G17}", fnumber, additional,
                                           fnumber + additional);
+     Console.WriteLine(fnumber ==(fnumber + additional));
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+
+```csharp    FloatingPoint_Experiments.cs
+using System;
+
+public class Program
+{
+    static void Main(string[] args)
+    {
      double value = .1;
      double result = 0;
      for (int ctr = 1; ctr <= 10000; ctr++){
           result += value;
      }
-     Console.WriteLine("\nExperiment 2");
+     Console.WriteLine("Experiment 2");
      Console.WriteLine(".1 Added 10000 times: {0:G17}", result);
     }
 }
@@ -553,9 +628,19 @@ Console.WriteLine(Double.IsNaN(0.0/0.0));//gibt true aus
 
 Konvertierungen beschreiben den Transformationsvorgang von einem Zahlentyp in einen anderen. Im Beispiel zuvor provoziert die Zeile
 
-```csharp
-float f = 5.1D;
+```csharp    FloatingPoint_Experiments.cs
+using System;
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+      float f = 5.1D;
+    }
+}
 ```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
 
 eine Fehlermeldung
 
@@ -729,17 +814,26 @@ public class Program
     {
       return Convert.ToString(value, 2).PadLeft(8,'0');
     }
+
     static void Main(string[] args)
     {
       int x = 21, y = 12;
       Console.WriteLine(printBinary(7));
-       Console.WriteLine("dezimal:{0:D}, binär:{1}", x, printBinary(x));
-       Console.WriteLine("dezimal:{0:D}, binär:{1}", y, printBinary(y));
-       Console.WriteLine("x & y  = {0}", printBinary(x & y));
-       Console.WriteLine("x | y  = {0}", printBinary(x | y));
-       Console.WriteLine("x << 1 = {0}", printBinary(x << 1));
-       Console.WriteLine("x >> 1 = {0}", printBinary(x >> 1));
+      Console.WriteLine("dezimal:{0:D}, binär:{1}", x, printBinary(x));
+      Console.WriteLine("dezimal:{0:D}, binär:{1}", y, printBinary(y));
+      Console.WriteLine("x & y  = {0}", printBinary(x & y));
+      Console.WriteLine("x | y  = {0}", printBinary(x | y));
+      Console.WriteLine("x << 1 = {0}", printBinary(x << 1));
+      Console.WriteLine("x >> 1 = {0}", printBinary(x >> 1));
     }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+
+## Aufgabe
+
+- [ ] Machen Sie sich noch mal mit dem Ariane 5 Desaster vertraut. Wie hätte eine C# Lösung ausgesehen, die den Absturz verhindert hätte?
+- [ ] Experimentieren Sie mit den Datentypen. Vollziehen Sie dabei die Erläuterungen des nachfolgenden Videos nach:
+
+!?[alt-text](https://www.youtube.com/watch?v=ekdcAHxJF6Q)

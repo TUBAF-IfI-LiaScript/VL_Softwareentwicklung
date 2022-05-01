@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `fjangfaragesh`, `KoKoKotlin` & `Lina`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.0
+version:  1.0.1
 language: de
 narrator: Deutsch Female
 
@@ -20,7 +20,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                    |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                      |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                    |
 | **Inhalte:**             | `Basiskonzepte von C# und dotnet `                                                                                            |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/02_DotNet.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/02_DotNet.md) |
@@ -59,29 +59,23 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 ```
 
 
-Weitere Klassifikationsansätze:
-
-+ Strukturierte Programmierung,
-+ Aspektorientierte Programmierung,
-+ Generische Programmierung
-+ ...
-
-
                                       {{1-2}}
 *******************************************************************************
-* **Imperative Programmierung** ... Quellcode besteht aus einer Folge von Befehlen die in einer festen Reihenfolge abgearbeitet werden.
 
-  + **Prozedurale Programmierung** ... Zerlegung von Programmen in überschaubare Teile, die durch eine definierte Schnittstelle aufrufbar sind (Kernkonzepte: Funktion, Prozedur, Routine, Unterprogramm)
-  + **Objektorientierte Programmierung** ... Kapselung von Daten und Funktionen in einem Konzept
++ __Imperative Programmierung__ - Quellcode besteht aus einer Folge von Befehlen die in einer festen Reihenfolge abgearbeitet werden.
+
+  + __Prozedurale Programmierung__ - Zerlegung von Programmen in überschaubare Teile, die durch eine definierte Schnittstelle aufrufbar sind (Kernkonzepte: Funktion, Prozedur, Routine, Unterprogramm)
+  + __Objektorientierte Programmierung__ - Kapselung von Daten und Funktionen in einem Konzept
 
 *******************************************************************************
 
                                        {{2-3}}
 *******************************************************************************
-* **Deklarative Programmierung** ... es wird kein Lösungsweg implementiert, sondern nur angegeben, was gesucht ist.
 
-  + **Funktionale Sprachen** ... Abbildung der Algorithmen auf funktionale Darstellungen
-  + **Logische Sprachen** ... Ableitung einer Lösung aus einer Menge von Fakten, Generierung einer Auswahl von Daten
++ __Deklarative Programmierung__ - es wird kein Lösungsweg implementiert, sondern nur angegeben, was gesucht ist.
+
+  + __Funktionale Sprachen__ - Abbildung der Algorithmen auf funktionale Darstellungen
+  + __Logische Sprachen__ -  Ableitung einer Lösung aus einer Menge von Fakten, Generierung einer Auswahl von Daten
 
 
 ```prolog    Prolog.pro
@@ -121,12 +115,14 @@ grossvater(adam,frank).
   + **Strukturierte  Programmierung** ... Verzicht bzw. Einschränkung des `Goto` Statements zugunsten von Kontrollstrukturen (Kernkonzepte: Verzweigungen,
      Schleifen)
   + **Nebenläufig**, **Reflektiv**, **Generisch**, ...
+  + **Aspektorientierte Programmierung**,
 
 
-*******************************************************************************
+******************************************************************************
 
                                     {{4-5}}
 *******************************************************************************
+
 Viele Sprachen unterstützen verschiedene Elemente der Paradigmen, bzw. entwickeln
 sich in dieser Richtung weiter.
 
@@ -188,6 +184,7 @@ print("Result in functional style      :" + str(result))
                                   {{5}}
 *******************************************************************************
 
+
 **"Das ist ja alles gut und schön, aber ich ich bin C Programmierer!"**
 
 > **Anti-Pattern "Golden Hammer"**:
@@ -235,6 +232,7 @@ C#
 | 2017 | 4.6.2/ .NET Core | 7.0        | Mustervergleiche (Pattern matching),  Binärliterale 0b..., Tupel                                                                                            |
 | 2019 | .NET Core 3      | 8.0        | Standardimplementierungen in Schnittstellen, Switch Expressions, statische lokale Funktionen, Index-Operatoren für Teilmengen                               |
 | 2020 | .NET 5.0         | 9.0        | Datensatztypen (Records),   Eigenschafteninitialisierung, Anweisungen außerhalb von Klassen, Verbesserungen beim Pattern Matching                           |
+| 2021 | .NET 6.0         | 10.0       | Erforderliche Eigenschaften, Null-Parameter-Prüfung, globale Using-Statements                                                                               |
 
 Die Sprache selbst ist unmittelbar mit der Ausführungsumgebung, dem .NET Konzept verbunden und war ursprünglich stark auf Windows Applikationen zugeschnitten.
 
@@ -250,12 +248,10 @@ Die Sprache selbst ist unmittelbar mit der Ausführungsumgebung, dem .NET Konzep
 + das als dessen Nachfolger positionierte, auf verschiedenen Plattformen unterstützte Framework .NET 5 (bei dem auch einige Techniken gekündigt wurden). Es wurde mehrere Jahre parallel unter der Bezeichnung .NET Core entwickelt.
 + die Plattform Mono und darauf basierende Techniken (von Microsoft meist als Xamarin bezeichnet). Diese unterstützt seit längerem .NET auf verschiedenen Plattformen (in der Vergangenheit jedoch oft unvollständig implementiert).
 
-Ab November 2021 sollen die .NET 6.0 Klassenbibliotheken und das SDK gemeinsam auch für Mono genutzt werden.
-
     --{{0}}--
 Mono ist eine alternative, ursprünglich unabhängige Implementierung von Microsofts .NET Standards. Sie ermöglicht die Entwicklung von plattformunabhängiger Software auf den Standards der Common Language Infrastructure und der Programmiersprache C#. Entstanden ist das Mono-Projekt 2001 unter Führung von Miguel de Icaza von der Firma Ximian, die 2003 von Novell aufgekauft wurde. Die Entwickler wurden 2011 in eine neue Firma namens Xamarin übernommen, die im Jahr 2016 eine Microsoft-Tochtergesellschaft wurde. In der Folge wurde Microsoft Hauptsponsor des Projektes.
 
-Mono "hinkt" als Open Source Projekt der eigentlichen Entwicklung etwas nach, für unsere Beispiele ist dies aber nicht von Bedeutung.
+Mono "hinkt" als Open Source Projekt der eigentlichen Entwicklung etwas nach.
 
 ********************************************************************************
 
@@ -267,7 +263,7 @@ Mono "hinkt" als Open Source Projekt der eigentlichen Entwicklung etwas nach, f�
        Teile von .NET Framework
        Teile von Mono
     +  neue Features
-    ------------------                                                         .
+    ------------------                                                                                  .
        .NET 5.0
 ```
 
@@ -286,7 +282,7 @@ Zum Vergleich sei auf eine Darstellung der **vor dem Erscheinen von .NET 5** ver
 
 Einen guten Überblick über das historische Nebeneinander gibt das Video von Tim Corey (Achtung, die Darstellung greift den Stand von 2017 auf!) [Link](https://www.youtube.com/watch?v=Ph_jSGq6vIA)
 
-> .NET 5 ist keine Long Term Support (LTS)-Version und wird nur bis 3 Monate nach dem nächsten Major Release unterstützt. Die .NET Release Cycles sind nun aber planbar,  .NET 6 als nächste LTS-Version im November 2021 erscheinen, wodurch .NET 5 bis Februar 2022 unterstützt wird.
+> .NET 6 ist als LTS-Version im November 2021 erscheinen und wird für 3 Jahre unterstützt.
 
 ********************************************************************************
 
@@ -312,7 +308,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
  +--------------------------------------------------+  
 
  +--------------------------------------------------+
- |   Betriebssystem (Windows, Linux, macOS)         |
+ |     Betriebssystem (Windows, Linux, macOS)       |
  +--------------------------------------------------+                         .
 ```
 
@@ -458,9 +454,9 @@ vgl. Vortrag von Mössenböck ([link](https://www.dcl.hpi.uni-potsdam.de/teachin
 | VM               | Java-VM                                     | CLR                                        |
 | Zwischencode     | Java-Bytecode                               | CIL                                        |
 | JIT              | per Methoden                                | per Methode / gesamt                       |
-| Komponenten      | Beans                                       | Assemblies                                           |
+| Komponenten      | Beans                                       | Assemblies                                 |
 | Versionierung    | nein                                        | ja                                         |
-| Leitidee         | Eine Sprache auf vielen Plattformen         | Viele Sprachen auf vielen Plattform         |
+| Leitidee         | Eine Sprache auf vielen Plattformen         | Viele Sprachen auf vielen Plattform        |
 
 
 ## Es wird konkret ... Hello World
@@ -485,13 +481,14 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
              |                             |                        |  
              |                             |                        |
    A) Vorlesungsmaterialien          B) Webseiten               C) Lokal
+          interaktiv                       |
              |                             |
     .--------+---------.         .---------+---------.
     |                  |         |                   |
-  mono (C#7)    dotnet (C#9)     |                   |
+  mono (C#7)    dotnet (C#10)    |                   |
                                  |                   |
                           dotnetfiddle.net        repl.it
-                             bis C#9                C#7                        .
+                             bis C#10               C#8                        .
 ```
 
 
@@ -499,7 +496,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
 Die LiaScript basierte Komplierung und Ausführung kann wie bereits erläutert auf der Basis von mono und dem dotnet Framework umgesetzt werden.
 
-```csharp    HelloWorld.cs
+```csharp    Mono.cs
 using System;
 
 public class Program
@@ -512,53 +509,26 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
+
+```csharp  Coderunner.cs9
+using System;
+
+Console.WriteLine("Hello, world!");
+```
+```xml   -myproject.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+
+
 *B) Repl.it*
 
 https://replit.com/
-
-*C) Mono Kommandozeile*
-
-Die Webseite des Mono Projekts ist unter [MonoProject](https://www.mono-project.com/) zu finden.
-
-```csharp    HelloWorld.cs
-using System;
-
-class Hello
-{
-    static void Main()
-    {
-        Console.WriteLine("Hello World!");
-        // Keep the console window open in debug mode.
-        Console.WriteLine("Press any key to exit.");
-        Console.ReadKey();
-    }
-}
-```
-
-Eine ausführliche Hilfe findet sich unter https://www.mono-project.com/docs/getting-started/mono-basics/
-
-``` bash
-> mcs --about
-Turbo C# compiler, Copyright 2001-2011 Novell, Inc., 2011-2016 Xamarin, Inc, 2016-2017 Microsoft Corp
-
-The compiler source code is released under the terms of the
-MIT X11 or GNU GPL licenses
-
-> mcs HelloWorld.cs
-
-> ls
-HelloWorld.cs  HelloWorld.exe
-
-> mono HelloWorld.exe
-Hello, world!
-Press any key to exit.
-
-> ikdasm HelloWorld.exe
-...
-
-```
-
-Eine gute Hilfestellung zur Analyse von Assemblies findet sich unter [codeproject](https://www.codeproject.com/Articles/362076/Understanding-Common-Intermediate-Language-CIL)
 
 *C) .NET Kommandozeile*
 
@@ -626,6 +596,6 @@ https://code.visualstudio.com/docs/languages/csharp
 ## Aufgaben
 =======
 
-- [ ] Installieren Sie das .NET 5 auf Ihrem Rechner und erfreuen Sie sich an einem ersten "Hello World"
+- [ ] Installieren Sie das .NET 6 auf Ihrem Rechner und erfreuen Sie sich an einem ersten "Hello World"
 - [ ] Testen Sie mit einem Kommilitonen die Features von repl.it! Arbeiten Sie probeweise an einem gemeinsamen Dokument.
 - [ ] Legen Sie sich einen GitHub-Account an.

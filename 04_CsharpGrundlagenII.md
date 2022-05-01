@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 
@@ -18,7 +18,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Einführung in die Basiselemente der Programmiersprache C#`                                                                                                                                |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/04_CsharpGrundlagenII.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/04_CsharpGrundlagenII.md) |
@@ -30,10 +30,8 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 ## Auf Nachfrage ...
 
-                             {{0-1}}
-********************************************************************************
 
-**1. Was passiert, wenn man eine größere Zahl in eine kleinere konvertiert, so dass offensichtlich Stellen verloren gehen?**
+**Was passiert, wenn man eine größere Zahl in eine kleinere konvertiert, so dass offensichtlich Stellen verloren gehen?**
 
 <!-- data-type="none" -->
 | Type                     | Name   | Bits | Wertebereich                     |
@@ -69,18 +67,6 @@ public class Program
 
 Nutzen Sie `checked{ }`, um eine Überprüfung der Konvertierung zur Laufzeit vornehmen zu lassen [Link auf die Dokumentation](https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/keywords/checked).
 
-********************************************************************************
-
-                          {{1-2}}
-********************************************************************************
-
-**2. Was hat es mit der Ausgabespezifikation `R` auf sich?**
-
-
-Der Formatbezeichner für ''Roundtrips'' `R` stellt sicher, dass bei der Konvertierung einer Zahl in eine Zeichenfolge die umgekehrte Abbildung wieder auf den gleichen Zahlenwert zurück führt. Dieses Format wird nur für folgende Typen unterstützt: Single, Double und BigInteger.
-[Dokumentation der Ausgabenspezifikation](https://docs.microsoft.com/de-de/dotnet/standard/base-types/standard-numeric-format-strings#RFormatString)
-
-********************************************************************************
 
 ## Wertdatentypen und Operatoren (Fortsetzung)
 
@@ -120,8 +106,18 @@ Character    Ganzzahl   Gleitkommazahl   Bool
                         {{0-2}}
 **********************************************************************
 
+In anderen Sprachen kann die bool Variable (logischen Werte `true` and `false`)  mit äquivalent Zahlenwerten kombiniert werden.
 
-Der `bool`-Typ umfasst die logischen Werte `true` and `false`. Diese sind durch keine cast-Operatoren in numerische Werte und umgekehrt wandelbar!
+```python    noTypes.py
+x = True
+y = 1
+
+print(y==True)
+```
+@LIA.eval(`["main.py"]`, `python3 -m compileall .`, `python3 main.py`)
+
+
+In C# existieren keine impliziten cast-Operatoren, die numerische Werte und umgekehrt wandeln!
 
 ```csharp                BoolOperation.cs
 using System;
@@ -203,10 +199,10 @@ unterschieden.
 
 Bedeutung der boolschen Operatoren für unterschiedliche Datentypen:
 
-| Operation | numerische Typen | boolsche Variablen                |
-| --------- | ---------------- | --------------------------------- |
-| `&`       | bitweises UND (Ergebnis ist ein numerischer Wert!)   | nicht-konditionaler UND Operator |
-| `&&`      |                  | konditonaler UND Operator         |
+| Operation | numerische Typen                                   | boolsche Variablen               |
+| --------- | -------------------------------------------------- | -------------------------------- |
+| `&`       | bitweises UND (Ergebnis ist ein numerischer Wert!) | nicht-konditionaler UND Operator |
+| `&&`      | FEHLER                                             | konditonaler UND Operator        |
 
 
 <!-- --{{1}}-- Idee des Codefragments:
@@ -415,7 +411,7 @@ public class Program
     int x = 5;
     int y = 6;
     y = x;
-    Console.Write("{0}, {1}", x, y);
+    Console.WriteLine("{0}, {1}", x, y);
     // Zuweisung für Referenztypen
     int [] intArrayA = new int[]{1,2,3};
     int [] intArrayB = intArrayA;
@@ -452,7 +448,7 @@ intArrayB    | 0x1234          | --+     | ...             |
 
 Muss die Referenz immer auf ein Objekt auf dem Heap zeigen?
 
-```csharp    ExampleArrays
+```csharp                NullReference.cs
 using System;
 
 public class Program
@@ -461,16 +457,24 @@ public class Program
   {
     int [] intArrayA = new int[]{1,2,3};
     int [] intArrayB;
-    //int [] intArrayB = null;
-    Console.WriteLine("Neuer Status {0}",intArrayA[0]);
-    if (intArrayB != null){     // C#6 Syntax
-      Console.WriteLine("Neuer Status {0}",intArrayB[0]);
-    }
-    //if (name is not null) { } // C#9 Syntax
+    // int [] intArrayB = null;
+    //if (intArrayB != null){     // C#6 Syntax
+    if (intArrayB is not null) {      // C#9 Syntax
+    	Console.WriteLine("Alles ok, mit intArrayB");
+     }
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+```xml   -myproject.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+
 
 Mit `null` kann angezeigt werden, dass diese Referenz noch nicht zugeordnet
 wurde.
@@ -796,11 +800,7 @@ using System;
 
 public class Program
 {
-<<<<<<< HEAD
-  public static void Main(string[] args){
-=======
   static void Main(string[] args){
->>>>>>> upstream/master
     string text = null;   // Die Referenz zeigt auf kein Objekt im Heap
     //int i = null;
     if (text == null) Console.WriteLine("Die Variable hat keinen Wert!");
