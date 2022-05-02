@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina` & `KoKoKotlin`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.1
+version:  1.0.2
 language: de
 narrator: Deutsch Female
 
@@ -970,6 +970,6 @@ public class Program
 
 ## Aufgaben
 
-- [ ] Bereiten Sie die Aufgaben für die Übungen. Diese sind unter [Link](https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2021_Aufgabe_00) zu finden.
+- [ ] Wenden Sie die Möglichkeit der Strukturierung des Codes in Funktionen auf die Aufgabe der letzten Vorlesung an. Integrieren Sie zum Beispiel eine Funktion, die den Algorithmus erkennt und eine andere, die die Operanden einliest. 
 
-**Bemühen Sie sich diese vor der Veranstaltung zu realisieren, um dort über Varianten möglicher Lösungen zu sprechen!**
+**Bemühen Sie sich für die Übungsaufgaben Lösungen vor der Veranstaltung zu realisieren, um dort über Varianten möglicher Lösungen zu sprechen!**
