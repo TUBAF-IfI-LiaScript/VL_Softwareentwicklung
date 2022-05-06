@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
 
@@ -18,7 +18,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Einführung der Konzepte OOP am Beispiel von Structs`                                                                                                                                |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/07_OOPGrundlagenI.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/07_OOPGrundlagenI.md) |
@@ -382,7 +382,7 @@ public class Program
 | `public Animal(name, sound = "Miau")`        | `Animal kitty = new Animal("kitty")`        |
 
 
-Im Hinblick auf die Verwendung des Schlüsselwortes `new` und die Konsequenzen in Bezug auf die Nutzung des Speichers, sei auf den excellenten [Beitrag](http://clarkkromenaker.com/post/csharp-structs/) von Clark Kromenaker verwiesen.
+Im Hinblick auf die Verwendung des Schlüsselwortes `new` und die Konsequenzen in Bezug auf die Nutzung des Speichers, sei auf den exzellenten [Beitrag](http://clarkkromenaker.com/post/csharp-structs/) von Clark Kromenaker verwiesen.
 
 *******************************************************************************
 
