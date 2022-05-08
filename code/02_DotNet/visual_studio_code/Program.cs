@@ -6,7 +6,15 @@ namespace visual_studio_code
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string text = "Hello World";
+            Console.WriteLine(text);
+
+            Console.WriteLine($"parameter count = {args.Length}");
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                Console.WriteLine($"Arg[{i}] = [{args[i]}]");
+            }
         }
     }
 }

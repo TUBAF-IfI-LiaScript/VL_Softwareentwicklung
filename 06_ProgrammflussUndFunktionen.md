@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina` & `KoKoKotlin`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.0
+version:  1.0.2
 language: de
 narrator: Deutsch Female
 
@@ -18,7 +18,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Programmfluss und Funktionsstrukturen in  C#`                                                                                                                                |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/06_ProgrammflussUndFunktionen.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/06_ProgrammflussUndFunktionen.md) |
@@ -370,9 +370,9 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-Lassen Sie uns zwei ineinander verschachtelte Schleifen nutzen, um eine [mxn] Matrix mit zufälligen Werten zu befüllen.
+Lassen Sie uns zwei ineinander verschachtelte Schleifen nutzen, um eine $[m\times n]$ Matrix mit zufälligen Werten zu befüllen.
 
-```csharp
+```csharp     MatrixInitalization.cs
 using System;
 
 public class Program
@@ -570,11 +570,11 @@ public class Program
   // Prozedur
   static void Print(int p)  => Console.WriteLine(p);
   // Funktion
-  static int Calc(int p)    => p+1;
+  static int Increment(int p)    => p+1;
 
   static void Main(string[] args){
     int p = 6, result;
-    result = Calc(p);
+    result = Increment(p);
     print(result);
   }
 }
@@ -607,7 +607,8 @@ public class Program
   }
 
   static void Main(string[] args){
-    int p = 6;
+    int p = 6;                   // Wertedatentyp
+    //int [] p = new int [] {6};   // Referenzdatentyp
     Calc(p);
     Console.WriteLine("Innerhalb von Main {0}", p);
   }
@@ -944,8 +945,31 @@ Ein bereits mehrfach genutztes Beispiel dafür ist die `System.Write`-Methode,
 die unabhängig vom Typ der übergebenen Variable eine entsprechende Ausgabe
 realisiert.
 
+```csharp               FunctionOverLoading.cs
+using System;
+
+public class Program
+{
+  static int Calc(int a, int b){
+    return a/b;
+  }
+
+  static float Calc(float a, float b){
+    return a/b;
+  }
+
+  static void Main(string[] args){
+    int a = 5, b= 2;
+    float c =5.0f, d=2.0f;
+    Console.WriteLine(Calc(a, b));
+    Console.WriteLine(Calc(c, d));    
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
 ## Aufgaben
 
-- [ ] Bereiten Sie die Aufgaben für die Übungen. Diese sind unter [Link](https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2021_Aufgabe_00) zu finden.
+- [ ] Wenden Sie die Möglichkeit der Strukturierung des Codes in Funktionen auf die Aufgabe der letzten Vorlesung an. Integrieren Sie zum Beispiel eine Funktion, die den Algorithmus erkennt und eine andere, die die Operanden einliest. 
 
-**Bemühen Sie sich diese vor der Veranstaltung zu realisieren, um dort über Varianten möglicher Lösungen zu sprechen!**
+**Bemühen Sie sich für die Übungsaufgaben Lösungen vor der Veranstaltung zu realisieren, um dort über Varianten möglicher Lösungen zu sprechen!**

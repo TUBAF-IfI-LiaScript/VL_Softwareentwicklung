@@ -18,7 +18,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Konzepte OOP Programmierung und Umsetzung in C#`                                                                                                                                |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/08_OOPGrundlagenII.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/08_OOPGrundlagenII.md) |
@@ -113,12 +113,12 @@ Starten Sie die Kompilierung, in dem Sie `dotnet run` im Ordner `MyApp` aufrufen
 > Ein Objekt ist ein Bestandteil eines Programms, der Zustände enthalten kann. Diese Zustände werden von dem Objekt vor einem Zugriff von außen versteckt und damit geschützt. Außerdem stellt ein Objekt anderen Objekten Operationen zur Verfügung. Von außen kann dabei auf das Objekt ausschließlich zugegriffen werden, indem eine Operation auf dem Objekt aufgerufen wird.
 Ein Objekt legt dabei selbst fest, wie es auf den Aufruf einer Operation reagiert. Die Reaktion kann in Änderungen des eigenen Zustands oder dem Aufruf von Operationen auf weiteren Objekte bestehen.
 
-> **Merke**  *Ein Objekt ist eine zur Ausführungszeit vorhandene und für ihre Member Speicher allozierende Instanz, die sich aus der der Spezifikation einer Klasse erschließt.*
+> **Merke**  *Ein Objekt ist eine zur Ausführungszeit vorhandene und für ihre Member Speicher allozierende Instanz, die sich aus der Spezifikation einer Klasse erschließt.*
 
 Ideen der OOP:
 * Objekte der *realen Welt* müssen sich in der Programmierung widerspiegeln
 * Es geht nicht um das Manipulieren von Daten, sondern um Zustandsänderungen von Objekten
-* Im Zentrum der objektorientierten Programmierung stehen Objekte, die mittels Nachrichten miteinander kommunizieren
+* Im Zentrum der objektorientierten Programmierung stehen Objekte, die miteinander kommunizieren
 
 > **Merke** Wir haben zwei Herausforderungen zu meistern - Modellierung und Realisierung.
 
@@ -142,7 +142,7 @@ Ideen der OOP:
                                      {{2-5}}
 *******************************************************************************
 
-**Welche Eigenschaften hat jedes Objekt des Typen "Spieler"?**
+**Welche Eigenschaften hat jedes Objekt des Typen "Spieler", "Trainer" bzw. "Schiedsrichter"?**
 
 + Name, Alter, Geschlecht, Gewicht, Größe
 + Position (x, y, z),
@@ -160,11 +160,11 @@ Einige der Eigenschaften ...
                                 {{3-4}}
 *******************************************************************************
 
-**Welche Eigenschaften und Methoden (Fähigkeiten) sind für die Instanzen aller Menschen gleich?**?
+**Welche Eigenschaften und Methoden (Fähigkeiten) sind für die Instanzen aller Teilnehmer gleich?**?
 
 + Name, Alter, Geschlecht, Gewicht, Größe
 + physischer Zustand (topfit, ausgepowert, verletzt)
-+ `Läuft()`
++ `ändertPosition()`
 
 
 **Welche Eigenschaften und Methoden (Fähigkeiten) sind unterschiedlich?**?
@@ -197,7 +197,7 @@ Realisierung?
                                      {{0-1}}
 *******************************************************************************
 
->  Die Verkapselung bezieht sich auf die "Einhüllung" von Daten und Methoden innerhalb einer Struktur einhüllt, die die Objektimplementierung verbirgt und den unmittelbaren Datenzugriff außerhalb vorbestimmter Dienste unterbindet.
+>  Die Verkapselung bezieht sich auf die "Einhüllung" von Daten und Methoden innerhalb einer Struktur (Klasse), die die Objektimplementierung verbirgt und den unmittelbaren Datenzugriff außerhalb vorbestimmter Dienste unterbindet.
 
 Vom Innenleben einer Klasse soll der Verwender – gemeint sind sowohl die Algorithmen, die mit der Klasse arbeiten, als auch der Programmierer, der diese entwickelt – möglichst wenig wissen müssen (Geheimnisprinzip). Durch die Kapselung werden nur Angaben über das „Was“ (Funktionsweise) einer Klasse nach außen sichtbar, nicht aber das „Wie“ (die interne Darstellung).
 
@@ -208,16 +208,14 @@ Standardidentifier für Daten- und Methodenzugriffe sind dabei:
 | public     | +          | Zugreifbar für alle Objekte (auch die anderer Klassen)                            |
 | private    | -          | Nur für Objekte der eigenen Klasse zugreifbar                                     |
 | protected  | #          | Nur für Objekte der eigenen Klasse und von Spezialisierungen derselben zugreifbar |
-
-sowie weitere programmiersprachenspezifische Realisierungen (`internal`, `protected`).
-
+| internal   |            | Der Zugriff ist auf die aktuelle Assembly beschränkt                              |
 
 
 **Vorteile**
 
-+ Da die Implementierung einer Klasse anderen Klassen nicht bekannt ist, kann die Implementierung geändert werden, ohne die Zusammenarbeit mit anderen Klassen zu beeinträchtigen.
++ Da die Implementierung einer Klasse anderen Klassen nicht bekannt ist, kann ihre Implementierung geändert werden, ohne die Zusammenarbeit mit anderen Klassen zu beeinträchtigen.
++ Beim Zugriff über eine Zugriffsfunktion spielt es von außen keine Rolle, ob diese Funktion komplett im Inneren der Klasse existiert, das Ergebnis einer Berechnung ist oder möglicherweise aus anderen Quellen (z. B. einer Datei oder Datenbank) stammt.
 + Es ergibt sich eine erhöhte Übersichtlichkeit, da nur die öffentliche Schnittstelle einer Klasse betrachtet werden muss.
-+ Beim Zugriff über eine Zugriffsfunktion spielt es von außen keine Rolle, ob diese Funktion 1:1 im Inneren der Klasse existiert, das Ergebnis einer Berechnung ist oder möglicherweise aus anderen Quellen (z. B. einer Datei oder Datenbank) stammt.
 + Deutlich verbesserte Testbarkeit, Stabilität und Änderbarkeit der Software bzw. deren Teile (Module).
 
 **Nachteile**
@@ -243,15 +241,15 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 +---------------------------+
 | Spieler                   |      public class Spieler{ // oder struct !!!
 +---------------------------+        enum Rolle {Stürmer, Tormann, Verteidiger};
-| - name: string            |          private string Name; byte? Alter;   |
-| - alter: byte             |          private int x, y, dx, dy;           |  Geschützte
-| - player: Postition       |          private Rolle player;               |  Felder
+| - name: string            |          private string Name;                |
+| - alter: byte             |          private byte? Alter;                |  Geschützte
+| - player: Rolle           |          private Rolle player;               |  Felder
 | ...                       |          private Position position;          |
 +---------------------------+
 | ✛ FängtDenBall(): void    |          public get ... set ...              |  Zugriffsmethoden für
 | ✛ SchießtDenBall(): Kraft |                                                  Felder
-| - Foul()                  |          public void FängtDenBall();
-| ...                       |          public Kraft = SchießtDenBall();
+| - Foul()                  |          public void FängtDenBall(Ball);
+| ...                       |          public Kraft = SchießtDenBall(Ball);
 +---------------------------+          private Foul(SpielerX);             |  Event an SpielerX im
                                     }                                         "Erfolgsfall"
 ```
@@ -317,7 +315,7 @@ style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-r
   |"+" ...                |   |   | ...                    |
   |"+" ...                |   |   +------------------------+
   +-----------------------+   |
-  |"+" StartedSpiel()     |   |
+  |"+" StartetSpiel()     |   |
   |"+" BeendetDasSpiel()  | --'
   |"+" ErkenntFoul()      |
   | ...                   |
@@ -658,7 +656,7 @@ public class Person{
 
 Konstanten sind unveränderliche Datensätze, die zur Kompilierzeit(!) bekannt
 sind und sich danach nicht mehr verändern lassen. Nur die in C# integrierten
-Typen - einfache Datentypen und System.Object - können als `const` deklariert
+Typen - einfache Datentypen und string können als `const` deklariert
 werden.
 
 Varianten "konstanter" Variablen in C#
@@ -806,7 +804,11 @@ public class Program
 
 **Statische Konstruktoren**
 
++ ... werden verwendet, um static-Daten zu initialisieren oder um eine bestimmte Aktion auszuführen, die nur einmal ausgeführt werden muss.
+
 + ... können nicht über Zugriffsmodifizierer oder Parameter verfügen.
+
++ ...  können nicht vererbt oder überladen werden. 
 
 + ... werden automatisch vor dem Erzeugen der ersten Instanz ausgeführt und können nicht direkt aufgerufen werden. Damit hat der Nutzer keine Kontrolle, wann der Konstruktor ausgeführt wird.
 
@@ -1127,7 +1129,7 @@ den Operatoren eine spezifische Bedeutung für die Klassen gegeben.
 | `==`, `!=`, `<`, `>`, `<=`, `>=`                   | Vergleichsoperatoren, überladbar                                        |
 | `[]`                                   | nicht überladbar, aber selbe Funktion mit Indexern                      |
 | `()`                                   | nicht überladbar, aber mittels custom conversion gleiche Funktionalität |
-| `+=`, `-=`, `\*=`, `/=`, `%=`, `&=`, `^=`, `<<=`, `>>=` | Werden durch die zugehörigen Operatoren automatisch überladen           |
+| `+=`, `-=`, `\*=`, `/=`, `%=`, `&=`, `^=`, `<<=`, `>>=` | Werden durch die zugehörigen binären Operatoren automatisch überladen           |
 
 
 ******************************************************************************
@@ -1184,7 +1186,7 @@ Die Operatoren += und -= werden dabei automatisch mit überladen.
                                        {{2-3}}
 ******************************************************************************
 
-> **Merke:** Die Typen beim Überladen von Operatoren müssen nicht übereinstimmen!
+> **Merke:** Die Typen der Operanden beim Überladen von Operatoren müssen nicht übereinstimmen!
 
 Nehmen wir an, dass wir eine Skalierung $r$ unseres Vektors einfügen wollen und dafür
 dessen Länge manipulieren.
