@@ -887,3 +887,50 @@ public class Program
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 - [ ] Studieren Sie C# Codebeispiele. Einen guten Startpunkt bieten zum Beispiel die ''1000 C# Examples'' unter https://www.sanfoundry.com/csharp-programming-examples/
+
+<!--START_SKIP_IN_PDF-->
+
+## Quizze
+
+Wähle aus ob folgende boolische Vergleiche `True` oder `False` wiedergeben:
+
+`a = True, b = False, c = 1, d = 0`
+
+- [ [True] (False) ]
+- [  (X)     ( )   ] `(a && d) || (42 < 666-420)`
+- [  (X)     ( )   ] `(b == d) && (a || d)`
+- [  ( )     (X)   ] `((a || b) && (c || d)) != (0 <= 8)`
+
+Wähle die richtige Nummerierung für das gegebene Enum aus:
+
+```cs
+enum Colors
+{
+  Cyan,
+  Magenta,
+  Yellow,
+  Red = 10,
+  Green,
+  Blue,
+  Black = 100
+};
+```
+
+[[ 0, 1, 2, 10, 3, 4, 100
+|  (0, 1, 2, 10, 11, 12, 100)
+|  1, 2, 3, 10, 4, 5, 100
+|  1, 2, 3, 10, 11, 12, 100
+|  0, 1, 2, 10, 20, 30, 100
+|  1, 2, 3, 10, 20, 30, 100
+]]
+
+Als was kann ein String (z.B. "Hello World") auch gesehen werden?
+
+[[ Struktur
+|  Klasse
+|  (Array)
+|  Liste
+|  Nichts weiter, string ist string
+]]
+
+<!--END_SKIP_IN_PDF-->

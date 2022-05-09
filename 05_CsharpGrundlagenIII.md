@@ -822,3 +822,15 @@ class MainClass
   }
 }
 ```
+
+<!--START_SKIP_IN_PDF-->
+
+## Quizz
+
+Was sollte beachtet werden wenn eine Ausnahmebehandlung durchgeführt wird?
+
+- [[ ]] Es reicht im Allgemeinen die generische `Exception` abzufangen.
+- [[X]] Man sollte so gut es geht spezielle Exceptions und am Ende noch die generische `Exception` abfangen um eventuell übersehene Fehlerquellen zu behandeln.
+- [[X]] Wenn man sich sicher ist alle möglichen Èxceptions für eine Ausnahmebehandlung behandelt zu haben, ist die generische `Exception` nicht notwendig.
+
+<!--END_SKIP_IN_PDF-->

@@ -598,3 +598,58 @@ https://code.visualstudio.com/docs/languages/csharp
 - [ ] Installieren Sie das .NET 6 auf Ihrem Rechner und erfreuen Sie sich an einem ersten "Hello World"
 - [ ] Testen Sie mit einem Kommilitonen die Features von repl.it! Arbeiten Sie probeweise an einem gemeinsamen Dokument.
 - [ ] Legen Sie sich einen GitHub-Account an.
+
+<!--START_SKIP_IN_PDF-->
+
+## Quizze - Vorwissenstest
+
+Was wird als Methode/Funktion bezeichnet?
+
+- [(X)] Codeblock welcher durch Aufruf seines Bezeichners ausgeführt wird
+- [( )] Ein spezieller Programmabschnitt
+- [( )] Eine Berechnung von Werten
+
+Welcher der folgenden Begriffe ist keine Bezeichnung für eine Schleife:
+
+[[  while
+|   do while
+|   (goto)
+|   for
+]]
+
+Vervollständige die folgenden Entscheidungs-Statements:
+
+``` c
+*A* (Variable)
+{
+  1:
+    //CODE
+    break;
+  2:
+    //CODE
+    break;
+  3:
+    //CODE
+    break;
+}
+```
+A:
+
+[[switch]]
+
+```
+*B* (Bedingung)
+{ //CODE }
+*C*
+{ //CODE }
+```
+
+B:
+
+[[if]]
+
+C:
+
+[[else]]
+
+<!--END_SKIP_IN_PDF-->
