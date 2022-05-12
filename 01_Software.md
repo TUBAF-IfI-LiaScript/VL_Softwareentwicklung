@@ -569,11 +569,11 @@ Wo entsteht der größte Zeit- bzw. Kostenaufwand bei kommerzieller Software?
 - [( )] Programmierung
 - [(X)] Service/Wartung
 
-Ist eine Software-Dokumentation immer notwendig?
+Wann ist eine Software-Dokumentation wichtig?
 
-- [[ ]] Ja, man sollte auch bei kleinen Projekten eine möglichst detaillierte Dokumentation schreiben
-- [[X]] Nicht immer, aber bei (mittel-)großen Projekten
-- [[x]] Nicht immer, aber bei kleinen Projekten mit komplexem Code
-- [[ ]] Nein, erfahrene Programmierer finden sich selber zurecht
+- [[ ]] immer, man sollte auch bei kleinstenen Projekten eine möglichst detaillierte Dokumentation schreiben
+- [[X]] bei (mittel-)großen Projekten
+- [[x]] bei kleinen Projekten mit komplexem Code
+- [[ ]] die Dokumentation ist generell nicht wichtig, erfahrene Programmierer finden sich selber zurecht
 
 <!--END_SKIP_IN_PDF-->
