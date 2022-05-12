@@ -605,11 +605,11 @@ https://code.visualstudio.com/docs/languages/csharp
 
 Was wird als Methode/Funktion bezeichnet?
 
-- [(X)] Codeblock welcher durch Aufruf seines Bezeichners ausgeführt wird
-- [( )] Ein spezieller Programmabschnitt
-- [( )] Eine Berechnung von Werten
+- [(X)] Codeblock, welcher durch Aufruf seines Bezeichners ausgeführt wird
+- [( )] Ein beliebiger Programmabschnitt zwischen zwei geschweiften Klammern
+- [( )] Die Berechnung eines Wertes infolge der Auswertung eines Ausdrucks
 
-Welcher der folgenden Begriffe ist keine Bezeichnung für eine Schleife:
+Welcher der folgenden Schlüsselwörter ist keine Bezeichnung für eine Schleife:
 
 [[  while
 |   do while
