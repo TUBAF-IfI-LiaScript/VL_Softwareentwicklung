@@ -892,7 +892,7 @@ public class Program
 
 ## Quizze
 
-Wähle aus ob folgende boolische Vergleiche `True` oder `False` wiedergeben:
+Wähle aus ob folgende boolische Vergleiche `true` oder `false` wiedergeben:
 
 `a = true, b = false, c = true, d = false`
 
