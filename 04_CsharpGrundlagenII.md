@@ -894,9 +894,9 @@ public class Program
 
 Wähle aus ob folgende boolische Vergleiche `True` oder `False` wiedergeben:
 
-`a = True, b = False, c = 1, d = 0`
+`a = true, b = false, c = true, d = false`
 
-- [ [True] (False) ]
+- [ [true] (false) ]
 - [  (X)     ( )   ] `(a && d) || (42 < 666-420)`
 - [  (X)     ( )   ] `(b == d) && (a || d)`
 - [  ( )     (X)   ] `((a || b) && (c || d)) != (0 <= 8)`
@@ -927,8 +927,8 @@ enum Colors
 Als was kann ein String (z.B. "Hello World") auch gesehen werden?
 
 [[ Struktur
-|  Klasse
-|  (Array)
+|  (Klasse)
+|  Array
 |  Liste
 |  Nichts weiter, string ist string
 ]]
