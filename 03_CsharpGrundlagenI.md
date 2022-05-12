@@ -856,9 +856,8 @@ Bei welchen der folgenden Umwandlungen können Daten verloren gehen?
 - [[X]] int -> uint
 - [[X]] double -> float
 - [[X]] ulong -> int
-- [[ ]] uint -> int
 
-Gebe im Folgenden die jeweiligen Ergebnisse der Operationen in binärer Schreibweise an:  
+Gebe die Ergebnisse der jeweiligen Ausdrücke in binärer Schreibweise an:  
 
 `((1011011 & 10101110) >> 1) | 11100`
 
