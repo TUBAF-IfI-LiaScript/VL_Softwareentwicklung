@@ -18,7 +18,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Implementierung der Vererbung in C#`                                                                                                                                |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/09_Vererbung.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/09_Vererbung.md) |
@@ -540,12 +540,12 @@ public class Program
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 Die verschiedenen Tierklassen werden auf ihre Basisklasse gecastet, trotzdem
-aber die individuelle Implementierung von Sound ausgeführt. Damit erlaubt die
+aber die individuelle Implementierung von makeSound ausgeführt. Damit erlaubt die
 Polymorphie ein gleichartiges Handling unterschiedlicher Klassen, die über die
 Vererbung miteinander verknüpft sind.
 
 Interessant ist die Möglichkeit die ursprüngliche Implementierung der Methode
-aus der Basisklasse weiterhin zu nutzt und zu erweitern:
+aus der Basisklasse weiterhin zu nutzen und zu erweitern:
 
 ```charp
 class Horse : Animal
@@ -553,7 +553,7 @@ class Horse : Animal
   public Horse(string name) : base(name) { }
   public override void makeSound()
   {
-    base.Speak();
+    base.makeSound();
     Console.WriteLine("Ich ziehe Kutschen");
   }
 }
