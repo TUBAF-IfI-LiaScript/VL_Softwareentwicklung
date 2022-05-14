@@ -928,7 +928,6 @@ Als was kann ein String (z.B. "Hello World") auch gesehen werden?
 
 [[ Struktur
 |  (Klasse)
-|  Array
 |  Liste
 |  Nichts weiter, string ist string
 ]]
