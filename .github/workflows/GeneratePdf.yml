@@ -37,8 +37,10 @@ jobs:
       - name: Run pandoc markdown to pdf
         run: |
           pandoc --toc --top-level-division=chapter -V linkcolor:blue .github/workflows/config/header-includes.yaml --pdf-engine=xelatex -o output/script.pdf *.mdx
-      # Speichern als Artifact
-      - uses: actions/upload-artifact@master
+      # Pushen auf Github Pages-Branch
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: output
-          path: output
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: output
+          destination_dir: single_pdf
