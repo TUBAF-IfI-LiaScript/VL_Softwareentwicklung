@@ -766,7 +766,7 @@ catch (InvalidOperationException ex)
 
 Schreiben Sie die Einträge eines Arrays in eine Datei!
 
-Lösung unter [ExceptionHandling.cs](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/mastercode/05_GrundlagenIII/ExceptionHandling/ExceptionHandling.cs)
+Lösung unter [ExceptionHandling.cs](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/code/05_GrundlagenIII/ExceptionHandling/ExceptionHandling.cs)
 
 | Schritt | Fragestellungen                                                                            |
 | ------- | ------------------------------------------------------------------------------------------ |
@@ -822,3 +822,15 @@ class MainClass
   }
 }
 ```
+
+<!--START_SKIP_IN_PDF-->
+
+## Quizz
+
+Was sollte beachtet werden wenn eine Ausnahmebehandlung durchgeführt wird?
+
+- [[ ]] Es reicht im Allgemeinen die generische `Exception` abzufangen.
+- [[X]] Man sollte so gut es geht spezielle Exceptions und am Ende noch die generische `Exception` abfangen um eventuell übersehene Fehlerquellen zu behandeln.
+- [[X]] Wenn man sich sicher ist alle möglichen Èxceptions für eine Ausnahmebehandlung behandelt zu haben, ist die generische `Exception` nicht notwendig.
+
+<!--END_SKIP_IN_PDF-->

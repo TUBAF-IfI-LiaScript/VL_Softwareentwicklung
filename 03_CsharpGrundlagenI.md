@@ -837,3 +837,36 @@ public class Program
 - [ ] Experimentieren Sie mit den Datentypen. Vollziehen Sie dabei die Erläuterungen des nachfolgenden Videos nach:
 
 !?[alt-text](https://www.youtube.com/watch?v=ekdcAHxJF6Q)
+
+<!--START_SKIP_IN_PDF-->
+
+## Quizze
+
+Wähle jeweils die zusammengehörenden Zahlen aus:
+
+- [ [0b1000111] (0b10110110) [0x1F1] (0x9D) [0d71] (0d157) ]
+- [     [ ]          [ ]       [X]    [ ]    [ ]     [ ]   ] 0d497
+- [     [ ]          [ ]       [ ]    [X]    [ ]     [X]   ] 0b10011101
+- [     [X]          [ ]       [ ]    [ ]    [X]     [ ]   ] 0x47
+
+Bei welchen der folgenden Umwandlungen können Daten verloren gehen?
+
+- [[X]] float -> int
+- [[ ]] int -> long
+- [[X]] int -> uint
+- [[X]] double -> float
+- [[X]] ulong -> int
+
+Gebe die Ergebnisse der jeweiligen Ausdrücke in binärer Schreibweise an:  
+
+`((1011011 & 10101110) >> 1) | 11100`
+
+[[11101]]
+
+`(11111111^10101010) & ~(100000 | 11)`
+
+[[10100]]
+
+
+
+<!--END_SKIP_IN_PDF-->

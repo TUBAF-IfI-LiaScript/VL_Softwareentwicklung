@@ -558,3 +558,22 @@ Nachteile:
 
 - [ ] Betrachten Sie die Darstellung unter [Webseite Programmwechsel](https://www.programmwechsel.de/lustig/management/schaukel-baum.html) und versuchen Sie die überspitzten Missverständnisse der einzelnen Protagonisten im Kontext eines Softwareprojektes zu stellen.
 - [ ] Korrigieren Sie das `allesFalsch.c` Beispiel, verbessern Sie die Lesbarkeit des Codes.
+
+<!--START_SKIP_IN_PDF-->
+
+## Quizze
+
+Wo entsteht der größte Zeit- bzw. Kostenaufwand bei kommerzieller Software?
+
+- [( )] Entwurf
+- [( )] Programmierung
+- [(X)] Service/Wartung
+
+Wann ist eine Software-Dokumentation wichtig?
+
+- [[ ]] immer, man sollte auch bei kleinstenen Projekten eine möglichst detaillierte Dokumentation schreiben
+- [[X]] bei (mittel-)großen Projekten
+- [[x]] bei kleinen Projekten mit komplexem Code
+- [[ ]] die Dokumentation ist generell nicht wichtig, erfahrene Programmierer finden sich selber zurecht
+
+<!--END_SKIP_IN_PDF-->

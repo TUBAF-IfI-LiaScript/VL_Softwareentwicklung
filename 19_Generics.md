@@ -28,7 +28,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 ---------------------------------------------------------------------
 
-# Motivation
+## Motivation
 
 Versuchen wir nach dem Exkurs zur UML Modellierung und den Werkzeugen, den roten Faden der C# Programmierung wieder aufzunehmen.
 In dieser Woche wollen wir uns mit der Frage der _Generics_ und damit der Frage beschäftigen, wie wir ohne eine spezifische Berücksichtigung von Datentypen wiederverwendbareren Code schreiben können.
