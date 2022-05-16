@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.9
+version:  1.0.10
 language: de
 narrator: Deutsch Female
 
@@ -19,7 +19,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Konzepte Abstrakter Klassen und Interfaces`                                                                                                                                |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/10_AbstrakteKlassenUndInterfaces.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/10_AbstrakteKlassenUndInterfaces.md) |
@@ -28,13 +28,6 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
-
-## Auf Nachfrage ...
-
-Wozu brauche ich das? Bisher bin ich auch gut ohne OOP ausgekommen ...
-
-Nutzung von objektorientierten Konzepten im Python Projekt [github2pandas](https://github.com/TUBAF-IFI-DiPiT/github2pandas).
-
 
 ## Abstrakte Klassen / Abstrakte Methoden
 

@@ -834,8 +834,3 @@ public class Program
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
-
-
-## Aufgaben
-
-- [ ]
