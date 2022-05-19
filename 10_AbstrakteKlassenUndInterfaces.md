@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.10
+version:  1.0.11
 language: de
 narrator: Deutsch Female
 
@@ -343,19 +343,21 @@ Allerdings kann diese Funktion dann nur über die Schnittstelle und nicht über 
 
 ## Beispiel der Woche
 
+       {{0-2}}
+***************************************************************
+
 Aufgabe
 ===============
 
 Nehmen wir an, das Prüfungsamt engagiert Sie für einen Auftrag. Im Laufe mehrerer Wochen sind viele Prüfungszertifikate eingegangen. Unglücklicherweise geht aus den Dateinamen nicht hervor, auf welche Lehrveranstaltung diese sich beziehen. Ihr Auftrag besteht darin, diese Frage automatisiert zu beantworten.
 
-Dabei existiert eine erste Lösung:
+Dabei existiert eine erste Lösung, das Beispielprojekt mit allen Textdateien finden Sie im [Repository](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/tree/master/code/10_AbstrakteKlassen/CsharpFileAnalyser).
 
 ```csharp
 using System;
 using System.IO;
 
 public class CertificateEvaluator{
-    public string [] fileList;
     private string fileName;
     public CertificateEvaluator(string fileName)
     {
@@ -389,12 +391,14 @@ public class RunCode
 
 __Welche Verbesserungsmöglichkeiten sehen Sie?__
 
+***************************************************************
+
           {{1-2}}
 ***************************************************************
 
 1. `RunEvaluation` mischt zwei Dinge, das Management aller Dateien und die eigentlichen Business-Logik - die "Textanalyse"
 2. Es wird nur ein Typ von Dateien überhaupt unterstützt, zudem ist die Art hart codiert - `txt`
-3. Es existiert keinerlei Fehlerhandling
+3. Es existiert keinerlei Fehlerhandling, weder in Bezug auf die Prüfung der Dateinamen noch mit Blick auf die eingelesen Informationen (`Nullable` Check für das Streamreader Objekt)
 4. Die Parameter - Ordner und Dateiname - werden im Code hinterlegt.
 5. ...
 
@@ -412,7 +416,7 @@ __Welche Verbesserungsmöglichkeiten sehen Sie?__
         {{3-4}}
 ***************************************************************
 
-```csharp
+```csharp         Start.cs
 using System;
 using System.IO;
 using DocumentFormat.OpenXml;
@@ -420,8 +424,8 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 
 public abstract class Certificate{      // <- Warum nutzen wir hier kein Interface?
-    public string fileName;
-    public string folderName;
+    public string? fileName;
+    public string? folderName;
     public abstract string getFirstLineContent();
 }
 
@@ -474,12 +478,12 @@ public class RunCode
 
     public static void Main(string[] args)
     {
-        string fileName = "./files/docxfile_0.docx";
+        string fileName = "./files/docxfile_1.docx";
         const string pattern = "VL Softwareentwicklung";
 
         CertificateDocx certTxtFile = new CertificateDocx(fileName);
         CheckCertificates(certTxtFile, pattern);
-    }***************************************************************
+    }
 }
 ```
 
@@ -488,5 +492,7 @@ Für die Nutzung der `DocumentFormat` Bibliothek müssen wir diese im Projekt no
 ```
 dotnet add package DocumentFormat.OpenXml
 ```
+
+> __Achtung!__ Die Lösung ignoriert eine Vielzahl von Hinweisen des Compilers auf mögliche `null references`. In einer realen Implementierung sollte dies berücksichtigt werden.
 
 ***************************************************************
