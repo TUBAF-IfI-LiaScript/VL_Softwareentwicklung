@@ -1,20 +1,17 @@
 ﻿using System;
 
-namespace visual_studio_code
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        string text = "Hello World";
+        Console.WriteLine(text);
+        Console.WriteLine(text + " " + text);
+        Console.WriteLine($"parameter count = {args.Length}");
+           
+        for (int i = 0; i < args.Length; i++)
         {
-            string text = "Hello World";
-            Console.WriteLine(text);
-
-            Console.WriteLine($"parameter count = {args.Length}");
-
-            for (int i = 0; i < args.Length; i++)
-            {
-                Console.WriteLine($"Arg[{i}] = [{args[i]}]");
-            }
+            Console.WriteLine($"Arg[{i}] = [{args[i]}]");
         }
     }
 }
