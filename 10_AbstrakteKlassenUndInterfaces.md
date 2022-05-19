@@ -340,3 +340,153 @@ Allerdings kann diese Funktion dann nur über die Schnittstelle und nicht über 
 !?[Interfaces](https://www.youtube.com/watch?v=_Zvi21_kMw4)
 
 !?[Interfaces](https://www.youtube.com/watch?v=A7qwuFnyIpM)
+
+## Beispiel der Woche
+
+Aufgabe
+===============
+
+Nehmen wir an, das Prüfungsamt engagiert Sie für einen Auftrag. Im Laufe mehrerer Wochen sind viele Prüfungszertifikate eingegangen. Unglücklicherweise geht aus den Dateinamen nicht hervor, auf welche Lehrveranstaltung diese sich beziehen. Ihr Auftrag besteht darin, diese Frage automatisiert zu beantworten.
+
+Dabei existiert eine erste Lösung:
+
+```csharp
+using System;
+using System.IO;
+
+public class CertificateEvaluator{
+    public string [] fileList;
+    private string fileName;
+    public CertificateEvaluator(string fileName)
+    {
+        this.fileName = fileName;
+    }
+    public void RunEvaluation(string patter)
+    {
+        bool result = false;
+        using (StreamReader file = File.OpenText(fileName))
+        {
+            string line = file.ReadLine();
+            result = line.Contains(patter);
+        }
+        Console.Write("{0:-20} - ", fileName);
+        if (result) Console.WriteLine($"references {patter}!");
+        else Console.WriteLine("contains unknown certificate");
+    }
+}
+
+public class RunCode
+{
+    public static void Main(string[] args)
+    {
+        string fileName = "./files/textfile_0.txt";
+        const string pattern = "VL Softwareentwicklung";
+        CertificateEvaluator CertProcessor = new CertificateEvaluator(fileName);
+        CertProcessor.RunEvaluation(pattern);
+    }
+}
+```
+
+__Welche Verbesserungsmöglichkeiten sehen Sie?__
+
+          {{1-2}}
+***************************************************************
+
+1. `RunEvaluation` mischt zwei Dinge, das Management aller Dateien und die eigentlichen Business-Logik - die "Textanalyse"
+2. Es wird nur ein Typ von Dateien überhaupt unterstützt, zudem ist die Art hart codiert - `txt`
+3. Es existiert keinerlei Fehlerhandling
+4. Die Parameter - Ordner und Dateiname - werden im Code hinterlegt.
+5. ...
+
+***************************************************************
+
+        {{2-3}}
+***************************************************************
+
+> Was müssen wir anpassen, wenn nun auch plötzlich `docx` Dateien zusätzlich auftauchen? Diese können wir nicht als Streamobjekt lesen!.
+
+***************************************************************
+
+
+
+        {{3-4}}
+***************************************************************
+
+```csharp
+using System;
+using System.IO;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
+
+public abstract class Certificate{      // <- Warum nutzen wir hier kein Interface?
+    public string fileName;
+    public string folderName;
+    public abstract string getFirstLineContent();
+}
+
+public class CertificateTxt : Certificate
+{
+   public CertificateTxt(string fileName)
+    {
+        this.fileName = fileName;
+    }
+   public override string getFirstLineContent(){
+        string line = "";
+        using (StreamReader file = File.OpenText(fileName))
+        {
+            line = file.ReadLine();
+        }
+        return line;
+   }
+}
+
+public class CertificateDocx : Certificate
+{
+   public CertificateDocx(string fileName)
+    {
+        this.fileName = fileName;
+    }
+   public override string getFirstLineContent(){
+        string line = "";
+        using (WordprocessingDocument wordDocument = WordprocessingDocument.Open(fileName, false))
+        {
+            var firstParagraph = wordDocument.MainDocumentPart.RootElement.Descendants<Paragraph>().First();   
+            line = firstParagraph.InnerText;
+        }
+        return line;
+   }
+}
+
+public class RunCode
+{
+    // Business Logik für unseren Anwendungsfall
+    public static void CheckCertificates(Certificate cert, string pattern){
+        // Datenaggregation
+        string line = cert.getFirstLineContent();
+        // Patternüberprüfung
+        bool result = line.Contains(pattern);
+        // Ausgabe des Resultates
+        Console.Write("{0:-20} - ", cert.fileName);
+        if (result) Console.WriteLine($"references {pattern}!");
+        else Console.WriteLine("contains unknown certificate");
+    }
+
+    public static void Main(string[] args)
+    {
+        string fileName = "./files/docxfile_0.docx";
+        const string pattern = "VL Softwareentwicklung";
+
+        CertificateDocx certTxtFile = new CertificateDocx(fileName);
+        CheckCertificates(certTxtFile, pattern);
+    }***************************************************************
+}
+```
+
+Für die Nutzung der `DocumentFormat` Bibliothek müssen wir diese im Projekt noch als Dependency installieren.
+
+```
+dotnet add package DocumentFormat.OpenXml
+```
+
+***************************************************************
