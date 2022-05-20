@@ -25,7 +25,7 @@ public class RunCode
 {
     public static void Main(string[] args)
     {
-        string fileName = "./files/textfile_0.txt";
+        string fileName = "./files/textfile_1.txt";
         const string pattern = "VL Softwareentwicklung";
         CertificateEvaluator CertProcessor = new CertificateEvaluator(fileName);
         CertProcessor.RunEvaluation(pattern);
