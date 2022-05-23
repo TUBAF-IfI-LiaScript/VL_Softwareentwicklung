@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich & `Lesestein`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.0
+version:  1.0.1
 language: de
 narrator: Deutsch Female
 
@@ -129,7 +129,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 ```ascii
 
         vSoSe2019                                                   vSoSe2020
-Master   O-----------------------------------------  ....  ---------O
+main     O-----------------------------------------  ....  ---------O
           \                                                        ^
            \               Offizielle Versionen                   /
 SoSe2020    \              O-->O                 O          ---->O
@@ -288,7 +288,7 @@ jobs:
         run: pwd && whoami && ls -all
 ```
 
-Spanndend wird die Sache nun dadurch, dass es eine breite Community rund um die Actions gibt. Diese stellen häufig benötigte _Steps_ bereits zur Verfügung, fertige Tools für das Bauen und Testen von .NET Code.
+Spannend wird die Sache nun dadurch, dass es eine breite Community rund um die Actions gibt. Diese stellen häufig benötigte _Steps_ bereits zur Verfügung, fertige Tools für das Bauen und Testen von .NET Code.
 
 Die Dokumentation zu den GitHub-Actions findet sich unter [https://github.com/features/actions](https://github.com/features/actions). Ein umfangreicheres Beispiel finden Sie in unserem Projektordner im aktuellen Branch `SoSe2020`. Hier werden alle LiaScript-Dateien in ein pdf umgewandelt.
 
@@ -296,8 +296,7 @@ Die Dokumentation zu den GitHub-Actions findet sich unter [https://github.com/fe
 
 ## Ein Wort zur Zusammenarbeit
 
-Bitte haben Sie immer den spezifischen Kontext Ihres Projektes vor Augen. Üblicherweise legt man am Anfang, bei einem "kleinen Hack" keinen Wert auf formelle Abläufe und Stukturen. Diese sind
-aber in großen Projekten unablässig.
+Bitte haben Sie immer den spezifischen Kontext Ihres Projektes vor Augen. Üblicherweise legt man am Anfang, bei einem "kleinen Hack" keinen Wert auf formelle Abläufe und Strukturen. Diese sind aber in großen Projekten unablässig.
 
 Ein neues Feature wird in einem Issue beschrieben, in einem eigenen Branch implementiert, mit Commits beschrieben, auf den master branch abgebildet und das Issue mit Referenz auf den commit geschlossen.
 
@@ -409,4 +408,4 @@ deactivate Maintainer
 - [ ] Recherchieren Sie die Methode des "Myers-diff-Algorithmus" https://blog.jcoglan.com/2017/02/12/the-myers-diff-algorithm-part-1/
 - [ ] Legen Sie sich ein lokales Repository mit git an und experimentieren Sie damit.
 - [ ] Richten Sie sich für Ihren GitHub-Account einen SSH basierten Zugriff ein (erspart einem das fortwährende Eingeben eines Passwortes).
-- [ ] Sie erhalten im Laufe der Woche Ihre erste Einladung für einen GitHub Classroom. Ausgehend davon werden Sie aufgefordert sich in Zweierteams zu organisieren und werden dann gemeinsam erste Gehversuche unter git zu unternehmen.
+- [ ] Sie sollten Ihre erste Einladung für einen GitHub Classroom bereits per OPAL erhalten haben. Ausgehend davon werden Sie aufgefordert sich in Zweierteams zu organisieren und werden dann gemeinsam erste Gehversuche unter git zu unternehmen.

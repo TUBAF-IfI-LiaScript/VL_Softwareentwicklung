@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich & `JohannaKlinke`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 
 language: de
 narrator: Deutsch Female
@@ -293,7 +293,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
 Ablauf:
 
-+ Harry und Sally kopierendas das Dokument A in ihre lokalen Ordner.
++ Harry und Sally kopieren das das Dokument A in ihre lokalen Ordner.
 + Beide arbeiten unabhängig daran und erzeugen die Versionen A' und A''
 + Sally schreibt als Erste das Dokument in das Repository zurück.
 + Harry kann das Dokument nun nicht mehr zurückschreiben, seine Version ist veraltet
