@@ -13,8 +13,7 @@ class Program
         xml_fw.WriteToFile("MessdatenMessdaten");
 
         JsonFileWriter json_fw = new JsonFileWriter();
-        //IWriter.SetName("DataFile1");  // keine Element des Interfaces!
-        //json_fw.WriteToFile("MessdatenMessdaten");
+        json_fw.WriteToFile("MessdatenMessdaten");
 
         // Phase 2 ("Closely coupled classes")
         // Wir wollen die Methoden erweitern und die Daten vor dem Schreiben
@@ -24,7 +23,7 @@ class Program
         xml_dh.Write("");
         // Was stört?
         // 1. Sobald wir "XmlFileWriter" anpassen, muss auch
-        //    FilteredDataToXML korrigiert werden
+        //    XmlCheckedWriter korrigiert werden
         // 2. Wir schreiben eine Klasse für xml, eine für json usw. :-(
 
         // Wir ersetzen die "feste Integration" durch ein

@@ -1,10 +1,13 @@
 using System;
+
+// Interface definition
 public interface IWriter
 {
     void WriteToFile(string data);
 }
  
-public class FileBase
+// Abstract class definiton
+public abstract class FileBase
 {
     protected string name;
     public void SetName(string name = "DataFile.txt")
@@ -13,6 +16,7 @@ public class FileBase
     }
 }
  
+// XmlFileWriter - "implements" IWriter and "inherits" from FileBase
 public class XmlFileWriter: FileBase, IWriter
 {
     public void WriteToFile(string data)
