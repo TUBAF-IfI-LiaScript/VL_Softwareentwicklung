@@ -532,6 +532,8 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
+Des Weiteren für alle die auch mit C programmieren: in C ist es notwendig Funktionen über der Main-Funktion zu deklarieren! Da diese vom Compiler sonst nicht erkannt werden können. In C# spielt das keine Rolle, Funktionen bzw. hier nun Methoden können belieibg ober- oder unterhalb der Main deklaitert werden.
+
 ### Verkürzte Darstellung
 
 Methoden können seit C#6 in Kurzform in einer einzigen Zeile angegeben werden (*Expression-bodied function members*). Dafür nutzt
