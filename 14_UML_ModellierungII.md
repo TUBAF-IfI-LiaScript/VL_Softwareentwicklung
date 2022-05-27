@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
 
@@ -20,7 +20,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Ausgewählte UML Diagrammtypen`                                                                                                                                |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/14_UML_ModellierungII.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/14_UML_ModellierungII.md) |
@@ -29,60 +29,6 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
-
-## Neues aus Github
-
-**Wann wird gearbeitet?**      
-
-<!--
-data-type="heatmap"
-data-title="Commit Anzahl"
-data-transpose="true"
-data-ylabel = "Wochentage (0 = Montag, 7 = Sonntag)"
-data-xlabel = "Stunden des Tages"
-data-show
--->
-| Stunde |   0 |   1 |   2 |   6 |   7 |   8 |   9 |  10 |  11 |  12 |  13 |  14 |  15 |  16 |  17 |  18 |  19 |  20 |  21 |  22 |  23 |
-| ------:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:|
-|      1 | nan | nan | nan | nan | nan | nan | nan |   2 | nan |   3 |   2 | nan | nan | nan |   1 | nan | nan | nan | nan | nan | nan |
-|      2 | nan | nan | nan | nan |   2 | nan | nan | nan |   2 |   8 | nan |  10 |  24 |   3 | nan | nan | nan | nan | nan | nan | nan |
-|      3 | nan | nan | nan | nan | nan | nan | nan |   1 |   4 |   6 |   7 |  25 |  22 | nan | nan | nan | nan | nan |   1 | nan |   2 |
-|      4 |   2 | nan | nan |   2 |   2 | nan |   5 |   8 |   7 | nan | nan |  29 |  16 |  14 |  12 | nan |   2 |   1 | nan | nan | nan |
-|      5 | nan | nan |   1 | nan | nan |   2 | nan |  12 |  10 |   3 |   1 |   2 |   2 | nan |   4 |   3 | nan | nan | nan | nan | nan |
-|      6 | nan | nan | nan | nan | nan |   1 | nan | nan | nan |   1 |   2 |   4 |   7 |   7 |   2 | nan | nan |   4 |   1 | nan | nan |
-|      7 | nan | nan | nan | nan | nan | nan | nan |   2 |   4 |   3 |   8 |   5 |   4 |   2 |   4 | nan | nan | nan | nan | nan | nan |
-
-
-**Was ist ein guter Commit?**
-
-Das folgende Diagramm zeigt die Commits pro Aufgabe
-
-<!--
-data-type="heatmap"
-data-title="Commit Anzahl"
-data-ylabel = "Team ID"
-data-xlabel = "Task"
-data-show
--->
-| Task    |   0 |   1 |   2 |   3 |   4 |   5 |   6 |   7 |   8 |   9 |  10 |  11 |  12 |  13 |  14 |  15 |  16 |
-| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:| ---:|
-|   3 |   7 |  15 |  12 |   8 |  18 |  10 |   5 |   8 |  45 |  21 |   5 |   8 |  18 |   8 |   6 |   6 |   3 |
-|   4 | nan | nan | nan |  15 |  13 |  18 |   3 |   5 |   5 |   9 |   4 |   3 |  19 |   2 |   3 |  24 | nan |
-
-... und wie viele unterschiedliche Dateien wurden dabei editiert?
-
-<!--
-data-type="heatmap"
-data-title="Editierte Dateien"
-data-ylabel = "Team ID"
-data-xlabel = "Task"
-data-show
--->
-|   Task |   0 |   1 |   2 |   3 |   4 |   5 |   6 |   7 |   8 |   9 |   10 |   11 |   12 |   13 |   14 |   15 |   16 |
-|-------:|----:|----:|----:|----:|----:|----:|----:|----:|----:|----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
-|      3 |   5 |   3 |   2 |  15 |   4 |   5 |   2 |   6 |   3 |  16 |    2 |    2 |    7 |    2 |    2 |    4 |    2 |
-|      4 | nan | nan | nan |  26 |  11 |   7 |   5 |   6 |   8 |   6 |    5 |    7 |    7 |    1 |    2 |    6 |  nan |
-
 
 ## UML Diagrammtypen
 
@@ -745,6 +691,7 @@ Verwendung von Klassendiagrammen
 
 ## Aufgaben
 
+- [ ] Experimentieren Sie mit [Umbrello](https://umbrello.kde.org/)
 - [ ] Experimentieren Sie mit der automatischen Extraktion von UML Diagrammen für Ihre Computer-Simulation aus den Übungen
 - [ ] Evaluieren Sie das Add-On "Class Designer" für die Visual Studio Umgebung
 
