@@ -190,14 +190,15 @@ Achtung: Die Einbettung der `CalculateBonus()` Methode in die jeweiligen `Employ
 ###  Liskovsche Substitutionsprinzip (LSP)
 
 > Das Liskovsche Substitutionsprinzip (LSP) oder Ersetzbarkeitsprinzip besagt, dass ein Programm, das Objekte einer Basisklasse T verwendet, auch mit Objekten der davon abgeleiteten Klasse S korrekt funktionieren muss, ohne dabei das Programm zu verändern:
-
-*"Sei $q(x)$ eine beweisbare Eigenschaft von Objekten $x$ des Typs $T$. Dann soll $q(y)$ für Objekte $y$ des Typs $S$ wahr sein, wobei $S$bein Untertyp von $T$ ist.“*
+> *"Sei $q(x)$ eine beweisbare Eigenschaft von Objekten $x$ des Typs $T$. Dann soll $q(y)$ für Objekte $y$ des Typs $S$ wahr sein, wobei $S$bein Untertyp von $T$ ist.“* [^Liskov]
 
 Beispiel: Grafische Darstellung von verschiedenen Primitiven
 
 ![Liskov](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuN8lIapBB4xEI2rspKdDJSqhKR2fqTLL24fDpYX9JSx69U-QavDPK9oAIpeajQA42we68k9Tb9fPp8L5lPL2LMfcSaPUgeOcbqDgNWhGKG00)<!-- width="60%" -->
 
 Entsprechend sollte eine Methode, die `GrafischesElement` verarbeitet, auch auf  `Ellipse` und `Kreis` anwendbar sein. Problematisch ist dabei allerdings deren unterschiedliches Verhalten. `Kreis` weist zwei gleich lange Halbachsen. Die zugehörigen Membervariablen sind nicht unabhängig von einander.
+
+[^liskov]: Liskov, Barbara H., and Jeannette M. Wing. “A Behavioral Notion of Subtyping.” ACM Transactions on Programming Languages and Systems, vol. 16, no. 6, 1994, pp. 1811–41. doi:10.1145/197320.197383
 
 ### Interface Segregation Prinzip
 
@@ -479,7 +480,7 @@ Beispiel aus https://exceptionnotfound.net/simply-solid-the-dependency-inversion
 
 Kunde TU Freiberg: *Entwickeln Sie für mich ein webbasiertes System, mit dem Sie die Anmeldung und Bewertung von Prüfungsleistung erfassen.*
 
-Welche Fragen sollten Sie dem Kunden stellen, bevor Sie sich daran machen und munter Code schreiben?
+> Welche Fragen sollten Sie dem Kunden stellen, bevor Sie sich daran machen und munter Code schreiben?
 
 ****************************************************************************
                                         {{1-2}}
@@ -659,4 +660,8 @@ ein realweltliches Problem zu entwickeln.
 ## Aufgaben
 
 - [ ] Bearbeiten Sie die Aufgabe 3 im GitHub Classroom
+- [ ] Machen Sie sich mit den SOLID Prinzipien weiter vertraut:
+
+!?[alt-text](https://www.youtube.com/watch?v=R1AimDBGtkY)
+
 - [ ] Experimentieren Sie mit [Umbrello](https://umbrello.kde.org/)
