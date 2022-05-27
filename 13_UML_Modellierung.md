@@ -663,5 +663,3 @@ ein realweltliches Problem zu entwickeln.
 - [ ] Machen Sie sich mit den SOLID Prinzipien weiter vertraut:
 
 !?[alt-text](https://www.youtube.com/watch?v=R1AimDBGtkY)
-
-- [ ] Experimentieren Sie mit [Umbrello](https://umbrello.kde.org/)
