@@ -186,8 +186,8 @@ Vorlesungen:
 |       | 20. Mai   | Versionsmanagement im Softwareentwicklungsprozess |                            |
 | 8     | 23. Mai   | Git und Continuous integration in GitHub          |                            |
 |       | 27. Mai   | UML Konzepte                                      |                            |
-| 9     | 30. Mai   | UML Diagrammtypen                                 | Ende EiS Vorlesungsinhalte |
-|       | 3. Juni   | UML Anwendungsbeispiel                            |                            |
+| 9     | 30. Mai   | UML Diagrammtypen                                 |                            |
+|       | 3. Juni   | UML Anwendungsbeispiel                            | Ende EiS Vorlesungsinhalte |
 | 10    | 6. Juni   | _Pfingstmontag_                                   |                            |
 |       | 10. Juni  | Testen                                            |                            |
 | 11    | 13. Juni  | Dokumentation                                     |                            |
