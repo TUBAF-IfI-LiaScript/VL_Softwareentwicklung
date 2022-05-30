@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 
@@ -30,9 +30,72 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 ---------------------------------------------------------------------
 
+## Hinweis auf die Prüfungen
+
++ Softwareentwicklung
+
+    + Miniprojekt als Prüfungsleistung - [Link](https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2022_Projektaufgaben)
+    + Beispielprojekt - [Link](https://github.com/fb89zila/exam-repo_swe-sose21)
+
++ Einführung in die Softwareentwicklung
+
+    + Voraussetzung für den positiven Abschluss ist die erfolgreiche Bearbeitung der letzten Übungsaufgabe.
+    + Es ist keine Anmeldung zur Prüfung notwendig!
+
+## Neues aus GitHub
+
+Statistiken der Git-Aktivitätsbalken
+====================================
+
+<!--data-type="none"-->
+| TeamKey | branch_count | commit_count | release_count | stars_count |
+| ------- | ------------ | ------------ | ------------- | ----------- |
+| 0       | 2            | 8            | 1             | 2           |
+| 1       | 3            | 2            | 1             | 0           |
+| 2       | 2            | 5            | 1             | 0           |
+| 3       | 1            | 0            | 0             | 0           |
+| 4       | 2            | 11           | 1             | 0           |
+| 5       | 1            | 17           | 1             | 0           |
+| 6       | 3            | 12           | 2             | 0           |
+| 7       | 2            | 28           | 0             | 0           |
+| 8       | 2            | 2            | 2             | 0           |
+| 9       | 2            | 4            | 0             | 1           |
+| 10      | 1            | 15           | 1             | 0           |
+| 11      | 1            | 6            | 1             | 0           |
+| 12      | 2            | 10           | 4             | 0           |
+| 13      | 3            | 24           | 1             | 0           |
+| 14      | 3            | 11           | 1             | 2           |
+| 15      | 2            | 13           | 1             | 0           |
+| 16      | 2            | 5            | 0             | 0           |
+| 17      | 2            | 6            | 1             | 0           |
+
+
+Commit Messages
+====================================
+
+<!--data-type="none"-->
+| Messag                                             | Häufigkeit |
+| -------------------------------------------------- | ---------- |
+| `Update CSharpBasics.md`                           | 40         |
+| `Update team.config`                               | 23         |
+| `Initial commit`                                   | 18         |
+| `Inital task selection - Variant_1.md`             | 11         |
+| `Update uebung.md`                                 | 10         |
+| `Create CSharpBasics.md`                           | 9          |
+| `Update CSharpBasics.txt`                          | 7          |
+| `Inital task selection - Variant_0.md`             | 7          |
+| ` Add files via upload`                            | 5          |
+| `Update Aufgabe3.md`                               | 4          |
+| `Update csharpbasics.md`                           | 3          |
+| `Test`                                             | 2          |
+| `tabelle`                                          | 2          |
+| `Merge pull request #2 from Ifi-Softwareentwick..` | 2          |
+| `Update converttxttomd.cs`                         | 2          |
+
+
 ## UML Diagrammtypen
 
-![OOPGeschichte](./img/13_UML/UML-Diagrammhierarchie.png)<!-- width="90%" --> [^WikiUMLDiagrammTypes]
+![OOPGeschichte](./img/13_UML/UML-Diagrammhierarchie.png " [^WikiUMLDiagrammTypes]")
 
 [^WikiUMLDiagrammTypes]: https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/UML-Diagrammhierarchie.svg/1200px-UML-Diagrammhierarchie.svg.png, Autor "Stkl"- derivative work: File: UML-Diagrammhierarchie.png: Sae1962, CC BY-SA 4.0
 
@@ -251,7 +314,7 @@ Die schmalen Rechtecke, die auf den Lebenslinien liegen, sind Aktivierungsbalken
 
 **Beispiel**
 
-![Aktivitätsdiagramme](./img/14_UML_II/SequenzCheckEmail.png "Sequenzdiagramm der Interaktion zwischen Emailclient und Server [^WikiSequenceDiagram]")
+![Aktivitätsdiagramme](./img/14_UML_II/SequenzCheckEmail.png "Sequenzdiagramm der Interaktion zwischen Emailclient und Server [^WikiSequenceDiagram]")<!-- width="70%" -->
 
 **Bestandteile**
 
@@ -681,18 +744,19 @@ Die Möglichkeiten der Verknüpfung zwischen Klassen und Interfaces lassen sich 
 Verwendung von Klassendiagrammen
 
 + ... unter Umbrello (UML Diagramm Generierung / Code Generierung)
+
 + ... unter Microsoft Studio [Link](https://docs.microsoft.com/de-de/visualstudio/ide/class-designer/how-to-add-class-diagrams-to-projects?view=vs-2019))
+
+![ClassDesigner](./img/14_UML_II/ClassDesigner.png)
 
 !?[VisualStudio](https://www.youtube.com/watch?v=syYyQ7LlcPc)
 
-+ ... unter Visual Studio Code mit PlantUML
++ ... unter Visual Studio Code mit PlantUML oder UMLet (siehe Codebeispiele zu dieser Vorlesung)
 
-> **Aufgabe:** Wer findet eine "automatisierbare" Lösung?
++ ... unter Visual Studio Code mit [PlantUmlClassDiagramGenerator](https://github.com/pierre3/PlantUmlClassDiagramGenerator)
 
 ## Aufgaben
 
 - [ ] Experimentieren Sie mit [Umbrello](https://umbrello.kde.org/)
 - [ ] Experimentieren Sie mit der automatischen Extraktion von UML Diagrammen für Ihre Computer-Simulation aus den Übungen
 - [ ] Evaluieren Sie das Add-On "Class Designer" für die Visual Studio Umgebung
-
-![ClassDesigner](./img/14_UML_II/ClassDesigner.png)

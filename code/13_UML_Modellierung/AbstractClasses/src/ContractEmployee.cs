@@ -1,7 +1,4 @@
-public class ContractEmployee{
-    public int ID {get; set;}
-    public string FirstName  {get; set;}
-    public string LastName  {get; set;}
+public class ContractEmployee : BaseEmployee{
     public int HourlyPay {get; set;}
     public int TotalHoursWorked{get; set;}
     public string GetFullName(){
