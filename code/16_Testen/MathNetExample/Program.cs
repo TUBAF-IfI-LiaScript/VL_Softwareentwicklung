@@ -18,7 +18,7 @@ namespace TestMathSolver
             var c = Expr.Variable("c");
             var d = Expr.Variable("d");
 
-            Console.WriteLine("a+a =" + (a + a + a).ToString());
+            Console.WriteLine("a+a+a =" + (a + a + a).ToString());
             Console.WriteLine("(2 + 1 / x - 1) =" + (2 + 1 / x - 1).ToString());
             Console.WriteLine("((a / b / (c * a)) * (c * d / a) / d) =" + ((a / b / (c * a)) * (c * d / a) / d).ToString());
             Console.WriteLine("Das Ergebnis von ((a / b / (c * a)) * (c * d / a) / d) als Latex-Code lautet " + ((a / b / (c * a)) * (c * d / a) / d).ToLaTeX());
