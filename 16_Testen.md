@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
 
@@ -20,7 +20,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                  |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                            |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                            |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                |
 | **Inhalte:**             | `Einbettung des Testens in den Softwareentwicklungsprozess`                                                                                                                      |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/16_Testen.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/16_Testen.md) |
@@ -30,14 +30,35 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 ---------------------------------------------------------------------
 
-## Organisatorisches
-
-+ Alternative Prüfungsleistung für die Veranstaltung Softwareentwicklung
-+ Prüfungsvorleistung für Einführung in die Softwareentwicklung
-
 ## Neues aus der GitHub Woche
 
+Wann arbeiten Sie üblicherweise?
+-------------------------------
+
+<!--
+data-type="heatmap"
+data-title="Commit Anzahl"
+data-xlabel="Wochentage"
+data-ylabel="Stunden des Tages"
+-->
+|            | 9   | 10  | 11  | 12  | 13  | 14  | 15  | 16  | 17  | 18  | 19  | 20  | 21  | 22  |
+| ---------- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Montag     |     |     |     |     | 3   | 38  | 37  |     |     |     |     |     |     |     |
+| Dienstag   |     |     | 36  | 36  |     | 15  | 1   |     |     |     |     | 1   |     | 1   |
+| Mittwoch   | 19  | 12  | 1   |     |     |     |     | 3   |     |     |     |     |     |     |
+| Donnerstag |     |     |     |     |     |     |     |     |     |     |     |     | 2   |     |
+| Freitag    |     |     | 3   |     |     |     | 3   | 1   |     |     | 3   |     |     |     |
+
+
+Zum Vergleich die Übungsslots:
+
+ + Mo 14 Uhr
+ + Di 14 Uhr
+ + Di 11 Uhr
+ + Mi 9:15
+
 Wie stabil sind die Teams?
+-------------------------------
 
 <!--
 data-type="none"
@@ -66,20 +87,22 @@ data-transpose="false"
 |      17 |            | [ 2 15]    |         |
 
 
+## Exkurs - Abhängigkeitsmanagment
+
+NuGet ist ein System zur freien Verteilung von Software-Komponenten in Form von Paketen. Es erleichtert insbesondere die Einbindung von Bibliotheken bei der Softwareentwicklung unter dem klassischem .Net-Framework als auch unter .NET.
+
+Die Pakete werden von ihren Entwicklern in zentrale Repositories (die bekanntesten sind [nuget.org](https://www.nuget.org/) und [myget.org](https://myget.org/)) hochgeladen und mit Meta-Daten (z. B. die erforderliche .NET-Version) versehen. Die Pakete sind dann in der Galerie des Repository sichtbar.
+
+Werfen Sie einen Blick auf das MathNet Beispiel im Code Ordner. Welche Bibliothek müssen Sie in Ihrem Projekt installieren, um es ausführbar zu machen?
+
 ## Softwarefehler
 
                                     {{0-1}}
 *******************************************************************************
 
-Bekannte Softwarefehler und deren Folgen:
+Zu Erinnerung an die bereits diskutierten Softwarefehler ...
 
-+ Beim Kampfflugzeug F-16 brachte der Autopilot das Flugzeug in Rückenlage, wenn der Äquator überflogen wurde. Dies kam daher, dass man keine „negativen“ Breitengrade als Eingabedaten bedacht hatte. Dieser Fehler wurde sehr spät während der Entwicklung der F-16 anhand eines Simulators entdeckt und beseitigt.
-
-+ 1999 verpasste die NASA-Sonde Mars Climate Orbiter den Landeanflug auf den Mars, weil die Programmierer unterschiedliche Maßsysteme verwendeten (ein Team verwendete das metrische und das andere das angloamerikanische) und beim Datenaustausch es so zu falschen Berechnungen kam. Eine Software wurde so programmiert, dass sie sich nicht an die vereinbarte Schnittstelle hielt, in der die metrische Einheit Newton × Sekunde festgelegt war. Die NASA verlor dadurch die Sonde.
-
-+ Zwischen 1985 und 1987 gab es mehrere Unfälle mit dem medizinischen Bestrahlungsgerät Therac-25. Infolge einer Überdosis, die durch fehlerhafte Programmierung und fehlende Sicherungsmaßnahmen verursacht wurde, mussten Organe entfernt werden, und es verstarben drei Patienten.
-
-+ Das Jahr-2000-Problem, auch als Millennium-Bug (zu deutsch „Millennium-Fehler“) oder Y2K-Bug bezeichnet, ist ein Computer­problem, das im Wesentlichen durch die Behandlung von Jahreszahlen als zweistellige Angabe innerhalb von Computersystemen entstanden ist.
+> 1999 verpasste die NASA-Sonde Mars Climate Orbiter den Landeanflug auf den Mars, weil die Programmierer unterschiedliche Maßsysteme verwendeten (ein Team verwendete das metrische und das andere das angloamerikanische) und beim Datenaustausch es so zu falschen Berechnungen kam. Eine Software wurde so programmiert, dass sie sich nicht an die vereinbarte Schnittstelle hielt, in der die metrische Einheit Newton × Sekunde festgelegt war. Die NASA verlor dadurch die Sonde. [Quelle](https://www.bernd-leitenberger.de/mco.shtml)
 
 Softwarefehler sind sowohl sicherheitstechnisch wie ökonomisch ein erhebliches Risiko. Eine Studie der Zeitschrift iX ermittelte 2013 für Deutschland folgende Werte:
 
@@ -202,13 +225,12 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
          v
 ````````````
 
-Der Modultest, auch Komponententest oder Unittest genannt, ist ein Test auf der Ebene der einzelnen Module der Software. Testgegenstand ist die Funktionalität innerhalb einzelner abgrenzbarer Teile der Software (Module, Programme oder Unterprogramme, Units oder Klassen). Testziel dieser häufig durch den Softwareentwickler selbst durchgeführten Tests ist der Nachweis der technischen Lauffähigkeit und korrekter fachlicher (Teil-) Ergebnisse.
-
-Der Integrationstest bzw. Interaktionstest testet die Zusammenarbeit voneinander abhängiger Komponenten. Der Testschwerpunkt liegt auf den Schnittstellen der beteiligten Komponenten und soll korrekte Ergebnisse über komplette Abläufe hinweg nachweisen.
-
-Der Systemtest ist die Teststufe, bei der das gesamte System gegen die gesamten Anforderungen (funktionale und nicht-funktionale Anforderungen) getestet wird. Gewöhnlich findet der Test auf einer Testumgebung statt und wird mit Testdaten durchgeführt. Die Testumgebung soll die Produktivumgebung des Kunden simulieren, d. h. ihr möglichst ähnlich sein. In der Regel wird der Systemtest durch die realisierende Organisation durchgeführt.
-
-Ein Abnahmetest, Verfahrenstest, Akzeptanztest oder auch User Acceptance Test (UAT) ist das Testen der gelieferten Software durch den Kunden. Der erfolgreiche Abschluss dieser Teststufe ist meist Voraussetzung für die rechtswirksame Übernahme der Software und deren Bezahlung. Dieser Test kann unter Umständen (z. B. bei neuen Anwendungen) bereits auf der Produktionsumgebung mit Kopien aus Echtdaten durchgeführt werden.
+| Bezeichnung                                | Ebene                                                                                                                          | Durchführender / Ziel                                                                                                                                     |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Modultest, Komponententest oder Unittest   | Funktionalität innerhalb einzelner abgrenzbarer Teile der Software (Module, Programme oder Unterprogramme, Units oder Klassen) | häufig durch den Softwareentwickler selbst, Nachweis der technischen Lauffähigkeit und korrekter fachlicher (Teil-) Ergebnisse                            |
+| Integrationstest, Interaktionstest         | Zusammenarbeit voneinander abhängiger Komponenten                                                                              | Testschwerpunkt liegt auf den Schnittstellen der beteiligten Komponenten und soll korrekte Ergebnisse über komplette Abläufe hinweg nachweisen            |
+| Systemtest                                 | Gesamtes System wird gegen die gesamten Anforderungen (funktionale und nicht-funktionale Anforderungen) getestet               | Test in einer Testumgebung statt / wird mit Testdaten  durchgeführt - Simulation einer realistischen Umgebung                                             |
+| Abnahmetest, Verfahrenstest, Akzeptanztest | Testen der gelieferten Software durch den Kunden                                                                               | Rechtlich bindende Evaluation der Software und deren Bezahlung, unter Umständen bereits auf der Produktionsumgebung mit Kopien aus Echtdaten durchgeführt |
 
 *******************************************************************************
 
@@ -266,6 +288,22 @@ Abbildung motiviert durch [^Somm01]
 
 [^Somm01]:  Ian Sommerville: Software Engineering, Pearson Education, 6. Auflage, 2001
 
+1. Entwerfen der Testfälle
+
++ Analyse der Anforderungen, Dokumentationen um erforderliche Testbedingungen festzulegen
++ Nachvollziehbarkeit der Entscheidungen, Weiterentwicklung bei Anpassungen in den Anforderungen bzw. der Spezifikation
+
+2. Spezifizieren der Testfälle
+
++ Ausarbeitung der eigentlichen Beschreibung der Testfälle und Testdaten
++ Definition der erwarteten Resultate
+
+3. Testausführung
+
++ (variable) Reihung der Testfälle  unter Berücksichtigung von Vor- und Nachbedingungen um Quereffekte abzubilden
+
+4. Evaluation der Ergebnisse
+
 ### Klassifikation Testmethoden
 
 <!--
@@ -292,7 +330,6 @@ style="width: 100%; display: block; margin-left: auto; margin-right: auto;"
 
 ````````````
 Abbildung motivierte aus [^Liggesmeyer]
-
 
 **Statische Code Analysen**
 
@@ -339,23 +376,27 @@ Wesentliche Aufgabe der einzelnen Verfahren ist die Bestimmung geeigneter Testf�
 
 ## Planung von Tests
 
-Im folgenden sollen unterschiedliche Black- und White-Box-Tests angewandt werden
-um eine Klasse MyMathFunctions, die zwei Methoden implementiert, zu testen:
+Nehmen wir an, wir hätten eine Klasse MyMathFunctions mit zwei Methoden implementiert und sollen diese testen ...
 
 ```csharp
 static class MyMathFunctions{
   //Fakultät der Zahl i
-  public int fak(int i) {...}
+  public static int fak(int i) {...}
   // Grösstergemeinsamer Teiler von i, j und k
-  public int ggt(int i, int j, int k) {...}
+  public static int ggt(int i, int j, int k) {...}
 }
 ```
 
-Ein vollständiges Testen aller `int` Werte ($2^{31}$ bis $2^{31}-1$) bedeutet für die Funktion
-`fak()` $2^{32}$ und für `ggt()` $2^{32} \cdot 2^{32} \cdot 2^{32}$ Kombinationen. Testen aller möglichen Eingaben ist damit nicht möglich. Für Variablen mit unbestimmtem Wertebereich (`string`) lässt sich nicht einmal die Menge der möglichen Kombinationen darstellen.
+> **Frage:** Mit wie vielen Tests könnten wir die Korrektheit der Implementierung nachweisen?
+
+                 {{1-2}}
+********************************************************************************
+
+Ein vollständiges Testen aller `int` Werte ($2^{31}$ bis $2^{31}-1$) bedeutet für die Funktion `fak()` $2^{32}$ und für `ggt()` $2^{32} \cdot 2^{32} \cdot 2^{32}$ Kombinationen. Testen aller möglichen Eingaben ist damit nicht möglich. Für Variablen mit unbestimmtem Wertebereich (`string`) lässt sich nicht einmal die Menge der möglichen Kombinationen darstellen.
+
+********************************************************************************
 
 ### Black-Box-Testing / Spezifikationsorientiert
-
 > Black-Box-Testing ... Grundlage der Testfallentwicklung ist die Spezifikation
 > des Moduls. Die Interna des Softwareelements sind nicht bekannt.
 
@@ -366,7 +407,6 @@ Für Black-Box-Testing existieren unterschiedliche Ausprägungen:
 
 + Äquivalenzklassenanalyse
 + Grenzwertanalyse [Link](https://www.youtube.com/watch?v=GshMbff3mzw)
-+ Ursache Wirkungsgraphen
 + Zustandsbasierte Testmethoden
 
 Problematisch ist dabei, dass spezifische Lösungen, wie zum Beispiel in folgendem Fall. Der Entwickler hat hier beschlossen die Performance der Berechnung der Fakultät zu steigern, um die Performance des Algorithmus für Werte kleiner 5 zu verbessern (hypothetisches Beispiel!).
