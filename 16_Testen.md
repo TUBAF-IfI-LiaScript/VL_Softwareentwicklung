@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 
@@ -767,58 +767,49 @@ Hierzu nutzen wir das xunit Framework. Eine Folge von Tests für unsere `DivideT
 ```csharp
 using Xunit;
 
-namespace MyMathMethods.Test
+public class Test_DivideTwoValues
 {
-    public class Test_DivideTwoValues
+    [Fact]
+    public void Check_StateEqualPositiveInputs()
     {
-        [Fact]
-        public void Check_StateEqualPositiveInputs()
-        {
-            // Arrange
-            double result = 0;
-            double dividend = 5;
-            double divisor = dividend;
-            int expected = 0;
+        // Arrange
+        double result = 0;
+        double dividend = 5;
+        double divisor = dividend;
+        int expected = 0;
+        // Act
+        var state = Calculator.DivideTwoValues(dividend, divisor, ref result);
+        // Assert
+        Assert.Equal(expected, state);
+    }
 
-            // Act
-            var state = Calculator.DivideTwoValues(dividend, divisor, ref result);
+    [Fact]
+    public void Check_StateZeroAsDivended()
+    {
+        // Arrange
+        double result = 0;
+        double dividend = 5;
+        double divisor = 0;
+        int expected = -1;
+        // Act
+        var state = Calculator.DivideTwoValues(dividend, divisor, ref result);
+        // Assert
+        Assert.True(expected == state);
+    }
 
-            // Assert
-            Assert.Equal(expected, state);
-        }
-
-        [Fact]
-        public void Check_StateZeroAsDivended()
-        {
-            // Arrange
-            double result = 0;
-            double dividend = 5;
-            double divisor = 0;
-            int expected = -1;
-
-            // Act
-            var state = Calculator.DivideTwoValues(dividend, divisor, ref result);
-
-            // Assert
-            Assert.True(expected == state);
-        }
-
-        [Theory]                                             // Übergabe von variablen Parametersets
-        [InlineData(10, 2, 5)]
-        [InlineData(5, 2, 2.5)]
-        [InlineData(double.MaxValue, double.MaxValue, 1)]    // Edge Cases
-        [InlineData(double.MaxValue, 1, double.MaxValue)]
-        public void Check_ResultCalculation(double dividend, double divisor, double expected)
-        {
-            // Arrange
-            double result = 0;
-
-            // Act
-            var state = Calculator.DivideTwoValues(dividend, divisor, ref result);
-
-            // Assert
-            Assert.Equal(expected, result);
-        }
+    [Theory]                                             // Übergabe von variablen Parametersets
+    [InlineData(10, 2, 5)]
+    [InlineData(5, 2, 2.5)]
+    [InlineData(double.MaxValue, double.MaxValue, 1)]    // Edge Cases
+    [InlineData(double.MaxValue, 1, double.MaxValue)]
+    public void Check_ResultCalculation(double dividend, double divisor, double expected)
+    {
+        // Arrange
+        double result = 0;
+        // Act
+        var state = Calculator.DivideTwoValues(dividend, divisor, ref result);
+        // Assert
+        Assert.Equal(expected, result);
     }
 }
 ```
