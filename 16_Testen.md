@@ -98,14 +98,102 @@ data-transpose="false"
 
 ****************************************************************
 
+## Exkurs - Abhängigkeitsmanagment / Paketmanagement
 
-## Exkurs - Abhängigkeitsmanagment
+> **Merke:** Erfinde das Rad nicht neu!
 
-NuGet ist ein System zur freien Verteilung von Software-Komponenten in Form von Paketen. Es erleichtert insbesondere die Einbindung von Bibliotheken bei der Softwareentwicklung unter dem klassischem .Net-Framework als auch unter .NET.
+Wie schaffen es erfahrene Entwickler innerhalb kürzester Zeit Prototypen mit beeindruckender Funktionalität zu entwerfen? Sicher, die Erfahrung spielt hier eine Große Rolle aber auch die Wiederverwendung von existierendem Code. Häufig wiederkehrende Aufgaben wie zum Beispiel:
 
-Die Pakete werden von ihren Entwicklern in zentrale Repositories (die bekanntesten sind [nuget.org](https://www.nuget.org/) und [myget.org](https://myget.org/)) hochgeladen und mit Meta-Daten (z. B. die erforderliche .NET-Version) versehen. Die Pakete sind dann in der Galerie des Repository sichtbar.
++ das Logging
++ der Zugriff auf Datenquellen
++ mathematische Operationen
++ Datenkapselung und Abstraktion
++ ...
 
-Werfen Sie einen Blick auf das MathNet Beispiel im Code Ordner. Welche Bibliothek müssen Sie in Ihrem Projekt installieren, um es ausführbar zu machen?
+werden bereits durch umfangreiche Bibliotheken implementiert und werden entsprechend nicht neu geschrieben.
+
+Ok, dann ziehe ich mir eben die zugehörigen Repositories in mein Projekt und kann die Bibliotheken nutzen. In individuell genutzten Implementierungen mag das ein gangbarer Weg sein, aber das Wissen um die zugehörigen Abhängigkeiten - Welche Subbibliotheken und welches .NET Framework werden vorausgesetzt? -  liegt so nur implizit vor.
+
+Entsprechend brauchen wir ein Tool, mit dem wir die Abhängigkeiten UND den eigentlichen Code kombinieren und einem Projekt hinzufügen können.
+`NuGet` löst diese Aufgabe für .NET und schließt auch gleich die Mechanismen zur Freigabe von Code ein. NuGet definiert dabei, wie Pakete für .NET erstellt, gehostet und verarbeitet werden.
+
+Ein `NuGet`-Paket ist eine gepackte Datei mit der Erweiterung `.nupkg` die:
++ den kompilierten Code (DLLs),
++ ein beschreibendes Manifest, in dem Informationen wie die Versionsnummer des Pakets, ggf. der Speicherort des Source Codes oder die Projektwebseite enthalten sind sowie
++ die Abhängigkeiten von anderen Paketen und dessen Versionen
+enthalten sind
+Ein Entwickler, der seinen Code veröffentlichen möchte generiert die zugehörige Struktur und läd diese auf einen `NuGet` Server. Unter dem [Link](https://www.nuget.org/) kann dieser durchsucht werden.
+
+**Anwendungsbeispiel: Symbolisches Lösen von Mathematischen Gleichungen**
+
+Eine entsprechende Bibliothek steht unter [Projektwebseite](https://symbolics.mathdotnet.com/). Das Ganze wird als `Nuget` Paket gehostet [MathNet](https://www.nuget.org/packages/MathNet.Symbolics/).
+
+Unter der Annahme, dass wir `dotnet` als Buildtool benutzen ist die Einbindung denkbar einfach.
+
+```
+dotnet new console -o SymbolicMath
+cd SymbolicMath
+dotnet add package MathNet.Symbolics
+Determining projects to restore...
+Writing /tmp/tmpNsaYtc.tmp
+info : Adding PackageReference for package 'MathNet.Symbolics' into project '/home/zug/Desktop/Vorlesungen/VL_Softwareentwicklung/code/16_Testen/ConditionalBuild/ConditionalBuild.csproj'.
+info :   GET https://api.nuget.org/v3/registration5-gz-semver2/mathnet.symbolics/index.json
+...
+```
+
+Danach findet sich in unserer Projektdatei `.csproj` ein entsprechender Eintrag
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MathNet.Symbolics" Version="0.24.0" />
+  </ItemGroup>
+</Project>
+```
+
+```csharp PreprocessorConsts.cs
+using System;
+using System.Collections.Generic;
+using MathNet.Symbolics;
+using Expr = MathNet.Symbolics.SymbolicExpression;  // Platzhalter für verkürzte Schreibweise
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    Console.WriteLine("Beispiele für die Verwendung des MathNet.Symbolics Paketes");
+    var x = Expr.Variable("x");
+    var y = Expr.Variable("y");
+    var a = Expr.Variable("a");
+    var b = Expr.Variable("b");
+    var c = Expr.Variable("c");
+    var d = Expr.Variable("d");
+    Console.WriteLine("a+a =" + (a + a + a).ToString());
+    Console.WriteLine("(2 + 1 / x - 1) =" + (2 + 1 / x - 1).ToString());
+    Console.WriteLine("((a / b / (c * a)) * (c * d / a) / d) =" + ((a / b / (c * a)) * (c * d / a) / d).ToString());
+    Console.WriteLine("Der zugehörige Latex Code lautet " + ((a / b / (c * a)) * (c * d / a) / d).ToLaTeX());
+  }
+}
+```
+```-xml  PreprocessorConsts.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MathNet.Symbolics" Version="0.24.0" />
+  </ItemGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+
 
 ## Softwarefehler
 
