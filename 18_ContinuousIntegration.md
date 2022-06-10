@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 
@@ -90,6 +90,9 @@ Das übergreifende Datenformat macht die Nachvollziehbarkeit von Code Änderunge
 > **Nachteil 2:** Die beliebige Reihung der Aufrufe lässt einen mitunter die Übersicht verlieren.
 
 > **Merke:** Jupyter Notebooks sind ein hervorragendes Werkzeug für schnelle Prototypen, API-Dokumentationen oder Vorträge mit Live Hacks aber ungeeignet für Projekte [persönliche Meinung des Vortragenden :-)].
+
+> **Hinweis:** Eine Beschreibung der Installationsprozedur für einen C#-Kernel finden Sie unter [Link](https://developers.refinitiv.com/en/article-catalog/article/using--net-core-in-jupyter-notebook)
+
 
 ## Continuous integration (CI)
 
