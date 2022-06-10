@@ -184,22 +184,22 @@ Vorlesungen:
 |       | 13. Mai   | Klassenelemente in C#  / Vererbung                |                            |
 | 7     | 16. Mai   | Klassenelemente in C#  / Vererbung                |                            |
 |       | 20. Mai   | Versionsmanagement im Softwareentwicklungsprozess |                            |
-| 8     | 23. Mai   | Git und Continuous integration in GitHub          |                            |
-|       | 27. Mai   | UML Konzepte                                      |                            |
-| 9     | 30. Mai   | UML Diagrammtypen                                 |                            |
-|       | 3. Juni   | UML Anwendungsbeispiel                            | Ende EiS Vorlesungsinhalte |
+| 8     | 23. Mai   | UML Konzepte                                      |                            |
+|       | 27. Mai   | UML Diagrammtypen                                 |                            |
+| 9     | 30. Mai   | UML Anwendungsbeispiel                            |                            |
+|       | 3. Juni   | Testen                                            | Ende EiS Vorlesungsinhalte |
 | 10    | 6. Juni   | _Pfingstmontag_                                   |                            |
-|       | 10. Juni  | Testen                                            |                            |
-| 11    | 13. Juni  | Dokumentation                                     |                            |
-|       | 17. Juni  | Build Toolchains und ihr Einsatz                  |                            |
-| 12    | 20. Juni  | Generics                                          |                            |
-|       | 24. Juni  | Container                                         |                            |
-| 13    | 27. Juni  | Delegaten                                         |                            |
-|       | 1. Juli   | Events                                            |                            |
-| 14    | 4. Juli   | Threadkonzepte in C#                              |                            |
-|       | 8. Juli   | Taskmodell                                        |                            |
-| 15    | 11. Juli  | Language Integrated Query                         |                            |
-|       | 15. Juli  | Design Pattern                                    |                            |
+|       | 10. Juni  | Dokumentation und Build Toolchains                |                            |
+| 11    | 13. Juni  | Continuous Integration in GitHub                  |                            |
+|       | 17. Juni  | Generics                                          |                            |
+| 12    | 20. Juni  | Container                                         |                            |
+|       | 24. Juni  | Delegaten                                         |                            |
+| 13    | 27. Juni  | Events                                            |                            |
+|       | 1. Juli   | Threadkonzepte in C#                              |                            |
+| 14    | 4. Juli   | Taskmodell                                        |                            |
+|       | 8. Juli   | Language Integrated Query                         |                            |
+| 15    | 11. Juli  | Design Pattern                                    |                            |
+|       | 15. Juli  |                                                   |                            |
 
 
 ### Durchführung
