@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 
@@ -30,6 +30,30 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 ---------------------------------------------------------------------
 
+## Neues aus der Github-Woche
+
+Wie stark arbeiten Sie kollaborativ und kooperativ?
+
+| TeamID | author_A                                          | author_B                                          | CollaborationRatio |
+| ------ | ------------------------------------------------- | ------------------------------------------------- | ------------------ |
+| 0      | [.gitignore, Program.cs, project.assets.json, ... | NaN                                               | 0.00               |
+| 1      | [README.md, IP.Tools class, Computer.simulatio... | NaN                                               | 0.00               |
+| 2      | [team.config, Program.cs]                         | [.gitignore, Program.cs, softwareentwicklung_a... | 0.25               |
+| 4      | [Program.cs, gitbefehle.md]                       | [.gitignore, Computer.csproj, Program.cs]         | 0.25               |
+| 5      | [.gitignore, Program.cs, softwareentwicklung_a... | [printmethode]                                    | 0.00               |
+| 6      | [class-computer.cs, computer_archive.2.cs, mai... | [computer_archive.cs, computer_archive.2.cs, I... | 0.20               |
+| 7      | [.gitignore, Archive.cs, Comnputer.cs, IPTools... | NaN                                               | 0.00               |
+| 8      | [.gitignore, Program.cs, user.csproj, Computer... | [.gitignore, Computer.cs, übung04.csproj]         | 0.40               |
+| 9      | [aufg1, aufg1.cs]                                 | [aufg2.cs]                                        | 0.00               |
+| 10     | [Computer.cs, IPTools.cs, .gitignore, Program.... | [Computer.cs, Program.cs, Archive.cs]             | 0.33               |
+| 11     | [ComputerClass.cs, ClassComputer.cs, softwaree... | [main.cs, .gitignore, Program.cs, softwareentw... | 0.38               |
+| 12     | [Program.cs, softwareentwicklung_aufgabe4_sose... | [Program.cs, .gitignore]                          | 0.66               |
+| 13     | [Schritt1.cs]                                     | NaN                                               | 0.00               |
+| 14     | [.gitignore, Program.cs, Computer.cs, .NETCore... | [Computer.cs, Program.cs, softwareentwicklung_... | 0.16               |
+| 15     | [computer.cs, computerclass.cs, Aufgabe4.cspro... | [Program.cs, Archiv.cs, IPTools.cs, .gitignore... | 0.42               |
+| 16     | NaN                                               | NaN                                               | 0.00               |
+| 17     | [Aufgabe04.csproj, Program.cs, daten_speichern... | [.gitignore, Computer.cs, Program.cs, Archive.cs] | 0.16               |
+
 ## Dokumentation
 
 **Wer braucht schon eine Doku?**
@@ -45,13 +69,13 @@ und auf welchen Grundlagen sie entwickelt wurde.
 *Klassifikation 1 - Intern/Extern* ... bezieht sich dabei auf die Frage, ob das Ganze
 für den internen Gebrauch oder den externen Gebrauch, also zur Weitergabe an
 Kunden, realisiert werden muss. Letztgenannte Variante unterliegt einer Vielzahl
-von rechtlichen Normierungen und Standards.
+von rechtlichen Normierungen und Standards!
 
 *Klassifikation 2 - Inhalt*
 
 | Art der Dokumentation      | Bezug                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Installationsdokumentation | Beschreibung der erforderlichen Hardware und Software, mögliche Betriebssysteme und -Versionen, vorausgesetzte Software-Umgebung wie etwa Standardbibliotheken und Laufzeitsysteme. Erläuterung der Prozeduren zur Installation, außerdem zur Pflege (Updates) und De-Installation, bei kleinen Produkten eine Readme-Datei.                                                                                                                                                                                                                                                                            |
+| Installationsdokumentation | Beschreibung der erforderlichen Hardware und Software, mögliche Betriebssysteme und -Versionen, vorausgesetzte Software-Umgebung, wie etwa Standardbibliotheken und Laufzeitsysteme. Erläuterung der Prozeduren zur Installation, außerdem zur Pflege (Updates) und De-Installation, bei kleinen Produkten eine Readme-Datei-Datei.                                                                                                                                                                                                                                                                     |
 | Benutzerdokumentation      | Informationsmaterial für die tatsächlichen Endbenutzer, etwa über die Benutzerschnittstelle. Den Anwendern kann auch die Methodendokumentation zugänglich gemacht werden, um Hintergrundinformationen und ein allgemeines Verständnis für die Funktionen der Software zu vermitteln.                                                                                                                                                                                                                                                                                                                    |
 | Datendokumentation         | Oft sind nähere Beschreibungen zu den Daten erforderlich. Es sind die Interpretation der Informationen in der realen Welt, Formate, Datentypen, Beschränkungen (Wertebereich, Größe) zu benennen. Die Datendokumentation kann oft in zwei Bereiche aufgeteilt werden: Innere Datenstrukturen, wie sie nur für Programmierer sichtbar sind und Äußere Datendokumentation für solche Datenelemente, die für Anwender sichtbar sind – von Endbenutzern einzugebende und von der Software ausgegebene Informationen. Dazu gehört auch die detaillierte Beschreibung möglicher Import-/Exportschnittstellen. |
 | Testdokumentation          | Nachweis von Testfällen, mit denen die ordnungsgemäße Funktion jeder Version des Produkts getestet werden können, sowie Verfahren und Szenarien, mit denen in der Vergangenheit erfolgreich die Richtigkeit überprüft wurde.                                                                                                                                                                                                                                                                                                                                                                            |
@@ -94,7 +118,9 @@ der Dokumentationsarbeit:
 + Systematiker ... liest zuerst einmal die Grundlagen, bemüht sich alle Hintergrundinfo zu API/Framework, zu erfassen. benötigt Architekturbeschreibung, Konzepte allgemeiner Programmieraufgaben (Error handling, Lokalisierung &Co.)
 + Bedarfsleser ... situationsgetriebene Auswertung der Dokumentation, erwartet Antworten auf spezifische Fragen, benötigt Code-Kommentare, Hintergrundinformationen und Code-Beispiele
 
-![Modelle](https://www.plantuml.com/plantuml/png/XP1FRzD04CNl-oc6NDfAiKq27AXGL2ino6fIgZXHuOJMzjXPTVz4Esj2-VHuRLACP2cdrRxvpNkZTqUEMzSeoQwMvlXYHNrmC7yx-mYnuh-D3WkZff3g8WHZGJW2NbL22kwGGeYbXArV8TWYeVs9PSYkiiVLjs0j2jI4GLgYTg8IQ6zXa-xW-dFhKwBZGj8K214EpXtfDefguGvDxWCZVYB9S_9l80gZAQYC3OwIQtzgb4kJHugJGnkjqsNoa2KtZBqHkf1DYV39huiyYf-ofL7AwCNeB1FgAFrbvM9a-Gjgj5n6Uq9BBT2zr_iisSwcC16wpMu1YFK9TObsqeemkHbWyrR1NnUnTqEtHBkJA9xb6FY-zxiCVcYL3TUyHeNQdUUiuBRyUqUZQy9N1-04oSFkALtUhvCjguH4Y1_J7olpt7W7xeJH7bfzlT_F-ddsGWvLEKRC6JbZUNs6l9vzptR9Xh6kFWY2nJ2mQs5CxCa-jMjq-7zTwZExXiR-v-okcG70sByq2CCpzh_OPOreStRdQrJo3m00)<!-- width="70%" --> Abbildung motiviert aus  [^codecentric]
+![Modelle](https://www.plantuml.com/plantuml/png/XP1FRzD04CNl-oc6NDfAiKq27AXGL2ino6fIgZXHuOJMzjXPTVz4Esj2-VHuRLACP2cdrRxvpNkZTqUEMzSeoQwMvlXYHNrmC7yx-mYnuh-D3WkZff3g8WHZGJW2NbL22kwGGeYbXArV8TWYeVs9PSYkiiVLjs0j2jI4GLgYTg8IQ6zXa-xW-dFhKwBZGj8K214EpXtfDefguGvDxWCZVYB9S_9l80gZAQYC3OwIQtzgb4kJHugJGnkjqsNoa2KtZBqHkf1DYV39huiyYf-ofL7AwCNeB1FgAFrbvM9a-Gjgj5n6Uq9BBT2zr_iisSwcC16wpMu1YFK9TObsqeemkHbWyrR1NnUnTqEtHBkJA9xb6FY-zxiCVcYL3TUyHeNQdUUiuBRyUqUZQy9N1-04oSFkALtUhvCjguH4Y1_J7olpt7W7xeJH7bfzlT_F-ddsGWvLEKRC6JbZUNs6l9vzptR9Xh6kFWY2nJ2mQs5CxCa-jMjq-7zTwZExXiR-v-okcG70sByq2CCpzh_OPOreStRdQrJo3m00)
+
+_Abbildung motiviert aus  [^codecentric]_
 
 
 [^codecentric]:  Uwe Friedrichsen, Optimale Systemdokumentation mit agilen Prinzipien, 06/11, https://www.codecentric.de/publikation/optimale-systemdokumentation-mit-agilen-prinzipien/
@@ -148,8 +174,8 @@ public class Vector {
   }
   public static bool operator !=(Vector p1, Vector p2){
     // hier hatte ich keine Lust mehr
-    // TODO die Methode müsste noch implemenntiert werden.
-    return true;
+    // TODO die Methode müsste noch implementiert werden.
+    return true;     
   }
 }
 
@@ -169,6 +195,8 @@ public class Program
   }
 }
 ```
+
+> Anmerkung: Bauen Sie nie Rückgabewerte für nicht ausimplementierte Klassenelemente ein ohne eine `throw new NotImplementedException();` zu integrieren.
 
 Über entsprechende Tags lassen sich den Dokumentationsfragmenten Bedeutungen
 geben, die eine entsprechende Gliederung und Zuordnung erlaubt:
@@ -277,7 +305,7 @@ public static int Add(int a, int b)
 }
 ```
 
-Leider funktioniert dieser Mechanismus unter dem gleich vorzustellen Tool Doxygen nicht.
+> Anmerkung: Leider funktioniert dieser Mechanismus unter dem gleich vorzustellen Tool Doxygen nicht.
 
 **Konkrete Umsetzung mit C\#**
 
@@ -342,103 +370,6 @@ USE_MDFILE_AS_MAINPAGE = README.md
 
 [^MS_VisualStudio]: Dokumentation Microsoft Visual Studio, https://docs.microsoft.com/de-de/visualstudio/ide/using-intellisense?view=vs-2019
 
-## Paketmanagement
-
-> **Merke:** Erfinde das Rad nicht neu!
-
-Wie schaffen es erfahrene Entwickler innerhalb kürzester Zeit Prototypen mit beeindruckender Funktionalität zu entwerfen? Sicher, die Erfahrung spielt hier eine Große Rolle aber auch die Wiederverwendung von existierendem Code. Häufig wiederkehrende Aufgaben wie zum Beispiel:
-
-+ das Logging
-+ der Zugriff auf Datenquellen
-+ mathematische Operationen
-+ Datenkapselung und Abstraktion
-+ ...
-
-werden bereits durch umfangreiche Bibliotheken implementiert und werden entsprechend nicht neu geschrieben.
-
-Ok, dann ziehe ich mir eben die zugehörigen Repositories in mein Projekt und kann die Bibliotheken nutzen. In individuell genutzten Implementierungen mag das ein gangbarer Weg sein, aber das Wissen um die zugehörigen Abhängigkeiten - Welche Subbibliotheken und welches .NET Framework werden vorausgesetzt? -  liegt so nur implizit vor.
-
-Entsprechend brauchen wir ein Tool, mit dem wir die Abhängigkeiten UND den eigentlichen Code kombinieren und einem Projekt hinzufügen können.
-`NuGet` löst diese Aufgabe für .NET und schließt auch gleich die Mechanismen zur Freigabe von Code ein. NuGet definiert dabei, wie Pakete für .NET erstellt, gehostet und verarbeitet werden.
-
-Ein `NuGet`-Paket ist eine gepackte Datei mit der Erweiterung `.nupkg` die:
-+ den kompilierten Code (DLLs),
-+ ein beschreibendes Manifest, in dem Informationen wie die Versionsnummer des Pakets, ggf. der Speicherort des Source Codes oder die Projektwebseite enthalten sind sowie
-+ die Abhängigkeiten von anderen Paketen und dessen Versionen
-enthalten sind
-Ein Entwickler, der seinen Code veröffentlichen möchte generiert die zugehörige Struktur und läd diese auf einen `NuGet` Server. Unter dem [Link](https://www.nuget.org/) kann dieser durchsucht werden.
-
-**Anwendungsbeispiel: Symbolisches Lösen von Mathematischen Gleichungen**
-
-Eine entsprechende Bibliothek steht unter [Projektwebseite](https://symbolics.mathdotnet.com/). Das Ganze wird als `Nuget` Paket gehostet [MathNet](https://www.nuget.org/packages/MathNet.Symbolics/).
-
-Unter der Annahme, dass wir `dotnet` als Buildtool benutzen ist die Einbindung denkbar einfach.
-
-```
-dotnet new console -o SymbolicMath
-cd SymbolicMath
-dotnet add package MathNet.Symbolics
-Determining projects to restore...
-Writing /tmp/tmpNsaYtc.tmp
-info : Adding PackageReference for package 'MathNet.Symbolics' into project '/home/zug/Desktop/Vorlesungen/VL_Softwareentwicklung/code/16_Testen/ConditionalBuild/ConditionalBuild.csproj'.
-info :   GET https://api.nuget.org/v3/registration5-gz-semver2/mathnet.symbolics/index.json
-...
-```
-
-Danach findet sich in unserer Projektdatei `.csproj` ein entsprechender Eintrag
-
-```xml
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="MathNet.Symbolics" Version="0.24.0" />
-  </ItemGroup>
-</Project>
-```
-
-```csharp PreprocessorConsts.cs
-using System;
-using System.Collections.Generic;
-using MathNet.Symbolics;
-using Expr = MathNet.Symbolics.SymbolicExpression;  // Platzhalter für verkürzte Schreibweise
-
-class Program
-{
-  static void Main(string[] args)
-  {
-    Console.WriteLine("Beispiele für die Verwendung des MathNet.Symbolics Paketes");
-    var x = Expr.Variable("x");
-    var y = Expr.Variable("y");
-    var a = Expr.Variable("a");
-    var b = Expr.Variable("b");
-    var c = Expr.Variable("c");
-    var d = Expr.Variable("d");
-    Console.WriteLine("a+a =" + (a + a + a).ToString());
-    Console.WriteLine("(2 + 1 / x - 1) =" + (2 + 1 / x - 1).ToString());
-    Console.WriteLine("((a / b / (c * a)) * (c * d / a) / d) =" + ((a / b / (c * a)) * (c * d / a) / d).ToString());
-    Console.WriteLine("Der zugehörige Latex Code lautet " + ((a / b / (c * a)) * (c * d / a) / d).ToLaTeX());
-  }
-}
-```
-```-xml  PreprocessorConsts.csproj
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="MathNet.Symbolics" Version="0.24.0" />
-  </ItemGroup>
-</Project>
-```
-@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
-
-
 ## Build Tools
 
 **Konzepte**
@@ -449,8 +380,9 @@ und für all diese Teilaspekte gibt es jeweils eigne Tools. Das möchte doch nie
 manuell angehen!
 
 ```
-mcs program.cs
-mono program.exe
+dotnet build myproject
+dotnet run myproject
+...
 doxygen Doxyfile
 ...
 ```
@@ -505,13 +437,13 @@ cd MyExcelGenerator
 cat MyExcelGenerator.csproj
 dotnet add package EPPlus
 cat MyExcelGenerator.csproj
-... Program.cs anpassen ... siehe Codebeispiel im Codeordner
+... Program.cs anpassen ...
 dotnet build
 dotnet run
 soffice -calc myworkbook.xlsx
 ```
 
-`dotnet` ermöglicht keine Defintion von Abhängigkeiten (ohne auf MSBuild
+`dotnet` ermöglicht keine Definition von Abhängigkeiten (ohne auf MSBuild
 zurückzugreifen) standardisiert aber den Erstellungs- und Testprozess, sowie das
 Pakethandling!
 
@@ -519,9 +451,7 @@ Pakethandling!
 
 MSBuild ist Build-Tool, das insbesondere für das Erstellen von .NET-basierten
 Anwendungen genutzt wird. Microsofts Visual Studio ist in wesentlichem Maße von
-MSBuild abhängig; MSBuild selbst ist aber nicht von Visual Studio abhängig.
-Dadurch lassen sich mit MSBuild auch Visual-Studio-Projekte ohne den Einsatz von
-Visual Studio bauen.
+MSBuild abhängig; umgekehrt besteht diese Abhängigkeit nicht.
 
 Im Wesentlichen besteht MSBuild aus der Datei `msbuild.exe` und dll-Dateien, die
 auch im .NET Framework enthalten sind, und XML-Schemas, nach deren Vorgaben die
@@ -627,7 +557,6 @@ $(EXE): $(OBJ)
 # Objects depend on these Libraries
 $(OBJ): $(INCL)
 
-
 # Clean Up Objects, Exectuables, Dumps out of source directory
 clean:
        $(RM) $(OBJ) $(EXE) core a.out
@@ -635,4 +564,4 @@ clean:
 
 > MERKE: Die Einschübe im MAKEFILE sind keine Leerzeichen, sondern Tabulatorshifts!
 
-Das Hilfsprogramm make ist Teil des POSIX-Standards.
+Das Hilfsprogramm `make` ist Teil des POSIX-Standards.
