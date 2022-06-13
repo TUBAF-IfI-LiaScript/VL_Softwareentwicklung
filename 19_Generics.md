@@ -51,6 +51,8 @@ public class Program{
       Type valueType = myArray.GetType();
       Console.WriteLine("\nmyArray: Type is {0}", valueType);
       Console.WriteLine("\nmyArray is Array? {0}", valueType.IsArray);
+      
+      Console.WriteLine("\nTotal length of the array = {0:d}", myArray.Length);
       //myArray.Add(7);   // Methode existiert nicht!
     }
 }
