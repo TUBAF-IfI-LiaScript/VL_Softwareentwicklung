@@ -14,6 +14,67 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/20_Container.md)
 
+## ... zur Erinnerung
+
+<!--
+style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+-->
+```ascii
+                                     C# Typen
+                                         |
+                       .------------------------------------.
+                       |                                    |
+                   Werttypen                           Referenztypen
+                       |                                    |
+         .-------+-----+---+--------.        .-------+---------+-------.
+         |       |         |        |        |       |         |       |
+     Vordefi-  Enumer-  Structs   Tupel   Klassen  Inter    Arrays  Delegates
+ nierte Typen  ation                     (String) -faces
+         |
+         |      ...............................................................
+         |                           Benutzerdefinierte Typen
+         |
+         .----+------+-----------+-------------.
+         |           |           |             |
+     Character    Ganzzahl   Gleitkommazahl   Bool
+                     |
+             .------+---------.
+             |                |
+     mit Vorzeichen     vorzeichenlos                                            .
+```
+
+Die bisher behandelten Userdatentypen `struct` und `class` erfahren in C# 9.0 eine Erweiterung - `records`. Es wurden zwei Varianten integriert
+
++ `record` ist nur eine Abkürzung für eine `record class` - ein Referenztyp.
++ `record struct` ist ein Wertdatentyp.
+
+
+```csharp    initKeyword
+using System;
+
+public record Person(string FirstName, string LastName);
+
+public class Program
+{
+  public static void Main()
+  {
+      var person1 = new Person("Calvin", "Allen");
+      Console.WriteLine(person1.FirstName);
+      Console.WriteLine(person1.LastName);
+  }
+}
+```
+```xml   -myproject.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+
+
 # Collections
 
 | Parameter                | Kursinformationen                                                                                                                                                                          |

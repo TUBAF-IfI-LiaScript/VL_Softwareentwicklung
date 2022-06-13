@@ -18,7 +18,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Generics und deren Anwendung`                                                                                                                                |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/19_Generics.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/19_Generics.md) |
@@ -51,7 +51,7 @@ public class Program{
       Type valueType = myArray.GetType();
       Console.WriteLine("\nmyArray: Type is {0}", valueType);
       Console.WriteLine("\nmyArray is Array? {0}", valueType.IsArray);
-      //myArray.Add(7);
+      //myArray.Add(7);   // Methode existiert nicht!
     }
 }
 ```
