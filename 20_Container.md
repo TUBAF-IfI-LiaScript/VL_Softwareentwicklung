@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
 
@@ -14,7 +14,23 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/20_Container.md)
 
-## ... zur Erinnerung
+
+# Collections
+
+| Parameter                | Kursinformationen                                                                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
+| **Inhalte:**             | `Containertypen und deren Implementierung in C#`                                                                                                                                |
+| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/20_Container.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/20_Container.md) |
+| **Autoren**              | @author                                                                                                                                                                                    |
+
+![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
+
+---------------------------------------------------------------------
+
+## ... zur Erinnerung und in Ergänzung
 
 <!--
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
@@ -52,15 +68,39 @@ Die bisher behandelten Userdatentypen `struct` und `class` erfahren in C# 9.0 ei
 ```csharp    initKeyword
 using System;
 
-public record Person(string FirstName, string LastName);
+public record PersonRecord(string FirstName, string LastName);
+
+public class PersonClass
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+}
 
 public class Program
 {
   public static void Main()
   {
-      var person1 = new Person("Calvin", "Allen");
-      Console.WriteLine(person1.FirstName);
-      Console.WriteLine(person1.LastName);
+      // Darstellung mit Records
+      var record_1 = new PersonRecord("Calvin", "Allen");
+      var record_2 = new PersonRecord("Calvin", "Allen");
+
+      Console.WriteLine(record_1);
+      Console.WriteLine(record_1 == record_2);
+      //record_1.FirstName = "Tralla";
+
+      // Darstellung mit Klasseninstanzen
+
+      var class_1 = new PersonClass(){
+            FirstName = "John",
+            LastName = "Doe"
+        };
+      var class_2 = new PersonClass(){
+            FirstName = "John",
+            LastName = "Doe"
+        };
+
+      Console.WriteLine(class_1);
+      Console.WriteLine(class_1 == class_2);      
   }
 }
 ```
@@ -74,21 +114,20 @@ public class Program
 ```
 @LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
+- die Klassen-Instanzen werden nicht als gleich angesehen, obwohl die Daten in den Objekten gleich sind. Dies liegt daran, dass die beiden Variablen auf unterschiedliche Objekte verweisen.
+- die Record-Instanzen werden als gleich angesehen. Dies liegt daran, dass Datensätze bei der Überprüfung auf Gleichheit nur Daten vergleichen.
+- die Records implementieren verschiedene Methoden automatisch `ToString()`
+- Records sind per default immutable!
 
-# Collections
-
-| Parameter                | Kursinformationen                                                                                                                                                                          |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**             | `Containertypen und deren Implementierung in C#`                                                                                                                                |
-| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/20_Container.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/20_Container.md) |
-| **Autoren**              | @author                                                                                                                                                                                    |
-
-![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
-
----------------------------------------------------------------------
+```csharp
+public record Person
+{
+    public string FirstName { get; init; }
+    //public string FirstName { get; set; }
+    public string LastName { get; init; }
+    // public string LastName { get; set; }
+}
+```
 
 ## Collections
 
