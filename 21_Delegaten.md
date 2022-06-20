@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 
@@ -18,7 +18,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Deleganten - Konzepte und  Anwendung`                                                                                                                                |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/21_Delegaten.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/21_Delegaten.md) |
@@ -27,6 +27,15 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
+
+## Hinweise zu den praktischen Prüfungsprojekten
+
+Was gab es an Feedbacks am Wochenende?
+
++ _Rote Debugausgaben auf schwarzem Grund sind weniger gut zu lesen!_
++ _Die Schriftgröße während der Vorlesung ist zu klein!_
++ _Wie umfangreich sollen die praktischen Prüfungsleistungen sein?_ [Projektaufgaben](https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2022_Projektaufgaben)
++ _Die praktischen Codebeispiele sind sehr abstrakt!_
 
 ## Motivation und Konzept der Delegaten
 
@@ -343,9 +352,27 @@ class Two : IXyz {
 
 Sowohl Delegaten als auch Schnittstellen ermöglichen einem Klassendesigner,
 Typdeklarationen und Implementierungen zu trennen. Eine bestimmte Schnittstelle
-kann von jeder Klasse oder Struktur geerbt und implementiert werden. Ein Delegat
+kann von jeder Klasse oder Struktur implementiert werden. Ein Delegat
 kann für eine Methode in einer beliebigen Klasse erstellt werden, sofern die
 Methode zur Methodensignatur des Delegaten passt.
+
+
+| Delegaten                                                                                            | Schnittstelle                                                                                    |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| repräsentiert eine Methodensignatur                                                                  | wenn eine Klasse eine Schnittstelle implementiert, dann implementiert sie deren gesamte Methoden |
+| lässt sich nur auf Methoden anwenden                                                                 | deckt sowohl Methoden als auch Eigenschaften ab                                                  |
+| verwendbar, wenn ein Delegat im Scope verfügbar ist                                                  | kann nur verwendet werden, wenn die Klasse diese Schnittstelle implementier.                     |
+| wird für die Behandlung von Ereignissen verwendet.                                                   | findet keine Anwendung bei der Behandlung von Ereignissen verwendet.                             |
+| kann auf anonyme Methoden zugreifen.                                                                 | kann nicht auf anonyme Methoden zugreifen.                                                       |
+| beim Zugriff auf eine Methode über Delegaten ist kein Zugriff auf das Objekt der Klasse erforderlich | beim Methodenzugriff benötigen Sie das Objekt der Klasse, die eine Schnittstelle implementiert   |
+| unterstützt keine Vererbung.                                                                         | unterstützt Vererbung.                                                                           |
+| wird zur Laufzeit erstellt.                                                                          | wird zur Kompilierzeit erstellt.                                                                 |
+| kann statische Methoden und Methoden versiegelter Klassen einschließen.                              | schließt statische Methoden und Methoden versiegelter Klassen nicht ein                          |
+| kann jede Methode implementieren, die die gleiche Signatur wie der angegebene Delegat aufweist.      | in der implementierenden Klasse wird die Methode mit gleichen Namen und Signatur überschrieben   |
+
+
+Übersetzt mit www.DeepL.com/Translator (kostenlose Version)
+
 
 > Merke: In beiden Fällen kann die Schnittstellenreferenz oder ein Delegat
 > von einem  Objekt verwendet werden, das keine Kenntnis von der Klasse hat, die
@@ -380,7 +407,79 @@ Grundlage eines Sortieralgorithmus gültig ist, gestaltet sich die fehlende Zuor
 Fähigkeit zum Vergleichen zur Klasse gehört und sich der Vergleichsalgorithmus
 zur Laufzeit nicht ändert, ist eine Einzelmethodenschnittstelle ideal.
 
-Vergleichen Sie dazu [Link](https://docs.microsoft.com/de-de/dotnet/api/system.collections.generic.list-1.sort?view=net-5.0)!
+```csharp     ComparableExample.cs
+using System;
+using System.Collections.Generic;
+
+public class Student :  IComparable<Student>
+{
+    public string Name { get; set; }
+    public int Matrikel { get; set; }
+
+    public override string ToString()
+    {
+        return "ID: " + Matrikel + "   Name: " + Name;
+    }
+
+    public int CompareTo(Student compareStudent)
+    {
+        if (compareStudent == null)
+            return 1;
+        else
+            return this.Matrikel.CompareTo(compareStudent.Matrikel);
+    }
+}
+
+public class Example
+{
+    public static int CompareStudentsByName(Student x, Student y)
+    {
+        if (x.Name == null && y.Name == null) return 0;
+        else if (x.Name == null) return -1;
+        else if (y.Name == null) return 1;
+        else return x.Name.CompareTo(y.Name);
+    }
+
+    public static void Main()
+    {
+        List<Student> students = new List<Student>();
+        students.Add(new Student() { Name = "Cotta", Matrikel = 1434 });
+        students.Add(new Student() { Name= "Humboldt", Matrikel = 1234 });
+        students.Add(new Student() { Name = "Zeuner", Matrikel = 1634 }); ;
+        // Name intentionally left null.
+        students.Add(new Student() {  Matrikel = 1334 });
+        students.Add(new Student() { Name = "Hardenberg", Matrikel = 1444 });
+        students.Add(new Student() { Name = "Winkler", Matrikel = 1534 });
+
+        Console.WriteLine("\nBefore sort:");
+        foreach (var aStudent in students)
+        {
+            Console.WriteLine(aStudent);
+        }
+
+        // Call Sort on the list. This will use the default compare method
+        students.Sort();
+
+        Console.WriteLine("\nAfter sort by matrikel number:");
+        foreach (var aStudent in students)
+        {
+            Console.WriteLine(aStudent);
+        }
+
+        // This shows calling the Sort(Comparison(T) overload using
+        // a generic predefined delegate
+        Comparison<Student> handler = new Comparison<Student>(CompareStudentsByName);
+        students.Sort(handler);
+
+        Console.WriteLine("\nAfter sort by name:");
+        foreach (var aStudent in students)
+        {
+            Console.WriteLine(aStudent);
+        }
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 ## Praktische Implementierung
 
