@@ -32,7 +32,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 Was gab es an Feedbacks am Wochenende?
 
-+ _Rote Debugausgaben auf schwarzem Grund sind weniger gut zu lesen!_
++ _Rote Debug-Ausgaben auf schwarzem Grund sind weniger gut zu lesen!_
 + _Die Schriftgröße während der Vorlesung ist zu klein!_
 + _Wie umfangreich sollen die praktischen Prüfungsleistungen sein?_ [Projektaufgaben](https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2022_Projektaufgaben)
 + _Die praktischen Codebeispiele sind sehr abstrakt!_
@@ -361,17 +361,14 @@ Methode zur Methodensignatur des Delegaten passt.
 | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | repräsentiert eine Methodensignatur                                                                  | wenn eine Klasse eine Schnittstelle implementiert, dann implementiert sie deren gesamte Methoden |
 | lässt sich nur auf Methoden anwenden                                                                 | deckt sowohl Methoden als auch Eigenschaften ab                                                  |
-| verwendbar, wenn ein Delegat im Scope verfügbar ist                                                  | kann nur verwendet werden, wenn die Klasse diese Schnittstelle implementier.                     |
-| wird für die Behandlung von Ereignissen verwendet.                                                   | findet keine Anwendung bei der Behandlung von Ereignissen verwendet.                             |
-| kann auf anonyme Methoden zugreifen.                                                                 | kann nicht auf anonyme Methoden zugreifen.                                                       |
+| verwendbar, wenn ein Delegat im Scope verfügbar ist                                                  | kann nur verwendet werden, wenn die Klasse diese Schnittstelle implementiert                     |
+| wird für die Behandlung von Ereignissen verwendet                                                    | findet keine Anwendung bei der Behandlung von Ereignissen verwendet.                             |
+| kann auf anonyme Methoden zugreifen                                                                  | kann nicht auf anonyme Methoden zugreifen.                                                       |
 | beim Zugriff auf eine Methode über Delegaten ist kein Zugriff auf das Objekt der Klasse erforderlich | beim Methodenzugriff benötigen Sie das Objekt der Klasse, die eine Schnittstelle implementiert   |
-| unterstützt keine Vererbung.                                                                         | unterstützt Vererbung.                                                                           |
-| wird zur Laufzeit erstellt.                                                                          | wird zur Kompilierzeit erstellt.                                                                 |
+| unterstützt keine Vererbung                                                                          | unterstützt Vererbung                                                                            |
+| wird zur Laufzeit erstellt                                                                           | wird zur Kompilierzeit erstellt                                                                  |
 | kann statische Methoden und Methoden versiegelter Klassen einschließen.                              | schließt statische Methoden und Methoden versiegelter Klassen nicht ein                          |
-| kann jede Methode implementieren, die die gleiche Signatur wie der angegebene Delegat aufweist.      | in der implementierenden Klasse wird die Methode mit gleichen Namen und Signatur überschrieben   |
-
-
-Übersetzt mit www.DeepL.com/Translator (kostenlose Version)
+| kann jede Methode implementieren, die die gleiche Signatur wie der angegebene Delegat aufweist       | in der implementierenden Klasse wird die Methode mit gleichen Namen und Signatur überschrieben   |
 
 
 > Merke: In beiden Fällen kann die Schnittstellenreferenz oder ein Delegat
@@ -536,10 +533,6 @@ public class Program{
     // Der existierende Delegat wird nun mit einer konkreten Methode
     // verknüpft
     p = DoWork;
-
-    // alternativ könnte man auch einen neuen Delegaten anlegen
-    //Printer p1 = new Printer(DoWork);
-    p("The delegate using the named method is called.");
   }
 }
 ```
