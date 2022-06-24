@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 
@@ -19,7 +19,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                             |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Events und Delegaten in der Anwendung`                                                                                                                                |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/22_Events.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/22_Events.md) |
@@ -29,31 +29,13 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 ---------------------------------------------------------------------
 
-## Organisatorisches
+## Allgemeine Hinweise
 
-> **1. Alternative Prüfungsleistung**
+> **1. Nächste Woche Freitag findet keine Vorlesung statt!**
 
-|             Datum | Bemerkung                                                                           |
-| -----------------:| ----------------------------------------------------------------------------------- |
-|     22. Juni 2021 | Rückmeldung der Gruppen zur Teilnahme an der praktischen Prüfungsleistung (per Email an Prof. Zug) |
-|                   | Anlegen eines Repositories und Erläuterung Ihrer Zielstellungen im Wiki             |                                                         
-|  bis 8. Juli 2021 | Spezifikation einer Fragestellung und zugehöriger Softwareentwurf                   |
-| bis 15. Juli 2021 | Bestätigung der Idee und des Entwurfes                                              |
-|                   | Bearbeitung der Aufgabenstellung in einem GitHub Projekt mit eingeladenen Betreuern |
-|     27. Juli 2021 | (Tag der Klausur) Abschluss der Bearbeitung, die Repos werden gespiegelt.           |
+> **2. Verwenden Sie einen _Code Formater_, der Ihnen bei der Restrukturierung Ihres Codes hilft!**
 
-+ Einrichten eines eignen Repositories
-+ Einladen des Partners
-+ Einladen von Frau Dr. Rudolf (`galinarudollf`) und mir (`sebastianzug`)
-+ Einrichten eines Wikis für die Darstellung der Projektidee
-
-> **2. Warum eigentlich LiaScript?**
-
-> **3. Tutor gesucht!**
-
-Für die Realisierung der Übungen in der Veranstaltung _Prozedurale Programmierung_ suchen wir einen motivierten Studierenden der Freude daran hat, Nicht-Informatikern den Einstieg in die Materie zu erleichtern. Gegenstand der Veranstaltung sind die Grundzüge der Programmierung in C, ein wenig Objektorientrierung in C++ und darauf aufbauend etwas Anwendung mit einem Mikrocontroller.
-
-> **4. Morgen keine Vorlesung!**
+> **3. Evaluieren Sie die Hinweise der Code Analyse sorgfältig, entwerfen Sie ggf. eigene Regeln.**
 
 ## Nachgefragt
 
@@ -101,6 +83,11 @@ public class Program
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+> **Frage:** Wie ließe sich das Codebeispiel verbessern?
+
+{{1}}
+Nutzen Sie einen vorimplementierten (generischen) Delegaten
 
 
 ## Wiederholung
@@ -391,16 +378,14 @@ Welche Informationen sollten an die Subscriber weitergereicht werden? Zum einen
 der auslösende Publisher (Wer ist verantwortlich?) und ggf. weitere Daten
 zum Event (Warum ist die Information eingetroffen?).
 
-Im Beispiel konzentrieren wir uns auf ein Default-Delegate, dass Bestandteil der
+Im Beispiel konzentrieren wir uns auf die Default-Delegates, die Bestandteil der
 .NET Umgebung ist
 
-`EventHandler Delegate` siehe https://docs.microsoft.com/de-de/dotnet/api/system.eventhandler?view=netframework-4.8
+| Delegate                |                                                  | Link                                                                                 |
+| ----------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `EventHandler Delegate` | `void EventHandler(object sender, EventArgs e)`` | [Link](https://docs.microsoft.com/de-de/dotnet/api/system.eventhandler?view=net-6.0) |
+| `EventHandler<TEventArgs> Delegat` | `EventHandler<TEventArgs>(object? sender, TEventArgs e);`` | [Link](https://docs.microsoft.com/de-de/dotnet/api/system.eventhandler-1?view=net-6.0) |
 
-Der Delegat ist dabei wie folgt definiert:
-
-```csharp
-void EventHandler(object sender, EventArgs e)
-```
 
 ```csharp           StockExchangeII
 using System;
@@ -525,3 +510,7 @@ class Program {
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+### Grafische Nutzer Interfaces
+
+siehe Codebeispiel `wpf_sharp` im Projektordner
