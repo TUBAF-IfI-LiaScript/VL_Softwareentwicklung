@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
 
@@ -18,7 +18,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                             |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Multithreading Konzepte und Anwendung`                                                                                                                                |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/23_Threads.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/23_Threads.md) |
@@ -28,35 +28,38 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 ---------------------------------------------------------------------
 
-## Neues aus GitHub
-
-<!-- data-type="none" -->
-| task | 0      | 1      | 2      | 3          | 4        | 5        |   6 | 7        | 8        | 9        | 10       | 11       | 12       | 13       | 14           | 15       |  16 | 32       |
-| ----:|:------ |:------ |:------ |:---------- |:-------- |:-------- | ---:|:-------- |:-------- |:-------- |:-------- |:-------- |:-------- |:-------- |:------------ |:-------- | ---:|:-------- |
-|    3 | [2, 3] | [4, 5] | [6, 7] | [8, 9]     | [10, 11] | [12, 13] |  14 | [15, 16] | [17, 18] | [19, 20] | [21, 22] | [23, 24] | [25, 26] | [27, 28] | [29, 30, 31] | [32, 33] |  34 | nan      |
-|    4 | nan    | [4, 5] | [6, 7] | [31, 8, 9] | [10, 11] | [12, 13] |  14 | [15]     | [17, 18] | [19, 20] | [21, 22] | [23, 24] | [26, 25] | [27, 28] | [29, 30]     | [32, 33] |  34 | [ 2, 15] |
-|    5 | nan    | [4, 5] | [7, 6] | [8, 9]     | [10, 11] | [13]     |   3 | nan      | [17]     | [19, 20] | [22, 21] | [24, 23] | [25, 26] | nan      | nan          | [33, 32] |  34 | [ 2, 15] |
-|    6 | nan    | [5, 4] | [7, 6] | [9 , 8]    | [10, 11] | [13]     | nan | nan      | [17]     | [19, 20] | [21]     | [24, 23] | [26, 25] | nan      | [29, 30]     | [33, 32] |  34 | [ 2, 15] |
-|    7 | nan    | [4]    | nan    | [8, 9]     | [11, 10] | nan      | nan | nan      | nan      | [20, 19] | [21]     | [24, 23] | [26, 25] | nan      | nan          | [33, 32] |  34 | [15,  2] |
-|    8 | nan    | nan    | nan    | [9, 8]     | nan      | nan      | nan | nan      | nan      | [19]     | nan      | nan      | nan      | nan      | nan          | [33, 32] | nan | [ 2, 15] |
-
-> Offenbar ist die Teamkoordination die zentrale Herausforderung für die Umsetzung der Aufgaben. Um unsere Eingriffsmöglichkeiten hier besser abzustimmen möchten wir Sie bitten uns ein entsprechendes Feedback zur aktuellen Teamkonfiguration zu geben:
-
-Hier ist der Link: https://panel.ovgu.de/s/957ab2a9/de.html
-
 ## Motivation - Threads
 
-**Threads Basics**
+Bisher haben wir rein sequentiell ablaufende Programme entworfen. Welches Problem generiert dieser Ansatz aber, wenn wir in unserer App einen Update-Service integrieren?
 
-Ein Ausführungs-Thread ist die kleinste Sequenz von programmierten Anweisungen, die unabhängig von einem Scheduler verwaltet werden kann, der typischerweise Teil des Betriebssystems ist. Die Implementierung von Threads und Prozessen unterscheidet sich von Betriebssystem zu Betriebssystem, aber in den meisten Fällen ist ein Thread ein Bestandteil eines Prozesses. Innerhalb eines Prozesses können mehrere Threads existieren, die gleichzeitig ausgeführt werden und Ressourcen wie Speicher gemeinsam nutzen, während verschiedene Prozesse diese Ressourcen nicht gemeinsam nutzen. Insbesondere teilen sich die Threads eines Prozesses seinen ausführbaren Code und die Werte seiner dynamisch zugewiesenen Variablen und seiner nicht thread-lokalen globalen Variablen zu einem bestimmten Zeitpunkt.
 
-![Vererbungsbeispiel](./img/23_Multithreading/ProcessVsThread.png "Darstellung eines Prozesses mit mehreren Tasks [^Cburnett]")
+![BlockedGUI](./img/23_Multithreading/WindowsFormBlocked.png "Erweiterte Variante unseres Windows Form Beispiels aus der vergangenen Vorlesung")
+
+
+### Grundlagen
+
+> Ein Ausführungs-Thread ist die kleinste Sequenz von programmierten Anweisungen, die unabhängig von einem Scheduler verwaltet werden kann, der typischerweise Teil des Betriebssystems ist.
+
+
+Die Implementierung von Threads und Prozessen unterscheidet sich von Betriebssystem zu Betriebssystem, aber in den meisten Fällen ist ein Thread ein Bestandteil eines Prozesses.
+
+Innerhalb eines Prozesses können mehrere Threads existieren, die gleichzeitig ausgeführt werden und Ressourcen wie Speicher gemeinsam nutzen, während verschiedene Prozesse diese Ressourcen nicht gemeinsam nutzen. Insbesondere teilen sich die Threads eines Prozesses seinen ausführbaren Code und die Werte seiner dynamisch zugewiesenen Variablen und seiner nicht thread-lokalen globalen Variablen zu einem bestimmten Zeitpunkt.
+
+![Vererbungsbeispiel](./img/23_Multithreading/ProcessVsThread.png "Darstellung eines Prozesses mit mehreren Tasks [^Cburnett]")<!-- width="50%" -->
 
 Auf eine Single-Core Rechner organisiert das Betriebssystem Zeitscheiben (unter
 Windows üblicherweise 20ms) um Nebenläufigkeit zu simulieren. Eine Multiprozessor-Maschine kann aber auch direkt auf die Rechenkapazität eines weiteren Prozessors
 ausweichen und eine echte Parallelisierung umsetzen, die allerdings im Beispiel
 durch den gemeinsamen Zugriff auf die Konsole limitiert ist.
 
+> Vorteile von Multi-Threading Applikationen:
+>
+> - Ausnutzung der Hardwarefähigkeiten (MultiCore-Systeme) zur Effizienzsteigerung
+> - Verhinderung eines "Verhungerns" der Anwendung
+
+### Erfassung der Performance
+
+Wie messen wir aber die Geschwindigkeit eines Programms?
 
 ## Implmementierung unter C#
 
@@ -84,8 +87,6 @@ public sealed class Thread{
 ```
 
 Um die grundlegende Verwendung des Typs `Thread` zu veranschaulichen, nehmen wir an, Sie haben eine Konsolenanwendung, in der die `CurrentThread`-Eigenschaft ein Thread-Objekt abruft, das den aktuell ausgeführten Thread repräsentiert.
-
-Das folgende Beispiel kann aus spezifischen Sicherheitsgründen nicht unter Rextester ausgeführt werden.
 
 ```csharp           ThreadBasicExample
 using System;
@@ -336,7 +337,39 @@ threadB.Start("abc");
 var threadC new Thread(SomeMethod).Start();
 ```
 
-**Ergänzen Sie das oben aufgeführte Beispiel `ThreadApplicationPrinter` um die Möglichkeit das auszugebene Zeichen als Parameter zu übergeben!**
+> **Aufgabe:** Ergänzen Sie das schon benutzte Beispiel um die Möglichkeit das auszugebene Zeichen als Parameter zu übergeben!
+
+```csharp           ThreadApplicationPrinterParameter
+using System;
+using System.Threading;
+
+class Printer{
+  char ch;
+  int sleepTime;
+
+  public Printer(char c, int t){
+    ch = c;
+    sleepTime = t;
+  }
+
+  public void Print(int count){
+    for (int i = 0; i<count;  i++){
+      Console.Write(ch);
+      Thread.Sleep(sleepTime);
+    }
+  }
+}
+
+class Program {
+    public static void Main(string[] args){
+        Printer a = new Printer ('a', 10);
+        Thread PrinterA = new Thread(new ThreadStart(a.Print));
+        PrinterA.Start();
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
 
 ### Datenaustausch zwischen Threads
 
@@ -357,7 +390,8 @@ class Program
     }
 
     public static void Main(string[] args){
-        new Thread(Execute).Start("New Tread :");
+        Thread thread_A = new Thread(Execute);
+        thread_A.Start("New Tread :");
         Execute("MainTread :");
     }
 }
@@ -374,7 +408,7 @@ Interaktion sind entsprechende Felder innerhalb einer gemeinsamen Objektinstanz.
 
 Welches Problem ergibt sich aber dabei?
 
-```csharp           ThreadManualLock
+```csharp           ThreadStaticVariable
 using System;
 using System.Threading;
 
@@ -399,6 +433,37 @@ class Program
         }
         Thread.Sleep(10000);
         Console.WriteLine("\n Fertig {0}", InteractiveThreads.count);
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+
+```csharp           ThreadMemberVariable
+using System;
+using System.Threading;
+
+class Calc  
+{
+    int paramA = 0;
+    public void Inc()
+    {
+        paramA = paramA + 1;
+        Console.WriteLine("Static funtion const = {0}", paramA);
+    }
+}
+
+class Program
+{
+    public static void Main(string[] args){
+        Calc c = new Calc();
+        ThreadStart delThreadA = new ThreadStart(c.Inc);
+        Thread newThread_A = new Thread(delThreadA);
+        newThread_A.Start();
+
+        ThreadStart delThreadB = new ThreadStart(c.Inc);
+        Thread newThread_B = new Thread(delThreadB);
+        newThread_B.Start();
     }
 }
 ```
@@ -443,7 +508,10 @@ class InteractiveThreads{
   public void AddOne(){
     lock(this)
     {
-        count = count + 1;
+       count = count + 1;
+       count = count + 1;
+       count = count + 1;
+       count = count + 1;
     }
     Console.WriteLine("count {0}", count);
   }
@@ -463,11 +531,11 @@ class Program {
 
 ### Hintergrund und Vordergrund-Threads
 
-Verwalteter Threads können als Hintergrund- oder Vordergrundthread definiert sein.
+Threads können als Hintergrund- oder Vordergrundthread definiert sein.
 Hintergrundthreads unterscheiden sich von Vordergrundthreads durch die Beibehaltung
 der Ausführungsumgebung nach dem Abschluss. Sobald alle Vordergrundthreads in einem
 verwalteten Prozess (wobei die EXE-Datei eine verwaltete Assembly ist) beendet
-sind, beendet das System alle Hintergrundthreads und fährt herunter.
+sind, beendet das System alle Hintergrundthreads.
 
 ```csharp    BackgroundThreads
 using System;
@@ -516,6 +584,8 @@ class Program {
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+> Wie verhält sich das Programm, wenn Sie `Printer_.IsBackground = true;` einfügen?
 
 ### Ausnahmebehandlung mit Threads
 
