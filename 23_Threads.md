@@ -69,14 +69,14 @@ Definitionen:
 ```csharp       ThreadClass
 public delegate void ThreadStart();
 public enum ThreadPriority (Normal, AboveNormal, BelowNormal, Highest, Lowest);
-public enum TheadState (Unstarted, Running, Suspended, Stopped, Aborted, ...);
+public enum ThreadState (Unstarted, Running, Suspended, Stopped, Aborted, ...);
 
 public sealed class Thread{
   public Thread (ThreadStart startMethod);
   ...
   public string Name {get; set;};
   public ThreadPriority Priority {get; set;};
-  public ThreadState TreadState {get;};
+  public ThreadState ThreadState {get;};
   public bool IsAlive {get;};
   public bool IsBackground{get;};
   public void Start();
