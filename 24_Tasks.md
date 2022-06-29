@@ -162,15 +162,10 @@ Welche Nachteile sehen Sie in dieser Lösung?
 C# stellt für die asynchrone Programmierung einen neuen Typen `Task` zur
 Verfügung und für die `await` und `async` Keywörter ein.
 
-Die `Task`-Klasse bildet einen einzelnen Vorgang ab, gibt keinen Wert zurück und
-wird in der Regel asynchron ausgeführt. `Task` Objekte sind eine der zentralen
-Komponenten von der aufgabenbasierte asynchrone Muster in .NET Framework 4
-eingeführt wurden. Da die Arbeit, indem geleistet eine Task Objekt in der Regel
-führt asynchron auf einem Threadpool-Thread anstatt synchron auf dem
-Hauptanwendungsthread, Sie verwenden die Thread Status-Eigenschaften des Threads, als auch
-die `IsCanceled`, `IsCompleted`, und `IsFaulted` Eigenschaften, um den Status eines
-Vorgangs zu bestimmen. In den meisten Fällen wird ein Lambda-Ausdruck verwendet,
-um die eigentliche Aufgabe zu spezifizieren.
+Die `Task`-Klasse bildet einen Vorgang zur Lösung einer einzelnen Aufgabe ab, der keinen Wert zurück gibt und in der Regel asynchron ausgeführt wird. 
+Task-Objekte sind eine der zentralen Komponenten von den aufgabenbasierten asynchronen Muster, die in .NET Framework 4 eingeführt wurden. 
+Ein `Task`-Objekt übernimmt eine Aufgabe, die asynchron auf einem Threadpool-Thread anstatt synchron auf dem Hauptanwendungsthread ausgeführt wird. Zum Überwachen des Bearbeitungsstatus stehen die Status-Eigenschaften des Threads 
+und die Eigenschaften der Klasse `Task` zur Verfügung: `IsCanceled`, `IsCompleted`, und `IsFaulted`. 
 
 ```csharp           TaskClasses
 public class Task{
@@ -182,7 +177,34 @@ public class Task{
   public void Wait();
   ...
 }
+```
 
+Instanziierung und Ausführung von Tasks:
+
+Die Instanziirung erfolgt über einen Konstruktor, die Ausführung wird durch den Aufruf der Methode Start veranlasst:
+
+```csharp
+Task task = new Task(() => {... Anweisungsblock ...});
+Task.Start();
+```
+
+Hierbei wird deutlich, dass das `Task`-Objekt auf einem `Thread` aufbaut und
+lediglich eine höhere Abstraktionsstufe darstellt. 
+
+Der verkürzte Aufruf mittels der statischen `Run`-Methode realisiert das gleiche Verhalten:
+
+```csharp
+Task task = Task.Run(() => {... Anweisungsblock ...});
+```
+
+An den Konstruktor und die Run-Methode können `Action`-Delegate übergeben werden, die den auszuführenden Code beinhalten.
+In den meisten Fällen wird zur Spezifikation der Aufgabe ein Lambda-Ausdruck  wird verwendet. Der Konstruktor wird nur in erweiterten Szenarien verwendet, wo es erforderlich ist, die Instanziirung und der Start zu trennen.
+
+Die generische Klasse `Task<T>` bildet ebenfalls einen Vorgang zur Lösung einer einzelnen Aufgabe ab, gibt aber im Unterschied zu der nicht generischen `Task`-Klasse einen Wert zurück. 
+Die Konstruktoren und die Run-Methode der Klasse bekommen einen `Func`-Delegat bzw. einen als Lambda-Ausderuck formulierten Code übergeben, der einen Rückgabewert liefert.
+
+
+```csharp           TaskClasses
 public class Task<T>: Task{
   public Task (Func<T> f);
   ...
@@ -191,30 +213,12 @@ public class Task<T>: Task{
 }
 ```
 
-Die Anwendung erfolgt dabei dem Muster:
-
-```csharp
-Task task = new Task(() => {... Anweisungsblock ...});
-Task.Start();
-```
-
-Hierbei wird deutlich, dass das `Task`-Objekt auf einem `Thread` aufbaut und
-lediglich eine höhere Abstraktionsstufe darstellt. Der verkürzte Aufruf mittels
-der statischen `Run`-Methode realisiert das gleiche Verhalten:
-
-```csharp
-Task task = Task.Run(() => {... Anweisungsblock ...});
-```
-
 ********************************************************************************
                                        {{1-2}}
 ********************************************************************************
 
-Es wäre nun möglich diesen laufenden Task aus dem Main-Thread anhand seiner
-Variablen `IsCompleted` zu überwachen oder mit `join` erfassen, um die Fertigstellung zu erkennen. Dieses
-Verhalten lässt sich zwar auch mit Threads umsetzen, mit dem höheren Abstraktionsgrad lässt sich die Komplexität des Aufrufes aber reduzieren.
-
-Um für die Durchführung einer einzelnen Aufgabe zu warten, rufen Sie die Task. `Wait` Methode. Ein Aufruf der Wait Methode blockiert den aufrufenden Thread, bis die Instanz der Klasse die Ausführung abgeschlossen hat.
+Über Property `IsCompleted` kann der laufende Task aus dem Main-Thread überwacht werden. 
+Um für die Durchführung einer einzelnen Aufgabe zu warten, rufen Sie die `Task.Wait` Methode auf. Ein Aufruf der Wait-Methode blockiert den aufrufenden Thread, bis die Instanz der Klasse die Ausführung abgeschlossen hat.
 
 ```csharp           TaskDefinition1
 // Motiviert aus
@@ -266,7 +270,7 @@ public class Example
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
 
-`Wait` ermöglicht auch die Beschränkung der Wartezeit auf ein bestimmtes Zeitintervall.Die `Wait(Int32)` und `Wait(TimeSpan)` Methoden blockiert den aufrufenden Thread, bis die Aufgabe abgeschlossen ist oder ein Timeoutintervall abläuft, welcher Fall zuerst eintritt.
+`Wait` ermöglicht auch die Beschränkung der Wartezeit auf ein bestimmtes Zeitintervall. Die `Wait(Int32)` und `Wait(TimeSpan)` Methoden blockiert den aufrufenden Thread, bis die Aufgabe abgeschlossen oder ein Timeoutintervall abgelaufen ist, je nach dem welcher Fall zuerst eintritt.
 
 ```csharp           WaitForNTimeSlots
 using System;
@@ -335,15 +339,14 @@ class Program {
                                       {{2-3}}
 ********************************************************************************
 
-Der Kanon der Möglichkeiten wird aber deutlich erweitert, wenn ein konkreter
-Rückgabewert genutzt werden soll. Anstatt wie bei Threads mit einer
-entsprechenden  "außen stehenden" Variablen zu arbeiten, wird das Ergebnis im
-`Task`-Objekt selbst  gespeichert und kann dann abgerufen werden. Dieser Aspekt wird über die generische Konfiguration des Tasks abgebildet:
+Der Kanon der Möglichkeiten wird durch die Klasse `Task<T>` deutlich erweitert. Anstatt die Ergebnisse wie bei Threads in eine "außen stehende" Variable (z.B. Datenfeld der einer Klasse) zu speichern, wird das Ergebnis im
+`Task`-Objekt selbst  gespeichert und kann dann über die Eigenschaft `Result` abgerufen werden. 
 
 ```csharp      TaskWithReturn
 Task<int> task = Task.Run(() => {int i;
                                  //... Anweisungsblock ...;
-                                 return i});
+                                 return i;});
+ Console.WriteLine("Finished ith result {0}", task.Result);
 ```
 
 Wie ist dieser Aufruf zu verstehen? Unser Task gibt anders als bei der synchronen
@@ -360,7 +363,7 @@ Eine asynchrone Methode ruft einen Task auf, setzt die eigene Bearbeitung aber
 fort und wartet auf dessen Beendigung.
 
 ```csharp
-aync void DoAsync(){
+async void DoAsync(){
   Task<int> task = Task.Run(() => {int i;
                                    // Berechnungen
                                    return i;}
