@@ -359,6 +359,13 @@ Wie aber erfolgt die Rückgabe wann?
 
 ### Asynchrone Methoden
 
+Ein Entwurfsmuster für Darstellung asynchroner Vorgänge in C#, das die Klassen `Task`und `Task<TResult>` verwendet, ist TAP (task-based asynchronous pattern). 
+Die Schlüsselwörter `async` und `await` sind das Kernstück der asynchronen Programmierung mit TAP.
+
+Die Initiierung und den Abschluss eines asynchronen Vorgangs wird in TAP in einer Methode realisiert, die 
+das `async`-Suffix hat und dadurch eine `await`-Anweisung enthalten darf, wenn sie Awaitable-Typen zurückgibt, 
+wie z. B. Task oder Task<TResult>.
+
 Eine asynchrone Methode ruft einen Task auf, setzt die eigene Bearbeitung aber
 fort und wartet auf dessen Beendigung.
 
