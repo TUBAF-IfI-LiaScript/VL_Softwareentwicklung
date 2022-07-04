@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.0
+version:  2.0.0
 language: de
 narrator: Deutsch Female
 
@@ -18,7 +18,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                             |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Tasks und deren Anwendung`                                                                                                                                |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/24_Tasks.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/24_Tasks.md) |
@@ -30,32 +30,66 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 ## Logging
 
-Unsere Ausgaben in der Console können auf Dauer ziemlich nerven ...
+Wie arbeiten wir bisher in Bezug auf Textausgaben?
+
+```csharp    ImplicitConstructorCall
+using System;
+using System.Reflection;
+using System.ComponentModel.Design;
+
+public class Person {
+  public int geburtsjahr;
+  public string name;
+
+  public Person(){
+    geburtsjahr = 1984;
+    name = "Orwell";
+    Console.WriteLine("ctor of Person");
+  }
+
+  public Person(int auswahl){
+    if (auswahl == 1) {name = "Micky Maus";}
+    else {name = "Donald Duck";}
+  }
+}
+
+public class Fußballspieler : Person {
+  public byte rückennummer;
+}
+
+public class Program
+{
+  public static void Main(string[] args){
+    Fußballspieler champ = new Fußballspieler();
+    Console.WriteLine("{0,4} - {1}", champ.geburtsjahr, champ.name );
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+Dieses Vorgehen kann auf Dauer ziemlich nerven ...
 
 > Lösung: Verwenden Sie ein Logging Framework!
 
-+ https://logging.apache.org/log4net/release/manual/configuration.html
-+ https://blog.elmah.io/log4net-tutorial-the-complete-guide-for-beginners-and-pros/
++ https://github.com/NLog
++ https://riptutorial.com/nlog
 
 ```
-<log4net>
-    <!-- A1 is set to be a ConsoleAppender -->
-    <appender name="A1" type="log4net.Appender.ConsoleAppender">
- 
-        <!-- A1 uses PatternLayout -->
-        <layout type="log4net.Layout.PatternLayout">
-            <conversionPattern value="%-4timestamp [%thread] %-5level %logger %ndc - %message%newline" />
-        </layout>
-    </appender>
-    
-    <!-- Set root logger level to DEBUG and its only appender to A1 -->
-    <root>
-        <level value="DEBUG" />
-        <appender-ref ref="A1" />
-    </root>
-</log4net>
-```
+<?xml version="1.0" encoding="utf-8" ?>
+<nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
+    <targets>
+        <target name="logfile" xsi:type="File" fileName="file.txt" />
+        <target name="logconsole" xsi:type="Console" />
+    </targets>
+
+    <rules>
+        <logger name="*" minlevel="Info" writeTo="logconsole" />
+        <logger name="*" minlevel="Debug" writeTo="logfile" />
+    </rules>
+</nlog>
+```
 
 ## Tasks
 
@@ -232,11 +266,11 @@ public class Example
    public static void Main()
    {
       Action<object> action = (object obj) =>
-                                    {
-                                       Console.WriteLine("Task={0}, obj={1}, Thread={2}",
-                                       Task.CurrentId, obj,
-                                       Thread.CurrentThread.ManagedThreadId);
-                                    };
+                        {
+                           Console.WriteLine("Task={0}, obj={1}, Thread={2}",
+                           Task.CurrentId, obj,
+                           Thread.CurrentThread.ManagedThreadId);
+                        };
 
       // Create a task but do not start it.
       Task t1 = new Task(action, "alpha");
@@ -252,13 +286,13 @@ public class Example
 
 
       Task t3 = Task.Run( () => {
-                                  // Just loop.
-                                  int ctr = 0;
-                                  for (ctr = 0; ctr <= 1000000; ctr++)
-                                  {}
-                                  Console.WriteLine("Finished {0} loop iterations",
-                                                    ctr);
-                               } );
+                        // Just loop.
+                        int ctr = 0;
+                        for (ctr = 0; ctr <= 1000000; ctr++)
+                        {}
+                        Console.WriteLine("Finished {0} loop iterations",
+                                          ctr);
+                     } );
       t3.Wait();
    }
 }
