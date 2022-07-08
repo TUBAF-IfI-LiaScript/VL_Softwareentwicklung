@@ -19,7 +19,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                             |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Überblick Entwurfsmuster`                                                                                                                                |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/26_DesignPattern.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/26_DesignPattern.md) |
@@ -39,7 +39,7 @@ unterschiedlichen Datentyps annimmt.
 
 | Bezeichnung | Bedeutung im Kontext der Objektorierung                   |
 | ----------- | --------------------------------------------------------- |
-| Etwas       | Instanz einer Objektinstanz aus einer Vererbungshierachie |
+| Etwas       | Instanz einer Klasse aus einer Vererbungshierachie        |
 | Situation   | Typ der Instanz beim Aufruf                               |
 | Gestalt     | ausgeführter Code                                         |
 
@@ -59,7 +59,7 @@ a = new C();
 
 Wir unterscheiden entsprechend den dynamischen und den statischen Typ der Variablen A. Eine Referenz des Typs `A` zeigt auf eine Instanz von `B` oder `C`.
 
-Der dynamische Typ kann zur Laufzeit geprüft (`is`) durch Cast-Operationen (`as`) angepasst werden.
+Der dynamische Typ kann zur Laufzeit geprüft (`is`) und durch Cast-Operationen (`as`) angepasst werden.
 
 Dieser Mechanismus wird beim sogenannten Boxing und Unboxing deutlich:
 
@@ -110,7 +110,7 @@ Anwendungsbeispiel:
 
 In folgendem Beispiel wurde allein die Klasse `Circle` implementiert. Es exisitiert eine Methode `Draw()`, die auf der Ebene der Basisklasse und der erbenden Klasse besteht.
 
-> Merke: Polymorphie bezieht sich auf Methoden mit einer gleichen Signatur. Unterscheidet sich diese sprechen wir von Überladen. Die Signatur wird durch die Parameterzahl, -typ, art (`ref`, `out`) und die Sichtbarkeitsattribute bestimmt.
+> Merke: Polymorphie bezieht sich auf Methoden mit einer gleichen Signatur. Die Signatur wird durch die Parameterzahl, -typ, art (`ref`, `out`) und die Sichtbarkeitsattribute bestimmt. Unterscheiden sich die Methoden im Bezug auf Parameter sprechen wir vom Überladen von Methoden. 
 
 Die Implementierung in `Square` kann die aus `Shape` ignorieren, verdecken oder überschreiben.
 
@@ -138,6 +138,7 @@ public class Program {
     sh.Draw();
     Square sq = new Square();
     sq.Draw("Tralla");
+    //sq.Draw();
   }
 }
 ```
@@ -165,7 +166,7 @@ In Bezug auf die Polymorphie bestimmen  die Schlüsselworte `new` und `override`
 das Verhalten:
 
 + `override` realisiert eine "angepasste" Implementierung der Methode der Basisklasse
-+ `new` implmentiert eine völlig neue Methode, die keinen Bezug mehr zur Basisklassenfunktion hat
++ `new` implementiert eine völlig neue Methode, die keinen Bezug mehr zur Basisklassenfunktion hat
 
 *******************************************************************************
                                     {{1-3}}
@@ -193,12 +194,14 @@ abstrakten Elementen zusammen?
 
 *******************************************************************************
 
-## Design Pattern
+## Design Pattern (Entwurfsmuster)
 
-Design Pattern sind spezielle Muster für Interaktionen und Zusammenhänge  der
-Bestandteile einer Softwarelösung. Sie präsentieren Implementierungsmodelle, die
++ Design Pattern sind spezielle Muster für Interaktionen und Zusammenhänge  der
+Bestandteile einer Softwarelösung. 
++ Sie präsentieren Implementierungsmodelle, die
 für häufig wiederkehrende Abläufe (Generierung und Maskierung von Objekten) eine
-flexible und gut wartbare Realisierung sicherstellen. Dafür werden die  Abläufe
+flexible und gut wartbare Realisierung sicherstellen. 
++ Dafür werden die  Abläufe
 abstrahiert und auf generisch anwendbare Muster reduziert, die dann mit
 domänenspezifische Bezeichnern versehen nicht nur für die vereinfachte Umsetzung
 sondern auch für die Kommunikation dazu genutzt werden. Dies vereinfacht die
@@ -223,7 +226,7 @@ Dabei sollte ein Muster:
 
 ### Kategorien
 
-In welchen Kategorien werden Design Pattern üblicherweise strukturiert:
+Kategorien von Design Pattern aus dem Entwurfsmusterkatalog des Autorenquartetts Gang of Four (GoF):
 
 1. Erzeugungsmuster (englisch creational patterns)
 
@@ -249,7 +252,8 @@ Das Singleton  ist ein in der Softwareentwicklung eingesetztes Entwurfsmuster
 und gehört zur Kategorie der Erzeugungsmuster. Es stellt sicher, dass von einer
 Klasse genau ein Objekt existiert. Dieses Singleton ist darüber hinaus
 üblicherweise global verfügbar. Es soll sicher gestellt werden, dass ein
-Resourcenzugriff kanalisiert wird.
+Resourcenzugriff kanalisiert wird, z.B. die Protokoll-Ausgabe in eine Datei erfolgt oder 
+Druckaufträge in einen einzigen Puffer geschrieben werden. 
 
 ![Singleton](https://www.plantuml.com/plantuml/png/JOwn3i9034FtV8N7LWY9cQcCdVi5HngLY6kABkb2rN_dX8JAQFlPSkUHIgnpfeUE0jR2MSYVQgzKqWpEoVqMKVI-XlIysA1lmONecs1GcxB4OXlXZAskXV8E_zdNWwZ08PgMSC8aqLlj64lJ_gCxKISsrbyV)
 
@@ -323,7 +327,7 @@ public class Program {
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-Von *Lazy Creation* spricht man, wenn das einzige Objekt der Klasse erst erzeugt
+Von *Lazy Creation* (verzögerte Instanziierung) spricht man, wenn das einzige Objekt der Klasse erst erzeugt
 wird, wenn es benötigt wird. Ziel ist, dass der Speicherbedarf und die
 Rechenzeit für die Instantiierung des Objektes nur dann aufgewendet werden, wenn
 das Objekt wirklich benötigt wird. Hierzu wird der Konstruktor ausschließlich
@@ -374,6 +378,8 @@ public class Program {
 }
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+
+Bei nebenläufigen (verteilten) Systemen gilt es auch sicherzustellen, dass wirklich nur eine Instanz existiert.
 
 Welche Lösung sehen Sie?
 
@@ -513,13 +519,13 @@ Schnittstellen ermöglich.
 using System;
 using System.Collections.Generic;
 
-public interface ITarget{
+public interface ITarget{       //Ziel
   List<string> GetEmployeeList();
 }
 
-public class ThirdPartyBillingSystem
+public class ThirdPartyBillingSystem //Klient
 {
-  private ITarget employeeSource;
+  private ITarget employeeSource; 
   public ThirdPartyBillingSystem(ITarget employeeSource){
    this.employeeSource = employeeSource;
   }
@@ -533,7 +539,7 @@ public class ThirdPartyBillingSystem
   }
 }
 
-public class HRSystem{
+public class HRSystem{  //Dienst
   public string[][] GetEmployees(){
     string[][] employees = new string[4][];
     employees[0] = new string[] { "100", "Deepak", "Team Leader" };
@@ -544,7 +550,7 @@ public class HRSystem{
   }
 }
 
-public class EmployeeAdapter : HRSystem, ITarget{
+public class EmployeeAdapter : HRSystem, ITarget{  //Adapter
   public List<string> GetEmployeeList(){
     List<string> employeeList = new List<string>();
     string[][] employees = GetEmployees();
@@ -655,11 +661,63 @@ Dabei können zwei grundsätzliche Varianten unterschieden werden:
 
 [^WikipediaFactory]: Wikipedia "Entwurfsmuster Fabrikmethode", Autor jarling, https://de.wikipedia.org/wiki/Fabrikmethode#/media/Datei:Fabrikmethode.svg
 
+Beispiel:
+
+```csharp
+// https://de.wikipedia.org/wiki/Fabrikmethode
+class Mahlzeit { };
+
+// konkretes Produkt
+class Pizza : Mahlzeit { };
+
+// noch ein konkretes Produkt
+class Rostwurst : Mahlzeit { };
+
+// Erzeuger
+abstract class Restaurant {
+    // Die abstrakte Factory-Methode, die von Erzeugern implementiert werden muss.
+    protected abstract void MahlzeitZubereiten();
+
+    // Diese Methode benutzt die Factory-Methode.
+    public void MahlzeitLiefern() {
+        MahlzeitZubereiten(); // Aufruf der Factory-Methode
+    }
+};
+
+// konkreter Erzeuger für konkretes Produkt "Pizza"
+class Pizzeria : Restaurant {
+    // Implementierung der abstrakten Methode der Basisklasse
+    protected override void MahlzeitZubereiten() {
+        //TO DO Pizza
+    }
+};
+
+// konkreter Erzeuger für konkretes Produkt "Rostwurst"
+class Rostwurstbude : Restaurant {
+    // Implementierung der abstrakten Methode der Basisklasse
+    protected override void MahlzeitZubereiten() {
+        //TO DO Rostwurst
+    }
+};
+
+class Program
+{
+    public static void Main() {
+       Pizzeria daToni=new Pizzeria();
+       daToni.MahlzeitLiefern();
+
+       Rostwurstbude brunosImbiss=new Rostwurstbude();
+       brunosImbiss.MahlzeitLiefern();
+       }
+}
+```
+
+
 ### Verhaltensmuster State Pattern
 
 Die Abbildung von Zustandsmaschinen ist ein häufig wiederkehrendes Motiv. Nehmen
 wir an, das wir eine Rollenspielfigur modellieren wollen. Dabei bestehen
-lediglich drei  emotionale Zustände, die Figur kann eine neutrale, eine
+lediglich drei emotionale Zustände, die Figur kann eine neutrale, eine
 aggressive oder eine  freundliche Position einnehmen. Üblicherweise würde sich
 diese Einschätzung auf den Gegenüber beziehen. Bei komplexeren Sozialstrukturen
 müsste eine Zuordnung zu einzelnen Charakteren gewährleistet sein.
@@ -668,7 +726,7 @@ In einer tabellarischen State-Maschine Darstellung ergibt sich dann folgendes Bi
 
 |            | Happy                  | Neutral   | Aggressive              |
 | ---------- | ---------------------- | --------- | ----------------------- |
-| Happy      | DealingWith, Addressed |           |                         |
+| Happy      | DealingWith, Addressed | DealingWith |                         |
 | Neutral    |                        | Addressed | DealingWith, Addresssed |
 | Aggressive | Provoked               | Provoked  | Provoked                |
 
@@ -765,7 +823,7 @@ public class Program {
 
 Welche Probleme sehen Sie?
 
-Wie wäre es mit folgender neuen Anforderung: Um die Modellierung "spielbar" zu
+Wie wäre es mit folgender neuen Anforderung: Um die Modellierung zu erweitern
 sollen Wahrscheinlichkeiten beim Übergang eingeführt werden. Damit muss jeder
 Transition eine eigene Zahl zugeordnet werden, die vom aktuellen Zustand, der
 Transition und einer Zufallsvariablen abhängt.
@@ -896,21 +954,35 @@ public class Program {
 2. Wie können wir eine zusätzliche Transition integrieren?
 3. Wie lassen sich Methoden einbetten, die nur von bestimmten Zuständen realisiert werden?
 
+## Anti-Pattern
 
-## Aufgabe der Woche
+Anti-Pattern bilden das Gegenstück zu Pattern und sind Lösungsansätze, die ungünstig oder gar schädlich sind. 
 
-Bitte geben Sie uns ein Feedback!
+**Projektmanagement-Anti-Pattern**
 
-https://panel.ovgu.de/s/c9845e6d/de.html
++ Blendwerk - nicht fertige Funktionen, welche als fertig vorgetäuscht werden.
++ Aufgeblähte Software - Software, die mit unnötigen Zusatzfunktionen oder Ressourcenverschwendung aufgebläht wird und damit den eigentlichen Anwendungszweck kaum oder gar nicht verbessert. 
++ ...
 
-## Ausblick
+**Entwurfs-Anti-Pattern**
 
-Und nun ... Wie geht es weiter?
++ Gasfabrik - unnötig komplexe Systementwürfe für relativ simple Probleme bezeichnet.
++ Gottobjekt (Gottklasse, Blob) - ein Objekt, das zu viel weiß bzw. macht. Die Aufteilung nach Verantwortlichkeiten, Kapselung und die Einhaltung von Entwurfsmustern helfen, diesem Muster zu begegnen. 
++ ...
 
-Im nächsten Semester mit der Veranstaltung Robotikprojekt bestehend
-aus zwei Teilen:
+**Programmierungs-Anti-Pattern**
 
-+ theoretische Vorbereitung im Wintersemester (abstrakte Einführung in C++ mit der Perspektive Softwareentwurf, Einführung in ROS, Robotikanwendungen)
-+ praktische Umsetzung im Sommersemester 2022
++ Zwiebel - Programmcode, bei dem neue Funktionalität um (oder über) die alte gelegt wird.
++ Copy and Paste - Programmierer entwickelt den Code nicht neu, sondern bedient sich sich bereits existenter Quelltexte. 
++ Magische Werte - hartkodierte und nur mit besonderem Wissen über die konkrete Verwendung zu verstehende Werte.
++ ...
 
-![Husky](https://raw.githubusercontent.com/ComputerScienceLecturesTUBAF/RobotikProjekt-SoSe21/main/imgs/Husky03.jpeg)
+**Organisations-, Management- bzw. Prozess-Anti-Pattern**
+
++ Wunderwaffe - ist ein bevorzugter Lösungsweg, der als universell anwendbar angesehen wird.
+
+    “if all you have is a hammer, everything looks like a nail.” – Abraham Maslow
+
++ Das Rad neu erfinden - die stetige Neuerstellung von Software – ohne bestehende Lösungen oder Frameworks zu nutzen. 
++ Das quadratische Rad neu erfinden - die Bereitstellung einer schlechten Lösung, wenn eine gute Lösung bereits existiert. 
++ ...
