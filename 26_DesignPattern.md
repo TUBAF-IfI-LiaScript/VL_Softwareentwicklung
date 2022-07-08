@@ -196,17 +196,9 @@ abstrakten Elementen zusammen?
 
 ## Design Pattern (Entwurfsmuster)
 
-+ Design Pattern sind spezielle Muster für Interaktionen und Zusammenhänge  der
-Bestandteile einer Softwarelösung. 
-+ Sie präsentieren Implementierungsmodelle, die
-für häufig wiederkehrende Abläufe (Generierung und Maskierung von Objekten) eine
-flexible und gut wartbare Realisierung sicherstellen. 
-+ Dafür werden die  Abläufe
-abstrahiert und auf generisch anwendbare Muster reduziert, die dann mit
-domänenspezifische Bezeichnern versehen nicht nur für die vereinfachte Umsetzung
-sondern auch für die Kommunikation dazu genutzt werden. Dies vereinfacht die
-Interaktion zwischen Softwarearchitekten, Programmierer und andere
-Projektmitglieder.
++ Design Pattern sind spezielle Muster für Interaktionen und Zusammenhänge  der Bestandteile einer Softwarelösung. 
++ Sie präsentieren Implementierungsmodelle, die für häufig wiederkehrende Abläufe (Generierung und Maskierung von Objekten) eine flexible und gut wartbare Realisierung sicherstellen. 
++ Dafür werden die  Abläufe abstrahiert und auf generisch anwendbare Muster reduziert, die dann mit domänenspezifische Bezeichnern versehen nicht nur für die vereinfachte Umsetzung sondern auch für die Kommunikation dazu genutzt werden. Dies vereinfacht die Interaktion zwischen Softwarearchitekten, Programmierer und andere Projektmitglieder.
 
 > Design Pattern sind Strukturen, Modelle, Schablonen und Muster, die sich zur Entwicklung stabiler Softwaremodelle nutzen lassen.
 
@@ -296,7 +288,7 @@ Offenbar kann der Druckertreiber mehrfach instantiiert werden. Welche Möglichke
 
 ** Variante 1**
 
-> ACHTUNG: Auf den ersten Blick mag die folgende Lösung plausibel erscheinen, sie hat aber einen zentralen Markel! Welche Einschränkung sehen Sie?
+> ACHTUNG: Auf den ersten Blick mag die folgende Lösung plausibel erscheinen, sie hat aber einen zentralen Makel! Welche Einschränkung sehen Sie?
 
 ```csharp    SingletonPatternStart
 using System;
@@ -665,13 +657,13 @@ Beispiel:
 
 ```csharp
 // https://de.wikipedia.org/wiki/Fabrikmethode
-class Mahlzeit { };
+abstract class Mahlzeit { }
 
 // konkretes Produkt
-class Pizza : Mahlzeit { };
+class Pizza : Mahlzeit { }
 
 // noch ein konkretes Produkt
-class Rostwurst : Mahlzeit { };
+class Rostwurst : Mahlzeit { }
 
 // Erzeuger
 abstract class Restaurant {
@@ -682,23 +674,23 @@ abstract class Restaurant {
     public void MahlzeitLiefern() {
         MahlzeitZubereiten(); // Aufruf der Factory-Methode
     }
-};
+}
 
 // konkreter Erzeuger für konkretes Produkt "Pizza"
 class Pizzeria : Restaurant {
     // Implementierung der abstrakten Methode der Basisklasse
     protected override void MahlzeitZubereiten() {
-        //TO DO Pizza
+        //Objekt der Klasse Pizza erzeugen
     }
-};
+}
 
 // konkreter Erzeuger für konkretes Produkt "Rostwurst"
 class Rostwurstbude : Restaurant {
     // Implementierung der abstrakten Methode der Basisklasse
     protected override void MahlzeitZubereiten() {
-        //TO DO Rostwurst
+        //Objekt der Klasse Rostwurst erzeugen
     }
-};
+}
 
 class Program
 {
@@ -950,7 +942,7 @@ public class Program {
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
-1. Was müssen Sie tuen, um einen weitere Zustand hinzuzufügen?
+1. Was müssen Sie tun, um einen weitere Zustand hinzuzufügen?
 2. Wie können wir eine zusätzliche Transition integrieren?
 3. Wie lassen sich Methoden einbetten, die nur von bestimmten Zuständen realisiert werden?
 
