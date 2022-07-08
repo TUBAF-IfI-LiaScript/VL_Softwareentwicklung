@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.0
+version:  1.0.1
 language: de
 narrator: Deutsch Female
 
@@ -28,6 +28,133 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
+
+## Fragen aus den Projekten
+
+> Frage: Was ist eigentlich eine csv Datei?
+
+Das Dateiformat CSV _comma-separated values_und beschreibt den Aufbau einer Textdatei zur Speicherung oder zum Austausch einfach strukturierter Daten. Die Dateinamenserweiterung lautet .csv.
+
+```text Prüfungsliste.csv
+# Prüfungen im SoSe
+16.07.2022 8:00, Theoretische Physik, mündlich, 30min
+18.07.2022 10:00, Technische Mechanik, schriftlich, 2h
+...
+```
+
+Wie werten wir das Ganze aus?
+
+```csharp  csvExampleI.cs9
+using System;
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
+using System.Text;
+using Microsoft.VisualBasic.FileIO;
+
+class Student{
+	 public string name;
+	 public int id;
+	 public string topic;
+
+	 public override string ToString(){
+	 	  return $"{this.id} - {this.name}";
+	 }
+}
+
+class ReadingCSV
+{
+   public static void Main()
+    {
+        var path = @"Data.csv";
+        List<Student> studentList = new List<Student>();
+        using (TextFieldParser csvReader = new TextFieldParser(path))
+        {
+            csvReader.CommentTokens = new string[] { "#" };
+            csvReader.SetDelimiters(new string[] { "," });
+            csvReader.HasFieldsEnclosedInQuotes = true;
+            csvReader.ReadLine();
+
+            while (!csvReader.EndOfData)
+            {
+                // Read current line fields, pointer moves to the next line.
+                string[] fields = csvReader.ReadFields();
+                var newRecord = new Student
+                {
+                	   id = Int32.Parse(fields[0]),
+                	   name = fields[1],
+                	   topic = fields[2]
+                };
+                studentList.Add(newRecord);
+            }
+        }
+        foreach(var student in studentList){
+        	 Console.WriteLine(student);
+        }
+    }
+}
+```
+```xml   -myproject.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+```text Data.csv
+StudentID, StudentName, Topic
+1, Humboldt, Geography
+2, Hardenberg, Geography
+3, Rammler, Process engineering
+4, Winkler, Chemistry
+5, Reich, Chemistry
+```
+@LIA.eval(`["Program.cs", "project.csproj", "Data.csv"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+
+
+Alternative Umsetzung mit `DataFrames` [Link](https://dotnet.microsoft.com/en-us/apps/machinelearning-ai/ml-dotnet). Dafür muss das Paket `ML.NET` installiert werden (vgl. erweiterte Projektkonfigurationsdatei).
+
+```csharp  csvExampleII.cs9
+using System;
+using System.Collections.Generic;
+using Microsoft.Data.Analysis;
+
+class ReadingCSV
+{
+   public static void Main()
+    {
+        var path = @"Data.csv";
+        var students = DataFrame.LoadCsv(path, separator:',',header:true);
+
+        Console.WriteLine(students.Info());
+        var topicStat = students["Topics"].ValueCounts();
+        Console.WriteLine(topicStat);
+    }
+}
+```
+```xml   -myproject.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Analysis" Version="0.19.1" />
+</ItemGroup>
+
+</Project>
+```
+```text Data.csv
+StudentID, StudentName, Topic
+1, Humboldt, Geography
+2, Hardenberg, Geography
+3, Rammler, Process engineering
+4, Winkler, Chemistry
+5, Reich, Chemistry
+```
+@LIA.eval(`["Program.cs", "project.csproj", "Data.csv"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+
 
 ## Motivation
 
@@ -438,11 +565,7 @@ Verfahren wie *ActiveX Data Objects* ADO und *Open Database Connectivity* ODBC
 hingegen verwenden Abfragestrings. Diese können erst zur Laufzeit interpretiert
 werden; dann wirken Fehler gravierender und sind schwieriger zu analysieren.
 
-Innerhalb des Quellprogramms in C# oder VB.NET präsentiert LINQ die
-Abfrage-Ergebnisse als streng typisierte Aufzählungen. Somit gewährleistet es
-Typsicherheit bereits zur Übersetzungszeit wobei ein minimaler Codeeinsatz zur
-Realisierung von Filter-, Sortier- und Gruppiervorgänge in Datenquellen
-investiert wird.
+> Innerhalb des Quellprogramms in C# oder VB.NET präsentiert LINQ die Abfrage-Ergebnisse als streng typisierte Aufzählungen. Somit gewährleistet es Typsicherheit bereits zur Übersetzungszeit wobei ein minimaler Codeeinsatz zurRealisierung von Filter-, Sortier- und Gruppiervorgänge in Datenquellen investiert wird.
 
 ![OOPGeschichte](./img/25_LINQ/AnbieterLINQ.png "LINQ Anwendungsfelder [^LinqAnbieter]")
 
@@ -482,29 +605,45 @@ Erweiterungsmethoden ergänzen den Umfang von bestehenden Methoden einer Klasse 
 
 > **Merke:** Erweiterungsmethoden stellen das bisherige Konzept der Deklaration von Klassen (etwas) auf den Kopf. Sie ermöglichen es zusätzliche Funktionalität "anzuhängen".
 
-Das folgende Beispiel unterstreicht den Unterschied zur bisher nur angedeuteten Methode der partiellen Methoden, die eine verteilte Implementierung einer Klasse erlaubt. Hierfür muss der Quellcode vorliegen, die Erweiterungsmethode `Print()` kann auch auf eine Bibliothek angewandt werden.
+Das folgende Beispiel unterstreicht den Unterschied zur bereits vorgestellten Methode der partiellen Methoden, die eine verteilte Implementierung einer Klasse erlaubt. Hierfür muss der Quellcode vorliegen, die Erweiterungsmethode `Print()` kann auch auf eine Bibliothek angewandt werden.
 
 ```csharp           Extensions.cs
 using System;
 
-partial class myString
+// Ergänzung mit partiellen Implementierungen - Nur zur Abgrenzung im
+// enthalten Beispiel
+
+//  .----- Explizite Erlaubnis zur Erweiterung
+//  v
+public partial class MyPartitalString
 {
    public string content;
-   public myString(string content)
+   public MyPartitalString(string content)
    {
      this.content = content;
    }
 }
 
-partial class myString
+public partial class MyPartitalString
 {
    public void sayHello() => Console.WriteLine("Say Hello!");
+}
+
+////////////////////////////////////////////////////////////////////////////
+
+class MyString
+{
+   public string content;
+   public MyString(string content)
+   {
+     this.content = content;
+   }
 }
 
 // Erweiterungsmethode in einer separaten Klasse
 static class Exporter
 {
-    public static void Print(this myString input, string newString)
+    public static void print(this MyString input, string newString)
     {
        Console.WriteLine(input.content + newString);
     }
@@ -514,9 +653,11 @@ class Program
 {
     public static void Main(string[] args)
     {
-      myString text = new myString("Bla fasel");
-      text.sayHello();
-      text.Print("-Hossa");
+      MyPartitalString text1 = new MyPartitalString("Bla fasel");
+      text1.sayHello();
+
+      MyString text2 = new MyString("Bla fasel");
+      text2.print("-Hossa");
     }
 }
 ```
@@ -591,7 +732,9 @@ class Program
 {
     public static void Main(string[] args)
     {
-        var v = new {text = "Das ist ein Text", zahl = 1};
+        //          .---- Hier steckt der Unterschied - keine Typangabe
+        //          v
+        var v = new  {text = "Das ist ein Text", zahl = 1};
         Console.WriteLine($"text = {v.text}, zahl = {v.zahl}");
         Console.WriteLine(v);
         //v.text = "asfsa";
@@ -641,9 +784,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-
 class myStrings : IEnumerable<string>{
+   // eigentliche Daten
    public string []  str_arr = new string[] {"one" , "two" ,"three", "four", "five"};
+
+   // "Verwaltungsoverhead"
    public IEnumerator<string> GetEnumerator()
    {
        IEnumerator<string> r = new StringEnumerator(this);
@@ -658,18 +803,22 @@ class myStrings : IEnumerable<string>{
 class StringEnumerator : IEnumerator<string>{
     int index;
     myStrings sp;
+
     public StringEnumerator (myStrings str_obj){
        index = -1 ;
        sp = str_obj ;
     }
+
     object IEnumerator.Current{
       get
         { return sp.str_arr[ index ] ; }
     }
+
     public string Current{
       get
         { return sp.str_arr[ index ] ; }
     }
+
     public bool MoveNext( ){
        if ( index < sp.str_arr.Length - 1 ){
            index++ ;
@@ -677,9 +826,11 @@ class StringEnumerator : IEnumerator<string>{
        }
        return false ;
     }
+
     public void Reset( ){
        index = -1 ;
     }
+
     public void Dispose(){
       // pass
     }
@@ -707,9 +858,7 @@ https://stackoverflow.com/questions/169973/when-should-i-use-a-list-vs-a-linkedl
 
 ## LINQ - Grundlagen
 
-Sie können LINQ zur Abfrage beliebiger aufzählbarer Auflistungen wie List<T>,
-Array oder Dictionary<TKey,TValue> verwenden. Die Auflistung kann entweder
-benutzerdefiniert sein oder von einer .NET Framework-API zurückgegeben werden.
+Sie können LINQ zur Abfrage beliebiger aufzählbarer Auflistungen wie `List<T>`, `Array` oder `Dictionary<TKey,TValue>` verwenden. Die Auflistung kann entweder benutzerdefiniert sein oder von einer .NET Framework-API zurückgegeben werden.
 
 Alle LINQ-Abfrageoperationen bestehen aus drei unterschiedlichen Aktionen:
 
@@ -726,25 +875,22 @@ using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
 
-
-    class Program {
-        public static void Main(string[] args){
-          // Spezifikation der Datenquelle
-          int[] scores = new int[] { 97, 92, 81, 60 };
-
-          // Definition der Abfrage
-          IEnumerable<int> scoreQuery =
-              from score in scores    // Bezug zur Datenquelle
-              where score > 80        // Filterkriterium
-              select score;           // "Projektion" des Rückgabewertes
-
-          // Execute the query.
-          foreach (int i in scoreQuery)
-          {
-              Console.Write(i + " ");
-          }
-        }
+class Program {
+    public static void Main(string[] args){
+      // Spezifikation der Datenquelle
+      int[] scores = new int[] { 55, 97, 92, 81, 60 };
+      // Definition der Abfrage
+      IEnumerable<int> scoreQuery =
+          from score in scores    // Bezug zur Datenquelle
+          where score > 80        // Filterkriterium
+          select score;           // "Projektion" des Rückgabewertes
+      // Execute the query.
+      foreach (int i in scoreQuery)
+      {
+          Console.Write(i + " ");
+      }
     }
+}
 ```
 @LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
 
@@ -817,7 +963,6 @@ Für nicht-generische Typen (die also `IEnumerable` anstatt `IEnumerable<T>` unm
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 
 public class Student
 {
@@ -1249,7 +1394,3 @@ bereit.
 
 Lesen Sie aus den Daten die jeweils am häufigsten vergebenen Vornamen aus und
 bestimmen Sie deren Anteil innerhalb des Jahrganges.
-
-https://github.com/liaScript/CsharpCourse/tree/master/code/25_LINQII
-
-Welche Möglichkeiten der Analyse sehen Sie?
