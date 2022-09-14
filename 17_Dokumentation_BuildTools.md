@@ -34,6 +34,7 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 Wie stark arbeiten Sie kollaborativ und kooperativ?
 
+<!--data-type="none"-->
 | TeamID | author_A                                          | author_B                                          | CollaborationRatio |
 | ------ | ------------------------------------------------- | ------------------------------------------------- | ------------------ |
 | 0      | [.gitignore, Program.cs, project.assets.json, ... | NaN                                               | 0.00               |
