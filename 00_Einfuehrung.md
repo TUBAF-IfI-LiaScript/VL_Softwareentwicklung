@@ -5,8 +5,8 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.4
 language: de
 narrator: Deutsch Female
-comment:  Motivation der Vorlesung Softwareentwicklung
-logo:     https://liascript.github.io/img/bg-showcase-1.jpg
+comment:  Motivation und Zielstellung der Lehrveranstaltung
+logo:     
 icon:     https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_Freiberg.svg
 
 import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
