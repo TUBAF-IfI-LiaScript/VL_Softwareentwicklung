@@ -22,7 +22,7 @@ import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/RE
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
-| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
+| **Semester**             | `Sommersemester 2023`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Motivation der Vorlesung "Softwareentwicklung" und Beschreibung der Organisation der Veranstaltung`                                                                                       |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md) |
@@ -60,14 +60,18 @@ Studierende sollen ...
 | Genereller Anspruch                                                                           | Spezifischer Anspruch                                                                                  |
 | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | Verstehen verschiedener Programmierparadigmen UNABHÄNGIG von der konkreten Programmiersprache | Objektorientierte (und funktionale) Programmierung am Beispiel von C#                                  |
-| praktische Einführung in die methodische Softwareentwicklung                                  | Arbeit mit ausgewählten UML Diagrammen und Entwurfsmustern                                             |
+| Praktische Einführung in die methodische Softwareentwicklung                                  | Systematisierung der Anforderungen an einen Code, Arbeit mit UML Diagrammen und Entwurfsmustern                                             |
 | Grundlagen der kooperativ/kollaborative Programmierung und Projektentwicklung                 | Verwendung von Projektmanagementtools und einer Versionsverwaltung für den Softwareentwicklungsprozess |
+
+### Im Fokus: Teamwork
 
 Obwohl Einstimmigkeit darüber besteht, dass kooperative Arbeit für Ingenieure
 Grundlage der täglichen Arbeitswelt ist, bleibt die Wissensvermittlung im Rahmen
 der Ausbildung nahezu aus.
 
-> __Frage:__ _Welche Probleme sehen Sie bei der Teamarbeit? _
+> __Frage:__ _Welche Probleme sehen Sie bei der Teamarbeit (kommaseparierte Stichpunkte)? _
+>
+>    [[___]]
 
                                     {{1-2}}
 ********************************************************************************
@@ -86,17 +90,15 @@ der Ausbildung nahezu aus.
 ### Wozu brauche ich das?
 
 > Anhand der Veranstaltung entwickeln Sie ein "Gefühl" für guten und schlechten
-> Code und hinterfragen den Softwareentwicklungsprozess.
+> Codeentwürfen und hinterfragen den Softwareentwicklungsprozess.
 
-      {{1}}
+      {{1-2}}
 ********************************************************************************
 
 **Beispiel 1: Mariner 1 Steuerprogramm-Bug (1962)**
 
-      {{1}}
 ![An Atlas-Agena 5 carrying the Mariner 1 spacecraft](./img/00_Einleitung/Atlas_Agena_with_Mariner_1.jpg)[^Atlas-Agena]
 
-    --{{1}}--
 Mariner 1 ging beim Start am 22. Juli 1962 durch ein fehlerhaftes Steuerprogramm verloren, als die Trägerrakete vom Kurs abkam und 293 Sekunden nach dem Start gesprengt werden musste. Ein Entwickler hatte einen Überstrich in der handgeschriebenen Spezifikation eines Programms zur Steuerung des Antriebs übersehen und dadurch statt geglätteter Messwerte Rohdaten verwendet, was zu einer fehlerhaften und potenziell gefährlichen Fehlsteuerung des Antriebs führte.
 
 [Link auf Beschreibung des Bugs](http://www.nfranze.de/download/Diplomarbeit_Nico_Franze.pdf)
@@ -106,13 +108,11 @@ Mariner 1 ging beim Start am 22. Juli 1962 durch ein fehlerhaftes Steuerprogramm
 ********************************************************************************
 
       {{2}}
+********************************************************************************
+
 **Beispiel 2: Toll-Collect On-Board-Units (2003)**
 
-    --{{2}}--
 Das Erfassungssystem für die Autobahngebühren für Lastkraftwagen sollte ursprünglich zum 31. August 2003 gestartet werden. Nachdem die organisatorischen und technischen Mängel offensichtlich geworden waren, erfolgte eine mehrfache Restrukturierung. Seit 1. Januar 2006 läuft das System, mit einer Verzögerung von über zwei Jahren, mit der vollen Funktionalität. Eine Baustelle war die On-Board-Units (OBU), diese konnte zunächst nicht in ausreichender Stückzahl geliefert und eingebaut werden, da Schwierigkeiten mit der komplexen Software der Geräte bestanden.
-
-      {{2}}
-********************************************************************************
 
 Die On-Board-Units des Systems
 
@@ -135,14 +135,12 @@ Die On-Board-Units des Systems
 
 ### Dozenten
 
-| Name          | Email                                   |
-|:------------- |:--------------------------------------- |
-| Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de |
-| Galina Rudolf | galina.rudolf@informatik.tu-freiberg.de |
-| Nico Sonack   | nico.sonack@student.tu-freiberg.de      |
-| Felix Busch   | Felix.Busch@student.tu-freiberg.de      |
-| Anne Gierig   | anne.gierich@student.tu-freiberg.de     |
-
+| Name           | Email                                   |
+| :------------- | :-------------------------------------- |
+| Sebastian Zug  | sebastian.zug@informatik.tu-freiberg.de |
+| Galina Rudolf  | galina.rudolf@informatik.tu-freiberg.de |
+| Adrian Köppen  | adrian.koeppen@student.tu-freiberg.de   |
+| Yannic Schwank | yannic.Schwank@student.tu-freiberg.de   |
 
 ### Ablauf
 
@@ -155,10 +153,10 @@ Vorlesungen:
 | --------------- | -------------------------------- | ------------------------------------------------------------------------------------- |
 | Hörerkreis      | Fakultät 1 + interessierte Hörer | Fakultät 4 - Studiengang Engineering                                                  |
 | Leistungspunkte | 9                                | 6                                                                                     |
-| Vorlesungen     | 28 (2 Feiertage)                 | 15 (bis 31. Mai 2021)                                                                 |
-| Übungen         | ab Mai 2 x wöchentlich           | ab 25. April 8 Übungen                                                                |
+| Vorlesungen     | 28 (2 Feiertage)                 | 16 (bis 2. Juni 2021)                                                                 |
+| Übungen         | ab Mai 2 x wöchentlich           | ab Mai 1 x wöchentlich (8 Termine)                                                                |
 |                 |                                  | zusätzliches Python Tutorial ab Juni                                                  |
-| Prüfungsform    | Klausur oder Projekt             | maschinenbauspezifisches Software-Projekt (im Wintersemester 2021/22)                 |
+| Prüfungsform    | Klausur oder Projekt             | maschinenbauspezifisches Software-Projekt (im Wintersemester 2023/24)                 |
 |                 |                                  | Prüfungsvoraussetzung: Erfolgreiche Bearbeitung der finalen Aufgabe im Sommersemester |
 
 > **Ermunterung an unsere EiS-Hörer**: Nehmen Sie an der ganzen Vorlesungsreihe
@@ -168,38 +166,38 @@ Vorlesungen:
 ### Struktur der Vorlesungen
 
 <!--data-type="none"-->
-| Woche | Tag       | Inhalt der Vorlesung                              | Bemerkung                  |
-|:----- | --------- |:------------------------------------------------- | -------------------------- |
-| 1     | 4. April  | Organisation, Einführung von GitHub und LiaScript |                            |
-|       | 8. April  | Softwareentwicklung als Prozess                   |                            |
-| 2     | 11. April | Konzepte von Dotnet und C#                        |                            |
-|       | 15. April | _Karfreitag_                                      |                            |
-| 3     | 18. April | _Ostermontag_                                     |                            |
-|       | 22. April | Elemente der Sprache C# (Datentypen)              |                            |
-| 4     | 25. April | Elemente der Sprache C# (Forts. Datentypen)       |                            |
-|       | 29. April | Elemente der Sprache C# (Ein-/Ausgaben)           |                            |
-| 5     | 2. Mai    | Programmfluss und Funktionen                      |                            |
-|       | 6. Mai    | Strukturen / Konzepte der OOP                     |                            |
-| 6     | 9. Mai    | Säulen Objektorientierter Programmierung          |                            |
-|       | 13. Mai   | Klassenelemente in C#  / Vererbung                |                            |
-| 7     | 16. Mai   | Klassenelemente in C#  / Vererbung                |                            |
-|       | 20. Mai   | Versionsmanagement im Softwareentwicklungsprozess |                            |
-| 8     | 23. Mai   | UML Konzepte                                      |                            |
-|       | 27. Mai   | UML Diagrammtypen                                 |                            |
-| 9     | 30. Mai   | UML Anwendungsbeispiel                            |                            |
-|       | 3. Juni   | Testen                                            | Ende EiS Vorlesungsinhalte |
-| 10    | 6. Juni   | _Pfingstmontag_                                   |                            |
-|       | 10. Juni  | Dokumentation und Build Toolchains                |                            |
-| 11    | 13. Juni  | Continuous Integration in GitHub                  |                            |
-|       | 17. Juni  | Generics                                          |                            |
-| 12    | 20. Juni  | Container                                         |                            |
-|       | 24. Juni  | Delegaten                                         |                            |
-| 13    | 27. Juni  | Events                                            |                            |
-|       | 1. Juli   | Threadkonzepte in C#                              |                            |
-| 14    | 4. Juli   | Taskmodell                                        |                            |
-|       | 8. Juli   | Language Integrated Query                         |                            |
-| 15    | 11. Juli  | Design Pattern                                    |                            |
-|       | 15. Juli  |                                                   |                            |
+| Woche | Tag       | Inhalt der Vorlesung                              | Bemerkung                      |
+| :---- | --------- | :------------------------------------------------ | ------------------------------ |
+| 1     | 3. April  | Organisation, Einführung von GitHub und LiaScript |                                |
+|       | 7. April  |                                                   | _Karfreitag_                   |
+| 2     | 10. April |                                                   | _Ostermontag_                  |
+|       | 14. April | Softwareentwicklung als Prozess                   |                                |
+| 3     | 17. April | Konzepte von Dotnet und C#                        |                                |
+|       | 21. April | Elemente der Sprache C# (Datentypen)              |                                |
+| 4     | 24. April | Elemente der Sprache C# (Forts. Datentypen)       |                                |
+|       | 28. April | Elemente der Sprache C# (Ein-/Ausgaben)           |                                |
+| 5     | 1. Mai    | Programmfluss und Funktionen                      | _Feiertag_ (Aufzeichnung)      |
+|       | 5. Mai    | Strukturen / Konzepte der OOP                     |                                |
+| 6     | 8. Mai    | Säulen Objektorientierter Programmierung          |                                |
+|       | 12. Mai   | Klassenelemente in C#  / Vererbung                |                                |
+| 7     | 15. Mai   | Klassenelemente in C#  / Vererbung                |                                |
+|       | 19. Mai   | Versionsmanagement im Softwareentwicklungsprozess |                                |
+| 8     | 22. Mai   | UML Konzepte                                      |                                |
+|       | 26. Mai   | UML Diagrammtypen                                 |                                |
+| 9     | 29. Mai   | UML Anwendungsbeispiel                            | _Pfingstmontag_ (Aufzeichnung) |
+|       | 2. Juni   | Testen                                            | Ende EiS Vorlesungsinhalte     |
+| 10    | 5. Juni   | Dokumentation und Build Toolchains                |                                |
+|       | 9. Juni   | Continuous Integration in GitHub                  |                                |
+| 11    | 12. Juni  | Generics                                          |                                |
+|       | 16. Juni  | Container                                         |                                |
+| 12    | 19. Juni  | Delegaten                                         |                                |
+|       | 23. Juni  | Events                                            |                                |
+| 13    | 28. Juni  | Threadkonzepte in C#                              |                                |
+|       | 30. Juni  | Taskmodell                                        |                                |
+| 14    | 3. Juli   | Language Integrated Query                         |                                |
+|       | 8. Juli   | Design Pattern                                    |                                |
+| 15    | 7. Juli   | Anwendungungsfälle                                |                                |
+|       | 14. Juli  |                                                   |                                |
 
 
 ### Durchführung
@@ -207,24 +205,25 @@ Vorlesungen:
      {{0-1}}
 ************************************************************************
 
-Die Vorlesung wurden im vergangenen Semester aufgezeichnet. Die Inhalte finden sich unter
+Die Vorlesung findet
+
+- Montags, 11:30 - 13:00
+- Freitags, 9:45 - 11:15
+
+im Audimax 1001 statt.
+
+Die Vorlesung wurden im Sommersemester 2021 vollständig aufgezeichnet. Die Inhalte finden sich unter
 
 https://teach.informatik.tu-freiberg.de/b/seb-blv-unz-kxu
 
-> Diese Materialien können der Nachbereitung der Veranstaltung dienen, ersetzen aber nicht den Besuch der Vorlesung.
-
-Die Vorlesung findet
-
-- Montags, 11:00 - 12:30
-- Freitags, 9:15 - 10:45
-
-im Audimax 1001 statt.
+> Diese Materialien können der Nachbereitung der Veranstaltung dienen, ersetzen aber nicht den Besuch der Vorlesung, da diese sich an vielen Stellen gewandelt hat.
 
 Die Materialien der Vorlesung sind als Open-Educational-Ressources konzipiert
 und stehen unter Github bereit.
 
-
 > Wie können Sie sich einbringen?
+>
+> * __Beiträge während der Vorlesungen__ ... Bringen Sie, soweit möglich Ihren Rechner mit. Wir bemühen uns die Inhalte in starkem Maße interaktiv zu gestalten.
 >
 > * __Allgemeine theoretische Fragen/Antworten__ ... Dabei können Sie sich über
 >   github/ das Opal-Forum in die Diskussion einbringen.
@@ -313,7 +312,7 @@ Verständnis auch die Werkzeuge der Softwareentwicklung adressiert!
   Konventionelle Klausur ODER Programmieraufgabe in Zweier-Team anhand einer selbstgewählten Aufgabe
 
 - **Einführung in die Softwareentwicklung:**
-  Teamprojekt und Projektpräsentationen (im Wintersemester 2022/23) bei bestandener Prüfungsvorleistung in Form einer Teamaufgabe im Sommersemester
+  Teamprojekt und Projektpräsentationen (im Wintersemester 2023/24) bei bestandener Prüfungsvorleistung in Form einer Teamaufgabe im Sommersemester
 
 
      {{1}}
@@ -398,14 +397,15 @@ Was sind die zentralen Tools unserer Veranstaltung?
 
 
 ### Markdown
-    {{1-2}}
+
+    {{0-1}}
 > Markdown wurde von John Gruber und Aaron Swartz mit dem Ziel entworfen, die
 > Komplexität der Darstellung so weit zu reduzieren, dass schon der Code sehr
 > einfach lesbar ist. Als Auszeichnungselemente werden entsprechend möglichst
 > kompakte Darstellungen genutzt.
 
 
-    --{{1}}--
+    {{0-1}}
 Markdown ist eine Auszeichnungssprache für die Gliederung und Formatierung von
 Texten und anderen Daten. Analog zu HTML oder LaTex werden die Eigenschaften und
 Organisation von Textelementen (Zeichen, Wörtern, Absätzen) beschrieben. Dazu
@@ -598,7 +598,7 @@ annotation SuppressWarnings
     --{{2}}--
 Wichtig für uns sind die ausführbaren Code-Blöcke, die ich in der Vorlesung nutze, um Beispielimplementierungen zu evaluieren. Dabei werden zwei Formen unterschieden:
 
-**C# 10 mit dotnet Unterstützung**
+**C# 9 mit dotnet Unterstützung**
 
 ```csharp  Coderunner.cs9
 using System;
@@ -627,7 +627,7 @@ foreach(int prime in primes) Console.Write($" {prime}");
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
@@ -651,7 +651,7 @@ namespace HelloWorld
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > **Frage:**
 > Welche Unterschiede sehen Sie zwischen C#8 und C#10 Code schon jetzt?
@@ -672,14 +672,14 @@ namespace HelloWorld
 
 * Editoren
 
-  - Für den [Atom](https://atom.io)-Editor von GitHub exitieren derzeit zwei Plugins:
+  - Für den Visual Studio Code - Editor von GitHub exitieren derzeit zwei Plugins:
 
-    1. [liascript-preview](https://atom.io/packages/liascript-preview)
+    1. [liascript-preview](https://marketplace.visualstudio.com/items?itemName=LiaScript.liascript-preview-web)
 
-    2. [liascript-snippets](https://atom.io/packages/liascript-snippets)
+    2. [liascript-snippets](https://marketplace.visualstudio.com/items?itemName=LiaScript.liascript-snippets)
 
-  - Für den Einsatz anderer Editoren eignet sich auch der [LiaScript-DevServer](https://github.com/LiaScript/LiaScript-DevServer)
 
+  !?[Tutorial](https://www.youtube.com/watch?v=8vFYMo5xqyY)
 
 *******************************************************************************
 
