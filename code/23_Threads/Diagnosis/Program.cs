@@ -44,12 +44,6 @@ public class Program{
 
         // Variante 2
         Console.WriteLine("\nUsing String Builder");
-        Recorder.Start();
-        var builder = new System.Text.StringBuilder();
-        for (int i=0; i < numbers.Length; i++){
-            builder.Append(numbers[i]);
-            builder.Append(", ");
-        }
-        Recorder.Stop();        
+        // ...  
     }
 }
