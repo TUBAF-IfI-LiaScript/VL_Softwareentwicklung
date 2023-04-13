@@ -2,29 +2,33 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `fjangfaragesh`, `KoKoKotlin` & `Lina`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.1
+version:  1.0.2
 language: de
 narrator: Deutsch Female
+comment:  Programmierparadigmen und Einordnung von C#, Basiskonzepte von C# und dem dotnet Framework, Unterschiede zu anderen Sprachen/Konzepten
+tags:      
+logo:     
 
 import: https://github.com/LiaTemplates/Pyodide
         https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liaTemplates/tau-prolog/master/README.md
+        config.md
 
-icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_Freiberg.svg
 -->
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/02_DotNet.md)
 
 # .NET und Einordnung der Sprache C#
 
-| Parameter                | Kursinformationen                                                                                                                                                                    |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                      |
-| **Semester**             | `Sommersemester 2022`                                                                                                                                                                |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                    |
-| **Inhalte:**             | `Basiskonzepte von C# und dotnet `                                                                                            |
-| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/02_DotNet.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/02_DotNet.md) |
-| **Autoren**              | @author                                                                                                                                                                              |
+| Parameter                | Kursinformationen                                                                      |
+| ------------------------ | -------------------------------------------------------------------------------------- |
+| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                        |
+| **Teil:**                | `2/27`                                                                                 |
+| **Semester**             | @config.semester                                                                       |
+| **Hochschule:**          | @config.university                                                                     |
+| **Inhalte:**             | @comment                                                                               |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/02_DotNet.md |
+| **Autoren**              | @author                                                                                |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 

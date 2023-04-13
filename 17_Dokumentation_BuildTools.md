@@ -2,13 +2,17 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
+comment:  Ziele von Dokumentation, Herausforderungen und Nutzertypengerechte Dokumentationen, Anwendung von Build-Tools
+tags:      
+logo:     
 
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
         https://raw.githubusercontent.com/liaTemplates/ExplainGit/master/README.md
+        config.md
 
 icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_Freiberg.svg
 -->
@@ -17,14 +21,15 @@ icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_F
 
 # Dokumentation und Build-Tools
 
-| Parameter                | Kursinformationen                                                                                                                                                                          |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**             | `Realisierung von Dokumentationen, Anwendung von Build-Tools`                                                                                                                                |
-| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/17_Dokumentation_BuildTools.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/17_Dokumentation_BuildTools.md) |
-| **Autoren**              | @author                                                                                                                                                                                    |
+| Parameter                | Kursinformationen                                                                                        |
+| ------------------------ | -------------------------------------------------------------------------------------------------------- |
+| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                          |
+| **Teil:**                | `17/27`                                                                                                   |
+| **Semester**             | @config.semester                                                                                         |
+| **Hochschule:**          | @config.university                                                                                       |
+| **Inhalte:**             | @comment                                                                                                 |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/17_Dokumentation_BuildTools.md |
+| **Autoren**              | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 

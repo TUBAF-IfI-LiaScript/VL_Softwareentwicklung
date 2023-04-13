@@ -2,31 +2,34 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich & `JohannaKlinke`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.7
-
+version:  1.0.8
 language: de
 narrator: Deutsch Female
+comment:  Motivation der Versionsverwaltung in der Softwareentwicklung, Diskussion der zentraler / dezentraler Ansätze, Umsetzung von merge Operation, Einführung in die Verwendung von Git
+tags:      
+logo:     
 
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liaTemplates/ExplainGit/master/README.md
         https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
         https://github.com/LiaTemplates/Pyodide
+        config.md
 
-icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_Freiberg.svg
 -->
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/11_VersionsverwaltungI.md)
 
 # Versionsverwaltung I
 
-| Parameter                | Kursinformationen                                                                                                                                                                          |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
-| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**             | `Motivation der Versionsverwaltung in der Softwareentwicklung`                                                                                                                                |
-| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/11_VersionsverwaltungI.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/11_VersionsverwaltungI.md) |
-| **Autoren**              | @author                                                                                                                                                                                    |
+| Parameter                | Kursinformationen                                                                                   |
+| ------------------------ | --------------------------------------------------------------------------------------------------- |
+| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                     |
+| **Teil:**                | `11/27`                                                                                              |
+| **Semester**             | @config.semester                                                                                    |
+| **Hochschule:**          | @config.university                                                                                  |
+| **Inhalte:**             | @comment                                                                                            |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/11_VersionsverwaltungI.md |
+| **Autoren**              | @author                                                                                             |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 

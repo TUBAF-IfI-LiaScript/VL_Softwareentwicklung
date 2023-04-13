@@ -2,27 +2,31 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
+comment:  Einführung in die Basiselemente der Programmiersprache C#, Basisdatentypen und deren Verwendung
+tags:      
+logo:     
 
 import: https://github.com/liascript/CodeRunner
+        config.md
 
-icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_Freiberg.svg
 -->
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/04_CsharpGrundlagenII.md)
 
 # C# Grundlagen II
 
-| Parameter                | Kursinformationen                                                                                                                                                                          |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                            |
-| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**             | `Einführung in die Basiselemente der Programmiersprache C#`                                                                                                                                |
-| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/04_CsharpGrundlagenII.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/04_CsharpGrundlagenII.md) |
-| **Autoren**              | @author                                                                                                                                                                                    |
+| Parameter                | Kursinformationen                                                                                  |
+| ------------------------ | -------------------------------------------------------------------------------------------------- |
+| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                    |
+| **Teil:**                | `4/27`                                                                                             |
+| **Semester**             | @config.semester                                                                                   |
+| **Hochschule:**          | @config.university                                                                                 |
+| **Inhalte:**             | @comment                                                                                           |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/04_CsharpGrundlagenII.md |
+| **Autoren**              | @author                                                                                            |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 

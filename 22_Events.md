@@ -2,28 +2,32 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
+comment:  Events und Delegaten in der Anwendungsentwicklung, Herausforderungen beim Handling
+tags:      
+logo:     
 
 import: https://github.com/liascript/CodeRunner
         https://github.com/LiaTemplates/Pyodide
+        config.md
 
-icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_Freiberg.svg
 -->
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/22_Events.md)
 
 # Events
 
-| Parameter                | Kursinformationen                                                                                                                                                                          |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                             |
-| **Semester**             | `Sommersemester 2022`                                                                                                                                                                      |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**             | `Events und Delegaten in der Anwendung`                                                                                                                                |
-| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/22_Events.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/22_Events.md) |
-| **Autoren**              | @author                                                                                                                                                                                    |
+| Parameter                | Kursinformationen                                                                      |
+| ------------------------ | -------------------------------------------------------------------------------------- |
+| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                        |
+| **Teil:**                | `22/27`                                                                                |
+| **Semester**             | @config.semester                                                                       |
+| **Hochschule:**          | @config.university                                                                     |
+| **Inhalte:**             | @comment                                                                               |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/22_Events.md |
+| **Autoren**              | @author                                                                                |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 

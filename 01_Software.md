@@ -2,29 +2,33 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, Christoph Pooch,`KoKoKotlin`, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.1
+version:  1.0.2
 language: de
 narrator: Deutsch Female
+comment:  Definition des Softwarebegriffes, des Entwicklungsprozesses und der Herausforderungen
+tags:      
+logo:     
 
 import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
         https://raw.githubusercontent.com/liaTemplates/DigiSim/master/README.md
         https://github.com/liascript/CodeRunner
-
-icon: https://upload.wikimedia.org/wikipedia/commons/d/de/Logo_TU_Bergakademie_Freiberg.svg
+        config.md
+        
 -->
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/01_Software.md)
 
 # Softwareentwicklung als Prozess
 
-| Parameter                | Kursinformationen                                                                                                                                                                    |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                                                                                                      |
-| **Semester**             | `Sommersemester 2022`                                                                                                                                                                |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                    |
-| **Inhalte:**             | `Definition des Softwarebegriffes und der Herausforderungen `                                                                                            |
-| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/01_Software.md](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/01_Software.md) |
-| **Autoren**              | @author                                                                                                                                                                              |
+| Parameter                | Kursinformationen                                                                        |
+| ------------------------ | ---------------------------------------------------------------------------------------- |
+| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                          |
+| **Teil:**                | `1/27`                                                                                   |
+| **Semester**             | @config.semester                                                                         |
+| **Hochschule:**          | @config.university                                                                       |
+| **Inhalte:**             | @comment                                                                                 |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/01_Software.md |
+| **Autoren**              | @author                                                                                  |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
