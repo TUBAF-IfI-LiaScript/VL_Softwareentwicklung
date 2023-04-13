@@ -6,8 +6,8 @@ version:  1.0.5
 language: de
 narrator: Deutsch Female
 comment:  Motivation der Vorlesung "Softwareentwicklung" und Beschreibung der Organisation der Veranstaltung
-tags:      
-logo:     
+
+
 
 import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
         https://github.com/liascript/CodeRunner
