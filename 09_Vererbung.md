@@ -2,10 +2,10 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
-comment:  Implementierung der Vererbung in C#, Zugriffsmechanismen, Polymorphie, `cast` Operationen
+comment:  Abstrakte Klassen und Methodens, Interface-Definition und -bedeutung, `cast` Operationen
 tags:      
 logo:     
 

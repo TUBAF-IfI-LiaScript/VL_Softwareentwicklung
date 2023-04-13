@@ -5,9 +5,10 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.6
 language: de
 narrator: Deutsch Female
-comment:  Einbettung des Testens in den Softwareentwicklungsprozess, Konzepte und Umsetzung in dotnet
+comment:  Softwarefehler, Testen zur Qualitätssicherung, Planung von Tests, Konzepte und Umsetzung in dotnet
 tags:      
 logo:     
+title: Software-Testen
 
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md

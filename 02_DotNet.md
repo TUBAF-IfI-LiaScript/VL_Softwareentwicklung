@@ -2,10 +2,10 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `fjangfaragesh`, `KoKoKotlin` & `Lina`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
-comment:  Programmierparadigmen und Einordnung von C#, Basiskonzepte von C# und dem dotnet Framework, Unterschiede zu anderen Sprachen/Konzepten
+comment:  Programmierparadigmen und Einordnung von C#, Eigenschaften der Programmiersprache C#, .NET, Unterschiede zu anderen Sprachen/Konzepten
 tags:      
 logo:     
 

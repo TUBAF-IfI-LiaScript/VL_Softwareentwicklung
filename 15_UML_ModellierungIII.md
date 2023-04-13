@@ -8,6 +8,7 @@ narrator: Deutsch Female
 comment:  Fallbeispiel UML Modellierung
 tags:      
 logo:     
+title: Modellierung von Software III
 
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md

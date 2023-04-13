@@ -5,7 +5,7 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.4
 language: de
 narrator: Deutsch Female
-comment:  Generelle Container und Datenkonzepte, Containertypen und deren Implementierung in C#
+comment:  Generelle Container und Datenkonzepte, Collections, Implementierung in Csharp und Anwendung der generischen Collections
 tags:      
 logo:     
 

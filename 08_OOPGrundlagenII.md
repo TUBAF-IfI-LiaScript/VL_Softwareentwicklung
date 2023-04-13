@@ -2,12 +2,13 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
-comment:  Grundkonzepte der OOP Programmierung, OOP Umsetzung in C# mit Elementen einer Klasse, Attribute, `objekt`-Klasse
+comment:  OOP-Konzepte (Kapselung, Vererbung, Polymorphie), Klassen und Klassenmembers, Operatorenüberladung
 tags:      
 logo:     
+titel: OOP-Konzepte
 
 import: https://github.com/liascript/CodeRunner
         config.md

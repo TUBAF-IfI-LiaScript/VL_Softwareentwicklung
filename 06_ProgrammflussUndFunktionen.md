@@ -2,10 +2,10 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina` & `KoKoKotlin`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
-comment:  Programmfluss und Funktionsstrukturen in C#, Datenübergabe, Lebensdauer und Sichtbarkeit von Variablen
+comment:  Kontrollstrukturen, Funktionen, Parameterübergabe, Überladen von Funktionen, Lebensdauer und Sichtbarkeit von Variablen
 tags:      
 logo:     
 

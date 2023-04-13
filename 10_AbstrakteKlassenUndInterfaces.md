@@ -5,7 +5,7 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.12
 language: de
 narrator: Deutsch Female
-comment:  Konzepte Abstrakter Klassen und Interfaces, Verwendung im Entwurfsprozess, Vergleich mit anderen Sprachen
+comment:  Lösungsansatz und Formen der Versionsverwaltung, Strategien der Konfliktvermeidung, Git
 tags:      
 logo:     
 

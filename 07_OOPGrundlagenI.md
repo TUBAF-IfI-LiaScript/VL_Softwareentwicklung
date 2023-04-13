@@ -5,7 +5,7 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.4
 language: de
 narrator: Deutsch Female
-comment:  Einführung der Konzepte OOP, Abbildung von OOP in verschiedenen Programmiersprachen, Unterscheidung zwischen `struct` und `class`
+comment:  Einführung der Konzepte OOP, structs, this-Operator, readonly- und const-Datenfelder, Sichtbarkeitsattribute
 tags:      
 logo:     
 

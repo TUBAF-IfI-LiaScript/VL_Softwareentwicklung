@@ -5,7 +5,7 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.5
 language: de
 narrator: Deutsch Female
-comment:  Events und Delegaten in der Anwendungsentwicklung, Herausforderungen beim Handling
+comment:  Publish-Subscribe Prinzip, Events in C#, generische Events
 tags:      
 logo:     
 

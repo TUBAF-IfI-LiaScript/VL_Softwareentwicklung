@@ -2,10 +2,10 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `snikker123` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
-comment:  Einführung in die Basiselemente der Programmiersprache C#
+comment:  Einführung in die Basiselemente der Programmiersprache C#, Variablen, Datentypen und Operatoren
 tags:      
 logo:     
 

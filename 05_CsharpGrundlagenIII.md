@@ -5,7 +5,7 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.3
 language: de
 narrator: Deutsch Female
-comment:  Einführung in die Basiselemente der Programmiersprache C#, Eingabe/Ausgabe, Dateihandling, Behandlung von Ausnahmen
+comment:  Ein-und Ausgabeoperationen, Ausnahmebehandlung
 tags:      
 logo:     
 

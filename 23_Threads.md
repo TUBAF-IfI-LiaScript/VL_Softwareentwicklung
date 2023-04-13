@@ -5,7 +5,7 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.5
 language: de
 narrator: Deutsch Female
-comment:  Multithreading Konzepte, Thread-Modell und Interaktion, Anwendung in C#
+comment:  Multithreading Konzepte, Thread-Modell und Interaktion, Implementierung in C#, Datenaustausch, Locking, Thread-Pool
 tags:      
 logo:     
 

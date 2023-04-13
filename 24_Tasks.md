@@ -5,7 +5,7 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  2.0.0
 language: de
 narrator: Deutsch Female
-comment:  Logging in Software, Konfiguration eines Programmweiten Loggingsystems, weiterführenden Abstraktionen für Multithreading, Task Modell in C#
+comment:  Logging in Software, Konfiguration eines Programmweiten Loggingsystems, weiterführenden Abstraktionen für Multithreading, Task Modell in C#, asynchrone Methoden
 tags:      
 logo:     
 

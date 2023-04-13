@@ -5,7 +5,7 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.5
 language: de
 narrator: Deutsch Female
-comment:  Einführung in die Basiselemente der Programmiersprache C#, Basisdatentypen und deren Verwendung
+comment:  Werte- und Referenzdatentypen, Array, String, implizite Variablendefinition und Nullables
 tags:      
 logo:     
 

@@ -2,10 +2,10 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
-comment:  Ziele von Dokumentation, Herausforderungen und Nutzertypengerechte Dokumentationen, Anwendung von Build-Tools
+comment:  Ziele von Dokumentation, Build Tools dotnet, MSBuild und Make
 tags:      
 logo:     
 

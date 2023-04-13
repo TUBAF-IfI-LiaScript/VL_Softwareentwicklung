@@ -5,7 +5,7 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.2
 language: de
 narrator: Deutsch Female
-comment:  Herausforderungen der Analyse großer Datensätze, Exkurs SQL, Language Integrated Query Konzepte, Umsetzung und Anwendung
+comment:  Erweiterungsmethode, anonyme Typen, Enumerables, LINQ-Grundlagen und Basisfunktionen
 tags:      
 logo:     
 

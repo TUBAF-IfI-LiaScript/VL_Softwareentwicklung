@@ -8,6 +8,7 @@ narrator: Deutsch Female
 comment:  Prinzipien des (objektorientierten) Softwareentwurfs, Motivation der Modellierung von Software, Unified Modeling Language
 tags:      
 logo:     
+title: Modellierung von Software I
 
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md

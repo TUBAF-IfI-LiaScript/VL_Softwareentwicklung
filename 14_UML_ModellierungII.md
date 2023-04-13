@@ -5,9 +5,10 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.5
 language: de
 narrator: Deutsch Female
-comment:  Klassifikation von UML Diagrammtypen, Anwendungsfall Diagramm, Aktivitätsdiagramm, Sequenzdiagramm, Klassendiagramm, Objektdiagramm
+comment:  Klassifikation von UML Diagrammtypen, Anwendungsfall Diagramm, Aktivitätsdiagramm, Sequenzdiagramm, Klassendiagramm, Objektdiagramm, UML Tools
 tags:      
 logo:     
+title: Modellierung von Software II
 
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md

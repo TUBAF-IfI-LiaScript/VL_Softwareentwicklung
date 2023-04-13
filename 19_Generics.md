@@ -5,7 +5,7 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.3
 language: de
 narrator: Deutsch Female
-comment:  Konzepte und Umsetzung von Generics in C#, Relation zu Templates in C++
+comment:  Generische Typen und Methoden, Constrains und Vererbung bei generischen Typen
 tags:      
 logo:     
 

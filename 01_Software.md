@@ -2,10 +2,10 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, Christoph Pooch,`KoKoKotlin`, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
-comment:  Definition des Softwarebegriffes, des Entwicklungsprozesses und der Herausforderungen
+comment:  Definition des Softwarebegriffes, Softwareentwicklungszyklus, Fehler in der Softwareentwicklung, Softwarequalitä
 tags:      
 logo:     
 
@@ -36,6 +36,22 @@ import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/RE
 
 ## Softwareentwicklung
 
+Was ist Software, welche Abläufen kennzeichnen den zugehörigen Entwicklungsprozess?
+
+![Lochkarte ](./img/01_Software/800px-Lochkarte.jpg "Denis Apel, CC BY-SA 3.0 <https://creativecommons.org/licenses/by-sa/3.0>, via Wikimedia Commons")
+
+```
+00000000  48 69 65 72 20 69 73 74  20 65 69 6e 20 42 65 69  |Hier ist ein Bei|
+00000010  73 70 69 65 6c 74 65 78  74 2e 20 44 65 72 20 48  |spieltext. Der H|
+00000020  65 78 64 75 6d 70 20 69  73 74 20 61 75 66 20 64  |exdump ist auf d|
+00000030  65 72 20 6c 69 6e 6b 65  6e 20 53 65 69 74 65 20  |er linken Seite |
+00000040  7a 75 20 73 65 68 65 6e  2e 0a 0a 4e 65 75 65 20  |zu sehen...Neue |
+00000050  5a 65 69 6c 65 6e 20 6f  64 65 72 20 41 62 73 e4  |Zeilen oder Absä|
+00000060  74 7a 65 20 73 69 6e 64  20 64 61 6e 6e 20 61 75  |tze sind dann au|
+00000070  63 68 20 22 5a 65 69 63  68 65 6e 22 20 6d 69 74  |ch "Zeichen" mit|
+00000080  20 65 69 6e 65 6d 20 62  65 73 74 69 6d 6d 74 65  | einem bestimmte|
+00000090  6e 0a 43 6f 64 65 2e 28  30 61 29 2e 2e 2e 0a 0a  |n.Code.(0a).....|
+```
 
 ### Begriffsdefinition
 
