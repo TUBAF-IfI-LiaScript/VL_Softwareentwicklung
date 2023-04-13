@@ -11,7 +11,8 @@ logo:
 
 import: https://github.com/liascript/CodeRunner
         https://github.com/LiaTemplates/Pyodide
-        config.md
+
+import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
 -->
 

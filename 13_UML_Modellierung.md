@@ -13,7 +13,8 @@ title: Modellierung von Software I
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
         https://raw.githubusercontent.com/liaTemplates/ExplainGit/master/README.md
-        config.md
+
+import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
 -->
 

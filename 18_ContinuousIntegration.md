@@ -5,12 +5,13 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.8
 language: de
 narrator: Deutsch Female
-comment:  Continuous Integration, Verwendung von Buildtools, Aufbau einer CI Toolchain
+comment:  Continuous Intergration, GitHub CI, Anwendungsbeispiele
 tags:      
 logo:     
 
 import: https://github.com/liascript/CodeRunner
-        config.md
+
+import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
 -->
 

@@ -11,7 +11,8 @@ logo:
 
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liaTemplates/AlaSQL/master/README.md
-        config.md
+
+import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
 -->
 

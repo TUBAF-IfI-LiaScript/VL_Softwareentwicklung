@@ -5,13 +5,14 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.3
 language: de
 narrator: Deutsch Female
-comment:  Entwurfsmuster-Kategorien und ausgewählte Beispiele, Singleton Pattern, Adapter Pattern, State Pattern, Factory Pattern, Anti Pattern
+comment:  Entwurfsmuster-Kategorien und ausgewählte Beispiele, Singleton Pattern, Adapter Pattern, State Pattern, Factory Pattern, Anti-Pattern 
 tags:      
 logo:     
 
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liaTemplates/AlaSQL/master/README.md
-        config.md
+
+import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
 -->
 

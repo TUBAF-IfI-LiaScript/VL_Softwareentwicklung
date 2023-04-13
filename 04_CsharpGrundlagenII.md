@@ -10,7 +10,8 @@ tags:
 logo:     
 
 import: https://github.com/liascript/CodeRunner
-        config.md
+
+import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
 -->
 

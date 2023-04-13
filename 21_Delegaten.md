@@ -5,12 +5,13 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.6
 language: de
 narrator: Deutsch Female
-comment:  C# Deleganten - Konzepte und Anwendung
+comment:  Grundidee, Multicast Delegaten, Anonyme/Lambda Funktionen, generische Delegaten, Action und Func
 tags:      
 logo:     
 
 import: https://github.com/liascript/CodeRunner
-        config.md
+
+import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
 -->
 
