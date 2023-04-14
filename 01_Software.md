@@ -153,14 +153,14 @@ Quelle unter anderem [^Weforum] und [^McCandless]
 Und wann entsteht der Aufwand? Wann muss ein Team Kosten in die Entwicklung investieren?
 
 <!--data-type="none"-->
-| Projektphase                         |             | Relativer Kosteanteil |
-| ------------------------------------ | ----------- | --------------------- |
-| Spezifikation und Architekturentwurf | Entwicklung | 16%                   |
-| Detailentwurf und Kodierung          |             | 9%                    |
-| Test                                 |             | 16%                   |
-| Anpassung                            | Wartung     | 12%                   |
-| Erweiterung und Verbesserung         |             | 36%                   |
-| Fehlerbehebung                       |             | 12%                   |
+| Projektphase                         |             | Relativer Kostenanteil |
+| ------------------------------------ | ----------- | ---------------------- |
+| Spezifikation und Architekturentwurf | Entwicklung | 16%                    |
+| Detailentwurf und Kodierung          |             | 9%                     |
+| Test                                 |             | 16%                    |
+| Anpassung                            | Wartung     | 12%                    |
+| Erweiterung und Verbesserung         |             | 36%                    |
+| Fehlerbehebung                       |             | 12%                    |
 
 Zahlwerte aus einem Diagramm in [^Lemburg]
 
