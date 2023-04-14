@@ -5,7 +5,7 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.3
 language: de
 narrator: Deutsch Female
-comment:  Definition des Softwarebegriffes, Softwareentwicklungszyklus, Fehler in der Softwareentwicklung, Softwarequalitä
+comment:  Definition des Softwarebegriffes, Softwareentwicklungszyklus, Fehler in der Softwareentwicklung, Softwarequalität
 tags:      
 logo:     
 
