@@ -52,25 +52,6 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
-
-
-```csharp  Coderunner.cs9
-using System;
-
-string message = "Glück auf";
-Console.WriteLine(message + " Freiberg");
-Console.WriteLine(message + " Softwareentwickler");
-```
-```xml   -myproject.csproj
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
-</Project>
-```
-@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
 C# Programme umfassen
 

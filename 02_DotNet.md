@@ -47,7 +47,7 @@ Das Programmierparadigma:
 * beruht auf Sprache, aber auch auf individuellem Stil.
 
 <!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
 
@@ -62,25 +62,29 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
   Prozedural    Objektorientiert    Funktional             Logisch             .
 
 ```
-
-
                                       {{1-2}}
 *******************************************************************************
 
 + __Imperative Programmierung__ - Quellcode besteht aus einer Folge von Befehlen die in einer festen Reihenfolge abgearbeitet werden.
 
-  + __Prozedurale Programmierung__ - Zerlegung von Programmen in überschaubare Teile, die durch eine definierte Schnittstelle aufrufbar sind (Kernkonzepte: Funktion, Prozedur, Routine, Unterprogramm)
-  + __Objektorientierte Programmierung__ - Kapselung von Daten und Funktionen in einem Konzept
-
-*******************************************************************************
-
-                                       {{2-3}}
-*******************************************************************************
+| Paradigma                        | Leitidee                                                |
+| -------------------------------- | ------------------------------------------------------- |
+| Prozedurale Programmierung       | Zerlegung von Programmen in überschaubare Teile         |
+| Objektorientierte Programmierung | Abbildung von Daten und Funktionalität in einem Konzept |
+|                                  |                                                         |
 
 + __Deklarative Programmierung__ - es wird kein Lösungsweg implementiert, sondern nur angegeben, was gesucht ist.
 
-  + __Funktionale Sprachen__ - Abbildung der Algorithmen auf funktionale Darstellungen
-  + __Logische Sprachen__ -  Ableitung einer Lösung aus einer Menge von Fakten, Generierung einer Auswahl von Daten
+| Paradigma            | Leitidee                                                                               |
+| -------------------- | -------------------------------------------------------------------------------------- |
+| Funktionale Sprachen | Abbildung der Algorithmen auf funktionale Darstellungen                                |
+| Logische Sprachen    | Ableitung einer Lösung aus einer Menge von Fakten, Generierung einer Auswahl von Daten |
+
+
+*******************************************************************************
+
+                                      {{2-3}}
+*******************************************************************************
 
 
 ```prolog    Prolog.pro
@@ -120,7 +124,7 @@ grossvater(adam,frank).
   + **Strukturierte  Programmierung** ... Verzicht bzw. Einschränkung des `Goto` Statements zugunsten von Kontrollstrukturen (Kernkonzepte: Verzweigungen,
      Schleifen)
   + **Nebenläufig**, **Reflektiv**, **Generisch**, ...
-  + **Aspektorientierte Programmierung**,
+  + **Aspektorientierte Programmierung**, ...
 
 
 ******************************************************************************
@@ -182,7 +186,9 @@ result = functools.reduce(lambda x, y: x + y, my_list)
 print("Result in functional style      :" + str(result))
 
 ```
-@Pyodide.eval
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+
 
 *******************************************************************************
 
@@ -196,6 +202,7 @@ print("Result in functional style      :" + str(result))
 > *If all you have is a hammer, everything looks like a nail.*
 
 Lösungsansätze:
+
 * Individuell - Hinterfragen des Vorgehens und der Intuition, bewusste Weiterentwicklung des eigenen Horizontes (ohne auf jeden Zug aufzuspringen)
 * im Team - Teilen Sie Ihre Erfahrungen im Team / der Community, besetzen Sie Teams mit Mitarbeitern unterschiedlichen Backgrounds (Technical Diversity)
 
@@ -238,6 +245,7 @@ C#
 | 2019 | .NET Core 3      | 8.0        | Standardimplementierungen in Schnittstellen, Switch Expressions, statische lokale Funktionen, Index-Operatoren für Teilmengen                               |
 | 2020 | .NET 5.0         | 9.0        | Datensatztypen (Records),   Eigenschafteninitialisierung, Anweisungen außerhalb von Klassen, Verbesserungen beim Pattern Matching                           |
 | 2021 | .NET 6.0         | 10.0       | Erforderliche Eigenschaften, Null-Parameter-Prüfung, globale Using-Statements                                                                               |
+| 2022 | .NET 7.0         | 11.0       | Generische Attribute, Zeilenumbrüche bei Stringinterpolation, Benötigte Member-Datenfelder, Default-Werte in struct-Datenstrukturen                                                                               |
 
 Die Sprache selbst ist unmittelbar mit der Ausführungsumgebung, dem .NET Konzept verbunden und war ursprünglich stark auf Windows Applikationen zugeschnitten.
 
@@ -250,7 +258,7 @@ Die Sprache selbst ist unmittelbar mit der Ausführungsumgebung, dem .NET Konzep
 .NET ist ein Sammelbegriff für mehrere von Microsoft/Dritten herausgegebene Software-Plattformen, die der Entwicklung und Ausführung von Anwendungsprogrammen dienen. Dabei erlebt die Plattform einen permanenten Wandel. Die Bedeutung der einzelnen Teile und Technologien, die .NET umfasst, hat sich im Laufe der Zeit gewandelt. Stand November 2020 spielen folgende Frameworks eine herausgehobene Rolle in der Praxis:
 
 + das nur unter Windows unterstützte klassische .NET Framework, das mit der Version 4.8 in der letzten Version vorliegt.
-+ das als dessen Nachfolger positionierte, auf verschiedenen Plattformen unterstützte Framework .NET 5 (bei dem auch einige Techniken gekündigt wurden). Es wurde mehrere Jahre parallel unter der Bezeichnung .NET Core entwickelt.
++ das als dessen Nachfolger positionierte, auf verschiedenen Plattformen unterstützte Framework .NETx (bei dem auch einige Techniken gekündigt wurden). Es wurde mehrere Jahre parallel unter der Bezeichnung .NET Core entwickelt.
 + die Plattform Mono und darauf basierende Techniken (von Microsoft meist als Xamarin bezeichnet). Diese unterstützt seit längerem .NET auf verschiedenen Plattformen (in der Vergangenheit jedoch oft unvollständig implementiert).
 
     --{{0}}--
@@ -289,6 +297,8 @@ Einen guten Überblick über das historische Nebeneinander gibt das Video von Ti
 
 > .NET 6 ist als LTS-Version im November 2021 erscheinen und wird für 3 Jahre unterstützt.
 
+
+
 ********************************************************************************
 
                                       {{2-3}}
@@ -321,14 +331,13 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
 * die Klassenbibliothek gliedern sich intern in Basisklassen und eigenen Bibliotheken für verschiedene Anwendungstypen:
 
-
-  * ASP.NET ... ist ein Web Application Framework, mit dem sich dynamische Webseiten, Webanwendungen und Webservices entwickeln lassen.
-  * Windows Forms/ WPF ... ist ein GUI-Toolkit des Microsoft .NET Frameworks. Es ermöglicht die Erstellung grafischer Benutzeroberflächen (GUIs) für Windows.
-  * ...
-
-    --{{2}}--
-Die Open Source Community stand dem .NET Konzept kritisch gegenüber, da eine "unklare Lage" im Hinblick auf die Lizenzen bestand. Aufgrund der Gefahr durch Patentklagen seitens Microsoft warnte Richard Stallman davor Mono in die Standardkonfiguration von Linuxdistributionen aufzunehme. Ab 2013 änderte Microsoft aber seine Strategie und veröffentlichte den Quellcode von .NET komplett als Open Source unter einer MIT-Lizenz bzw. Apache-2.0-Lizenz.
-
+   * Darstellung von Basisdatentypen und -ausnahmen
+   * E/A-Operationen
+   * Zugriff auf Informationen über geladene Typen
+   * ...
+   * ASP.NET ... ist ein Web Application Framework, mit dem sich dynamische Webseiten, Webanwendungen und Webservices entwickeln lassen.
+   * MAUI ... ist ein GUI-Toolkit des .NET Frameworks. Es ermöglicht die Erstellung grafischer Benutzeroberflächen (GUIs) für Windows, macOS und Android / iOS.
+   * ...
 
 ********************************************************************************
 
@@ -338,7 +347,7 @@ Die Open Source Community stand dem .NET Konzept kritisch gegenüber, da eine "u
 *Compilierung unter C* (zur Erinnerung und zum Vergleich)
 
 <!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
 Sourccode (.c, .cpp, .h)             |
@@ -433,6 +442,7 @@ bereit:
 ```
 
 Ein Assembly umfasst:
+
 * das Assemblymanifest, das die Assemblymetadaten enthält.
 * die Typmetadaten.
 * den CIL-Code
@@ -490,10 +500,10 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
              |                             |
     .--------+---------.         .---------+---------.
     |                  |         |                   |
-  mono (C#7)    dotnet (C#10)    |                   |
+  mono (C#8)    dotnet (C#10)    |                   |
                                  |                   |
                           dotnetfiddle.net        repl.it
-                             bis C#10               C#8                        .
+                             bis C#11               C#10                        .
 ```
 
 
@@ -512,7 +522,7 @@ public class Program
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 ```csharp  Coderunner.cs9
@@ -603,58 +613,3 @@ https://code.visualstudio.com/docs/languages/csharp
 - [ ] Installieren Sie das .NET 6 auf Ihrem Rechner und erfreuen Sie sich an einem ersten "Hello World"
 - [ ] Testen Sie mit einem Kommilitonen die Features von repl.it! Arbeiten Sie probeweise an einem gemeinsamen Dokument.
 - [ ] Legen Sie sich einen GitHub-Account an.
-
-<!--START_SKIP_IN_PDF-->
-
-## Quizze - Vorwissenstest
-
-Was wird als Methode/Funktion bezeichnet?
-
-- [(X)] Codeblock, welcher durch Aufruf seines Bezeichners ausgeführt wird
-- [( )] Ein beliebiger Programmabschnitt zwischen zwei geschweiften Klammern
-- [( )] Die Berechnung eines Wertes infolge der Auswertung eines Ausdrucks
-
-Welcher der folgenden Schlüsselwörter ist keine Bezeichnung für eine Schleife:
-
-[[  while
-|   do while
-|   (goto)
-|   for
-]]
-
-Vervollständige die folgenden Entscheidungs-Statements:
-
-``` c
-*A* (Variable)
-{
-  1:
-    //CODE
-    break;
-  2:
-    //CODE
-    break;
-  3:
-    //CODE
-    break;
-}
-```
-A:
-
-[[switch]]
-
-```
-*B* (Bedingung)
-{ //CODE }
-*C*
-{ //CODE }
-```
-
-B:
-
-[[if]]
-
-C:
-
-[[else]]
-
-<!--END_SKIP_IN_PDF-->
