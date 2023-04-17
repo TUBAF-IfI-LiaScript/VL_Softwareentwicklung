@@ -5,7 +5,7 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.3
 language: de
 narrator: Deutsch Female
-comment:  Definition des Softwarebegriffes, Softwareentwicklungszyklus, Fehler in der Softwareentwicklung, Softwarequalitä
+comment:  Definition des Softwarebegriffes, Softwareentwicklungszyklus, Fehler in der Softwareentwicklung, Softwarequalität
 tags:      
 logo:     
 
@@ -580,7 +580,6 @@ Nachteile:
 - [ ] Betrachten Sie die Darstellung unter [Webseite Programmwechsel](https://www.programmwechsel.de/lustig/management/schaukel-baum.html) und versuchen Sie die überspitzten Missverständnisse der einzelnen Protagonisten im Kontext eines Softwareprojektes zu stellen.
 - [ ] Korrigieren Sie das `allesFalsch.c` Beispiel, verbessern Sie die Lesbarkeit des Codes.
 
-<!--START_SKIP_IN_PDF-->
 
 ## Quizze
 
@@ -596,5 +595,3 @@ Wann ist eine Software-Dokumentation wichtig?
 - [[X]] bei (mittel-)großen Projekten
 - [[x]] bei kleinen Projekten mit komplexem Code
 - [[ ]] die Dokumentation ist generell nicht wichtig, erfahrene Programmierer finden sich selber zurecht
-
-<!--END_SKIP_IN_PDF-->
