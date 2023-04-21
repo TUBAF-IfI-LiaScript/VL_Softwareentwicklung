@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `snikker123` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 comment:  Einführung in die Basiselemente der Programmiersprache C#, Variablen, Datentypen und Operatoren
@@ -10,7 +10,6 @@ tags:
 logo:     
 
 import: https://github.com/liascript/CodeRunner
-        https://github.com/LiaTemplates/Pyodide
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
@@ -38,7 +37,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 Woraus setzt sich ein C# Programm zusammen?
 
-```csharp    HelloWorld.cs
+```csharp  HelloWorld.cs
 using System;
 
 public class Program
@@ -52,8 +51,18 @@ public class Program
   }
 }
 ```
+```xml   -myproject.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
-C# Programme umfassen
+
+(C#) Programme umfassen
 
 + Schlüsselwörter der Sprache,
 + Variablennamen,
@@ -71,7 +80,7 @@ using System; public class Program {static void Main(string[] args){
 string message = "Glück auf"; Console.WriteLine(message + " Freiberg");
 Console.WriteLine(message + " Softwareentwickler");}}
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 ### Schlüsselwörter
@@ -84,7 +93,7 @@ ermöglicht Ausnahmen.
 var
 if
 operator
-@class // class als Name !
+@class // class als Name einer Variablen !
 ```
 
 Welche Schlüsselwörter sind das?  (C# 7.0)
@@ -156,13 +165,13 @@ public class Program
 {
     static void Main(string[] args)
     {
-      var Δ = 1;
+      int Δ = 1;
       Δ++;
       System.Console.WriteLine(Δ);
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Die Vergabe von Namen sollte sich an die Regeln der Klassenbibliothek halten,
 damit bereits aus dem Namen der Typ ersichtlich wird:
@@ -175,6 +184,8 @@ damit bereits aus dem Namen der Typ ersichtlich wird:
 + Methoden ohne Rückgabewert sollten mit einem Verb beginnen `PrintResult()` alles
    andere mit einem Substantiv. Boolsche Ausdrücke auch mit einem Adjektiv
    `valid` oder `empty`.
+
+> Wichtig ist an dieser Stelle, dass Sie sich eine Konsistenz in der Darstellung angewöhnen. _Nur mal eben, um zu testen ..._ sollte unterbleiben.
 
 ### Zahlen
 
@@ -190,7 +201,7 @@ Zahlenwerte können als
 
 Eingabe von Zahlenwerten
 
-```csharp    Number.cs9
+```csharp    Number.cs
 using System;
 
 public class Program
@@ -198,21 +209,13 @@ public class Program
   static void Main(string[] args)
   {
     Console.WriteLine(0xFF);
-    Console.WriteLine(0b1111_1111);  // ab C#7 unterstützt
+    Console.WriteLine(0b1111_1111);
     Console.WriteLine(100_000_000);
     Console.WriteLine(1.3454E06);
   }
 }
 ```
-```xml   -myproject.csproj
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
-</Project>
-```
-@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 ### Zeichenketten
@@ -232,7 +235,7 @@ public class Program
    }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ```csharp    PrintLongLines
 using System;
@@ -245,7 +248,7 @@ public class Program
                            Satz, der sich ohne die
                            Zeilenumbrüche blöd lesen
                            würde");
-      Console.WriteLine("Das ist ein ganz schön langer \nSatz, der sich ohne die \nZeilenumbrüche blöd lesen \nwürde");
+       Console.WriteLine("Das ist ein ganz schön langer \nSatz, der sich ohne die \nZeilenumbrüche blöd lesen \nwürde");
        Console.WriteLine("Das ist ein ganz schön langer" +
                          "Satz, der sich ohne die" +
                          "Zeilenumbrüche blöd lesen" +
@@ -253,7 +256,16 @@ public class Program
    }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+Ab C# 11 können Sie Raw-String-Literale verwenden, um Strings einfacher zu erstellen, die mehrzeilig sind oder Zeichen verwenden, die Escape-Sequenzen erfordern. Mit Raw-String-Literalen müssen Sie keine Escape-Sequenzen mehr verwenden. Sie können die Zeichenkette einschließlich der Whitespace-Formatierung so schreiben, wie sie in der Ausgabe erscheinen soll.
+
+```csharp
+var multiLine = """
+                This is a nice ""multi-line"" literal.
+                Whitespaces to the left of closing quotes are discarded.
+                """;
+```
 
 ### Kommentare
 
@@ -280,7 +292,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 In einer der folgenden Veranstaltungen werden die Möglichkeiten der Dokumentation
 explizit adressiert.
@@ -296,8 +308,11 @@ explizit adressiert.
 
 ## Datentypen und Operatoren
 
+                                            {{0-2}}
 > **Frage:** Warum nutzen einige Programmiersprachen eine Typisierung, andere nicht?
 
+                                            {{1-2}}
+********************************************************************************
 
 ```python    noTypes.py
 number = 5
@@ -311,9 +326,32 @@ print(my_list)
 ```
 @LIA.eval(`["main.py"]`, `python3 -m compileall .`, `python3 main.py`)
 
-> **Merke:** Datentypen definieren unter anderem den möglichen "Inhalt", Speichermechanismen (Größe, Organisation).
+> **Merke:** Datentypen definieren unter anderem den möglichen "Inhalt", Speichermechanismen (Größe, Organisation) und dienen der Evaluation zulässiger Eingaben.
 
-Datentypen können sehr unterschiedlich strukturiert werden. Das nachfolgende
+Interessanterweise bedient python diesen Aspekt seit der Version 3.5 mit den _type hints_ und ergänzt zug um zug weitere Feature.
+
+
+```python 
+# Input string / output string
+def greet(name: str) -> str:
+    return "Hello, " + name
+
+# Input string, string oder Path Objekt / output model
+def load_model(filename: str, cache_folder: Union[str, Path]):
+    if isinstance(cache_folder, Path):
+        cache_folder = str(cache_folder)
+    
+    model_path = os.join(filename, cache_folder)
+    model = torch.load(model_path)
+    return model
+```
+
+********************************************************************************
+
+                                            {{2-3}}
+********************************************************************************
+
+Datentypen können in der C# Welt nach unterschiedlichen Kriterien strukturiert werden. Das nachfolgende
 Schaubild realisiert dies auf 2 Ebenen (nach Mössenböck, Kompaktkurs C# 7 )
 
 <!--
@@ -332,7 +370,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
  nierte Typen  ation                     (String) -faces
          |
          |      ...............................................................
-         |                           Benutzerdefinierte Typen
+         |           Klassenbibliotheksbasierte / Benutzerdefinierte Typen
          |
          .----+------+-----------+-------------.
          |           |           |             |
@@ -352,6 +390,8 @@ grundlegenden Organisationsformen im Arbeitsspeicher.
 | Speicherort      | Stack            | Heap                                       |
 | Zuweisung        | kopiert den Wert | kopiert die Referenz                       |
 | Speicher         | Größe der Daten  | Größe der Daten, Objekt-Metadata, Referenz |
+
+********************************************************************************
 
 ## Wertdatentypen
 
@@ -388,7 +428,7 @@ public class Program
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Neben der unmittelbaren Eingabe über die Buchstaben und Zeichen kann die Eingabe entsprechend
 
@@ -409,7 +449,7 @@ public class Program
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Entsprechend der Datenbreite können `char` Variablen implizit in `short`
 überführt werden. Für andere numerische Typen ist eine explizite Konvertierung
@@ -433,7 +473,7 @@ notwendig.
 |                             | `M`    | decimal | Decimal  | 128  |                                                          |
 
 
-```csharp    HelloWorld_rex.cs
+```csharp    DataTypes.cs
 using System;
 
 public class Program
@@ -447,7 +487,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 {{1-2}}
 ********************************************************************************
@@ -476,7 +516,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ********************************************************************************
 
@@ -548,7 +588,7 @@ public class Program
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 ```csharp    FloatingPoint_Experiments.cs
@@ -568,7 +608,7 @@ public class Program
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ********************************************************************************
 
@@ -624,7 +664,7 @@ public class Program
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 eine Fehlermeldung
@@ -673,7 +713,7 @@ Multiplikation, Division und Modulo, mit Ausnahme der 8 und 16-Bit breiten Typen
 Die Addition und Subtraktion kann mit Inkrement und Dekrement-Operatoren
 abgebildet werden.
 
-```csharp
+```csharp   operators.cs
 using System;
 
 public class Program
@@ -688,7 +728,7 @@ public class Program
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ********************************************************************************
 
@@ -716,7 +756,7 @@ public class Program
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Überlaufsituationen (Vergleiche Ariane 5 Beispiel der zweiten Vorlesung) lassen
 sich in C# sehr komfortabel handhaben:
@@ -738,7 +778,7 @@ public class Program
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Die Überprüfung kann auf Blöcke `checked{}` ausgedehnt werden oder per Compiler-Flag
 den gesamten Code einbeziehen.
@@ -772,7 +812,7 @@ public class Program
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ********************************************************************************
 #### Bitweise Operatoren
@@ -813,7 +853,7 @@ public class Program
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 ## Aufgabe
@@ -823,7 +863,6 @@ public class Program
 
 !?[alt-text](https://www.youtube.com/watch?v=ekdcAHxJF6Q)
 
-<!--START_SKIP_IN_PDF-->
 
 ## Quizze
 
@@ -851,7 +890,3 @@ Gebe die Ergebnisse der jeweiligen Ausdrücke in binärer Schreibweise an:
 `(11111111^10101010) & ~(100000 | 11)`
 
 [[10100]]
-
-
-
-<!--END_SKIP_IN_PDF-->
