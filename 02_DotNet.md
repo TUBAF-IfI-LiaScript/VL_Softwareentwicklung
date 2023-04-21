@@ -2,15 +2,14 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `fjangfaragesh`, `KoKoKotlin` & `Lina`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 comment:  Programmierparadigmen und Einordnung von C#, Eigenschaften der Programmiersprache C#, .NET, Unterschiede zu anderen Sprachen/Konzepten
 tags:      
 logo:     
 
-import: https://github.com/LiaTemplates/Pyodide
-        https://github.com/liascript/CodeRunner
+import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liaTemplates/tau-prolog/master/README.md
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
