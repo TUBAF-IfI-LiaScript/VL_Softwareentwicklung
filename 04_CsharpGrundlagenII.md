@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 comment:  Werte- und Referenzdatentypen, Array, String, implizite Variablendefinition und Nullables
@@ -62,7 +62,7 @@ public class Program
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 <!-- data-type="none" -->
 | Wert   | Binäre Darstellung  |
@@ -90,20 +90,19 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
          .-------+-----+---+--------.        .-------+---------+-------.
          |       |         |        |        |       |         |       |
      Vordefi-  Enumer-  Structs   Tupel   Klassen  Inter    Arrays  Delegates
- nierte Typen  ation                      (String) -faces
+ nierte Typen  ation                     (String) -faces
          |
          |      ...............................................................
-         |                           Benutzerdefinierte Typen
+         |           Klassenbibliotheksbasierte / Benutzerdefinierte Typen
          |
-    .----+------+-----------+-------------.
-    |           |           |             |
-Character    Ganzzahl   Gleitkommazahl   Bool
-                |
-        .------+---------.
-        |                |
-   mit Vorzeichen   vorzeichenlos                                              .
+         .----+------+-----------+-------------.
+         |           |           |             |
+     Character    Ganzzahl   Gleitkommazahl   Bool
+                     |
+             .------+---------.
+             |                |
+     mit Vorzeichen     vorzeichenlos                                            .
 ```
-
 
 ### Boolscher Datentyp und Operatoren
 
@@ -135,19 +134,21 @@ public class Program
         Console.WriteLine(x);
         Console.WriteLine(!x);
         Console.WriteLine(x == true);      // Rückgabe eines "neuen" bool Wertes
+        
+        // cast operationen 
         int y = 1;
-        //Console.WriteLine(x == y);       // Funkioniert nicht
+        Console.WriteLine(y == x);       // Funkioniert nicht
         // Lösungsansatz I bool -> int
-        int bool2int = x ? 1 : 0;
-        Console.WriteLine(bool2int);
+        int xAsInt = x ? 1 : 0;          // x == True -> 1 else -> 0
+        Console.WriteLine(xAsInt);
         // Lösungsansatz II
-        bool2int = Convert.ToInt32(x);
-        Console.WriteLine(bool2int);
-        Console.WriteLine(bool2int == y);  // Funktiontiert
+        xAsInt = Convert.ToInt32(x);
+        Console.WriteLine(xAsInt);
+        Console.WriteLine(xAsInt == y);  // Funktiontiert
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Im Codebeispiel wird der sogenannte tertiäre Operator `?` verwandt, der auch durch eine `if` Anweisung abgebildet werden könnte (vgl. [Dokumentation](https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/operators/conditional-operator)).
 
@@ -184,7 +185,7 @@ public class Program
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > Merke: Für Referenztypen evaluiert `==` die Addressen der Objekte, für Wertetypen die spezifischen Daten. (Es sei denn, Sie haben den Operator überladen.)
 
@@ -209,6 +210,7 @@ Bedeutung der boolschen Operatoren für unterschiedliche Datentypen:
 | `&`       | bitweises UND (Ergebnis ist ein numerischer Wert!) | nicht-konditionaler UND Operator |
 | `&&`      | FEHLER                                             | konditonaler UND Operator        |
 
+> Achtung: In dieser Typbehafteten Unterscheidung in der Bedeutung von `&` und `&&` liegt ein signifikanter Unterschied zu C und C++.
 
 <!-- --{{1}}-- Idee des Codefragments:
     * Wechsel zu && -> Fehlermeldung
@@ -228,7 +230,7 @@ public class Program
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Konditional und Nicht-Konditional, was heißt das? Erstgenannte optimieren die Auswertung. So berücksichtigt der AND-Operator `&&` den rechten Operanden gar nicht, wenn der linke Operand bereits ein `false` ergibt.
 
@@ -270,7 +272,7 @@ public class Program
 }
 
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 **********************************************************************
 
@@ -303,7 +305,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Die Typkonvertierung von einem Zahlenwert in eine enum kann wiederum mit `checked` überwacht werden.
 
@@ -344,21 +346,41 @@ public class Program
   }
 }
 ```
-```xml   -myproject.csproj
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
-</Project>
-```
-@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ********************************************************************************
 
 ### Weitere Wertdatentypen
 
 Für die Einführung der weiteren Wertdatentypen müssen wir noch einige Grundlagen erarbeiten. Entsprechend wird an dieser Stelle noch nicht auf `struct` und `tupel` eingegangen. Vielmehr sei dazu auf nachfolgende Vorlesungen verwiesen.
+
+<!--
+style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+-->
+```ascii
+                                     C# Typen
+                                         |
+                       .------------------------------------.
+                       |                                    |
+                   Werttypen                           Referenztypen
+                       |                                    |
+         .-------+-----+---+--------.        .-------+---------+-------.
+         |       |         |        |        |       |         |       |
+     Vordefi-  Enumer-  Structs   Tupel   Klassen  Inter    Arrays  Delegates
+ nierte Typen  ation                     (String) -faces
+         |
+         |      ...............................................................
+         |           Klassenbibliotheksbasierte / Benutzerdefinierte Typen
+         |
+         .----+------+-----------+-------------.
+         |           |           |             |
+     Character    Ganzzahl   Gleitkommazahl   Bool
+                     |
+             .------+---------.
+             |                |
+     mit Vorzeichen     vorzeichenlos                                            .
+```
+
 
 ## Referenzdatentypen
 
@@ -430,7 +452,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 <!--
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
@@ -461,9 +483,8 @@ public class Program
   static void Main(string[] args)
   {
     int [] intArrayA = new int[]{1,2,3};
-    int [] intArrayB;
-    // int [] intArrayB = null;
-    //if (intArrayB != null){     // C#6 Syntax
+    int [] intArrayB; //= null;
+    //if (intArrayB != null){         // C#6 Syntax
     if (intArrayB is not null) {      // C#9 Syntax
     	Console.WriteLine("Alles ok, mit intArrayB");
      }
@@ -474,7 +495,7 @@ public class Program
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
@@ -494,7 +515,7 @@ von Arrays und haben folgende Eigenschaften:
 
 * Ein Array kann eindimensional, mehrdimensional oder verzweigt sein.
 * Die Größe innerhalb der Dimensionen eines Arrays wird festgelegt, wenn die Arrayinstanz erstellt wird. Eine Anpassung zur Lebensdauer ist nicht vorgesehen.
-* Arrays sind nullbasiert: Der Index eines Arrays mit n Elementen beginnt bei 0 und endet bei n-1.
+* Arrays sind nullbasiert: Der Index eines Arrays mit n Elementen beginnt bei $0$ und endet bei $n-1$.
 * Arraytypen sind Referenztypen.
 * Arrays können mit `foreach` iteriert werden.
 
@@ -547,7 +568,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ********************************************************************************
 
@@ -575,7 +596,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ********************************************************************************
 
@@ -650,7 +671,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ********************************************************************************
 
@@ -676,7 +697,7 @@ public class Program
 }
 
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Der Gebrauch des `+` Operators im Zusammenhang mit `string` Daten ist nicht effektiv.
 eine bessere Performanz bietet `System.Text.StringBuilder`.
@@ -688,46 +709,24 @@ Ausgabe und entsprechend den Methoden der String Generierung beschäftigen.
 
 ## Umgang mit Variablen
 
-Wie sollten wir die variablen benennbaren Komponenten unseres Programms bezeichnen [Naming guidelines](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/general-naming-conventions?redirectedfrom=MSDN)?
+```csharp        ToString.cs
+using System;
 
-* Nutzen Sie sinnvolle, selbsterklärende Variablennamen!
-
-* Vermeiden Sie Abkürzungen abgesehen von verbreiteten Bezeichnungen.
-
-* camelCasing für Methodenargumente und lokale Variablen um konsistent mit dem .NET Framework zu sein
-
-```csharp
-public class UserLog
+public class Program
 {
-  public void Add(LogEvent logEvent)
+  static void Main(string[] args)
   {
-    int itemCount = 0;
-    // ...
+     String intro = "Mein Name ist";
+     String [] names = new String[] { "Sebastian", "Ernst", "Zug" };
+     Console.Write(intro);
+     foreach(string name in names){
+         Console.Write(" " + name);
+     }
   }
 }
 ```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-* Keine Codierung von Datentypen (Ungarische Notation), ihre IDE sollte hinreichend schlau sein.
-
-```csharp
-// Correct
-int counter;
-string name;
-// Avoid
-int iCounter;
-string strName;
-```
-
-* Vermeiden Sie es Konstanten mit Screaming Caps zu definieren (diskutable Position)
-
-```csharp
-// Correct
-public const string UniName = "TU Freiberg";
-// Avoid
-public const string UNINAME = "TU Freiberg";
-```
-
-Ihre IDE bzw. ein Linterprogramm sollte die Einhaltung dieser Regularien überprüfen.
 
 ### Konstante Werte
 
@@ -746,8 +745,9 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
+> Auf die Abgrenzung zum `readonly` Schlüsselwort wird zu einem späteren Zeitpunkt eingegangen ([Link](https://josipmisko.com/posts/c-sharp-const-vs-readonly)).
 
 ### Implizit typisierte Variablen
 
@@ -786,7 +786,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Weitere Infos https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/classes-and-structs/implicitly-typed-local-variables
 
@@ -813,7 +813,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Aus der Definition heraus kann zum Beispiel eine `int` Variable nur einen Wert zwischen int.MinValue und int.MaxValue annehmen. Eine `null` ist nicht vorgesehen und eine `0` gehört zum "normalen" Wertebereich.
 
@@ -837,7 +837,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Wie wird das Ganze umgesetzt? Jeder `Typ?` wird vom Compiler dazu in einen generischen Typ `Nullable<Typ>`
 transformiert, der folgende Methoden implementiert:
@@ -864,36 +864,7 @@ https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/keywords/defau
 
 - [ ] Experimentieren Sie mit Arrays und Enumerates. Schreiben Sie Programme, die Arrays nach bestimmten Einträgen durchsuchen. Erstellen Sie Arrays aus Enum Einträgen und zählen Sie die Häufigkeit des Vorkommens.
 
-- [ ] Welche Funktion realisiert das folgende Codebeispiel?
-
-```csharp   PrimeNumbers.cs
-using System;
-
-public class Program
-{
-  static void Main(string[] args)
-  {
-    for (int number = 0; number < 20; number ++)
-    {
-      bool prime = true;
-      for (int i = 2; i <= number / 2; i++)
-      {
-        if(number % i == 0)
-        {
-          prime = false;
-          break;
-        }
-      }
-      if (prime == true) Console.Write("{0}, ", number);
-    }
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
-
 - [ ] Studieren Sie C# Codebeispiele. Einen guten Startpunkt bieten zum Beispiel die ''1000 C# Examples'' unter https://www.sanfoundry.com/csharp-programming-examples/
-
-<!--START_SKIP_IN_PDF-->
 
 ## Quizze
 
@@ -906,7 +877,7 @@ Wähle aus ob folgende boolische Vergleiche `true` oder `false` wiedergeben:
 - [  (X)     ( )   ] `(b == d) && (a || d)`
 - [  ( )     (X)   ] `((a || b) && (c || d)) != (0 <= 8)`
 
-Wähle die richtige Nummerierung für das gegebene Enum aus:
+Geben Sie die automatisch generierte Nummerierung innerhalb folgenden Enums an:
 
 ```cs
 enum Colors
@@ -937,4 +908,29 @@ Als was kann ein String (z.B. "Hello World") auch gesehen werden?
 |  Nichts weiter, string ist string
 ]]
 
-<!--END_SKIP_IN_PDF-->
+Welche Funktion realisiert das folgende Codebeispiel?
+
+```csharp   PrimeNumbers.cs
+using System;
+
+public class Program
+{
+  static void Main(string[] args)
+  {
+    for (int number = 0; number < 20; number ++)
+    {
+      bool prime = true;
+      for (int i = 2; i <= number / 2; i++)
+      {
+        if(number % i == 0)
+        {
+          prime = false;
+          break;
+        }
+      }
+      if (prime == true) Console.Write("{0}, ", number);
+    }
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
