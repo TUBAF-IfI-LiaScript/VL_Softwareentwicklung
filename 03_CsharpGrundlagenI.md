@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `snikker123` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 comment:  Einführung in die Basiselemente der Programmiersprache C#, Variablen, Datentypen und Operatoren
@@ -173,7 +173,7 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-Die Vergabe von Namen sollte sich an die Regeln der Klassenbibliothek halten,
+Wie sollten wir die variablen benennbaren Komponenten unseres Programms bezeichnen [Naming guidelines](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/general-naming-conventions?redirectedfrom=MSDN)? Die Vergabe von Namen sollte sich an die Regeln der Klassenbibliothek halten,
 damit bereits aus dem Namen der Typ ersichtlich wird:
 
 + C#-Community bevorzugt *camel case* `MyNewClass` anstatt *underscoring* `My_new_class`.
@@ -549,11 +549,11 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 -->
 ```ascii
   +-+---- ~ -----+----- ~ ----+
-  |V|  Mantisse  |  Exponent  |   V=Vorzeichenbit
+  |V|  Exponent  | Mantisse   |   V=Vorzeichenbit
   +-+---- ~ -----+----- ~ ----+
 
-   1      23           8          = 32 Bit (float)
-   1      52          11          = 64 Bit (double)                            .
+   1       8            23        = 32 Bit (float)
+   1      11            52        = 64 Bit (double)                            .
 ```
 
 Welche Probleme treten bei der Verwendung von `float`, `double` und `decimal` ggf. auf?
