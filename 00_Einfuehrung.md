@@ -157,8 +157,8 @@ Vorlesungen:
 | --------------- | -------------------------------- | ------------------------------------------------------------------------------------- |
 | Hörerkreis      | Fakultät 1 + interessierte Hörer | Fakultät 4 - Studiengang Engineering                                                  |
 | Leistungspunkte | 9                                | 6                                                                                     |
-| Vorlesungen     | 28 (2 Feiertage)                 | 16 (bis 2. Juni 2021)                                                                 |
-| Übungen         | ab Mai 2 x wöchentlich           | ab Mai 1 x wöchentlich (8 Termine)                                                                |
+| Vorlesungen     | 27 (3 Feiertage)                 | 16 (bis 5. Juni 2021)                                                                 |
+| Übungen         | ab Mai 2 x wöchentlich           | ab Mai 1 x wöchentlich (8 Termine)                                                    |
 |                 |                                  | zusätzliches Python Tutorial ab Juni                                                  |
 | Prüfungsform    | Klausur oder Projekt             | maschinenbauspezifisches Software-Projekt (im Wintersemester 2023/24)                 |
 |                 |                                  | Prüfungsvoraussetzung: Erfolgreiche Bearbeitung der finalen Aufgabe im Sommersemester |
@@ -180,28 +180,28 @@ Vorlesungen:
 |       | 21. April | Elemente der Sprache C# (Datentypen)              |                                |
 | 4     | 24. April | Elemente der Sprache C# (Forts. Datentypen)       |                                |
 |       | 28. April | Elemente der Sprache C# (Ein-/Ausgaben)           |                                |
-| 5     | 1. Mai    | Programmfluss und Funktionen                      | _Feiertag_ (Aufzeichnung)      |
-|       | 5. Mai    | Strukturen / Konzepte der OOP                     |                                |
-| 6     | 8. Mai    | Säulen Objektorientierter Programmierung          |                                |
-|       | 12. Mai   | Klassenelemente in C#  / Vererbung                |                                |
+| 5     | 1. Mai    |                                                   | _Feiertag_                     |
+|       | 5. Mai    | Programmfluss und Funktionen                      |                                |
+| 6     | 8. Mai    | Strukturen / Konzepte der OOP                     |                                |
+|       | 12. Mai   | Säulen Objektorientierter Programmierung          |                                |
 | 7     | 15. Mai   | Klassenelemente in C#  / Vererbung                |                                |
-|       | 19. Mai   | Versionsmanagement im Softwareentwicklungsprozess |                                |
-| 8     | 22. Mai   | UML Konzepte                                      |                                |
-|       | 26. Mai   | UML Diagrammtypen                                 |                                |
-| 9     | 29. Mai   | UML Anwendungsbeispiel                            | _Pfingstmontag_ (Aufzeichnung) |
-|       | 2. Juni   | Testen                                            | Ende EiS Vorlesungsinhalte     |
-| 10    | 5. Juni   | Dokumentation und Build Toolchains                |                                |
-|       | 9. Juni   | Continuous Integration in GitHub                  |                                |
-| 11    | 12. Juni  | Generics                                          |                                |
-|       | 16. Juni  | Container                                         |                                |
-| 12    | 19. Juni  | Delegaten                                         |                                |
-|       | 23. Juni  | Events                                            |                                |
-| 13    | 28. Juni  | Threadkonzepte in C#                              |                                |
-|       | 30. Juni  | Taskmodell                                        |                                |
-| 14    | 3. Juli   | Language Integrated Query                         |                                |
-|       | 8. Juli   | Design Pattern                                    |                                |
-| 15    | 7. Juli   | Anwendungungsfälle                                |                                |
-|       | 14. Juli  |                                                   |                                |
+|       | 19. Mai   | Klassenelemente in C#  / Vererbung                |                                |
+| 8     | 22. Mai   | Versionsmanagement im Softwareentwicklungsprozess |                                |
+|       | 26. Mai   | UML Konzepte                                      |                                |
+| 9     | 29. Mai   | UML Diagrammtypen                                 | _Pfingstmontag_ (Aufzeichnung) |
+|       | 2. Juni   | UML Anwendungsbeispiel                            |                                |
+| 10    | 5. Juni   | Testen                                            | Ende EiS Vorlesungsinhalte     | 
+|       | 9. Juni   | Dokumentation und Build Toolchains                |                                |
+| 11    | 12. Juni  | Continuous Integration in GitHub                  |                                |
+|       | 16. Juni  | Generics                                          |                                |
+| 12    | 19. Juni  | Container                                         |                                |
+|       | 23. Juni  | Delegaten                                         |                                |
+| 13    | 28. Juni  | Events                                            |                                |
+|       | 30. Juni  | Threadkonzepte in C#                              |                                |
+| 14    | 3. Juli   | Taskmodell                                        |                                |
+|       | 8. Juli   | Language Integrated Query                         |                                |
+| 15    | 7. Juli   | Design Pattern                                    |                                |
+|       | 14. Juli  | Anwendungungsfälle                                |                                |
 
 
 ### Durchführung
