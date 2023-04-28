@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich & `Lina`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 comment:  Ein-und Ausgabeoperationen, Ausnahmebehandlung
@@ -78,7 +78,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 Achtung, für Referenzdatentypen bedeutet dies, dass die Referenz ausgegeben wird.
@@ -96,7 +96,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Lassen Sie uns schon mal etwas in die Zukunft schauen und die objektorientierte
 Implementierung dieser Idee erfassen:
@@ -124,7 +124,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 ### Kombinierte Formatierung von Strings
@@ -179,7 +179,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 <!-- data-type="none" -->
 | Format Symbol | Bedeutung                | Beispiel      |
@@ -226,7 +226,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > **Merke:** Die kulturbezogene Ausgabe ist auch für das Komma bei den gebrochenen Zahlen relevant. Dieser Aspekt wird in den Übungen thematisiert [Link](https://docs.microsoft.com/de-de/dotnet/api/system.globalization.numberformatinfo.numberdecimalseparator?view=net-5.0).
 
@@ -254,7 +254,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 Die Darstellung des Ausdrucks folgt dabei der Semantik:
@@ -282,11 +282,11 @@ public class Program
     // Fallunterscheidungen mit ternärem Operator
     Console.WriteLine($"{ivalue < 5 ? ivalue.ToString() : "invalid"}");
     Console.WriteLine($"{(fvalue < 1000 ? fvalue : fvalue/1000):f2}"+
-                      $"{fvalue < 1000 ? "Euro" : "kEuro"}");
+                      $"{fvalue < 1000 ? " Euro" : " kEuro"}");
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ### Ziele der Schreiboperationen
 
@@ -307,7 +307,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Die dafür vorgesehenen Standardeinstellungen können aber entsprechend umgelenkt
 werden. Dafür greift C# analog zu vielen anderen Sprachen (und Betriebssysteme)
@@ -392,6 +392,13 @@ namespace Wiki
 
 > **Zur Erinnerung:** Das `@` vor einen String markiert ein [verbatim string literal](https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/tokens/verbatim) - alles in der Zeichenfolge, was normalerweise als Escape-Sequenz interpretiert werden würde, wird ignoriert.
 
+> **Achtung** Denken Sie bei Pfadangaben immer Betriebssystemübergreifend!
+>
+> + `c:\\MyDir\\MyFile.txt` in C# (Windows)
+> + `/MyDir/MyFile.txt` in C# (Linux).
+
+Darstellung des Konzepts von `Path.DirectorySeparatorChar` anhand folgenden  [Tutorials](https://code-maze.com/csharp-path-class/)
+
 ### Beispiel
 
 Zur Erinnerung, in Markdown werden Tabellen nach folgendem Muster aufgebaut:
@@ -411,9 +418,9 @@ Zur Erinnerung, in Markdown werden Tabellen nach folgendem Muster aufgebaut:
 
 Geben Sie die Daten bestimmte Fußballvereine in einer Markdown-Tabelle aus.
 
+     {{0}}
 ```csharp   GenerateMarkDownTable
 using System;
-
 
 public class Program
 {
@@ -431,6 +438,38 @@ public class Program
     // Ausgabe
     string output;
     output  = "| ";
+
+    // Hier sind Sie gefragt
+    Console.WriteLine(output);
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+
+                         {{1}}
+***************************************************************************
+
+```csharp   GenerateMarkDownTable
+using System;
+
+public class Program
+{
+  static void Main(string[] args)
+  {
+    string [] clubs = {"Blau Weiß", "Grün Gelb 1905", "Borussia Tralla Trulla", "Eintracht"};
+    int [] punkte = {12, 10, 9, 5};
+    // Wie lang ist ein Clubname maximal?
+    int maxlength = 0;
+    foreach(string club in clubs)
+    {
+      maxlength =  club.Length < maxlength ? maxlength : club.Length ;
+    }  
+    maxlength += 1;
+    // Ausgabe
+    string output;
+    output  = "| ";
+
     output += "Verein".PadRight(maxlength, ' ') + "| Punkte |\n";
     output += "|:"+ "".PadRight(maxlength, '-') + "|:-------|\n";
     for (int i = 0; i < clubs.Length; i++){
@@ -440,9 +479,12 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
 
 > **Frage:** Welche Annahmen werden implizit bei der Erstellung der Tabelle getroffen? Wo sehen Sie Verbesserungsbedarf?
+
+***************************************************************************
 
 ## I/O Leseoperationen
 
@@ -475,7 +517,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Bei der Vorgabe von Commandline Parametern unterscheidet sich der Ablauf etwas, je nachdem wie Sie Ihren Code "bauen".
 
@@ -510,7 +552,7 @@ Suchen Sie den zugehörigen `.vscode` Ordner innerhalb Ihres Projektes und öffe
 
 **Auswertung der Kommandozeilenparameter**
 
-> **Achtung:** Im folgenden bemühen wir uns selbst um das Parsen der Kommandozeilenargumente. Dies sollte in realen Vorhaben entsprechenden Bibliotheken überlassen werden [Using System.CommandLine](https://blogs.msmvps.com/bsonnino/2020/04/12/parsing-the-command-line-for-your-application-with-system-commandline/)!
+> **Achtung:** Im folgenden bemühen wir uns selbst um das Parsen der Kommandozeilenargumente. Dies sollte in realen Vorhaben entsprechenden Bibliotheken überlassen werden [Using System.CommandLine](https://learn.microsoft.com/en-us/dotnet/standard/commandline/get-started-tutorial)!
 
 ```csharp      CommandlineParameter.cs
 using System;
@@ -564,13 +606,13 @@ public class Program
       {
         x = Console.Read();   // Lesen eines Zeichens
         ch = Convert.ToChar(x);
-        Console.Write($"Unicode {x}- Sign {Convert.ToChar(x)}\n");
+        Console.WriteLine($"Unicode {x} - Sign {Convert.ToChar(x)}");
         // Hier könnte man jetzt eine Filterung realiseren
       } while (ch != '+');
   }
 }  // 你好 zu Demonstrationszwecken
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 Das Beispiel zeigt sehr schön, wie verschiedene Zeichensätze auf unterschiedlich
@@ -592,10 +634,11 @@ public class Program
     foreach(string s in param){
         Console.Write(s + " ");
     }
-
-    if (param.Length == 0)
+		Console.WriteLine(param.Length);
+		
+    if (param.Length == 1)
     {
-        Console.WriteLine("Offenbar keine Eingabe - Fehler!");
+        Console.WriteLine("Eingabe unvollständig!");
         return 1;
     }
     if (param.Length == 2)  // Erwartete Zahl von Parametern
@@ -613,7 +656,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Dabei nutzt das obige Beispiel 3 Formen der Interpretation der Daten. In den beiden ersten Fällen ist der Entwickler für das Abfangen der _Exceptions_ verantwortlich. Die letzte Variante kapselt dies intern und gibt die möglicherweise eingetretene Ausnahme über die Rückgabewerte aus. Der Code auf Seiten der Anwendung wird kompakter.
 
@@ -648,7 +691,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > **Merke:** Wenn für eine spezifische Ausnahme kein Ausnahmehandler existiert, beendet sich das Programm mit einer Fehlermeldung.
 
@@ -729,7 +772,7 @@ static void Main(string[] args)
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 ### Best Practice
@@ -828,8 +871,6 @@ class MainClass
 }
 ```
 
-<!--START_SKIP_IN_PDF-->
-
 ## Quizz
 
 Was sollte beachtet werden wenn eine Ausnahmebehandlung durchgeführt wird?
@@ -837,5 +878,3 @@ Was sollte beachtet werden wenn eine Ausnahmebehandlung durchgeführt wird?
 - [[ ]] Es reicht im Allgemeinen die generische `Exception` abzufangen.
 - [[X]] Man sollte so gut es geht spezielle Exceptions und am Ende noch die generische `Exception` abfangen um eventuell übersehene Fehlerquellen zu behandeln.
 - [[X]] Wenn man sich sicher ist alle möglichen Èxceptions für eine Ausnahmebehandlung behandelt zu haben, ist die generische `Exception` nicht notwendig.
-
-<!--END_SKIP_IN_PDF-->
