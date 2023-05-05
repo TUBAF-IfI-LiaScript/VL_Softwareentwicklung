@@ -683,10 +683,11 @@ public class Program
   {
       // Beispiel 1: Zugriff auf das Filesystem eines Rechners aus dem Netz
       System.IO.FileStream file = null;
-      //System.IO.FileInfo fileInfo = new System.IO.FileInfo(@"NoPermission.txt");
+      System.IO.FileInfo fileInfo = new System.IO.FileInfo(@"NoPermission.txt");
       // Beispiel 2: Division durch Null
       int a = 0, b = 5;
       //a = b / a;
+      // Beispiel 3: Parsen von Strings
       //long num = long.Parse("NN");
   }
 }
@@ -810,11 +811,6 @@ catch (InvalidOperationException ex)
 * Stellen Sie den Status einer Methode wieder her, die von einer Ausnahmebehandlung betroffen war (Beispiel: Code für Banküberweisungen, Abbuchen von einem Konto und Einzahlung auf ein anderes. Scheitert die zweite Aktion muss auch die erste zurückgefahren werden.)
 * Testen Sie Ihre Ausnahmebehandlungsstrategie!
 
-### Beispiel Exception-Handling
-
-Schreiben Sie die Einträge eines Arrays in eine Datei!
-
-Lösung unter [ExceptionHandling.cs](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/code/05_GrundlagenIII/ExceptionHandling/ExceptionHandling.cs)
 
 | Schritt | Fragestellungen                                                                            |
 | ------- | ------------------------------------------------------------------------------------------ |
@@ -822,8 +818,6 @@ Lösung unter [ExceptionHandling.cs](https://github.com/TUBAF-IfI-LiaScript/VL_S
 | 2       | Wo sollen die Fehler abgefangen werden?                                                    |
 | 3       | Gibt es Prioritäten bei der Abarbeitung?                                                   |
 | 4       | Sind abschließende "Arbeiten" notwendig?                                                   |
-
-[Link auf die Dokumentation der StreamWriter Klasse](https://docs.microsoft.com/de-de/dotnet/api/system.io.streamwriter.-ctor?view=netframework-4.7.2#System_IO_StreamWriter__ctor_System_String_)
 
 
 ## Aufgaben
@@ -870,6 +864,7 @@ class MainClass
   }
 }
 ```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ## Quizz
 

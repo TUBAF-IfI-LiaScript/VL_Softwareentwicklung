@@ -81,7 +81,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Warum sollte ich in jedem Fall Klammern um Anweisungen setzen, gerade
 wenn diese nur ein Zeile umfasst?
@@ -111,7 +111,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Versuchen Sie nachzuvollziehen, welche Wirkung die Klammern in Zeile 9 und 12 hätten. Wie verändert sich die Logik des Ausdruckes?
 
@@ -143,7 +143,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 ********************************************************************************
@@ -184,7 +184,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > **Aufgabe:** Realisieren Sie das Beispiel als als Folge von `if else` Anweisungen.
 
@@ -192,8 +192,7 @@ Anders als bei vielen anderen Sprachen erlaubt C# `switch`-Verzweigungen anhand
 auch von `string`s (zusätzlich zu allen Ganzzahl-Typen, bool, char, enums). Interessant ist die
 Möglichkeit auf `case: null` zu testen!
 
-Es
-fehlt hier aber die Möglichkeit sogenannte *Fall Through*  durch das Weglassen
+Es fehlt hier aber die Möglichkeit sogenannte *Fall Through*  durch das Weglassen
 von `break`-Anweisungen zu realisieren.
 
 **Jeder switch muss mit einem `break`, `return`, `throw`, `continue` oder `goto` beendet werden.**
@@ -223,7 +222,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > **Achtung:** Beachten Sie den Unterschied zwischen dem `switch`-Ausdruck [Link](https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/operators/switch-expression) und der `switch`-Anweisung, die wir hier besprechen.
 
@@ -296,9 +295,44 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > **Frage:** Sehen Sie in der Lösung eine gut wartbare Implementierung?
+
+********************************************************************************
+
+
+                                   {{2-3}}
+********************************************************************************
+
+**switch - Varianten / Erweiterungen**
+
+```csharp        whenStatement.cs
+using System;
+
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+int value = 1;
+  int second_value= 2;
+  Console.WriteLine($"Evaluating two variables: {value}, {second_value}");
+  switch (value) {
+    case 1 when second_value == 1:
+        Console.WriteLine("Eins");
+        break;
+    case 1 when second_value == 2:
+        Console.WriteLine("value == 1 and second_value = 2");
+        break;
+    case 2:
+        Console.WriteLine("value == 2");
+        break;
+    }
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
 
 C# 7.0 führt darüber hinaus das _pattern matching_ mit switch ein. Damit werden
 komplexe Typ und Werte-Prüfungen innerhalb der case Statements möglich.
@@ -332,6 +366,20 @@ Codebeispiel aus [MSDoku](#11)
 
 > **Achtung**: C# 8.0 erweitert das Spektrum hier noch einmal mit einen `is` Keyword, dass die Lesbarkeit und Eindeutigkeit erhöht. Zudem wird `switch` mit der _fat arrow_ Syntax erweitert und kann unmittelbar Werte zurückgeben.
 
+Seit C# 9.0 können Sie ein relationales Muster verwenden, um ein Ausdrucksergebnis mit einer Konstanten zu vergleichen, wie das folgende Beispiel zeigt:
+
+```csharp    RationalPatterns.cs
+string WaterState(int tempInFahrenheit) =>
+    tempInFahrenheit switch
+    {
+        (> 32) and (< 212) => "liquid",
+        < 32 => "solid",
+        > 212 => "gas",
+        32 => "solid/liquid transition",
+        212 => "liquid / gas transition",
+    };
+```
+
 ********************************************************************************
 
 ### Schleifen
@@ -357,7 +405,7 @@ werden.
   * Hinweis, dass Dekrementieren und Inkrementieren durch beliebige andere
   Funktionen ersetzt werden können.
 -->
-```csharp
+```csharp   ForLoop.cs
 using System;
 
 public class Program
@@ -373,7 +421,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Lassen Sie uns zwei ineinander verschachtelte Schleifen nutzen, um eine $[m\times n]$ Matrix mit zufälligen Werten zu befüllen.
 
@@ -399,7 +447,7 @@ public class Program
    }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 **Kopf- Fußgesteuerte schleife - while/do while**
 
@@ -409,7 +457,7 @@ Ausführung der Schleife ausgewertet wird, wird eine while-Schleife entweder nie
 oder mehrmals ausgeführt. Dies unterscheidet sich von der do-Schleife, die ein
 oder mehrmals ausgeführt wird.
 
-```csharp
+```csharp  whileVsDoWhile.cs
 using System;
 
 public class Program
@@ -432,7 +480,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 **Iteration - foreach**
 
@@ -443,7 +491,7 @@ Elemente nacheinander aufgerufen, ohne dass eine Laufvariable nötig ist.
 <!-- --{{1}}-- Idee des Codefragments:
   * foreach (char in "TU Bergakademie")
 -->
-```csharp
+```csharp   ForEach.cs
 using System;
 
 public class Program
@@ -457,7 +505,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ### Sprünge
 
@@ -482,23 +530,24 @@ public class Program
   static void Main(string[] args)
   {
     int dummy = 0;
-    for (int y = 0; y < 10; y++)
+    for (int y = 0; y < 3; y++)
     {
-      for (int x = 0; x < 10; x++)
+      for (int x = 0; x < 3; x++)
       {
-        if (x == 5 && y == 5)
+        if (x == 1 && y == 1)
         {
-          goto Outer;
+          //goto Outer;
         }
+        Console.Write($"y={y} x={x} | ");
       }
       dummy++;
     }
-    Outer:
-        Console.WriteLine(dummy);
+    //Outer:
+    //    Console.WriteLine("5 - 5 reached!");
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Vgl. Links zur Diskussion um goto auf https://de.wikipedia.org/wiki/Sprunganweisung
 
@@ -535,7 +584,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Des Weiteren für alle die auch mit C programmieren: in C ist es notwendig Funktionen über der Main-Funktion zu deklarieren! Da diese vom Compiler sonst nicht erkannt werden können. In C# spielt das keine Rolle, Funktionen bzw. hier nun Methoden können belieibg ober- oder unterhalb der Main deklaitert werden.
 
@@ -549,16 +598,16 @@ using System;
 
 public class Program
 {
-  static string Combine(string fname, string lname) => $"{fname.Trim()} {lname.Trim()}";
+  static string CombineNames(string fname, string lname) => $"{fname.Trim()} {lname.Trim()}";
 
   static void Main(string[] args)
   {
     // Nutzereingaben mit Leerzeichen
-    Console.WriteLine(Combine("      Sebastian", "Zug     "));
+    Console.WriteLine(CombineNames("      Sebastian", "      Zug     "));
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Die oben genannte Funktion, die die Kundendaten von Lehrzeichen befreit, ist also äquivalent zur Darstellung von:
 
@@ -572,6 +621,8 @@ public static string CombineNames(string fname, string lname)
 Damit lassen sich einfache Funktionen sehr kompakt darstellen.
 
 ```csharp            FatArrowInAction.cs
+using System;
+
 public class Program
 {
   // Prozedur
@@ -582,10 +633,11 @@ public class Program
   static void Main(string[] args){
     int p = 6, result;
     result = Increment(p);
-    print(result);
+    Print(result);
   }
 }
 ```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ### Übergeben von Parametern
 
@@ -621,7 +673,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > **Merke:** Die Namesgleichheit der Variablennamen in der Funktion und der `Main` ist irrelevant.  
 
@@ -659,7 +711,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ********************************************************************************
 
@@ -689,7 +741,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ********************************************************************************
 
@@ -725,7 +777,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 `ref` kann auch auf Referenzdatentypen angewendet werden. Dort wirkt es sich nur dann aus, wenn an den betreffenden Parameter zugewiesen wird.
 
@@ -759,7 +811,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Nur der Vollständigkeit halber sei erwähnt, dass Sie auch unter C# die Pointer-Direktiven wie unter C oder C++ verwenden können. Allerdings müssen
 Sie Ihre Methoden dann explizit als `unsafe` deklarieren.
@@ -806,7 +858,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Interessant wird dieses Konzept durch die in C# 7.0 eingeführte Möglichkeit,
 dass die Deklaration beim Aufruf selbst erfolgt. Im Zusammenhang mit impliziten
@@ -829,20 +881,11 @@ public class Program
   }
 }
 ```
-```xml-
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
-</Project>
-
-```
-@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 Zudem sollte für eine sehr umfangreiches Set von Rückgabewerten geprüft werden,
-ob diese wirklich alle benötig werden. Mit dem *discard* Platzhalter `out _` werden unnötige Deklarationen eingespart.
+ob diese wirklich alle benötigt werden. Mit dem *discard* Platzhalter `out _` werden unnötige Deklarationen eingespart.
 
 ```csharp
 // Defintion
@@ -884,7 +927,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Letztendlich wird damit eine Funktionalität realisiert, wie sie für
 `Main(string[] args)` obligatorisch ist.
@@ -937,7 +980,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ### Überladen von Funktionen
 
@@ -973,7 +1016,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ## Aufgaben
 
