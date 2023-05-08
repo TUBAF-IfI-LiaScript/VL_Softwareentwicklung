@@ -39,7 +39,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 *******************************************************************************
 
 Ein struct-Typ ist ein ein Werttyp, der in der Regel verwendet wird, um eine
-Gruppe verwandter Variablen zusammenzufassen. Beispiele dafür können sein:
+Gruppe verwandter Variablen zusammenzufassen. Diese können sich in Bezug auf den Datentyp unterscheiden. Beispiele dafür können sein:
 
 * kartesische Koordinaten (x, y, z)
 * Merkmale eines Produktes (Größe, Name, Preis)
@@ -177,6 +177,7 @@ public struct Animal
   	Console.WriteLine($"{name} makes {sound}");
   }
 }
+
 public class Program
 {
   static void Main(string[] args){
@@ -187,7 +188,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > Erstellen Sie eine weiteres Objekt vom Typ `Animal` und erstellen Sie eine Kopie von Kitty.
 
@@ -223,7 +224,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Das Verständnis von `this` macht die grundlegende Idee deutlich. Das `struct Animal` ist ein genereller Bauplan. Die Instanzen davon haben ein "Selbstverständnis" in Form der `this` Referenz.
 
@@ -253,25 +254,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
-
-Wie sieht unser Speicher nach Zeile 12 aus?
-
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
-```ascii
-                    STACK
-             +-----------------+
-             | ...             |
-             +-----------------+ -.
- kitty.name  | undefiniert     |  |
-             +-----------------+  | Instanz von Animal
- kitty.sound | undefiniert     |  |
-             +-----------------+ -'
-             | ...             |
-             +-----------------+                                              .
-```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Wie können wir also sicherstellen, dass die Initialisierung vollständig
 vorgenommen wurde?
@@ -311,12 +294,12 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Nach dem Aufruf besteht eine mit den Standardwerten der Datentypen vorinitialisierte Instanz auf dem Stack.
 
 <!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
                     STACK
@@ -331,7 +314,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
              +-----------------+                                              .
 ```
 
-In `structs` dürfen allerdings (im Unterschied zu Klassen) keine parameterlosen
+In `structs` dürfen Konstruktoren allerdings (im Unterschied zu Klassen) keine parameterlosen
 Methoden sein. Der Compiler erzeugt diese automatisch, die Methode beschreibt
 alle Felder mit den datentypspezifischen Nullwerten.
 
@@ -374,7 +357,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > *Anmerkung:* Konstruktoren sind Methoden und folglich steht das gesamte Spektrum
 > der Variabilität bei deren Definition zur Verfügung (Überladen, vordefinierte
@@ -408,6 +391,7 @@ public struct Animal
   	Console.WriteLine("{0} makes Miau", name);
   }
 }
+
 public class Program
 {
   static void Main(string[] args){
@@ -416,15 +400,7 @@ public class Program
   }
 }
 ```
-```xml   -myproject.csproj
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
-</Project>
-```
-@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 *******************************************************************************
 
@@ -460,7 +436,7 @@ public class Program
     }
   }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > **Aufgabe:** Versuchen Sie das Beispiel um einen Konstruktor und einen zugehörigen Aufruf für die Initialisierung zu ergänzen!
 
@@ -470,10 +446,10 @@ public class Program
 
 | Aspekt                 | `readonly`  Felder                                                              | `const`  Felder                                                       |
 | ---------------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Zweck                  | ... wird verwendet, um ein schreibgeschütztes Feld zu erstellen.                | ...  wird verwendet, um konstante Felder zu erstellen.                |
+| Zweck                  | ... wird verwendet, um ein schreibgeschütztes Feld zu erstellen.                | ... wird verwendet, um konstante Felder zu erstellen.                 |
 | Typ                    | ... ist eine zur Laufzeit definierte Konstante.                                 | ... wird verwendet, um eine Konstante zur Kompilierzeit zu erstellen. |
 | Wert                   | ... kann nach der Deklaration geändert werden.                                  | ... kann nach der Deklaration nicht geändert werden.                  |
-| Wertzuweisung          | ... werden als Instanzvariable deklariert und im Konstruktor mit Werten belegt. | ...  sind zum Zeitpunkt der Deklaration zuzuweisen.                   |
+| Wertzuweisung          | ... werden als Instanzvariable deklariert und im Konstruktor mit Werten belegt. | ... sind zum Zeitpunkt der Deklaration zuzuweisen.                    |
 | Einbettung in Methoden | ... können nicht innerhalb einer Methode definiert werden.                      | ... können innerhalb einer Methode deklariert werden.                 |
 
 ```csharp                                      Constructors
@@ -502,7 +478,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > **Achtung:** _Der readonly-Modifizierer verhindert, dass das Feld durch eine andere Instanz des Verweistyps ersetzt wird. Der Modifizierer verhindert jedoch nicht, dass die Instanzdaten des Felds durch das schreibgeschützte Feld geändert werden._
 
@@ -538,7 +514,7 @@ public class Program
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
@@ -560,16 +536,16 @@ Kontext heraus sichtbar sind, werden diese mit Attributen versehen.
 
 Strukturen, die innerhalb eines _Namespace_ (mit anderen Worten, die nicht in anderen Klassen oder Strukturen geschachtelt sind) direkt deklariert werden, können entweder `private`, `public` oder `internal` sein.
 
-| Bezeichner | Konsequenz                                            |
-| ---------- | ----------------------------------------------------- |
-| `public`     | Keine Einschränkungen für den Zugriff                 |
-| `internal`   | Der Zugriff ist auf die aktuelle _Assembly_ beschränkt. |
-| `private`    | Der Zugriff kann nur aus dem Code der gleichen Struktur erfolgen.                                                      |
+| Bezeichner | Konsequenz                                                        |
+| ---------- | ----------------------------------------------------------------- |
+| `public`   | Keine Einschränkungen für den Zugriff                             |
+| `internal` | Der Zugriff ist auf die aktuelle _Assembly_ beschränkt.           |
+| `private`  | Der Zugriff kann nur aus dem Code der gleichen Struktur erfolgen. |
 
 Wenn kein Modifizierer angegeben ist, wird standardmäßig `internal` verwendet.
 
 <!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
 
@@ -632,7 +608,7 @@ public struct Animal
   public Animal(string name, uint born, string sound = "Miau"){
     this.name = name;
     this.sound = sound;
-    age = (byte) (2019 - born);
+    age = (byte) (2023 - born);
   }
   public void MakeNoise() {
   	Console.WriteLine("{0} ({1} years old) makes {2}", name, age, sound);
@@ -648,7 +624,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 *******************************************************************************
@@ -656,7 +632,7 @@ public class Program
 ## Vergleich mit Klassen
 
 <!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
                                      C# Typen
@@ -711,7 +687,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 | Structs                                                          | Klassen                                                 |
@@ -811,7 +787,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 ## Aufgaben
