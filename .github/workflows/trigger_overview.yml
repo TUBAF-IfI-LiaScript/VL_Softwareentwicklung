@@ -1,0 +1,21 @@
+name: Trigger_overview
+on:
+  push:
+    branches:
+      - master
+      
+jobs:
+  dispatch:
+    name: Dispatch dashboard
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repo: ['TUBAF-IfI-LiaScript/TUBAF-IfI-LiaScript.github.io']
+    timeout-minutes: 5
+    steps:
+      - name: Dispatch to workflows
+        run: |
+            curl -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
+            --request POST \
+            --data '{"event_type": "new_version", "client_payload": { "repo": "${{ github.repository }}" }}' https://api.github.com/repos/${{ matrix.repo }}/dispatches
