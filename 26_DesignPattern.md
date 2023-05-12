@@ -101,7 +101,7 @@ public class Program {
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > Merke: Boxing und Unboxing sind Cast-Operationen die eine Variable in eine Instanz von `object` konvertieren und umgekehrt.
 
@@ -282,7 +282,7 @@ public class Program {
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Offenbar kann der Druckertreiber mehrfach instantiiert werden. Welche Möglichkeiten sehen sie?
 
@@ -322,7 +322,7 @@ public class Program {
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Von *Lazy Creation* (verzögerte Instanziierung) spricht man, wenn das einzige Objekt der Klasse erst erzeugt
 wird, wenn es benötigt wird. Ziel ist, dass der Speicherbedarf und die
@@ -374,7 +374,7 @@ public class Program {
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Bei nebenläufigen (verteilten) Systemen gilt es auch sicherzustellen, dass wirklich nur eine Instanz existiert.
 
@@ -430,7 +430,7 @@ public class Program {
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ********************************************************************************
 
@@ -467,7 +467,7 @@ public class Program {
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 
@@ -572,7 +572,7 @@ public class Program {
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 [^WikipediaAdapter]: Wikipedia "Entwurfsmuster Objektadapter", Autor jarling, https://commons.wikimedia.org/wiki/File:Objektadapter.svg
 
@@ -642,7 +642,7 @@ public class Program {
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Dabei können zwei grundsätzliche Varianten unterschieden werden:
 
@@ -816,7 +816,7 @@ public class Program {
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Welche Probleme sehen Sie?
 
@@ -945,7 +945,7 @@ public class Program {
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 1. Was müssen Sie tun, um einen weitere Zustand hinzuzufügen?
 2. Wie können wir eine zusätzliche Transition integrieren?

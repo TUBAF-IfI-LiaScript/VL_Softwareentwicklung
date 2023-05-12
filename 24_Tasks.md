@@ -70,7 +70,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Dieses Vorgehen kann auf Dauer ziemlich nerven ...
 
@@ -121,7 +121,7 @@ class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 An dieser Stelle spricht man von **synchronen** Methodenaufrufen. Das
 Hauptprogramm (Rufer oder Caller) stoppt, wartet auf den Abschluss des
@@ -189,7 +189,7 @@ class Program {
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Welche Nachteile sehen Sie in dieser Lösung?
 
@@ -306,7 +306,7 @@ public class Example
    }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 `Wait` ermöglicht auch die Beschränkung der Wartezeit auf ein bestimmtes Zeitintervall. Die `Wait(Int32)` und `Wait(TimeSpan)` Methoden blockiert den aufrufenden Thread, bis die Aufgabe abgeschlossen oder ein Timeoutintervall abgelaufen ist, je nach dem welcher Fall zuerst eintritt.
@@ -334,7 +334,7 @@ class Program {
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Für komplexe Taskstrukturen kann man diese zum Beispiel in Arrays arrangieren.
 Für diese Reihe von Aufgaben jeweils durch Aufrufen der `Wait` Methode zu warten
@@ -371,7 +371,7 @@ class Program {
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ********************************************************************************
 

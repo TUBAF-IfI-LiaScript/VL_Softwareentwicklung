@@ -87,7 +87,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > **Frage:** Wie ließe sich das Codebeispiel verbessern?
 
@@ -298,7 +298,7 @@ class Program
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 + Erweitern Sie den Code so, dass Parameter an die Callback-Methoden übergeben werden können
 
@@ -353,7 +353,7 @@ class Program {
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 **Ja, aber ... ** Was unterscheidet eine Delegate von einem Event? Was würde passieren, wenn wir
 das Key-Wort aus dem Code entfernen?
@@ -435,7 +435,7 @@ class Program {
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ### Generic Events
 
@@ -514,7 +514,7 @@ class Program {
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ### Grafische Nutzer Interfaces
 

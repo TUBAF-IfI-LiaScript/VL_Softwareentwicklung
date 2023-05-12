@@ -192,7 +192,7 @@ public class Program{
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 Dabei setzen die vielfältigen Methoden Anforderungen an die im Container gespeicherten Werte.
@@ -247,7 +247,7 @@ public class ArrayExamples  {
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
 
@@ -419,7 +419,7 @@ class Program
 	}
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > **Achtung:** Das Beispiel implmentiert das Iteratorkonzept mittels [`yield`](https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/keywords/yield). Damit lässt sich einige Tipparbeit sparen, die bei der konventionellen Umsetzung anfallen würde, vgl [Link](https://docs.microsoft.com/de-de/troubleshoot/dotnet/csharp/make-class-foreach-statement).
 
@@ -512,7 +512,7 @@ public class Program{
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 **Dictionary<T, U>**
 
@@ -547,7 +547,7 @@ public class Program{
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 **HashSet<T>**
 
@@ -586,7 +586,7 @@ public class Program{
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mono main.cs`, `mono main.exe`)
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ## Achtung!
 
