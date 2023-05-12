@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich & `JohannaKlinke`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.8
+version:  1.0.9
 language: de
 narrator: Deutsch Female
 comment:  Motivation der Versionsverwaltung in der Softwareentwicklung, Diskussion der zentraler / dezentraler Ansätze, Umsetzung von merge Operation, Einführung in die Verwendung von Git
@@ -12,7 +12,6 @@ logo:
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liaTemplates/ExplainGit/master/README.md
         https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
-        https://github.com/LiaTemplates/Pyodide
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
@@ -100,7 +99,7 @@ Und nun übertragen wir den Ansatz auf eine Softwareentwicklungsprojekt mit viel
 
 ******************************************************************************
 
-### Lösungsansatz
+## Vergleichbare Probleme
 
 Eine Versionsverwaltung ist ein System, das zur Erfassung von Änderungen an Dokumenten oder Dateien verwendet wird. Alle Versionen werden in einem Archiv mit Zeitstempel und Benutzerkennung gesichert und können später wiederhergestellt werden. Versionsverwaltungssysteme werden typischerweise in der Softwareentwicklung eingesetzt, um Quelltexte zu verwalten.
 
@@ -122,7 +121,10 @@ Hauptaufgaben:
 ******************************************************************************
 
 
-### Strategien zur Konfliktvermeidung
+## Strategien zur Konfliktvermeidung
+
+                                {{0-1}}
+******************************************************************************
 
 **Herausforderung**
 
@@ -138,7 +140,7 @@ zentralen Server liegt:
 Die zeitliche Abfolge der Schreibzugriffe bestimmt welche Variante des Dokuments A überlebt.
 
 <!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
 +----------------------------+---------------------------+
@@ -170,16 +172,22 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 | +-------+    +-------+     | +-------+   +-------+     |
 |   Harry        Sally       |   Harry       Sally       |
 |                            |                           |
-|Harry schreibt seine Version|Sally übermittelt A''      |
+|Harry schreibt seine Version| Sally übermittelt A''     |
 +----------------------------+---------------------------+                     .
 ```
+
+******************************************************************************
+
+
+                                {{1-2}}
+******************************************************************************
 
 **Lösung I - Exklusives Bearbeiten (Sequenzialisierung)**
 
 Bei der pessimistische Versionsverwaltung (*Lock Modify Unlock*) werden einzelne Dateien vor einer Änderung durch den Benutzer gesperrt und nach Abschluss der Änderung wieder freigegeben werden. Während sie gesperrt sind, verhindert das System Änderungen durch andere Benutzer. Der Vorteil dieses Konzeptes ist, dass kein Zusammenführen von Versionen erforderlich ist, da nur immer ein Entwickler eine Datei ändern kann.
 
 <!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
 +----------------------------+---------------------------+
@@ -223,12 +231,18 @@ Welche Aspekte sehen Sie an dieser Lösung kritisch?
 2. Unnötige Sequentialisierung der Arbeit ... Wenn zwei Nutzer ein Dokument an verschiedenen Stellen ändern möchten, könnten sie dies auch gleichzeitig tun.
 3. Keine Abbildung von übergreifenden Abhängigkeiten ... Zwei Nutzer arbeiten getrennt auf den Dokumenten A und B. Was passiert, wenn A von B abhängig ist? A und B passen nicht mehr zusammen. Die Nutzer müssen dieses Problem diskutieren.
 
+
+******************************************************************************
+
+                                {{2-3}}
+******************************************************************************
+
 **Lösung II - Kollaboratives Arbeiten mit Mischen (Mergen)**
 
 Optimistische Versionsverwaltungen (*Copy Modify Merge*) versuchen die die Schwächen der pessimistischen Versionsverwaltung zu beheben, in dem sie gleichzeitige Änderungen durch mehrere Benutzer an einer Datei zu lassen und anschließend diese Änderungen automatisch oder manuell zusammen führen (Merge).
 
 <!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
 +----------------------------+---------------------------+
@@ -311,9 +325,12 @@ Welche Konsequenzen ergeben sich daraus?
 + Das Dokument liegt in zeitgleich in n-Versionen vor, die ggf. überlappende Änderungen umfassen.
 + Das zentrale Repository kennt die Version von Harry nur indirekt. Man kann zwar indirekt aus A'' und A* auf A' schließen, man verliert aber zum Beispiel die Information wann Harry seine Änderungen eingebaut hat.
 
-Die Herausforderung liegt somit im Mischen von Dokumenten!
+> Die Herausforderung liegt somit im Mischen von Dokumenten!
+
+******************************************************************************
 
 [^Subversion]: Brian W. Fitzpatrick, Ben Collins-Sussman, C. Michael Pilato, Version Control with Subversion, 2nd Edition, O'Reilly Media
+
 
 ### Mischen von Dokumenten
 
@@ -412,7 +429,7 @@ m = len(S1)
 n = len(S2)
 lcs_algo(S1, S2, m, n)
 ```
-@Pyodide.eval
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 **Schritt 2: Mischen**
 
@@ -547,7 +564,7 @@ Die Entwicklungsgeschichte von git ist mit der des Linux Kernels verbunden:
 | 1991 | Änderungen am Linux Kernel via patches und archive files       |
 | 2002 | Linux Kernel mit dem Tool BitKeeper verwaltet                  |
 | 2005 | Bruch zwischen der vertreibenden Firma und der Linux Community |
-| 2021 | Die aktuelle Version ist 2.31.1                                |
+| 2023 | Die aktuelle Version ist 2.40.1                                |
 
 2005 wurde einen Anforderungsliste für eine Neuentwicklung definiert. Dabei wurde hervorgehoben, dass sie insbesondere sehr große Projekte (Zahl der Entwickler, Features und Codezeilen, Dateien) unterstützen können muss. Daraus entstand `Git` als freie Software zur verteilten Versionsverwaltung von Dateien.
 
@@ -555,14 +572,14 @@ Die Entwicklungsgeschichte von git ist mit der des Linux Kernels verbunden:
 
 **Wie bekommen sie Git auf Ihren Windows-Rechner?**
 
-1. Variante 1: als Integralen Bestandteil in Ihrer Entwicklungsumgebung (Visual Studio Code)
-Die großen IDEs umfassen einen eigenen Git-Client, für einfachere Editoren muss dieser meist nachinstalliert werden.
+1. Variante 1: als Integralen Bestandteil in Ihrer Entwicklungsumgebung (Visual Studio Code) -Die großen IDEs umfassen einen eigenen Git-Client, für einfachere Editoren muss dieser meist nachinstalliert werden.
 
-2. Variante 2: als unabhänigige Installation
-Unter [Link](https://phoenixnap.com/kb/how-to-install-git-windows) findet sich eine Schritt-für-Schritt Beschreibung für die Installation von Git unter Windows. Dabei wird sowohl ein Shell als auch eine GUI installiert.
+2. Variante 2: als unabhänigige Installation - Unter [Link](https://www.heise.de/tipps-tricks/Git-auf-Windows-installieren-und-einrichten-5046134.html) findet sich eine Schritt-für-Schritt Beschreibung für die Installation von Git unter Windows. Dabei wird sowohl ein Shell als auch eine GUI installiert.
 
 3. Variante 3: mittels cygwin
 Cygwin emuliert Linuxbefehle und Tools der Shell. Neben Compilern und einer Vielzahl von Entwicklertools können auch verschiedene Versionsverwaltungen installiert werden.
+
+4. ....
 
 Eine übergreifende Erklärung für die Installation gibt zum Beispiel dieses [Tutorial](https://www.youtube.com/watch?v=Fk12ELJ9Bww).
 
@@ -604,6 +621,19 @@ Unmodified --> Untracked : Löschen aus dem Repository\n   <color:Red>  ""git re
 
 ********************************************************************************
 
+### Weitere Einführung
+
+| Stufe der Einführung                                              | GitExplain | Demo |
+| ----------------------------------------------------------------- | ---------- | ---- |
+| _Git_ - Lokale Verwendung von Git in einer Sequenz von Änderungen | x          | X    |
+| _Git_ - Interaktion mit einem Remote-Repository                   | X          | X    |
+| _Git_ - Nutzung von Branches                                      |            |      |
+| _Github_ - Verknüpfungen                                          |            |      |
+
+> GitExplain eröffnet die Möglichkeit einer visuellen Darstellung der Änderungen im Repository, bringt aber einige Einschränkungen bei der Nutzung des Befehlsumfanges mit.
+
+> Demos zeigen zwar das Grundsätzliche Vorgehen, sind aber in Bezug auf die Nachvollziehbarkeit beschränkt.
+
 ### Grundlegende Anwendung (lokal!)
 
 > **Merke:** Anders als bei svn können Sie mit git eine völlig autonome Versionierung auf Ihrem Rechner realisieren. Ein Server ist dazu *zunächst* nicht nötig.
@@ -618,8 +648,8 @@ Aus dem Zustandmodell einer Datei ergeben sich drei Ebenen auf der wir eine Date
   Arbeitskopie     "Staging"        Lokales          Remote
                                    Repository      Repository
                        |               |                          
-                       |               |            Dazu kommen               
-                       |               |            wir morgen!          
+                       |               |            Dazu kommen   
+                       |               |            wir gleich !  
        +-+- - - - - - -|- - - - - - - -|                          
        | | Änderungen  |               |                          
        | |             |               |                          
@@ -634,7 +664,8 @@ Aus dem Zustandmodell einer Datei ergeben sich drei Ebenen auf der wir eine Date
         |   git add    |               |                          
         +------------->|  git commit   |                          
                        |-------------->|                          
-                       |               |                                                 |               |                                       .
+                       |               |
+                       |               |                                       .
 ```
 
 
@@ -667,7 +698,6 @@ git log --oneline
 
 > **Merke:** Beschränken Sie die versionierten Dateien auf ein Minimum! Der gesamte Umfang des dotnet-Projektes gehört nur in seltenen Fällen ins Repository!
 
-
 Phase 3: Arbeit im Projekt
 
 ```
@@ -679,21 +709,29 @@ git log --oneline
 
 Bis hier her haben wir lediglich eine Erfassung unserer Aktivitäten umgesetzt. Wir können anhand der Log-Files einen Überblick darüber behalten, wann welche Änderungen in welcher Datei realisiert wurden.
 
+Wie sieht aber die dahinterliegende Datenstruktur aus?
+
+``` text @ExplainGit.eval
+git commit -m V1
+git commit -m V2
+git commit -m V3
+```
+
 ### "Kommando zurück"
 
 Nun wird es aber interessanter! Lassen Sie uns jetzt aber zwischen den Varianten navigieren.
 
-**Variante 1 - Reset**
+**Variante 1 - Reset (Zurücksetzen)**
 
 `git reset` löscht die Historie bis zu einem Commit. Adressieren können wir die Commits relativ zum `HEAD` `git reset HEAD~1` oder mit der jeweiligen ID `git reset <commit-id>`.
 
 Wichtig sind dabei die Parameter des Aufrufes:
 
-| Attribut            | Bedeutung                                                                |
-| ------------------- | ------------------------------------------------------------------------ |
-| `git reset --soft`  | uncommit changes, changes are left staged (index).                       |
-| `git reset --mixed` | (default): uncommit + unstage changes, changes are left in working tree. |
-| `git reset --hard`  | uncommit + unstage + delete changes, nothing left.                       |
+| Attribut            |         | Vorgang                                                       |
+| ------------------- | ------- | ------------------------------------------------------------- |
+| `git reset --soft`  |         | uncommit changes, changes are left staged (index).            |
+| `git reset --mixed` | default | uncommit + unstage changes, changes are left in working tree. |
+| `git reset --hard`  |         | uncommit + unstage + delete changes, nothing left.            |
 
 ``` text @ExplainGit.eval
 git commit -m V1
@@ -749,41 +787,19 @@ Als Anwendungsfall habe ich mir meine Aktivitäten im Kontext einiger Experiment
 mit den GitHub Actions, die im nächsten Abschnitt kurz eingeführt werden, ausgesucht.
 Schauen wir zunächst auf den ursprünglichen Stand. Alle Experimente drehten sich darum, eine Datei anzupassen und dann auf dem Server die Korrektheit zu testen.
 
-```console
-▶
-c56a779 - Sebastian Zug, 7 hours ago : Corrects md filename
-05b76f3 - Sebastian Zug, 7 hours ago : New pandoc command line
-f70cfc7 - Sebastian Zug, 8 hours ago : Replaces wildcard by specific filename
-78839b0 - Sebastian Zug, 21 hours ago : Reconfigures checkout
-d2a06e4 - Sebastian Zug, 22 hours ago : Update main.yml
-...
-aa04051 - Sebastian Zug, 23 hours ago : Restart action activities
-4b22d12 - Sebastian Zug, 23 hours ago : Deleting old state
-64075cc - Sebastian Zug, 24 hours ago : Update main.yml
-01f341b - Sebastian Zug, 24 hours ago : Missing links added
-...
-29c8e68 - Sebastian Zug, 11 days ago : Update README.md
-```
-
-Unser lokaler Branch liegt nach dem Löschen aber um einiges hinter dem auf GitHub entsprechend müssen wir mit `git push --force` das Überschreiben erzwingen.
+> Wir werden `git rebase` im Zusammenhang mit der Arbeit in  Branches wieder aufgreifen.
 
 ### Was kann schief gehen?
 
 1. **Ups, die Datei sollte im Commit nicht dabei sein (Unstage)**
 
 ```
-... ein neues Feature wird in sourceA.cs implementiert
-... ein Bug in Codedatei sourceB.cs korrigiert
+... ein neues Feature wird in `sourceA.cs` implementiert
+... ein Bug in Codedatei `sourceB.cs` korrigiert
 ... wir wollen schnell sein und fügen alle Änderungen als staged ein
 git add *
 ... Aber halt! Die beiden Dinge gehören doch nicht zusammen!
 git reset
-```
-
-``` text @ExplainGit.eval
-git commit -m V1
-git commit -m V2
-git commit -m V3
 ```
 
 2. **Ups, eine Datei in der Version vergessen! (Unvollständiger Commit)**
@@ -824,6 +840,80 @@ doc/**/*.pdf
 ```
 
 Unter [gitIgnoreBeispiele](https://github.com/github/gitignore) gibt es eine ganze Sammlung von Konfigurationen für bestimmte Projekttypen.
+
+###  Verteiltes Versionsmanagement
+
+_Einfaches Editieren_: Sie klonen das gesamte Repository, dass sich auf dem "Server-Rechner" befindet. Damit haben Sie eine vollständige Kopie aller Versionen in Ihrem Working Directory. Wenn wir annehmen, dass keine branches im Repository bestehen, dann können Sie direkt auf der Ihrer Arbeitskopie arbeiten und diese verändern. Danach generieren Sie einen Snappshot des Arbeitsstandes _Staging_. Ihre Version ist als relevant markiert und kann im lokalen Repository als neuer Eintrag abgelegt werden. Vielleicht wollen sie Ihren Algorithmus noch weiterentwickeln und speichern zu einem späteren Zeitpunk eine weitere Version. All diese Vorgänge betreffen aber zunächst nur Ihre Kopie, ein anderer Mitstreiter in diesem Repository kann darauf erst zurückgreifen, wenn Sie das Ganze an den Server übermittelt haben.
+
+```ascii
+                     lokal                           remote
+  ---------------------------------------------  --------------
+  Arbeitskopie     "Staging"        Lokales          Remote
+                                   Repository      Repository
+                       |               |                 |
+                       |               |    git clone    |
+                       |               |<----------------|
+       +-+- - - - - - -|- - - - - - - -|                 |
+       | | Änderungen  |               |                 |
+       | |             |               |                 |
+       +-+             |               |                 |
+        |   git add    |               |                 |
+        |------------->|  git commit   |                 |
+        |              |-------------->|                 |
+       +-+             |               |                 |
+       | | weitere     |               |                 |
+       | | Änderungen  |               |                 |
+       +-+             |               |                 |
+        |   git add    |               |                 |
+        +------------->|  git commit   |                 |
+                       |-------------->|   git push      |
+                       |               |---------------->|
+                       |               |                 |                     .
+```
+
+
+_Kooperatives Arbeiten:_ Nehmen wir nun an, dass Ihr Kollege in dieser Zeit selbst das Remote Repository fortgeschrieben hat. In diesem Fall bekommen Sie bei Ihrem `push` eine Fehlermeldung, die sie auf die neuere Version hinweist. Nun "ziehen" Sie sich den aktuellen
+Stand in Ihr Repository und kombinieren die Änderungen. Sofern keine Konflikte
+entstehen, wird daraus ein neuer Commit generiert, den Sie dann mit Ihren Anpassungen an das Remote-Repository senden.
+
+```ascii
+                     lokal                           remote
+  ---------------------------------------------  --------------
+  Arbeitskopie     "Staging"        Lokales          Remote
+                                   Repository      Repository
+                       |               |                 |
+                       |               |    git clone    |
+                       |               |<----------------|
+       +-+- - - - - - -|- - - - - - - -|                 |
+       | | Änderungen  |               |                 |
+       | |             |               |                 |
+       +-+             |               |                 |
+        |   git add    |               |                 |
+        |------------->|  git commit   |                 |
+        |              |-------------->|                 |
+       +-+             |               |                 |
+       | | weitere     |               |                 |
+       | | Änderungen  |               |                 |   git push
+       +-+             |               |                 |<-------------
+        |   git add    |               |                 |
+        +------------->|  git commit   |                 |
+                       |-------------->|   git push      |
+                       |               |---------------X |
+                       |               |   git fetch     |
+                       |               |<--------------- |     git fetch
+                       |               |   git merge     |   + git merge
+                       |               |<--------------- |   = git pull
+                       |               |   git push      |
+                       |               |---------------->|                   .
+```
+
+
+Versuchen wir das ganze noch mal etwas plastischer nachzuvollziehen. Rechts oben sehen Sie unser Remote-Repository auf dem Server. Im mittleren Bereich den Status unseres lokalen Repositories.
+
+
+``` text @ExplainGit.eval
+create origin
+```
 
 ## Kommandozeile oder keine Kommandozeile
 
