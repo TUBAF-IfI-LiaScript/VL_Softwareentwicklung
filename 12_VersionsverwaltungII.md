@@ -381,3 +381,5 @@ deactivate Maintainer
 !?[](https://www.youtube.com/watch?v=snCP3c7wXw0)
 
 - [ ] Sie sollten Ihre erste Einladung für einen GitHub Classroom bereits per OPAL erhalten haben. Ausgehend davon werden Sie aufgefordert sich in Zweierteams zu organisieren und werden dann gemeinsam erste Gehversuche unter git zu unternehmen.
+
+- [ ] Weiter Aufgabe
