@@ -35,86 +35,6 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
-##  Verteiltes Versionsmanagement
-
-_Einfaches Editieren_: Sie klonen das gesamte Repository, dass sich auf dem "Server-Rechner" befindet. Damit haben Sie eine vollständige Kopie aller Versionen in Ihrem Working Directory. Wenn wir annehmen, dass keine branches im Repository bestehen, dann können Sie direkt auf der Ihrer Arbeitskopie arbeiten und diese verändern. Danach generieren Sie einen Snappshot des Arbeitsstandes _Staging_. Ihre Version ist als relevant markiert und kann im lokalen Repository als neuer Eintrag abgelegt werden. Vielleicht wollen sie Ihren Algorithmus noch weiterentwickeln und speichern zu einem späteren Zeitpunk eine weitere Version. All diese Vorgänge betreffen aber zunächst nur Ihre Kopie, ein anderer Mitstreiter in diesem Repository kann darauf erst zurückgreifen, wenn Sie das Ganze an den Server übermittelt haben.
-
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
-```ascii
-                     lokal                           remote
-  ---------------------------------------------  --------------
-  Arbeitskopie     "Staging"        Lokales          Remote
-                                   Repository      Repository
-                       |               |                 |
-                       |               |    git clone    |
-                       |               |<----------------|
-       +-+- - - - - - -|- - - - - - - -|                 |
-       | | Änderungen  |               |                 |
-       | |             |               |                 |
-       +-+             |               |                 |
-        |   git add    |               |                 |
-        |------------->|  git commit   |                 |
-        |              |-------------->|                 |
-       +-+             |               |                 |
-       | | weitere     |               |                 |
-       | | Änderungen  |               |                 |
-       +-+             |               |                 |
-        |   git add    |               |                 |
-        +------------->|  git commit   |                 |
-                       |-------------->|   git push      |
-                       |               |---------------->|
-                       |               |                 |                     .
-```
-
-
-_Kooperatives Arbeiten:_ Nehmen wir nun an, dass Ihr Kollege in dieser Zeit selbst das Remote Repository fortgeschrieben hat. In diesem Fall bekommen Sie bei Ihrem `push` eine Fehlermeldung, die sie auf die neuere Version hinweist. Nun "ziehen" Sie sich den aktuellen
-Stand in Ihr Repository und kombinieren die Änderungen. Sofern keine Konflikte
-entstehen, wird daraus ein neuer Commit generiert, den Sie dann mit Ihren Anpassungen an das Remote-Repository senden.
-
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
-```ascii
-                     lokal                           remote
-  ---------------------------------------------  --------------
-  Arbeitskopie     "Staging"        Lokales          Remote
-                                   Repository      Repository
-                       |               |                 |
-                       |               |    git clone    |
-                       |               |<----------------|
-       +-+- - - - - - -|- - - - - - - -|                 |
-       | | Änderungen  |               |                 |
-       | |             |               |                 |
-       +-+             |               |                 |
-        |   git add    |               |                 |
-        |------------->|  git commit   |                 |
-        |              |-------------->|                 |
-       +-+             |               |                 |
-       | | weitere     |               |                 |
-       | | Änderungen  |               |                 |   git push
-       +-+             |               |                 |<-------------
-        |   git add    |               |                 |
-        +------------->|  git commit   |                 |
-                       |-------------->|   git push      |
-                       |               |---------------X |
-                       |               |   git fetch     |
-                       |               |<--------------- |     git fetch
-                       |               |   git merge     |   + git merge
-                       |               |<--------------- |   = git pull
-                       |               |   git push      |
-                       |               |---------------->|                   .
-```
-
-
-Versuchen wir das ganze noch mal etwas plastischer nachzuvollziehen. Rechts oben sehen Sie unser Remote-Repository auf dem Server. Im mittleren Bereich den Status unseres lokalen Repositories.
-
-
-``` text @ExplainGit.eval
-create origin
-```
-
 ## Arbeiten mit Branches
 
 Die Organisation von Versionen in unterschiedlichen Branches ist ein zentrales
@@ -145,7 +65,7 @@ SoSe2020dev    O->O---->O---->O->O---->O-->O->O      ....
                00             01
 ```
 
-Ein Branch in Git ist einfach ein Zeiger auf einen Commit zeigt. Der zentrale Branch wird zumeist als `master` bezeichnet.
+Ein Branch in Git ist einfach ein Zeiger auf einen Commit zeigt. Der zentrale Branch wird zumeist als `master`/`main` bezeichnet.
 
 ### Generieren und Navigation über Branches
 <!--
@@ -221,9 +141,29 @@ git checkout master
 git commit -m V1
 ```
 
+> Achtung: Ein Rebase kann fatale Auswirkungen auf die Gesamte Projektstruktur haben!
+
 ## Arbeit mit GitHub
 
 ![](https://media.giphy.com/media/487L0pNZKONFN01oHO/giphy.gif)
+
+Github integriert einen git-Dienst und stellt darauf aufbauend weitere Werkzeuge bereit.
+
+| Bezeichnung         | Bedeutung                                                             |
+| ------------------- | --------------------------------------------------------------------- |
+| `Issue`             | Aufgabenbeschreibungen mit zugehörigen Diskussionen                   |
+| `Pull-Request` (PR) | Anfrage zum Merge einer eignen Lösung mit der existierenden Codebasis |
+| `Review`            | Vorgänge zur Evaluation von Pull-Requests                             |
+| `Action`            | Möglichkeit der automatisierten Realsierung von Abläufen              |
+| `Project`           | Verwaltungsebene von Aufgabenbeschreibungen                           |
+
+![SWEonGithub](./img/12_VersionsverwaltungII/ScreenshotSoftwareentwicklungVorlesung.png)<!-- width="100%" -->
+
+> Softwareprojekte sind soziale Ereignisse - entsprechend integriert Github auch Aspekte zur Vernetzung (`Discussion`), der Anerkennung (`Stars`) und Follow Mechanismen.
+
+> Neben Github existieren weitere Plattformen für das Hosten von Projekten. Eine völlig eigenständige Nutzung ermöglicht die GitLab Community Edition (CE) von GitLab die als Open-Source-Software unter der MIT-Lizenz entwickelt wird.
+
+Lassen Sie uns die Verwendung anhand vdes Open Source Projektes Tensorflow erörtern [https://github.com/tensorflow/tensorflow](https://github.com/tensorflow/tensorflow)
 
 ### Issues
 
@@ -234,6 +174,26 @@ Sie können eine Pull-Anfrage mit einer Ausgabe verknüpfen, um zu zeigen, dass 
 Um über die neuesten Kommentare in einer Ausgabe auf dem Laufenden zu bleiben, können Sie eine Ausgabe beobachten, um Benachrichtigungen über die neuesten Kommentare zu erhalten.
 
 https://guides.github.com/features/issues/
+
+> Im Tensorflow Projekt sind aktuell etwa 2000 Issues offen, über 35000 wurden bereits bearbeitet. Eine Menge Koordinationsarbeit ... wie halten wir da Ordnung?
+
+```
+If you open a GitHub Issue, here is our policy:
+
+    It must be a bug/performance issue or a feature request or a build issue or a documentation issue (for small doc fixes please send a PR instead).
+    Make sure the Issue Template is filled out.
+    The issue should be related to the repo it is created in.
+
+Here's why we have this policy: We want to focus on the work that benefits the whole community, e.g., fixing bugs and adding features. Individual support should be sought on Stack Overflow or other non-GitHub channels. It helps us to address bugs and feature requests in a timely manner.
+```
+
+1. Als potentieller Mitstreiter - Durchsuchen geht vor Schreiben eines neuen Issues
+2. Strukturieren Sie die Meldung von Problemen (ermutigen Sie die Meldenden, spezifisch zu sein)
+3. Nutzen Sie Label aber generieren Sie keinen bunten Strauß 
+4. Referenzieren Sie die entsprechenden Personen im Issue 
+5. Vergessen Sie Issues nicht zu schließen
+
+Das zugehörige Template findet sich unter [https://github.com/tensorflow/tensorflow/blob/master/ISSUE_TEMPLATE.md](https://github.com/tensorflow/tensorflow/blob/master/ISSUE_TEMPLATE.md)
 
 ### Pull requests und Reviews
 
@@ -247,6 +207,7 @@ Pull-Request und Review Konfiguration.
 
 Wird ein Pull Request akzeptiert, so spricht man von einem _Merge_, wird er geschlossen, so spricht man von einem _Close_. Vor dem Merge sollte eine gründliche Prüfung sichergestellt werden, diese kann in Teilen automatisch erfolgen oder durch Reviews [Doku](https://github.com/features/code-review/)
 
+> Achtung: Forks sind Kopien bestehender Repositories. Sie ermöglichen die Arbeit in einem eigenen Repo. 
 
 ### Automatisierung der Arbeit
 
@@ -299,7 +260,7 @@ Die Dokumentation zu den GitHub-Actions findet sich unter [https://github.com/fe
 
 > **Merke** Workflow files müssen unter `.github\workflows\*.yml` abgelegt werden.
 
-## Ein Wort zur Zusammenarbeit
+## Organisation
 
 Bitte haben Sie immer den spezifischen Kontext Ihres Projektes vor Augen. Üblicherweise legt man am Anfang, bei einem "kleinen Hack" keinen Wert auf formelle Abläufe und Strukturen. Diese sind aber in großen Projekten unablässig.
 
@@ -307,7 +268,14 @@ Ein neues Feature wird in einem Issue beschrieben, in einem eigenen Branch imple
 
 Entsprechend ist die Dokumentation in Form der Issues und Commit-Messages der zentrale Schlüssel für die Interaktion im Softwareentwicklerteam. Entsprechend hoch ist Ihre Bedeutung anzusetzen.
 
+### Contribution.md Dateien
+
+Lassen Sie uns die Inhalte einer solchen Datei anhand eines konkreten Beispiels analysieren [https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md](https://github.com/tensorflow/tensorflow/blob/master/CONTRIBUTING.md)
+
 ### Commit Messages
+
+
+https://cbea.ms/git-commit/
 
 Stöbern Sie dafür mal durch anderen Projekte (zum Beispiel [GitHub Tensorflow](https://github.com/tensorflow/tensorflow)) und informieren Sie sich über deren Policies.
 
@@ -340,23 +308,18 @@ Folgende Regeln sollte man für die Beschreibung eines Commits berücksichtigen:
 
 > **Merke:** Beschreiben Sie in der Commit-Nachricht das was und warum, aber nicht das wie.
 
-Das _Semantic Versioning_ geht einen Schritt weiter und gibt den Commit-Messages eine feste Satzstruktur, vgl. [entwickler.de](
-https://entwickler.de/online/development/commit-messages-git-579873267.html)
+Das _Semantic Versioning_ geht einen Schritt weiter und gibt den Commit-Messages eine feste Satzstruktur, vgl. [entwickler.de](https://entwickler.de/online/development/commit-messages-git-579873267.html)
 
-### Generelles Vorgehen
-
-Lassen Sie uns einen Blick auf das Aufgabenblatt der kommenden Woche werfen. Ihre Aufgabe besteht darin, in einem zweier Team verschiedene Rollen einzunehmen.
+## Ausblick auf Aufgabe 3
 
 ```text @plantUML.png
 @startuml
 actor Maintainer
 actor Developer
 == Vorbereitung ==
-Maintainer --> Maintainer: Einfügen der Rolleninformation\n und des Fragebogenschlüssels\n in [[https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2021_Aufgabe_04/blob/main/team.config{Link zur Datei} team.config]]
-Developer --> Developer: Einfügen der Rolleninformation\n und des Fragebogenschlüssels\n in [[https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2021_Aufgabe_04/blob/main/team.config{Link zur Datei} team.config]]
+Maintainer --> Maintainer: Recherche zur Definition von Issue Templates, \nEinbetten einer Vorlage in das Projekt
 == Projekt Initialisierung ==
-Maintainer --> Maintainer: Konfiguration [[https://docs.github.com/en/organizations/organizing-members-into-teams/managing-code-review-assignment-for-your-team{Review Konfiguration} Reviews]]
-Maintainer --> Maintainer: Anlegen [[https://guides.github.com/features/issues/{Mastering Issues} Issue]] "txt_to_md"
+Maintainer --> Maintainer: Anlegen [[https://guides.github.com/features/issues/{Mastering Issues} Issue]] "python_vs_csharp"\nFestlegen der Subtasks (Inhalt, Fomatierung, \nCodebeispiel usw.) 
 Maintainer --> Developer:  Zuweisung Issue
 == Implementierung ==
 activate Maintainer
@@ -369,13 +332,15 @@ note right
  * Anlegen neue Datei
  * Kopieren der txt Inhalte
  * Formatieren als md
+ * Diskussion der Unterschiede Python vs. Csharp
  * Einbau einiger Typos, die
     der Maintainer finden soll
 end note
-Developer --> Developer:  Commiten
+Developer --> Developer:  Commiten (Referenz auf Issue!)
 Developer -> Developer:  Implementieren 2
 note right
- * Ergänzen eines Hello-World Codebeispiels
+ * OOP Csharp Codebeispiels 
+ * OOP Python Codebeispiels 
 end note
 Developer -> Developer:  Commiten
 == Review ==
@@ -385,13 +350,14 @@ Maintainer --> Maintainer:  Code Review / Kommentare
 Maintainer --> Developer :  Anforderung Nachbesserungen
 note left
 Bitte um zusätzliche
- * Bildunterschrift
+ * ggf. Codeformatierung
+ * Hinzufügen von Projektdateien
  * Rechtschreibkorrektur
 end note
 Developer -> Developer:  Implementieren 3
 note right
  * Korrektur der Fehler
- * Einfügen einer Beschreibung der Grafik
+ * ggf. Adaption der Darstellung
 end note
 Developer --> Maintainer :  Bitte um erneutes Rereview
 Maintainer --> Developer :  Review abgeschlossen
@@ -410,7 +376,8 @@ deactivate Maintainer
 
 !?[alt-text](https://www.youtube.com/watch?v=SWYqp7iY_Tc)
 
-- [ ] Recherchieren Sie die Methode des "Myers-diff-Algorithmus" https://blog.jcoglan.com/2017/02/12/the-myers-diff-algorithm-part-1/
-- [ ] Legen Sie sich ein lokales Repository mit git an und experimentieren Sie damit.
 - [ ] Richten Sie sich für Ihren GitHub-Account einen SSH basierten Zugriff ein (erspart einem das fortwährende Eingeben eines Passwortes).
+
+!?[](https://www.youtube.com/watch?v=snCP3c7wXw0)
+
 - [ ] Sie sollten Ihre erste Einladung für einen GitHub Classroom bereits per OPAL erhalten haben. Ausgehend davon werden Sie aufgefordert sich in Zweierteams zu organisieren und werden dann gemeinsam erste Gehversuche unter git zu unternehmen.

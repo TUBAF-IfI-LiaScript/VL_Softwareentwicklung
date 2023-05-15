@@ -982,5 +982,6 @@ Date:   Tue Apr 7 07:01:02 2020 +0200
 
 ## Aufgaben
 
+- [ ] Recherchieren Sie die Methode des "Myers-diff-Algorithmus" https://blog.jcoglan.com/2017/02/12/the-myers-diff-algorithm-part-1/
 - [ ] Legen Sie sich einen GitHub Account an.
 - [ ] Experimentieren Sie mit lokalen Repositories!
