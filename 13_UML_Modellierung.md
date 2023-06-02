@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 comment:  Prinzipien des (objektorientierten) Softwareentwurfs, Motivation der Modellierung von Software, Unified Modeling Language
@@ -40,13 +40,41 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 Die erste Aufgabe unter Zuhilfenahme von git / GitHub ist angelaufen. Setzen Sie sich in dieser Woche, soweit das noch nicht geschehen ist, intensiv damit auseinander! Die Techniken sind von zentraler Bedeutung für die weiteren Aufgabenblätter.
 
++ Verwenden Sie wichtige Github-Features wie
 
-Anmerkungen:
+```
+Issues                            | + - + + + + + - + + + - + - + + - + - - + | 14/21
+Issue-Template                    | + - - - + + + - - + - - + - - - - + - - + |  8/21
+PR                                | + + + + + + + - - + + - + - - + - + - - + | 13/21
+PR Review                         | - - - + + - - - - - + - + - - + - + - - - |  6/21
+Branches-Verwendung               | + + + + + + + - - + + - + - - + - + - - + | 13/21
+Release                           | + - + - + + + - - - - - + - - - - + - - + |
+```
 
-+ Versehen Sie Ihre Commits mit aussagekräftigen Bezeichnungen -> [Anleitung](https://t3n.de/news/schreibt-richtig-gute-1214910/)
-+ Beenden Sie das Projekt mit der Veröffentlichung eines Release!
++ Strukturieren Sie Ihr Projekt in Ordnern (C# Beispiel, Python Beispiel, Text)
 
-> Tragen Sie bitte Ihre Fragebogenschlüssel in die Datei team.config ein. Dies hilft bei der wissenschaftlichen Aufbereitung der Daten ungemein.
+```
+Struktur vorhanden                | - + - - + - - - - - - - + - - - - - - - - |
+```
++ Fügen Sie immer alle notwendigen Informationen für die Installation bei (Config Files, Pipenv etc., im konkreten Fall Projekt-Datei)
+
+```
+C#-Projektdatei                   | - + - - - + - - - - + - + - - - - - - - - |
+```
+
++ Umgang mit Issues
+```
+Issues erstellt                   | + - + + + + + - + + + - + - + + - + - - + | 
+Issues geschlossen                | + - + - + + + - - - + - + - - - - + - - + |
+Release        	                  | + - + - + + + - - - - - + - - - - + - - + |
+```
+
++ Umgang mit Branches
+```
+merged Branches nicht geschlossen | 1 2 9 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 |
+Branches nicht gemerged           | 1 0 1 3 1 0 2 0 0 1 0 0 2 0 0 2 0 0 0 0 0 |
+Release                           | + - + - + + + - - - - - + - - - - + - - + |
+```
 
 ## Motivation des Modellierungsgedankens
 
@@ -324,7 +352,7 @@ klassischerweise hierachische Struktur von Klassen.
 
 
 <!--
-style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ````ascii
 
@@ -502,7 +530,7 @@ dass am Ende die erwartete Anwendung realisiert wird?
                                          {{2-3}}
 ****************************************************************************
 <!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ````````````
 
@@ -526,10 +554,8 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
 vgl. zum Beispiel [Link](https://www.johner-institut.de/blog/iec-62304-medizinische-software/v-modell/)
 
-Achtung: Das V-Modell ist nur eine Variante eines Vorgehensmodells, moderne
-Entwicklungen stellen eher agile Methoden in den Vordergrund.
-
-vgl. zum Beispiel [Link](https://entwickler.de/online/agile/agile-methoden-einfuehrung-209035.html)
+> Achtung: Das V-Modell ist nur eine Variante eines Vorgehensmodells, moderne
+Entwicklungen stellen eher agile Methoden in den Vordergrund vgl. zum Beispiel [Link](https://entwickler.de/online/agile/agile-methoden-einfuehrung-209035.html)
 
 ****************************************************************************
 
