@@ -765,7 +765,7 @@ Ein Konstruktor kann einen anderen Konstruktor der gleichen Klasse über das
 Schlüsselwort `this` aufrufen. Dabei kann der Aufruf mit oder ohne Parameter
 erfolgen.
 
-```csharp    ReadOnlyVsConst
+```csharp    ConstructorCallWithThis
 using System;
 
 class Car
@@ -916,7 +916,7 @@ Mit Finalizern (die auch als Destruktoren bezeichnet werden) werden alle
 erforderlichen endgültigen Bereinigungen durchgeführt, wenn eine Klasseninstanz
 vom Garbage Collector gesammelt wird.
 
-```csharp    ReadOnlyVsConst
+```csharp    FinalizerExample
 using System;
 
 public class Person
@@ -979,7 +979,7 @@ Dabei können durchaus mehrere Eigenschaften auf eine private Variable verweisen
 Für den Benutzer eines Objekts erscheint eine Eigenschaft wie ein Feld; der
 Zugriff auf die Eigenschaft erfordert dieselbe Syntax.
 
-```csharp    ReadOnlyVsConst
+```csharp    PropertyExample
 using System;
 
 public class Vorlesung
