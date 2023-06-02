@@ -554,8 +554,7 @@ style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-
 
 vgl. zum Beispiel [Link](https://www.johner-institut.de/blog/iec-62304-medizinische-software/v-modell/)
 
-> Achtung: Das V-Modell ist nur eine Variante eines Vorgehensmodells, moderne
-Entwicklungen stellen eher agile Methoden in den Vordergrund vgl. zum Beispiel [Link](https://entwickler.de/online/agile/agile-methoden-einfuehrung-209035.html)
+> Achtung: Das V-Modell ist nur eine Variante eines Vorgehensmodells, moderne Entwicklungen stellen eher agile Methoden in den Vordergrund vgl. zum Beispiel [Link](https://entwickler.de/online/agile/agile-methoden-einfuehrung-209035.html)
 
 ****************************************************************************
 
