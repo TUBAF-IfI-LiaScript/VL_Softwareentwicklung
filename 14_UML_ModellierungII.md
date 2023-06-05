@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 comment:  Klassifikation von UML Diagrammtypen, Anwendungsfall Diagramm, Aktivitätsdiagramm, Sequenzdiagramm, Klassendiagramm, Objektdiagramm, UML Tools
@@ -12,7 +12,6 @@ title: Modellierung von Software II
 
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
-        https://github.com/LiaTemplates/Pyodide
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
@@ -46,38 +45,9 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 + Einführung in die Softwareentwicklung
 
     + Voraussetzung für den positiven Abschluss ist die erfolgreiche Bearbeitung der letzten Übungsaufgabe.
-    + Es ist keine Anmeldung zur Prüfung notwendig!
+     Es ist keine Anmeldung zur Prüfung notwendig!
 
 ## Neues aus GitHub
-
-Statistiken der Git-Aktivitätsbalken
-====================================
-
-<!--data-type="none"-->
-| TeamKey | branch_count | commit_count | release_count | stars_count |
-| ------- | ------------ | ------------ | ------------- | ----------- |
-| 0       | 2            | 8            | 1             | 2           |
-| 1       | 3            | 2            | 1             | 0           |
-| 2       | 2            | 5            | 1             | 0           |
-| 3       | 1            | 0            | 0             | 0           |
-| 4       | 2            | 11           | 1             | 0           |
-| 5       | 1            | 17           | 1             | 0           |
-| 6       | 3            | 12           | 2             | 0           |
-| 7       | 2            | 28           | 0             | 0           |
-| 8       | 2            | 2            | 2             | 0           |
-| 9       | 2            | 4            | 0             | 1           |
-| 10      | 1            | 15           | 1             | 0           |
-| 11      | 1            | 6            | 1             | 0           |
-| 12      | 2            | 10           | 4             | 0           |
-| 13      | 3            | 24           | 1             | 0           |
-| 14      | 3            | 11           | 1             | 2           |
-| 15      | 2            | 13           | 1             | 0           |
-| 16      | 2            | 5            | 0             | 0           |
-| 17      | 2            | 6            | 1             | 0           |
-
-
-Commit Messages
-====================================
 
 <!--data-type="none"-->
 | Messag                                             | Häufigkeit |
@@ -98,6 +68,7 @@ Commit Messages
 | `Merge pull request #2 from Ifi-Softwareentwick..` | 2          |
 | `Update converttxttomd.cs`                         | 2          |
 
+> Gewöhnen Sie sich an Commit-Messages nach bestimmten Schemata zu verfassen.
 
 ## UML Diagrammtypen
 
@@ -459,12 +430,6 @@ Modellierung in UML
 
 ```text @plantUML.png
 @startuml
-
-@enduml
-```
-
-```text @plantUML.png
-@startuml
 skinparam classAttributeIconSize 0
 
 class Zähler{
@@ -483,7 +448,7 @@ class Zähler:
 A = Zähler()
 print(A.i)
 ```
-@LIA.eval(`["main.py"]`, `python -m compileall .`, `python main.pyc`)
+@LIA.evalWithDebug(`["main.py"]`, `python2.7 -m compileall .`, `python2.7 main.pyc`)
 
 
 Ausführbarer Code in C++ 20
@@ -741,9 +706,9 @@ Die Möglichkeiten der Verknüpfung zwischen Klassen und Interfaces lassen sich 
 
 | Beziehung                             | Darstellung                                                                                                                                          | Bedeutung                                                                                  |
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Generalisierung                       | <img src="https://www.plantuml.com/plantuml/png/LOv12W8n40Jlyuh-m7vW3x9NRu8l2CcO7KmcC9diHVsxgoZehMcgw5ww1_DH2wsI654i5gR25uStcEJLaSGukZIbM4BlEB7rfZS2D5IUSNOJpGHipVwQnrSmsO9VXoP-MNWd7RMopJYgSsRROVhXC4ttmsU95jQqNtm2" width="228"> | gerichtete Beziehung zwischen einer generelleren und einer spezielleren Klasse (Vererbung) |
-| Assoziationen (ohne Anpassung)        | <img src="https://www.plantuml.com/plantuml/png/NSon3S9038NXtbEy1LWW1Kf1Hya4nvr9B3csvFFHeEoE0550-_H_R-vP8iUcj4fZL8cgJCgtH3f2bZNH9BYck15LBRtZx9R-8C3AnXCk6M8B0Rreymad7rTbsh_riCQl6dUFFm4hTVtPTgBtFGx7ZwIPhOrDdm00"width="80">          | beschreiben die Verknüpfung allgemein                                                      |
-| Assoziation (Komposition/Aggregation) | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Komposition_Aggregation.svg/1920px-Komposition_Aggregation.svg.png"width="228">  | Bildet Beziehungen von einem Ganzen und seinen Teilen ab                                   |
+| Generalisierung                       | <img src="https://www.plantuml.com/plantuml/png/LOv12W8n40Jlyuh-m7vW3x9NRu8l2CcO7KmcC9diHVsxgoZehMcgw5ww1_DH2wsI654i5gR25uStcEJLaSGukZIbM4BlEB7rfZS2D5IUSNOJpGHipVwQnrSmsO9VXoP-MNWd7RMopJYgSsRROVhXC4ttmsU95jQqNtm2" width="660"> | gerichtete Beziehung zwischen einer generelleren und einer spezielleren Klasse (Vererbung) |
+| Assoziationen (ohne Anpassung)        | <img src="https://www.plantuml.com/plantuml/png/NSon3S9038NXtbEy1LWW1Kf1Hya4nvr9B3csvFFHeEoE0550-_H_R-vP8iUcj4fZL8cgJCgtH3f2bZNH9BYck15LBRtZx9R-8C3AnXCk6M8B0Rreymad7rTbsh_riCQl6dUFFm4hTVtPTgBtFGx7ZwIPhOrDdm00"width="160">          | beschreiben die Verknüpfung allgemein                                                      |
+| Assoziation (Komposition/Aggregation) | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Komposition_Aggregation.svg/1920px-Komposition_Aggregation.svg.png"width="660">  | Bildet Beziehungen von einem Ganzen und seinen Teilen ab                                   |
 
 ## Verwendung von UML Tools
 
