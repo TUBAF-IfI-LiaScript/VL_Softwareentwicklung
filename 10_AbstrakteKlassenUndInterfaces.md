@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.12
+version:  1.0.13
 language: de
 narrator: Deutsch Female
 comment:  Lösungsansatz und Formen der Versionsverwaltung, Strategien der Konfliktvermeidung, Git
@@ -87,7 +87,7 @@ public class Program
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+@LIA.evalWithDebug(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Abstrakte Klassen dienen somit als Template für nachgeordnete Unterklassen. Neben Methoden können auch Properties und Indexer als abstrakt deklariert werden.
 
@@ -338,13 +338,6 @@ public class SampleClass : IInterfaceA, IInterfaceB
 
 Allerdings kann diese Funktion dann nur über die Schnittstelle und nicht über die Klasse aufgerufen werden.
 
-## Aufgaben
-
-- [ ] Setzen Sie sich mit den Konzepten von Interfaces auseinander!
-
-!?[Interfaces](https://www.youtube.com/watch?v=_Zvi21_kMw4)
-
-!?[Interfaces](https://www.youtube.com/watch?v=A7qwuFnyIpM)
 
 ## Beispiel der Woche
 
@@ -501,3 +494,11 @@ dotnet add package DocumentFormat.OpenXml
 > __Achtung!__ Die Lösung ignoriert eine Vielzahl von Hinweisen des Compilers auf mögliche `null references`. In einer realen Implementierung sollte dies berücksichtigt werden.
 
 ***************************************************************
+
+## Aufgaben
+
+- [ ] Setzen Sie sich mit den Konzepten von Interfaces auseinander!
+
+!?[Interfaces](https://www.youtube.com/watch?v=_Zvi21_kMw4)
+
+!?[Interfaces](https://www.youtube.com/watch?v=A7qwuFnyIpM)

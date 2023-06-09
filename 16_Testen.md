@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 comment:  Softwarefehler, Testen zur Qualitätssicherung, Planung von Tests, Konzepte und Umsetzung in dotnet
@@ -35,74 +35,6 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
-
-## Neues aus der GitHub Woche
-
-                  {{0-1}}
-****************************************************************
-
-Wann arbeiten Sie üblicherweise?
--------------------------------
-
-<!--
-data-type="heatmap"
-data-title="Commit Anzahl"
-data-xlabel="Wochentage"
-data-ylabel="Stunden des Tages"
--->
-|            | 9   | 10  | 11  | 12  | 13  | 14  | 15  | 16  | 17  | 18  | 19  | 20  | 21  | 22  |
-| ---------- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Montag     |     |     |     |     | 3   | 38  | 37  |     |     |     |     |     |     |     |
-| Dienstag   |     |     | 36  | 36  |     | 15  | 1   |     |     |     |     | 1   |     | 1   |
-| Mittwoch   | 19  | 12  | 1   |     |     |     |     | 3   |     |     |     |     |     |     |
-| Donnerstag |     |     |     |     |     |     |     |     |     |     |     |     | 2   |     |
-| Freitag    |     |     | 3   |     |     |     | 3   | 1   |     |     | 3   |     |     |     |
-
-
-Zum Vergleich die Übungsslots:
-
- + Mo 14 Uhr
- + Di 14 Uhr
- + Di 11 Uhr
- + Mi 9:15
-
-****************************************************************
-
-
-             {{1-2}}
-****************************************************************
-
-
-Wie stabil sind die Teams?
--------------------------------
-
-<!--
-data-type="none"
-data-title="Commit Anzahl"
-data-transpose="false"
--->
-| teamKey | Task 3                             | Task 4                                     |
-| ------- | ----------------------------------- | ------------------------------------- |
-| 0       | [0, 1]                              | <!-- style="background: coral"-->[0]  |
-| 1       | [5]                                 | [5]                                   |
-| 2       | [8, 7]                              | [8, 7]                                |
-| 3       | <!-- style="background: red"-->  [] | <!-- style="background: red"-->[]     |
-| 4       | [9, 10]                             | [9, 10]                               |
-| 5       | [11, 12]                            | [11, 12]                              |
-| 6       | [13, 14]                            | [13, 14]                              |
-| 7       | [16, 15]                            | <!-- style="background: coral"-->[16] |
-| 8       | [18, 19]                            | [18, 19]                              |
-| 9       | [20, 21]                            | [20, 21]                              |
-| 10      | [22, 23]                            | [22, 23]                              |
-| 11      | [24, 25]                            | [24, 25]                              |
-| 12      | [26, 27]                            | [26, 27]                              |
-| 13      | [28, 29]                            | <!-- style="background: coral"-->[28] |
-| 14      | [30, 31]                            | [30, 31]                              |
-| 15      | [32, 33]                            | [32, 33]                              |
-| 16      | [34, 35]                            | <!-- style="background: red"-->[]     |
-| 17      | [36, 37]                            | [36, 37]                              |
-
-****************************************************************
 
 ## Exkurs - Abhängigkeitsmanagment / Paketmanagement
 
@@ -191,7 +123,7 @@ class Program
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MathNet.Symbolics" Version="0.24.0" />
@@ -553,10 +485,10 @@ anhand differenzierter Metriken erfolgen:
 Anweisungsüberdeckung (auch $C_0$-Test genannt) zerlegt das Programm statisch in
 seine Anweisungen und bestimmt den Anteil der in den Testfällen berücksichtigten
 Anweisungen. Üblich ist eine Prüfung von 95%-100% aller Anweisungen durch als
-$C-0$-Kriterium anzustreben:
+$C_0$-Kriterium anzustreben:
 
 $$
-C_0 = \frac{Anzahl überdeckte Anzahl}{Gesamtanzahl der Anweisungen}
+C_0 = \frac{\text{Anzahl überdeckte Anweisungen}}{\text{Gesamtanzahl der Anweisungen}}
 $$
 
 ```csharp
@@ -611,7 +543,7 @@ Softwareteile, die oft durchlaufen werden, gezielt optimieren.
 Die [Zyklomatische Komplexität](https://de.wikipedia.org/wiki/McCabe-Metrik) gibt an, wie viele Testfälle höchstens nötig sind, um eine Zweigüberdeckung zu erreichen.
 
 $$
-C_1 = \frac{Anzahl überdeckten Zweige}{Gesamtanzahl der Zweige}
+C_1 = \frac{\text{Anzahl überdeckten Zweige}}{\text{Gesamtanzahl der Zweige}}
 $$
 
 ```csharp
@@ -762,7 +694,7 @@ class Test
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <DefineConstants>CONDITION2;</DefineConstants>
   </PropertyGroup>
 </Project>
