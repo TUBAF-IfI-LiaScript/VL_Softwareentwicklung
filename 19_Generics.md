@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 comment:  Generische Typen und Methoden, Constrains und Vererbung bei generischen Typen
@@ -491,7 +491,10 @@ public class Program{
 
 Wie bereits bei den generischen Methoden angedeutet können wir mittels "Beschränkungen" sicherstellen, dass eine gültige Operation für einen Datentyp existiert.
 
-```csharp          GenericCompare
+
+```csharp    initKeyword
+using System;
+
 using System;
 
 public class Program{
@@ -507,7 +510,16 @@ public class Program{
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+```xml   -myproject.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+     <EnablePreviewFeatures>true</EnablePreviewFeatures>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
 Folglich ist es notwendig die Allgemeinheit der generischen Methoden oder Klassen zu
 beschränken. Man definiert Beschänkungen oder *Constraints*, die die Breite der verwendbaren Datentypen einschränken. Die Typprüfung bezieht diese Informationen dann ein.
@@ -518,6 +530,8 @@ beschränken. Man definiert Beschänkungen oder *Constraints*, die die Breite de
 | `where T : class`           | ... ein Verweistyp sein.                                |
 | `where T : <Basisklasse>`   | ... die Basisklasse sein oder von ihr abgeleitete sein. |
 | `where T : <Schnittstelle>` | ... die Schnittstelle sein oder diese  implementieren.  |
+
+> Unter `net7` lässt sich obiges Problem sehr elegant mit einem `where T : INumber<T>` lösen. Testen Sie dieses Feature auf Ihrem lokalen Rechner. [Link](https://devblogs.microsoft.com/dotnet/dotnet-7-generic-math/)
 
 Das folgende Beispiel setzt die Möglichkeiten der Beschränkung konsequent um und lässt nur
 `Employee` selbst oder abgeleitete Typen zu. Damit wird sichergestellt, dass die Methoden,
