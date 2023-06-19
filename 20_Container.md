@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 comment:  Generelle Container und Datenkonzepte, Collections, Implementierung in Csharp und Anwendung der generischen Collections
@@ -19,6 +19,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 
 # Collections
+
 
 | Parameter                | Kursinformationen                                                                         |
 | ------------------------ | ----------------------------------------------------------------------------------------- |
@@ -144,11 +145,11 @@ In der vergangen Vorlesung haben wir über die Vorteile von generischen Speicher
 
 Beginnen wir zunächst mit einem Vergleich einiger listenähnlichen Konstrukte. Diese sind in den Namespaces `System.Collections` und `System.Collections.Generic` enthalten. Um zu vermeiden, dass diese beständig mitgeführt werden, betten wir sie mit `using` in unseren Code ein.
 
+
 ```csharp      ContainerTypes.cs
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
 
 public class Animal
 {
@@ -191,7 +192,16 @@ public class Program{
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+```xml   -myproject.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+
 
 
 Dabei setzen die vielfältigen Methoden Anforderungen an die im Container gespeicherten Werte.
@@ -200,7 +210,10 @@ Dabei setzen die vielfältigen Methoden Anforderungen an die im Container gespei
 using System;
 
 public class Point
-{>
+{
+    public int x;
+    public int y;
+    public Point(int x, int y){
         this.x = x;
         this.y = y;
     }
@@ -243,7 +256,15 @@ public class ArrayExamples  {
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+```xml   -myproject.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
 
 
