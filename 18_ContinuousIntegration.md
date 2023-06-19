@@ -53,8 +53,6 @@ Neben lokalen Jupyter Installationen bieten sich verschiedene Webdienste an:
 
 Eine gut Übersicht zu den Features bietet die Webseite [DataSchool](https://www.dataschool.io/cloud-services-for-jupyter-notebook/).
 
-> **Visual Studio Code integriert ein eigenes Plugin für die Ausführung von .Net Interactive Sessions [Tutorial](https://dev.to/kenakamu/time-to-learn-c-with-notebook-2gfj)**
-
 > **Nachteil 1:** Die Kombinierbarkeit von Markdown und ausführbarem Sourcecode ist die zentrale Stärke von Jupyter Notebooks aber auch ihre Schwäche!
 
 Das übergreifende Datenformat macht die Nachvollziehbarkeit von Code Änderungen schwer. Vor jedem Commit sollten entsprechend zumindest die Ausgaben gelöscht werden.
@@ -96,7 +94,9 @@ Das übergreifende Datenformat macht die Nachvollziehbarkeit von Code Änderunge
 
 > **Merke:** Jupyter Notebooks sind ein hervorragendes Werkzeug für schnelle Prototypen, API-Dokumentationen oder Vorträge mit Live Hacks aber ungeeignet für Projekte [persönliche Meinung des Vortragenden :-)].
 
-> **Hinweis:** Eine Beschreibung der Installationsprozedur für einen C#-Kernel finden Sie unter [Link](https://developers.refinitiv.com/en/article-catalog/article/using--net-core-in-jupyter-notebook)
+> **Hinweis:** Eine Beschreibung der Installationsprozedur für einen C#-Kernel finden Sie unter [Link](https://devblogs.microsoft.com/dotnet/net-core-with-juypter-notebooks-is-here-preview-1/)
+
+> **Hinweis:** Deutlich einfacher ist die Installation mit dem VSC Plugin "Polyglot Notebooks".
 
 
 ## Continuous integration (CI)
@@ -153,7 +153,7 @@ Welche Elemente machen somit eine CI Pipeline aus:
 * **Wo** (Runner) ausgeführt werden um
 * **Welches Ergebnis** (Artefakt) zu generieren
 
-Beschrieben werden die Pipelines unter GitHub and Gitlab in YAML einer Auszeichnungssprache für Datenstrukturen über sogenannte Folgen. Die YAML-Datei, die die Pipeline-Konfiguration spezifizieren müssen im GitHub-Repositorys im Verzeichnis .github/workflows liegen.
+Beschrieben werden die Pipelines unter GitHub and Gitlab in YAML einer Auszeichnungssprache für Datenstrukturen über sogenannte Folgen. Die YAML-Datei, die die Pipeline-Konfiguration spezifizieren müssen im GitHub-Repositorys im Verzeichnis `.github/workflows` liegen.
 
 ```yaml
 # Kommentare sind auch erlaubt
@@ -554,7 +554,7 @@ jobs:
 
 ## Aufgaben der Woche
 
-[ ] Klonen Sie mein Repository von [https://github.com/SebastianZug/CSharpExample](https://github.com/SebastianZug/CSharpExample)
-[ ] Ergänzen Sie in der Build Action ein weiteres Target, zum Beispiel "Windows"
-[ ] Erweitern Sie das Ganze um weitere Unit-Tests, ergänzen Sie den Eintrag in der README.md Datei
-[ ] Übernehmen Sie das Konzept der automatischen Generierung eines Klassendiagramm aus den Übungsblättern, so dass auf dem Deckblatt der Dokumentation die aktuelle Klassenstruktur, die automatisch generiert wurde, sichtbar wird.
+- [ ] Klonen Sie mein Repository von [https://github.com/SebastianZug/CSharpExample](https://github.com/SebastianZug/CSharpExample)
+- [ ] Ergänzen Sie in der Build Action ein weiteres Target, zum Beispiel "Windows"
+- [ ] Erweitern Sie das Ganze um weitere Unit-Tests, ergänzen Sie den Eintrag in der README.md Datei
+- [ ] Übernehmen Sie das Konzept der automatischen Generierung eines Klassendiagramm aus den Übungsblättern, so dass auf dem Deckblatt der Dokumentation die aktuelle Klassenstruktur, die automatisch generiert wurde, sichtbar wird.

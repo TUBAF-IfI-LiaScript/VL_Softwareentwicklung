@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 comment:  Generelle Container und Datenkonzepte, Collections, Implementierung in Csharp und Anwendung der generischen Collections
@@ -10,7 +10,6 @@ tags:
 logo:     
 
 import: https://github.com/liascript/CodeRunner
-        https://github.com/LiaTemplates/Pyodide
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
@@ -113,7 +112,7 @@ public class Program
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
@@ -201,10 +200,7 @@ Dabei setzen die vielfältigen Methoden Anforderungen an die im Container gespei
 using System;
 
 public class Point
-{
-    public int x;
-    public int y;
-    public Point(int x, int y){
+{>
         this.x = x;
         this.y = y;
     }
@@ -256,7 +252,7 @@ Worin liegt der Unterschied zu den bereits bekannten `Array` Implementierung?
 | Feature             | Array                           | `ArrayList`                             | `Array<T>`          |
 | ------------------- | ------------------------------- | --------------------------------------- | ------------------- |
 | Generisch?          | nein                            | nein                                    | ja                    |
-| Anzahl der Elemente | feste Größe                     | variabel                                | variabel            |
+| Anzahl der Elemente | feste Größe                     | variabel    >                            | variabel            |
 | Datentyp            | muss homogen sein (typsicher) | kann variieren (nicht streng typisiert) | muss homogen sein |
 | null                | nicht akzeptiert                | wird akzeptiert                         | wird akzeptiert     |
 | Dimensionen         | multidimensional `array[X][Y]`  | -                                       | -                   |
@@ -433,23 +429,23 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
                 Non-generic                             Generic
 
             +----------------+                     +-----------------+
-            | IEnumerator    |                     | IEnumerator﹤T﹥  |
+            | IEnumerator    |                     | IEnumerator﹤T﹥ |
             +----------------+                     +-----------------+
 
             +----------------+                     +-----------------+
-            | IEnumerable    | ⊲------------------ | IEnumerable﹤T﹥  |
+            | IEnumerable    | ⊲------------------ | IEnumerable﹤T﹥ |
             +----------------+                     +-----------------+
                     ∆                                       ∆
                     |                                       |
             +----------------+                     +-----------------+
-            | ICollection    |                     | ICollection﹤T﹥  |
+            | ICollection    |                     | ICollection﹤T﹥ |
             +----------------+                     +-----------------+
                     ∆                                       ∆
                     |                                       |
         .-----------+----------.                  .---------+----------.
         |                      |                  |                    |
  +----------------+  +----------------+   +-----------------+  +----------------+
- | IDictionary    |  | IList          |   | IDictionary﹤T﹥  |  | IList﹤T﹥       |
+ | IDictionary    |  | IList          |   | IDictionary﹤T﹥ |  | IList﹤T﹥    |
  +----------------+  +----------------+   +-----------------+  +----------------+
 ````````````
 
@@ -616,7 +612,7 @@ print(your_set)
 
 print(my_set | your_set)
 ```
-@Pyodide.eval
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 ## Aufgaben der Woche
 
