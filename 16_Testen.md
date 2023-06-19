@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.7
+version:  1.0.8
 language: de
 narrator: Deutsch Female
 comment:  Softwarefehler, Testen zur Qualitätssicherung, Planung von Tests, Konzepte und Umsetzung in dotnet
@@ -20,7 +20,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/16_Testen.md)
 
-# Modellierung von Software
+# Testen von Software
 
 | Parameter                | Kursinformationen                                                                      |
 | ------------------------ | -------------------------------------------------------------------------------------- |
