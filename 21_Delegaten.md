@@ -730,6 +730,6 @@ Warum würde die Verwendung von Action an dieser Stelle einen Fehler generieren?
 
 ## Aufgaben der Woche
 
-- [ ] Vertiefen Sie das erlernte anhand von zusätzichen Materialien
+- [ ] Vertiefen Sie das Erlernte anhand von zusätzichen Materialien
 
 !?[alt-text](https://www.youtube.com/watch?v=R8Blt5c-Vi4)
