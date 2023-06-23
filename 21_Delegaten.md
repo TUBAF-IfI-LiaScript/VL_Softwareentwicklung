@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 comment:  Grundidee, Multicast Delegaten, Anonyme/Lambda Funktionen, generische Delegaten, Action und Func
@@ -35,12 +35,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ## Hinweise zu den praktischen Prüfungsprojekten
 
-Was gab es an Feedbacks am Wochenende?
-
-+ _Rote Debug-Ausgaben auf schwarzem Grund sind weniger gut zu lesen!_
-+ _Die Schriftgröße während der Vorlesung ist zu klein!_
-+ _Wie umfangreich sollen die praktischen Prüfungsleistungen sein?_ [Projektaufgaben](https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2022_Projektaufgaben)
-+ _Die praktischen Codebeispiele sind sehr abstrakt!_
+[Projektaufgaben](https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2023_Projektaufgaben)
 
 ## Motivation und Konzept der Delegaten
 
@@ -423,6 +418,7 @@ public class Student :  IComparable<Student>
         return "ID: " + Matrikel + "   Name: " + Name;
     }
 
+    // Default Vergleicher 
     public int CompareTo(Student compareStudent)
     {
         if (compareStudent == null)
@@ -434,6 +430,7 @@ public class Student :  IComparable<Student>
 
 public class Example
 {
+    // Alternativer Vergleicher, der als Delegate übergeben wird
     public static int CompareStudentsByName(Student x, Student y)
     {
         if (x.Name == null && y.Name == null) return 0;
@@ -448,7 +445,7 @@ public class Example
         students.Add(new Student() { Name = "Cotta", Matrikel = 1434 });
         students.Add(new Student() { Name= "Humboldt", Matrikel = 1234 });
         students.Add(new Student() { Name = "Zeuner", Matrikel = 1634 }); ;
-        // Name intentionally left null.
+        // Hier wird der Name nicht gesetzt
         students.Add(new Student() {  Matrikel = 1334 });
         students.Add(new Student() { Name = "Hardenberg", Matrikel = 1444 });
         students.Add(new Student() { Name = "Winkler", Matrikel = 1534 });
@@ -481,9 +478,11 @@ public class Example
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+@LIA.evalWithDebug(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ## Praktische Implementierung
+
+> Bislang bezogen sich unsere Delegaten immer auf statische Methoden oder Methoden einer Klasseninstanz. Darüber hinaus können hier aber auch alternative Formate genutzt werden, um die eigentliche Implementierung zu realisieren.
 
 Neben dem Basiskonzept der Delegaten können in C# spezifischere Realisierungen
 umgesetzt werden, die die Anwendung flexibler bzw. effizienter machen.
@@ -634,6 +633,7 @@ public class Program
       return x*x;
   }
 
+  // Ausgabefunktion für die Visualisierung der Ergebnisse
   static void printArray<T>(T[] values){
       foreach(T i in values)
           Console.Write(i + " ");
