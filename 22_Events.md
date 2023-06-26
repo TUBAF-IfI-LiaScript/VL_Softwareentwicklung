@@ -36,11 +36,9 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ## Allgemeine Hinweise
 
-> **1. Nächste Woche Freitag findet keine Vorlesung statt!**
+> **1. Verwenden Sie einen _Code Formater_, der Ihnen bei der Restrukturierung Ihres Codes hilft!**
 
-> **2. Verwenden Sie einen _Code Formater_, der Ihnen bei der Restrukturierung Ihres Codes hilft!**
-
-> **3. Evaluieren Sie die Hinweise der Code Analyse sorgfältig, entwerfen Sie ggf. eigene Regeln.**
+> **2. Evaluieren Sie die Hinweise der Code Analyse sorgfältig, entwerfen Sie ggf. eigene Regeln.**
 
 ## Nachgefragt
 
@@ -80,19 +78,23 @@ public class Program
     Console.WriteLine("Zahl von eingebundenen Delegates {0}",
                       computer3.GetInvocationList().GetLength(0));
 
+    // Individueller Aufruf der einzelnen Einträge
     var x = computer3.GetInvocationList();
     Console.WriteLine("Typ der Invocation List {0}", x.GetType());
     Console.WriteLine(x[0].DynamicInvoke(1,2));
-    Console.WriteLine(x[1].DynamicInvoke(3,5));                        
+    Console.WriteLine(x[1].DynamicInvoke(3,5));   
+
+    // Übergreifender Aufruf aller Einträge                     
+    Console.WriteLine(computer3(40,8));
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+@LIA.evalWithDebug(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > **Frage:** Wie ließe sich das Codebeispiel verbessern?
 
 {{1}}
-Nutzen Sie einen vorimplementierten (generischen) Delegaten
+Nutzen Sie einen vorimplementierten (generischen) Delegaten! Wie war das gleich noch `Func` oder `Action`?
 
 
 ## Wiederholung
@@ -122,7 +124,7 @@ Wie war das noch mal, welche Elemente (Member) zeichnen einen Klasse unter C# au
 | Konstanten      | Konstante Werte innerhalb einer Klasse                                  |
 | Felder          | Variablen der Klasse                                                    |
 | Methoden        | Funktionen, die der Klasse zugeordnet sind                              |
-| Eigenschaften   | Aktionen beim Lesen und Schreiben auf geschützter Variablen             |
+| Eigenschaften   | Mechanismen zum Lesen und Schreiben auf geschützter Variablen           |
 | Indexer         | Spezifikation eines Indexoperators für die Klasse                       |
 | Ereignisse      | ?                                                                       |
 | Operatoren      | Definition von eigenen Symbolen für die Arbeit mit Instanzen der Klasse |
@@ -168,7 +170,7 @@ C# etabliert für die Nutzung der Pub-Sub Kommunikation *Events*. Dies sind spez
 Der Publisher ist eine Klasse, die ein Delegaten enthält. Der Publisher entscheidet damit darüber, wann Nachrichten versand werden.
 Auf der anderen Seite finden sich die Subscriber-Methoden, die ausgehend vom aktivierten Delegaten im Publisher zur Ausführung kommen. Ein Subscriber hat keine Kenntnis von anderen Subscribern. Events sind ein Feature aus C# dass dieses Pattern formalisiert.
 
-> Merke: Ein Event ist ein Klassenmember, dass diejenigen Features des Delegatenkonzepts nutzt, um eine Publisher-Subscribe Interaktion zu realisieren.
+> Merke: Ein Event ist ein Klassenmember, dass die Features des Delegatenkonzepts nutzt, um eine Publisher-Subscribe Interaktion zu realisieren.
 
 Im einfachsten Fall lässt sich das Event-Konzept folgendermaßen anwenden:
 
@@ -298,9 +300,7 @@ class Program
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-+ Erweitern Sie den Code so, dass Parameter an die Callback-Methoden übergeben werden können
+@LIA.evalWithDebug(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ********************************************************************************
 
@@ -519,3 +519,5 @@ class Program {
 ### Grafische Nutzer Interfaces
 
 siehe Codebeispiel `wpf_sharp` im Projektordner
+
+![BlockedGUI](./img/23_Multithreading/WindowsFormBlocked.png)

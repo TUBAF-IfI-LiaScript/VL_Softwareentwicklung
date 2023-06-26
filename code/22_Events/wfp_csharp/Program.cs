@@ -23,7 +23,7 @@ namespace Delegates
 
             //Event handler is assigned to
             // the button click event
-            btn.Click += new EventHandler(onClcik);
+            btn.Click += new EventHandler(onClick);
             add += new DelEventHandler(Initiate);
 
             TextBox Mytextbox = new TextBox();
@@ -32,7 +32,7 @@ namespace Delegates
                     Mytextbox.ForeColor = Color.DarkOliveGreen;
                     Mytextbox.AutoSize = true;
                     Mytextbox.Name = "text_box1";
-                    Mytextbox.Text = "Running Update!";
+                    Mytextbox.Text = "Sorry running Update!";
 
 
 
@@ -47,9 +47,9 @@ namespace Delegates
         }
 
         //call when button clicked
-        public void onClcik(object sender, EventArgs e)
+        public void onClick(object sender, EventArgs e)
         {
-            MessageBox.Show("onClcik");
+            MessageBox.Show("onClick");
         }
         static void Main(string[] args)
         {
