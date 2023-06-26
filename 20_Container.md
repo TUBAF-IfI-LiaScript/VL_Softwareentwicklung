@@ -450,23 +450,23 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
                 Non-generic                             Generic
 
             +----------------+                     +-----------------+
-            | IEnumerator    |                     | IEnumerator﹤T﹥ |
+            | IEnumerator    |                     | IEnumerator﹤T﹥|
             +----------------+                     +-----------------+
 
             +----------------+                     +-----------------+
-            | IEnumerable    | ⊲------------------ | IEnumerable﹤T﹥ |
+            | IEnumerable    | ⊲------------------ | IEnumerable﹤T﹥|
             +----------------+                     +-----------------+
                     ∆                                       ∆
                     |                                       |
             +----------------+                     +-----------------+
-            | ICollection    |                     | ICollection﹤T﹥ |
+            | ICollection    |                     | ICollection﹤T﹥|
             +----------------+                     +-----------------+
                     ∆                                       ∆
                     |                                       |
         .-----------+----------.                  .---------+----------.
         |                      |                  |                    |
  +----------------+  +----------------+   +-----------------+  +----------------+
- | IDictionary    |  | IList          |   | IDictionary﹤T﹥ |  | IList﹤T﹥    |
+ | IDictionary    |  | IList          |   | IDictionary﹤T﹥|  | IList﹤T﹥     |
  +----------------+  +----------------+   +-----------------+  +----------------+
 ````````````
 
@@ -502,7 +502,8 @@ Im Folgenden sollen Beispiele für die aufgeführten Datenstrukturen dargestellt
 
 ## Anwendung der Generic Collections
 
-**List<T>**
+List<T>
+=====================
 
 ```csharp      ListExample
 using System;
@@ -531,7 +532,8 @@ public class Program{
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-**Dictionary<T, U>**
+Dictionary<T, U>
+=====================
 
 ```csharp      DictionaryExample
 using System;
@@ -566,7 +568,8 @@ public class Program{
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-**HashSet<T>**
+HashSet<T>
+=====================
 
 ```csharp      DictionaryExample
 using System;
@@ -604,6 +607,14 @@ public class Program{
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+```csharp
+public class a : IEqualityComparer<a>
+{
+  public int GetHashCode(a obj) { /* Implementation */ }
+  public bool Equals(a obj1, a obj2) { /* Implementation */ }
+}
+```
 
 ## Achtung!
 
