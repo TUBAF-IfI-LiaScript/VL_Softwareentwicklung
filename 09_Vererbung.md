@@ -33,11 +33,6 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
-## Auf Nachfrage ...
-
-> Hinweis auf die Lauffähigkeit der _Fat Arrow Syntax_ unter C# 7.0. siehe [Beispiel aus Vorlesung 7](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/07_OOPGrundlagenI.md#5)
-
-
 ## Vererbung in C#
 
                                       {{0-1}}
