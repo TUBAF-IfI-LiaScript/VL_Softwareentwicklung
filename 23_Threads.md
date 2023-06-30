@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 comment:  Multithreading Konzepte, Thread-Modell und Interaktion, Implementierung in C#, Datenaustausch, Locking, Thread-Pool
@@ -10,6 +10,7 @@ tags:
 logo:     
 
 import: https://github.com/liascript/CodeRunner
+        https://github.com/LiaTemplates/plantUML/blob/0.0.10/README.md
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
@@ -50,7 +51,7 @@ Die Implementierung von Threads und Prozessen unterscheidet sich von Betriebssys
 
 Innerhalb eines Prozesses können mehrere Threads existieren, die gleichzeitig ausgeführt werden und Ressourcen wie Speicher gemeinsam nutzen, während verschiedene Prozesse diese Ressourcen nicht gemeinsam nutzen. Insbesondere teilen sich die Threads eines Prozesses seinen ausführbaren Code und die Werte seiner dynamisch zugewiesenen Variablen und seiner nicht thread-lokalen globalen Variablen zu einem bestimmten Zeitpunkt.
 
-![Vererbungsbeispiel](./img/23_Multithreading/ProcessVsThread.png "Darstellung eines Prozesses mit mehreren Tasks [^Cburnett]")<!-- width="50%" -->
+![Vererbungsbeispiel](./img/23_Multithreading/ProcessVsThread.png "Darstellung eines Prozesses mit mehreren Tasks [^Cburnett]")<!-- width="40%" -->
 
 Auf eine Single-Core Rechner organisiert das Betriebssystem Zeitscheiben (unter
 Windows üblicherweise 20ms) um Nebenläufigkeit zu simulieren. Eine Multiprozessor-Maschine kann aber auch direkt auf die Rechenkapazität eines weiteren Prozessors
@@ -59,61 +60,23 @@ durch den gemeinsamen Zugriff auf die Konsole limitiert ist.
 
 > Vorteile von Multi-Threading Applikationen:
 >
-> - Ausnutzung der Hardwarefähigkeiten (MultiCore-Systeme) zur Effizienzsteigerung
+> - Ausnutzung der Hardwarefähigkeiten (MultiCore-Systeme) 
+> - Effizienzsteigerung bei Wartevorgängen
 > - Verhinderung eines "Verhungerns" der Anwendung
+
+[^Cburnett]: https://commons.wikimedia.org/wiki/File:Multithreaded_process.svg, Autor I, Cburnett, GNU Free Documentation License, [Link](https://commons.wikimedia.org/wiki/Commons:GNU_Free_Documentation_License,_version_1.2)
 
 ### Erfassung der Performance
 
 Wie messen wir aber die Geschwindigkeit eines Programms?
 
+vgl. Projekt im Projektordner unter Nutzung des Pakets 
+
+https://www.nuget.org/packages/BenchmarkDotNet
+
+> BenchmarkDotNet funktioniert nur, wenn das Konsolenprojekt mit einer Release-Konfiguration erstellt wurde, d. h. mit angewandten Code-Optimierungen. Die Ausführung in Debug führt zu einem Laufzeitfehler.
+
 ## Implmementierung unter C#
-
-Die Implementierung der Klasse Thread unter C# umfasst dabei folgende
-Definitionen:
-
-```csharp       ThreadClass
-public delegate void ThreadStart();
-public enum ThreadPriority (Normal, AboveNormal, BelowNormal, Highest, Lowest);
-public enum ThreadState (Unstarted, Running, Suspended, Stopped, Aborted, ...);
-
-public sealed class Thread{
-  public Thread (ThreadStart startMethod);
-  ...
-  public string Name {get; set;};
-  public ThreadPriority Priority {get; set;};
-  public ThreadState ThreadState {get;};
-  public bool IsAlive {get;};
-  public bool IsBackground{get;};
-  public void Start();
-  public void Join();
-  public void Abort(Object);
-  public static void Sleep(int milliseconds);
-}
-```
-
-Um die grundlegende Verwendung des Typs `Thread` zu veranschaulichen, nehmen wir an, Sie haben eine Konsolenanwendung, in der die `CurrentThread`-Eigenschaft ein Thread-Objekt abruft, das den aktuell ausgeführten Thread repräsentiert.
-
-```csharp           ThreadBasicExample
-using System;
-using System.Threading;
-
-class Program
-{
-    public static void Main(string[] args)
-    {
-        Console.WriteLine("**********Current Thread Informations***************\n");
-        Thread t = Thread.CurrentThread;
-        t.Name = "Primary_Thread";
-        Console.WriteLine("Thread Name: {0}", t.Name);
-        Console.WriteLine("Thread Status: {0}", t.IsAlive);
-        Console.WriteLine("Priority: {0}", t.Priority);
-        Console.WriteLine("Context ID: {0}", Thread.CurrentContext.ContextID);
-        Console.WriteLine("Current application domain: {0}",Thread.GetDomain().FriendlyName);
-    }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
 
 ```csharp           ThreadApplicationPrinter
 using System;
@@ -162,36 +125,55 @@ class Program {
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-[^Cburnett]: https://commons.wikimedia.org/wiki/File:Multithreaded_process.svg, Autor I, Cburnett, GNU Free Documentation License, [Link](https://commons.wikimedia.org/wiki/Commons:GNU_Free_Documentation_License,_version_1.2)
 
-### Thread-Interaktion
+Die Implementierung der Klasse Thread unter C# umfasst dabei folgende
+Definitionen:
 
-```ascii
-                       .-----------.
-                       | Unstarted |
-                       .-----------.
-                             |
-                             v
-                       .-----------.
-+-+------------------->|  Started  |<--------------------------------+
-| |                    .-----------.                                 |
-| |                       |    ^                                     |
-| | Interrupt or          v    |                                     |
-| | sleep interval     .-----------.                                 |
-| | expired            |  Running  |                                 |
-| |                    .-----------.                                 |
-| |                          |                                       |
-| |        +-----------------+--------------+---------------+        |
-| |        |                 |              |               |        |
-| |        v                 v              v               v        |
-| |  .-----------.    .-----------.   .-----------.   .-----------.  |
-| +--| Wait/Join |    | Suspended |   |  Abort    |   |  Block    |--+
-|    .-----------.    .-----------.   .-----------.   .-----------.
-|                            |
-+----------------------------+
-        Resume                                               .
+```csharp       ThreadClass
+public delegate void ThreadStart();
+public enum ThreadPriority (Normal, AboveNormal, BelowNormal, Highest, Lowest);
+public enum ThreadState (Unstarted, Running, Suspended, Stopped, Aborted, ...);
+
+public sealed class Thread{
+  public Thread (ThreadStart start);
+  public Thread (ParameterizedThreadStart start);
+  public Thread (ThreadStart start, int maxStackSize);
+  public Thread (ParameterizedThreadStart start, int maxStackSize);
+  ...
+  public string Name {get; set;};
+  public ThreadPriority Priority {get; set;};
+  public ThreadState ThreadState {get;};
+  public bool IsAlive {get;};
+  public bool IsBackground{get;};
+  public void Start();
+  public void Join();
+  public void Abort(Object);
+  public static void Sleep(int milliseconds);
+}
 ```
 
+```csharp           ThreadBasicExample
+using System;
+using System.Threading;
+
+class Program
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("**********Current Thread Informations***************\n");
+        Thread t = Thread.CurrentThread;
+        t.Name = "Primary_Thread";
+        Console.WriteLine("Thread Name: {0}", t.Name);
+        Console.WriteLine("Thread Status: {0}", t.ThreadState);
+        Console.WriteLine("Priority: {0}", t.Priority);
+        Console.WriteLine("Context ID: {0}", Thread.CurrentContext.ContextID);
+        Console.WriteLine("Current application domain: {0}",Thread.GetDomain().FriendlyName);
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+### Thread-Interaktion
 
 Wie lässt sich eine Serialisierung von Threads realisieren? Im Beispiel soll die Ausführung des Printers C erst starten, wenn die beiden anderen Druckaufträge abgearbeitet wurden.
 
@@ -240,6 +222,21 @@ class Program {
 
 Aus dem Gesamtkonzept des Threads ergeben sich mehrere Zustände, in denen sich dieser befinden kann:
 
+```text @plantUML.png
+@startuml
+hide empty description
+[*] --> Unstarted
+Unstarted --> Running : Start
+Running --> WaitSleepJoin  : Thread Blocks
+WaitSleepJoin --> Running  : Thread Unblocks
+WaitSleepJoin --> AbortRequest : Abort
+Running --> Stopped : Thread Ends
+Running --> AbortRequest : Abort
+AbortRequest --> Running : Reset Abort 
+AbortRequest --> Stopped : Thread Ends
+@enduml
+```
+
 | Zustand       | Bedeutung                                                                                             | Transition                                                            |
 | ------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
 | unstarted     | Thread ist initialisiert                                                                              | `t.Start();`                                                          |
@@ -248,8 +245,7 @@ Aus dem Gesamtkonzept des Threads ergeben sich mehrere Zustände, in denen sich 
 | Suspended     | Der Thread ist dauerhaft deaktiviert.                                                                 | `t.Resume() aktiviert ihn wieder`                                                                      |
 | stopped       | Bearbeitung beendet                                                                                   |                                                                       |
 
-Jeder Thread umfasst eine Feld vom Typ `ThreadState`, dass auf verschiedenen Ebenen dessen Parameter abbildet. Um nur die für uns relevanten Informationen
-zu erfassen, benutzen wir eine kleine Funktion.
+Jeder Thread umfasst eine Feld vom Typ `ThreadState`, dass auf verschiedenen Ebenen dessen Parameter abbildet. Das Enum ist dabei als Bitfeld konfiguriert (vgl [Doku](https://learn.microsoft.com/en-us/dotnet/api/system.flagsattribute?view=net-7.0)).
 
 ```csharp
 public static ThreadState DetermineThreadState(this ThreadState ts){
@@ -258,11 +254,8 @@ public static ThreadState DetermineThreadState(this ThreadState ts){
                ThreadState.WaitSleepJoin |
                ThreadState.Stopped);
 
-bool blocked = (Thread_a.ThreadState & ThreadState.WaitSleepJoin) != 0;
 }
 ```
-
-Ein Thread in C# zu einem beliebigen Zeitpunkt existiert in einem der folgenden Zustände. Ein Thread liegt zu einem beliebigen Zeitpunkt nur in einem Zustand vor.
 
 ### Thread-Initialisierung
 
@@ -306,13 +299,16 @@ class Program
 {
     static void Main()
     {
+        // explizite Übergabe des Delegaten auf statische Methode
         ThreadStart threadDelegate = new ThreadStart(Calc.getConst);
         Thread newThread = new Thread(threadDelegate);
         newThread.Start();
 
-        newThread = new Thread(Calc.getConst);    // impliziter Cast zu ThreadStart
+        // impliziter Cast zu ThreadStart (gleicher Delegat)
+        newThread = new Thread(Calc.getConst);    
         newThread.Start();
 
+        // explizite Übergabe des Delegaten auf Methode
         Calc c = new Calc(5, 6);
         threadDelegate = new ThreadStart(c.process);
         newThread = new Thread(threadDelegate);
@@ -357,6 +353,7 @@ class Printer{
     sleepTime = t;
   }
 
+  // Unsere Methode soll nun einen Parameter bekommen
   public void Print(int count){
     for (int i = 0; i<count;  i++){
       Console.Write(ch);
@@ -391,21 +388,20 @@ class Program
     static void Execute(object output){
       for (int i = 0; i<10;  i++){
         Console.WriteLine(output + i.ToString());
+        Thread.Sleep(10);
       }
     }
 
     public static void Main(string[] args){
         Thread thread_A = new Thread(Execute);
-        thread_A.Start("New Tread :");
+        thread_A.Start("New Tread :     ");
         Execute("MainTread :");
     }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-**Warum werden die beiden Threads ohne Unterbrechung sequentiell abgearbeitet? Welche Ergänzung ist notwendig, um einen zyklischen Wechsel zu erzwingen?**
-
-Auf dem individuellen Stack eigenen Kopien der lokale Variablen
+> Auf dem individuellen Stack eigenen Kopien der lokale Variablen
 `count` angelegt, so dass die beiden Threads keine Interaktion realisieren.
 
 Was aber, wenn ein Datenaustausch realisiert werden soll? Eine Möglichkeit der
@@ -625,7 +621,7 @@ class Program {
 Analog kann das Abbrechen eines Threads als Ausnahme erkannt und in einer Behandlungsroutine organsiert werden.
 
 ```csharp           ThreadBasic
-// Beispiel aus Mösenböck, Kompaktkurs C# 7, Seite 159
+// Beispiel aus Mösenböck, Kompaktkurs C# 
 using System;
 using System.Threading;
 
@@ -650,7 +646,7 @@ class Program {
   }
 }
 ```
-
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ## Thread-Pool
 
@@ -686,7 +682,3 @@ Das klingt sehr praktisch, was aber sind die Einschränkungen?
 + Pooled Threads sind immer Background-Threads
 + Sie können keine individuellen Prioritäten festlegen.
 + Blockierte Threads im Pool senken die entsprechende Performance des Pools
-
-## Aufgaben der Woche
-
-- [ ]
