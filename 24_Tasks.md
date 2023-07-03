@@ -32,6 +32,48 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
+## Frage 
+
+Wie befüllen mehrere Threads ein Array oder eine Liste?
+
+```csharp ThreasList.cs
+public class Program
+{
+    static Random rnd = new Random();
+    private static List<int> list = new List<int>();
+    private static object lockObject = new object();
+    public static void AddToList()
+    {
+        lock (lockObject)
+        {
+          list.Add(rnd.Next(10));
+        }
+    }
+    public static void Main()
+    {
+        int numThreads = 5;
+
+        Thread[] threads = new Thread[numThreads];
+        for (int i = 0; i < numThreads; i++)
+        {
+            threads[i] = new Thread(AddToList);
+            threads[i].Start();
+        }
+
+        foreach (Thread thread in threads)
+        {
+            thread.Join();
+        }
+
+        Console.WriteLine("Liste:");
+        foreach (int num in list)
+        {
+            Console.WriteLine(num);
+        }
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ## Logging
 
