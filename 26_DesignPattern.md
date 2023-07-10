@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 comment:  Entwurfsmuster-Kategorien und ausgewählte Beispiele, Singleton Pattern, Adapter Pattern, State Pattern, Factory Pattern, Anti-Pattern 
@@ -21,7 +21,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 # Entwurfsmuster
 
 | Parameter                | Kursinformationen                                                                             |
-| ------------------------ | --------------------------------------------------------------------------------------------- |
+|--------------------------|-----------------------------------------------------------------------------------------------|
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                               |
 | **Teil:**                | `26/27`                                                                                       |
 | **Semester**             | @config.semester                                                                              |
@@ -36,17 +36,20 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ## Wiederholung - Polymorphie
 
+                                    {{0-1}}
+*******************************************************************************
+
 Polymorphie ist ein Konzept in der objektorientierten Programmierung, das
 ermöglicht, dass ein Bezeichner abhängig von seiner Verwendung Objekte
 unterschiedlichen Datentyps annimmt.
 
 > Polymorphie "Vielgestaltigkeit" bezeichnet die Situation, dass ein und das gleiche "Etwas" je nach "Situation" verschiedene "Gestalt" annehmen kann.
 
-| Bezeichnung | Bedeutung im Kontext der Objektorierung                   |
-| ----------- | --------------------------------------------------------- |
-| Etwas       | Instanz einer Klasse aus einer Vererbungshierachie        |
-| Situation   | Typ der Instanz beim Aufruf                               |
-| Gestalt     | ausgeführter Code                                         |
+| Bezeichnung | Bedeutung im Kontext der Objektorierung            |
+|-------------|----------------------------------------------------|
+| Etwas       | Instanz einer Klasse aus einer Vererbungshierachie |
+| Situation   | Typ der Instanz beim Aufruf                        |
+| Gestalt     | ausgeführter Code                                  |
 
 Voraussetzung ist, dass Methoden gleichen Namens für die Basisklasse und die erbende Klasse besteht. Im Beispiel ist dies `Object` und `Shape` bzw `int`.
 
@@ -61,6 +64,11 @@ a = new C();
 
 //B b = new A();    verboten
 ```
+
+*******************************************************************************
+
+                                    {{1-2}}
+*******************************************************************************
 
 Wir unterscheiden entsprechend den dynamischen und den statischen Typ der Variablen A. Eine Referenz des Typs `A` zeigt auf eine Instanz von `B` oder `C`.
 
@@ -107,6 +115,12 @@ public class Program {
 
 > Merke: `(Shape) obj` generiert eine Exception, wenn die Umwandlung fehlschlägt. Bei der Verwendung des Schlüsselwortes `as` in `obj as Shape` wird in diesem Fall ein `null` zurückgegeben.
 
+*******************************************************************************
+
+                                    {{2-3}}
+*******************************************************************************
+
+
 *Wie wende ich das Ganze an?*
 
 Anwendungsbeispiel:
@@ -131,9 +145,9 @@ public class Shape{
 }
 
 public class Square : Shape{
-    public void Draw(string output)
+    public void Draw()
     {
-      Console.WriteLine($"Drawing a SQUARE with {output}");
+        Console.WriteLine("Drawing a SQUARE");
     }
  }
 
@@ -142,40 +156,27 @@ public class Program {
     Shape sh = new Shape();
     sh.Draw();
     Square sq = new Square();
-    sq.Draw("Tralla");
     //sq.Draw();
   }
 }
 ```
-```xml
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
-</Project>
-```
-@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+@LIA.evalWithDebug(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Erklären Sie die Bedeutung der Schlüsselworte `virtual` und `override`.
 
-                                    {{0-1}}
-*******************************************************************************
+
 
 |                                          | **Virtuelle Member**           |
 | Schlüsselwort                            | `virtual`                   |
 | Implementierung in der Basisklasse       | muss implementiert werden   |
 | Überschreiben in der abgeleiteten Klasse |  `override` |
 
-In Bezug auf die Polymorphie bestimmen  die Schlüsselworte `new` und `override`
+In Bezug auf die Polymorphie bestimmen 
+die Schlüsselworte `new` und `override`
 das Verhalten:
 
 + `override` realisiert eine "angepasste" Implementierung der Methode der Basisklasse
 + `new` implementiert eine völlig neue Methode, die keinen Bezug mehr zur Basisklassenfunktion hat
-
-*******************************************************************************
-                                    {{1-3}}
-*******************************************************************************
 
 |                                          | **Virtuelle Member**          | **Abstrakte Member**          |
 | Schlüsselwort                            | `virtual`                 | `abstract`                |
@@ -186,7 +187,7 @@ Beide Konzepte können auf Methoden (hier vorrangig betrachtet), Eigenschaften, 
 
 *******************************************************************************
 
-                                    {{2-3}}
+                                    {{3-4}}
 *******************************************************************************
 
 Und wie war das noch mal mit den abstrakten Klassen, wie hängt deren Konzept mit
@@ -647,7 +648,7 @@ public class Program {
 Dabei können zwei grundsätzliche Varianten unterschieden werden:
 
 | Pattern                  | Bedeutung                                                                                      |
-| ------------------------ | ---------------------------------------------------------------------------------------------- |
+|--------------------------|------------------------------------------------------------------------------------------------|
 | Factory pattern          | Implementiert den Zugriff auf eine Familie von Produkten über einen Konkreten Erzeuger.        |
 | Abstract Factory pattern | Implementiert den Zugriff auf unterschiedliche Produktklassen über eine Familie von Erzeugern. |
 
@@ -721,11 +722,11 @@ müsste eine Zuordnung zu einzelnen Charakteren gewährleistet sein.
 
 In einer tabellarischen State-Maschine Darstellung ergibt sich dann folgendes Bild:
 
-|            | Happy                  | Neutral   | Aggressive              |
-| ---------- | ---------------------- | --------- | ----------------------- |
+|            | Happy                  | Neutral     | Aggressive              |
+|------------|------------------------|-------------|-------------------------|
 | Happy      | DealingWith, Addressed | DealingWith |                         |
-| Neutral    |                        | Addressed | DealingWith, Addresssed |
-| Aggressive | Provoked               | Provoked  | Provoked                |
+| Neutral    |                        | Addressed   | DealingWith, Addresssed |
+| Aggressive | Provoked               | Provoked    | Provoked                |
 
 
 Und wie implementieren wir das Ganze? Zunächst intuitiv mittels einer einzigen
