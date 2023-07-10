@@ -32,6 +32,48 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
+## Frage 
+
+Wie befüllen mehrere Threads ein Array oder eine Liste?
+
+```csharp ThreasList.cs
+public class Program
+{
+    static Random rnd = new Random();
+    private static List<int> list = new List<int>();
+    private static object lockObject = new object();
+    public static void AddToList()
+    {
+        lock (lockObject)
+        {
+          list.Add(rnd.Next(10));
+        }
+    }
+    public static void Main()
+    {
+        int numThreads = 5;
+
+        Thread[] threads = new Thread[numThreads];
+        for (int i = 0; i < numThreads; i++)
+        {
+            threads[i] = new Thread(AddToList);
+            threads[i].Start();
+        }
+
+        foreach (Thread thread in threads)
+        {
+            thread.Join();
+        }
+
+        Console.WriteLine("Liste:");
+        foreach (int num in list)
+        {
+            Console.WriteLine(num);
+        }
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ## Logging
 
@@ -74,10 +116,14 @@ public class Program
 
 Dieses Vorgehen kann auf Dauer ziemlich nerven ...
 
-> Lösung: Verwenden Sie ein Logging Framework!
+> Lösung: Verwenden Sie ein Logging Framework, z.B. NLog - ein Logging-Framework für .NET-Anwendungen!
 
-+ https://github.com/NLog
-+ https://riptutorial.com/nlog
+NLog:
+
++ ermöglicht das Protokollieren von Informationen, Warnungen, Fehlern und anderen Ereignissen,
++ unterstützt Datei-Logging, Datenbank-Logging, E-Mail-Logging, Konsolen-Logging und mehr
+
+nlog.config:
 
 ```
 <?xml version="1.0" encoding="utf-8" ?>
@@ -96,9 +142,30 @@ Dieses Vorgehen kann auf Dauer ziemlich nerven ...
 </nlog>
 ```
 
+```csharp
+using NLog;
+
+public class Program
+{
+    private static Logger logger = LogManager.GetCurrentClassLogger();
+
+    public static void Main()
+    {
+        logger.Info("Anwendung gestartet");
+        // ... Weitere Anwendungslogik ...
+        logger.Error("Ein Fehler ist aufgetreten");
+        // ... Weitere Anwendungslogik ...
+        logger.Info("Anwendung beendet");
+    }
+}
+```
+
++ https://github.com/NLog
++ https://riptutorial.com/nlog
+
 ## Tasks
 
-Die prozdedurale/objektorientierte Programmierung basiert auf der Idee, dass ausgehend von einem
+Die prozedurale/objektorientierte Programmierung basiert auf der Idee, dass ausgehend von einem
 Hauptprogramm Methoden aufgerufen werden, deren Abarbeitung realisiert wird und
 danach zum Hauptprogramm zurückgekehrt wird.
 
@@ -109,7 +176,6 @@ using System.Threading;
 class Program
 {
   public static void TransmitsMessage(string output){
-    Random rnd = new Random();
     Thread.Sleep(1);
     Console.WriteLine(output);
   }
@@ -198,12 +264,13 @@ Welche Nachteile sehen Sie in dieser Lösung?
                               {{0-1}}
 ********************************************************************************
 
-C# stellt für die asynchrone Programmierung einen neuen Typen `Task` zur
-Verfügung und für die `await` und `async` Keywörter ein.
+C# stellt für die asynchrone Programmierung die neuen Typen `Task`  und `Task<TResult>`und die Schlüsselwörter `await` und `async` zur
+Verfügung. Diese sind zentrale Komponenten von den 
+aufgabenbasierten asynchronen Muster (TAP - Task based Asynchronous Pattern), die in .NET Framework 4 eingeführt wurden.
 
-Die `Task`-Klasse bildet einen Vorgang zur Lösung einer einzelnen Aufgabe ab, der keinen Wert zurück gibt und in der Regel asynchron ausgeführt wird. 
-Task-Objekte sind eine der zentralen Komponenten von den aufgabenbasierten asynchronen Muster, die in .NET Framework 4 eingeführt wurden. 
-Ein `Task`-Objekt übernimmt eine Aufgabe, die asynchron auf einem Threadpool-Thread anstatt synchron auf dem Hauptanwendungsthread ausgeführt wird. Zum Überwachen des Bearbeitungsstatus stehen die Status-Eigenschaften des Threads 
+Die `Task`-Klasse bildet einen Vorgang zur Lösung einer einzelnen Aufgabe ab, der keinen Wert zurück gibt und (in der Regel) asynchron ausgeführt wird. 
+Ein `Task`-Objekt übernimmt eine Aufgabe, die asynchron auf einem Threadpool-Thread anstatt synchron auf dem Hauptanwendungsthread ausgeführt wird. 
+Zum Überwachen des Bearbeitungsstatus stehen die Status-Eigenschaften des Threads 
 und die Eigenschaften der Klasse `Task` zur Verfügung: `IsCanceled`, `IsCompleted`, und `IsFaulted`. 
 
 ```csharp           TaskClasses
@@ -237,7 +304,7 @@ Task task = Task.Run(() => {... Anweisungsblock ...});
 ```
 
 An den Konstruktor und die Run-Methode können `Action`-Delegate übergeben werden, die den auszuführenden Code beinhalten.
-In den meisten Fällen wird zur Spezifikation der Aufgabe ein Lambda-Ausdruck  wird verwendet. Der Konstruktor wird nur in erweiterten Szenarien verwendet, wo es erforderlich ist, die Instanziirung und der Start zu trennen.
+In den meisten Fällen wird zur Spezifikation der Aufgabe ein Lambda-Ausdruck verwendet. Der Konstruktor wird nur in erweiterten Szenarien verwendet, wo es erforderlich ist, die Instanziirung und der Start zu trennen.
 
 Die generische Klasse `Task<T>` bildet ebenfalls einen Vorgang zur Lösung einer einzelnen Aufgabe ab, gibt aber im Unterschied zu der nicht generischen `Task`-Klasse einen Wert zurück. 
 Die Konstruktoren und die Run-Methode der Klasse bekommen einen `Func`-Delegat bzw. einen als Lambda-Ausderuck formulierten Code übergeben, der einen Rückgabewert liefert.
@@ -320,6 +387,8 @@ class Program {
   public static void Main(string[] args){
     // Wait on a single task with a timeout specified.
     Task taskA = Task.Run( () => Thread.Sleep(2000));
+    //Task taskX = Task.Run(() => { throw new IndexOutOfRangeException(); } );
+    //Task taskY = Task.Run(() => { throw new FormatException(); } );
     try {
       taskA.Wait(1000);       // Wait for 1 second.
       bool completed = taskA.IsCompleted;
@@ -327,6 +396,8 @@ class Program {
                        completed, taskA.Status);
       if (! completed)
          Console.WriteLine("Timed out before task A completed.");
+      //taskX.Wait();
+      //taskY.Wait();
      }
      catch (AggregateException) {
         Console.WriteLine("Exception in taskA.");
@@ -378,7 +449,8 @@ class Program {
                                       {{2-3}}
 ********************************************************************************
 
-Der Kanon der Möglichkeiten wird durch die Klasse `Task<T>` deutlich erweitert. Anstatt die Ergebnisse wie bei Threads in eine "außen stehende" Variable (z.B. Datenfeld der einer Klasse) zu speichern, wird das Ergebnis im
+Der Kanon der Möglichkeiten wird durch die Klasse `Task<TResult>` deutlich erweitert. 
+Anstatt die Ergebnisse wie bei Threads in eine "außen stehende" Variable (z.B. Datenfeld der einer Klasse) zu speichern, wird das Ergebnis im
 `Task`-Objekt selbst  gespeichert und kann dann über die Eigenschaft `Result` abgerufen werden. 
 
 ```csharp      TaskWithReturn
@@ -392,16 +464,46 @@ Wie ist dieser Aufruf zu verstehen? Unser Task gibt anders als bei der synchrone
 Abarbeitung nicht unmittelbar mit dem Ende der Bearbeitung einen Wert zurück, sondern
 verspricht zu einem späteren Zeitpunkt einen Wert in einem bestimmten Format zu liefern. Dank der generischen Realisierung können dies beliebige Objekte sein.
 
-Wie aber erfolgt die Rückgabe wann?
+Wie aber erfolgt die Rückgabe und wann?
 
 ********************************************************************************
 
 ### Asynchrone Methoden
 
-Ein Entwurfsmuster für Darstellung asynchroner Vorgänge in C#, das die Klassen `Task`und `Task<TResult>` verwendet, ist TAP (task-based asynchronous pattern). 
-Die Schlüsselwörter `async` und `await` sind das Kernstück der asynchronen Programmierung mit TAP.
+Das Kernstück der asynchronen Programmierung mit TAP (task based asynchronous pattern) sind die Schlüsselwörter `async` und `await`.
+"async" wird verwendet, um eine Methode zu markieren, die asynchronen Code enthält, 
+"await" wird verwendet, um auf das Ergebnis einer asynchronen Operation zu warten, ohne den Aufrufer zu blockieren. 
 
-Die Initiierung und den Abschluss eines asynchronen Vorgangs wird in TAP in einer Methode realisiert, die 
+```csharp
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+public class Program
+{
+    public static async Task Main()
+    {   Console.WriteLine("Beispiel mit Download");
+        int n=await DownloadFileAsync();
+        Console.WriteLine(n);
+        Console.WriteLine("Download abgeschlossen!");
+    }
+
+    public static async Task<int> DownloadFileAsync()
+    {
+        using (var httpClient = new HttpClient())
+        {
+            Console.WriteLine("Starte den Download...");
+            var url = "https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/24_Tasks.md";
+            var response = await httpClient.GetAsync(url);
+            var content = await response.Content.ReadAsStringAsync();
+            //Console.WriteLine("Datei heruntergeladen: " + content);
+            return content.Length;
+        }
+    }
+}
+```
+
+Die Initiierung und der Abschluss eines asynchronen Vorgangs wird in TAP in einer Methode realisiert, die 
 das `async`-Suffix hat und dadurch eine `await`-Anweisung enthalten darf, wenn sie Awaitable-Typen zurückgibt, 
 wie z. B. Task oder Task<TResult>.
 
@@ -414,7 +516,7 @@ async void DoAsync(){
                                    // Berechnungen
                                    return i;}
   // Instruktionen I
-  // Methoden, die nach der Rückkehr nach DoAsync ausgeführt werden.
+  // Methoden, die unabhängig von task ausgeführt werden
   int result = await task;
   // Instruktionen II
   // Hier wird nun mit dem Ergebnis result weitergearbeitet
@@ -448,7 +550,9 @@ mit await erreicht hat (Quasi-Synchroner Fall)
         v
 ```
 
-**Fall II** Das Ergebnis der Lambdafunktion liegt erst später, nachdem DoAsync die Zeile mit await erreicht hat (und bereits nach main zurückgekehrt ist)
+**Fall II** Das Ergebnis der Lambdafunktion liegt erst später, nachdem DoAsync die Zeile mit await erreicht hat.
+Die Methode pausiert an der Stelle des await-Ausdrucks und wartet darauf, dass der Task abgeschlossen wird. 
+Während dieser Wartezeit wird der Thread, auf dem DoAsync() ausgeführt wird, nicht blockiert, sondern steht für andere Aufgaben zur Verfügung.
 
 <!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 815px;" -->
 ```ascii
@@ -485,3 +589,4 @@ Zwei sehr anschauliche Beispiele finden sich im Code Ordner des Projekts.
 ## Aufgaben der Woche
 
 - [ ]
+
