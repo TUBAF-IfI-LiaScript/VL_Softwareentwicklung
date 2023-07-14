@@ -340,6 +340,7 @@ public class Character: IComparable{
 
 public class Program
 {
+  // konkrete Methode
   private static bool before1950(Character entry)
   {
     return entry.year > 1950;
@@ -359,9 +360,11 @@ public class Program
        new Character("Donald Duck", 1931),
        new Character("Superman", 1938)
     };
+    // Verwendung einer konkreten Methode (impliziter Cast)
     ComicHeros.RemoveAll(before1950);
+    // Verwendung einer Lambda-Methode (impliziter Cast)
     //ComicHeros.RemoveAll(x => x.year > 1950);
-    //ComicHeros.Sort(sortByYear);
+    ComicHeros.Sort(sortByYear);
     foreach (Character c in ComicHeros){
       Console.WriteLine(c);
     }
