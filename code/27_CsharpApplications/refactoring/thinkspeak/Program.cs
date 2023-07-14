@@ -2,26 +2,30 @@ using System.Web;
 using System.Text;
 using System.Net;
 
-public class Entry 
+public class Entry
 {
     public string fieldname;
     public string content;
     public double value;
 
-    public Entry (int index, string contentname){
+    public Entry(int index, string contentname)
+    {
         this.fieldname = $"field{index}";
         this.content = contentname;
     }
 }
 
-public class Message{
+public class Message
+{
     public List<Entry> entryList = new();
     public string channelname;
 
-    public Message(string channelname, string [] contentNames){
+    public Message(string channelname, string[] contentNames)
+    {
         this.channelname = channelname;
         int index = 0;
-        foreach(var name in contentNames){
+        foreach (var name in contentNames)
+        {
             entryList.Add(new Entry(index, name));
             index++;
         }
@@ -30,7 +34,8 @@ public class Message{
     public override string ToString()
     {
         string output = $"{channelname}\n\n";
-        foreach (var item in entryList){
+        foreach (var item in entryList)
+        {
             output += $"{item.fieldname} / {item.content} - {item.value} \n";
         }
         return output;
@@ -42,7 +47,8 @@ public class ThingSpeak
     private const string _url = "http://api.thingspeak.com/";
     private string _APIKey;
 
-    public ThingSpeak(string APIKey){
+    public ThingSpeak(string APIKey)
+    {
         _APIKey = APIKey;
     }
     public Boolean SendDataToThingSpeak(string field1, string field2, string field3, string field4, string field5, string field6, string field7, string field8, out Int16 TSResponse)
@@ -109,18 +115,19 @@ public class ThingSpeak
 // + Exception handling 
 // + ...
 
-class Program {         
-     static void Main(string[] args)
-     {
+class Program
+{
+    static void Main(string[] args)
+    {
         Console.WriteLine("Los geht's");
         var ts = new ThingSpeak("38KVQHK38XDKOBJY");
-        string[] content_names = {"Value X", "Value Y"};
-        Message msg = new (".net_TestChannel", content_names);
+        string[] content_names = { "Value X", "Value Y" };
+        Message msg = new(".net_TestChannel", content_names);
         Console.WriteLine(msg);
         // msg.SetValue("Value X", 220);
         // msg.SetValue("Value Y", 174);
         // Console.WriteLine(msg);
         // ts.SendDataToThingSpeak(msg);
         // Console.WriteLine(msg);
-     }
- }
+    }
+}

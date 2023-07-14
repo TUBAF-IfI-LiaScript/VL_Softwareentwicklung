@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.1
+version:  1.0.2
 language: de
 narrator: Deutsch Female
 comment:  Zusammenfassung und Ausblick, Anwendung von C# in der Godot Engine
@@ -10,7 +10,6 @@ tags:
 logo:     
 
 import: https://github.com/liascript/CodeRunner
-        https://raw.githubusercontent.com/liaTemplates/AlaSQL/master/README.md
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
@@ -21,7 +20,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 # Anwendungsbeispiele
 
 | Parameter                | Kursinformationen                                                                           |
-| ------------------------ | ------------------------------------------------------------------------------------------- |
+|--------------------------|---------------------------------------------------------------------------------------------|
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                             |
 | **Teil:**                | `27/27`                                                                                     |
 | **Semester**             | @config.semester                                                                            |
@@ -33,11 +32,6 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
-
-
-## Auswertung der Gitaktivitäten
-
-![pdflatexScreenshoot](./img/27_Anwendungen/Results_GitActivities.png "Vergleich der studentischen Teamaktivitäten in Git 2020-2022")
 
 ## Secrets
 
@@ -193,7 +187,7 @@ Ablauf eines Schreibprozesses:
 
 <!--data-type="none"-->
 | Woche | Tag       | Inhalt der Vorlesung                              |
-|:----- | --------- |:------------------------------------------------- |
+|:------|-----------|:--------------------------------------------------|
 | 1     | 4. April  | Organisation, Einführung von GitHub und LiaScript |
 |       | 8. April  | Softwareentwicklung als Prozess                   |
 | 2     | 11. April | Konzepte von Dotnet und C#                        |
@@ -225,12 +219,24 @@ Ablauf eines Schreibprozesses:
 | 15    | 11. Juli  | Design Pattern                                    |
 |       | 15. Juli  | Anwendungungsfälle                                |
 
-> __Frage__: Und was kann ich jetzt damit anfangen?
-
 
 > **Und was kann ich jetzt damit anstellen?**
 
-Siehe Mini-Godot Projekt im Projektordner :-)
+## Godot 
+
+Godot ist eine plattformübergreifende Open-Source-Spiel-Engine, die unter der MIT-Lizenz veröffentlicht wird. Es wurde ursprünglich von den argentinischen Softwareentwicklern Juan Linietsky und Ariel Manzur[6] für mehrere Unternehmen in Lateinamerika entwickelt, bevor es öffentlich veröffentlicht wurde.
+
+Die Entwicklungsumgebung läuft auf mehreren Betriebssystemen, darunter Linux, FreeBSD, NetBSD, OpenBSD, macOS, Microsoft Windows, Android und Web. Es ist für die Erstellung von 2D- und 3D-Spielen für PC-, Mobil- und Webplattformen konzipiert und kann auch für die Entwicklung von Nicht-Spiele-Software, einschließlich Editoren, verwendet werden.
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Godot3.4.png/800px-Godot3.4.png?20211106184510 "Screenshot [^SakuraMiyazono]")
+
+Die aktuelle Version 4 wurde am 1. März 2023 veröffentlicht wurde. Dies definierte einen großen Schritt , unter anderem wurde von Mono zu dotnet gewechselt. Daneben wurde das das Rendering-System überarbeitet, Unterstützung für die Vulkan-Grafik-API hinzufügt, die Leistung und Benutzerfreundlichkeit von GDScript verbessert, Physik- und Animationssysteme verbessert und neue Funktionen einführt viele weitere Funktionen und Fehlerbehebungen.
+
+> Achtung: Die C# API wurde angepasst! - [Link](https://docs.godotengine.org/en/stable/index.html)
+
+!?[](https://www.youtube.com/watch?v=N0LHUOcKXAQ)
+
+[^SakuraMiyazono]: SakuraMiyazono, Godot 3.4 Interface, https://commons.wikimedia.org/wiki/File:Godot3.4.png
 
 ## Evaluation der Lehrveranstaltung
 
