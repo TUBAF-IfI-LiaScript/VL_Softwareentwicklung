@@ -143,12 +143,11 @@ Die On-Board-Units des Systems
 
 ### Dozenten
 
-| Name           | Email                                   |
-| :------------- | :-------------------------------------- |
-| Sebastian Zug  | sebastian.zug@informatik.tu-freiberg.de |
-| Galina Rudolf  | galina.rudolf@informatik.tu-freiberg.de |
-| Adrian Köppen  | adrian.koeppen@student.tu-freiberg.de   |
-| Yannic Schwank | yannic.Schwank@student.tu-freiberg.de   |
+| Name            | Email                                   |
+| :-------------- | :-------------------------------------- |
+| Sebastian Zug   | sebastian.zug@informatik.tu-freiberg.de |
+| Galina Rudolf   | galina.rudolf@informatik.tu-freiberg.de |
+| Martin Heinrich | Martin.Heinrich@imfd.tu-freiberg.de     |
 
 ### Ablauf
 
@@ -162,7 +161,7 @@ Vorlesungen:
 | Hörerkreis      | Fakultät 1 + interessierte Hörer | Fakultät 4 - Studiengang Engineering                                           |
 | Leistungspunkte | 9                                | 6                                                                              |
 | Vorlesungen     | 29 (1 Feiertag )                 | 16 (bis 31. Mai 2024)                                                          |
-| Übungen         | ab Mai 2 x wöchentlich           | ab Mai 1 x wöchentlich (8 Termine)                                             |
+| Übungen         | ab 29. April 2 x wöchentlich     | voraussichtlich ab 13. Mai 1 x wöchentlich (8 Termine)                         |
 | Prüfungsform    | Klausur oder Projekt             | maschinenbauspezifisches Software-Projekt (im Wintersemester 2024/25)          |
 |                 |                                  | Prüfungsvoraussetzung: Erfolgreiche Bearbeitung der Aufgaben im Sommersemester |
 
@@ -216,7 +215,9 @@ Die Vorlesung findet
 - Montags, 11:30 - 13:00
 - Freitags, 9:45 - 11:15
 
-im Audimax 1001 statt.
+im Audimax 1001 statt,
+
+für Studierende der FAK-4 vom 12.4. bis 10.5. in KKB-2030.
 
 Die Vorlesung wurden im Sommersemester 2021 vollständig aufgezeichnet. Die Inhalte finden sich unter
 
