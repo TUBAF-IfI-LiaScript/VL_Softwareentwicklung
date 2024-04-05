@@ -23,7 +23,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 | Parameter                | Kursinformationen                                                                           |
 | ------------------------ | ------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                             |
+| **Veranstaltung:**       | `Vorlesung Softwareentwicklung` `Vorlesung Einführung in die Softwareentwicklung`           |
 | **Teil:**                | `0/27`                                                                                      |
 | **Semester**             | @config.semester                                                                            |
 | **Hochschule:**          | @config.university                                                                          |
@@ -33,13 +33,17 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
+Ziele der heutigen Vorlesung:
+
++ inhaltliche Motivation der Veranstaltung
++ organisatorische Hinweise
++ Vorstellung von Werkzeugen der Veranstaltung
+
 ---------------------------------------------------------------------
 
-
-## Zielstellung der Veranstaltung
+## Inhalt der Veranstaltung
 
 ![Gif einer Fahrradtour über eine Berg](https://media.giphy.com/media/3oKIP9M5hm5YxsG58I/giphy.gif)<!--style="width: 100%; max-width: 80vh;"-->
-
 
 ### Qualifikationsziele / Kompetenzen
 
@@ -63,7 +67,7 @@ Studierende sollen ...
 
 | Genereller Anspruch                                                                           | Spezifischer Anspruch                                                                                  |
 | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Verstehen verschiedener Programmierparadigmen UNABHÄNGIG von der konkreten Programmiersprache | Objektorientierte (und funktionale) Programmierung am Beispiel von C#                                  |
+| Verstehen verschiedener Programmierparadigmen UNABHÄNGIG von der konkreten Programmiersprache | Objektorientierte (und funktionale) Programmierung am Beispiel von C# / Python                                 |
 | Praktische Einführung in die methodische Softwareentwicklung                                  | Systematisierung der Anforderungen an einen Code, Arbeit mit UML Diagrammen und Entwurfsmustern                                             |
 | Grundlagen der kooperativ/kollaborative Programmierung und Projektentwicklung                 | Verwendung von Projektmanagementtools und einer Versionsverwaltung für den Softwareentwicklungsprozess |
 
@@ -153,15 +157,14 @@ Jetzt wird es etwas komplizierter ... die Veranstaltung kombiniert nämlich zwei
 Vorlesungen:
 
 <!--data-type="none"-->
-|                 | _Softwareentwicklung (SWE)_      | _Einführung in die Softwareentwicklung (EiS)_                                         |
-| --------------- | -------------------------------- | ------------------------------------------------------------------------------------- |
-| Hörerkreis      | Fakultät 1 + interessierte Hörer | Fakultät 4 - Studiengang Engineering                                                  |
-| Leistungspunkte | 9                                | 6                                                                                     |
-| Vorlesungen     | 27 (3 Feiertage)                 | 16 (bis 5. Juni 2021)                                                                 |
-| Übungen         | ab Mai 2 x wöchentlich           | ab Mai 1 x wöchentlich (8 Termine)                                                    |
-|                 |                                  | zusätzliches Python Tutorial ab Juni                                                  |
-| Prüfungsform    | Klausur oder Projekt             | maschinenbauspezifisches Software-Projekt (im Wintersemester 2023/24)                 |
-|                 |                                  | Prüfungsvoraussetzung: Erfolgreiche Bearbeitung der finalen Aufgabe im Sommersemester |
+|                 | _Softwareentwicklung (SWE)_      | _Einführung in die Softwareentwicklung (EiS)_                                  |
+| --------------- | -------------------------------- | ------------------------------------------------------------------------------ |
+| Hörerkreis      | Fakultät 1 + interessierte Hörer | Fakultät 4 - Studiengang Engineering                                           |
+| Leistungspunkte | 9                                | 6                                                                              |
+| Vorlesungen     | 29 (1 Feiertag )                 | 16 (bis 31. Mai 2024)                                                          |
+| Übungen         | ab Mai 2 x wöchentlich           | ab Mai 1 x wöchentlich (8 Termine)                                             |
+| Prüfungsform    | Klausur oder Projekt             | maschinenbauspezifisches Software-Projekt (im Wintersemester 2024/25)          |
+|                 |                                  | Prüfungsvoraussetzung: Erfolgreiche Bearbeitung der Aufgaben im Sommersemester |
 
 > **Ermunterung an unsere EiS-Hörer**: Nehmen Sie an der ganzen Vorlesungsreihe
 > teil. Den Einstieg haben Sie ja schon gelegt ...
@@ -170,38 +173,37 @@ Vorlesungen:
 ### Struktur der Vorlesungen
 
 <!--data-type="none"-->
-| Woche | Tag       | Inhalt der Vorlesung                              | Bemerkung                      |
-| :---- | --------- | :------------------------------------------------ | ------------------------------ |
-| 1     | 3. April  | Organisation, Einführung von GitHub und LiaScript |                                |
-|       | 7. April  |                                                   | _Karfreitag_                   |
-| 2     | 10. April |                                                   | _Ostermontag_                  |
-|       | 14. April | Softwareentwicklung als Prozess                   |                                |
-| 3     | 17. April | Konzepte von Dotnet und C#                        |                                |
-|       | 21. April | Elemente der Sprache C# (Datentypen)              |                                |
-| 4     | 24. April | Elemente der Sprache C# (Forts. Datentypen)       |                                |
-|       | 28. April | Elemente der Sprache C# (Ein-/Ausgaben)           |                                |
-| 5     | 1. Mai    |                                                   | _Feiertag_                     |
-|       | 5. Mai    | Programmfluss und Funktionen                      |                                |
-| 6     | 8. Mai    | Strukturen / Konzepte der OOP                     |                                |
-|       | 12. Mai   | Säulen Objektorientierter Programmierung          |                                |
-| 7     | 15. Mai   | Klassenelemente in C#  / Vererbung                |                                |
-|       | 19. Mai   | Klassenelemente in C#  / Vererbung                |                                |
-| 8     | 22. Mai   | Versionsmanagement im Softwareentwicklungsprozess |                                |
-|       | 26. Mai   | UML Konzepte                                      |                                |
-| 9     | 29. Mai   | UML Diagrammtypen                                 | _Pfingstmontag_ (Aufzeichnung) |
-|       | 2. Juni   | UML Anwendungsbeispiel                            |                                |
-| 10    | 5. Juni   | Testen                                            | Ende EiS Vorlesungsinhalte     | 
-|       | 9. Juni   | Dokumentation und Build Toolchains                |                                |
-| 11    | 12. Juni  | Continuous Integration in GitHub                  |                                |
-|       | 16. Juni  | Generics                                          |                                |
-| 12    | 19. Juni  | Container                                         |                                |
-|       | 23. Juni  | Delegaten                                         |                                |
-| 13    | 28. Juni  | Events                                            |                                |
-|       | 30. Juni  | Threadkonzepte in C#                              |                                |
-| 14    | 3. Juli   | Taskmodell                                        |                                |
-|       | 8. Juli   | Language Integrated Query                         |                                |
-| 15    | 7. Juli   | Design Pattern                                    |                                |
-|       | 14. Juli  | Anwendungungsfälle                                |                                |
+| Woche | Tag       | Inhalt der Vorlesung                              | Inhalt der Vorlesung FAK-4                             |
+| :---- | --------- | :------------------------------------------------ | ------------------------------------------------------ |
+| 1     | 5. April  | Organisation, Einführung von GitHub und LiaScript |                                                        |
+| 2     | 8. April  | Softwareentwicklung als Prozess                   |                                                        |
+|       | 12. April | Konzepte von Dotnet und C#                        | Python: Einordnung,Eigenschaften, Entwicklungsumgebung |
+| 3     | 15. April | Elemente der Sprache C# I                         | (Module), Elemente der Sprache                         |
+|       | 19. April | Elemente der Sprache C# II                        | Listen, Kontrollstrukturen, ListComprehension          |
+| 4     | 22. April | Strukturen / Konzepte der OOP                     | Erweiterte Typen: Tupel, Dictionary, Set               |
+|       | 26. April | Säulen Objektorientierter Programmierung          | Funktionen                                             |
+| 5     | 29. April | Klassenelemente in C#  / Vererbung                | Konzepte der OOP                                       |
+|       | 3. Mai    | Klassenelemente in C#  / Interfaces               | OOP, Elemente der Klasse                               |
+| 6     | 6. Mai    | Generics                                          | Private und öffentliche Methoden, Vererbung            |
+|       | 10. Mai   | Container                                         | Datenanalyse /Datenvisualisierung                      |
+| 7     | 13. Mai   | Versionsmanagement im SWE-Prozess I               |                                                        |
+|       | 17. Mai   | Versionsmanagement im SWE_Pprozess II             |                                                        |
+| 8     | 20. Mai   | _Pfingstmontag_                                   |                                                        |
+|       | 24. Mai   | UML Konzepte                                      |                                                        |
+| 9     | 27. Mai   | UML Diagrammtypen                                 |                                                        |
+|       | 31. Mai   | UML Anwendungsbeispiel                            |                                                        |
+| 10    | 3. Juni   | Testen                                            |                                                        |
+|       | 7. Juni   | Dokumentation und Build Toolchains                |                                                        |
+| 11    | 10. Juni  | Continuous Integration in GitHub                  |                                                        |
+|       | 14. Juni  | Delegaten                                         |                                                        |
+| 12    | 17. Juni  | Events                                            |                                                        |
+|       | 21. Juni  | Threadkonzepte in C#                              |                                                        |
+| 13    | 24. Juni  | Taskmodell                                        |                                                        |
+|       | 28. Juni  | GUI - MAUI                                        |                                                        |
+| 14    | 1. Juli   | GUI - MAUI                                        |                                                        |
+|       | 5. Juli   | Language Integrated Query                         |                                                        |
+| 15    | 8. Juli   | Design Pattern                                    |                                                        |
+|       | 12. Juli  | Anwendungungsfälle                                |                                                        |
 
 
 ### Durchführung
@@ -244,7 +246,7 @@ und stehen unter Github bereit.
 
 Die Übungen bestehen aus selbständig zu bearbeitenden Aufgaben, wobei einzelne
 Lösungen im Detail besprochen werden. Wir werden die Realisierung der Übungsaufgaben
-über die Plattform GitHub abwickeln.
+über die Plattform [GitHub](https://github.com/) abwickeln.
 
 > Wie können Sie sich einbringen?
 >
@@ -274,9 +276,9 @@ Sie sich dafür ein Gruppen von 2 Studierenden zu organisieren.
                          |
                          v
                         .-.
-  Alle Teilnehmer      ( 5 )  Basiselemente Objektorientierte Programmierung
+  Alle Teilnehmer      ( 5 )  Objektorientierte Programmierung
                         '-'
- ::::::::::::::::::::::::|:::::::::::::::::::::::::::::::::::::::::::
+                         |
                          v
   Informatiker          .-.
   Mathematiker         ( 6 )  Erweiterte OOP Konzepte, Generics
@@ -313,7 +315,7 @@ In der Klausur werden neben den Programmierfähigkeiten und dem konzeptionellen
 Verständnis auch die Werkzeuge der Softwareentwicklung adressiert!
 
 - **Softwareentwicklung:**
-  Konventionelle Klausur ODER Programmieraufgabe in Zweier-Team anhand einer selbstgewählten Aufgabe
+  Konventionelle Klausur __ODER__ Programmieraufgabe in Zweier-Team anhand einer selbstgewählten Aufgabe
 
 - **Einführung in die Softwareentwicklung:**
   Teamprojekt und Projektpräsentationen (im Wintersemester 2023/24) bei bestandener Prüfungsvorleistung in Form einer Teamaufgabe im Sommersemester
@@ -370,8 +372,6 @@ sondern erfordert eine individuelle Suche nach spezifischen Inhalten.
 
 - **Online-Kurse:**
 
-  + [Leitfaden von Microsoft für C# aber auch die Werkzeuge](https://docs.microsoft.com/de-de/dotnet/csharp/)
-  + [C# Tutorial for Beginners: Learn in 7 Days](https://www.guru99.com/c-sharp-tutorial.html) [englisch]
   + [Einsteiger Tutorials](https://docs.microsoft.com/de-de/dotnet/csharp/tour-of-csharp/tutorials/) [deutsch]
   + [Programmierkonzepte von C#](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/)
 
@@ -395,10 +395,9 @@ sondern erfordert eine individuelle Suche nach spezifischen Inhalten.
     --{{0}}--
 Was sind die zentralen Tools unserer Veranstaltung?
 
-* _Vorlesungstool_ -> BigBlueButton für die Aufzeichnungen aus dem vergangenen Semester  [Introduction](https://www.youtube.com/watch?v=uYYnryIM0Uw)
+* _Vorlesungstool_ -> BigBlueButton für die Aufzeichnungen aus dem vergangenen Semester 
 * _Entwicklungsplattform_ -> [GitHub](https://github.com/)
 * _Beschreibungssprache für Lerninhalte_ -> [LiaScript](https://liascript.github.io/)
-
 
 ### Markdown
 
@@ -676,13 +675,6 @@ namespace HelloWorld
 
 * Editoren
 
-  - Für den Visual Studio Code - Editor von GitHub exitieren derzeit zwei Plugins:
-
-    1. [liascript-preview](https://marketplace.visualstudio.com/items?itemName=LiaScript.liascript-preview-web)
-
-    2. [liascript-snippets](https://marketplace.visualstudio.com/items?itemName=LiaScript.liascript-snippets)
-
-
   !?[Tutorial](https://www.youtube.com/watch?v=8vFYMo5xqyY)
 
 *******************************************************************************
@@ -711,10 +703,6 @@ https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung
     --{{0}}--
 **Seien Sie neugierig und probieren Sie verschiedene Tools und Editoren aus!**
 
-* [Atom](https://atom.io)
-
-  !?[Tutorial](https://www.youtube.com/watch?v=EdBqjPSx8bA)
-
 * [Visual Studio Code](https://code.visualstudio.com/)
 
   !?[Tutorial](https://www.youtube.com/watch?v=rOzXt--TXLg)
@@ -725,17 +713,12 @@ https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung
 
 * weitere ...
 
-
 ## Aufgaben
 
 - [ ] Legen Sie sich einen GitHub Account an (sofern dies noch nicht geschehen ist).
 - [ ] Installieren Sie einen Editor Ihrer Wahl auf Ihrem Rechner, mit dem Sie Markdown-Dateien komfortabel bearbeiten können.
 - [ ] Nutzen Sie das Wiki der Vorlesung um Ihre neuen Markdown-Kenntnisse zu erproben und versuchen Sie sich an folgenden Problemen:
 
+ - Recherchieren Sie weitere Softwarebugs. Dabei interessieren uns insbesondere solche, wo der konkrete Fehler direkt am Code nachvollzogen werden konnte.
 
-- Recherchieren Sie weitere Softwarebugs. Dabei interessieren uns insbesondere
-  solche, wo der konkrete Fehler direkt am Code nachvollzogen werden konnte.
-
-- Fügen Sie eine kurze Referenz auf Ihren Lieblingseditor ein und erklären Sie,
-  warum Sie diesen anderen Systemen vorziehen. Ergänzen Sie Links auf Tutorials
-  und Videos, die anderen nützlich sein können.
+ - Fügen Sie eine kurze Referenz auf Ihren Lieblingseditor ein und erklären Sie, warum Sie diesen anderen Systemen vorziehen. Ergänzen Sie Links auf Tutorials und Videos, die anderen nützlich sein können.

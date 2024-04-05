@@ -15,6 +15,6 @@ comment:  This file provides commonly used meta information for all LiaScript co
 # Config variables
 
 ```
-@config.semester:   `Sommersemester 2023`
+@config.semester:   `Sommersemester 2024`
 @config.university: `Technische Universität Freiberg`
 ```
