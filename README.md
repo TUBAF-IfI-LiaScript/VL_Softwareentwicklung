@@ -33,5 +33,3 @@
 |       | 5. Juli   | Language Integrated Query                         |
 | 15    | 8. Juli   | Design Pattern                                    |
 |       | 12. Juli  | Anwendungungsfälle                                |
-
-
