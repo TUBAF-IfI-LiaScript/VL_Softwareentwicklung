@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, Christoph Pooch,`KoKoKotlin`, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 comment:  Definition des Softwarebegriffes, Softwareentwicklungszyklus, Fehler in der Softwareentwicklung, Softwarequalität
@@ -62,9 +62,9 @@ Was ist Software, welche Abläufen kennzeichnen den zugehörigen Entwicklungspro
 |                       | *Software ist sinnlich nicht wahrnehmbar ... . Sie ist komplex und besteht aus umfangreichen Texten*                                             |
 | Software als Ziel     | *Software macht den Computer nutzbar*                                                                                                            |
 |                       | *Software ermöglicht die Abbildung von Prozessen auf einem Rechner*                                                                             |
-| Software als Prozess  | *Software ist die Idee, die Lösung, die man sich für ein Problem ausgedacht hat, das Verfahren, das helfen soll ...*                             |
-|                       | *Dabei sind Computerprogramme nicht nur als Beschreibung der auszuführenden Funktionen ... Vereinbarung zur Nutzung, ... Dokumentationsinhalte.* |
+| Software als Ganzes   | *Dabei sind Computerprogramme nicht nur als Beschreibung der auszuführenden Funktionen ... Vereinbarung zur Nutzung, ... Dokumentationsinhalte.* |
 
+> Software beschreibt die Umsetzung von Algorithmen, Datenstrukturen, Nutzerinterfaces usw. in Code, der auf einem Computer ausgeführt werden kann. 
 
 ### Lebenszyklus einer Software
 
@@ -430,10 +430,13 @@ Hier ist eine koordinierte Interaktion und Kommunikation notwendig!
 
 ## Ansätze zur Strukturierung der Aufgaben
 
-                                     {{0}}
-*******************************************************************************
+> Ein Vorgehensmodell zur Softwareentwicklung ist ein für die Softwareentwicklung angepasstes Vorgehensmodell bei der professionellen („ingenieursmäßigen“) Anwendungsentwicklung. Es ist ein standardisierter, organisatorischer Rahmen für den idealen Ablauf eines Entwicklungsprojektes und dient dazu, die Softwareentwicklung übersichtlicher zu gestalten und in der Komplexität beherrschbar zu machen. [^WikiVorgehen]
 
-*Erweitertes Wasserfallmodell*
+[^WikiVorgehen]: [Wikipedia](https://de.wikipedia.org/wiki/Vorgehensmodell)
+
+Die zwei erstgenannten Vorgehensweisen setzen auf eine Planbarkeit des Projektes, während die agilen Methoden auf die Flexibilität in den Vordergrund stellen. 
+
+### Erweitertes Wasserfallmodell
 
 <!--
 style="width: 100%; max-width: 760px; display: block; margin-left: auto; margin-right: auto;"
@@ -469,12 +472,7 @@ Nachteile:
 * Frühes festschreiben der Anforderungen ist sehr problematisch und kann zu teuren Änderungen führen
 * Fehler werden eventuell erst sehr spät erkannt und müssen mit erheblichen Aufwand  entfernt werden
 
-*******************************************************************************
-
-                                     {{1}}
-*******************************************************************************
-
-*V-Modell*
+### V-Modell
 
 <!--
 style="width: 100%; max-width: 760px; display: block; margin-left: auto; margin-right: auto;"
@@ -511,16 +509,27 @@ Nachteile:
 * Die im V-Modell definierten Rollen (bis zu 25) sind für gängige Softwareentwicklungen nicht realistisch
 * explizite Werkzeuge notwendig
 
-*******************************************************************************
 
-                                     {{2}}
-*******************************************************************************
+### Agile Softwareentwicklung 
 
-> __Achtung:__ Die Nachteile aus den sehr statisch ausgerichteten Modellen lassen sich für größere Projekte kaum umsetzen. Modernere Ansätze lösen den stringenten Ablauf auf und fokussieren einem schnelleren Einsatz: *Agile Softwareentwicklung*, *Rational Unified Process*, *Spiralmodell* -  [Link](https://www.dev-insider.de/was-ist-agile-softwareentwicklung-a-569187/)
+> Wesentliche Gründe für agile Herangehensweisen sind, dass sich die Ziele und das Umfeld (beteiligte Personen, Marktanforderungen, technisches Umfeld/Schnittstellen) im Laufe des Projektes ändern. Die agilen Methoden eignen sich daher besonders gut, um auf geänderte Anforderungen zu reagieren, da die Entwicklungszyklen in der Regel kurz angelegt sind. Die Anforderungen werden häufig nur knapp beschrieben und erst kurz vor Beginn von Umsetzung und Test ausformuliert. Durch die kurzen Zeiträume sind (nachträgliche) Änderungen der Anforderungen relativ leicht möglich. 
 
+|                                | Klassische Methoden                             | Agile Methoden                |
+| ------------------------------ | ----------------------------------------------- | ----------------------------- |
+| Anforderungen am Projektbeginn | klar definiert                                  | unscharf                      |
+| Änderungsbereitschaft          | gering                                          | explizit                      |
+| Anforderungsbeschreibung       | technische Sicht / Perspektive des Unternehmens | Kundensicht (Anwendungsfälle) |
+| Entscheidungsfindung           | Gremien                                         | Team                          |
+| Planung                        | durch Projektleiter                             | im Team                       |
+| Kundeninteraktion              | Kunde oft unbekannt                             | Kunde als aktiver Teil        |
 
+Agile Methoden sind z.B.:
 
-*******************************************************************************
+* Scrum
+* Kanban
+* Extreme Programming (XP)
+* Crystal
+
 
 ## Ok, wir brauchen Unterstützung
 
@@ -591,7 +600,7 @@ Wo entsteht der größte Zeit- bzw. Kostenaufwand bei kommerzieller Software?
 
 Wann ist eine Software-Dokumentation wichtig?
 
-- [[ ]] immer, man sollte auch bei kleinstenen Projekten eine möglichst detaillierte Dokumentation schreiben
+- [[ ]] immer, man sollte auch bei kleinsten Projekten eine möglichst detaillierte Dokumentation schreiben
 - [[X]] bei (mittel-)großen Projekten
 - [[x]] bei kleinen Projekten mit komplexem Code
 - [[ ]] die Dokumentation ist generell nicht wichtig, erfahrene Programmierer finden sich selber zurecht
