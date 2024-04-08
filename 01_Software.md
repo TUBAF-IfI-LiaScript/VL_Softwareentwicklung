@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug, Galina Rudolf, André Dietrich, Christoph Pooch,`KoKoKotlin`, `Lina` & `Florian2501`
+author:   Sebastian Zug; Galina Rudolf; André Dietrich; Christoph Pooch; `KoKoKotlin`; `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.4
 language: de
@@ -312,6 +312,7 @@ Das folgende anschauliche Beispiel und die zugehörige Analyse ist durch ein Bei
 
 > **Achtung:** Das folgende Codebeispiel enthält eine Fülle von Fehlern!
 
+<!-- data-showGutter="true"-->
 ```c AllesFalsch.c
 #include <stdio.h>
 

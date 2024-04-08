@@ -1,13 +1,11 @@
 <!--
 
-author:   Sebastian Zug, Galina Rudolf, André Dietrich, Fritz Apelt, `KoKoKotlin`
+author:   Sebastian Zug; Galina Rudolf; André Dietrich; Fritz Apelt; `KoKoKotlin`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 comment:  Motivation der Vorlesung "Softwareentwicklung" und Beschreibung der Organisation der Veranstaltung
-tags:      
-logo:     
 
 import: https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
         https://github.com/liascript/CodeRunner
