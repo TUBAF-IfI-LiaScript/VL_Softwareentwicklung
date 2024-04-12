@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `fjangfaragesh`, `KoKoKotlin` & `Lina`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 comment:  Programmierparadigmen und Einordnung von C#, Eigenschaften der Programmiersprache C#, .NET, Unterschiede zu anderen Sprachen/Konzepten
@@ -11,6 +11,7 @@ logo:
 
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liaTemplates/tau-prolog/master/README.md
+        https://raw.githubusercontent.com/liaTemplates/AlaSQL/master/README.md
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
@@ -85,6 +86,7 @@ style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-
                                       {{2-3}}
 *******************************************************************************
 
+__Beispiel 1: Prolog__
 
 ```prolog    Prolog.pro
 % Prolog Text mit Fakten
@@ -111,6 +113,56 @@ grossvater(X,Y) :-
 grossvater(adam,frank).
 ```
 @Tau.query(Prolog.pro)
+
+
+__Beispiel 2: SQL__
+
+``` sql
+CREATE TABLE one;
+
+-- ? gets replaced by the values in data.csv
+INSERT INTO one SELECT * from ?;
+```
+``` text -data.csv
+Region,Country,Item Type,Sales Channel,Order Priority,Order Date,Order ID,Ship Date,Units Sold,Unit Price,Unit Cost,Total Revenue,Total Cost,Total Profit
+Middle East and North Africa,Libya,Cosmetics,Offline,M,10/18/2014,686800706,10/31/2014,8446,437.20,263.33,3692591.20,2224085.18,1468506.02
+North America,Canada,Vegetables,Online,M,11/7/2011,185941302,12/8/2011,3018,154.06,90.93,464953.08,274426.74,190526.34
+Middle East and North Africa,Libya,Baby Food,Offline,C,10/31/2016,246222341,12/9/2016,1517,255.28,159.42,387259.76,241840.14,145419.62
+Asia,Japan,Cereal,Offline,C,4/10/2010,161442649,5/12/2010,3322,205.70,117.11,683335.40,389039.42,294295.98
+Sub-Saharan Africa,Chad,Fruits,Offline,H,8/16/2011,645713555,8/31/2011,9845,9.33,6.92,91853.85,68127.40,23726.45
+Europe,Armenia,Cereal,Online,H,11/24/2014,683458888,12/28/2014,9528,205.70,117.11,1959909.60,1115824.08,844085.52
+Sub-Saharan Africa,Eritrea,Cereal,Online,H,3/4/2015,679414975,4/17/2015,2844,205.70,117.11,585010.80,333060.84,251949.96
+Europe,Montenegro,Clothes,Offline,M,5/17/2012,208630645,6/28/2012,7299,109.28,35.84,797634.72,261596.16,536038.56
+Central America and the Caribbean,Jamaica,Vegetables,Online,H,1/29/2015,266467225,3/7/2015,2428,154.06,90.93,374057.68,220778.04,153279.64
+Australia and Oceania,Fiji,Vegetables,Offline,H,12/24/2013,118598544,1/19/2014,4800,154.06,90.93,739488.00,436464.00,303024.00
+Sub-Saharan Africa,Togo,Clothes,Online,M,12/29/2015,451010930,1/19/2016,3012,109.28,35.84,329151.36,107950.08,221201.28
+Europe,Montenegro,Snacks,Offline,M,2/27/2010,220003211,3/18/2010,2694,152.58,97.44,411050.52,262503.36,148547.16
+Europe,Greece,Household,Online,C,11/17/2016,702186715,12/22/2016,1508,668.27,502.54,1007751.16,757830.32,249920.84
+Sub-Saharan Africa,Sudan,Cosmetics,Online,C,12/20/2015,544485270,1/5/2016,4146,437.20,263.33,1812631.20,1091766.18,720865.02
+Asia,Maldives,Fruits,Offline,L,1/8/2011,714135205,2/6/2011,7332,9.33,6.92,68407.56,50737.44,17670.12
+Europe,Montenegro,Clothes,Offline,H,6/28/2010,448685348,7/22/2010,4820,109.28,35.84,526729.60,172748.80,353980.80
+Europe,Estonia,Office Supplies,Online,H,4/25/2016,405997025,5/12/2016,2397,651.21,524.96,1560950.37,1258329.12,302621.25
+North America,Greenland,Beverages,Online,M,7/27/2012,414244067,8/7/2012,2880,47.45,31.79,136656.00,91555.20,45100.80
+Sub-Saharan Africa,Cape Verde,Clothes,Online,C,9/8/2014,821912801,10/3/2014,1117,109.28,35.84,122065.76,40033.28,82032.48
+Sub-Saharan Africa,Senegal,Household,Offline,L,8/27/2012,247802054,9/8/2012,8989,668.27,502.54,6007079.03,4517332.06,1489746.97
+```
+@AlaSQL.eval_with_csv
+
+
+``` sql
+/*
+select some stuff
+*/
+SELECT Region FROM one;
+```
+@AlaSQL.eval
+
+``` sql
+SELECT * FROM one Where Region == "North America";
+```
+@AlaSQL.eval
+
+
 
 *******************************************************************************
 
@@ -160,7 +212,6 @@ for x in my_list:
 print("Result in imperative style      :" + str(result))
 
 # procedural
-result = 0
 def do_add(list_of_numbers):
     result = 0
     for x in my_list:
@@ -179,7 +230,7 @@ create_sum = MyClass(my_list)
 create_sum.do_add()
 print("Result in object oriented style :" + str(create_sum.sum))
 
-# functional
+# functional (map, filter, reduce)
 import functools
 result = functools.reduce(lambda x, y: x + y, my_list)
 print("Result in functional style      :" + str(result))
@@ -232,19 +283,20 @@ C#
 ### Historie der Sprache C#
 
 <!--data-type="none"-->
-| Jahr | Version .NET     | Version C# | Ergänzungen                                                                                                                                                 |
-| ---- | ---------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2002 | 1.0              | 1.0        |                                                                                                                                                             |
-| 2006 | 3.0              | 2.0        | Generics, Anonyme Methoden, Iteratoren, Private setters, Delegates                                                                                          |
-| 2007 | 3.5              | 3.0        | Implizit typisierte Variablen, Objekt- und Collection-Initialisierer, Automatisch implementierte Properties, LINQ, Lambda Expressions                       |
-| 2010 | 4.0              | 4.0        | Dynamisches Binding, Benannte und optionale Argumente, Generische Co- und Kontravarianz                                                                     |
-| 2012 | 4.5              | 5.0        | Asynchrone Methoden                                                                                                                                         |
-| 2015 | 4.6              | 6.0        | Exception Filters, Indizierte Membervariablen und Elementinitialisierer, Mehrzeilige String-Ausdrücke, Implementierung von Methoden mittels Lambda-Ausdruck |
-| 2017 | 4.6.2/ .NET Core | 7.0        | Mustervergleiche (Pattern matching),  Binärliterale 0b..., Tupel                                                                                            |
-| 2019 | .NET Core 3      | 8.0        | Standardimplementierungen in Schnittstellen, Switch Expressions, statische lokale Funktionen, Index-Operatoren für Teilmengen                               |
-| 2020 | .NET 5.0         | 9.0        | Datensatztypen (Records),   Eigenschafteninitialisierung, Anweisungen außerhalb von Klassen, Verbesserungen beim Pattern Matching                           |
-| 2021 | .NET 6.0         | 10.0       | Erforderliche Eigenschaften, Null-Parameter-Prüfung, globale Using-Statements                                                                               |
-| 2022 | .NET 7.0         | 11.0       | Generische Attribute, Zeilenumbrüche bei Stringinterpolation, Benötigte Member-Datenfelder, Default-Werte in struct-Datenstrukturen                                                                               |
+| Jahr | Version .NET     | Version C# | Ergänzungen                                                                                                                                                                                 |
+| ---- | ---------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2002 | 1.0              | 1.0        |                                                                                                                                                                                             |
+| 2006 | 3.0              | 2.0        | Generics, Anonyme Methoden, Iteratoren, Private setters, Delegates                                                                                                                          |
+| 2007 | 3.5              | 3.0        | Implizit typisierte Variablen, Objekt- und Collection-Initialisierer, Automatisch implementierte Properties, LINQ, Lambda Expressions                                                       |
+| 2010 | 4.0              | 4.0        | Dynamisches Binding, Benannte und optionale Argumente, Generische Co- und Kontravarianz                                                                                                     |
+| 2012 | 4.5              | 5.0        | Asynchrone Methoden                                                                                                                                                                         |
+| 2015 | 4.6              | 6.0        | Exception Filters, Indizierte Membervariablen und Elementinitialisierer, Mehrzeilige String-Ausdrücke, Implementierung von Methoden mittels Lambda-Ausdruck                                 |
+| 2017 | 4.6.2/ .NET Core | 7.0        | Mustervergleiche (Pattern matching),  Binärliterale 0b..., Tupel                                                                                                                            |
+| 2019 | .NET Core 3      | 8.0        | Standardimplementierungen in Schnittstellen, Switch Expressions, statische lokale Funktionen, Index-Operatoren für Teilmengen                                                               |
+| 2020 | .NET 5.0         | 9.0        | Datensatztypen (Records),   Eigenschafteninitialisierung, Anweisungen außerhalb von Klassen, Verbesserungen beim Pattern Matching                                                           |
+| 2021 | .NET 6.0         | 10.0       | Erforderliche Eigenschaften, Null-Parameter-Prüfung, globale Using-Statements                                                                                                               |
+| 2022 | .NET 7.0         | 11.0       | Generische Attribute, Zeilenumbrüche bei Stringinterpolation, Benötigte Member-Datenfelder, Default-Werte in struct-Datenstrukturen                                                         |
+| 2024 | .NET 8           | 12.0       | Primäre Konstruktoren, Sammlungsausdrücke (u.a. für Arraytypen und generische Collections), Standardwerte für Lambdaausdrücke, ref readonly-Parameter, semantische Alias für Datentypen ... |
 
 Die Sprache selbst ist unmittelbar mit der Ausführungsumgebung, dem .NET Konzept verbunden und war ursprünglich stark auf Windows Applikationen zugeschnitten.
 
@@ -292,11 +344,10 @@ Zum Vergleich sei auf eine Darstellung der **vor dem Erscheinen von .NET 5** ver
 | macOS                    |                | X         |         |
 | iOS                      |                |           | X       |
 
-Einen guten Überblick über das historische Nebeneinander gibt das Video von Tim Corey (Achtung, die Darstellung greift den Stand von 2017 auf!) [Link](https://www.youtube.com/watch?v=Ph_jSGq6vIA)
 
-> .NET 6 ist als LTS-Version im November 2021 erscheinen und wird für 3 Jahre unterstützt.
-
-
+> .NET 8 ist als LTS-Version im November 2023 erscheinen und wird für 3 Jahre unterstützt.
+> Die Veröffentlichung von .NET 9 ist für November 2024 geplant.
+> Der Xamarin-Support soll im Mai 2024 enden.
 
 ********************************************************************************
 
@@ -458,7 +509,7 @@ Ein Assembly bildet:
 
 ### Abgrenzung zu Java
 
-vgl. Vortrag von Mössenböck ([link](https://www.dcl.hpi.uni-potsdam.de/teaching/componentVl05/slides/Net_VL2_01_Java-CS-Moessenboeck.pdf))
+vgl. Vortrag von Mössenböck ([link](https://fodok.jku.at/fodok/person.xsql?PER_ID=1071))
 
 <!--data-type="none"-->
 |                  | Java                                        | C#                                         |
@@ -524,7 +575,7 @@ public class Program
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
-```csharp  Coderunner.cs9
+```csharp  Coderunner.cs10
 using System;
 
 Console.WriteLine("Hello, world!");
@@ -533,7 +584,7 @@ Console.WriteLine("Hello, world!");
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
@@ -565,7 +616,7 @@ Baum von Projektdateien.
 .
 ├── bin
 │   └── Debug
-│       └── net5.0
+│       └── net8.0
 │           ├── ref
 │           │   └── visual_studio_code.dll
 │           ├── visual_studio_code
@@ -576,7 +627,7 @@ Baum von Projektdateien.
 │           └── visual_studio_code.runtimeconfig.json
 ├── obj
 │   ├── Debug
-│   │   └── net5.0
+│   │   └── net8.0
 │   │       ├── apphost
 │   │       ├── ref
 │   │       │   └── visual_studio_code.dll
