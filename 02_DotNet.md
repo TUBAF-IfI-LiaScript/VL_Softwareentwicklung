@@ -521,7 +521,7 @@ vgl. Vortrag von Mössenböck ([link](https://fodok.jku.at/fodok/person.xsql?PER
 | JIT              | per Methoden                                | per Methode / gesamt                       |
 | Komponenten      | Beans                                       | Assemblies                                 |
 | Versionierung    | nein                                        | ja                                         |
-| Leitidee         | Eine Sprache auf vielen Plattformen         | Viele Sprachen auf vielen Plattform        |
+| Leitidee         | Eine Sprache auf vielen Plattformen         | Viele Sprachen auf vielen Plattformen        |
 
 
 ## Es wird konkret ... Hello World
