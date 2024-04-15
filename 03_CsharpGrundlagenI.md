@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `snikker123` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 comment:  Einführung in die Basiselemente der Programmiersprache C#, Variablen, Datentypen und Operatoren
@@ -47,7 +47,6 @@ public class Program
     // Print Hello World message
     string message = "Glück auf";
     Console.WriteLine(message + " Freiberg");
-    Console.WriteLine(message + " Softwareentwickler");
   }
 }
 ```
@@ -85,7 +84,7 @@ Console.WriteLine(message + " Softwareentwickler");}}
 
 ### Schlüsselwörter
 
-... C# umfasst 77 Schlüsselwörter (C# 7.0), die immer klein geschrieben werden.
+... C# umfasst 77 Schlüsselwörter (C# 10.0), die immer klein geschrieben werden.
 Schlüsselwörter dürfen nicht als Namen verwendet werden. Ein vorangestelltes `@`
 ermöglicht Ausnahmen.
 
@@ -96,21 +95,29 @@ operator
 @class // class als Name einer Variablen !
 ```
 
-Welche Schlüsselwörter sind das?  (C# 7.0)
+Welche Schlüsselwörter sind das?
 
-| abstract    | as       | base     | bool       | break      | byte      |
-| case        | catch    | char     | checked    |`class`     | const     |
-| continue    | decimal  | default  | delegate   | do         | double    |
-| else        | enum     | event    | explicit   | extern     | false     |
-| finally     | fixed    | float    | for        | foreach    | goto      |
-| if          | implicit | in       | int        | interface  | internal  |
-| is          | lock     | long     |`namespace` | new        | null      |
-| object      | operator | out      | override   | params     | private   |
-| protected   | public   | readonly | ref        | return     | sbyte     |
-| sealed      | short    | sizeof   | stackalloc |`static`    | string    |
-| struct      | switch   | this     | throw      | true       | try       |
-| typeof      | uint     | ulong    | unchecked  | unsafe     | ushort    |
-| `using`     | virtual  |`void`    | volatile   | while      |           |
+| abstract | event     | namespace  | static    |
+| as       | explicit  | new        | string    |
+| base     | extern    | null       | struct    |
+| bool     | false     | object     | switch    |
+| break    | finally   | operator   | this      |
+| byte     | fixed     | out        | throw     |
+| case     | float     | override   | true      |
+| catch    | for       | params     | try       |
+| char     | foreach   | private    | typeof    |
+| checked  | goto      | protected  | uint      |
+| class    | if        | public     | ulong     |
+| const    | implicit  | readonly   | unchecked |
+| continue | in        | ref        | unsafe    |
+| decimal  | int       | return     | ushort    |
+| default  | interface | sbyte      | using     |
+| delegate | internal  | sealed     | virtual   |
+| do       | is        | short      | void      |
+| double   | lock      | sizeof     | volatile  |
+| else     | long      | stackalloc | while     |
+| enum     |           |            |           |
+
 
 Auf die Auführung der 40 kontextabhängigen Schlüsselwörter wie `where` oder
 `ascending` wurde hier verzichtet.
@@ -127,7 +134,6 @@ Ist das viel oder wenig, welche Bedeutung hat die Zahl der Schlüsselwörter?
 | Java       | 51              | Java 5.0 (48 without unused keywords const and goto)  |
 | JavaScript | 38              | reserved words + 8 words reserved in strict mode only |
 | Python 3.7 | 35              |                                                       |
-| Python 2.7 | 31              |                                                       |
 | Smalltalk  | 6               |                                                       |
 
 Weiterführende Links:
@@ -140,23 +146,10 @@ https://halyph.com/blog/2016/11/28/prog-lang-reserved-words.html
 
 ### Variablennamen
 
-Variablennamen repräsentieren Speicherbereiche, so dass keine explizite Adressangabe durch den Programmier zu tätigen ist. Der Compiler "kümmert" sich um den Rest.
+                 {{0-1}}
+**************************************************
 
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
-```ascii
-   Programm           Speicher
-
-   i = 50;            |     ....     |
-   |                  +--------------+
-   .----------------->|      50      |
-                      +--------------+
-                      |     ....     |                                         .
-```
-
-Variablennamen umfassen Buchstaben, Ziffern oder `_`. Das erste Zeichen eines Namens muss ein Buchstabe (des Unicode-Zeichensatzes) oder ein `_` sein. Der C# Compiler ist
-*case sensitive* (Unterschied zwischen Groß- und Kleinschreibung, z.B. `Test != test`).
+Variablennamen umfassen Buchstaben, Ziffern oder `_`. Das erste Zeichen eines Namens muss ein Buchstabe (des Unicode-Zeichensatzes) oder ein `_` sein. Der C# Compiler ist *case sensitive*.
 
 ```csharp    GreekSymbols.cs
 using System;
@@ -173,6 +166,11 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
+**************************************************
+
+                 {{1-2}}
+**************************************************
+
 Wie sollten wir die variablen benennbaren Komponenten unseres Programms bezeichnen [Naming guidelines](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/general-naming-conventions?redirectedfrom=MSDN)? Die Vergabe von Namen sollte sich an die Regeln der Klassenbibliothek halten,
 damit bereits aus dem Namen der Typ ersichtlich wird:
 
@@ -186,6 +184,8 @@ damit bereits aus dem Namen der Typ ersichtlich wird:
    `valid` oder `empty`.
 
 > Wichtig ist an dieser Stelle, dass Sie sich eine Konsistenz in der Darstellung angewöhnen. _Nur mal eben, um zu testen ..._ sollte unterbleiben.
+
+**************************************************
 
 ### Zahlen
 
@@ -354,9 +354,6 @@ def load_model(filename: str, cache_folder: Union[str, Path]):
 Datentypen können in der C# Welt nach unterschiedlichen Kriterien strukturiert werden. Das nachfolgende
 Schaubild realisiert dies auf 2 Ebenen (nach Mössenböck, Kompaktkurs C# 7 )
 
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
 ```ascii
                                      C# Typen
                                          |
@@ -390,6 +387,8 @@ grundlegenden Organisationsformen im Arbeitsspeicher.
 | Speicherort      | Stack            | Heap                                       |
 | Zuweisung        | kopiert den Wert | kopiert die Referenz                       |
 | Speicher         | Größe der Daten  | Größe der Daten, Objekt-Metadata, Referenz |
+
+> Im Folgenden fassen wir Datentypen und Operatoren in der Diskussion zusammen, da eine separate Betrachtung wenig zielführend wäre.
 
 ********************************************************************************
 
@@ -456,6 +455,8 @@ Entsprechend der Datenbreite können `char` Variablen implizit in `short`
 notwendig.
 
 ### Zahlendatentypen und Operatoren
+
+> Im Unterschied zu den C und C++ Standards sind die Parameter der Datentypen in C# festgelegt. Die Größe der Datentypen ist plattformunabhängig!
 
 <!-- data-type="none" -->
 | Type                        | Suffix | Name    | .NET Typ | Bits | Wertebereich                                             |
@@ -544,9 +545,6 @@ Um diese zusätzliche Information eindeutig abzulegen, normieren wir die Darstel
 
 Die Gleitkommadarstellung besteht dann aus dem Vorzeichen, der Mantisse und dem Exponenten. Für binäre Zahlen ist diese Darstellung in der [IEEE 754](https://de.wikipedia.org/wiki/IEEE_754) genormt.
 
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
 ```ascii
   +-+---- ~ -----+----- ~ ----+
   |V|  Exponent  | Mantisse   |   V=Vorzeichenbit
@@ -643,9 +641,20 @@ entstehen können. Außerdem gibt es den Wert *NaN* (*not a number*, *1.#IND*), 
 einen irregulären Zustand repräsentiert. Mit Hilfe der Methoden
 *IsInfinity()* bzw. *IsNaN()* kann überprüft werden, ob diese Werte vorliegen.
 
-```csharp
-Console.WriteLine(Double.IsNaN(0.0/0.0));//gibt true aus
+```csharp    DivisionByZero.cs
+using System;
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+      Console.WriteLine(Double.IsNaN(0.0/0.0));//gibt true aus
+    }
+}
 ```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+
 
 ********************************************************************************
 
@@ -667,17 +676,7 @@ public class Program
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 
-eine Fehlermeldung
-
-```
-... error CS0664:
-Literal of type double cannot be implicitly converted
-to type `float'. Add suffix `f' to create a literal of
-this type.
-...
-```
-
-Das Problem ist offensichtlich. Wir versuchen einen Datentypen, der größere Werte umfassen kann auf einen Typen mit einem kleineren darstellbaren Zahlenbereich abzubilden. Der Compiler unterbindet dies logischerweise.
+eine Fehlermeldung. Das Problem ist offensichtlich. Wir versuchen einen Datentypen, der größere Werte umfassen kann auf einen Typen mit einem kleineren darstellbaren Zahlenbereich abzubilden. Der Compiler unterbindet dies logischerweise.
 
 C# kennt implizite und explizite Konvertierungen.
 
@@ -690,7 +689,7 @@ Da die Konvertierung von Ganzkommazahlen in Gleitkommazahlen in jedem Fall
 umgesetzt werden kann, sieht C# hier eine implizite Konvertierung vor. Umgekehrt
 muss diese explizit realisiert werden.
 
-Explizite Konvertiering mit dem Typkonvertierungsoperator (runde Klammern) ist
+Explizite Konvertierung mit dem Typkonvertierungsoperator (runde Klammern) ist
 ebenfalls nicht immer möglich. Zusätzliche Möglichkeiten der Typkonvertierung
 bietet für elementare Datentypen die Klasse **Convert** durch zahlreiche Methoden
 wie z.B.:
@@ -698,6 +697,31 @@ wie z.B.:
 ```csharp
 int wert=Convert.ToInt32(Console.ReadLine());//string to int
 ```
+
+> Achtung: Nutzen Sie `checked{ }`, um eine Überprüfung der Konvertierung zur Laufzeit vornehmen zu lassen [Link auf die Dokumentation](https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/keywords/checked).
+
+```csharp                Conversion.cs
+using System;
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        byte x = 0;            //    0 bis 255
+        ushort y = 65535;      // 0 bis 65.535
+        Console.WriteLine(x);
+        Console.WriteLine(y);
+
+        x = y; // Fehler! Die Konvertierung muss explizit erfolgen!
+        x = (byte) y;
+        Console.WriteLine(x);
+        x = checked((byte) y);
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+Offenbar müssen wir die Konvertierung explizit vornehmen, da der Compiler die Konvertierung nicht automatisch durchführt. Die Anweisung `checked` überprüft die Konvertierung zur Laufzeit und wirft eine Exception, wenn der Wertebereich überschritten wird. 
 
 #### Arithmetische Operatoren
 
@@ -855,6 +879,256 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
+### Boolscher Datentyp und Operatoren
+
+
+                        {{0-2}}
+**********************************************************************
+
+In anderen Sprachen kann die bool Variable (logischen Werte `true` and `false`)  mit äquivalent Zahlenwerten kombiniert werden.
+
+```python    noTypes.py
+x = True
+y = 1
+
+print(y==True)
+```
+@LIA.eval(`["main.py"]`, `python3 -m compileall .`, `python3 main.py`)
+
+
+In C# existieren keine impliziten cast-Operatoren, die numerische Werte und umgekehrt wandeln!
+
+```csharp                BoolOperation.cs
+using System;
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        bool x = true;
+        Console.WriteLine(x);
+        Console.WriteLine(!x);
+        Console.WriteLine(x == true);      // Rückgabe eines "neuen" bool Wertes
+        
+        // cast operationen 
+        int y = 1;
+        Console.WriteLine(y == x);       // Funkioniert nicht
+        // Lösungsansatz I bool -> int
+        int xAsInt = x ? 1 : 0;          // x == True -> 1 else -> 0
+        Console.WriteLine(xAsInt);
+        // Lösungsansatz II
+        xAsInt = Convert.ToInt32(x);
+        Console.WriteLine(xAsInt);
+        Console.WriteLine(xAsInt == y);  // Funktiontiert
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+Im Codebeispiel wird der sogenannte tertiäre Operator `?` verwandt, der auch durch eine `if` Anweisung abgebildet werden könnte (vgl. [Dokumentation](https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/operators/conditional-operator)).
+
+Welchen Vorteil/Nachteil sehen Sie zwischen den beiden Lösungsansätzen?
+
+**********************************************************************
+
+                        {{1-2}}
+**********************************************************************
+
+Die Vergleichsoperatoren `==` und `!=` testen auf Gleichheit oder Ungleichheit
+für jeden Typ und geben in jedem Fall einen `bool` Wert zurück. Dabei muss
+unterschieden werden zwischen Referenztypen und Wertetypen.
+
+<!-- --{{1}}-- Idee des Codefragments:
+    * Einführung eines weiteren Objektes, dass auf student2 zeigt,
+      anschließend Ausführung der Vergleichsoperation
+-->
+```csharp                    Equality.cs
+using System;
+
+public class Person{
+  public string Name;
+  public Person (string n) {Name = n;}
+}
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        Person student1 = new Person("Sebastian");
+        Person student2 = new Person("Sebastian");
+        Console.WriteLine(student1 == student2);
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+> Merke: Für Referenztypen evaluiert `==` die Addressen der Objekte, für Wertetypen die spezifischen Daten. (Es sei denn, Sie haben den Operator überladen.)
+
+Die Gleichheits- und Vergleichsoperationen  `==`, `!=`, `>=`, `>` usw. sind auf
+alle  numerischen Typen anwendbar.
+
+**********************************************************************
+
+                        {{2}}
+**********************************************************************
+
+In der Vorlesung 3 war bereits über die bitweisen boolschen Operatoren gesprochen worden. Diese verknüpfen Zahlenwerte auf Bitniveau. Die gleiche Notation (einzelne Operatorsymbole `&`, `|`) kann auch zur Verknüpfung von Boolschen Aussagen genutzt werden.
+
+Darüber hinaus existieren die doppelten Schreibweisen als eigenständige Operatorkonstrukte - `&&`, , `||`. Bei der Anwendung auf boolsche Variablen wird
+dabei zwischen "nicht-konditionalen" und "konditionalen" Operatoren
+unterschieden.
+
+Bedeutung der boolschen Operatoren für unterschiedliche Datentypen:
+
+| Operation | numerische Typen                                   | boolsche Variablen               |
+| --------- | -------------------------------------------------- | -------------------------------- |
+| `&`       | bitweises UND (Ergebnis ist ein numerischer Wert!) | nicht-konditionaler UND Operator |
+| `&&`      | FEHLER                                             | konditonaler UND Operator        |
+
+> Achtung: In dieser Typbehafteten Unterscheidung in der Bedeutung von `&` und `&&` liegt ein signifikanter Unterschied zu C und C++.
+
+<!-- --{{1}}-- Idee des Codefragments:
+    * Wechsel zu && -> Fehlermeldung
+-->
+```csharp                   BooleanOperations.cs
+using System;
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        int a =  6; // 0110
+        int b = 10; // 1010
+        Console.WriteLine((a & b).GetType());
+        Console.WriteLine(Convert.ToString(a & b, 2).PadLeft(8,'0'));
+        // Console.WriteLine(a && b);
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+Konditional und Nicht-Konditional, was heißt das? Erstgenannte optimieren die Auswertung. So berücksichtigt der AND-Operator `&&` den rechten Operanden gar nicht, wenn der linke Operand bereits ein `false` ergibt.
+
+```csharp
+bool a=true, b=true, c=false;
+Console.WriteLine(a || (b && c)); // short-circuit evaluation
+
+// alternativ
+Console.WriteLine(a | (b & c));   // keine short-circuit evaluation
+```
+Hier ein kleines Beispiel für die Optimierung der Konditionalen Operatoren:
+
+```csharp
+using System;
+
+public class Program
+{
+    public static void Main(){
+
+            bool a=false, b= true, c=false;
+
+            //Nicht-Konditionales UND
+            DateTime start = DateTime.Now;
+            for(int i=0; i<1000; i++){
+                if(a & (b | c)){}
+            }
+            DateTime end = DateTime.Now;
+            Console.WriteLine("Mit Nicht-Konditionalen Operatoren dauerte es: {0} Millisekunden", (end-start).TotalMilliseconds);
+
+
+            //Konditionales UND
+            start = DateTime.Now;
+            for(int i=0; i<1000; i++){
+                if(a && (b || c)){}
+            }
+            end = DateTime.Now;
+            Console.WriteLine("Mit Konditionalen Operatoren dauerte es nur: {0} Millisekunden, da vereinfacht wurde.", (end-start).TotalMilliseconds);
+    }
+}
+
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+**********************************************************************
+
+### Enumerations
+
+                                   {{0-1}}
+********************************************************************************
+
+Enumerationstypen erlauben die Auswahl aus einer Aufstellung von Konstanten, die
+als Enumeratorliste bezeichnet wird. Was passiert intern? Die Konstanten werden
+auf einen ganzzahligen Typ gemappt. Der Standardtyp von Enumerationselementen ist `int`. Um eine Enumeration eines anderen ganzzahligen Typs, z. B. `byte` zu deklarieren, setzen Sie einen Doppelpunkt hinter dem Bezeichner, auf den der Typ folgt.
+
+<!-- --{{1}}-- Idee des Codefragments:
+  * Darstellung des Enum spezifischen Cast Operators
+        Day startingDay = (Day) 5;
+  * Darstellung der Möglichkeit Constanten zuzuordnen Sat = 5
+-->
+```csharp    Enumeration.cs
+using System;
+
+public class Program
+{
+  enum Day {Sat, Sun, Mon, Tue, Wed, Thu, Fri};
+  //enum Day : byte {Sat, Sun, Mon, Tue, Wed, Thu, Fri};
+
+  static void Main(string[] args)
+  {
+    Day startingDay = Day.Wed;
+    Console.WriteLine(startingDay);
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+Die Typkonvertierung von einem Zahlenwert in eine enum kann wiederum mit `checked` überwacht werden.
+
+********************************************************************************
+
+                                   {{1-2}}
+********************************************************************************
+
+Dabei schließen sich die Instanzen nicht gegenseitig aus, mit einem entsprechenden
+Attribut können wir auch Mehrfachbelegungen realisieren.
+
+<!-- --{{1}}-- Idee des Codefragments:
+  * Hinweis auf Zahlenzuordnung mit Zweierpotenzen
+-->
+```csharp                EnumExample.cs
+// https://docs.microsoft.com/de-de/dotnet/api/system.flagsattribute?view=netframework-4.7.2
+
+using System;
+
+public class Program
+{
+  [FlagsAttribute] // <- Specifisches Enum Attribut
+  enum MultiHue : byte
+  {
+     None  = 0b_0000_0000,  // 0
+     Black = 0b_0000_0001,  // 1
+     Red   = 0b_0000_0010,  // 2
+     Green = 0b_0000_0100,  // 4
+     Blue  = 0b_0000_1000,  // 8
+  };
+
+  static void Main(string[] args)
+  {
+     Console.WriteLine(
+          "\nAll possible combinations of values with FlagsAttribute:");
+     for( int val = 0; val < 16; val++ )
+        Console.WriteLine( "{0,3} - {1}", val, (MultiHue)val);
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+********************************************************************************
+
+### Weitere Wertdatentypen
+
+Für die Einführung der weiteren Wertdatentypen müssen wir noch einige Grundlagen erarbeiten. Entsprechend wird an dieser Stelle noch nicht auf `struct` und `tupel` eingegangen. Vielmehr sei dazu auf nachfolgende Vorlesungen verwiesen.
+
 
 ## Aufgabe
 
@@ -890,3 +1164,35 @@ Gebe die Ergebnisse der jeweiligen Ausdrücke in binärer Schreibweise an:
 `(11111111^10101010) & ~(100000 | 11)`
 
 [[10100]]
+
+Wähle aus ob folgende boolische Vergleiche `true` oder `false` wiedergeben:
+
+`a = true, b = false, c = true, d = false`
+
+- [ [true] (false) ]
+- [  (X)     ( )   ] `(a && d) || (42 < 666-420)`
+- [  (X)     ( )   ] `(b == d) && (a || d)`
+- [  ( )     (X)   ] `((a || b) && (c || d)) != (0 <= 8)`
+
+Geben Sie die automatisch generierte Nummerierung innerhalb folgenden Enums an:
+
+```cs
+enum Colors
+{
+  Cyan,
+  Magenta,
+  Yellow,
+  Red = 10,
+  Green,
+  Blue,
+  Black = 100
+};
+```
+
+[[ 0, 1, 2, 10, 3, 4, 100
+|  (0, 1, 2, 10, 11, 12, 100)
+|  1, 2, 3, 10, 4, 5, 100
+|  1, 2, 3, 10, 11, 12, 100
+|  0, 1, 2, 10, 20, 30, 100
+|  1, 2, 3, 10, 20, 30, 100
+]]
