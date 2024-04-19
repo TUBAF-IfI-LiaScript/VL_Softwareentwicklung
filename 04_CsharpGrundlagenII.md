@@ -33,6 +33,19 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
+## Einschub Explizite Projektdefinitionen
+
+In der letzten Veranstaltung haben wir uns mit der Erstellung von C#-Programmen
+beschäftigt und die Notwendigkeit 
+
++ der expliziten Beschreibung von Abhängigkeiten 
++ der Angabe von Versionsinformationen
++ der Autorenschaft etc.
+
+diskutiert.
+
+> Natürlich ist das kein ausgemachtes Problem von C# ... Codebeispiel in Python
+
 ## Referenzdatentypen
 
 ```ascii
@@ -160,10 +173,11 @@ public class Program
   {
     int [] intArrayA = new int[]{1,2,3};
     int [] intArrayB; //= null;
-    //if (intArrayB != null){         // C#6 Syntax
-    if (intArrayB is not null) {      // C#9 Syntax
+    if (intArrayB is not null) {      
     	Console.WriteLine("Alles ok, mit intArrayB");
-     }
+    } else {
+      Console.WriteLine("intArrayB ist null");
+    }    
   }
 }
 ```
@@ -245,6 +259,8 @@ public class Program
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+> **Recherche**: Wie kann ich nach mehreren Zeichen splitten?
 
 ********************************************************************************
 
@@ -383,27 +399,6 @@ Ausgabe und entsprechend den Methoden der String Generierung beschäftigen.
 
 ********************************************************************************
 
-## Umgang mit Variablen
-
-```csharp        ToString.cs
-using System;
-
-public class Program
-{
-  static void Main(string[] args)
-  {
-     String intro = "Mein Name ist";
-     String [] names = new String[] { "Sebastian", "Ernst", "Zug" };
-     Console.Write(intro);
-     foreach(string name in names){
-         Console.Write(" " + name);
-     }
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-
 ### Konstante Werte
 
 Konstanten sind unveränderliche Werte, die zur Compilezeit bekannt sind und sich während der Lebensdauer des Programms nicht ändern. Der Versuch einer Änderung wird durch den Compiler überwacht.
@@ -423,7 +418,14 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-> Auf die Abgrenzung zum `readonly` Schlüsselwort wird zu einem späteren Zeitpunkt eingegangen ([Link](https://josipmisko.com/posts/c-sharp-const-vs-readonly)).
+> In C# gibt es auch das Schlüsselwort `readonly`, das eine Variable als konstant kennzeichnet, aber erst zur Laufzeit initialisiert wird.
+
+| `const`                                 | `readonly`                                                |
+| --------------------------------------- | --------------------------------------------------------- |
+| Muss zur Kompilierzeit definiert werden | Kann zur Kompilierzeit oder zur Laufzeit definiert werden |
+| Implizit statisch                       | Instanz-Ebene oder statisch                               |
+| Assembler-übergreifend kopiert          | Assembler-übergreifend gemeinsam genutzt                  |
+| Speicher nicht zuweisen                 | Speicher zuweisen                                         |
 
 ### Implizit typisierte Variablen
 
