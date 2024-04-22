@@ -804,20 +804,19 @@ catch (InvalidOperationException ex)
 }
 ```
 
-* Nutzen Sie die Möglichkeite von Ausnahmen statt einen Fehlercode zurückzugeben
-* Verwenden Sie dafür die vordefinierten .NET-Ausnahmetypen!
+* Nutzen Sie die Möglichkeiten von Ausnahmen statt einen Fehlercode zurückzugeben - Verwenden Sie dafür die vordefinierten .NET-Ausnahmetypen!
 * Selbst definierte Ausnahmen enden auf das Wort *Exception*!
 * Vermeiden Sie unklare Ausgaben für den Fall einer Ausnahmebehandlung, stellen Sie alle Informationen bereit, die für die Analyse des Fehlers nötig sind
 * Stellen Sie den Status einer Methode wieder her, die von einer Ausnahmebehandlung betroffen war (Beispiel: Code für Banküberweisungen, Abbuchen von einem Konto und Einzahlung auf ein anderes. Scheitert die zweite Aktion muss auch die erste zurückgefahren werden.)
 * Testen Sie Ihre Ausnahmebehandlungsstrategie!
 
 
-| Schritt | Fragestellungen                                                                            |
-| ------- | ------------------------------------------------------------------------------------------ |
+| Schritt | Fragestellungen                                                                                      |
+| ------- | ---------------------------------------------------------------------------------------------------- |
 | 1       | Welche Fehler können überhaupt auftreten? Welche Fehler werden durch die Implementierung abgefangen? |
-| 2       | Wo sollen die Fehler abgefangen werden?                                                    |
-| 3       | Gibt es Prioritäten bei der Abarbeitung?                                                   |
-| 4       | Sind abschließende "Arbeiten" notwendig?                                                   |
+| 2       | Wo sollen die Fehler abgefangen werden?                                                              |
+| 3       | Gibt es Prioritäten bei der Abarbeitung?                                                             |
+| 4       | Sind abschließende "Arbeiten" notwendig?                                                             |
 
 
 ## Aufgaben
