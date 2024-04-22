@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina` & `KoKoKotlin`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 comment:  Kontrollstrukturen, Funktionen, Parameterübergabe, Überladen von Funktionen, Lebensdauer und Sichtbarkeit von Variablen
@@ -228,9 +228,6 @@ public class Program
 
 Ein weiteres Anwendungsbeispiel ist die Implementierung eines Automaten. Nehmen wir an, dass wir einen Sequenzdetektor entwerfen wollen, der das Auftreten des Musters *a{c}d* in einem Signalverlauf erkennt! Der Zustand kann mit *f* verlassen werden.
 
-<!--
-style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
 ````ascii
 
 
@@ -513,16 +510,15 @@ Während `label` bestimmte Positionen im Code adressiert, lassen sich mit
 `break` Schleifen beenden, dient `continue` der Unterbrechung des aktuellen
 Blockes.
 
-| Sprunganweisung | Wirkung                                                                              |
-| --------------- | ------------------------------------------------------------------------------------ |
-| `break`         | beendet die Ausführung der nächsten einschließenden Schleife oder `switch`-Anweisung |
-| `continue`      | realisiert einen Sprung in die nächste Iteration der einschließenden Schleife        |
-| `goto <label>`  | Sprung an eine Stelle im Code, er durch das Label markiert ist                       |
-| `return`                |     beendet die Ausführung der Methode, in der sie angezeigt wird und gibt den optional nachfolgenden Wert zurücksetzen                                                                                  |
+| Sprunganweisung | Wirkung                                                                                                             |
+| --------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `break`         | beendet die Ausführung der nächsten einschließenden Schleife oder `switch`-Anweisung                                |
+| `continue`      | realisiert einen Sprung in die nächste Iteration der einschließenden Schleife                                       |
+| `goto <label>`  | Sprung an eine Stelle im Code, er durch das Label markiert ist                                                      |
+| `return`        | beendet die Ausführung der Methode, in der sie angezeigt wird und gibt den optional nachfolgenden Wert zurücksetzen |
 
-<!-- --{{1}}-- Idee des Codefragments:
--->
-```csharp   GoTo
+
+```csharp   GoTo.cs
 using System;
 
 public class Program
@@ -586,7 +582,7 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-Des Weiteren für alle die auch mit C programmieren: in C ist es notwendig Funktionen über der Main-Funktion zu deklarieren! Da diese vom Compiler sonst nicht erkannt werden können. In C# spielt das keine Rolle, Funktionen bzw. hier nun Methoden können belieibg ober- oder unterhalb der Main deklaitert werden.
+Des Weiteren für alle die auch mit C programmieren: in C ist es notwendig Funktionen über der Main-Funktion zu deklarieren! Da diese vom Compiler sonst nicht erkannt werden können. In C# spielt das keine Rolle, Funktionen bzw. hier nun Methoden können beliebig ober- oder unterhalb der Main deklariert werden.
 
 ### Verkürzte Darstellung
 
@@ -609,7 +605,7 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-Die oben genannte Funktion, die die Kundendaten von Lehrzeichen befreit, ist also äquivalent zur Darstellung von:
+Die oben genannte Funktion, die die Kundendaten von Leerzeichen befreit, ist also äquivalent zur Darstellung von:
 
 ```csharp
 public static string CombineNames(string fname, string lname)
