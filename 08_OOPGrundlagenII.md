@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 comment:  OOP-Konzepte (Kapselung, Vererbung, Polymorphie), Klassen und Klassenmembers, Operatorenüberladung
@@ -36,62 +36,6 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ## Auf Nachfrage ...
 
-> **Wann machen `private` Klassen oder `structs` Sinn?**
-
-<!-- data-marker="23 0 36 200 log;" -->
-```csharp                                      Usage
-using System;
-using System.Collections;
-using System.Collections.Generic;
-
-public struct Farm{
-  public string adress;
-  public List<Animal> animalList;
-
-  public Farm(string adress) {
-  	animalList = new List<Animal>();
-  	this.adress = adress;
-  }
-
-  public void AddAnimal(string name, string sound){
-    animalList.Add(new Animal(name, sound));
-  }
-
-  public void PrintAnimals(){
-    foreach (Animal pet in animalList){
-      pet.MakeNoise();
-    }
-  }
-
-  private struct Animal
-  {
-    public string name;
-    public string sound;
-
-    public Animal(string name, string sound = "Miau"){
-      this.name = name;
-      this.sound = sound;
-    }
-
-    public void MakeNoise() {
-    	Console.WriteLine("{0} makes {1}", name, sound);
-    }
-  }
-}
-
-public class Program
-{
-  static void Main(string[] args){
-    Farm myFarm = new Farm("Biobauernhof Freiberg");
-    myFarm.AddAnimal("Wally", "Wau");
-    myFarm.AddAnimal("Kitty", "Miau");
-    myFarm.PrintAnimals();
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-
 > **Wie verhält es sich mit mehreren Dateien in einem Ordner und wie stellt man die Relationen zwischen separaten Assemblies her?**
 
 
@@ -122,6 +66,7 @@ Ein Objekt legt dabei selbst fest, wie es auf den Aufruf einer Operation reagier
 > **Merke**  *Ein Objekt ist eine zur Ausführungszeit vorhandene und für ihre Member Speicher allozierende Instanz, die sich aus der Spezifikation einer Klasse erschließt.*
 
 Ideen der OOP:
+
 * Objekte der *realen Welt* müssen sich in der Programmierung widerspiegeln
 * Es geht nicht um das Manipulieren von Daten, sondern um Zustandsänderungen von Objekten
 * Im Zentrum der objektorientierten Programmierung stehen Objekte, die miteinander kommunizieren
@@ -239,9 +184,7 @@ Standardidentifier für Daten- und Methodenzugriffe sind dabei:
 1. Die Position x,y eines jeden Spielers und des Balls sollte nur über entsprechende Zugriffsmethoden manipuliert werden.
 2. Die `Foul` kann nur aus dem Spieler heraus aufgerufen werden :-)
 
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
+
 ```ascii
                                  public struct Position{float x; float y};
 +---------------------------+
@@ -296,9 +239,6 @@ Die vererbende Klasse wird meist Basisklasse (auch Super-, Ober- oder Elternklas
 
 **Am Beispiel Fußballspiel**
 
-<!--
-style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
 ````ascii
 
    Erbende Klasse                  Höherabstrakte Klasse                       .
@@ -545,16 +485,16 @@ die an den entsprechenden Konstruktor übergeben wird.
                                      {{2-3}}
 ******************************************************************************
 
-|                              | Fields                                       | Methods                                            |
-| ---------------------------- | -------------------------------------------- | -------------------------------------------------- |
-| Statisches Attribut          | `static`                                     | `static`                                           |
-| Zugriffsattribute            | `public`, `internal`, `private`, `protected` | `public`, `internal`, `private`, `protected`       |
-| Vererbungsattribut           | `new`                                        | `new`, `virtual`, `abstract`, `override`, `sealed` |
-| Unsafe Attribute             | `unsafe`                                     |                                                    |
-| Attribut Teilimplementierung |                                              | `partitial`                                        |
-| Unmanaged Code Attribute     |                                              | `unsafe extern`                                    |
-| Read-only Attribute          | `readonly`                                   |                                                    |
-| Threading Attribute          | `volatile`                                   |                                                    |
+|                              | Fields                                       | Methods                                      |
+| ---------------------------- | -------------------------------------------- | -------------------------------------------- |
+| Statisches Attribut          | `static`                                     | `static`                                     |
+| Zugriffsattribute            | `public`, `internal`, `private`, `protected` | `public`, `internal`, `private`, `protected` |
+| Vererbungsattribut           |                                              | `virtual`, `abstract`, `override`, `sealed`  |
+| Unsafe Attribute             | `unsafe`                                     |                                              |
+| Attribut Teilimplementierung |                                              | `partitial`                                  |
+| Unmanaged Code Attribute     |                                              | `unsafe extern`                              |
+| Read-only Attribute          | `readonly`                                   |                                              |
+| Threading Attribute          | `volatile`                                   |                                              |
 
 ******************************************************************************
 
@@ -573,9 +513,6 @@ auch dort deklariert werden.
 Eine Klasse oder Struktur kann Instanzenfelder, statische Felder oder beides
 gemischt verfügen.
 
-<!--
-style="width: 90%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
 ```ascii
 
   +-----------------+   +-----------------+  +-----------------+               .
@@ -908,6 +845,8 @@ Member damit adressiert werden. An dieser Stelle wird deutlich, dass
 Initializier ggf. beim schnellen Testen Tipparbeit sparen, in realen Anwendungen
 aber nicht zum Einsatz kommen sollten.
 
+> Achtung: _The `required` modifier is available beginning with C# 11._ Der hilft uns, in Ordnung in das Konzept der Initializer zu bringen.
+
 ******************************************************************************
 
 ### Destruktoren / Finalizer
@@ -965,7 +904,7 @@ public class Program
 {
   static void Main(string[] args){
     Vorlesung SoWi = new Vorlesung();
-    SoWi.wochentag = 4;
+    SoWi.wochentag = 24;
   }
 }
 ```
