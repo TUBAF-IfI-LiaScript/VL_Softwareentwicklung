@@ -156,7 +156,7 @@ Und wann entsteht der Aufwand? Wann muss ein Team Kosten in die Entwicklung inve
 | Projektphase                         |             | Relativer Kosteanteil |
 | ------------------------------------ | ----------- | --------------------- |
 | Spezifikation und Architekturentwurf | Entwicklung | 16%                   |
-| Detailentwurf und Kodierung          |             | 9%                    |
+| Detailentwurf und Kodierung          |             | 8%                    |
 | Test                                 |             | 16%                   |
 | Anpassung                            | Wartung     | 12%                   |
 | Erweiterung und Verbesserung         |             | 36%                   |

@@ -655,7 +655,7 @@ style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-
                      |
              .------+---------.
              |                |
-     mit Vorzeichen     vorzeichenlos                                            .
+     mit Vorzeichen     vorzeichenlos                                            
 ```
 
 Das vorangegangene Beispiel als Klassenimplementierung:
