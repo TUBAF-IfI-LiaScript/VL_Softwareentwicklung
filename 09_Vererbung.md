@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 comment:  Abstrakte Klassen und Methodens, Interface-Definition und -bedeutung, `cast` Operationen
@@ -170,9 +170,6 @@ public class Program
 Wer darf auf welche Methoden, Properties, Variablen usw. zurückgreifen? Mit der Einführung
 der Vererbung steigt die Komplexität der Sichtbarkeitsregeln nochmals an.
 
-<!--
-style="width: 100%; max-width: 720px; display: block; margin-left: auto; margin-right: auto;"
--->
 ````ascii
 | Zugriffsmodifizierer | Innerhalb eines Assemblys       || Außerhalb eines Assemblys      |
 |                      | Vererbung      | Instanzierung  || Vererbung     | Instanzierung  |
@@ -192,9 +189,12 @@ Die Konzepte von `internal` setzen diese Überlegung fort und kontrollieren den 
 
 ### Member der Klasse
 
-<!--
-style="width: 100%; max-width: 720px; display: block; margin-left: auto; margin-right: auto;"
--->
+Kriterien der Zugriffsattribute:
+
++ innerhalb/außerhalb einer Klasse
++ innerhalb der Vererbungshierachie einer Klasse / außerhalb ("nutzt")
++ innerhalb des Assemblys / außerhalb
+
 ```ascii
                                       :  Variante I                       Variante II
                                       :  Übergreifendes gemeinsames       Separate Assemblies via
@@ -238,11 +238,7 @@ style="width: 100%; max-width: 720px; display: block; margin-left: auto; margin-
                               {{2-3}}
 *****************************************************************************
 
-Kriterien der Zugriffsattribute:
 
-+ innerhalb/außerhalb einer Klasse
-+ innerhalb der Vererbungshierachie einer Klasse / außerhalb ("nutzt")
-+ innerhalb des Assemblys / außerhalb
 
 Für Methoden, Membervariablen etc. ist das klar, aber macht es Sinn geschützte
 private Konstruktoren zu definieren?
@@ -430,6 +426,7 @@ public class Program
   public static void Main(string[] args)
   {
     Zug IC239 = new Ice();
+    Console.WriteLine($"Statischer Typ von IC239 {IC239.GetType()}");
     Console.WriteLine("IC239 ist ein Zug? " + (IC239 is Zug)); // true
     Console.WriteLine("IC239 ist ein PersonenZug? " + (IC239 is PersonenZug)); // true
     Console.WriteLine("IC239 ist ein Ice? " + (IC239 is Ice)); // true
@@ -450,7 +447,7 @@ Objekte einer Basisklasse können somit Instanzen einer abgeleiteten Klassen
 umfassen. Damit lassen sich ähnlich einem Container sehr unterschiedliche
 Objekte einer Vererbungslinie bündeln. Welche Frage ergibt sich dann?
 
-**Wir haben schon gesehen, dass die Vererbung unter anderem Funktionen umfasst. Auf welche Klassenmember greife ich überhaupt zurück?**
+> **Wir haben schon gesehen, dass die Vererbung unter anderem Methoden umfasst. Auf welche Klassenmember greife ich überhaupt zurück?**
 
 *******************************************************************************
 
@@ -776,6 +773,7 @@ public class Program
                                                rückennummer = 13};
     Person mensch = champ;
     Fußballspieler champ2 = (Fußballspieler) mensch;
+    Console.WriteLine(champ2.rückennummer);
   }
 }
 ```

@@ -36,9 +36,9 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ## Abstrakte Klassen / Abstrakte Methoden
 
-Mit `virtual` werden einzelne Methoden spezifiziert, die durch die abgeleiteten
-Klassen implmentiert werden. Die Basisklasse hält aber eine "default" Implementierung
-bereit. Letztendich kann man diesen Gedanken konsequent weiter treiben und die
+> Mit `virtual` werden einzelne Methoden spezifiziert, die durch die abgeleiteten Klassen implmentiert werden. Die Basisklasse hält aber eine "default" Implementierung bereit. 
+
+Letztendich kann man diesen Gedanken konsequent weiter treiben und die
 Methoden der Basisklasse auf ein reines Muster reduzieren, dass keine eigenen Implementierungen
 umfasst.
 
@@ -91,7 +91,7 @@ public class Program
 
 Abstrakte Klassen dienen somit als Template für nachgeordnete Unterklassen. Neben Methoden können auch Properties und Indexer als abstrakt deklariert werden.
 
-Warum macht es keinen Sinn eine abstrakte Klasse als `sealed` zu deklarieren?
+> Warum macht es keinen Sinn eine abstrakte Klasse als `sealed` zu deklarieren?
 
 ## Interfaces
 
