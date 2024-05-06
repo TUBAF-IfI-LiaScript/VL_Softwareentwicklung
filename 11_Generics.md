@@ -22,7 +22,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 | Parameter                | Kursinformationen                                                                        |
 | ------------------------ | ---------------------------------------------------------------------------------------- |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                          |
-| **Teil:**                | `19/27`                                                                                  |
+| **Teil:**                | `11/27`                                                                                  |
 | **Semester**             | @config.semester                                                                         |
 | **Hochschule:**          | @config.university                                                                       |
 | **Inhalte:**             | @comment                                                                                 |
@@ -33,10 +33,64 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
+## Nachgefragt und nachgedacht
+
++ Beispiel zur Anwendung der Polymorphie 
++ Interfaces
+
+| interface                         | abstract class                                    |
+| --------------------------------- | ------------------------------------------------- |
+| viele Interfaces möglich          | immer nur eine Basisklasse                        |
+| speichert keine Daten             | kann Felder umfassen                              |
+| keine Konstruktorensignaturen     | kann Konstruktoren umfassen                       |
+| beinhaltet nur Methodensignaturen | kann Signaturen und Implementierungen integrieren |
+| keine Zugriffsmodifizierer        | beliebige Zugriffsmodifizierer                    |
+| keine statischen Member           | statische Member möglich                          |
+
+
+```
+interface IFile
+{
+    void ReadFile();
+    void DetermineSize();
+    string Name { get; set; }
+}
+
+abstract class File 
+{
+  public abstract void ReadFile();
+  public int DetermineSize() 
+  {
+    // Bestimme die Größe der Datei auf der Festplatte
+    // Default Implementierung
+  }
+  public string Name { get; set; }
+  private string path;
+}
+
+class OfficeFile : IFile
+//class OfficeFile : File   // Alternative
+{
+    void ReadFile()
+    {
+        ...
+    }
+
+    ....
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        IFile file1 = new OfficeFile();
+        //File  file2 = new OfficeFile();
+}
+```
+
 ## Motivation
 
-Versuchen wir nach dem Exkurs zur UML Modellierung und den Werkzeugen, den roten Faden der C# Programmierung wieder aufzunehmen.
-In dieser Woche wollen wir uns mit der Frage der _Generics_ und damit der Frage beschäftigen, wie wir ohne eine spezifische Berücksichtigung von Datentypen wiederverwendbareren Code schreiben können.
+In dieser Veranstaltung wollen wir uns mit der Frage der _Generics_ und damit der Frage beschäftigen, wie wir ohne eine spezifische Berücksichtigung von Datentypen wiederverwendbareren Code schreiben können.
 
 Nehmen wir an, dass Sie ohne die entsprechenden .NET-Bibliotheken eine Liste für `int`-Werte implementieren sollen. Warum funktioniert das Ganze nicht mit unserem bisherigen Array-Konzept?
 
@@ -70,10 +124,8 @@ Die Dokumentation von `Array` findet sich unter https://docs.microsoft.com/de-de
 
 Lassen Sie uns einen alternativen Ansatz bestreiten. Wir implementieren ein eigenes Konzept, dass eine verkettete Liste repräsentiert.
 
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
-````````````
+
+```ascii
   Start
    |
    |   +----------+      +----------+      +----------+      +----------+
@@ -81,7 +133,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
        | Referenz |--+   | Referenz |--+   | Referenz |--+   | Referenz |--+
        +----------+      +----------+      +----------+      +----------+
 
-````````````
+```
 
 ```csharp   LinkedList.cs
 using System;
@@ -419,7 +471,7 @@ Was verbirgt sich hinter dem Interface `IComparable`? Werfen Sie einen Blick auf
 entsprechende Dokumentation und benennen Sie die Methoden, die in Klassen, die dieses
 Interface implementieren, existieren müssen.
 
-https://docs.microsoft.com/de-de/dotnet/api/system.icomparable?view=netframework-4.8
+https://learn.microsoft.com/de-de/dotnet/api/system.icomparable?view=net-9.0
 
 > Achtung: Dieses Beispiel benutzt die typbehaftete Variante des IComparable
 > Interfaces! Diese generiert über das Boxing und Unboxing einen unnötigen
