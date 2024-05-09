@@ -468,7 +468,7 @@ zur Laufzeit bestimmt (dynamische Bindung).
 > Einsatz kommt.
 
 Dynamische Bindung erlaubt den Aufruf von überschriebenen Methoden aus der
-Basisklasse heraus, wobei das Überschreiben muss in der Basisklasse explizit
+Basisklasse heraus, wobei das Überschreiben in der Basisklasse explizit
 erlaubt werden muss.
 
 *******************************************************************************
@@ -704,7 +704,7 @@ public class Program
 ## Casts über Klassen
 
 Konvertierungen zwischen unterschiedlichen Datentypen lassen sich auch
-auf Klassen anwenden, allerdings sind hier einige Besonderheiten zu beachten.
+auf Klassen anwenden, allerdings sind hier einige Besonderheiten zu beachten. Diese treten auf, wenn Klassen: 
 
 + implizit auf die Basisklasse  (upcast)
 + explizit auf die abgeleitete Klasse (downcast)
