@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 comment:  Generelle Container und Datenkonzepte, Collections, Implementierung in Csharp und Anwendung der generischen Collections
@@ -37,9 +37,6 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ## ... zur Erinnerung und in Ergänzung
 
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
 ```ascii
                                      C# Typen
                                          |
@@ -124,20 +121,10 @@ public class Program
 - die Records implementieren verschiedene Methoden automatisch `ToString()`
 - Records sind per default immutable!
 
-```csharp
-public record Person
-{
-    public string FirstName { get; init; }
-    //public string FirstName { get; set; }
-    public string LastName { get; init; }
-    // public string LastName { get; set; }
-}
-```
+
+> Nutzen Sie https://sharplab.io, um sich intensiver mit dem autogenerierten Code auseinanderzusetzen.
 
 ## Collections
-
-                              {{0-1}}
-********************************************************************************
 
 > **Merke:** Sogenannte Container sind ein zentrales Element jeder Klassenbibliothek. Sie erlauben die Abbildung verschiedener Entitäten in einem Objekt. Im Kontext von C# wird dabei von _Collections_ gesprochen.
 
@@ -270,19 +257,19 @@ public class ArrayExamples  {
 
 Worin liegt der Unterschied zu den bereits bekannten `Array` Implementierung?
 
-| Feature             | Array                           | `ArrayList`                             | `Array<T>`          |
-| ------------------- | ------------------------------- | --------------------------------------- | ------------------- |
-| Generisch?          | nein                            | nein                                    | ja                    |
-| Anzahl der Elemente | feste Größe                     | variabel    >                            | variabel            |
-| Datentyp            | muss homogen sein (typsicher) | kann variieren (nicht streng typisiert) | muss homogen sein |
-| null                | nicht akzeptiert                | wird akzeptiert                         | wird akzeptiert     |
-| Dimensionen         | multidimensional `array[X][Y]`  | -                                       | -                   |
+| Feature             | Array                          | `ArrayList`                             | `Array<T>`        |
+| ------------------- | ------------------------------ | --------------------------------------- | ----------------- |
+| Generisch?          | nein                           | nein                                    | ja                |
+| Anzahl der Elemente | feste Größe                    | variabel    >                           | variabel          |
+| Datentyp            | muss homogen sein (typsicher)  | kann variieren (nicht streng typisiert) | muss homogen sein |
+| null                | nicht akzeptiert               | wird akzeptiert                         | wird akzeptiert   |
+| Dimensionen         | multidimensional `array[X][Y]` | -                                       | -                 |
 
-Die Methoden von `ArrayList` sind zum Beispiel unter https://docs.microsoft.com/de-de/dotnet/api/system.collections.arraylist?view=netcore-3.1 zu finden.
+Die Methoden von `ArrayList` sind zum Beispiel unter https://learn.microsoft.com/de-de/dotnet/api/system.collections.arraylist?view=net-8.0 zu finden.
 
-********************************************************************************
+### Einordnung
 
-                              {{1-2}}
+                              {{0-1}}
 ********************************************************************************
 
 Neben den genannten existieren weitere Typen, die spezifischere Aufgaben umsetzen. Diese können entweder als sequenzielle oder als assoziative Container klassifiziert werden.
@@ -293,6 +280,11 @@ Container (in der C#-Welt sprechen wir von Collections) können durch die folgen
 2. Speicherung, d.h. die Art und Weise, wie die Objekte des Containers gelagert werden;
 3. Durchlaufen, d.h. die Art und Weise, wie die Objekte des Containers iteriert werden.
 
+********************************************************************************
+
+                                        {{1-2}}
+***************************************************************************
+
 Von den Containerklassen wird entsprechend erwartet, dass sie folgende Methoden implementieren:
 
 + einen leeren Container erzeugen (Konstruktor);
@@ -302,9 +294,18 @@ Von den Containerklassen wird entsprechend erwartet, dass sie folgende Methoden 
 + auf die Objekte im Container zugreifen;
 + auf die Anzahl der Objekte im Container zugreifen.
 
-Sequenzielle-Container speichern jedes Objekt unabhängig voneinander. Auf Objekte kann direkt oder mit einem Iterator zugegriffen werden.
+***************************************************************************
 
-Ein assoziativer Container verwendet ein assoziatives Array, eine Karte oder ein Wörterbuch, das aus Schlüssel-Wert-Paaren besteht, so dass jeder Schlüssel höchstens einmal im Container erscheint. Der Schlüssel wird verwendet, um den Wert, d.h. das Objekt, zu finden, falls es im Container gespeichert ist.
+                                        {{2-3}}
+***************************************************************************
+> __Sequenzielle-Container__ speichern jedes Objekt unabhängig voneinander. Auf Objekte kann direkt oder mit einem Iterator zugegriffen werden.
+
+> Ein __assoziativer Container__ verwendet ein assoziatives Array, eine Karte oder ein Wörterbuch, das aus Schlüssel-Wert-Paaren besteht, so dass jeder Schlüssel höchstens einmal im Container erscheint. Der Schlüssel wird verwendet, um den Wert, d.h. das Objekt, zu finden, falls es im Container gespeichert ist.
+
+***************************************************************************
+
+                                        {{3-4}}
+***************************************************************************
 
 Welche Container-Typen sind programmiersprachenunabhängig gängig?
 
@@ -314,27 +315,12 @@ Welche Container-Typen sind programmiersprachenunabhängig gängig?
 | Liste      | via Index                  | Folge von Elementen mit einem Index als Schlüssel |
 | Queue      | nur jeweils erstes Objekt  | FIFO (First-In-First-Out) Speicher                |
 | Stack      | nur jeweils letztes Objekt | LIFO (Last-In-First-Out) Speicher                 |
-| Set        |                            | Werte ohne Dublikate                              |
+| Set        |                            | Werte ohne Duplikate                              |
 | ...        |                            |                                                   |
 
-********************************************************************************
+***************************************************************************
 
-                            {{2-3}}
-********************************************************************************
-
-Und wie sieht es mit der Performance aus? Der Beitrag des Autors `Serj-Tm` auf Stackoverflow vergleicht in einem Codebeispiel unterschiedliche Operationen für verschiedene Container-Typen.
-
-<!-- data-type="none" -->
-| Array            | `List<T>`        | Penalties | Method    |
-| ---------------- | ---------------- | --------- | --------- |
-| 00:00:01.3932446 | 00:00:01.6677450 | 1 vs  1,2 | Generate  |
-| 00:00:00.1856069 | 00:00:01.0291365 | 1 vs  5,5 | Sum       |
-| 00:00:00.4350745 | 00:00:00.9422126 | 1 vs  2,2 | BlockCopy |
-| 00:00:00.2029309 | 00:00:00.4272936 | 1 vs  2,1 | Sort      |
-
-********************************************************************************
-
-                            {{3-4}}
+                            {{4-5}}
 ********************************************************************************
 
 Fragenkatalog für die Auswahl von Collections:
@@ -351,6 +337,19 @@ Fragenkatalog für die Auswahl von Collections:
 | Soll der Container nur Zeichenfolgen annehmen?                             | `StringCollection`                                                        |
 
 ********************************************************************************
+
+### Performance
+
+Und wie sieht es mit der Performance aus? Der Beitrag des Autors `Serj-Tm` auf Stackoverflow vergleicht in einem Codebeispiel unterschiedliche Operationen für verschiedene Container-Typen.
+
+<!-- data-type="none" -->
+| Array            | `List<T>`        | Penalties | Method    |
+| ---------------- | ---------------- | --------- | --------- |
+| 00:00:01.3932446 | 00:00:01.6677450 | 1 vs  1,2 | Generate  |
+| 00:00:00.1856069 | 00:00:01.0291365 | 1 vs  5,5 | Sum       |
+| 00:00:00.4350745 | 00:00:00.9422126 | 1 vs  2,2 | BlockCopy |
+| 00:00:00.2029309 | 00:00:00.4272936 | 1 vs  2,1 | Sort      |
+
 
 ## Containerimplementierung in Csharp
 
@@ -442,31 +441,29 @@ class Program
 
 Die Methoden für das Handling der Daten beschränken sich aber auf ein `Add()` und die Iteration - hier braucht es noch deutlich mehr, um anwendbar zu sein. Um diese Funktionalität umzusetzen, greift die C#-Collections Implementierung auf eine ganze Reihe von Interfaces zurück, die den einzelnen Containern die notwendige Funktion geben.
 
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
+
 ````````````
 
                 Non-generic                             Generic
 
             +----------------+                     +-----------------+
-            | IEnumerator    |                     | IEnumerator﹤T﹥|
+            | IEnumerator    |                     | IEnumerator﹤T﹥  |
             +----------------+                     +-----------------+
 
             +----------------+                     +-----------------+
-            | IEnumerable    | ⊲------------------ | IEnumerable﹤T﹥|
+            | IEnumerable    | ⊲------------------ | IEnumerable﹤T﹥  |
             +----------------+                     +-----------------+
                     ∆                                       ∆
                     |                                       |
             +----------------+                     +-----------------+
-            | ICollection    |                     | ICollection﹤T﹥|
+            | ICollection    |                     | ICollection﹤T﹥  |
             +----------------+                     +-----------------+
                     ∆                                       ∆
                     |                                       |
         .-----------+----------.                  .---------+----------.
         |                      |                  |                    |
  +----------------+  +----------------+   +-----------------+  +----------------+
- | IDictionary    |  | IList          |   | IDictionary﹤T﹥|  | IList﹤T﹥     |
+ | IDictionary    |  | IList          |   | IDictionary﹤T﹥  |  | IList﹤T﹥       |
  +----------------+  +----------------+   +-----------------+  +----------------+
 ````````````
 
@@ -550,6 +547,9 @@ public class Program{
      {
         Console.Write("Key = {0}\n", s);
      }
+     foreach (KeyValuePair<string, int> entry in Telefonbuch) {
+         Console.WriteLine("Key = {0}, Value = {1}", entry.Key, entry.Value);
+     }    
      // Enthält das Dictionary bestimmte Einträge?
      if (Telefonbuch.ContainsKey("Paula")){
          Console.WriteLine(Telefonbuch["Paula"]);
@@ -566,7 +566,15 @@ public class Program{
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+```xml   -myproject.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
 HashSet<T>
 =====================
