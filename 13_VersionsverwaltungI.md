@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich & `JohannaKlinke`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.10
+version:  1.0.11
 language: de
 narrator: Deutsch Female
 comment:  Motivation der Versionsverwaltung in der Softwareentwicklung, Diskussion der zentraler / dezentraler Ansätze, Umsetzung von merge Operation, Einführung in die Verwendung von Git
@@ -611,11 +611,11 @@ Unmodified --> Untracked : Löschen aus dem Repository
 @startuml
 hide empty description
 [*] --> Untracked : Erzeugen einer Datei
-Untracked --> Staged : Hinzufügen zum Repository\n <color:Red> ""git add""
+Untracked --> Staged : Hinzufügen zum Repository <color:Red> ""git add""
 Unmodified --> Modified : Editierung der Datei
-Modified --> Staged : Markiert als neue Version\n  <color:Red>  ""git add""
-Staged --> Unmodified : Bestätigt als neue Version\n   <color:Red>  ""git commit""
-Unmodified --> Untracked : Löschen aus dem Repository\n   <color:Red>  ""git remove""
+Modified --> Staged : Markiert als neue Version  <color:Red>  ""git add""
+Staged --> Unmodified : Bestätigt als neue Version  <color:Red>  ""git commit""
+Unmodified --> Untracked : Löschen aus dem Repository   <color:Red>  ""git remove""
 @enduml
 ```
 
