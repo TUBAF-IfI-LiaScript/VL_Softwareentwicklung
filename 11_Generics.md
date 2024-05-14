@@ -129,7 +129,7 @@ Lassen Sie uns einen alternativen Ansatz bestreiten. Wir implementieren ein eige
   Start
    |
    |   +----------+      +----------+      +----------+      +----------+
-   +-->| Wert [0] |  +-->| Wert [1] |  +-->| Wert [2] |  +-->| Wert [2] |  +-->
+   +-->| Wert [0] |  +-->| Wert [1] |  +-->| Wert [2] |  +-->| Wert [3] |  +-->
        | Referenz |--+   | Referenz |--+   | Referenz |--+   | Referenz |--+
        +----------+      +----------+      +----------+      +----------+
 
@@ -190,9 +190,9 @@ public class Program{
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-Was sind die Nachteile in dieses Konstrukts auf der Listenebene? Welche Lösungsansätze sehen Sie?
+Was sind die Nachteile dieses Konstrukts auf der Listenebene? Welche Lösungsansätze sehen Sie?
 
-Im Hinblick auf die Wiederverwendbarkeit stellt sich noch eine weiteres Problem - die Lösung ist typabhängig, die Speicherung eines anderen Datentypen macht eine
+Im Hinblick auf die Wiederverwendbarkeit stellt sich noch ein weiteres Problem - die Lösung ist typabhängig, die Speicherung eines anderen Datentypen macht eine
 Neuimplementierung notwendig. Zählen Sie doch mal durch, wie oft wir aus dem `int` ein `float` machen müssten, um eine Übertragbarkeit auf Fließkommazahlen zu realisieren. Damit entstünde dann aber auch ein überwiegend redundanter
 Code, der eine konsistente Realisierung und Wartung erheblich erschwert.
 
@@ -281,7 +281,7 @@ Generische Klassen und Methoden vereinen Wiederverwendbarkeit, Typsicherheit und
 
 Was passiert eigentlich hinter den Kulissen? Im Unterschied zu C++ Templates werden
 C# Generics nicht zur Compile-Zeit konkretisiert, sondern zunächst in einen generischen Zwischencode übersetzt. Die eigentliche Konkretisierung findet zur Laufzeit statt, wobei
-Referenz- und Wertdatentypen unterschiedlich behandelt werden. Für jeden Werttyp, der den Platzhalter ersetzt wird eine konkrete Klasse erzeugt, während sich alle Referenztypen eine einzige Konkretisierung teilen. Das Laufzeitsystem erzeugt den typentsprechenden Code erst erst mit ersten Instanzierung der konkreten Klasse.
+Referenz- und Wertdatentypen unterschiedlich behandelt werden. Für jeden Werttyp, der den Platzhalter ersetzt wird eine konkrete Klasse erzeugt, während sich alle Referenztypen eine einzige Konkretisierung teilen. Das Laufzeitsystem erzeugt den typentsprechenden Code erst durch die erste Instanziierung der konkreten Klasse.
 
 Die Parameterisierung eines generischen Typs beschränkt sich nicht nur auf einen Typ sondern kann mehrere Typen umfassen.
 
