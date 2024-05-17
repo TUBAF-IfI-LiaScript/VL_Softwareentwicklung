@@ -334,63 +334,7 @@ Vermeiden Sie es,
 
 ## Ausblick auf Aufgabe 3
 
-```text @plantUML.png
-@startuml
-actor Maintainer
-actor Developer
-== Vorbereitung ==
-Maintainer --> Maintainer: Recherche zur Definition von Issue Templates, \nEinbetten einer Vorlage in das Projekt
-== Projekt Initialisierung ==
-Maintainer --> Maintainer: Anlegen [[https://guides.github.com/features/issues/{Mastering Issues} Issue]] "python_vs_csharp"\nFestlegen der Subtasks (Inhalt, Fomatierung, \nCodebeispiel usw.) 
-Maintainer --> Developer:  Zuweisung Issue
-== Implementierung ==
-activate Maintainer
-Maintainer --> Maintainer:  Monitoring Projekt
-Developer --> Maintainer:  //Issue in progress//
-activate Developer
-Developer --> Developer:  Anlegen eines Branches
-Developer -> Developer:  Implementieren 1
-note right
- * Anlegen neue Datei
- * Kopieren der txt Inhalte
- * Formatieren als md
- * Diskussion der Unterschiede Python vs. Csharp
- * Einbau einiger Typos, die
-    der Maintainer finden soll
-end note
-Developer --> Developer:  Commiten (Referenz auf Issue!)
-Developer -> Developer:  Implementieren 2
-note right
- * OOP Csharp Codebeispiels 
- * OOP Python Codebeispiels 
-end note
-Developer -> Developer:  Commiten
-== Review ==
-Developer --> Developer:   Starte  [[https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request {Guideline Pull request} Pull request]]
-Developer --> Maintainer : Anforderung [[https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-reviews#re-requesting-a-review {Guideline Reviews on Github} Review]]
-Maintainer --> Maintainer:  Code Review / Kommentare
-Maintainer --> Developer :  Anforderung Nachbesserungen
-note left
-Bitte um zusätzliche
- * ggf. Codeformatierung
- * Hinzufügen von Projektdateien
- * Rechtschreibkorrektur
-end note
-Developer -> Developer:  Implementieren 3
-note right
- * Korrektur der Fehler
- * ggf. Adaption der Darstellung
-end note
-Developer --> Maintainer :  Bitte um erneutes Rereview
-Maintainer --> Developer :  Review abgeschlossen
-Maintainer --> Maintainer:  Abschluss Pull request
-deactivate Developer
-== Deploy ==
-Maintainer --> Maintainer:  Abschluss des Pullrequests
-Maintainer --> Maintainer:  Generierung Release
-deactivate Maintainer
-@enduml
-```
+![](http://www.plantuml.com/plantuml/png/hLN1RXit4BthAwRf9IaYBThU3AY8OzUkORWndBI79aR0NOvsMNF9BMSermxyD_sCtl9Z7Iwn6qcGjpxa850S3cVclJV3VKMi0iVMpbJ5Fi25CexbXo4Ru1ZNQ7qd--KIVlUXn826ewjXkPnzyORv_AUDomTmXLM3GNvm7rEKbN66ZNUmbjyPKKHuXsrd5IEzX0_kP-DAP4O7c0AaL5RL2CQ1LWINmV-9Don537_XB0LKrf31yF_r73gBDJfu_xvXxkYWAEfeDDAYDjp4Sb7vjbYXuXYG2YFroVBfGX5ZCAxE5TD3Ng-luLbtnurt7zVqiQ96XUxP1tU2n3c9nW1lOycARWYUdxb6MNu99xvLd8jDY8-ynX8DTGOjHBfTl81T02Fv1m1_n5jnZaCjYOapuGzRT3moa4GpQyMuWNsA5RZmmg9F44UAXwHxl8iYAoUYTC7N0OcAualEyUOGOm-Ch4DMcU1rK4vwX3OkxFXlOfHhty-SPuHWwePdyDqOpc6K_8hH9Ekvxx9x4eB_PiWIO3exyK5aoCVA4hGwMOyDtKGYu_ETtnnZeAeng14kUwbXJGiuwhLE5rA_gfXWc1e3lBlhlFInDf83e8-nGRiqlqO7vAsTeTEGC4nmTEJRrh1SU7w5grJeFQYuohf_y-B9NFsmmzMRDvUG0S1cxn4CXndexk6-WlVNctho2jS6RwKL9_31s_Je86mCe_RLrYYYA_Akg8GqLVeWchbwVYl6UHxFkN9wtaLhvm7_aZrJKGNCRchh03wTfbctnecOOeUGxGzRk-lhHriVqlknya7dEVlQPOjVv2sRh8b6-ZRWOCgmidqJK2QSG8GxxLC_G3O9dgd9JoeFQXLmBXAY70Pyz0qI4hPO-5LLJOb4_GvTRZQBAvwzDim8iPMddpx_m_VML4q_UtMzMlI99Shu5gQ3NuoxZwlF_zROVo26jqYdWKQNFDBtX6KY0vhoneSWfp6ClVdacVXnPoREXr3zo9vWOp6CbHvgrV7m91ohG8pMIiLZsgc6WP4530uZ8mc6BDyKnOCaggnHu5fFX6vIoCCo-KMYhMwUQTppBY-NikcilvC1VM9GZJdmqAsJrqvHrYoh0B6e2AMGVH-bL-XqREr_)<!--style="width: 80%;"-->
 
 > **Wichtig:** Schließen Sie Ihre Arbeit mit einem Release ab! Damit ist für uns erkennbar, dass Sie die Aufgabe erfolgreich umgesetzt haben.
 
@@ -403,5 +347,3 @@ deactivate Maintainer
 !?[](https://www.youtube.com/watch?v=snCP3c7wXw0)
 
 - [ ] Sie sollten Ihre erste Einladung für einen GitHub Classroom bereits per OPAL erhalten haben. Ausgehend davon werden Sie aufgefordert sich in Zweierteams zu organisieren und werden dann gemeinsam erste Gehversuche unter git zu unternehmen.
-
-- [ ] Weiter Aufgabe
