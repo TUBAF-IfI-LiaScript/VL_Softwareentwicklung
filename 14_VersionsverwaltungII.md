@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich & `Lesestein`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
 comment:  Versionsverwaltung mit Git und GitHub, Automatisierung von Arbeitsabläufen auf dem Versionsserver
@@ -17,7 +17,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/12_VersionsverwaltungII.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/14_VersionsverwaltungII.md)
 
 # Versionsverwaltung II
 
@@ -28,12 +28,16 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 | **Semester**             | @config.semester                                                                                     |
 | **Hochschule:**          | @config.university                                                                                   |
 | **Inhalte:**             | @comment                                                                                             |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/12_VersionsverwaltungII.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/14_VersionsverwaltungII.md |
 | **Autoren**              | @author                                                                                              |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
+
+## Ein Beispiel
+
+> __Auftrag 1:__ Erstellen Sie ein Python Projekt, dass eine Textdatei liest und die Sprache einer Datei erkennt. Nutzen Sie dabei die Ihnen bekannten Git-Vorgehensmuster.
 
 ## Arbeiten mit Branches
 
@@ -48,9 +52,6 @@ die Stabilität des Gesamtsystems zu gefährden. Gleichzeitig haben die Entwickl
 
 Wie sieht das zum Beispiel für unsere Kursmaterialien aus?
 
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
 ```ascii
 
         vSoSe2019                                                   vSoSe2020
@@ -143,6 +144,10 @@ git commit -m V1
 
 > Achtung: Ein Rebase kann fatale Auswirkungen auf die Gesamte Projektstruktur haben!
 
+### Am Beispiel
+
+> __Auftrag 2:__ Erweitern Sie das Projekt um eine weitere Funktion, die die Anzahl der Zeilen in der Datei zählt. Nutzen Sie dafür einen eigenen Branch.
+
 ## Arbeit mit GitHub
 
 ![](https://media.giphy.com/media/487L0pNZKONFN01oHO/giphy.gif)
@@ -154,7 +159,7 @@ Github integriert einen git-Dienst und stellt darauf aufbauend weitere Werkzeuge
 | `Issue`             | Aufgabenbeschreibungen mit zugehörigen Diskussionen                   |
 | `Pull-Request` (PR) | Anfrage zum Merge einer eignen Lösung mit der existierenden Codebasis |
 | `Review`            | Vorgänge zur Evaluation von Pull-Requests                             |
-| `Action`            | Möglichkeit der automatisierten Realsierung von Abläufen              |
+| `Action`            | Möglichkeit der automatisierten Realisierung von Abläufen             |
 | `Project`           | Verwaltungsebene von Aufgabenbeschreibungen                           |
 
 ![SWEonGithub](./img/12_VersionsverwaltungII/ScreenshotSoftwareentwicklungVorlesung.png)<!-- width="100%" -->
@@ -194,6 +199,8 @@ Here's why we have this policy: We want to focus on the work that benefits the w
 5. Vergessen Sie Issues nicht zu schließen
 
 Das zugehörige Template findet sich unter [https://github.com/tensorflow/tensorflow/blob/master/ISSUE_TEMPLATE.md](https://github.com/tensorflow/tensorflow/blob/master/ISSUE_TEMPLATE.md)
+
+> __Auftrag 3:__ Fügen Sie Ihrem Projekt ein Issue hinzu, dass die Erweiterung der Analyse Funktion um einen Wortzähler vorsieht.
 
 ### Pull requests und Reviews
 
@@ -260,6 +267,8 @@ Die Dokumentation zu den GitHub-Actions findet sich unter [https://github.com/fe
 
 > **Merke** Workflow files müssen unter `.github\workflows\*.yml` abgelegt werden.
 
+> __Auftrag 4:__ Integrieren Sie einen automatischen Lauf Ihres Codes in Ihren Workflow.
+
 ## Organisation
 
 Bitte haben Sie immer den spezifischen Kontext Ihres Projektes vor Augen. Üblicherweise legt man am Anfang, bei einem "kleinen Hack" keinen Wert auf formelle Abläufe und Strukturen. Diese sind aber in großen Projekten unablässig.
@@ -309,6 +318,19 @@ Folgende Regeln sollte man für die Beschreibung eines Commits berücksichtigen:
 > **Merke:** Beschreiben Sie in der Commit-Nachricht das was und warum, aber nicht das wie.
 
 Das _Semantic Versioning_ geht einen Schritt weiter und gibt den Commit-Messages eine feste Satzstruktur, vgl. [entwickler.de](https://entwickler.de/online/development/commit-messages-git-579873267.html)
+
+### Dinge die man nicht tun sollte
+
+Vermeiden Sie es, 
+
++ ... die Commit-Nachrichten zu ändern, nachdem Sie sie bereits gepusht haben.
++ ... mehrere Änderungen in einem Commit zu mischen.
++ ... überkomplexe Branchstrukturen - wählen Sie ein klar verständliches Modell.
++ ... ungetesteten Code zu pushen oder zu mergen 
++ ... Issues ohne Verantwortlichen zu erstellen
++ ... Commits ohne Issue-Referenz zu erstellen
++ ... Branches "offen" zu lassen 
++ ... 
 
 ## Ausblick auf Aufgabe 3
 
