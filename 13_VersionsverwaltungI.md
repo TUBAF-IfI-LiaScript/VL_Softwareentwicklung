@@ -54,7 +54,7 @@ myProject_Moms_corrections
 ...
 ```
 
-3. Wenn Sie "einen Plan hatte", haben Sie täglich eine Kopie aller Dateien in einem Ordner angelegt und diese systematisch benannt.
+3. Wenn Sie "einen Plan hatten", haben Sie täglich eine Kopie aller Dateien in einem Ordner angelegt und diese systematisch benannt.
 
 ```console
 ▶ ls
@@ -64,7 +64,7 @@ myProject_03042021
 ...
 ```
 
-In den Ordnern gab es dann aber wieder das gleiche Durcheinander wie in (2), weil Sie bestimmte Texte gern kurzfristig sichern wollten. Teilweise haben sie diese dann gelöscht bevor die Kopie erstellt wurde, meistens aber einfach in einem `sonstiges` Ordner belassen.
+In den Ordnern gab es dann aber wieder das gleiche Durcheinander wie in (2), weil Sie bestimmte Texte gern kurzfristig Sichern wollten. Teilweise haben sie diese dann gelöscht bevor die Kopie erstellt wurde, meistens aber einfach in einem `sonstiges` Ordner belassen.
 
 ******************************************************************************
 
@@ -133,7 +133,7 @@ Das Beispiel entstammt dem Buch _Version Control with Subversion_ [^Subversion]
 Zwei Nutzer (Harry und Sally) arbeiten am gleichen Dokument (A), das auf einem
 zentralen Server liegt:
 
-+ Beide führen verschiedene Änderungen an ihren lokalen Versionendes Dokuments durch.
++ Beide führen verschiedene Änderungen an ihren lokalen Versionen des Dokuments durch.
 + Die lokalen Versionen werden nacheinander in das Repository geschrieben.
 + Sally überschreibt dadurch eventuell Änderungenvon Harry.
 
@@ -184,7 +184,7 @@ style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-
 
 **Lösung I - Exklusives Bearbeiten (Sequenzialisierung)**
 
-Bei der pessimistische Versionsverwaltung (*Lock Modify Unlock*) werden einzelne Dateien vor einer Änderung durch den Benutzer gesperrt und nach Abschluss der Änderung wieder freigegeben werden. Während sie gesperrt sind, verhindert das System Änderungen durch andere Benutzer. Der Vorteil dieses Konzeptes ist, dass kein Zusammenführen von Versionen erforderlich ist, da nur immer ein Entwickler eine Datei ändern kann.
+Bei der pessimistischen Versionsverwaltung (*Lock Modify Unlock*) werden einzelne Dateien vor einer Änderung durch den Benutzer gesperrt und nach Abschluss der Änderung wieder freigegeben werden. Während sie gesperrt sind, verhindert das System Änderungen durch andere Benutzer. Der Vorteil dieses Konzeptes ist, dass kein Zusammenführen von Versionen erforderlich ist, da nur immer ein Entwickler eine Datei ändern kann.
 
 <!--
 style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
@@ -259,7 +259,7 @@ style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-
 | +-------+    +-------+     | +-------+   +-------+     |
 |   Harry        Sally       |   Harry       Sally       |
 |                            |                           |
-| Erzeugen der lokalen Kopie | Barbeitung                |
+| Erzeugen der lokalen Kopie | Bearbeitung               |
 +----------------------------+---------------------------+
 |        Repository          |       Repository          |
 |        +-------+           |       +-------+           |
@@ -274,7 +274,7 @@ style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-
 | +-------+    +-------+     | +-------+   +-------+     |
 |   Harry        Sally       |   Harry       Sally       |
 |                            |                           |
-|Sally schreibt ihre Version |Harries Schreibversuch wird|
+|Sally schreibt ihre Version |Harry's Schreibversuch wird|
 |                            |blockiert                  |
 +----------------------------+---------------------------+
 |        Repository          |       Repository          |
@@ -311,7 +311,7 @@ style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-
 
 Ablauf:
 
-+ Harry und Sally kopieren das das Dokument A in ihre lokalen Ordner.
++ Harry und Sally kopieren das Dokument A in ihre lokalen Ordner.
 + Beide arbeiten unabhängig daran und erzeugen die Versionen A' und A''
 + Sally schreibt als Erste das Dokument in das Repository zurück.
 + Harry kann das Dokument nun nicht mehr zurückschreiben, seine Version ist veraltet
@@ -363,7 +363,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
 Offenbar wurden sowohl Lehrzeichen, als auch neue Zeilen eingeführt. In anderen Zeilen wurden Inhalte angepasst.
 
-Nutzen wir das Tool `diff` um diese Änderungen automatisiert festzustellen. Die Zeilen, die mit `>` beginnen, sind nur in der ersten Datei vorhanden, diejenigen, die mit `<`, markieren das Vorkomen in der zweiten Datei. Die einzelnen Blöcke werden durch sogenannte change commands („Änderungsbefehle“) getrennt, die angeben, welche Aktion (Zeilen hinzufügen – a, ändern – c oder entfernen – d) in welchen Zeilen ausgeführt wurde.
+Nutzen wir das Tool `diff` um diese Änderungen automatisiert festzustellen. Die Zeilen, die mit `>` beginnen, sind nur in der ersten Datei vorhanden, diejenigen, die mit `<`, markieren das Vorkommen in der zweiten Datei. Die einzelnen Blöcke werden durch sogenannte change commands („Änderungsbefehle“) getrennt, die angeben, welche Aktion (Zeilen hinzufügen – a, ändern – c oder entfernen – d) in welchen Zeilen ausgeführt wurde.
 
 ```console
 ▶diff DokumentV1.md DokumentV2.md
@@ -450,7 +450,7 @@ Bei einem Konflikt muss eine der beiden ̈Änderungen weggelassen werden. Die En
 
     + Übernahme keiner Änderung,
 
-    + Übernahme von modifizierten Änderung
+    + Übernahme von modifizierten Änderungen
 
 ### Revisionen
 
@@ -494,7 +494,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
           |                         |                          |
   +-----------------+       +-----------------+       +-----------------+
   | V 21.11         |       | V 21.11         |       | V 21.11         |
-  | ABCD            |       | GEFH            |       | IKLM            |
+  | ABCD            |       | EFGH            |       | IJKL            |
   |                 |       |                 |       |                 |
   +-----------------+       +-----------------+       +-----------------+
     User 1                    User 2                    User 3
@@ -568,7 +568,7 @@ Die Entwicklungsgeschichte von git ist mit der des Linux Kernels verbunden:
 
 2005 wurde einen Anforderungsliste für eine Neuentwicklung definiert. Dabei wurde hervorgehoben, dass sie insbesondere sehr große Projekte (Zahl der Entwickler, Features und Codezeilen, Dateien) unterstützen können muss. Daraus entstand `Git` als freie Software zur verteilten Versionsverwaltung von Dateien.
 
-> Git dominiert entweder als einzelne Installation oder aber eingebettet in verschiedene Entwicklungsplattform die Softwareentwicklung!
+> Git dominiert entweder als einzelne Installation oder aber eingebettet in verschiedene Entwicklungsplattformen die Softwareentwicklung!
 
 **Wie bekommen sie Git auf Ihren Windows-Rechner?**
 
@@ -625,7 +625,7 @@ Unmodified --> Untracked : Löschen aus dem Repository   <color:Red>  ""git remo
 
 | Stufe der Einführung                                              | GitExplain | Demo |
 | ----------------------------------------------------------------- | ---------- | ---- |
-| _Git_ - Lokale Verwendung von Git in einer Sequenz von Änderungen | x          | X    |
+| _Git_ - Lokale Verwendung von Git in einer Sequenz von Änderungen | X          | X    |
 | _Git_ - Interaktion mit einem Remote-Repository                   | X          | X    |
 | _Git_ - Nutzung von Branches                                      |            |      |
 | _Github_ - Verknüpfungen                                          |            |      |
