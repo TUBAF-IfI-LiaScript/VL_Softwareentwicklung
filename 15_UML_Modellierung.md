@@ -18,7 +18,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/13_UML_Modellierung.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/15_UML_Modellierung.md)
 
 # Modellierung von Software
 
@@ -29,52 +29,12 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 | **Semester**             | @config.semester                                                                                 |
 | **Hochschule:**          | @config.university                                                                               |
 | **Inhalte:**             | @comment                                                                                         |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/13_UML_Modellierung.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/15_UML_Modellierung.md |
 | **Autoren**              | @author                                                                                          |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
-
-## Neues aus Github
-
-Die erste Aufgabe unter Zuhilfenahme von git / GitHub ist angelaufen. Setzen Sie sich in dieser Woche, soweit das noch nicht geschehen ist, intensiv damit auseinander! Die Techniken sind von zentraler Bedeutung für die weiteren Aufgabenblätter.
-
-+ Verwenden Sie wichtige Github-Features wie
-
-```
-Issues                            | + - + + + + + - + + + - + - + + - + - - + | 14/21
-Issue-Template                    | + - - - + + + - - + - - + - - - - + - - + |  8/21
-PR                                | + + + + + + + - - + + - + - - + - + - - + | 13/21
-PR Review                         | - - - + + - - - - - + - + - - + - + - - - |  6/21
-Branches-Verwendung               | + + + + + + + - - + + - + - - + - + - - + | 13/21
-Release                           | + - + - + + + - - - - - + - - - - + - - + |
-```
-
-+ Strukturieren Sie Ihr Projekt in Ordnern (C# Beispiel, Python Beispiel, Text)
-
-```
-Struktur vorhanden                | - + - - + - - - - - - - + - - - - - - - - |
-```
-+ Fügen Sie immer alle notwendigen Informationen für die Installation bei (Config Files, Pipenv etc., im konkreten Fall Projekt-Datei)
-
-```
-C#-Projektdatei                   | - + - - - + - - - - + - + - - - - - - - - |
-```
-
-+ Umgang mit Issues
-```
-Issues erstellt                   | + - + + + + + - + + + - + - + + - + - - + | 
-Issues geschlossen                | + - + - + + + - - - + - + - - - - + - - + |
-Release        	                  | + - + - + + + - - - - - + - - - - + - - + |
-```
-
-+ Umgang mit Branches
-```
-merged Branches nicht geschlossen | 1 2 9 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 |
-Branches nicht gemerged           | 1 0 1 3 1 0 2 0 0 1 0 0 2 0 0 2 0 0 0 0 0 |
-Release                           | + - + - + + + - - - - - + - - - - + - - + |
-```
 
 ## Motivation des Modellierungsgedankens
 
@@ -89,9 +49,11 @@ Um gedanklich wieder in die C# Entwicklung einzutauchen, finden Sie in dem Ordne
 
 > **Merke:** Software lebt!
 
-+ Prinzipien zum Entwurf von Systemen
-+ Prinzipien zum Entwurf einzelner Klassen
-+ Prinzipien zum Entwurf miteinander kooperierender Klassen
+Gibt es für ein Problem mehrere Lösungen? Sind sie alle gleich gut? Ist das einfachste und nahliegende (Curly’s Law) immer am besten?
+
++ Prinzipien zum Entwurf von Systemen: Modularität, Trennung von Zuständigkeiten (Separation of Concerns), Schichtenarchitektur, lose Kopplung und hohe Kohäsion  
++ Prinzipien zum Entwurf einzelner Klassen: S ingle Responsibility (einzige Verantwortlichkeit) Principle, Kapselung, Immutable Objects
++ Prinzipien zum Entwurf miteinander kooperierender Klassen: O, L, I, D, Law of Demeter (Kommunikation nur unter "verwandten" Klassen, keine lange Aufrufketten)
 
 [Robert C. Martin](https://de.wikipedia.org/wiki/Robert_Cecil_Martin)
 fasste eine wichtige Gruppe von Prinzipien zur Erzeugung wartbarer und
@@ -123,6 +85,30 @@ Funktionen vorhanden sein, die direkt zur Erfüllung dieser Aufgabe beitragen.
 > “There should never be more than one reason for a class to change. [^UncleBob]
 
 +  Verantwortlichkeit = Grund für eine Änderung (multiple Veränderungen == multiple Verantwortlichkeiten)
+
+```csharp
+public class Book
+{
+    // nur eine Verantwortlichkeit: die Verwaltung der Buchdetails
+    public string Title { get; private set; }
+    public string Author { get; private set; }
+    public string ISBN { get; private set; }
+
+    public Book(string title, string author, string isbn)
+    {
+        Title = title;
+        Author = author;
+        ISBN = isbn;
+    }
+
+    public string GetBookDetails()
+    {
+        return $"Title: {Title}, Author: {Author}, ISBN: {ISBN}";
+    }
+    //Speichern von Büchern in einer Datenbank, das Drucken der Buchdetails erfolgt in den separaten Klassen
+}
+
+```
 
 ```csharp
 public class Employee
@@ -161,6 +147,8 @@ Eine Verallgemeinerung des SRP stellt Curly’s Law [CodingHorror](https://blog.
 "methods should do one thing" bis "single source of truth" zusammenfasst und
 auf alle Aspekte eines Softwareentwurfs anwendet. Dazu gehören
 nicht nur Klassen, sondern unter anderem auch Funktionen und Variablen.
+
+> Jedes Wissenselement muss eine einzigartige, eindeutige Darstellung innerhalb eines Systems haben.
 
 ```csharp
 var numbers = new [] { 5,8,4,3,1 };
@@ -203,6 +191,7 @@ public class Employee
   }
 
   public decimal CalculateBonus(decimal salary){
+    //if ...
     return salary * 0.1M;
   }
 }
@@ -350,7 +339,6 @@ public class MultiFunctionalCar : IMultiFunctionalVehicle
 Lösungsansatz für die Realisierung ist eine veränderte Sicht auf die
 klassischerweise hierachische Struktur von Klassen.
 
-
 <!--
 style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
 -->
@@ -385,6 +373,97 @@ style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-r
                                       +-------------------------------+
 ````
 
+Hohe Abstraktionsebenen (High-level modules) sind die Komponenten des Systems, die höhere Logik oder Funktionalität implementieren (z.B. Benutzeroberfläche). 
+
+Niedrige Abstraktionsebenen (Low-level modules) sind Komponenten, die konkrete Aufgaben wie Datenzugriff, Netzwerkkommunikation oder hardwarebezogene Operationen ausführen.
+
+> Die High-level Module sollen nicht direkt von den Low-level Modulen abhängig sein. Stattdessen sollten beide Arten von Modulen von Abstraktionen abhängen, wie Schnittstellen oder abstrakte Klassen.
+
+Beispiel:
+High-level Modul ist ein Rechnungsservice, und ein Low-level Modul ist ein konkretes Datenrepository. Rechnungsservice soll nicht direkt vom Datenrepository abhängen, sondern von einer Abstraktion (IDataRepository). Das konkrete Datenrepository implementiert dann diese Schnittstelle.
+
+```csharp
+public interface IDataRepository
+{
+    void SaveInvoice(Invoice invoice);
+}
+
+public class DatabaseRepository : IDataRepository //Low-level Modul
+{
+    public void SaveInvoice(Invoice invoice)
+    {
+        // Konkrete Implementierung zum Speichern der Rechnung in der Datenbank
+    }
+}
+
+public class InvoiceService //High-level Modul
+{
+    private IDataRepository repository;
+
+    public InvoiceService(IDataRepository repository)
+    {
+        this.repository = repository;
+    }
+
+    public void CreateInvoice(Invoice invoice)
+    {
+        // Geschäftslogik zur Erstellung einer Rechnung
+        repository.SaveInvoice(invoice);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        IDataRepository repository = new DatabaseRepository();
+        InvoiceService invoiceService = new InvoiceService(repository);
+
+        Invoice invoice = new Invoice();
+        invoiceService.CreateInvoice(invoice);
+    }
+}
+```
+
+> Abstraktionen (wie Schnittstellen oder abstrakte Klassen) sollen nicht von konkreten Implementierungen abhängig sein, sondern nur von (anderen) Abstraktionen.
+
+```csharp
+public interface INotificationSender
+{
+    void Send(string message);
+}
+
+public interface INotificationService
+{
+    void Notify(string message, INotificationSender sender);
+}
+
+//EmailSender, SmsSender
+
+public class NotificationService : INotificationService //abhängige Abstraktion
+{
+    public void Notify(string message, INotificationSender sender)
+    {
+        // Geschäftslogik zur Benachrichtigung
+        sender.Send(message);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        INotificationSender emailSender = new EmailSender();
+        INotificationSender smsSender = new SmsSender();
+        
+        INotificationService notificationService = new NotificationService();
+
+        notificationService.Notify("Notification via Email.", emailSender);
+        notificationService.Notify("Notification via SMS.", smsSender);
+    }
+}
+
+```
 
 Das folgende Beispiel entstammt der Webseite
 https://exceptionnotfound.net/simply-solid-the-dependency-inversion-principle/
@@ -557,6 +636,13 @@ vgl. zum Beispiel [Link](https://www.johner-institut.de/blog/iec-62304-medizinis
 > Achtung: Das V-Modell ist nur eine Variante eines Vorgehensmodells, moderne Entwicklungen stellen eher agile Methoden in den Vordergrund vgl. zum Beispiel [Link](https://entwickler.de/online/agile/agile-methoden-einfuehrung-209035.html)
 
 ****************************************************************************
+### Objektorientierte Analyse, objektorientiertes Design
+
+Die **objektorientierte Analyse (OO-Analyse)** ist der Prozess der Analyse von Anforderungen und des Verständnisses eines Problems aus der Perspektive von Objekten und deren Interaktionen. Die Anforderungen werden in verschiedene Klassen (Objekte) zerlegt, die Daten und Verhalten gemeinsam haben, typische Benutzungsabläufe (Use Cases) werden dokumentiert, um das Verhalten des Systems aus Sicht der Benutzer darzustellen. Ziel ist es, ein Modell zu erstellen, das das System und seine Eigenschaften klar darstellt.
+
+Das **objektorientierte Design (OO-Design)** setzt das Modell aus der Analyse in eine detailierte Softwarearchitektur umgesetzt wird. Dabei werden die verschiedenen Klassen, ihre Methoden und Interaktionen spezifiziert. 
+
+Als Standardnotation für OOA/OOD wird UML (Unified Modeling Language) verwendet. 
 
 ## Unified Modeling Language
 
@@ -568,7 +654,9 @@ UML ist heute die dominierende Sprache für die Softwaresystem-Modellierung. Der
 + Softwareentwickler realisieren Arbeitsabläufe, die Wirtschaftsanalytiker in Aktivitätsdiagrammen beschrieben haben;
 + Systemingenieure implementieren, installieren und betreiben Softwaresysteme basierend auf einem Implementationsplan, der als Verteilungsdiagramm vorliegt.
 
-UML ist dabei Bezeichner für die meisten bei einer Modellierung wichtigen Begriffe und legt mögliche Beziehungen zwischen diesen Begriffen fest. UML definiert weiter grafische Notationen für diese Begriffe und für Modelle statischer Strukturen und dynamischer Abläufe, die man mit diesen Begriffen formulieren kann.
+UML enthält dabei Bezeichner (Begriffe) für die meisten Elemente der Modellierung und legt mögliche Beziehungen zwischen diesen Elementen fest. 
+
+UML definiert weiterhin grafische Notationen für diese Begriffe und für statische Strukturen und dynamische Abläufe, die man mit diesen Begriffen formulieren kann.
 
 > **Merke:**  Die grafische Notation ist jedoch nur ein Aspekt, der durch UML geregelt wird. UML legt in erster Linie fest, mit welchen Begriffen und welchen Beziehungen zwischen diesen Begriffen sogenannte Modelle spezifiziert werden.
 
@@ -582,6 +670,14 @@ Was ist UML nicht:
 
 [^Jeckle]:  Mario Jeckle, Christine Rupp, Jürgen Hahn, Barbara Zengler, Stefan Queins, UML 2 glasklar, Hanser Verlag, 2004
 
+**UML-Modell und Diagramme**
+
+UML-Modell: ist eine abstrakte Darstellung eines Systems, das alle relevanten Informationen über die Struktur und das Verhalten des Systems enthält. Es umfasst nicht nur Diagramme, sondern auch die (nicht darstellbare) Beziehungen, Constraints und anderen Metadaten, die die Modellierung ausmachen.
+
+UML-Diagramme: sind verschiedene grafische Darstellungen, die unterschiedliche Aspekte des Systems betonen. Es gibt mehrere Arten von UML-Diagrammen, die um unterschiedliche Perspektiven auf ein realweltliches Problem zeigen. Ein UML-Modell beinhaltet die Menge aller seiner Diagramme. 
+
+![Modelle](https://www.plantuml.com/plantuml/png/JSj1oi9030NW_PmYpFA7ARG7-Ed2fLrwW3WJsq3IWIIzlwAYhXxlVRpP0oqEbIHq2uWEnkiMqDYe1lSzRTm8bFHAvgzIsQfGIbNG7V9bEPUbDnB9W0xFTVh54-DggFhbyNsU88yPIlb_v33yvO_EjBT3vGu0 "Modell vs. Diagramm")
+
 ### Geschichte
 
 UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die ISO (ISO/IEC 19505 für Version 2.4.1) genormt.
@@ -589,6 +685,21 @@ UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die I
 ![OOPGeschichte](./img/13_UML/OO-historie.png "Darstellung der Historie von UML [^WikiUMLHist]")
 
 [^WikiUMLHist]: https://commons.wikimedia.org/w/index.php?curid=7892951, Autor GuidoZockoll, Mitarbeiter der oose.de Dienstleistungen für Innovative Informatik GmbH - derivative work: File:OO-historie.svg : AxelScheithauer, oose.de Dienstleistungen für Innovative Informatik GmbH - derivative work: Chris828 (talk) - File:Objektorientieren methoden historie.png and File:OO-historie.svg, CC BY-SA 3.0
+
+**Booch-Methode** (*Grady Booch*, 1984) umfasste die ersten formalen Methoden für das objektorientierte Software-Engineering, Konzepte wie Klassen, Vererbung, Assoziationen und Aggregationen mit graphischen Elementen. 
+
+**OMT-Object Modeling Technique** (*James Rumbaugh* et al., Ende der 1980er) war eine Methode für das objektorientierte Modellieren mit der grafischen Notation für die Analyse und das Design von Systemen. 
+
+**OOSE-Object-Oriented Software Engineering** (*Ivar Jacobson*, 1992) betonte die Verwendung von Anwendungsfällen (Use Cases) zur Spezifikation von Systemanforderungen und war eine der ersten Methoden, die diese Konzepte einführte.
+
+
+**UML** (3 amigos, Rational Software, Mitte 1990er) vereinheitlicht Modellierungssystem, das die verschiedenen Ansätze und Diagrammtypen der Objektorientierten Analyse und Design (OOA/OOD) vereint.
+
+**UML 1** (1997) umfasst eine Reihe von Diagrammen, etabliert sich als Standard für die Modellierung von Software- und Systemarchitekturen.
+
+**Übernahme durch die OMG - Object Management Group** (1997) leitete den Beginn als offenen Industriestandard ein.
+
+**UML 2** (2005) eine aktualisierten und erweiterten Version der UML mit neuen Diagrammtypen und Verbesserungen in der Semantik und der Modellierungssprache.  
 
 ### UML Werkzeuge
 
@@ -663,30 +774,21 @@ WB is Waiting
 | Klassendiagramm              | Welche Klassen bilden das Systemverhalten ab und in welcher Beziehung stehen diese?                                      |
 | Paketdiagramm                | Wie kann ich mein Modell in Module strukturieren?                                                                        |
 | Objektdiagramm               | Welche Instanzen bestehen zu einem bestimmten Zeitpunkt im System?                                                       |
-| Kompositionsstrukturdiagramm | Welche Elemente sind Bestandteile einer Klasse, Komponente, eines Subsystems?                                            |
-| Komponentendiagramm          | Wie lassen sich die Klassen zu wiederverwendbaren Komponenten zusammenfassen und wie werden deren Beziehungen definiert? |
-| Verteilungsdiagramm          | Wie sieht das Einsatzumfeld des Systems aus?                                                                             |
+| Kompositionsstrukturdiagramm | Wie sieht die interne Struktur einer Klasse, Komponente, eines Subsystems?                                               |
+| Komponentendiagramm          | Wie lassen sich die Klassen zu wiederverwendbaren Komponenten (Module, Bibliotheken etc) zusammenfassen und wie werden deren Beziehungen definiert? |
+| Verteilungsdiagramm          | Wie werden Softwareanwendungen und -komponenten auf Hardwareknoten (Server, Geräte, Netzwerke) verteilt?                 |
 
 **Verhaltensdiagramme**
 
 | Diagrammtyp                    | Zentrale Frage                                                                                |
 | ------------------------------ | --------------------------------------------------------------------------------------------- |
 | Use-Case-Diagramm              | Was leistet mein System überhaupt? Welche Anwendungen müssen abgedeckt werden?                |
-| Aktivitätsdiagramm             | Wie lassen sich die Stufen eines Prozesses beschreiben?                                       |
+| Aktivitätsdiagramm             | Wie lassen sich die Stufen eines Prozesses beschreiben? Fließen auch Daten in den Prozess?    |
 | Zustandsautomat                | Welche Abfolge von Zuständen wird für eine eine Sequenz von Einganginformationen realisiert   |
-| Sequenzdiagramm                | Wer tauscht mit wem welche Informationen aus? Wie bedingen sich lokale Abläufe untereinander? |
+| Sequenzdiagramm                | Wer tauscht mit wem welche Informationen aus? Wie bedingen sich lokale Abläufe untereinander? Wie ist die zeitliche Reihenfolge des Nachrichtenaustauschs? |
 | Kommunikationsdiagramm         | Wer tauscht mit wem welche Informationen aus?                                                 |
 | Timing-Diagramm                | Wie hängen die Zustände verschiedener Akteure zeitlich voneinander ab?                        |
-| Interaktionsübersichtsdiagramm | Wann läuft welche Interaktion ab?                                                             |
-
-
-**Begrifflichkeiten**
-
-Ein UML-Modell ergibt sich aus der Menge aller seiner Diagramme. Entsprechend
-werden verschiedene Diagrammtypen genutzt um unterschiedliche Perspektiven auf
-ein realweltliches Problem zu entwickeln.
-
-![Modelle](https://www.plantuml.com/plantuml/png/JSj1oi9030NW_PmYpFA7ARG7-Ed2fLrwW3WJsq3IWIIzlwAYhXxlVRpP0oqEbIHq2uWEnkiMqDYe1lSzRTm8bFHAvgzIsQfGIbNG7V9bEPUbDnB9W0xFTVh54-DggFhbyNsU88yPIlb_v33yvO_EjBT3vGu0 "Modell vs. Diagramm")
+| Interaktionsübersichtsdiagramm | Über welche Interaktionen verfügt das System, wie laufen sie ab?                              |
 
 ## Aufgaben
 
