@@ -260,7 +260,7 @@ Worin liegt der Unterschied zu den bereits bekannten `Array` Implementierung?
 | Feature             | Array                          | `ArrayList`                             | `Array<T>`        |
 | ------------------- | ------------------------------ | --------------------------------------- | ----------------- |
 | Generisch?          | nein                           | nein                                    | ja                |
-| Anzahl der Elemente | feste Größe                    | variabel    >                           | variabel          |
+| Anzahl der Elemente | feste Größe                    | variabel                               | variabel          |
 | Datentyp            | muss homogen sein (typsicher)  | kann variieren (nicht streng typisiert) | muss homogen sein |
 | null                | nicht akzeptiert               | wird akzeptiert                         | wird akzeptiert   |
 | Dimensionen         | multidimensional `array[X][Y]` | -                                       | -                 |
