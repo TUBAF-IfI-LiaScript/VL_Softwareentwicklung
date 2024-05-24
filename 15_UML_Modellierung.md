@@ -49,9 +49,9 @@ Um gedanklich wieder in die C# Entwicklung einzutauchen, finden Sie in dem Ordne
 
 > **Merke:** Software lebt!
 
-Gibt es für ein Problem mehrere Lösungen? Sind sie alle gleich gut? Ist das einfachste und nahliegende (Curly’s Law) immer am besten?
+Gibt es für ein Problem mehrere Lösungen? Sind sie alle gleich gut? Ist das einfachste und nahliegende nach KISS-Prinzip (Keep It Simple, Stupid) immer am besten?
 
-+ Prinzipien zum Entwurf von Systemen: Modularität, Trennung von Zuständigkeiten (Separation of Concerns), Schichtenarchitektur, lose Kopplung und hohe Kohäsion  
++ Prinzipien zum Entwurf von Systemen: Modularität, Trennung von Zuständigkeiten (Separation of Concerns), Schichtenarchitektur, lose Kopplung und hohe Kohäsion von Modulen
 + Prinzipien zum Entwurf einzelner Klassen: S ingle Responsibility (einzige Verantwortlichkeit) Principle, Kapselung, Immutable Objects
 + Prinzipien zum Entwurf miteinander kooperierender Klassen: O, L, I, D, Law of Demeter (Kommunikation nur unter "verwandten" Klassen, keine lange Aufrufketten)
 
@@ -433,14 +433,14 @@ public interface INotificationSender
     void Send(string message);
 }
 
-public interface INotificationService
+//EmailSender, SmsSender
+
+public interface INotificationService //abhängige Abstraktion
 {
     void Notify(string message, INotificationSender sender);
 }
 
-//EmailSender, SmsSender
-
-public class NotificationService : INotificationService //abhängige Abstraktion
+public class NotificationService : INotificationService 
 {
     public void Notify(string message, INotificationSender sender)
     {
@@ -463,6 +463,46 @@ class Program
     }
 }
 
+```
+
+```python
+from abc import ABC, abstractmethod
+
+# Definition des Interface INotificationSender
+class INotificationSender(ABC):
+    @abstractmethod
+    def send(self, message: str):
+        pass
+
+# Definition des Interface INotificationService
+class INotificationService(ABC):
+    @abstractmethod
+    def notify(self, message: str, sender: INotificationSender):
+        pass
+
+# Implementierung des EmailSender
+class EmailSender(INotificationSender):
+    def send(self, message: str):
+        print(f"Sending email: {message}")
+
+# Implementierung des SmsSender
+class SmsSender(INotificationSender):
+    def send(self, message: str):
+        print(f"Sending SMS: {message}")
+
+# Implementierung des NotificationService
+class NotificationService(INotificationService):
+    def notify(self, message: str, sender: INotificationSender):
+        # Geschäftslogik zur Benachrichtigung
+        sender.send(message)
+
+# Hauptprogramm
+if __name__ == "__main__":
+    email_sender = EmailSender()
+    sms_sender = SmsSender()
+    notification_service = NotificationService()
+    notification_service.notify("Notification via Email.", email_sender)
+    notification_service.notify("Notification via SMS.", sms_sender)
 ```
 
 Das folgende Beispiel entstammt der Webseite
@@ -638,7 +678,7 @@ vgl. zum Beispiel [Link](https://www.johner-institut.de/blog/iec-62304-medizinis
 ****************************************************************************
 ### Objektorientierte Analyse, objektorientiertes Design
 
-Die **objektorientierte Analyse (OO-Analyse)** ist der Prozess der Analyse von Anforderungen und des Verständnisses eines Problems aus der Perspektive von Objekten und deren Interaktionen. Die Anforderungen werden in verschiedene Klassen (Objekte) zerlegt, die Daten und Verhalten gemeinsam haben, typische Benutzungsabläufe (Use Cases) werden dokumentiert, um das Verhalten des Systems aus Sicht der Benutzer darzustellen. Ziel ist es, ein Modell zu erstellen, das das System und seine Eigenschaften klar darstellt.
+Die **objektorientierte Analyse (OO-Analyse)** ist der Prozess der Analyse von Anforderungen aus der Perspektive von Objekten und deren Interaktionen. Die Anforderungen werden in verschiedene Klassen (Objekte) zerlegt, die Daten und Verhalten gemeinsam haben, typische Benutzungsabläufe (Use Cases) werden dokumentiert, um das Verhalten des Systems aus Sicht der Benutzer darzustellen. Ziel ist es, ein **Modell** zu erstellen, das das System und seine Eigenschaften klar darstellt.
 
 Das **objektorientierte Design (OO-Design)** setzt das Modell aus der Analyse in eine detailierte Softwarearchitektur umgesetzt wird. Dabei werden die verschiedenen Klassen, ihre Methoden und Interaktionen spezifiziert. 
 
@@ -656,7 +696,7 @@ UML ist heute die dominierende Sprache für die Softwaresystem-Modellierung. Der
 
 UML enthält dabei Bezeichner (Begriffe) für die meisten Elemente der Modellierung und legt mögliche Beziehungen zwischen diesen Elementen fest. 
 
-UML definiert weiterhin grafische Notationen für diese Begriffe und für statische Strukturen und dynamische Abläufe, die man mit diesen Begriffen formulieren kann.
+UML definiert weiterhin grafische Notationen für diese Begriffe und für **statische Strukturen** und **dynamische Abläufe**, die man mit diesen Begriffen formulieren kann.
 
 > **Merke:**  Die grafische Notation ist jedoch nur ein Aspekt, der durch UML geregelt wird. UML legt in erster Linie fest, mit welchen Begriffen und welchen Beziehungen zwischen diesen Begriffen sogenannte Modelle spezifiziert werden.
 
@@ -672,9 +712,9 @@ Was ist UML nicht:
 
 **UML-Modell und Diagramme**
 
-UML-Modell: ist eine abstrakte Darstellung eines Systems, das alle relevanten Informationen über die Struktur und das Verhalten des Systems enthält. Es umfasst nicht nur Diagramme, sondern auch die (nicht darstellbare) Beziehungen, Constraints und anderen Metadaten, die die Modellierung ausmachen.
+**UML-Modell**: ist eine abstrakte Darstellung eines Systems, das alle relevanten Informationen über die Struktur und das Verhalten des Systems enthält. Es umfasst nicht nur Diagramme, sondern auch die (nicht darstellbare) Beziehungen, Constraints und anderen Metadaten, die die Modellierung ausmachen.
 
-UML-Diagramme: sind verschiedene grafische Darstellungen, die unterschiedliche Aspekte des Systems betonen. Es gibt mehrere Arten von UML-Diagrammen, die um unterschiedliche Perspektiven auf ein realweltliches Problem zeigen. Ein UML-Modell beinhaltet die Menge aller seiner Diagramme. 
+**UML-Diagramme**: sind verschiedene grafische Darstellungen, die unterschiedliche Aspekte des Systems betonen. Es gibt mehrere Arten von UML-Diagrammen, die um unterschiedliche Perspektiven auf ein realweltliches Problem zeigen. Ein UML-Modell beinhaltet die Menge aller seiner Diagramme. 
 
 ![Modelle](https://www.plantuml.com/plantuml/png/JSj1oi9030NW_PmYpFA7ARG7-Ed2fLrwW3WJsq3IWIIzlwAYhXxlVRpP0oqEbIHq2uWEnkiMqDYe1lSzRTm8bFHAvgzIsQfGIbNG7V9bEPUbDnB9W0xFTVh54-DggFhbyNsU88yPIlb_v33yvO_EjBT3vGu0 "Modell vs. Diagramm")
 
@@ -688,10 +728,9 @@ UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die I
 
 **Booch-Methode** (*Grady Booch*, 1984) umfasste die ersten formalen Methoden für das objektorientierte Software-Engineering, Konzepte wie Klassen, Vererbung, Assoziationen und Aggregationen mit graphischen Elementen. 
 
-**OMT-Object Modeling Technique** (*James Rumbaugh* et al., Ende der 1980er) war eine Methode für das objektorientierte Modellieren mit der grafischen Notation für die Analyse und das Design von Systemen. 
+**OMT - Object Modeling Technique** (*James Rumbaugh* et al., Ende der 1980er) war eine Methode für das objektorientierte Modellieren mit der grafischen Notation für die Analyse und das Design von Systemen. 
 
-**OOSE-Object-Oriented Software Engineering** (*Ivar Jacobson*, 1992) betonte die Verwendung von Anwendungsfällen (Use Cases) zur Spezifikation von Systemanforderungen und war eine der ersten Methoden, die diese Konzepte einführte.
-
+**OOSE - Object-Oriented Software Engineering** (*Ivar Jacobson*, 1992) betonte die Verwendung von Anwendungsfällen (Use Cases) zur Spezifikation von Systemanforderungen und war eine der ersten Methoden, die diese Konzepte einführte.
 
 **UML** (3 amigos, Rational Software, Mitte 1990er) vereinheitlicht Modellierungssystem, das die verschiedenen Ansätze und Diagrammtypen der Objektorientierten Analyse und Design (OOA/OOD) vereint.
 
@@ -699,7 +738,7 @@ UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die I
 
 **Übernahme durch die OMG - Object Management Group** (1997) leitete den Beginn als offenen Industriestandard ein.
 
-**UML 2** (2005) eine aktualisierten und erweiterten Version der UML mit neuen Diagrammtypen und Verbesserungen in der Semantik und der Modellierungssprache.  
+**UML 2** (2005) eine aktualisierten und erweiterten Version der UML mit weiteren Diagrammtypen und Verbesserungen in der Semantik und der Modellierungssprache.  
 
 ### UML Werkzeuge
 
@@ -792,7 +831,7 @@ WB is Waiting
 
 ## Aufgaben
 
-- [ ] Bearbeiten Sie die Aufgabe 3 im GitHub Classroom
+- [ ] Schließen Sie das Bearbeiten der Aufgabe 3 im GitHub Classroom
 - [ ] Machen Sie sich mit den SOLID Prinzipien weiter vertraut:
 
 !?[alt-text](https://www.youtube.com/watch?v=R1AimDBGtkY)
