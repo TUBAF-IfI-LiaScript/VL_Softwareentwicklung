@@ -17,7 +17,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/14_UML_ModellierungII.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/16_UML_ModellierungII.md)
 
 # Modellierung von Software
 
@@ -28,47 +28,12 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 | **Semester**             | @config.semester                                                                                   |
 | **Hochschule:**          | @config.university                                                                                 |
 | **Inhalte:**             | @comment                                                                                           |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/14_UML_ModellierungII.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/16_UML_ModellierungII.md |
 | **Autoren**              | @author                                                                                            |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
-
-## Hinweis auf die Prüfungen
-
-+ Softwareentwicklung
-
-    + Miniprojekt als Prüfungsleistung - [Link](https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2022_Projektaufgaben)
-    + Beispielprojekt - [Link](https://github.com/fb89zila/exam-repo_swe-sose21)
-
-+ Einführung in die Softwareentwicklung
-
-    + Voraussetzung für den positiven Abschluss ist die erfolgreiche Bearbeitung der letzten Übungsaufgabe.
-     Es ist keine Anmeldung zur Prüfung notwendig!
-
-## Neues aus GitHub
-
-<!--data-type="none"-->
-| Messag                                             | Häufigkeit |
-| -------------------------------------------------- | ---------- |
-| `Update CSharpBasics.md`                           | 40         |
-| `Update team.config`                               | 23         |
-| `Initial commit`                                   | 18         |
-| `Inital task selection - Variant_1.md`             | 11         |
-| `Update uebung.md`                                 | 10         |
-| `Create CSharpBasics.md`                           | 9          |
-| `Update CSharpBasics.txt`                          | 7          |
-| `Inital task selection - Variant_0.md`             | 7          |
-| ` Add files via upload`                            | 5          |
-| `Update Aufgabe3.md`                               | 4          |
-| `Update csharpbasics.md`                           | 3          |
-| `Test`                                             | 2          |
-| `tabelle`                                          | 2          |
-| `Merge pull request #2 from Ifi-Softwareentwick..` | 2          |
-| `Update converttxttomd.cs`                         | 2          |
-
-> Gewöhnen Sie sich an Commit-Messages nach bestimmten Schemata zu verfassen.
 
 ## UML Diagrammtypen
 
@@ -84,7 +49,7 @@ Im folgenden werden wir uns aus den beiden Hauptkategorien jeweils folgende Diag
   + Aktivitätsdiagramm
   + Sequenzdiagramm
 
-+ Strukturdiagramm
++ Strukturdiagramme
 
   + Klassendiagramm
   + Objektdiagramm
@@ -95,10 +60,16 @@ Im folgenden werden wir uns aus den beiden Hauptkategorien jeweils folgende Diag
 > Verhalten eines Systems und wird dafür eingesetzt, die Anforderungen an ein
 > System zu spezifizieren.
 
+**Lastenheft und Pflichtenheft (Wiederholung?**:
+
+Das Lastenheft beschreibt alle Anforderungen und Wünsche des Auftraggebers an ein zukünftiges System,  u.a. *funktionale Anforderungen*: Was soll das System tun? (Features, Anwendungsfälle). 
+Das Pflichtenheft beschreibt, wie die Anforderungen des Lastenhefts umgesetzt werden sollen, d.h. es enthält detaillierte Spezifikationen und Entwürfe für die Realisierung des Systems und enthält ebenfalls einen Abschnitt zu funktionalen Anforderungen.
+
+Ein Anwendungsfalldiagramm ist eine grafische Darstellung der *funktionalen Anforderungen* eines Systems. Es zeigt die verschiedenen Anwendungsfälle (Use Cases), Akteure und deren Interaktionen.
+
 Ein Anwendungsfalldiagramm stellt keine
 Ablaufbeschreibung dar! Diese kann stattdessen mit einem Aktivitäts-, einem
-Sequenz- oder einem Kollaborationsdiagramm (ab UML 2.x Kommunikationsdiagramm)
-dargestellt werden.
+Sequenz- oder einem Kommunikationsdiagramm dargestellt werden.
 
 **Basiskonzepte**
 
@@ -158,7 +129,12 @@ Bis UML 1.x waren Aktivitätsdiagramme eine Mischung aus Zustandsdiagramm,
 Petrinetz und Ereignisdiagramm, was zu theoretischen und praktischen Problemen
 führte.
 
+Elemente UML 1.x: Aktivitätszustände (Activity States), Übergänge (Transitions), Startzustand (Initial State), Endzustand (Final State), Entscheidungsknoten (Decision Nodes), Synchronisationsbalken.
+
 **Erweiterung des Konzeptes in UML2**
+
+Erweiterte und umbenannte Elemente UML 2.x: Aktionen (Actions): Call Behavior Action, Call Operation Action, Send Signal Action und weitere Action,
+Kontrollknoten (Control Nodes): Initial Node, Activity Final Node, Flow Final Node, Decision Node, Merge Node, Fork Node, Join Node, Objektknoten (Object Nodes), Aktivitätspartitionen (Activity Partitions, auch Swimlanes genannt), Interruptible Activity Region, Pins.
 
 > "Was früher Aktivitäten waren sind heute Aktionen."
 
@@ -274,19 +250,20 @@ style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-r
 
 > Sequenzdiagramme beschreiben den Austausch von Nachrichten zwischen Objekten mittels Lebenslinien.
 
-Ein Sequenzdiagramms besteht aus einem Kopf- und einem Inhaltsbereich. Von jedem Kommunikationspartner geht eine Lebenslinie (gestrichelt) aus. Es sind zwei synchrone Operationsaufrufe, erkennbar an den Pfeilen mit ausgefüllter Pfeilspitze, dargestellt. Notationsvarianten für synchrone und asynchrone Nachrichten
+Ein Sequenzdiagramms besteht aus einem Kopf- und einem Inhaltsbereich. Von jedem Kommunikationspartner geht eine **Lebenslinie** (gestrichelt) aus. 
 
 Eine Nachricht wird in einem Sequenzdiagramm durch einen Pfeil dargestellt, wobei der Name der Nachricht über den Pfeil geschrieben wird. Nachrichten können:
 
 + Operationsaufrufe einer Klasse sein
-+ Ergebnisse einer Operation
++ Ergebnisse einer Operation, Antwortsnachricht (gestrichelte Linien)
 + Signale
 + Interaktionen mit dem Nutzern
 + das Setzen einer Variablen
 
-Synchrone Nachrichten werden mit einer gefüllten Pfeilspitze, asynchrone Nachrichten mit einer offenen Pfeilspitze gezeichnet.
+Für synchrone und asynchrone Operationsaufrufe (Nachrichten) gibt es verschiedene Notationsvarianten.
+**Synchrone Nachrichten** werden mit einer gefüllten Pfeilspitze, **asynchrone Nachrichten** mit einer offenen Pfeilspitze gezeichnet.
 
-Die schmalen Rechtecke, die auf den Lebenslinien liegen, sind Aktivierungsbalken, die den Focus of Control anzeigen, also jenen Bereich, in dem ein Objekt über den Kontrollfluss verfügt, und aktiv an Interaktionen beteiligt ist.
+Die schmalen Rechtecke, die auf den Lebenslinien liegen, sind **Aktivierungsbalken**, die den Focus of Control anzeigen, also jenen Bereich, in dem ein Objekt über den Kontrollfluss verfügt, und aktiv an Interaktionen beteiligt ist.
 
 
 **Beispiel**
@@ -297,14 +274,13 @@ Die schmalen Rechtecke, die auf den Lebenslinien liegen, sind Aktivierungsbalken
 
 | Name                   | Beschreibung                                                                                                          |
 | ---------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| Objekt                 | Dient zur Darstellung einer Klasse oder eines Objekts im Kopfbereich.                                                 |
+| Objekt                 | Dient zur Darstellung eines Objekts (:Klasse) im Kopfbereich.                                                         |
 | Nachrichtensequenzen   | Modelliert den Informationsfluss zwischen den Objekten                                                                |
 | Aktivitätsbalken       | Repräsentiert die Zeit, die ein Objekt zum Abschließen einer Aufgabe benötigt.                                        |
-| Paket                  | Strukturiert das Sequenzdiagramm                                                                                      |
+| Akteur                | Repräsentiert einen Nutzer (Strichmännchen)                                                                            |
 | Lebenslinien-Symbol    | Stellt durch die Ausdehnung nach unten den Zeitverlauf dar.                                                           |
-| Fragmente              | Kapseln Sequenzen in „Wenn-dann“-Szenarien, optionalen Interaktionen, Schleifen, etc.                                 |
-| Alternativen-Symbol    | Stellt eine Auswahl zwischen zwei oder mehr Nachrichtensequenzen (die sich in der Regel gegenseitig ausschließen) dar |
-| Interaktionsreferenzen | Binden Submodelle und deren Ergebnisse ein  deren                                                                     |
+| Fragmente              | Kapseln Sequenzen in Szenarien, wie optionalen Interaktionen (opt), Alternativen (Alt), Schleifen (Loop), Parallelität (par)  |
+| Interaktionsreferenzen | Binden Submodelle und deren Ergebnisse ein  (ref)                                                                     |
 
 **Beispiel**
 
@@ -312,6 +288,20 @@ Die schmalen Rechtecke, die auf den Lebenslinien liegen, sind Aktivierungsbalken
 |Alkoholkontrolle.plantUML |
 
 [^WikiSequenceDiagram]: Wikimedia, Autor Coupling_loss_graph.svg, UML of message sequence, https://commons.wikimedia.org/wiki/File:CheckEmail.svg
+
+**Anwendungsfälle**
+
++ Verfeinerung von Anwendungsfällen (aus den Use Case Diagrammen)
++ Darstellung von Kommunikation zwischen Systemkomponenten
++ Darstellung der Steuerung des Programmflusses und die
++ Darstellung der Behandlung von Ausnahmen 
+
+**Sequenzdiagramm vs. Aktivitätsdiagramm**
+
++ Beide können zur Beschreibung von Use Cases und einzelnen Methoden einer Klasse verwendet werden
++ bieten unterschiedliche Perspektiven und Betrachtungsweisen auf diese Elemente:
+  + Aktivität: Visualisierung der Ablaufschritte, Darstellung/Dokumentation von komplexen Geschäftsprozessen oder Systemabläufen
+  + Sequenz: Darstellung von Interaktionen zwischen Objekten, einschließlich Aufrufen von Methoden einer Klasse, betonen die zeitliche Abfolge der Kommunikation
 
 ### Klassendiagramme
 
@@ -385,10 +375,11 @@ Order "1" *-- "1" ShippingInfo
 ********************************************************************************
 
 Klassen werden durch Rechtecke dargestellt, die entweder nur den Namen der
-Klasse (fett gedruckt) tragen oder zusätzlich auch Attribute, Operationen und
+Klasse (fett gedruckt, abstrakte und Interfaces evtl. kursiv) tragen oder zusätzlich auch Attribute, Operationen und
 Eigenschaften spezifiziert haben.  Oberhalb des Klassennamens können
 Schlüsselwörter in Guillemets und unterhalb des Klassennamens in
 geschweiften Klammern zusätzliche Eigenschaften (wie {abstrakt}) stehen.
+Mit Schlüsselwörtern können zusätzliche Informationen oder Meta-Eigenschaften zur Standardsemantik der Elemente hinzugefügt werden. Sie bieten eine Möglichkeit, benutzerdefinierte Modellierungskonzepte hinzuzufügen oder vorhandene Konzepte zu präzisieren.
 
 Elemente der Darstellung :
 
@@ -399,8 +390,7 @@ Elemente der Darstellung :
 | Zusicherungen | Bedingungen, Voraussetzungen und Regeln, die die Objekte erfüllen müssen     |
 | Beziehungen   | Beziehungen einer Klasse zu anderen Klassen                                  |
 
-Wenn die Klasse keine Eigenschaften oder Operationen besitzt, kann die unterste
-horizontale Linie entfallen.
+Wenn die Klasse keine Eigenschaften oder Operationen besitzt, können die entspechende Abschnitte wegfallen.
 
 ![OOPGeschichte](./img/14_UML_II/ClassTypes.png "UML Klassendiagramme und deren Attribute - adaptiert aus [^WikiUMLClass]")
 
@@ -538,11 +528,10 @@ definierbar:
 ```
 
 + *Sichtbarkeit* ... vgl. vorheriger Absatz
-    Das "/" bedeutet, dass es sich um ein abgeleitetes Attribut handelt, dessen
-    Daten von anderen Attributen abhängt
+    Das "/" bedeutet, dass es sich um ein abgeleitetes Attribut handelt.
 + *Name* ... des Attributes, Leer und Sonderzeichen sollten weggelassen werden, um zu vermeiden, dass Sie bei der Implementierung Probleme generieren.
 
-+ *Typ* ... UML verwendet zwar einige vordefinierte Typen (Integer, String, Boolean) beinhaltet aber keine Einschränkungen zu deren Wertebereich!
++ *Typ* ... UML verwendet zwar einige vordefinierte Typen (Integer, String, Boolean, UnlimitedNatural) beinhaltet aber keine Einschränkungen zu deren Wertebereich!
 
 + *Multiplizität* ... die Zahlenwerte in der rechteckigen Klammer legen eine Ober- und Untergrenze der Anzahl (Kardinalitäten) von Instanzen eines Datentyps fest.
 
@@ -566,7 +555,7 @@ definierbar:
 | `ordered`   | Inhaltes eines Attributes treten in geordneter Reihenfolge ohne Dublikate auf |
 | `bag`       | Attribute dürfen ungeordnet und mit Dublikaten versehen enthalten sein        |
 | `sequence`  | legt fest, dass der Inhalt sortiert, aber ohne Dublikate ist                  |
-| `composite` |                                                                               |
+| `composite` | starke Abhängigkeitsbeziehungen                                               |
 
 Daraus ergeben sich UML-korrekte Darstellungen
 
@@ -575,7 +564,7 @@ Daraus ergeben sich UML-korrekte Darstellungen
 | `public zähler:int `             | ja      | Umlaute sind nicht verboten                                                        |
 | `/ alter`                        | ja      | Datentypen müssen nicht zwingend angegeben werden                                  |
 | `privat adressen: String [1..*]` | ja      | Menge der Zeichenketten                                                            |
-| `protected bruder Person`        | ja      | Datentyp kann neben den Basistypen jede andere Klasse oder eine Schnittstelle sein |
+| `protected bruder: Person`       | ja      | Datentyp kann neben den Basistypen jede andere Klasse oder eine Schnittstelle sein |
 | String                           | nein    | Name des Attributes fehlt                                                          |
 | privat, public name: String      | nein    | Fehler wegen mehrfachen Zugriffsattributen                                         |
 
@@ -709,6 +698,26 @@ Die Möglichkeiten der Verknüpfung zwischen Klassen und Interfaces lassen sich 
 | Generalisierung                       | <img src="https://www.plantuml.com/plantuml/png/LOv12W8n40Jlyuh-m7vW3x9NRu8l2CcO7KmcC9diHVsxgoZehMcgw5ww1_DH2wsI654i5gR25uStcEJLaSGukZIbM4BlEB7rfZS2D5IUSNOJpGHipVwQnrSmsO9VXoP-MNWd7RMopJYgSsRROVhXC4ttmsU95jQqNtm2" width="660"> | gerichtete Beziehung zwischen einer generelleren und einer spezielleren Klasse (Vererbung) |
 | Assoziationen (ohne Anpassung)        | <img src="https://www.plantuml.com/plantuml/png/NSon3S9038NXtbEy1LWW1Kf1Hya4nvr9B3csvFFHeEoE0550-_H_R-vP8iUcj4fZL8cgJCgtH3f2bZNH9BYck15LBRtZx9R-8C3AnXCk6M8B0Rreymad7rTbsh_riCQl6dUFFm4hTVtPTgBtFGx7ZwIPhOrDdm00"width="160">          | beschreiben die Verknüpfung allgemein                                                      |
 | Assoziation (Komposition/Aggregation) | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Komposition_Aggregation.svg/1920px-Komposition_Aggregation.svg.png"width="660">  | Bildet Beziehungen von einem Ganzen und seinen Teilen ab                                   |
+
+## UML- Metamodell
+
+Abstraktionseben der UML-Modellierung:
+
++ M0 - Instanzebene: repräsentiert die konkrete Ausführung des Systems und ist nicht direkt in der UML-Modellierung abgebildet, auf dieser Ebene befinden sich die tatsächlichen Instanzen von Objekten, die während der Laufzeit eines Systems existieren. 
+
++ M1 - Modellierungsebene: beinhaltet verschiedene Arten von UML-Diagrammen wie Klassendiagramme, Aktivitätsdiagramme, Zustandsdiagramme usw. für eigentliche Benutzermodelle. 
+
++ M2 - Metamodell-Ebene: beinhaltet die Modelle, die das System selbst beschreiben. Das UML-Metamodell ist ein Beispiel für ein Metamodell auf dieser Ebene. Es beschreibt die Struktur und Syntax der UML selbst und ermöglicht es, UML-Diagramme zu erstellen und zu interpretieren.
+
++ M3 - Metametamodell-Ebene: Diese Ebene beschreibt die Struktur und Semantik von Metamodellen auf der M2-Ebene. Metametamodelle definieren die Regeln und Konzepte, die verwendet werden, um Metamodelle zu erstellen. 
+
+![Metamodel-Hierarchy](https://de.wikipedia.org/wiki/Unified_Modeling_Language#/media/Datei:MetamodelHierarchy_de.svg)
+
+## Links
+
+[Wikipedia-Diagrammübersicht](https://de.wikipedia.org/wiki/Unified_Modeling_Language#/media/Datei:UML-Diagramme.svg)
+
+[OMG-Spezifikation](https://www.omg.org/spec/UML/2.5.1/PDF)
 
 ## Verwendung von UML Tools
 
