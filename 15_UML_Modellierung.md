@@ -52,8 +52,8 @@ Um gedanklich wieder in die C# Entwicklung einzutauchen, finden Sie in dem Ordne
 Gibt es für ein Problem mehrere Lösungen? Sind sie alle gleich gut? Ist das einfachste und nahliegende nach KISS-Prinzip (Keep It Simple, Stupid) immer am besten?
 
 + Prinzipien zum Entwurf von Systemen: Modularität, Trennung von Zuständigkeiten (Separation of Concerns), Schichtenarchitektur, lose Kopplung und hohe Kohäsion von Modulen
-+ Prinzipien zum Entwurf einzelner Klassen: S ingle Responsibility (einzige Verantwortlichkeit) Principle, Kapselung, Immutable Objects
-+ Prinzipien zum Entwurf miteinander kooperierender Klassen: O, L, I, D, Law of Demeter (Kommunikation nur unter "verwandten" Klassen, keine lange Aufrufketten)
++ Prinzipien zum Entwurf einzelner Klassen: Single Responsibility (einzige Verantwortlichkeit) Principle, Kapselung, Immutable Objects
++ Prinzipien zum Entwurf miteinander kooperierender Klassen: O, L, I, D, Law of Demeter (Kommunikation nur unter "verwandten" Klassen, keine langen Aufrufketten)
 
 [Robert C. Martin](https://de.wikipedia.org/wiki/Robert_Cecil_Martin)
 fasste eine wichtige Gruppe von Prinzipien zur Erzeugung wartbarer und
@@ -176,7 +176,7 @@ abgeleiteten Klasse.
 Gegenbeispiel: Ausgangspunkt ist eine Klasse `Employee`, die für unterschiedliche
 Angestelltentypen um verschiedenen Algorithmen zur Bonusberechnung versehen werden soll.
 Intuitiv ist der Ansatz ein weiteres Feld einzufügen, dass den Typ des Angestellten
-erfasst und dazu eine entsprechende Verzweigung zu realisieren ... ein Verstoß gegen das OCP, der sich über eine Vererbungshierachie deutlich wartungsfreundlicher realisieren lässt!
+erfasst und dazu eine entsprechende Verzweigung zu realisiert ... ein Verstoß gegen das OCP, der sich über eine Vererbungshierachie deutlich wartungsfreundlicher realisieren lässt!
 
 ```csharp                                      Iniitalisation
 using System;
@@ -213,13 +213,13 @@ Achtung: Die Einbettung der `CalculateBonus()` Methode in die jeweiligen `Employ
 ###  Liskovsche Substitutionsprinzip (LSP)
 
 > Das Liskovsche Substitutionsprinzip (LSP) oder Ersetzbarkeitsprinzip besagt, dass ein Programm, das Objekte einer Basisklasse T verwendet, auch mit Objekten der davon abgeleiteten Klasse S korrekt funktionieren muss, ohne dabei das Programm zu verändern:
-> *"Sei $q(x)$ eine beweisbare Eigenschaft von Objekten $x$ des Typs $T$. Dann soll $q(y)$ für Objekte $y$ des Typs $S$ wahr sein, wobei $S$bein Untertyp von $T$ ist.“* [^Liskov]
+> *"Sei $q(x)$ eine beweisbare Eigenschaft von Objekten $x$ des Typs $T$. Dann soll $q(y)$ für Objekte $y$ des Typs $S$ wahr sein, wobei $S$ein Untertyp von $T$ ist.“* [^Liskov]
 
 Beispiel: Grafische Darstellung von verschiedenen Primitiven
 
 ![Liskov](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuN8lIapBB4xEI2rspKdDJSqhKR2fqTLL24fDpYX9JSx69U-QavDPK9oAIpeajQA42we68k9Tb9fPp8L5lPL2LMfcSaPUgeOcbqDgNWhGKG00)<!-- width="60%" -->
 
-Entsprechend sollte eine Methode, die `GrafischesElement` verarbeitet, auch auf  `Ellipse` und `Kreis` anwendbar sein. Problematisch ist dabei allerdings deren unterschiedliches Verhalten. `Kreis` weist zwei gleich lange Halbachsen. Die zugehörigen Membervariablen sind nicht unabhängig von einander.
+Entsprechend sollte eine Methode, die `GrafischesElement` verarbeitet, auch auf  `Ellipse` und `Kreis` anwendbar sein. Problematisch ist dabei allerdings deren unterschiedliches Verhalten. `Kreis` weist zwei gleich lange Halbachsen auf. Die zugehörigen Membervariablen sind nicht unabhängig voneinander.
 
 [^liskov]: Liskov, Barbara H., and Jeannette M. Wing. “A Behavioral Notion of Subtyping.” ACM Transactions on Programming Languages and Systems, vol. 16, no. 6, 1994, pp. 1811–41. doi:10.1145/197320.197383
 
@@ -227,10 +227,9 @@ Entsprechend sollte eine Methode, die `GrafischesElement` verarbeitet, auch auf 
 
 Zu große Schnittstellen sollten in mehrere Schnittstellen aufgeteilt werden,
 so dass die implementierende Klassen keine unnötigen Methoden umfasst.
-Schnittstellen aufgeteilt werden, falls implementierende Klassen unnötige
-Methoden haben müssen. Nach erfolgreicher Anwendung dieses Entwurfprinzips würde
-ein Modul, das eine Schnittstelle benutzt, nur die Methoden implementieren
-müssen, die es auch wirklich braucht.
+Schnittstellen müssen aufgeteilt werden, falls implementierende Klassen unnötige
+Methoden haben. Nach erfolgreicher Anwendung dieses Entwurfprinzips würde
+ein Modul, das eine Schnittstelle benutzt, nur die Methoden implementieren, die es auch wirklich braucht.
 
 
 ```csharp
