@@ -668,7 +668,7 @@ style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-
          v
 ````````````
 
-> Das V-Modell ist ein Vorgehensmodell, das den Softwareentwicklungsprozess in Phasen organisiert. Zusätzlich zu den Entwicklungsphasen definiert das V-Modell auch das Evaluationsphasen, in welchen den einzelnen Entwicklungsphasen Testphasen gegenüber gestellt werden.
+> Das V-Modell ist ein Vorgehensmodell, das den Softwareentwicklungsprozess in Phasen organisiert. Zusätzlich zu den Entwicklungsphasen definiert das V-Modell auch die Evaluationsphasen, in welchen den einzelnen Entwicklungsphasen Testphasen gegenübergestellt werden.
 
 vgl. zum Beispiel [Link](https://www.johner-institut.de/blog/iec-62304-medizinische-software/v-modell/)
 
@@ -679,7 +679,7 @@ vgl. zum Beispiel [Link](https://www.johner-institut.de/blog/iec-62304-medizinis
 
 Die **objektorientierte Analyse (OO-Analyse)** ist der Prozess der Analyse von Anforderungen aus der Perspektive von Objekten und deren Interaktionen. Die Anforderungen werden in verschiedene Klassen (Objekte) zerlegt, die Daten und Verhalten gemeinsam haben, typische Benutzungsabläufe (Use Cases) werden dokumentiert, um das Verhalten des Systems aus Sicht der Benutzer darzustellen. Ziel ist es, ein **Modell** zu erstellen, das das System und seine Eigenschaften klar darstellt.
 
-Das **objektorientierte Design (OO-Design)** setzt das Modell aus der Analyse in eine detailierte Softwarearchitektur umgesetzt wird. Dabei werden die verschiedenen Klassen, ihre Methoden und Interaktionen spezifiziert. 
+Das **objektorientierte Design (OO-Design)** setzt das Modell aus der Analyse in eine detaillierte Softwarearchitektur um. Dabei werden die verschiedenen Klassen, ihre Methoden und Interaktionen spezifiziert. 
 
 Als Standardnotation für OOA/OOD wird UML (Unified Modeling Language) verwendet. 
 
@@ -711,7 +711,7 @@ Was ist UML nicht:
 
 **UML-Modell und Diagramme**
 
-**UML-Modell**: ist eine abstrakte Darstellung eines Systems, das alle relevanten Informationen über die Struktur und das Verhalten des Systems enthält. Es umfasst nicht nur Diagramme, sondern auch die (nicht darstellbare) Beziehungen, Constraints und anderen Metadaten, die die Modellierung ausmachen.
+**UML-Modell**: ist eine abstrakte Darstellung eines Systems, das alle relevanten Informationen über die Struktur und das Verhalten des Systems enthält. Es umfasst nicht nur Diagramme, sondern auch die (nicht darstellbaren) Beziehungen, Constraints und anderen Metadaten, die die Modellierung ausmachen.
 
 **UML-Diagramme**: sind verschiedene grafische Darstellungen, die unterschiedliche Aspekte des Systems betonen. Es gibt mehrere Arten von UML-Diagrammen, die um unterschiedliche Perspektiven auf ein realweltliches Problem zeigen. Ein UML-Modell beinhaltet die Menge aller seiner Diagramme. 
 
@@ -729,15 +729,15 @@ UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die I
 
 **OMT - Object Modeling Technique** (*James Rumbaugh* et al., Ende der 1980er) war eine Methode für das objektorientierte Modellieren mit der grafischen Notation für die Analyse und das Design von Systemen. 
 
-**OOSE - Object-Oriented Software Engineering** (*Ivar Jacobson*, 1992) betonte die Verwendung von Anwendungsfällen (Use Cases) zur Spezifikation von Systemanforderungen und war eine der ersten Methoden, die diese Konzepte einführte.
+**OOSE - Object-Oriented Software Engineering** (*Ivar Jacobson*, 1992) betonte die Verwendung von Anwendungsfällen (Use Cases) zur Spezifikation von Systemanforderungen und war eine der ersten Methoden, die diese Konzept einführte.
 
-**UML** (3 amigos, Rational Software, Mitte 1990er) vereinheitlicht Modellierungssystem, das die verschiedenen Ansätze und Diagrammtypen der Objektorientierten Analyse und Design (OOA/OOD) vereint.
+**UML** (3 amigos, Rational Software, Mitte 1990er) vereinheitlichtes Modellierungssystem, das die verschiedenen Ansätze und Diagrammtypen der Objektorientierten Analyse und Design (OOA/OOD) vereint.
 
 **UML 1** (1997) umfasst eine Reihe von Diagrammen, etabliert sich als Standard für die Modellierung von Software- und Systemarchitekturen.
 
 **Übernahme durch die OMG - Object Management Group** (1997) leitete den Beginn als offenen Industriestandard ein.
 
-**UML 2** (2005) eine aktualisierten und erweiterten Version der UML mit weiteren Diagrammtypen und Verbesserungen in der Semantik und der Modellierungssprache.  
+**UML 2** (2005) eine aktualisierte und erweiterte Version der UML mit weiteren Diagrammtypen und Verbesserungen in der Semantik und der Modellierungssprache.  
 
 ### UML Werkzeuge
 
@@ -751,7 +751,7 @@ UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die I
 
     (Beispiel mit Visual Studio folgt am Ende der Vorlesung.)
 
-* Reverse Engineering / Dokumentation - UML-Werkzeug bilden Quelltext als Eingabe liest auf entsprechende UML-Diagramme und Modelldaten ab
+* Reverse Engineering / Dokumentation - UML-Werkzeuge bilden Quelltext als Eingabe auf entsprechende UML-Diagramme und Modelldaten ab
 
     *Herausforderungen:* Abstraktionskonzept der Modelle führt zu verallgemeinernden Darstellungen, die ggf. Konzepte des Codes nicht reflektieren.
 
@@ -760,7 +760,7 @@ UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die I
 
 **Darstellung von UML im Rahmen dieser Vorlesung**
 
-Die Vorlesungsunterlagen der Veranstaltung "Softwareentwicklung" setzen auf die domainspezifische Beschreibungssprache plantUML auf, die verschiedene Aspekte in einer
+Die Vorlesungsunterlagen der Veranstaltung "Softwareentwicklung" setzen auf die domainspezifische Beschreibungssprache plantUML auf, die verschiedene Aspekte in einer einheitlichen und übersichtlichen Weise darstellt.
 
 http://plantuml.com/de/
 
@@ -812,7 +812,7 @@ WB is Waiting
 | Klassendiagramm              | Welche Klassen bilden das Systemverhalten ab und in welcher Beziehung stehen diese?                                      |
 | Paketdiagramm                | Wie kann ich mein Modell in Module strukturieren?                                                                        |
 | Objektdiagramm               | Welche Instanzen bestehen zu einem bestimmten Zeitpunkt im System?                                                       |
-| Kompositionsstrukturdiagramm | Wie sieht die interne Struktur einer Klasse, Komponente, eines Subsystems?                                               |
+| Kompositionsstrukturdiagramm | Wie sieht die interne Struktur einer Klasse, Komponente, eines Subsystems aus?                                               |
 | Komponentendiagramm          | Wie lassen sich die Klassen zu wiederverwendbaren Komponenten (Module, Bibliotheken etc) zusammenfassen und wie werden deren Beziehungen definiert? |
 | Verteilungsdiagramm          | Wie werden Softwareanwendungen und -komponenten auf Hardwareknoten (Server, Geräte, Netzwerke) verteilt?                 |
 
