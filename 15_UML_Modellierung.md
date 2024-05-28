@@ -52,8 +52,8 @@ Um gedanklich wieder in die C# Entwicklung einzutauchen, finden Sie in dem Ordne
 Gibt es für ein Problem mehrere Lösungen? Sind sie alle gleich gut? Ist das einfachste und nahliegende nach KISS-Prinzip (Keep It Simple, Stupid) immer am besten?
 
 + Prinzipien zum Entwurf von Systemen: Modularität, Trennung von Zuständigkeiten (Separation of Concerns), Schichtenarchitektur, lose Kopplung und hohe Kohäsion von Modulen
-+ Prinzipien zum Entwurf einzelner Klassen: S ingle Responsibility (einzige Verantwortlichkeit) Principle, Kapselung, Immutable Objects
-+ Prinzipien zum Entwurf miteinander kooperierender Klassen: O, L, I, D, Law of Demeter (Kommunikation nur unter "verwandten" Klassen, keine lange Aufrufketten)
++ Prinzipien zum Entwurf einzelner Klassen: Single Responsibility (einzige Verantwortlichkeit) Principle, Kapselung, Immutable Objects
++ Prinzipien zum Entwurf miteinander kooperierender Klassen: O, L, I, D, Law of Demeter (Kommunikation nur unter "verwandten" Klassen, keine langen Aufrufketten)
 
 [Robert C. Martin](https://de.wikipedia.org/wiki/Robert_Cecil_Martin)
 fasste eine wichtige Gruppe von Prinzipien zur Erzeugung wartbarer und
@@ -176,7 +176,7 @@ abgeleiteten Klasse.
 Gegenbeispiel: Ausgangspunkt ist eine Klasse `Employee`, die für unterschiedliche
 Angestelltentypen um verschiedenen Algorithmen zur Bonusberechnung versehen werden soll.
 Intuitiv ist der Ansatz ein weiteres Feld einzufügen, dass den Typ des Angestellten
-erfasst und dazu eine entsprechende Verzweigung zu realisieren ... ein Verstoß gegen das OCP, der sich über eine Vererbungshierachie deutlich wartungsfreundlicher realisieren lässt!
+erfasst und dazu eine entsprechende Verzweigung zu realisiert ... ein Verstoß gegen das OCP, der sich über eine Vererbungshierachie deutlich wartungsfreundlicher realisieren lässt!
 
 ```csharp                                      Iniitalisation
 using System;
@@ -213,13 +213,13 @@ Achtung: Die Einbettung der `CalculateBonus()` Methode in die jeweiligen `Employ
 ###  Liskovsche Substitutionsprinzip (LSP)
 
 > Das Liskovsche Substitutionsprinzip (LSP) oder Ersetzbarkeitsprinzip besagt, dass ein Programm, das Objekte einer Basisklasse T verwendet, auch mit Objekten der davon abgeleiteten Klasse S korrekt funktionieren muss, ohne dabei das Programm zu verändern:
-> *"Sei $q(x)$ eine beweisbare Eigenschaft von Objekten $x$ des Typs $T$. Dann soll $q(y)$ für Objekte $y$ des Typs $S$ wahr sein, wobei $S$bein Untertyp von $T$ ist.“* [^Liskov]
+> *"Sei $q(x)$ eine beweisbare Eigenschaft von Objekten $x$ des Typs $T$. Dann soll $q(y)$ für Objekte $y$ des Typs $S$ wahr sein, wobei $S$ein Untertyp von $T$ ist.“* [^Liskov]
 
 Beispiel: Grafische Darstellung von verschiedenen Primitiven
 
 ![Liskov](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuN8lIapBB4xEI2rspKdDJSqhKR2fqTLL24fDpYX9JSx69U-QavDPK9oAIpeajQA42we68k9Tb9fPp8L5lPL2LMfcSaPUgeOcbqDgNWhGKG00)<!-- width="60%" -->
 
-Entsprechend sollte eine Methode, die `GrafischesElement` verarbeitet, auch auf  `Ellipse` und `Kreis` anwendbar sein. Problematisch ist dabei allerdings deren unterschiedliches Verhalten. `Kreis` weist zwei gleich lange Halbachsen. Die zugehörigen Membervariablen sind nicht unabhängig von einander.
+Entsprechend sollte eine Methode, die `GrafischesElement` verarbeitet, auch auf  `Ellipse` und `Kreis` anwendbar sein. Problematisch ist dabei allerdings deren unterschiedliches Verhalten. `Kreis` weist zwei gleich lange Halbachsen auf. Die zugehörigen Membervariablen sind nicht unabhängig voneinander.
 
 [^liskov]: Liskov, Barbara H., and Jeannette M. Wing. “A Behavioral Notion of Subtyping.” ACM Transactions on Programming Languages and Systems, vol. 16, no. 6, 1994, pp. 1811–41. doi:10.1145/197320.197383
 
@@ -227,10 +227,9 @@ Entsprechend sollte eine Methode, die `GrafischesElement` verarbeitet, auch auf 
 
 Zu große Schnittstellen sollten in mehrere Schnittstellen aufgeteilt werden,
 so dass die implementierende Klassen keine unnötigen Methoden umfasst.
-Schnittstellen aufgeteilt werden, falls implementierende Klassen unnötige
-Methoden haben müssen. Nach erfolgreicher Anwendung dieses Entwurfprinzips würde
-ein Modul, das eine Schnittstelle benutzt, nur die Methoden implementieren
-müssen, die es auch wirklich braucht.
+Schnittstellen müssen aufgeteilt werden, falls implementierende Klassen unnötige
+Methoden haben. Nach erfolgreicher Anwendung dieses Entwurfprinzips würde
+ein Modul, das eine Schnittstelle benutzt, nur die Methoden implementieren, die es auch wirklich braucht.
 
 
 ```csharp
@@ -669,7 +668,7 @@ style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-
          v
 ````````````
 
-> Das V-Modell ist ein Vorgehensmodell, das den Softwareentwicklungsprozess in Phasen organisiert. Zusätzlich zu den Entwicklungsphasen definiert das V-Modell auch das Evaluationsphasen, in welchen den einzelnen Entwicklungsphasen Testphasen gegenüber gestellt werden.
+> Das V-Modell ist ein Vorgehensmodell, das den Softwareentwicklungsprozess in Phasen organisiert. Zusätzlich zu den Entwicklungsphasen definiert das V-Modell auch die Evaluationsphasen, in welchen den einzelnen Entwicklungsphasen Testphasen gegenübergestellt werden.
 
 vgl. zum Beispiel [Link](https://www.johner-institut.de/blog/iec-62304-medizinische-software/v-modell/)
 
@@ -680,7 +679,7 @@ vgl. zum Beispiel [Link](https://www.johner-institut.de/blog/iec-62304-medizinis
 
 Die **objektorientierte Analyse (OO-Analyse)** ist der Prozess der Analyse von Anforderungen aus der Perspektive von Objekten und deren Interaktionen. Die Anforderungen werden in verschiedene Klassen (Objekte) zerlegt, die Daten und Verhalten gemeinsam haben, typische Benutzungsabläufe (Use Cases) werden dokumentiert, um das Verhalten des Systems aus Sicht der Benutzer darzustellen. Ziel ist es, ein **Modell** zu erstellen, das das System und seine Eigenschaften klar darstellt.
 
-Das **objektorientierte Design (OO-Design)** setzt das Modell aus der Analyse in eine detailierte Softwarearchitektur umgesetzt wird. Dabei werden die verschiedenen Klassen, ihre Methoden und Interaktionen spezifiziert. 
+Das **objektorientierte Design (OO-Design)** setzt das Modell aus der Analyse in eine detaillierte Softwarearchitektur um. Dabei werden die verschiedenen Klassen, ihre Methoden und Interaktionen spezifiziert. 
 
 Als Standardnotation für OOA/OOD wird UML (Unified Modeling Language) verwendet. 
 
@@ -712,7 +711,7 @@ Was ist UML nicht:
 
 **UML-Modell und Diagramme**
 
-**UML-Modell**: ist eine abstrakte Darstellung eines Systems, das alle relevanten Informationen über die Struktur und das Verhalten des Systems enthält. Es umfasst nicht nur Diagramme, sondern auch die (nicht darstellbare) Beziehungen, Constraints und anderen Metadaten, die die Modellierung ausmachen.
+**UML-Modell**: ist eine abstrakte Darstellung eines Systems, das alle relevanten Informationen über die Struktur und das Verhalten des Systems enthält. Es umfasst nicht nur Diagramme, sondern auch die (nicht darstellbaren) Beziehungen, Constraints und anderen Metadaten, die die Modellierung ausmachen.
 
 **UML-Diagramme**: sind verschiedene grafische Darstellungen, die unterschiedliche Aspekte des Systems betonen. Es gibt mehrere Arten von UML-Diagrammen, die um unterschiedliche Perspektiven auf ein realweltliches Problem zeigen. Ein UML-Modell beinhaltet die Menge aller seiner Diagramme. 
 
@@ -730,15 +729,15 @@ UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die I
 
 **OMT - Object Modeling Technique** (*James Rumbaugh* et al., Ende der 1980er) war eine Methode für das objektorientierte Modellieren mit der grafischen Notation für die Analyse und das Design von Systemen. 
 
-**OOSE - Object-Oriented Software Engineering** (*Ivar Jacobson*, 1992) betonte die Verwendung von Anwendungsfällen (Use Cases) zur Spezifikation von Systemanforderungen und war eine der ersten Methoden, die diese Konzepte einführte.
+**OOSE - Object-Oriented Software Engineering** (*Ivar Jacobson*, 1992) betonte die Verwendung von Anwendungsfällen (Use Cases) zur Spezifikation von Systemanforderungen und war eine der ersten Methoden, die diese Konzept einführte.
 
-**UML** (3 amigos, Rational Software, Mitte 1990er) vereinheitlicht Modellierungssystem, das die verschiedenen Ansätze und Diagrammtypen der Objektorientierten Analyse und Design (OOA/OOD) vereint.
+**UML** (3 amigos, Rational Software, Mitte 1990er) vereinheitlichtes Modellierungssystem, das die verschiedenen Ansätze und Diagrammtypen der Objektorientierten Analyse und Design (OOA/OOD) vereint.
 
 **UML 1** (1997) umfasst eine Reihe von Diagrammen, etabliert sich als Standard für die Modellierung von Software- und Systemarchitekturen.
 
 **Übernahme durch die OMG - Object Management Group** (1997) leitete den Beginn als offenen Industriestandard ein.
 
-**UML 2** (2005) eine aktualisierten und erweiterten Version der UML mit weiteren Diagrammtypen und Verbesserungen in der Semantik und der Modellierungssprache.  
+**UML 2** (2005) eine aktualisierte und erweiterte Version der UML mit weiteren Diagrammtypen und Verbesserungen in der Semantik und der Modellierungssprache.  
 
 ### UML Werkzeuge
 
@@ -752,7 +751,7 @@ UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die I
 
     (Beispiel mit Visual Studio folgt am Ende der Vorlesung.)
 
-* Reverse Engineering / Dokumentation - UML-Werkzeug bilden Quelltext als Eingabe liest auf entsprechende UML-Diagramme und Modelldaten ab
+* Reverse Engineering / Dokumentation - UML-Werkzeuge bilden Quelltext als Eingabe auf entsprechende UML-Diagramme und Modelldaten ab
 
     *Herausforderungen:* Abstraktionskonzept der Modelle führt zu verallgemeinernden Darstellungen, die ggf. Konzepte des Codes nicht reflektieren.
 
@@ -761,7 +760,7 @@ UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die I
 
 **Darstellung von UML im Rahmen dieser Vorlesung**
 
-Die Vorlesungsunterlagen der Veranstaltung "Softwareentwicklung" setzen auf die domainspezifische Beschreibungssprache plantUML auf, die verschiedene Aspekte in einer
+Die Vorlesungsunterlagen der Veranstaltung "Softwareentwicklung" setzen auf die domainspezifische Beschreibungssprache plantUML auf, die verschiedene Aspekte in einer einheitlichen und übersichtlichen Weise darstellt.
 
 http://plantuml.com/de/
 
@@ -813,7 +812,7 @@ WB is Waiting
 | Klassendiagramm              | Welche Klassen bilden das Systemverhalten ab und in welcher Beziehung stehen diese?                                      |
 | Paketdiagramm                | Wie kann ich mein Modell in Module strukturieren?                                                                        |
 | Objektdiagramm               | Welche Instanzen bestehen zu einem bestimmten Zeitpunkt im System?                                                       |
-| Kompositionsstrukturdiagramm | Wie sieht die interne Struktur einer Klasse, Komponente, eines Subsystems?                                               |
+| Kompositionsstrukturdiagramm | Wie sieht die interne Struktur einer Klasse, Komponente, eines Subsystems aus?                                               |
 | Komponentendiagramm          | Wie lassen sich die Klassen zu wiederverwendbaren Komponenten (Module, Bibliotheken etc) zusammenfassen und wie werden deren Beziehungen definiert? |
 | Verteilungsdiagramm          | Wie werden Softwareanwendungen und -komponenten auf Hardwareknoten (Server, Geräte, Netzwerke) verteilt?                 |
 
