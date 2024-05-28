@@ -60,9 +60,9 @@ Im folgenden werden wir uns aus den beiden Hauptkategorien jeweils folgende Diag
 > Verhalten eines Systems und wird dafür eingesetzt, die Anforderungen an ein
 > System zu spezifizieren.
 
-**Lastenheft und Pflichtenheft (Wiederholung?**:
+**Lastenheft und Pflichtenheft (Wiederholung?)**:
 
-Das Lastenheft beschreibt alle Anforderungen und Wünsche des Auftraggebers an ein zukünftiges System,  u.a. *funktionale Anforderungen*: Was soll das System tun? (Features, Anwendungsfälle). 
+Das Lastenheft beschreibt alle Anforderungen und Wünsche des Auftraggebers an ein zukünftiges System,  u.a. *funktionale Anforderungen*: was soll das System tun? (Features, Anwendungsfälle). 
 Das Pflichtenheft beschreibt, wie die Anforderungen des Lastenhefts umgesetzt werden sollen, d.h. es enthält detaillierte Spezifikationen und Entwürfe für die Realisierung des Systems und enthält ebenfalls einen Abschnitt zu funktionalen Anforderungen.
 
 Ein Anwendungsfalldiagramm ist eine grafische Darstellung der *funktionalen Anforderungen* eines Systems. Es zeigt die verschiedenen Anwendungsfälle (Use Cases), Akteure und deren Interaktionen.
@@ -76,7 +76,7 @@ Sequenz- oder einem Kommunikationsdiagramm dargestellt werden.
 Elemente:
 
 + Systemgrenzen werden durch Rechtecke gekennzeichnet.
-+ Akteure werden als „Strichmännchen“ dargestellt, dies können sowohl Personen (Kunden, Administratoren) als auch technische Systeme sein (manchmal auch ein Bandsymbol verwendet). Sie ordnen den Symbolen Rollen zu
++ Akteure werden als „Strichmännchen“ dargestellt, dies können sowohl Personen (Kunden, Administratoren) als auch technische Systeme sein (manchmal auch ein Bandsymbol verwendet). Sie ordnen den Symbolen Rollen zu.
 + Anwendungsfälle werden in Ellipsen dargestellt. Üblich ist die Kombination aus Verb und ein Substantiv `Kundendaten Ändern`.
 + Beziehungen zwischen Akteuren und Anwendungsfällen müssen durch Linien gekennzeichnet werden. Man unterscheidet "Association", "Include", "Extend" und "Generalization".
 
@@ -129,7 +129,7 @@ Bis UML 1.x waren Aktivitätsdiagramme eine Mischung aus Zustandsdiagramm,
 Petrinetz und Ereignisdiagramm, was zu theoretischen und praktischen Problemen
 führte.
 
-Elemente UML 1.x: Aktivitätszustände (Activity States), Übergänge (Transitions), Startzustand (Initial State), Endzustand (Final State), Entscheidungsknoten (Decision Nodes), Synchronisationsbalken.
+Elemente UML 1.x: Aktivitätszustände (Activity States), Übergänge (Transitions), Startzustand (Initial State), Endzustand (Final State), Entscheidungsknoten (Decision Nodes), Synchronisationsbalken, Aktivitätspartitionen.
 
 **Erweiterung des Konzeptes in UML2**
 
@@ -236,7 +236,7 @@ style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-r
 
 ![Aktivitätsdiagramme](./img/14_UML_II/ActivityDiagram.png "Beispiel eines Anwendungsfall Diagramms [^WikiActivityDiagram]")
 
-**Anwendungsfälle**
+**Anwendung**
 
 + Verfeinerung von Anwendungsfällen (aus den Use Case Diagrammen)
 + Darstellung von Abläufen mit fachlichen Ausführungsbedingungen
@@ -289,7 +289,7 @@ Die schmalen Rechtecke, die auf den Lebenslinien liegen, sind **Aktivierungsbalk
 
 [^WikiSequenceDiagram]: Wikimedia, Autor Coupling_loss_graph.svg, UML of message sequence, https://commons.wikimedia.org/wiki/File:CheckEmail.svg
 
-**Anwendungsfälle**
+**Anwendung**
 
 + Verfeinerung von Anwendungsfällen (aus den Use Case Diagrammen)
 + Darstellung von Kommunikation zwischen Systemkomponenten
@@ -300,8 +300,8 @@ Die schmalen Rechtecke, die auf den Lebenslinien liegen, sind **Aktivierungsbalk
 
 + Beide können zur Beschreibung von Use Cases und einzelnen Methoden einer Klasse verwendet werden
 + bieten unterschiedliche Perspektiven und Betrachtungsweisen auf diese Elemente:
-  + Aktivität: Visualisierung der Ablaufschritte, Darstellung/Dokumentation von komplexen Geschäftsprozessen oder Systemabläufen
-  + Sequenz: Darstellung von Interaktionen zwischen Objekten, einschließlich Aufrufen von Methoden einer Klasse, betonen die zeitliche Abfolge der Kommunikation
++ Aktivität: Visualisierung der Ablaufschritte, Darstellung/Dokumentation von komplexen Geschäftsprozessen oder Systemabläufen
++ Sequenz: Darstellung von Interaktionen zwischen Objekten, einschließlich Aufrufen von Methoden einer Klasse, betonen die zeitliche Abfolge der Kommunikation
 
 ### Klassendiagramme
 
@@ -390,7 +390,7 @@ Elemente der Darstellung :
 | Zusicherungen | Bedingungen, Voraussetzungen und Regeln, die die Objekte erfüllen müssen     |
 | Beziehungen   | Beziehungen einer Klasse zu anderen Klassen                                  |
 
-Wenn die Klasse keine Eigenschaften oder Operationen besitzt, können die entspechende Abschnitte wegfallen.
+Wenn die Klasse keine Eigenschaften oder Operationen besitzt, können die entspechenden Abschnitte wegfallen.
 
 ![OOPGeschichte](./img/14_UML_II/ClassTypes.png "UML Klassendiagramme und deren Attribute - adaptiert aus [^WikiUMLClass]")
 
@@ -407,6 +407,15 @@ Wenn die Klasse keine Eigenschaften oder Operationen besitzt, können die entspe
 | <img src="https://www.plantuml.com/plantuml/png/TP2_JWCn3CRtF8Lr4r1LWXKn5C7I1OPxWjGnhKNYd1o7WJ_lJhXhInYOelm-Vpz7sHJpQZL5vyeho-JL9y3eIxatKzvLeorc6VcTuDeTE10WAqPoRfw2Xrei9rBuS01h49y8Rc5iNTdF96Rqnbbwke924fura5vSpdSb97wZ4_ewwHiukuEt7_TZEvPTDUr86zcAqPvq5c6M5zPqr6BCXNhVKzRauwzr1O7Bv0qFVn-oT8wbSIBaVrjjRadkFjVhVa6FUuKx_zbmCq0BXwi1bcH34cgAtm00" width="228"> | <img src="https://www.plantuml.com/plantuml/png/TSwnJiCm4CRntKznojvWEss7gaIL8h4HaF84RdmK8pj6b_DKyMPil1WnY10ARDRdltwwmyY6E0KlF3umS0HofqS6wmXxTd4G8XwVfYSK-rGtQUGOa7PmZuoqlqfr0MQ4vYm64n2kFtUuVNlr7adus9kCJ1ytXEw8T18lFyGsKZ3-Zcn6LQNqUaPRTHRMS5OBfKkvARNKiX132XCqhHzvzlu7rzKIrD-Wbd-1ERyui7l6tisWtcotizSj3wnAMLrwkSvS0wjL3Qs27SJieFsQzA-fMrO776mA_Xq0" width="300">  |
 
 Darstellung motiviert nach _What is Object Diagram?_, https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-object-diagram/, Autor unbekannt
+
+**Objektdiagramm** stellt die Instanzen von Klassen und ihre Beziehungen zueinander zu einem bestimmten Zeitpunkt dar basierend auf einem Klassendiagramm
+(ein „Schnappschuss“ der Objekte innerhalb eines Systems) und enthält als Elemente: Objekte (Instanzen der Klasse), Links (Instanzen von Assoziationen), Attribute (Werte von Eigenschaften von Objekten).
+
+Anwendung des Objektdiagramms:
+
++ Um den Zustand eines Systems zu einem bestimmten Zeitpunkt darzustellen bzw. während der Laufzeit zu visualisieren.
++ Um Testfälle und Szenarien zu beschreiben.
+
 
 
 ********************************************************************************
@@ -501,7 +510,7 @@ Zudem muss die Methode `StopAtStation` auch auf die Geschwindigkeit zurückgreif
 
 **internal**
 
-Ein Member vom Typ `protected internal` einer Basisklasse kann von jedem Typ innerhalb seiner enthaltenden Assembly aus zugegriffen werden.
+Ein Member vom Typ `internal` einer Basisklasse kann von jedem Typ innerhalb seiner enthaltenden Assembly aus zugegriffen werden.
 
 ![Protected](https://www.plantuml.com/plantuml/png/JOwzRkf044RxVOfFha38YDjQ2463T2b3b2PACUoExH7hjRK_HKZ8iqTcRONspCmvim-HV4oTLU4gRY1F7RIb40unUhcaoFzrxyvoOsnKAuQXnMlBQY1zfORnqfDvzLJNeh7T7djhsEzs-5B87hnnAzho280IOM0s5KoVBfOVx0U1utd4Yqpppl8nNA6PXykdgxkwAvNzf-HqbDwDWHAQVAWmFLHLKpoyVwZHTPOkMOfyecwn_5CSn0-M76T5ozB45a-r5OxsCn_CDHJ_2fGbYasrNgEOEgXGD9wbZhWbKAeBDRjHVkymhQazEvCw-mi0 "Internal Member [internal.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/internal.plantUML)")
 
@@ -531,7 +540,7 @@ definierbar:
     Das "/" bedeutet, dass es sich um ein abgeleitetes Attribut handelt.
 + *Name* ... des Attributes, Leer und Sonderzeichen sollten weggelassen werden, um zu vermeiden, dass Sie bei der Implementierung Probleme generieren.
 
-+ *Typ* ... UML verwendet zwar einige vordefinierte Typen (Integer, String, Boolean, UnlimitedNatural) beinhaltet aber keine Einschränkungen zu deren Wertebereich!
++ *Typ* ... UML verwendet zwar einige vordefinierte Typen (Integer, Real, String, Boolean, UnlimitedNatural) beinhaltet aber keine Einschränkungen zu deren Wertebereich!
 
 + *Multiplizität* ... die Zahlenwerte in der rechteckigen Klammer legen eine Ober- und Untergrenze der Anzahl (Kardinalitäten) von Instanzen eines Datentyps fest.
 
@@ -711,11 +720,11 @@ Abstraktionseben der UML-Modellierung:
 
 + M3 - Metametamodell-Ebene: Diese Ebene beschreibt die Struktur und Semantik von Metamodellen auf der M2-Ebene. Metametamodelle definieren die Regeln und Konzepte, die verwendet werden, um Metamodelle zu erstellen. 
 
-![Metamodel-Hierarchy](https://de.wikipedia.org/wiki/Unified_Modeling_Language#/media/Datei:MetamodelHierarchy_de.svg)
+[Metamodel-Hierarchy](https://de.wikipedia.org/wiki/Unified_Modeling_Language#/media/Datei:MetamodelHierarchy_de.svg)
 
 ## Links
 
-[Wikipedia-Diagrammübersicht](https://de.wikipedia.org/wiki/Unified_Modeling_Language#/media/Datei:UML-Diagramme.svg)
+[Wikipedia-übersicht der Diagramm Elemente](https://de.wikipedia.org/wiki/Unified_Modeling_Language#/media/Datei:UML-Diagramme.svg)
 
 [OMG-Spezifikation](https://www.omg.org/spec/UML/2.5.1/PDF)
 
