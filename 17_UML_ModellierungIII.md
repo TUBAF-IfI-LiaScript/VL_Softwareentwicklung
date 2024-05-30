@@ -18,7 +18,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/15_UML_ModellierungIII.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/17_UML_ModellierungIII.md)
 
 # Modellierung von Software
 
@@ -29,7 +29,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 | **Semester**             | @config.semester                                                                                    |
 | **Hochschule:**          | @config.university                                                                                  |
 | **Inhalte:**             | @comment                                                                                            |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/15_UML_ModellierungIII.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/17_UML_ModellierungIII.md |
 | **Autoren**              | @author                                                                                             |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
@@ -98,7 +98,7 @@ Was fehlt noch?
 
 **Anwendungsfälle des Distributors**
 
-![UseCaseOnlineShopIII](https://www.plantuml.com/plantuml/png/TOz1IyD048Nl-olUiHvIi4SffTRMYmU5uCNRDfcaGpUpONQMek8_y-OVCubG2-9juBtlySqwcLVBNN3foD9xzHrwNnrzIwMz1e9IPLxQG2vGOx08vVPWg7bCE8hpbKN5bfCfx_DmEtU6y2Y1XOho47kyEs2s8SdsHYg-8q6M6ay-fLDK0x6qj2UvWazuBdTtj-NkUcGUXXf9CRKtb8n2gBsHe8ud2T4F8IwXnG31uT89HN6U_3TPm3cSQvZFLvYzv5QvQTAUbAg3SPkbHQzVdyqeUeFbagKAkQRLwfTT_B3RIP8xA4ye2UwZTjumhh5Dd_oTSHzkJLBdBdm3)
+![UseCaseOnlineShopIII](https://www.plantuml.com/plantuml/png/ZP6nJWCn343tV8L76DeFGAYgK65bPqiJ9sV9vrIE8mR4dtNhZv6xfLUXaswBu-VunJvMysfjPCUO3Ao0KXuC8Ya6eoBE1oiA9wgcT6xzxAQCbym8dy8aM8To-N6jOl0LuUchPQMKwXaxE1Zb9XbkrnvUz7PDACztzfs4IyuFTszO3PcZDnI8vRiJFZuGfpb5OtUT6_JWe-Ze3QQUP7FzLB711LxtIuqN80dS8hfL3zWVjYlSt_jrYnd2RdTO_-a_SZcd8qhi-_e3)
 
 Welche Zusammenhänge konnten wir bisher nicht abbilden?
 
@@ -122,9 +122,7 @@ auf eine Grafik des Originaltutorials zurückgegriffen wird:
 
 ### Klassendiagramme
 
-Konzentrieren wir uns zunächst auf einzelne Aspekte der Modellierung, um darauf aufbauend die
-
-das gesamte Diagramm zu entwerfen.
+Konzentrieren wir uns zunächst auf einzelne Aspekte der Modellierung, um darauf aufbauend das gesamte Diagramm zu entwerfen.
 
 **Ausgangspunkt Angebot / Artikel**
 
@@ -136,6 +134,8 @@ Assoziationen und Eigenschaften sind äquivalent in der Darstellung, entsprechen
 | ---------- | ----------- |
 |    ![ClassDiagramm](https://www.plantuml.com/plantuml/png/DOsnQYin44Nx-OfX-pNljIg27TAu2G53UgtsMXuiZS9er2JapzBbnnAMR3Vd39Tpx1xDHotKxw9lqMBbL6Bl9tUJPJZEgUb5ti7_gE3gx8rDyirv5KDoQKetMS59B1KGRMi-QSRIV2TpkQDy4FEyWuvQOO7FwiYmxVKSAm9Vt4Jp9buCqWC_jR4KREOLTlt-oakqm8-j5KIbJwA_7a__9vxd1_uzmk4mxJ4wGjTHomy0)<!-- width="100%" -->            | ![ClassDiagramm](https://www.plantuml.com/plantuml/png/NSknIWD14CRnVfvYk5Aue6qAoObD6X42DcAnT_TbCsHtLcPd6yKti_F5XEDI9Dt7_FwpgnxCMqvKpwAVmKBcAOLQ1tUJiJdsKz63V87lAU7ex8LDuibv5iFaKfHECeCdiIc1QFdcGIF6uj_4tFDWBcUaxMMyFsmsTn_qSudNCz4wkEyVcVVgYB0jTzole2rdM7VT7Tn4uvAzX8mRVIvjJ5ZqrI3rXfzAIGYw-1li-FSRns0TxQ1po-aV)<!-- width="100%" -->           |
 
+![ClassDiagramm](https://www.plantuml.com/plantuml/png/VO-zYiCm381tFON9T3yuSAk78pbkkUKeBNHtOiKrjQqYArr2twnRNwo1UkXKJH_euqFgYbYMEKM8E8aIKXpyGPGBZAC4oZ16MuhgiyU1P06rpcVlNCyIZXZVJfPDvNVpGnJHveUqnKHdVEbTQhqk5j2LyfmIildBWXuPzBzDQ7R28NlG6yPGp2_DGqJGU-JfTlM3vQTiFLSrNuqYhRzNQDkFfjQXm-pMd-y0)<!-- width="45%" -->
+
 **Integration des Warenkorbes**
 
 Der Warenkorb bildet die Menge der bestellten Artikel ab, entsprechend wird hier eine 1:n-Beziehung zwischen der Klasse Warenkorb und der Klasse `BestellteArtikel` definiert. `BestellteArtikel` erbt dabei von Artikel und erweitert die Felder um den Eintrag Anzahl.
@@ -143,6 +143,8 @@ Der Warenkorb bildet die Menge der bestellten Artikel ab, entsprechend wird hier
 Zudem bilden wir in der Klasse Warenkorb unsere Anforderung nach einer Bestellumfang gebundenen Versandkostenhöhe ab. Es wird davon ausgegangen, dass der Kunde hier eine Landes- und Versandart und Zahlungsmethodenunabhängige Lösung wünscht. Daher besitzt die Klasse Warenkorb neben der Assoziation zur Klasse Artikel eine statische Eigenschaft KostenfreiAb (diese ist unterstrichen). Die Membervariable gibt einen Euro-Betrag an, ab dem für die Lieferung der bestellten Ware keine Verpackungs- und Versandkosten in Rechnung gestellt werden.
 
 ![](https://www.plantuml.com/plantuml/png/bP3FIiD048Vl-nH3JlunHQz1f2rUYY12GS-JP9eCtSpAxCH3QzxCcozcMHArr8kdtPdzVNmxCu-6QdtdNToolA9Y1vN761TcocLljAg2h7b7SEqyRGmiW7BJ6jIiL1a7SItN11LhvScvHCD26Yg3JPKQRydl7K0-5T9t7Ma1Ap5gIDFJ8tPKmDgKfKcD9oME1To7llIKEi-acy-FfiG3kWp14ueRHisIef7tHiS-sM7hVqHJ-WMLP1kqJB5zD3Ik1dW8qKWsIhmeVvalMnPYESC_Vty5U6mvB-0jS3s2sCV_WeDpRbmYP3SPvFaT72x5R9PD6tJZ2RVlUNuolFkUBx7PHNOQcPFKVUU_0000)<!-- width="100%" -->
+
+![](https://www.plantuml.com/plantuml/png/bO-_JiD038TtFuNLYJ_S2qG8DOW58R4oEudRM7Lyai_7GCcxW-1Q2NNYjhFzVVvvMu8ywgAWl0kCZ2xxEN0Ivp4a6y2eL0hs7d9WFNqVkGIh1hVw4V3xfTu-QDRksOBtxB12Q-FzPqeNK7EzaRCTiWzDSYn18UEABxa4syvP-g5xodLG_fcudSLOx8f-DQzrMTXFI--G_eIuxjwpJ6UEQlaNjmASys5EwG4tDvlBIxPiKrtq2m00)<!-- width="70%" -->
 
 Die Klasse Bestellung umfasst zwei private Eigenschaften vom Typ Anschrift: Lieferanschrift und Rechnungsanschrift. Dabei gibt es genau eine Rechnungsanschrift, eine Lieferanschrift ist aber nicht zwingend ist. Ist keine Lieferanschrift angegeben, wird der Warenkorb an die Rechnungsanschrift ausgeliefert.
 
@@ -157,12 +159,18 @@ Die Klasse Anschrift enthält zahlreiche private Eigenschaften vom Typ `string`.
 
 Das Anforderungsset des Kunden beschreibt 3 Zahlungsmethoden für die Abrechnung der Bestellung: Bankeinzug, Nachnahme, Vorauskasse. Lediglich im Falle des Bankeinzuges müssen weitere Daten erhoben werden. Bitte beachten Sie, das die Basisklasse Zahlungsmethode als abstrakte Klasse definiert wurde, um zu vermeiden, dass davon (sinnlose) Instanzen gebildet werden können.
 
-![](https://www.plantuml.com/plantuml/png/TOxFIWCn4CRlUOe1RyAMUYqYRHMaABqKF2WUPhFJPjXa8fF9fTety-QBwLfgfT1RliptvpSjXcerHLTwbZTKJE0ZbZ8pKswhqS9dMV6MOEmYhGqiW_8c67Iiv8spkC0TWMVraPpxJSESYb6CLJRl3g1vP5gJeXGVbDSsWTdX-J8UZQvUtSvXMqpHstuUdZ4CwPB8GkveQBc0Usg_FeDEu2xNDfBR_SsXzCIohVkvXooMfQP4FzwLASjc-5xCPyl_UhwuFSYXoXsXuRAvWLC6TwBX-gDfO8a-28PqvloK5MlfiPGpXYEwcv9qDSLl)<!-- width="60%" -->
+![](https://www.plantuml.com/plantuml/png/TOwnIiH048RxUOe1Eo5WBI9tKP0WN7DWOJVPZDabkxCoEzkS-cPslfY9edSSfFpd_-RdsnGZjPeYb2d8AoabT95AsPffwAjnvxBimu7n2YA_65f63QCt78Aoiv05V1WONL0N6U3d6riknZ5M6O7wOahEyBTv9h-SIsBpUU0tGBp01-w_FhrUutskVMJu-DyXcJZ8eOuBs3nciImr9PxP_MmeutBksktkDBVTtLzSfk1eWvVDBPuxm5d6c_UcmHqvB-JJIlsKbMgPPiaLuAWE6vQXflWD)<!-- width="60%" -->
 
 **Und nun alles zusammen**
 
 Was bisher fehlte, war der Distributor, der, wie in unserem Use-Case Diagramm modelliert, per Benutzername und Kennwort auf den Online-Shop zugreifen möchte, um Bestell- und Kundendaten herunterzuladen. Die Klasse Distributor ist entsprechend mit den Klassen Bestellung und Land verknüpft. Diese Assoziationen drücken aus, dass der Distributor auf beliebig viele Bestellungen zugreifen kann und für mindestens ein Land verantwortlich ist, in das er Bestellungen auszuliefern hat. Die Klasse Format umfasst die Methoden zur Generierung der Ausgabeformate für die Daten, da davon ausgegangen wird, die dass die weitere Bearbeitung mit alternativen Programmen realisiert wird.
 
-![](https://www.plantuml.com/plantuml/png/RP51IyD048Nl-ok67WjRz2fIcYA281uK5BnDDcDtoMPMPcOlfJzUIsW3IQ_lUxmtZzcfeLWTijC-yIyA3X0ogZPcajfgz18AVwGZmPsBgIC8IK8cvx1L4mmssk4ROwvyq84ibexSgBuYTyxjIOto6SFQRm6-K8Zx8ksSDAmXIlenU80L-7SAaS-XUD5Nu2QFzzkneE43jMKK6h7KKpu7t6yswzMbmkX27hrVNZ1XVxg6pC-RRtp341dZGF_DfmK6zra4g_QeUjlXziWz9JxMmst-b7JyGf7hscdPd3uN6T0MyZJ2xOYxEkG_)<!-- width="100%" -->
+![](https://www.plantuml.com/plantuml/png/bLB1RjGm4BtxAwmzGS6Lk4O8TLSL0b4j5KX5uZP99ecrpbWQZpcqxBVm8zpwOymgJaftjOVcz2RptlCRZw-I04iUWmdOYPLesVU3sDOpDk8ZcIP0IdPDFTPHveh5xp0y65SGvN54hZwJO8zit1P6hBuBU-gDksNqgRgEkGvet1roz_Ythu6hJOm1WSo-s6um2OOWkFXR_ToQxc48ixcoIzk-_-tSYQXu_G16saMkYyb34X3VxEsNg7pg6FswdaCT66y6J-Zf5KmsssSJlRNmBCJhwbVqxQA3d5wasvjodtRrRcMZSnyKN5vUhEmycZ7B0AMlpPDHpRLFmhxE4jakBWinKt_2-1Xv13adl05gpPDwEdfDgHdOTrBP6uyTCim__gTU756_OJEGDj8Jkwnc8UbgTBcCBIguYqmm7j0MLAcG5EiRWiS_gEWJv3GzCorkOvA0NWvtg-LN5htJnNVASZJBzFEd2hH88yeGzLoeap0qOgTen-sZUdfn9T-PhiwXINVgTeQm0TgXf_lScvDuozBD5LARn_0F)<!-- width="100%" -->
+
+**Wie kann es weiter gehen**
+
+| GebuehrenBerechnen | Klassendiagramm |
+| ---------- | ----------- |
+|    ![SequenzDiagramm](https://www.plantuml.com/plantuml/png/RSkn2i8m48VnlKyHRiyB197QnKLmTulDNwzmkKhkylwYYrGwVl3xHlFSl5SPA5rL5eNn-g8GZu7I17E8T7rIIE6CUmStw8I6cHKwRCdkuxVCdx8AvxLWxpcfpToMXzFtk6GjV-mGuyQ57noXfLTv0m00)<!-- width="100%" -->            | ![ClassDiagramm](https://www.plantuml.com/plantuml/png/HK-nhiCm2Dpz5OpljSeFPAZIg5ANTkdOpR59R8bWoSPJrNylLXI50T1nTy1Gn6QfAnd2MK0IvBW40HypEec9pOX5aAZo0gUkky2LYmivpjB32rrW7HIxOyQHBGKEpSU0nlcEKyMGaKVCJOJyzz_VKfq8DyA2yhQ1cjaJ9IIFIjYHTKFCTxC_Jb3tZYpx_g79j3NIEfMselm1sUjpFm00)<!-- width="100%" -->           |
 
 [^UMLTutorial]: Boris Schäling, "Der moderne Softwareentwicklungsprozess mit UML, Kapitel 3: Das Aktivitätsdiagramm" http://www.highscore.de/uml/titelseite.html
