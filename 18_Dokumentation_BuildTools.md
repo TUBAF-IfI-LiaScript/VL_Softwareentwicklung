@@ -24,7 +24,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 | Parameter                | Kursinformationen                                                                                        |
 | ------------------------ | -------------------------------------------------------------------------------------------------------- |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                          |
-| **Teil:**                | `17/27`                                                                                                   |
+| **Teil:**                | `18/27`                                                                                                   |
 | **Semester**             | @config.semester                                                                                         |
 | **Hochschule:**          | @config.university                                                                                       |
 | **Inhalte:**             | @comment                                                                                                 |
