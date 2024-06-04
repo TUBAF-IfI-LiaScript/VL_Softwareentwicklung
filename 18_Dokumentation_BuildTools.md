@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.7
+version:  1.0.8
 language: de
 narrator: Deutsch Female
 comment:  Ziele von Dokumentation, Build Tools dotnet, MSBuild und Make
@@ -17,14 +17,14 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/17_Dokumentation_BuildTools.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/18_Dokumentation_BuildTools.md)
 
 # Dokumentation und Build-Tools
 
 | Parameter                | Kursinformationen                                                                                        |
 | ------------------------ | -------------------------------------------------------------------------------------------------------- |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                          |
-| **Teil:**                | `17/27`                                                                                                   |
+| **Teil:**                | `18/27`                                                                                                   |
 | **Semester**             | @config.semester                                                                                         |
 | **Hochschule:**          | @config.university                                                                                       |
 | **Inhalte:**             | @comment                                                                                                 |
@@ -35,9 +35,13 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
+## Praktische Prüfungsleistung
+
+https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2024_Projektaufgaben/tree/main
+
 ## Neues aus der Github-Woche
 
-Wie stark arbeiten Sie kollaborativ und kooperativ?
+> Forschungsfrage: Arbeiten Studentische Teams kollaborativ oder kooperativ? Können wir als Lehrende dieses Verhalten beeinflussen?
 
 <!--data-type="none"-->
 | TeamID | author_A                                          | author_B                                          | CollaborationRatio |
@@ -60,22 +64,37 @@ Wie stark arbeiten Sie kollaborativ und kooperativ?
 | 16     | NaN                                               | NaN                                               | 0.00               |
 | 17     | [Aufgabe04.csproj, Program.cs, daten_speichern... | [.gitignore, Computer.cs, Program.cs, Archive.cs] | 0.16               |
 
+> Welche Vorteile / Probeleme sehen Sie in diesen Mustern der Zusammenarbeit der Teams?
+
+!?[](https://www.youtube.com/watch?v=hlUD6uOJ5j4)
+
 ## Dokumentation
 
 **Wer braucht schon eine Doku?**
 
-> *Eine Softwaredokumentation ist mangelhaft, wenn in ihr in nennenswertem Umfang Bildschirmdialoge nicht (mehr) aktuell sind, nicht mit den im Programm vorhandenen Dialogen übereinstimmen oder gar nicht dokumentiert sind. ... Eine Softwaredokumentation ist mangelhaft, wenn sie den Anwender nicht in die Lage versetzt, die Software im Bedarfsfalle erneut oder auf einer anderen Anlage zu installieren.* [LG Bonn, 19.12.2003]
+> *Eine Softwaredokumentation ist mangelhaft, wenn ihre Inhale in einem nennenswertem Umfang nicht (mehr) aktuell sind, nicht mit den im Programm vorhandenen Dialogen übereinstimmen oder gar nicht dokumentiert sind. ... Eine Softwaredokumentation ist mangelhaft, wenn sie den Anwender nicht in die Lage versetzt, die Software im Bedarfsfalle erneut oder auf einer anderen Anlage zu installieren.* [LG Bonn, 19.12.2003]
 
 Als Softwaredokumentation bezeichnet man die Beschreibung einer Software für
-Entwickler, Anwender und Benutzer. Entsprechend den unterschiedlichen Rollen,
+Entwickler, Anwender oder Benutzer. Entsprechend den unterschiedlichen Rollen,
 wird erläutert, wie die Software funktioniert, was sie erzeugt und verarbeitet
 (z. B. Daten), wie sie zu benutzen ist, was zu ihrem Betrieb erforderlich ist
 und auf welchen Grundlagen sie entwickelt wurde.
 
-*Klassifikation 1 - Intern/Extern* ... bezieht sich dabei auf die Frage, ob das Ganze
+### Einteilung von Dokumentation
+
+                             {{0-1}}
+*******************************************************
+*Klassifikation 1 - Intern/Extern* 
+
+... bezieht sich dabei auf die Frage, ob das Ganze
 für den internen Gebrauch oder den externen Gebrauch, also zur Weitergabe an
 Kunden, realisiert werden muss. Letztgenannte Variante unterliegt einer Vielzahl
 von rechtlichen Normierungen und Standards!
+
+*******************************************************
+
+                             {{1-2}}
+*******************************************************
 
 *Klassifikation 2 - Inhalt*
 
@@ -87,9 +106,14 @@ von rechtlichen Normierungen und Standards!
 | Testdokumentation          | Nachweis von Testfällen, mit denen die ordnungsgemäße Funktion jeder Version des Produkts getestet werden können, sowie Verfahren und Szenarien, mit denen in der Vergangenheit erfolgreich die Richtigkeit überprüft wurde.                                                                                                                                                                                                                                                                                                                                                                            |
 | Entwicklungsdokumentation  | Nachweis der einzelnen Versionen auf Grund von Veränderungen, der jeweils zugrundegelegten Ziele und Anforderungen und der als Vorgaben benutzten Konzepte (z. B. in Lastenheften und Pflichtenheften); beteiligte Personen und Organisationseinheiten; erfolgreiche und erfolglose Entwicklungsrichtungen; Planungs- und Entscheidungsunterlagen etc.                                                                                                                                                                                                                                                  |
 
-Häufig fasst ein Projekt alle Arten der Dokumentation gleichermaßen zusammen. Im folgenden soll zum Beispiel die Implementierung der avrlibc für Mikrocontroller der AtTiny, AtMega und XMega Familie auf die entsprechenden Beiträge hin untersucht werden.
+> Häufig fasst ein Projekt alle Arten der Dokumentation gleichermaßen zusammen. Im folgenden soll zum Beispiel die Implementierung der avrlibc für Mikrocontroller der AtTiny, AtMega und XMega Familie auf die entsprechenden Beiträge hin untersucht werden.
+> https://www.nongnu.org/avr-libc/
 
-https://www.nongnu.org/avr-libc/
+
+*******************************************************
+
+                             {{2-3}}
+*******************************************************
 
 *Klassifikation 3 - Autoren*
 
@@ -104,6 +128,14 @@ Technischer Redakteur:
 + fehlendes technisches Detailwissen, dichter am Wissensstand des Kunden
 + geeignetes Abstraktionsvermögen
 + erfahren im Dokumentenmanagement
+
+*******************************************************
+
+### Analyse des Bedarfes
+
+> E. Aghajani et al., "Software Documentation: The Practitioners' Perspective," 2020 IEEE/ACM 42nd International Conference on Software Engineering (ICSE), Seoul, Korea (South), 2020, pp. 590-601.
+
+https://emadpres.github.io/pdfs/icse2020.pdf
 
 ### Programmiererdokumentation
 
@@ -150,7 +182,11 @@ Auch die Benutzerdokumentation muss einer starken Zielgruppenorientierung unterl
 + Referenzkarte (auch als Cheat-Sheets bezeichnet)
 + Benutzer-Leitfaden
 
-vgl. zum Beispiel Python Pandas [Cheat Sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf)
+> Beispiele:
+> 
+> - Python Pandas [Cheat Sheet](https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf)
+> - Python Paket PyGithub [Dokumentation](https://pygithub.readthedocs.io/en/stable/index.html)
+
 
 ### Realisierung der Dokumentation in Csharp
 
@@ -537,7 +573,7 @@ verwenden, um die Beschreibung effizienter und kompakter zu gestalten. Ein
 typisches Makefile für eine eingebettetes C Projekt (Arduino) stellt sich wie
 folgt dar:
 
-```console
+```console   Makefile
 # Source, Executable, Includes, Library Defines
 INCL   = loop.h defs.h
 SRC    = a.c b.c d.c      # c Code-Dateien
