@@ -72,7 +72,7 @@ https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2024_Proj
 
 **Wer braucht schon eine Doku?**
 
-> *Eine Softwaredokumentation ist mangelhaft, wenn ihre Inhale in einem nennenswertem Umfang nicht (mehr) aktuell sind, nicht mit den im Programm vorhandenen Dialogen übereinstimmen oder gar nicht dokumentiert sind. ... Eine Softwaredokumentation ist mangelhaft, wenn sie den Anwender nicht in die Lage versetzt, die Software im Bedarfsfalle erneut oder auf einer anderen Anlage zu installieren.* [LG Bonn, 19.12.2003]
+> *Eine Softwaredokumentation ist mangelhaft, wenn ihre Inhalte in einem nennenswertem Umfang nicht (mehr) aktuell sind, nicht mit den im Programm vorhandenen Dialogen übereinstimmen oder gar nicht dokumentiert sind. ... Eine Softwaredokumentation ist mangelhaft, wenn sie den Anwender nicht in die Lage versetzt, die Software im Bedarfsfalle erneut oder auf einer anderen Anlage zu installieren.* [LG Bonn, 19.12.2003]
 
 Als Softwaredokumentation bezeichnet man die Beschreibung einer Software für
 Entwickler, Anwender oder Benutzer. Entsprechend den unterschiedlichen Rollen,
@@ -153,7 +153,7 @@ davon bedienen wollen. Aus dieser Fragestellung ergeben sich die Schwerpunkte
 der Dokumentationsarbeit:
 
 + Praktiker ... starker Bezug zur Umsetzung, benötigt Code-Kommentare, Code-Beispiele
-+ Systematiker ... liest zuerst einmal die Grundlagen, bemüht sich alle Hintergrundinfo zu API/Framework, zu erfassen. benötigt Architekturbeschreibung, Konzepte allgemeiner Programmieraufgaben (Error handling, Lokalisierung &Co.)
++ Systematiker ... liest zuerst einmal die Grundlagen, bemüht sich alle Hintergrundinfo zu API/Framework, zu erfassen. Benötigt Architekturbeschreibung, Konzepte allgemeiner Programmieraufgaben (Error handling, Lokalisierung &Co.)
 + Bedarfsleser ... situationsgetriebene Auswertung der Dokumentation, erwartet Antworten auf spezifische Fragen, benötigt Code-Kommentare, Hintergrundinformationen und Code-Beispiele
 
 ![Modelle](https://www.plantuml.com/plantuml/png/XP1FRzD04CNl-oc6NDfAiKq27AXGL2ino6fIgZXHuOJMzjXPTVz4Esj2-VHuRLACP2cdrRxvpNkZTqUEMzSeoQwMvlXYHNrmC7yx-mYnuh-D3WkZff3g8WHZGJW2NbL22kwGGeYbXArV8TWYeVs9PSYkiiVLjs0j2jI4GLgYTg8IQ6zXa-xW-dFhKwBZGj8K214EpXtfDefguGvDxWCZVYB9S_9l80gZAQYC3OwIQtzgb4kJHugJGnkjqsNoa2KtZBqHkf1DYV39huiyYf-ofL7AwCNeB1FgAFrbvM9a-Gjgj5n6Uq9BBT2zr_iisSwcC16wpMu1YFK9TObsqeemkHbWyrR1NnUnTqEtHBkJA9xb6FY-zxiCVcYL3TUyHeNQdUUiuBRyUqUZQy9N1-04oSFkALtUhvCjguH4Y1_J7olpt7W7xeJH7bfzlT_F-ddsGWvLEKRC6JbZUNs6l9vzptR9Xh6kFWY2nJ2mQs5CxCa-jMjq-7zTwZExXiR-v-okcG70sByq2CCpzh_OPOreStRdQrJo3m00)
@@ -243,7 +243,7 @@ public class Program
 Über entsprechende Tags lassen sich den Dokumentationsfragmenten Bedeutungen
 geben, die eine entsprechende Gliederung und Zuordnung erlaubt:
 
-| Tag           | Erlärung                                                                              |
+| Tag           | Erklärung                                                                              |
 | ------------- | ------------------------------------------------------------------------------------- |
 | `<summary>`   | Umfasst kurze Informationen über einen Typ oder Member.                               |
 | `<remarks>`   | Ergänzt weiterführende Informationen zu Typen und Membern.                            |
@@ -347,7 +347,7 @@ public static int Add(int a, int b)
 }
 ```
 
-> Anmerkung: Leider funktioniert dieser Mechanismus unter dem gleich vorzustellen Tool Doxygen nicht.
+> Anmerkung: Leider funktioniert dieser Mechanismus unter dem gleich vorzustellendem Tool Doxygen nicht.
 
 **Konkrete Umsetzung mit C\#**
 
@@ -510,7 +510,7 @@ XML-Basiertheit wird MSBuild auch als Auszeichnungssprache eingeordnet.
 
 Innerhalb der xml-Struktur definieren Sie sogenannte Targets als Einsprungpunkte
 für den Erstellungsprozess. Im Beispiel sind dies zunächst nur HelloWorld-Ausgaben,
-im Weiteren wirde dies auf konkrete Kompiliervorgänge ausgeweitet.
+im Weiteren wurde dies auf konkrete Kompiliervorgänge ausgeweitet.
 
 Ein spezifisches Target kann mit `msbuild filename /t:targetname` aufgerufen
 werden.
@@ -552,10 +552,10 @@ https://docs.microsoft.com/de-de/visualstudio/msbuild/msbuild?view=vs-2019
 
 ### Make
 
-`make` wird  beispielsweise, um in Projekten, die aus vielen verschiedenen
+`make` wird  beispielsweise verwendet, um in Projekten, die aus vielen verschiedenen
 Dateien mit Quellcode bestehen, automatisiert alle Arbeitsschritte (Übersetzung,
-Linken, Dateien kopieren etc.) zu steuern, bis hin zum fertigen, ausführbaren
-Programm.
+Linken, Dateien kopieren etc.) zu steuern, bis hin zum Fertigen von ausführbaren
+Programmen.
 
 `make` liest ein sogenanntes *Makefile* (ACHTUNG Großschreibung erforderlich) und
 realisiert den beschriebenen Übersetzungsprozesses entsprechend der Abhängigkeiten.
