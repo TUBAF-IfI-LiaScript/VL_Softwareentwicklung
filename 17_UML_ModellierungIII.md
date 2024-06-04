@@ -44,7 +44,7 @@ Hier sind auch weitergehende Informationen und Designdiskussionen zu finden.  Di
 Texte sind jeweils in kursiver Schrift gehalten, Ergänzungen für die Einbettung
 in dieser Vorlesung entsprechend hervorgehoben. Ein zusätzliches Durcharbeiten der Originalunterlagen wird empfohlen.
 
-Der Anforderungskatalog an den beispielhaft zur realisierenden Onlineshop gliedert sich wie folgt:
+Der Anforderungskatalog an den beispielhaft zu realisierenden Onlineshop gliedert sich wie folgt:
 
 + *Alle im Online-Shop erhältlichen Artikel besitzen eine eindeutige Artikelnummer, einen Namen und einen Preis. Außerdem sollen Artikel aus dem Angebot entfernt werden können, ohne ihre Daten aus dem System zu löschen.*
 
@@ -112,7 +112,7 @@ darstellen:
 | ---------- | ----------- |
 |    ![UseCaseOnlineShopIII](https://www.plantuml.com/plantuml/png/PSzD2i8m40NWVKuHkimHTDFk54G5mVtOFfj2CfN9547nB6wyIIzcK3V1vNppmxmwAObECHX1gyHzWAsSQpYrNeQpMWpSumIsQ-Ugk_cCcuLjMD31qfIkyyi7y3BZSHIc2FujVN5BhV_NWmhDJnIsojTuYX5Iy7vC6Z3eZNme6ZlHejuGTyL7ISUBUPWQtEM4Rm00)<!-- width="100%" -->            | ![UseCaseOnlineShopIII](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuIfAJIv9p4lFILLGqj9op2jEpYZAJ2jHICtCIqzDIirJyFJKqbAgvWAhvqhBByfMuB9ISCmhIar9LKWiBIu_l2GZ9pNFcai1B9UOdfYP1r8Hbb-KbvYRcWSp25E5Ns9o1W4bmIL5YOVdf-9MeAUdPysLcfS24GOwCh-0gvRB0IW2z1e0)<!-- width="100%" -->           |
 
-UML 2 für eine stärkere Differenzierung in die Aktivitätsdiagramme ein. Was sind
+UML 2 führt eine stärkere Differenzierung in die Aktivitätsdiagramme ein. Was sind
 die Hauptmerkmale?
 
 Leider Unterstützt *plantUML* die Features diese Feature noch nicht, so dass hier
