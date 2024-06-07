@@ -234,7 +234,7 @@ style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-r
 
 **Beispiel**
 
-![Aktivitätsdiagramme](./img/14_UML_II/ActivityDiagram.png "Beispiel eines Anwendungsfall Diagramms [^WikiActivityDiagram]")
+![Aktivitätsdiagramme](./img/14_UML_II/ActivityDiagram.png "Beispiel eines Aktivitätsdiagramms [^WikiActivityDiagram]")
 
 **Anwendung**
 
@@ -252,12 +252,12 @@ style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-r
 
 Ein Sequenzdiagramms besteht aus einem Kopf- und einem Inhaltsbereich. Von jedem Kommunikationspartner geht eine **Lebenslinie** (gestrichelt) aus. 
 
-Eine Nachricht wird in einem Sequenzdiagramm durch einen Pfeil dargestellt, wobei der Name der Nachricht über den Pfeil geschrieben wird. Nachrichten können:
+Eine Nachricht wird in einem Sequenzdiagramm durch einen Pfeil dargestellt, wobei der Name der Nachricht über den Pfeil geschrieben wird. Nachrichten können sein:
 
-+ Operationsaufrufe einer Klasse sein
++ Operationsaufrufe einer Klasse
 + Ergebnisse einer Operation, Antwortsnachricht (gestrichelte Linien)
 + Signale
-+ Interaktionen mit dem Nutzern
++ Interaktionen mit den Nutzern
 + das Setzen einer Variablen
 
 Für synchrone und asynchrone Operationsaufrufe (Nachrichten) gibt es verschiedene Notationsvarianten.
@@ -383,12 +383,12 @@ Mit Schlüsselwörtern können zusätzliche Informationen oder Meta-Eigenschafte
 
 Elemente der Darstellung :
 
-| Eigenschaften | Bedeutung                                                                    |
-| ------------- | ---------------------------------------------------------------------------- |
-| Attribute     | beschreiben die Struktur der Objekte: Bestandteile und darin enthalten Daten |
-| Operationen   | Beschreiben das Verhalten der Objekte (Methoden)                             |
-| Zusicherungen | Bedingungen, Voraussetzungen und Regeln, die die Objekte erfüllen müssen     |
-| Beziehungen   | Beziehungen einer Klasse zu anderen Klassen                                  |
+| Eigenschaften | Bedeutung                                                                         |
+| ------------- | --------------------------------------------------------------------------------- |
+| Attribute     | Beschreiben die Struktur der Objekte: die Bestandteile und darin enthaltene Daten |
+| Operationen   | Beschreiben das Verhalten der Objekte (Methoden)                                  |
+| Zusicherungen | Bedingungen, Voraussetzungen und Regeln, die die Objekte erfüllen müssen          |
+| Beziehungen   | Beziehungen einer Klasse zu anderen Klassen                                       |
 
 Wenn die Klasse keine Eigenschaften oder Operationen besitzt, können die entspechenden Abschnitte wegfallen.
 
@@ -440,12 +440,12 @@ class Zähler{
 Ausführbarer Code in Python 2
 
 ```python KlasseMitUmlaut.py
-class Zähler:
+class Zaehler:
     """A simple example class"""
     i = 12345
 
-A = Zähler()
-print(A.i)
+A = Zaehler()
+print A.i
 ```
 @LIA.evalWithDebug(`["main.py"]`, `python2.7 -m compileall .`, `python2.7 main.pyc`)
 
