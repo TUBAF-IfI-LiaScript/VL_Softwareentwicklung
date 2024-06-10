@@ -13,6 +13,53 @@ import: https://github.com/liascript/CodeRunner
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
+
+@style
+.flex-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows the items to wrap as needed */
+    align-items: stretch;
+}
+
+.flex-child,
+.flex-child-1 { flex: 1; }
+.flex-child-2 { flex: 2; }
+.flex-child-3 { flex: 3; }
+.flex-child-4 { flex: 4; }
+.flex-child-5 { flex: 5; }
+.flex-child-6 { flex: 6; }
+.flex-child-7 { flex: 7; }
+.flex-child-8 { flex: 8; }
+
+.flex-child,
+.flex-child-1,
+.flex-child-2,
+.flex-child-3,
+.flex-child-4,
+.flex-child-5,
+.flex-child-6,
+.flex-child-7,
+.flex-child-8 {
+    margin-right: 20px; /* Adds space between the columns */
+}
+
+@media (max-width: 600px) {
+    .flex-child,
+    .flex-child-1,
+    .flex-child-2,
+    .flex-child-3,
+    .flex-child-4,
+    .flex-child-5,
+    .flex-child-6,
+    .flex-child-7,
+    .flex-child-8 {
+        flex: 100%; /* Makes the child divs take up the full width on slim devices */
+        margin-right: 0; /* Removes the right margin */
+    }
+}
+@end
+
+
 -->
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/18_ContinuousIntegration.md)
@@ -22,7 +69,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 | Parameter                | Kursinformationen                                                                                     |
 | ------------------------ | ----------------------------------------------------------------------------------------------------- |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                       |
-| **Teil:**                | `18/27`                                                                                                |
+| **Teil:**                | `20/27`                                                                                                |
 | **Semester**             | @config.semester                                                                                      |
 | **Hochschule:**          | @config.university                                                                                    |
 | **Inhalte:**             | @comment                                                                                              |
@@ -94,9 +141,143 @@ Das übergreifende Datenformat macht die Nachvollziehbarkeit von Code Änderunge
 
 > **Merke:** Jupyter Notebooks sind ein hervorragendes Werkzeug für schnelle Prototypen, API-Dokumentationen oder Vorträge mit Live Hacks aber ungeeignet für Projekte [persönliche Meinung des Vortragenden :-)].
 
-> **Hinweis:** Eine Beschreibung der Installationsprozedur für einen C#-Kernel finden Sie unter [Link](https://devblogs.microsoft.com/dotnet/net-core-with-juypter-notebooks-is-here-preview-1/)
+> **Hinweis:** Eine Beschreibung der Installationsprozedur für einen C#-Kernel finden Sie unter [Link](https://github.com/dotnet/interactive)
 
 > **Hinweis:** Deutlich einfacher ist die Installation mit dem VSC Plugin "Polyglot Notebooks".
+
+## Exkurs: Konfigurationsfiles 
+
+> Wie strukturieren wir abstrakte Daten / Informationen?
+
+| Merkmal                    | TXT                           | YAML                                    | JSON                            | XML                                  |
+| -------------------------- | ----------------------------- | --------------------------------------- | ------------------------------- | ------------------------------------ |
+| **Beschreibung**           | Unstrukturierter Text         | Mensch lesbares Datenformat             | Leichtgewichtiges Datenformat   | Markup-Sprache zur Datenbeschreibung |
+| **Struktur**               | Keine spezielle Struktur      | Hierarchisch, Einrückung basiert        | Hierarchisch, Schlüssel-Wert    | Hierarchisch, durch Tags definiert   |
+| **Lesbarkeit**             | Sehr hoch                     | Sehr hoch                               | Mittel bis hoch                 | Mittel bis hoch                      |
+| **Schreibbarkeit**         | Sehr hoch                     | Hoch                                    | Mittel bis hoch                 | Mittel                               |
+| **Format**                 | Plaintext                     | Schlüssel-Wert-Paare                    | Schlüssel-Wert-Paare            | Tags umschließen Inhalte             |
+| **Dateiendung**            | .txt                          | .yaml, .yml                             | .json                           | .xml                                 |
+| **Kommentare**             | Keine Standardkommentare      | # für Kommentare                        | Keine Kommentare                | <!-- Kommentar -->                   |
+| **Support für Datentypen** | Text                          | Verschiedene Datentypen                 | Verschiedene Datentypen         | Verschiedene Datentypen              |
+| **Parser**                 | Keine speziellen Parser nötig | YAML-Parser erforderlich                | JSON-Parser erforderlich        | XML-Parser erforderlich              |
+
+
+<section class="flex-container">
+
+<div class="flex-child" style="min-width: 300px">
+
+```yaml beispiel.yaml
+person:
+  name: John Doe
+  age: 30
+  address:
+    street: 123 Main St
+    city: Anytown
+    state: CA
+    postalCode: 12345
+  phoneNumbers:
+    - type: home
+      number: "123-456-7890"
+    - type: work
+      number: "098-765-4321"
+```
+
+</div>
+
+
+<div class="flex-child" style="min-width: 300px">
+
+```json   beispiel.json
+{
+  "person": {
+    "name": "John Doe",
+    "age": 30,
+    "address": {
+      "street": "123 Main St",
+      "city": "Anytown",
+      "state": "CA",
+      "postalCode": "12345"
+    },
+    "phoneNumbers": [
+      {
+        "type": "home",
+        "number": "123-456-7890"
+      },
+      {
+        "type": "work",
+        "number": "098-765-4321"
+      }
+    ]
+  }
+}
+```
+
+</div>
+
+
+<div class="flex-child" style="min-width: 300px">
+
+```xml  beispiel.xml
+<person>
+  <name>John Doe</name>
+  <age>30</age>
+  <address>
+    <street>123 Main St</street>
+    <city>Anytown</city>
+    <state>CA</state>
+    <postalCode>12345</postalCode>
+  </address>
+  <phoneNumbers>
+    <phoneNumber>
+      <type>home</type>
+      <number>123-456-7890</number>
+    </phoneNumber>
+    <phoneNumber>
+      <type>work</type>
+      <number>098-765-4321</number>
+    </phoneNumber>
+  </phoneNumbers>
+</person>
+```
+
+</div>
+
+
+</section>
+
+**Beispielanwendung**
+
+```text data.yaml
+person:
+  name: John Doe
+  age: 30
+  address:
+    street: 123 Main St
+    city: Anytown
+    state: CA
+    postalCode: 12345
+  phoneNumbers:
+    - type: home
+      number: "123-456-7890"
+    - type: work
+      number: "098-765-4321"
+```
+```python readYAML.py
+import yaml
+
+# Datei öffnen und die YAML-Daten laden
+with open('data.yaml', 'r') as file:
+    data = yaml.safe_load(file)
+
+# Greife auf die Daten zu und verarbeite sie
+print(f"Name: {data['person']['name']}")
+print(f"Age: {data['person']['age']}")
+print(f"Address: {data['person']['address']['street']}, {data['person']['address']['city']}, {data['person']['address']['state']} {data['person']['address']['postalCode']}")
+print("Phone Numbers:")
+for phone in data['person']['phoneNumbers']:
+    print(f"  {phone['type']}: {phone['number']}")
+```
+@LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
 
 
 ## Continuous integration (CI)
@@ -141,6 +322,38 @@ Damit ergeben sich folgende Aktivitäten, die für einen CI Realisierung benöti
 * Darstellung von Build-Resultaten und Artifacts
 
 > Merke: Unterschätzen Sie den Aufwand für die Realisierung und Wartung der Tool-Chain nicht. Häufig müssen hier zu Beginn des Projektes grundsätzliche Entscheidungen getroffen werden, die zumindest mittelfristige Auswirkungen auf das Projekt haben.
+
+## Continuous Deployment
+
+Continuous Deployment (CD) ist ein Softwareentwicklungsprozess, der darauf abzielt, Codeänderungen automatisch und kontinuierlich in die Produktionsumgebung zu integrieren und bereitzustellen. Dies geschieht oft ohne menschliches Eingreifen, sobald der Code durch automatisierte Tests und andere Qualitätssicherungsmaßnahmen validiert wurde.
+
+![](https://upload.wikimedia.org/wikipedia/commons/c/c3/Continuous_Delivery_process_diagram.svg "Beispielhafter schematischer Ablauf einer Continous Delivery Pipeline - Autor Grégoire Détrez, original by Jez Humble, Wikmedia [Link](https://commons.wikimedia.org/wiki/File:Continuous_Delivery_process_diagram.svg) Creative Commons Attribution-Share Alike 4.0 International")
+
+
+Die Hauptmerkmale von Continuous Deployment sind:
+
++ Automatisierung: Der gesamte Prozess, von der Codeänderung bis zur Bereitstellung in der Produktionsumgebung, ist stark automatisiert. Dies umfasst den Code-Commit, das Bauen der Anwendung, das Testen und schließlich das Deployment.
+
++ Häufige Releases: Änderungen werden kontinuierlich und in kleinen, häufigen Schritten in die Produktion gebracht. Dies führt zu schnelleren Release-Zyklen und kürzeren Feedback-Schleifen.
+
++ Qualitätssicherung: Um sicherzustellen, dass nur qualitativ hochwertiger Code in die Produktion gelangt, werden umfangreiche automatisierte Tests und andere Validierungsprozesse eingesetzt. Dies kann Unit-Tests, Integrationstests, End-to-End-Tests und andere Qualitätskontrollen umfassen.
+
++ Schnelles Feedback: Entwickler erhalten schneller Feedback zu ihren Änderungen, da diese schnell in der Produktion verfügbar sind. Dies erleichtert das schnelle Erkennen und Beheben von Fehlern.
+
+> Continuous Deployment baut auf der Praxis der Continuous Integration auf, bei der Codeänderungen regelmäßig in ein gemeinsames Repository integriert und getestet werden.
+
+Techniken des CD sind:
+
++ Blue-Green Deployment (harter Wechsel zwischen zwei Produktionsumgebung)
++ Canary Deployment (Selektives Ausrollen der neuen Version)
+
+## DevOps
+
+DevOps betrachtet den gesamten Softwareentwicklungs- und Bereitstellungsprozess, von der Planung und Codierung bis zum Testen, Bereitstellen und Betrieb.
+
++ DevOps ist ein umfassenderer Ansatz, der die Kultur, Praktiken und Werkzeuge umfasst, um die Zusammenarbeit zwischen Entwicklungs- und Betriebsteams zu verbessern und die Softwarebereitstellung zu optimieren.
++ CI/CD sind spezifische Praktiken innerhalb von DevOps, die sich auf die Automatisierung der Integration und Bereitstellung von Codeänderungen konzentrieren.
+
 
 ## CI Umsetzung mit GitHub
 
