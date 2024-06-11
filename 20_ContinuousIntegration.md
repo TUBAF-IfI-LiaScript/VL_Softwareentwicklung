@@ -157,7 +157,7 @@ Das übergreifende Datenformat macht die Nachvollziehbarkeit von Code Änderunge
 | **Schreibbarkeit**         | Sehr hoch                     | Hoch                                    | Mittel bis hoch                 | Mittel                               |
 | **Format**                 | Plaintext                     | Schlüssel-Wert-Paare                    | Schlüssel-Wert-Paare            | Tags umschließen Inhalte             |
 | **Dateiendung**            | .txt                          | .yaml, .yml                             | .json                           | .xml                                 |
-| **Kommentare**             | Keine Standardkommentare      | # für Kommentare                        | Keine Kommentare                | <!-- Kommentar -->                   |
+| **Kommentare**             | Keine Standardkommentare      | # für Kommentare                        | Keine Kommentare                | <! -- Kommentar -->                  |
 | **Support für Datentypen** | Text                          | Verschiedene Datentypen                 | Verschiedene Datentypen         | Verschiedene Datentypen              |
 | **Parser**                 | Keine speziellen Parser nötig | YAML-Parser erforderlich                | JSON-Parser erforderlich        | XML-Parser erforderlich              |
 
