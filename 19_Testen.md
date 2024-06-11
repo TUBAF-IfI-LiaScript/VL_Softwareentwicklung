@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.8
+version:  1.0.9
 language: de
 narrator: Deutsch Female
 comment:  Softwarefehler, Testen zur Qualitätssicherung, Planung von Tests, Konzepte und Umsetzung in dotnet
@@ -11,21 +11,19 @@ logo:
 title: Software-Testen
 
 import: https://github.com/liascript/CodeRunner
-        https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
-        https://raw.githubusercontent.com/liaTemplates/ExplainGit/master/README.md
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/16_Testen.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/19_Testen.md)
 
 # Testen von Software
 
 | Parameter                | Kursinformationen                                                                      |
 | ------------------------ | -------------------------------------------------------------------------------------- |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                        |
-| **Teil:**                | `16/27`                                                                                 |
+| **Teil:**                | `19/27`                                                                                 |
 | **Semester**             | @config.semester                                                                       |
 | **Hochschule:**          | @config.university                                                                     |
 | **Inhalte:**             | @comment                                                                               |
@@ -56,6 +54,7 @@ Entsprechend brauchen wir ein Tool, mit dem wir die Abhängigkeiten UND den eige
 `NuGet` löst diese Aufgabe für .NET und schließt auch gleich die Mechanismen zur Freigabe von Code ein. NuGet definiert dabei, wie Pakete für .NET erstellt, gehostet und verarbeitet werden.
 
 Ein `NuGet`-Paket ist eine gepackte Datei mit der Erweiterung `.nupkg` die:
+
 + den kompilierten Code (DLLs),
 + ein beschreibendes Manifest, in dem Informationen wie die Versionsnummer des Pakets, ggf. der Speicherort des Source Codes oder die Projektwebseite enthalten sind sowie
 + die Abhängigkeiten von anderen Paketen und dessen Versionen
@@ -86,7 +85,7 @@ Danach findet sich in unserer Projektdatei `.csproj` ein entsprechender Eintrag
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -123,7 +122,7 @@ class Program
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MathNet.Symbolics" Version="0.24.0" />
@@ -301,11 +300,13 @@ Welche Unterschiede sehen Sie in den Definitionen?
 
 [^Pol]: Martin Pol, Tim Koomen, Andreas Spillner: Management und Optimierung des Testprozesses. Ein praktischer Leitfaden für erfolgreiches Testen von Software mit TPI und TMap. 2., aktualisierte Auflage. dpunkt.Verlag, Heidelberg 2002, ISBN 3-89864-156-2.
 
+> Unterschied Verifikation vs. Validierung
+>
+> + **Verifikation** ... ist der Prozess, der sicherstellt, dass ein Softwareprodukt die Spezifikationen erfüllt und korrekt implementiert wurde.
+> + **Validierung** ... ist der Prozess, der sicherstellt, dass das Softwareprodukt die Bedürfnisse des Kunden erfüllt und die richtige Software entwickelt wurde.
+
 ### Ablauf beim Testen
 
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
 ````````````
                    +------------------------------------------------+
                    |                                                |
@@ -371,8 +372,7 @@ Abbildung motivierte aus [^Liggesmeyer]
 
 **Statische Code Analysen**
 
-Statische Code-Analyse ist ein statisches
-Software-Testverfahren, das zur Übersetzungszeit durchgeführt wird. Der
+... ist ein Software-Testverfahren, das zur Übersetzungszeit durchgeführt wird. Der
 Quelltext wird hierbei einer Reihe formaler Prüfungen unterzogen, bei denen
 bestimmte Sorten von Fehlern entdeckt werden können, noch bevor die
 entsprechende Software (z. B. im Modultest) ausgeführt wird. Die Methodik gehört
@@ -389,11 +389,13 @@ bestimmt.
 
 Eine Übersicht zu den Standard-Regeln findet sich unter [Link](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/DOCUMENTATION.md).
 
-+ Codereviews ... Reviews sind manuelle Überprüfungen der Arbeitsergebnisse der Softwareentwicklung. Jedes Arbeitsergebnis kann einer Durchsicht durch eine andere Person unterzogen werden.
++ **Codereviews** ... Reviews sind manuelle Überprüfungen der Arbeitsergebnisse der Softwareentwicklung. Jedes Arbeitsergebnis kann einer Durchsicht durch eine andere Person unterzogen werden.
 
     Der untersuchte Gegenstand eines Reviews kann verschieden sein. Es wird vor
     allem zwischen einem Code-Review (Quelltext) und einem Architektur-Review
     (Softwarearchitektur, insbesondere Design-Dokumente) unterschieden.
+
++ ...
 
 **Dynamische Code Analysen**
 
@@ -404,11 +406,11 @@ Laufzeitparametern auftreten, wie variierende Eingabeparameter, Laufzeitumgebung
 oder Nutzer-Interaktion.
 Wesentliche Aufgabe der einzelnen Verfahren ist die Bestimmung geeigneter Testfälle für den Test der Software.
 
-+ strukturorientiert ... Strukturorientierte Verfahren bestimmen Testfälle auf Basis des Softwarequellcodes (Whiteboxtest). Dabei steht entweder die enthaltenen Daten oder aber die Kontrollstruktur, die die Verarbeitung der Daten steuert, im Fokus.
++ **strukturorientiert** ... Strukturorientierte Verfahren bestimmen Testfälle auf Basis des Softwarequellcodes (Whiteboxtest). Dabei steht entweder die enthaltenen Daten oder aber die Kontrollstruktur, die die Verarbeitung der Daten steuert, im Fokus.
 
-+ spezifikationsorientiert ...  die sogenannten Black-Box Verfahren werden zum Abgleich des vorgegebenen, spezifizierten und des realen Verhaltens einer Methode genutzt. Beim Modultest wird z. B. gegen die Modulspezifikation getestet, beim Schnittstellentest gegen die Schnittstellenspezifikation und beim Abnahmetest gegen die fachlichen Anforderungen, wie sie etwa in einem Pflichtenheft niedergelegt sind.
++ **spezifikationsorientiert** ...  die sogenannten Black-Box Verfahren werden zum Abgleich des vorgegebenen, spezifizierten und des realen Verhaltens einer Methode genutzt. Beim Modultest wird z. B. gegen die Modulspezifikation getestet, beim Schnittstellentest gegen die Schnittstellenspezifikation und beim Abnahmetest gegen die fachlichen Anforderungen, wie sie etwa in einem Pflichtenheft niedergelegt sind.
 
-+ diversifizierend .. Diese Tests analysieren die Ergebnisse verschiedener Versionen einer Software gegeneinander. Es findet entsprechend kein Vergleich zwischen den Testergebnissen und der Spezifikation statt! Zudem kann im Gegensatz zu den funktions- und strukturorientierten Testmethoden kein Vollständigkeitskriterium definiert werden. Die notwendigen Testdaten werden mittels einer der anderen Techniken, per Zufall oder Aufzeichnung einer Benutzer-Session erstellt.
++ **diversifizierend** .. Diese Tests analysieren die Ergebnisse verschiedener Versionen einer Software gegeneinander. Es findet entsprechend kein Vergleich zwischen den Testergebnissen und der Spezifikation statt! Zudem kann im Gegensatz zu den funktions- und strukturorientierten Testmethoden kein Vollständigkeitskriterium definiert werden. Die notwendigen Testdaten werden mittels einer der anderen Techniken, per Zufall oder Aufzeichnung einer Benutzer-Session erstellt.
 
 [^Liggesmeyer]: Peter Liggesmeyer, "Software-Qualität - Testen, Analysieren und Verifizieren von Software", Springer, 2002
 
@@ -435,6 +437,7 @@ Ein vollständiges Testen aller `int` Werte ($2^{31}$ bis $2^{31}-1$) bedeutet f
 ********************************************************************************
 
 ### Black-Box-Testing / Spezifikationsorientiert
+
 > Black-Box-Testing ... Grundlage der Testfallentwicklung ist die Spezifikation
 > des Moduls. Die Interna des Softwareelements sind nicht bekannt.
 
@@ -452,8 +455,8 @@ Problematisch ist dabei, dass spezifische Lösungen, wie zum Beispiel in folgend
 ```csharp
 static class MyMathFunctions{
   public int fak (int i){
-    if ( i==1 ) return 0;
-    elseif (i == 2) return 1;
+    if ( i==1 ) return 0;           // Fehler
+    elseif (i == 2) return 1;       // Fehler
     elseif  ... Ergebnisse für 3 und 4 ...
     elseif (i == 5) return 120;
     else return i * fak(i-1);
@@ -525,7 +528,7 @@ static class MyMathFunctions{
 }
 ```
 
-Mit dem Testfall $i = 1$ lassen sich hingegen vermeindlich $11/12 = 0.91$ der
+Mit dem Testfall $i = 1$ lassen sich hingegen vermeintlich $11/12 = 0.91$ der
 Anweisungen abdecken, die Fehleinschätzung ist aber offensichtlich. Gleichwohl
 sind die fest hinterlegten Werte aus Erfahrung heraus auch besonders anfällig
 für Copy-&-Paste-Fehler.
@@ -601,7 +604,7 @@ static class MyMathFunctions{
 
 ### Exkurs: Attribute in C#
 
-Im Folgenden werden wir Atttribute als Hilfsmittel verwenden. Entsprechend soll an dieser Stelle ein kurzer Einschub die Möglichkeiten dieser Zuordnung von Metainformationen zum C# Code verdeutlichen.
+Im Folgenden werden wir Attribute als Hilfsmittel verwenden. Entsprechend soll an dieser Stelle ein kurzer Einschub die Möglichkeiten dieser Zuordnung von Metainformationen zum C# Code verdeutlichen.
 
 Attribute erlaube es Zusatzinformationen oder Bedingungen in Code (Assemblys, Typen, Methoden, Eigenschaften usw.) einzubinden. Nach dem Zuordnen eines Attributs zu einer Programmentität kann das Attribut zur Laufzeit mit einer Technik namens Reflektion abgefragt werden.
 
