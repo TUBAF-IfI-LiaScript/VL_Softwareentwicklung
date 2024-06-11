@@ -752,7 +752,7 @@ public class Program
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Welche Funktionalität fehlt Ihnen in diesem Setup? Welche weitergehenden Features
-würden Sie für unsere Testmethoden vorschlagen.
+würden Sie für unsere Testmethoden vorschlagen?
 
 ### Idee 2: Test-Frameworks
 
