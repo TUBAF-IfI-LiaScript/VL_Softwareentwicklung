@@ -136,7 +136,7 @@ int main()
     return 0;
 }
 ```
-@LIA.eval(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
+@LIA.evalWithDebug(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
 ### Grundidee
 
@@ -232,7 +232,7 @@ deutlich? Handelt es sich bei `notifyMe` wirklich nur um eine Methode?
 *******************************************************************************
 Delegattypen werden von der `Delegate`-Klasse im .NET Framework abgeleitet.
 
-https://docs.microsoft.com/de-de/dotnet/api/system.delegate?view=netframework-4.8
+https://learn.microsoft.com/de-de/dotnet/api/system.delegate?view=net-9.0
 
 Wenn der C#-Compiler Delegiertentypen verarbeitet, erzeugt er automatisch eine versiegelte Klassenableitung aus `System.MulticastDelegate`. Diese Klasse (in Verbindung mit ihrer Basisklasse, `System.Delegate`) stellt die notwendige Infrastruktur zur Verfügung, damit der Delegierte eine Liste von Methoden vorhalten kann. Der Compiler erzeugt insbesondere drei Methoden, um diese  aufzurufen:
 
@@ -323,7 +323,7 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-> Merke: Der Rückgabewert des Aufrufes entspricht dem der letzten Methode.
+> **Merke:** Es werden alle referenzierten Methoden ausgeführt - der Rückgabewert des Aufrufes entspricht dem der letzten Methode.
 
 
 ### Schnittstellen vs. Delegaten
