@@ -95,7 +95,7 @@ definiert haben.
 
   VideoEncodingService myMovie = new VideoEncodingService("007.mpeg",
                                                           "12321",
-                                                          triggerMe);
+                                                          TriggerMe);
 ```
 
 > In C würden wir an dieser Stelle von einem Funktionspointer sprechen.
@@ -140,7 +140,7 @@ int main()
 
 ### Grundidee
 
-> Merke: Ein Delegat ist eine Methodentyp und dient zur Deklaration von Variablen,
+> Merke: Ein Delegat ist ein Methodentyp und dient zur Deklaration von Variablen,
 > die auf eine Methode verweisen.
 
 Für die Anwendung sind drei Vorgänge nötig:
@@ -249,7 +249,7 @@ sealed class Transformer : System.MulticastDelegate
   ...
   public int Invoke(int x);
   public IAsyncResult BeginInvoke(int x, AsyncCallback cb, object state);
-  public int EndInvoke(IAsyncResult resut);
+  public int EndInvoke(IAsyncResult result);
   ...
 }
 ```
@@ -362,7 +362,7 @@ Methode zur Methodensignatur des Delegaten passt.
 | repräsentiert eine Methodensignatur                                                                  | wenn eine Klasse eine Schnittstelle implementiert, dann implementiert sie deren gesamte Methoden |
 | lässt sich nur auf Methoden anwenden                                                                 | deckt sowohl Methoden als auch Eigenschaften ab                                                  |
 | verwendbar, wenn ein Delegat im Scope verfügbar ist                                                  | kann nur verwendet werden, wenn die Klasse diese Schnittstelle implementiert                     |
-| wird für die Behandlung von Ereignissen verwendet                                                    | findet keine Anwendung bei der Behandlung von Ereignissen verwendet.                             |
+| wird für die Behandlung von Ereignissen verwendet                                                    | findet keine Anwendung bei der Behandlung von Ereignissen.                             |
 | kann auf anonyme Methoden zugreifen                                                                  | kann nicht auf anonyme Methoden zugreifen.                                                       |
 | beim Zugriff auf eine Methode über Delegaten ist kein Zugriff auf das Objekt der Klasse erforderlich | beim Methodenzugriff benötigen Sie das Objekt der Klasse, die eine Schnittstelle implementiert   |
 | unterstützt keine Vererbung                                                                          | unterstützt Vererbung                                                                            |
@@ -509,7 +509,7 @@ Del d = delegate(int k) { /* ... */ };
 
 ```
 Das folgende Codebeispiel illustriert die Verwendung. Dabei wird auch deutlich, wie
-eine Methodenreferenz durch einen anderen ersetzt werden kann.
+eine Methodenreferenz durch eine andere ersetzt werden kann.
 
 ```csharp           AnonymouseDelegate
 using System;
@@ -712,7 +712,7 @@ public class Program
      myOutput("Das ist eine Textausgabe");
      Action<string> myActionOutput = PrintHello;
      myActionOutput("Das ist eine Action-Testausgabe!");
-     Func<float, float> myFuncOutput = Square;
+     Func<double, double> myFuncOutput = Square;
      Console.WriteLine(myFuncOutput(5));
   }
 }
