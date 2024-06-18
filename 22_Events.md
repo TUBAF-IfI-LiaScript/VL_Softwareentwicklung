@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 comment:  Publish-Subscribe Prinzip, Events in C#, generische Events
@@ -10,7 +10,6 @@ tags:
 logo:     
 
 import: https://github.com/liascript/CodeRunner
-        https://github.com/LiaTemplates/Pyodide
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
@@ -36,13 +35,31 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ## Allgemeine Hinweise
 
+> **0. Kennen Sie Ihren Editor und dessen Shortcuts!**
+
+https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf
+
 > **1. Verwenden Sie einen _Code Formater_, der Ihnen bei der Restrukturierung Ihres Codes hilft!**
 
 > **2. Evaluieren Sie die Hinweise der Code Analyse sorgfältig, entwerfen Sie ggf. eigene Regeln.**
 
+https://learn.microsoft.com/de-de/dotnet/fundamentals/code-analysis/overview?tabs=net-8
+
 ## Nachgefragt
 
 In der letzten Veranstaltung fragte einer von Ihnen wie der selektive Zugriff auf die MultiCastDelegaten realisieren kann. Zur Erinnerung MulticastDelegate verfügt über eine verknüpfte Liste von Delegaten, die als Aufruf Liste bezeichnet wird und aus einem oder mehreren-Elementen besteht. Wenn ein Multicast Delegat aufgerufen wird, werden die Delegaten in der Aufruf Liste synchron in der Reihenfolge aufgerufen, in der Sie angezeigt werden.
+
+```ascii
+
+Mulitcast Invocation List
+
++----------+----------+----------+----------+----------+----------+
+| Add      | Multiply | Multiply | Divide   | Add      | Divide   |
++----------+----------+----------+----------+----------+----------+                               .
+```
+> **Frage:** Wie können wir unsere MultiCastDelegaten verwalten und selektiv auf einzelne Elemente zugreifen?
+
+vgl. https://learn.microsoft.com/en-us/dotnet/api/system.delegate.getinvocationlist?view=net-8.0
 
 
 ```csharp           MultiCast
@@ -70,31 +87,30 @@ public class Program
   }
 
   public static void Main(string[] args){
-    Calc computer3 = Add;
-    computer3 += Multiply;
-    computer3 += Multiply;
-    computer3 += Divide;
-    computer3 -= Add;
+    Calc computer = Add;
+    computer += Multiply;
+    computer += Multiply;
+    computer += Divide;
+    computer += Add;
+    computer += Divide;
+    computer -= Add;
     Console.WriteLine("Zahl von eingebundenen Delegates {0}",
-                      computer3.GetInvocationList().GetLength(0));
+                      computer.GetInvocationList().GetLength(0));
 
     // Individueller Aufruf der einzelnen Einträge
-    var x = computer3.GetInvocationList();
+    var x = computer.GetInvocationList();
     Console.WriteLine("Typ der Invocation List {0}", x.GetType());
     Console.WriteLine(x[0].DynamicInvoke(1,2));
     Console.WriteLine(x[1].DynamicInvoke(3,5));   
 
     // Übergreifender Aufruf aller Einträge                     
-    Console.WriteLine(computer3(40,8));
+    Console.WriteLine(computer(40,8));
   }
 }
 ```
 @LIA.evalWithDebug(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-> **Frage:** Wie ließe sich das Codebeispiel verbessern?
-
-{{1}}
-Nutzen Sie einen vorimplementierten (generischen) Delegaten! Wie war das gleich noch `Func` oder `Action`?
+> **Frage:** Wie ließe sich das Codebeispiel verbessern? Wie war das gleich noch `Func` oder `Action`?
 
 
 ## Wiederholung
@@ -138,9 +154,9 @@ Wie war das noch mal, welche Elemente (Member) zeichnen einen Klasse unter C# au
 ## Motivation und Idee der Events
 
 Was haben wir mit den Delegaten erreicht? Wir sind in der Lage aus einer Klasse,
-auf Methoden anderer Klassen zurückzugreifen, über die wir per Referenz
+auf Methoden (einer anderer Klassen) zurückzugreifen, über die wir per Referenz
 informiert wurden. Die aufgerufene Methode wird der aufrufenden Klasse über
-einen Delegaten bekannt gegeben.
+einen Delegaten bekannt gegeben. Es erfolgt eine Typprüfung der Parameter.
 
 Damit sind die beiden Klassen nur über eine Funktionssignatur miteinander "lose"
 gekoppelt. Welche Konzepte lassen sich damit umsetzen?
@@ -167,7 +183,7 @@ C# etabliert für die Nutzung der Pub-Sub Kommunikation *Events*. Dies sind spez
 {{0-1}}
 ********************************************************************************
 
-Der Publisher ist eine Klasse, die ein Delegaten enthält. Der Publisher entscheidet damit darüber, wann Nachrichten versand werden.
+Der Publisher ist eine Klasse, die ein Delegaten enthält. Der Publisher entscheidet damit darüber, wann Nachrichten versandt werden.
 Auf der anderen Seite finden sich die Subscriber-Methoden, die ausgehend vom aktivierten Delegaten im Publisher zur Ausführung kommen. Ein Subscriber hat keine Kenntnis von anderen Subscribern. Events sind ein Feature aus C# dass dieses Pattern formalisiert.
 
 > Merke: Ein Event ist ein Klassenmember, dass die Features des Delegatenkonzepts nutzt, um eine Publisher-Subscribe Interaktion zu realisieren.
@@ -196,9 +212,7 @@ public class Publisher{
 
 // Schritt 4
 // Implementieren des Subscribers - in diesem Fall wurde eine separate Klasse
-// gewählt. Natürlich kann die Methode, die der Signatur von
-// varAChangedHandler entspricht, auch in der Publisher-Klasse implementiert
-// sein
+// gewählt. 
 public class Subscriber{
   public static void m_OnPropertyChanged(){
       Console.WriteLine("A was changed!");
@@ -214,11 +228,11 @@ public static void Main(string[] args){
 }
 ```
 
-Entsprechend der Darstellung in [Link](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/events/index) sind Events durch folgende Eigenschaften definiert:
+Welche Konsequenzen ergeben sich daraus?
 
 + Der Publisher bestimmt, wann ein Ereignis ausgelöst wird. Die Subscriber bestimmen, welche  Aktion als Reaktion auf das Ereignis ausgeführt wird.
 
-+ Ein Ereignis entstammt einem Publisher, kann aber mehrere Subscriber adressieren. Ein Abonnent kann mehrere Ereignisse von mehreren Herausgebern behandeln.
++ Es ist eine 1:n Relation. Ein Ereignis entstammt einem Publisher, kann aber mehrere Subscriber adressieren.
 
 + Ereignisse, die keine Subscriber haben, werden nie ausgelöst. Das bedeutet, dass ein Publisher die Subscriber kennen muss.
 
@@ -386,10 +400,10 @@ zum Event (Warum ist die Information eingetroffen?).
 Im Beispiel konzentrieren wir uns auf die Default-Delegates, die Bestandteil der
 .NET Umgebung ist
 
-| Delegate                |                                                  | Link                                                                                 |
-| ----------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `EventHandler Delegate` | `void EventHandler(object sender, EventArgs e)`` | [Link](https://docs.microsoft.com/de-de/dotnet/api/system.eventhandler?view=net-6.0) |
-| `EventHandler<TEventArgs> Delegat` | `EventHandler<TEventArgs>(object? sender, TEventArgs e);`` | [Link](https://docs.microsoft.com/de-de/dotnet/api/system.eventhandler-1?view=net-6.0) |
+| Delegate                           | Aufruf                                                    | Link                                                                                   |
+| ---------------------------------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `EventHandler Delegate`            | `void EventHandler(object sender, EventArgs e)`           | [Link](https://docs.microsoft.com/de-de/dotnet/api/system.eventhandler?view=net-6.0)   |
+| `EventHandler<TEventArgs> Delegat` | `EventHandler<TEventArgs>(object? sender, TEventArgs e);` | [Link](https://docs.microsoft.com/de-de/dotnet/api/system.eventhandler-1?view=net-6.0) |
 
 
 ```csharp           StockExchangeII
@@ -460,7 +474,7 @@ Standard Event
 void EventHandler(object sender, PriceChangedEventArgs e)
 ```
 
-Um diese Anpassungen beim Datentyp zu realisieren exisitiert bereits eine
+Um diese Anpassungen beim Datentyp zu realisieren existiert bereits eine
 generischen Form von EventHandler mit der Signatur
 
 ```csharp
@@ -516,7 +530,201 @@ class Program {
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-### Grafische Nutzer Interfaces
+### Events und Ausnahmebehandlung
+
+                          {{0-1}}
+******************************************************
+
+> Welche Rückmeldung hätten Sie mit Blick auf die Flexibilität des Codes an einen Mitstreiter?
+
+```csharp           MinimalEvent.cs
+using System;
+using System.Reflection;
+using System.Collections.Generic;
+
+public delegate void MyEventHandler(string message);
+
+public class Publisher
+{
+    public event MyEventHandler MyEvent;
+    public void RaiseEvent(string message)
+    {
+        MyEvent?.Invoke(message);
+    }
+}
+
+public class Subscriber1
+{
+    //int x = 100;
+    //int divider = 0;
+    public void OnEventRaised(string message)
+    {
+        Console.WriteLine($"Sub 1 - Event received: {message}");
+        //Console.WriteLine($"Sub 1 - Event received: {x / divider}");
+    }
+}
+
+public class Subscriber2
+{
+    public void OnEventRaised(string message)
+    {
+        Console.WriteLine($"Sub 2 - Event received: {message}");
+    }
+}
+
+class Program {
+    public static void Main(string[] args){
+        var publisher = new Publisher();
+        var subscriber1 = new Subscriber1();
+        publisher.MyEvent += subscriber1.OnEventRaised;
+        var subscriber2 = new Subscriber2();
+        publisher.MyEvent += subscriber2.OnEventRaised;
+        publisher.RaiseEvent("Hallo Welt");
+    }
+}
+```
+@LIA.evalWithDebug(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+******************************************************
+
+{{1-2}}
+```csharp    Solution.cs
+using System;
+using System.Reflection;
+using System.Collections.Generic;
+
+// nicht mehr benötigt !
+// public delegate void MyEventHandler(string message);
+
+public class CustomEventArgs : EventArgs
+{
+    public string Message { get; }
+    public CustomEventArgs(string msg)
+    {
+        Message = msg;
+    }
+}
+
+public class Publisher
+{
+    public event EventHandler<CustomEventArgs> MyEvent;
+    public void RaiseEvent(string message)
+    {
+	    foreach (var handler in MyEvent.GetInvocationList())
+	    {
+	        try
+	        {
+	            handler.DynamicInvoke(this, new CustomEventArgs(message));
+	        }
+	        catch (Exception ex)
+	        {
+	            Console.WriteLine($"Exception caught: {ex.Message}");
+	        }
+	    }
+    }
+}
+
+public class Subscriber1
+{
+    int x = 100;
+    int divider = 0;
+    public void OnEventRaised(object sender, CustomEventArgs e)
+    {
+        Console.WriteLine($"Sub 1 - Event received: {e.Message}");
+        Console.WriteLine($"Sub 1 - Event received: {x/divider}");
+    }
+}
+
+public class Subscriber2
+{
+    public void OnEventRaised(object sender, CustomEventArgs e)
+    {
+        Console.WriteLine($"Sub 1 - Event received: {e.Message}");
+    }
+}
+
+class Program {
+    public static void Main(string[] args){
+        var publisher = new Publisher();
+        var subscriber1 = new Subscriber1();
+        publisher.MyEvent += subscriber1.OnEventRaised;
+        var subscriber2 = new Subscriber2();
+        publisher.MyEvent += subscriber2.OnEventRaised;
+        publisher.RaiseEvent("Hallo Welt");
+    }
+}
+```
+@LIA.evalWithDebug(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+### Anpassung der Subscribe/Unsubscribe Methoden
+
+In spezifischen Fällen kann es notwendig sein, die Subscriber-Methoden zu adaptieren. 
+
+```csharp
+private MyEventHandler _myEvent;
+
+public event MyEventHandler MyEvent
+{
+    add
+    {
+        Console.WriteLine("Subscriber added");
+        _myEvent += value;
+    }
+    remove
+    {
+        Console.WriteLine("Subscriber removed");
+        _myEvent -= value;
+    }
+}
+```
+
+### Anonyme / Lambda Funktionen als Subscriber
+
+
+```csharp           MinimalEvent.cs
+using System;
+using System.Reflection;
+using System.Collections.Generic;
+
+public class CustomEventArgs : EventArgs
+{
+    public string Message { get; }
+    public CustomEventArgs(string msg)
+    {
+        Message = msg;
+    }
+}
+
+public class Publisher
+{
+    public event EventHandler<CustomEventArgs> MyEvent;
+    public void RaiseEvent(string message)
+    {
+        MyEvent?.Invoke(this, new CustomEventArgs(message));
+    }
+}
+
+class Program {
+    public static void Main(){
+        var publisher = new Publisher();
+
+        // Using an anonymous method
+        publisher.MyEvent += delegate(object sender, CustomEventArgs args) 
+        {
+            Console.WriteLine($"Anonyme Method received: {args.Message}");
+        };
+
+        // Or using a lambda expression
+        publisher.MyEvent += (sender, args) => Console.WriteLine($"Lambda expression received: {args.Message}");
+        publisher.RaiseEvent("Hallo Welt");
+    }
+}
+```
+@LIA.evalWithDebug(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+Eine sehr anschauliche Darstellung dazu findet sich unter https://gehirnwindung.de/categories/csharp/tanz-den-lambda-mit-mir
+ 
+## Grafische Nutzer Interfaces
 
 siehe Codebeispiel `wpf_sharp` im Projektordner
 
