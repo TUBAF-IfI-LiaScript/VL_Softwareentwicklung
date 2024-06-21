@@ -258,8 +258,8 @@ public static ThreadState DetermineThreadState(this ThreadState ts){
 
 ### Thread-Initialisierung
 
-Wie wird der Thread-Objekt korrekt initialisiert? Viele Tutorials führen Beispiele auf, die wie folgt strukturiert sind, während im obrigen Beispiel der
-Konstruktoraufruf von `Thread` ein weiteren Konstruktor `ThreadStart` adressiert:
+Wie wird das Thread-Objekt korrekt initialisiert? Viele Tutorials führen Beispiele auf, die wie folgt strukturiert sind, während im obrigen Beispiel der
+Konstruktoraufruf von `Thread` einen weiteren Konstruktor `ThreadStart` adressiert:
 
 ```csharp  
 Thread threadA = new Thread(ExecuteA);
@@ -327,9 +327,9 @@ Der Konstruktor der Klasse `Thread` hat aber folgende Signatur:
 | Konstruktor                               | Initialisiert eine neue Thread Klasse  ...                                                                                                                                              |
 | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `Thread(ThreadStart)`                     | ... auf der Basis einer Instanz von ThreadStart                                                                                                                                         |
-| `Thread(ThreadStart, Int32)`              | ... auf der Basis eine Instanz von ThreadStart unter Angabe der Größe des Stacks in Byte (aufgerundet auf entsprechende Page Size und unter Berücksichtigung der globalen Mindestgröße) |
-| `Thread(ParameterizedThreadStart) `       | ... auf der Basis eine Instanz von ParameterizedThreadStart                                                                                                                             |
-| `Thread(ParameterizedThreadStart, Int32)` | ... auf der Basis eine Instanz von ParameterizedThreadStart unter Angabe der Größe des Stacks                                                                                           |
+| `Thread(ThreadStart, Int32)`              | ... auf der Basis einer Instanz von ThreadStart unter Angabe der Größe des Stacks in Byte (aufgerundet auf entsprechende Page Size und unter Berücksichtigung der globalen Mindestgröße) |
+| `Thread(ParameterizedThreadStart) `       | ... auf der Basis einer Instanz von ParameterizedThreadStart                                                                                                                             |
+| `Thread(ParameterizedThreadStart, Int32)` | ... auf der Basis einer Instanz von ParameterizedThreadStart unter Angabe der Größe des Stacks                                                                                           |
 
 
 ```csharp
@@ -500,7 +500,7 @@ void ThreadMethod(int initialValue)
 Locking und Threadsicherheit sind zentrale Herausforderungen bei der Arbeit mit
 Multithread-Anwendungen. Wie können wir im vorhergehenden Beispiel sicherstellen,
 dass zwischen dem Laden von threadcount in ein Register, der Inkrementierung
-und dem zurückschreiben nicht ein anderer Thread den Wert zwischenzeitlich manipuliert hat.
+und dem Zurückschreiben nicht ein anderer Thread den Wert zwischenzeitlich manipuliert hat?
 
 Für eine binäre Variable wird dabei von einem Test-And-Set Mechanisms gesprochen
 der Thread-sicher sein muss. Wie können wir dies erreichen? Die Prüfung und Manipulation
@@ -513,7 +513,7 @@ Darauf aufbauend implementiert C# verschiedene Methoden:
 | ---------------- | ----------------------------------------------------- |
 | "exclusive lock" | Alleiniger Zugriff auf einen Codeabschnitt             |
 | Monitor          | Erweiterter `lock` mit Bedingungsvariablen (`Wait`, `Pulse`, `PulseAll`) zum Warten und Signalisieren von Zustandsänderungen, synchronisierende Zugriffsprozeduren |
-| Mutex ( (Mutual Exclusion) | Prozessübergreifende exklusive (binäre) Sperrung      |
+| Mutex (Mutual Exclusion) | Prozessübergreifende exklusive (binäre) Sperrung      |
 | Semaphor         | Zugriff auf einen Codeabschnitt durch n Threads oder Prozesse, basierend auf einem Zählermechanismus |
 
 ```csharp

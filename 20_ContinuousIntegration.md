@@ -157,7 +157,7 @@ Das übergreifende Datenformat macht die Nachvollziehbarkeit von Code Änderunge
 | **Schreibbarkeit**         | Sehr hoch                     | Hoch                                    | Mittel bis hoch                 | Mittel                               |
 | **Format**                 | Plaintext                     | Schlüssel-Wert-Paare                    | Schlüssel-Wert-Paare            | Tags umschließen Inhalte             |
 | **Dateiendung**            | .txt                          | .yaml, .yml                             | .json                           | .xml                                 |
-| **Kommentare**             | Keine Standardkommentare      | # für Kommentare                        | Keine Kommentare                | <!-- Kommentar -->                   |
+| **Kommentare**             | Keine Standardkommentare      | # für Kommentare                        | Keine Kommentare                | <! -- Kommentar -->                  |
 | **Support für Datentypen** | Text                          | Verschiedene Datentypen                 | Verschiedene Datentypen         | Verschiedene Datentypen              |
 | **Parser**                 | Keine speziellen Parser nötig | YAML-Parser erforderlich                | JSON-Parser erforderlich        | XML-Parser erforderlich              |
 
@@ -304,13 +304,13 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 ````````````
 
 
-Continuous integration (CI) zielt darauf ab, die Qualität der Software zu verbessern und die Lieferzeit zu verkürzen, indem die das Gesamtprojekt kontinuierlich realisiert wird. Darauf aufbauend können die Konzepte der Qualitätskontroller automatisiert auf einer höheren Integrationsebene umgesetzt werden.
+Continuous integration (CI) zielt darauf ab, die Qualität der Software zu verbessern und die Lieferzeit zu verkürzen, indem das Gesamtprojekt kontinuierlich realisiert wird. Darauf aufbauend können die Konzepte der Qualitätskontroller automatisiert auf einer höheren Integrationsebene umgesetzt werden.
 
 **Tests lokal ausführen** ... erste Stufe der CI ist die Durchführung lokaler Unit-Test in der lokalen Umgebung des Entwicklers. Auf diese Weise wird vermieden, dass die individuelle, aktuelle Entwicklungsarbeit das Gesamtprojekt beeinflusst.
 
 **Code in CI kompilieren** ... ein Build-Server kompiliert den Code periodisch oder sogar nach jedem Commit und meldet die Ergebnisse an die Entwickler.
 
-**Tests in CI durchführen** ... Zusätzlich zu automatisierten Unit-Tests werden  kontinuierliche Prozesse der Qualitätskontrolle implementieren, die statische Analysen durchführen, die Leistung vermessen und profilieren, Dokumentationen extrahieren, etc.
+**Tests in CI durchführen** ... Zusätzlich zu automatisierten Unit-Tests werden kontinuierliche Prozesse der Qualitätskontrolle implementiert, die statische Analysen durchführen, die Leistung vermessen und profilieren, Dokumentationen extrahieren, etc.
 
 **Bereitstellen eines Artifacts von CI** ... Nun ist CI oft mit kontinuierlicher Bereitstellung oder kontinuierlichem Einsatz in der so genannten CI/CD-Pipeline verflochten. CI stellt sicher, dass die auf der Hauptleitung eingecheckte Software immer in einem Zustand ist, der den Benutzern zur Verfügung gestellt werden kann, und CD macht den Bereitstellungsprozess vollständig automatisiert.
 
@@ -410,7 +410,7 @@ jobs:
 *******************************************************************************
 **Trigger**
 
-Das Ausführen einer Pipeline wird aus verschiedenen Quellen resultieren und mit Bedingungen verknüpft werden.
+Das Ausführen einer Pipeline resultiert aus verschiedenen Quellen und wird mit Bedingungen verknüpft.
 
 ```yaml
 on: push
@@ -516,7 +516,7 @@ Welche Mängel gibt es noch im Gebrauch der GitHub-Actions?
 * die Sequenz der Ausführungen mehrerer Pipelines ist nicht steuerbar
 * die Liste der verfügbaren Actions ist noch sehr überschaubar
 
-> Merke: Man merkt an einigen Stellen der GitHub CI Implmentierung an, dass diese noch recht jung ist. Features die für andere Tools etabliert sind, fehlen noch.
+> Merke: Man merkt an einigen Stellen der GitHub CI Implementierung an, dass diese noch recht jung ist. Features die für andere Tools etabliert sind, fehlen noch.
 
 Alternative Realisierungen lassen sich zum Beispiel mit [Jenkins](https://www.jenkins.io/) oder [TravisCI](https://travis-ci.org/) unabhängig von einem ursprünglichen Versionsmanagementsystem evaluieren.
 
@@ -525,7 +525,7 @@ Alternative Realisierungen lassen sich zum Beispiel mit [Jenkins](https://www.je
 ## Anwendungsbeispiel 1
 
 Geben Sie die jeweiligen Anteile der verschiedenen Mitstreiter an einem Projekt
-in der README.md aus. Wer hat zum Beispiel wie viele Codezeilen realisiert.
+in der README.md aus. Wer hat zum Beispiel wie viele Codezeilen realisiert?
 
 Werfen wir dazu einen Blick auf das [Anwendungsbeispiel](https://github.com/SebastianZug/test_contributor_feedback). Folgende Bearbeitungsschritte werden im zugehörigen Python Skript durchlaufen:
 
