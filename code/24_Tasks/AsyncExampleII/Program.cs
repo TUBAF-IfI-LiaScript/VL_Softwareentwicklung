@@ -1,42 +1,27 @@
-﻿// Example found at https://www.dotnetperls.com/async
-
-using System;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
-class Program
+public class Program
 {
-    static void Main()
-    {
-        Console.WriteLine("Your inputs trigger the async calculations  ...");
-        while (true)
-        {
-            // Start computation.
-            Example();
-            // Handle user input.
-            string result = Console.ReadLine();
-            Console.WriteLine("You typed: " + result);
-        }
+    public static Task Main()
+    {   Console.WriteLine("Beispiel mit Download");
+        int n=await DownloadFileAsync();
+        Console.WriteLine("Zurück in Main()");
+        Console.WriteLine(n);
+        Console.WriteLine("Download abgeschlossen!");
     }
 
-    static async void Example()
+    public static async Task<int> DownloadFileAsync()
     {
-        // This method runs asynchronously.
-        int t = await Task.Run(() => Allocate());
-        Console.WriteLine("Compute: " + t);
-    }
-
-    static int Allocate()
-    {
-        // Compute total count of digits in strings.
-        int size = 0;
-        for (int z = 0; z < 100; z++)
+        using (var httpClient = new HttpClient())
         {
-            for (int i = 0; i < 1000000; i++)
-            {
-                string value = i.ToString();
-                size += value.Length;
-            }
+            Console.WriteLine("Starte den Download...");
+            var url = "https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/24_Tasks.md";
+            var response = await httpClient.GetAsync(url);
+            var content = await response.Content.ReadAsStringAsync();
+            //Console.WriteLine("Datei heruntergeladen: " + content);
+            return content.Length;
         }
-        return size;
     }
 }

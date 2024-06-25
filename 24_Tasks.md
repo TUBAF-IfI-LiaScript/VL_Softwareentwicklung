@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  2.0.0
+version:  2.0.1
 language: de
 narrator: Deutsch Female
 comment:  Logging in Software, Konfiguration eines Programmweiten Loggingsystems, weiterführenden Abstraktionen für Multithreading, Task Modell in C#, asynchrone Methoden
@@ -32,48 +32,6 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
-## Frage 
-
-Wie befüllen mehrere Threads ein Array oder eine Liste?
-
-```csharp ThreasList.cs
-public class Program
-{
-    static Random rnd = new Random();
-    private static List<int> list = new List<int>();
-    private static object lockObject = new object();
-    public static void AddToList()
-    {
-        lock (lockObject)
-        {
-          list.Add(rnd.Next(10));
-        }
-    }
-    public static void Main()
-    {
-        int numThreads = 5;
-
-        Thread[] threads = new Thread[numThreads];
-        for (int i = 0; i < numThreads; i++)
-        {
-            threads[i] = new Thread(AddToList);
-            threads[i].Start();
-        }
-
-        foreach (Thread thread in threads)
-        {
-            thread.Join();
-        }
-
-        Console.WriteLine("Liste:");
-        foreach (int num in list)
-        {
-            Console.WriteLine(num);
-        }
-    }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 ## Logging
 
@@ -163,7 +121,7 @@ public class Program
 + https://github.com/NLog
 + https://riptutorial.com/nlog
 
-## Tasks
+## Rückblick: Multithreading
 
 Die prozedurale/objektorientierte Programmierung basiert auf der Idee, dass ausgehend von einem
 Hauptprogramm Methoden aufgerufen werden, deren Abarbeitung realisiert wird und
@@ -259,14 +217,86 @@ class Program {
 
 Welche Nachteile sehen Sie in dieser Lösung?
 
-### Task Modell in C#
+```csharp Monitor.cs
+using System;
+using System.Threading;
 
-                              {{0-1}}
-********************************************************************************
+public class Fass
+{
+    private int max, level;
+    private readonly object lockObject = new object();
+
+    public Fass(int max)
+    {
+        this.max = max;
+        this.level = 0;
+    }
+
+    public void Füllen(int x)
+    {
+        while (true){
+            lock (lockObject)
+            {
+                while ((level + x) > max)
+                {
+                    Monitor.Wait(lockObject);
+                }
+                level += x;
+                Console.WriteLine("plus " + x + " level " + level);
+                Monitor.PulseAll(lockObject);
+            }
+            Thread.Sleep(500);
+        }
+    }
+
+    public void Leeren(int x)
+    {
+        while (true){
+            lock (lockObject)
+            {
+                while ((level - x) < 0)
+                {
+                    Monitor.Wait(lockObject);
+                }
+                level -= x;
+                Console.WriteLine("minus " + x + " level " + level);
+                Monitor.PulseAll(lockObject);
+               
+            }
+            Thread.Sleep(500);
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Fass fass = new Fass(500);
+        new Thread(() => fass.Füllen(30)).Start();
+        new Thread(() => fass.Leeren(10)).Start();
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+## Task Modell in C#
 
 C# stellt für die asynchrone Programmierung die neuen Typen `Task`  und `Task<TResult>`und die Schlüsselwörter `await` und `async` zur
 Verfügung. Diese sind zentrale Komponenten von den 
 aufgabenbasierten asynchronen Muster (TAP - Task based Asynchronous Pattern), die in .NET Framework 4 eingeführt wurden.
+
+Unterschied zwischen Task und Thread:
+
++ Die Klasse Thread wird zum Erstellen und Bearbeiten einer Thread-Instanz verwendet. Ein Task stellt eine asynchrone Operation dar und ist Teil der Task Parallel Library, einer Reihe von APIs zur asynchronen und parallelen Ausführung von Tasks.
++ Der Task kann ein Ergebnis zurückgeben. Es gibt keinen direkten Mechanismus, um das Ergebnis von einem Thread zurückzugeben.
++ Task unterstützt die Stornierung durch die Verwendung von Storno-Tokens, Thread hingegen nicht.
++ Ein Task kann mehrere Prozesse gleichzeitig ablaufen lassen. Bei Threads kann immer nur eine Aufgabe gleichzeitig laufen.
++ Mit den Schlüsselwörtern 'async' und 'await' können wir Asynchronous leicht implementieren.
++ Ein neuer Thread() hat nichts mit dem Thread-Pool zu tun, während jeder Task durch den Thread-Pool verwaltet wird.
++ Ein Task ist ein Konzept auf höherer Ebene als ein Thread.
+
+### Task-Klasse
 
 Die `Task`-Klasse bildet einen Vorgang zur Lösung einer einzelnen Aufgabe ab, der keinen Wert zurück gibt und (in der Regel) asynchron ausgeführt wird. 
 Ein `Task`-Objekt übernimmt eine Aufgabe, die asynchron auf einem Threadpool-Thread anstatt synchron auf dem Hauptanwendungsthread ausgeführt wird. 
@@ -294,8 +324,7 @@ Task task = new Task(() => {... Anweisungsblock ...});
 Task.Start();
 ```
 
-Hierbei wird deutlich, dass das `Task`-Objekt auf einem `Thread` aufbaut und
-lediglich eine höhere Abstraktionsstufe darstellt. 
+> Bis hierher ist die API völlig identisch zu einem Tread (abgesehen von den Typen). 
 
 Der verkürzte Aufruf mittels der statischen `Run`-Methode realisiert das gleiche Verhalten:
 
@@ -304,24 +333,12 @@ Task task = Task.Run(() => {... Anweisungsblock ...});
 ```
 
 An den Konstruktor und die Run-Methode können `Action`-Delegate übergeben werden, die den auszuführenden Code beinhalten.
-In den meisten Fällen wird zur Spezifikation der Aufgabe ein Lambda-Ausdruck verwendet. Der Konstruktor wird nur in erweiterten Szenarien verwendet, wo es erforderlich ist, die Instanziirung und der Start zu trennen.
 
-Die generische Klasse `Task<T>` bildet ebenfalls einen Vorgang zur Lösung einer einzelnen Aufgabe ab, gibt aber im Unterschied zu der nicht generischen `Task`-Klasse einen Wert zurück. 
-Die Konstruktoren und die Run-Methode der Klasse bekommen einen `Func`-Delegat bzw. einen als Lambda-Ausderuck formulierten Code übergeben, der einen Rückgabewert liefert.
+> Delegaten können durch konkrete Methoden, anonyme Methoden oder Lambda-Ausdrücke realisiert werden.
 
+Der Konstruktor wird nur in erweiterten Szenarien verwendet, wo es erforderlich ist, die Instanziirung und der Start zu trennen.
 
-```csharp           TaskClasses
-public class Task<T>: Task{
-  public Task (Func<T> f);
-  ...
-  public static Task<T> Run (Func <T> f);
-  ...
-}
-```
-
-********************************************************************************
-                                       {{1-2}}
-********************************************************************************
+### Überwachung
 
 Über Property `IsCompleted` kann der laufende Task aus dem Main-Thread überwacht werden. 
 Um für die Durchführung einer einzelnen Aufgabe zu warten, rufen Sie die `Task.Wait` Methode auf. Ein Aufruf der Wait-Methode blockiert den aufrufenden Thread, bis die Instanz der Klasse die Ausführung abgeschlossen hat.
@@ -444,10 +461,21 @@ class Program {
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-********************************************************************************
+### Generische Task-Klasse
 
-                                      {{2-3}}
-********************************************************************************
+Die generische Klasse `Task<T>` bildet ebenfalls einen Vorgang zur Lösung einer einzelnen Aufgabe ab, gibt aber im Unterschied zu der nicht generischen `Task`-Klasse einen Wert zurück. 
+Die Konstruktoren und die Run-Methode der Klasse bekommen einen `Func`-Delegat bzw. einen als Lambda-Ausderuck formulierten Code übergeben, der einen Rückgabewert liefert.
+
+
+```csharp           TaskClasses
+public class Task<T>: Task{
+  public Task (Func<T> f);
+  ...
+  public static Task<T> Run (Func <T> f);
+  ...
+  public T Result { get; }
+}
+```
 
 Der Kanon der Möglichkeiten wird durch die Klasse `Task<TResult>` deutlich erweitert. 
 Anstatt die Ergebnisse wie bei Threads in eine "außen stehende" Variable (z.B. Datenfeld der einer Klasse) zu speichern, wird das Ergebnis im
@@ -466,9 +494,8 @@ verspricht zu einem späteren Zeitpunkt einen Wert in einem bestimmten Format zu
 
 Wie aber erfolgt die Rückgabe und wann?
 
-********************************************************************************
 
-### Asynchrone Methoden
+## Asynchrone Methoden
 
 Das Kernstück der asynchronen Programmierung mit TAP (task based asynchronous pattern) sind die Schlüsselwörter `async` und `await`.
 "async" wird verwendet, um eine Methode zu markieren, die asynchronen Code enthält, 
@@ -582,11 +609,5 @@ Zwei sehr anschauliche Beispiele finden sich im Code Ordner des Projekts.
 
 | Beispiel | Bemerkung |
 | -------- | --------- |
-| [AsyncExampleI.cs](https://github.com/liaScript/CsharpCourse/blob/master/code/23_Tasks/AsyncExampleI.cs) | Generelle Einbettung des asynchronen Tasks |
-| [AsyncExampleII.cs](https://github.com/liaScript/CsharpCourse/blob/master/code/23_Tasks/AsyncExampleII.cs) | Illustration der Interaktionsfähigkeit eines asynchronen Programmes, das Berechnungen und Nutzereingaben gleichermaßen realisiert. |
-
-
-## Aufgaben der Woche
-
-- [ ]
-
+| [AsyncExampleI.cs](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/code/24_Tasks/AsyncExampleI/Program.cs) | Generelle Einbettung des asynchronen Tasks |
+| [AsyncExampleII.cs](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/code/24_Tasks/AsyncExampleII/Program.cs) | Was passiert eigentlich, wenn `main` zum Ende kommt mit den noch ausbleibenden Ergebnissen von Tasks? |
