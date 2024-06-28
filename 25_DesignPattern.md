@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 comment:  Entwurfsmuster-Kategorien und ausgewählte Beispiele, Singleton Pattern, Adapter Pattern, State Pattern, Factory Pattern, Anti-Pattern 
@@ -34,7 +34,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
-## Wiederholung - Polymorphie
+## Wiederholung - 1. Polymorphie
 
                                     {{0-1}}
 *******************************************************************************
@@ -200,6 +200,182 @@ abstrakten Elementen zusammen?
 
 *******************************************************************************
 
+## Wiederholung - 2. Dependency Injection
+
+Die Beispiele auf dieser Seite wurden in starkem Maße durch einen Artikel von [Ben Weidig](https://belief-driven-design.com/decouple-your-code-with-dependency-injection-77b8d39cc93/) motiviert. Die Codebeiträge wurden nach C# überführt und angepasst.
+
+> Welche Funktionalität implementiert das folgende Code-Fragment? Was stört Sie an folgendem Code?
+
+```csharp
+public class DataProcessor {
+
+    private readonly DbManager manager = new SqliteDbManager("db.sqlite");
+    private readonly Calculator calculator = new HighPrecisionCalculator(5);
+
+    public void processData() {
+        this.manager.processData();
+    }
+
+    public int calc(int input) {
+        return this.calculator.expensiveCalculation(input);
+    }
+}
+```
+
+> ”One should depend upon abstractions, [not] concretions.”
+>
+> --Robert C. Martin (2000), Design Principles and Design Patterns
+
+### Constructor Injection
+
+> Konstruktor- oder initialisierungsbasierte Abhängigkeitsinjektion bedeutet, dass alle erforderlichen Abhängigkeiten während der Initialisierung einer Instanz als Konstruktorargumente bereitgestellt werden.
+
+```csharp
+public class DataProcessor {
+
+    // Die Abhängigkeiten werden über den Konstruktor injiziert und nicht lokal erzeugt
+    private readonly DbManager manager;
+    private readonly Calculator calculator;
+
+    public DataProcessor(DbManager manager, Calculator calculator) {
+        this.manager = manager;
+        this.calculator = calculator;
+    }
+
+    public int calc(int input) {
+        return this.calculator.expensiveCalculation(input);
+    }
+}
+```
+
+{{1-2}}
+```csharp  DependencyInjectionViaInterfac.cs
+using System;
+
+public interface iCalculator {
+    int expensiveCalculation(int input);
+}
+
+public class cpuCalculator : iCalculator {
+    public int expensiveCalculation(int input) {
+        // some expensive calculation
+        return input * 2;
+    }
+}
+
+public class gpuCalculator : iCalculator {
+    public int expensiveCalculation(int input) {
+        // some expensive calculation
+        return input * 2;
+    }
+}
+
+public class DataProcessor {
+
+    private readonly iCalculator calculator;
+
+    public DataProcessor(iCalculator calculator) {
+        this.calculator = calculator;
+    }
+
+    public int calc(int input) {
+        return this.calculator.expensiveCalculation(input);
+    }
+}
+
+public class Program {
+  public static void Main(string[] args){
+    DataProcessor dp = new DataProcessor(new cpuCalculator());
+    Console.WriteLine(dp.calc(5));
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+### Property Injection
+
+```csharp  DependencyInjectionViaInterfac.cs
+using System;
+
+public interface iCalculator {
+    int expensiveCalculation(int input);
+}
+
+public class cpuCalculator : iCalculator {
+    public int expensiveCalculation(int input) {
+        // some expensive calculation
+        return input * 2;
+    }
+}
+
+public class gpuCalculator : iCalculator {
+    public int expensiveCalculation(int input) {
+        // some expensive calculation
+        return input * 2;
+    }
+}
+
+public class DataProcessor {
+
+    public iCalculator calculator { set; get;}
+
+    public int calc(int input) {
+        return this.calculator.expensiveCalculation(input);
+    }
+}
+
+public class Program {
+  public static void Main(string[] args){
+    DataProcessor dp = new DataProcessor();
+    dp.calculator = new cpuCalculator();
+    Console.WriteLine(dp.calc(5));
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+### Method Injection
+
+```csharp  DependencyInjectionViaInterfac.cs
+using System;
+
+public interface iCalculator {
+    int expensiveCalculation(int input);
+}
+
+public class cpuCalculator : iCalculator {
+    public int expensiveCalculation(int input) {
+        // some expensive calculation
+        return input * 2;
+    }
+}
+
+public class gpuCalculator : iCalculator {
+    public int expensiveCalculation(int input) {
+        // some expensive calculation
+        return input * 2;
+    }
+}
+
+public class DataProcessor {
+
+    public int calc(iCalculator calculator, int input) {
+        return calculator.expensiveCalculation(input);
+    }
+}
+
+public class Program {
+  public static void Main(string[] args){
+    DataProcessor dp = new DataProcessor();
+    iCalculator calculation = new cpuCalculator();
+    Console.WriteLine(dp.calc(calculation, 5));
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+> Mischformen lassen sich wunderbar mit der Methodenüberladung realisieren. Wir prüfen ab, ob es einen gültigen `this.calculator` gibt.
+
 ## Design Pattern (Entwurfsmuster)
 
 + Design Pattern sind spezielle Muster für Interaktionen und Zusammenhänge  der Bestandteile einer Softwarelösung. 
@@ -336,7 +512,7 @@ beim ersten Aufruf der Funktion `getInstance()` aufgerufen.
                                     {{2-3}}
 ********************************************************************************
 
-Unter Rextester gelingt es leider nicht die Threads so zu konfigurieren, dass
+In unserem LiaScript-Setup gelingt es leider nicht die Threads so zu konfigurieren, dass
 mehrere Instanzen der Klasse entstehen. Wenn Sie aber den nachfolgenden Code
 in Ihre Entwicklungsumgebung kopieren, können Sie den Effekt gut beobachten.
 
