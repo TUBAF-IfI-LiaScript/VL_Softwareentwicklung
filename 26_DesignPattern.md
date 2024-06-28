@@ -204,7 +204,7 @@ abstrakten Elementen zusammen?
 
 + Design Pattern sind spezielle Muster für Interaktionen und Zusammenhänge  der Bestandteile einer Softwarelösung. 
 + Sie präsentieren Implementierungsmodelle, die für häufig wiederkehrende Abläufe (Generierung und Maskierung von Objekten) eine flexible und gut wartbare Realisierung sicherstellen. 
-+ Dafür werden die  Abläufe abstrahiert und auf generisch anwendbare Muster reduziert, die dann mit domänenspezifische Bezeichnern versehen nicht nur für die vereinfachte Umsetzung sondern auch für die Kommunikation dazu genutzt werden. Dies vereinfacht die Interaktion zwischen Softwarearchitekten, Programmierer und andere Projektmitglieder.
++ Dafür werden die  Abläufe abstrahiert und auf generisch anwendbare Muster reduziert, die dann mit domänenspezifischen Bezeichnern versehen nicht nur für die vereinfachte Umsetzung sondern auch für die Kommunikation dazu genutzt werden. Dies vereinfacht die Interaktion zwischen Softwarearchitekten, Programmierer und andere Projektmitglieder.
 
 > Design Pattern sind Strukturen, Modelle, Schablonen und Muster, die sich zur Entwicklung stabiler Softwaremodelle nutzen lassen.
 
@@ -218,7 +218,7 @@ Dabei sollte ein Muster:
 
 + ein oder mehrere Standardprobleme lösen,
 + die Lesbarkeit und Wartbarkeit des Codes erhöhen
-+ auf die Nutzung sprachspezifischer Feature verzichten, um eine Übertragbarkeit sicherzustellen
++ auf die Nutzung sprachspezifischer Features verzichten, um eine Übertragbarkeit sicherzustellen
 + ein eindeutiges Set von Begriffen definieren
 + Denkanstöße für den eigenen Entwurf liefern
 
@@ -386,7 +386,7 @@ Welche Lösung sehen Sie?
                                     {{3-4}}
 ********************************************************************************
 
-Als Lösungsansatz können die Synchronisationsmethoden aus der Laufzeitumgebung
+Als Lösungsansatz können Sie die Synchronisationsmethoden aus der Laufzeitumgebung
 nutzen. `lock` garantiert, dass lediglich ein Thread einen bestimmten
 Codeabschnitt betreten hat und blockiert alle anderen. Eine mögliche Lösung
 könnte wie folgt aussehen:
@@ -476,7 +476,7 @@ public class Program {
 
 ### Strukturmuster Adapter Pattern
 
-Ausgangspunkt für das Beispiel ist die Notwendigkeit eine externes Buchungssystem mit einer Mitarbeiterdatenbank zu verknüpfen. Dabei sind Sie als Entwickler mit zwei Formen der Datenhaltung konfrontiert. Während Ihr Managementsystem für die Mitarbeiter `HRSystem` auf ein Array von strings setzt, erwartet das einzubindende Buchungssystem eine (generische) Liste von strings.
+Ausgangspunkt für das Beispiel ist die Notwendigkeit ein externes Buchungssystem mit einer Mitarbeiterdatenbank zu verknüpfen. Dabei sind Sie als Entwickler mit zwei Formen der Datenhaltung konfrontiert. Während Ihr Managementsystem für die Mitarbeiter `HRSystem` auf ein Array von strings setzt, erwartet das einzubindende Buchungssystem eine (generische) Liste von strings.
 
 ```csharp
 public class HRSystem{
@@ -580,7 +580,7 @@ public class Program {
 ### Erzeugungsmuster (Abstract) Factory Pattern
 
 Der Begriff Factory Pattern bezeichnet ein Entwurfsmuster, das beschreibt, wie
-ein Objekt durch Aufruf einer Methode anstatt durch direkten Aufruf eines
+ein Objekt durch den Aufruf einer Methode anstatt durch den direkten Aufruf eines
 Konstruktors erzeugt wird.
 
 Eine abstrakte "Fabrikmethode" dient dabei als Schnittstelle zur Erstellung
