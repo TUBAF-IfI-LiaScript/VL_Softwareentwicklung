@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 comment:  Entwurfsmuster-Kategorien und ausgewählte Beispiele, Singleton Pattern, Adapter Pattern, State Pattern, Factory Pattern, Anti-Pattern 
@@ -16,18 +16,18 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/26_DesignPattern.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/25_DesignPattern.md)
 
 # Entwurfsmuster
 
 | Parameter                | Kursinformationen                                                                             |
 |--------------------------|-----------------------------------------------------------------------------------------------|
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                               |
-| **Teil:**                | `26/27`                                                                                       |
+| **Teil:**                | `25/27`                                                                                       |
 | **Semester**             | @config.semester                                                                              |
 | **Hochschule:**          | @config.university                                                                            |
 | **Inhalte:**             | @comment                                                                                      |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/26_DesignPattern.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/25_DesignPattern.md |
 | **Autoren**              | @author                                                                                       |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
