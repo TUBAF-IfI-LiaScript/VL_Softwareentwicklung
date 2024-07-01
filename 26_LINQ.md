@@ -103,7 +103,7 @@ class ReadingCSV
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
@@ -133,7 +133,7 @@ class ReadingCSV
         var students = DataFrame.LoadCsv(path, separator:',',header:true);
 
         Console.WriteLine(students.Info());
-        var topicStat = students["Topics"].ValueCounts();
+        var topicStat = students["Topic"].ValueCounts();
         Console.WriteLine(topicStat);
     }
 }
@@ -142,7 +142,7 @@ class ReadingCSV
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.Analysis" Version="0.19.1" />
@@ -435,7 +435,7 @@ WIE festlegt. Dabei strukturieren sich die Befehle in 4 Kategorien:
 
 Eine Datenbanktabelle stellt eine Datenbank-Relation dar. Die Relation ist Namensgeber und Grundlage der relationalen Datenbanken.
 
-![OOPGeschichte](./img/25_LINQ/SQL-Beispiel.png "Relationale Datenbank [^DatenbankSchema]")
+![OOPGeschichte](./img/25_LINQ/SQL-Beispiel.png "Relationale Datenbank - Autor: Nils Boßung, https://de.wikipedia.org/wiki/SQL#/media/Datei:SQL-Beispiel.svg")
 
 
 *******************************************************************************
@@ -451,7 +451,7 @@ INSERT INTO Student SELECT * from ?;
 ```
 ``` text -student.csv
 MatrNr,Name
-26120,Fichte
+26120,Fin
 25403,Jonas
 27103,Fauler
 ```
@@ -509,16 +509,21 @@ FROM Student;
 
 
 ``` sql     Abfrage mit Spaltenauswahl
-SELECT VorlNr, Titel
+SELECT VorlNr
 FROM Vorlesung;
 ```
 @AlaSQL.eval
+
+Eine erste Form der Filterung kann nun darin bestehen, zunächst die Anzahl der überhaupt aktiven Studierenden zu bestimmen. Diese müssten in der Tabelle `hoert` eingetragen sein. `DISTINCT` implementiert die Auswahl von eindeutigen Werten.
 
 ``` sql      Abfrage mit eindeutigen Werten
 SELECT DISTINCT MatrNr
 FROM hoert;
 ```
 @AlaSQL.eval
+
+`WHERE` ermöglicht die Filterung von Zeilen, die einem oder mehreren Kriterien genügen.
+`LIKE` kann mit verschiedenen Platzhaltern verwendet werden: `_` steht für ein einzelnes beliebiges Zeichen, `%` steht für eine beliebige Zeichenfolge. Manche Datenbanksysteme bieten weitere solche Wildcard-Zeichen an, etwa für Zeichenmengen.
 
 ``` sql        Abfrage mit Filter und Sortierung
 SELECT VorlNr, Titel
@@ -527,9 +532,17 @@ WHERE Titel = 'ET';
 ```
 @AlaSQL.eval
 
-`LIKE` kann mit verschiedenen Platzhaltern verwendet werden: _ steht für ein einzelnes beliebiges Zeichen, % steht für eine beliebige Zeichenfolge. Manche Datenbanksysteme bieten weitere solche Wildcard-Zeichen an, etwa für Zeichenmengen.
+`ORDER BY` öffnet die Möglichkeit die Reihung anzupassen. `ASC` und `DESC` steuern die Sortierreihenfolge.
 
-`ORDER BY` öffnet die Möglichkeit die Reihung anzupassen.
+``` sql        Abfrage mit Filter und Sortierung
+SELECT Name
+FROM Student
+WHERE Name LIKE 'F%'
+ORDER BY Name DESC;
+```
+@AlaSQL.eval
+
+`JOIN` erlaubt es die Relationen zwischen einzelnen Datenbanktabellen aufzulösen. Dabei kann mit `INNER` und `OUTER` bzw `LEFT` und `RIGHT` die Auswahl über der Schnittmenge beschrieben werden.
 
 ``` sql   Verbund
 SELECT Vorlesung.VorlNr, Vorlesung.Titel, Professor.PersNr, Professor.Name
@@ -538,7 +551,7 @@ INNER JOIN Vorlesung ON Professor.PersNr = Vorlesung.PersNr;
 ```
 @AlaSQL.eval
 
-`JOIN` erlaubt es die Relationen zwischen einzelnen Datenbanktabellen aufzulösen. Dabei kann mit `INNER` und `OUTER` bzw `LEFT` und `RIGHT` die Auswahl über der Schnittmenge beschrieben werden.
+`GROUP BY` ermöglicht die Gruppierung von Zeilen, die ein gemeinsames Merkmal aufweisen. `COUNT` zählt die Anzahl der Zeilen, die in die Gruppe fallen.
 
 ``` sql   Gruppierung mit Aggregat-Funktionen
 SELECT COUNT(Vorlesung.PersNr) AS Anzahl, Professor.PersNr, Professor.Name
@@ -549,8 +562,6 @@ GROUP BY Professor.Name, Professor.PersNr;
 @AlaSQL.eval
 
 ****************************************************************
-
-[^DatenbankSchema]: Wikipedia "SQL", Nils Boßung, https://de.wikipedia.org/wiki/SQL#/media/Datei:SQL-Beispiel.svg
 
 ## LINQ Umsetzung
 
@@ -1095,10 +1106,10 @@ Wieso hat meine Klasse `Student` plötzlich eine Methode `where`? Hier nutzen wi
 
 Dabei wird die eigentliche Filterfunktion als Delegat übergeben, dies wiederum
 kann durch eine Lambdafunktion ausgedrückt werden.
-https://docs.microsoft.com/de-de/dotnet/api/system.linq.enumerable.where?view=netframework-4.8
+https://learn.microsoft.com/de-de/dotnet/api/system.linq.enumerable.where?view=net-8.0
 
 Dabei beschreiben die Lambdafunktionen sogenannten Prädikate, Funktionen, die eine
-bestimmte Bedingung prüfen und einen boolschen Wert zurückgeben.
+bestimmte Bedingung prüfen und einen booleschen Wert zurückgeben.
 
 ```csharp        WhereExample
 using System;
@@ -1384,8 +1395,7 @@ https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/linq/t
 
 Für die Vereinigten Staaten liegen umfangreiche Datensätze zur Namensgebung von
 Neugeborenen seit 1880 vor. Eine entsprechende csv-Datei (comma separated file)
-findet sich im Projektordner und /data, sie umfasst 258.000 Einträge. Diese sind
-wie folgt gegliedert
+ist wie folgt gegliedert
 
 ```
 1880,"John",0.081541,"boy"
@@ -1400,5 +1410,4 @@ Der Datensatz steht zum Download unter
 https://osf.io/d2vyg/
 bereit.
 
-Lesen Sie aus den Daten die jeweils am häufigsten vergebenen Vornamen aus und
-bestimmen Sie deren Anteil innerhalb des Jahrganges.
+Im Code-Ordner liegen Beispielimplementierungen für Sie bereit. Damit können Sie 
