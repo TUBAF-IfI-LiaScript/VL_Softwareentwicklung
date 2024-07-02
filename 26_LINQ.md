@@ -38,7 +38,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 > Frage: Was ist eigentlich eine csv Datei?
 
-Das Dateiformat CSV _comma-separated values_und beschreibt den Aufbau einer Textdatei zur Speicherung oder zum Austausch einfach strukturierter Daten. Die Dateinamenserweiterung lautet .csv.
+Das Dateiformat CSV _comma-separated values_ beschreibt den Aufbau einer Textdatei zur Speicherung oder zum Austausch einfach strukturierter Daten. Die Dateinamenserweiterung lautet .csv.
 
 ```text Prüfungsliste.csv
 # Prüfungen im SoSe
@@ -221,7 +221,7 @@ Die intuitive Lösung könnte folgendermaßen daher kommen:
 Die Dokumentation von `List<T>` findet sich unter folgendem [Link](https://docs.microsoft.com/de-de/dotnet/api/system.collections.generic.list-1.removeall?view=netcore-3.1)
 
 1. Wir "erinnern" uns an das `Count` Member der Klasse `List`.
-2. Für die Filteroperation implementieren Sie eine Loop. Sie können dazu `foreach` verwenden, weil `List<T>` das Interface `IEnumerable` implementiert.
+2. Für die Filteroperation implementieren Sie einen Loop. Sie können dazu `foreach` verwenden, weil `List<T>` das Interface `IEnumerable` implementiert.
 3. Die Sortieroperation bedingt die Anwendung einer Vergleichsoperation zwischen den Elementen der Liste. Eine Variante ist die Implementierung des Interfaces `IComparable` zu diesem Zweck.
 
 ```csharp    Solution
@@ -281,7 +281,7 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-> Eine Menge Aufwand für einen simple Operation! Welche zusätzlichen Probleme werden auftreten, wenn Sie eine solche Kette aus Datenerfassung, Verarbeitung und Ausgabe in realen Anwendungen umsetzen?
+> Eine Menge Aufwand für eine simple Operation! Welche zusätzlichen Probleme werden auftreten, wenn Sie eine solche Kette aus Datenerfassung, Verarbeitung und Ausgabe in realen Anwendungen umsetzen?
 
 ********************************************************************************
 
@@ -292,8 +292,8 @@ Alternativ schauen wir uns weiter im Kanon der `List<T>` Klasse um und realisier
 
 `RemoveAll()` zum Beispiel entfernt alle Elemente, die mit den Bedingungen
 übereinstimmen, die durch das angegebene Prädikat definiert werden. Interessant
-ist dabei die Umsetzung. Ein Prädikat ist eine generischer Delegat der einen
-Instanzen eines Typs `T` auf ein Kriterium hin evaluiert und einen Bool-Wert
+ist dabei die Umsetzung. Ein Prädikat ist ein generischer Delegat der eine
+Instanz eines Typs `T` auf ein Kriterium hin evaluiert und einen Bool-Wert
 als Ausgabe generiert.
 
 ```csharp
@@ -566,7 +566,7 @@ GROUP BY Professor.Name, Professor.PersNr;
 ## LINQ Umsetzung
 
 *Language Integrated Query* (LINQ) zielt auf die direkte Integration von
-Abfragefunktionen in die Sprache. Dafür definieren C# (wie auch VB.NET und F#)
+Abfragefunktionen in die Sprache. Dafür definiert C# (wie auch VB.NET und F#)
 eigene Schlüsselwörter sowie eine Menge an vorbestimmten
 LINQ-Methoden. Diese können aber durch den Anwender in der jeweiligen Sprache
 erweitert werden.
@@ -584,13 +584,13 @@ Verfahren wie *ActiveX Data Objects* ADO und *Open Database Connectivity* ODBC
 hingegen verwenden Abfragestrings. Diese können erst zur Laufzeit interpretiert
 werden; dann wirken Fehler gravierender und sind schwieriger zu analysieren.
 
-> Innerhalb des Quellprogramms in C# oder VB.NET präsentiert LINQ die Abfrage-Ergebnisse als streng typisierte Aufzählungen. Somit gewährleistet es Typsicherheit bereits zur Übersetzungszeit wobei ein minimaler Codeeinsatz zurRealisierung von Filter-, Sortier- und Gruppiervorgänge in Datenquellen investiert wird.
+> Innerhalb des Quellprogramms in C# oder VB.NET präsentiert LINQ die Abfrage-Ergebnisse als streng typisierte Aufzählungen. Somit gewährleistet es Typsicherheit bereits zur Übersetzungszeit wobei ein minimaler Codeeinsatz zur Realisierung von Filter-, Sortier- und Gruppiervorgänge in Datenquellen investiert wird.
 
 ![OOPGeschichte](./img/25_LINQ/AnbieterLINQ.png "LINQ Anwendungsfelder [^LinqAnbieter]")
 
 Merkmale von LINQ
 
-+ Die Arbeit mit Abfrageausdrücken ist einfach, da sie viele vertraute Konstrukte der Sprache C# verwenden.
++ Die Arbeit mit Abfrageausdrücken ist einfach, da sie viele vertraute Konstrukte der Sprache C# verwendet.
 
 + Alle Variablen in einem Abfrageausdruck sind stark typisiert, obwohl dieser in der Regel nicht explizit angegeben wird. Der Compiler übernimmt die Ableitung.
 
@@ -601,7 +601,7 @@ Merkmale von LINQ
 + LINQ kombiniert Abfrageausdrücke und Methodenaufrufe (`count` oder `max`). Hierin liegt die Flexibilität des Konzeptes.
 
 Diese Veranstaltung konzentriert sich auf die *LINQ to Objects* Realisierung von
-LINQ. Dabei können Abfragen mit einer beliebigen `IEnumerable`- oder `IEnumerable<T>`-Auflistungen angewandt werden.
+LINQ. Dabei können Abfragen mit einer beliebigen `IEnumerable`- oder `IEnumerable<T>`-Auflistung angewandt werden.
 
 [^LinqAnbieter]: Wikimedia https://commons.wikimedia.org/wiki/File:AnbieterLINQ.png, Author 'Mussklprozz'
 
@@ -683,7 +683,7 @@ class Program
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Erweiterungsmethoden schaffen uns die Möglichkeit weitere Funktionalität zu
-integrieren und gleichzeitig Datenobjekte durch eine Verarbeitungskette "hindurchzureichen". Erweitern Sie die statische Klasse doch mal um eine Methode, die dem Inhalt der Membervariable `content` zusätzlichen Information einfügt.
+integrieren und gleichzeitig Datenobjekte durch eine Verarbeitungskette "hindurchzureichen". Erweitern Sie die statische Klasse doch mal um eine Methode, die dem Inhalt der Membervariable `content` zusätzliche Information einfügt.
 
 Das Ganze ist natürlich noch recht behäbig, weil wir zwingend von einem bestimmten Typen ausgehen. Dies lässt sich über eine generische Implementierung lösen.
 
