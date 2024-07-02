@@ -28,8 +28,8 @@
 | 12    | 17. Juni  | Events                                            |
 |       | 21. Juni  | Threadkonzepte in C#                              |
 | 13    | 24. Juni  | Taskmodell                                        |
-|       | 28. Juni  | GUI - MAUI                                        |
-| 14    | 1. Juli   | GUI - MAUI                                        |
-|       | 5. Juli   | Language Integrated Query                         |
-| 15    | 8. Juli   | Design Pattern                                    |
+|       | 28. Juni  | Design Pattern                                    |
+| 14    | 1. Juli   | Language Integrated Query                         |
+|       | 5. Juli   | GUI - MAUI                                        |
+| 15    | 8. Juli   | GUI - MAUI                                        |
 |       | 12. Juli  | Anwendungungsfälle                                |

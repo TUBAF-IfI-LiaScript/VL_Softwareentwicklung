@@ -972,13 +972,13 @@ alle  numerischen Typen anwendbar.
                         {{2}}
 **********************************************************************
 
-In der Vorlesung 3 war bereits über die bitweisen boolschen Operatoren gesprochen worden. Diese verknüpfen Zahlenwerte auf Bitniveau. Die gleiche Notation (einzelne Operatorsymbole `&`, `|`) kann auch zur Verknüpfung von Boolschen Aussagen genutzt werden.
+In der Vorlesung 3 war bereits über die bitweisen booleschen Operatoren gesprochen worden. Diese verknüpfen Zahlenwerte auf Bitniveau. Die gleiche Notation (einzelne Operatorsymbole `&`, `|`) kann auch zur Verknüpfung von Booleschen Aussagen genutzt werden.
 
 Darüber hinaus existieren die doppelten Schreibweisen als eigenständige Operatorkonstrukte - `&&`, , `||`. Bei der Anwendung auf boolsche Variablen wird
 dabei zwischen "nicht-konditionalen" und "konditionalen" Operatoren
 unterschieden.
 
-Bedeutung der boolschen Operatoren für unterschiedliche Datentypen:
+Bedeutung der booleschen Operatoren für unterschiedliche Datentypen:
 
 | Operation | numerische Typen                                   | boolsche Variablen               |
 | --------- | -------------------------------------------------- | -------------------------------- |

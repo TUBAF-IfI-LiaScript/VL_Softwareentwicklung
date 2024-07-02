@@ -55,7 +55,7 @@ Der letztgenannte Bereich wurde im Zusammenhang mit der Ein- und Ausgabe von Dat
 
 **if**
 
-Verzweigungen in C# sind allein aufgrund von boolschen Ausdrücken realisiert. Eine
+Verzweigungen in C# sind allein aufgrund von booleschen Ausdrücken realisiert. Eine
 implizite Typwandlung wie in C `if (value)` ist nicht vorgesehen. Dabei sind entsprechend kombinierte Ausdrücke möglich, die auf boolsche Operatoren basieren.
 
 ```csharp
