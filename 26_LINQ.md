@@ -772,7 +772,7 @@ class Program
 Der Vorteil anonymer Typen liegt in ihrer Flexibilität. Die eigentlichen Daten werden entsprechend den Ergebnissen einer Funktion erzeugt.
 
 
-### Exkurs "Enumarables"
+### Exkurs "Enumerables"
 
 ![Collections](https://www.plantuml.com/plantuml/png/VP5FIyD04CNlyoaMl8afVe0GAlw1OZr8nVjsCzeXcrsPp1uKFxma4tN9jhqDx_VcCRnP3s9PKkzXw2XyMBQzSTuEmuq8qpu9RbmCE_f2Smq7Qj4uOkTHvoUKGsnrVY3qBS2qR3Rt8VN8LYAR-gKnTKr1aD-imwOn2zFUOsdwzTn6xz49nN3QiwL19deStz6qR_dJr8zNvdMPCll-KYxU6J7CwdF2XAMy4-kwKjvIwB0zdbIUiOYCBBfxZeyfImvvavTLazSFUODLzQrmDaFMZSBC3Tfh8KEsirgDy5-0xCWJR0mjMQQE8sYHIrMVeK9saJwZaDSOsjJx7m00)<!-- size="350px" -->
 
@@ -793,7 +793,7 @@ Zur Wiederholung soll nochmals ein kurzes Implementierungsbeispiel gezeigt
 werden. An dieser Stelle wird eine Klasse myStrings umgesetzt, die als
 Enumerationstyp realisiert werden soll. Entsprechend implementiert die Klasse
 `IEnumerable` das Interface `IEnumerable<string>` und referenziert einen
-Enumeratortyp `StringEnumerator`, der wiederum das Interface generische
+Enumeratortyp `StringEnumerator`, der wiederum das generische
 Interface `IEnumerator<string>` umsetzt.
 
 Transformieren Sie folgendes Codefragment in eine UML Darstellung.
@@ -939,7 +939,7 @@ Insgesamt sind 7 Query-Klauseln vorimplementiert, können aber durch Erweiterung
 | orderby  | sortiert die Elemente                             |
 | select   | projeziert die Laufvariable auf die Ergebnisfolge |
 | group    | bildet Gruppen innerhalb der Ergebnismenge        |
-| join     | vereinigt Elemente mehrere Datenquellen           |
+| join     | vereinigt Elemente mehrerer Datenquellen           |
 | let      | definiert eine Hilfsvariable                      |
 
 ```csharp
@@ -1065,7 +1065,7 @@ class Program
 ### Hinter den Kulissen
 
 Der Compiler transformiert LINQ-Anfragen in der Abfragesyntax in
-Lambda-Ausdrücke, Erweiterungsmethoden, Objektinitializer und anonyme Typen.
+Lambda-Ausdrücke, Erweiterungsmethode, Objektinitializer und anonyme Typen.
 Dabei sprechen wir von der Methodensyntax. Abfragesyntax und Methodensyntax sind
 semantisch identisch, aber viele Benutzer finden die Abfragesyntax einfacher und
 leichter zu lesen. Da aber einige Abfragen nur in der Methodensyntax möglich
@@ -1108,7 +1108,7 @@ Dabei wird die eigentliche Filterfunktion als Delegat übergeben, dies wiederum
 kann durch eine Lambdafunktion ausgedrückt werden.
 https://learn.microsoft.com/de-de/dotnet/api/system.linq.enumerable.where?view=net-8.0
 
-Dabei beschreiben die Lambdafunktionen sogenannten Prädikate, Funktionen, die eine
+Dabei beschreiben die Lambdafunktionen sogenannte Prädikate, Funktionen, die eine
 bestimmte Bedingung prüfen und einen booleschen Wert zurückgeben.
 
 ```csharp        WhereExample
@@ -1215,7 +1215,7 @@ Die group-Klausel ermöglicht es, die Ergebnisse auf der Basis eines Merkmals
 zusammenzufassen. Die group-Klausel gibt entsprechend eine Sequenz von
 `IGrouping<TKey,TElement>`-Objekten zurück, die null oder mehr Elemente
 enthalten, die mit dem Schlüsselwert `TKey` für die Gruppe übereinstimmen. Der
-Compiler leiten den Typ des Schlüssels anhand der Parameter von `group` her.
+Compiler leitet den Typ des Schlüssels anhand der Parameter von `group` her.
 IGrouping selbst implementiert das Interface `IEnumerable` und kann damit
 iteriert werden.
 
@@ -1410,4 +1410,6 @@ Der Datensatz steht zum Download unter
 https://osf.io/d2vyg/
 bereit.
 
-Im Code-Ordner liegen Beispielimplementierungen für Sie bereit. Damit können Sie 
+Im Code-Ordner liegen Beispielimplementierungen für Sie bereit. Damit können Sie die Implementierung einer LINQ Abfrage testen und mit den eben genannten Funktionalitäten experimentieren.
+
+Viel Spaß!
