@@ -2,7 +2,7 @@
 
 author:   Galina Rudolf, Sebastian Zug, 
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.1
+version:  1.0.2
 language: de
 narrator: Deutsch Female
 comment:  Grundlagen der Programmierung mit MAUI
@@ -62,10 +62,15 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 >
 > [Wikipedia Grafische Benutzeroberfläche](https://de.wikipedia.org/wiki/Grafische_Benutzeroberfl%C3%A4che)
 
-> Anekdote (erzält von ChatGPT): Steve Jobs besuchte das Xerox PARC (Palo Alto Research Center) in den späten 1970er Jahren und war beeindruckt von den Technologien, die er dort sah, insbesondere von der grafischen Benutzeroberfläche. Er erkannte sofort das Potenzial und implementierte ähnliche Konzepte in den Apple Lisa und später in den Macintosh. Jobs soll gesagt haben, dass der Besuch bei Xerox PARC einer der inspirierendsten Momente seiner Karriere war.
 
-![Xerox Alto](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Xerox_Alto.jpg/220px-Xerox_Alto.jpg "Xerox Alto (1973")
-![Apple Lisa](https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Apple_Lisa_%28Little_Apple_Museum%29_%288032162544%29.jpg/220px-Apple_Lisa_%28Little_Apple_Museum%29_%288032162544%29.jpg "Apple Lisa 1983")
+![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Schema_der_Schichten_der_grafischen_Benutzeroberfl%C3%A4che.svg/1280px-Schema_der_Schichten_der_grafischen_Benutzeroberfl%C3%A4che.svg.png "Fenstersystem-basierte grafische Benutzeroberflächen haben mehrere Schichten, z. B. Gnome-Shell auf Mutter und X.Org-Server - Autor Shmuel Csaba Otto Traian, https://de.wikipedia.org/wiki/Fenstermanager#/media/Datei:Schema_der_Schichten_der_grafischen_Benutzeroberfl%C3%A4che.svg")
+
+Steve Jobs besuchte das Xerox PARC (Palo Alto Research Center) in den späten 1970er Jahren und war beeindruckt von den Technologien, die er dort sah, insbesondere von der grafischen Benutzeroberfläche. Er erkannte sofort das Potenzial und implementierte ähnliche Konzepte in den Apple Lisa und später in den Macintosh. Jobs soll gesagt haben, dass der Besuch bei Xerox PARC einer der inspirierendste Momente seiner Karriere war.
+
+
+![Xerox Alto](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Xerox_Alto_mit_Rechner.JPG/800px-Xerox_Alto_mit_Rechner.JPG "Xerox Alto (1973) - Autor Jojo345 https://de.wikipedia.org/wiki/Xerox_Alto#/media/Datei:Xerox_Alto_mit_Rechner.JPG")
+![Xerox Alto](https://upload.wikimedia.org/wikipedia/en/f/f2/Xerox_8010_compound_document.jpg "Desktop Xerox 8010/40 Autor unbekannt, Wikimedia, https://en.wikipedia.org/wiki/File:Xerox_8010_compound_document.jpg")
+![Apple Lisa](https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Apple_Lisa_2_with_Profile_HD_cropped.jpg/800px-Apple_Lisa_2_with_Profile_HD_cropped.jpg "Lisa 2 (1984) mit einem geöffneten Arbeitsfenster und Maus, am unteren Bildschirmrand halbverdeckt einige der Desktop-Symbole wie „Disk“ und „Papierkorb“ - Autor Marcin Wichary, https://de.wikipedia.org/wiki/Apple_Lisa#/media/Datei:Apple_Lisa_2_with_Profile_HD_cropped.jpg")
 
 ************************************************
 
@@ -75,9 +80,34 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 + Benutzerfreundlich und intuitiv bedienbar, optimalere Lernkurve für weniger technisch versierte Benutzer 
 + Umfangreiche Möglichkeiten komplexe Daten zu visualisieren durch Diagramme, Tabellen und Grafiken 
-+ Interaktivität: Feedback in Echtzeit
-+ Minimierung von Eingabefehler
++ Interaktivität und Echtzeit-Feedback bei verschiedenen Eingabesystemen
++ Minimierung von Eingabefehler durch eine gezielte Nutzerführung
 + Ästhetik 
+
+### Programmierframeworks
+
+**Java**
+
++ Abstract Window Toolkit (AWT): ältere Java-GUI-Bibliothek, ist plattformabhängig, da es direkt auf die nativen GUI-Komponenten des jeweiligen Betriebssystems zugreift, hat eingeschränkte Funktionalität im Vergleich zu neueren Toolkits und ist weniger flexibel.
+
++ Swing: etablierte GUI-Toolkit-Bibliothek, die in der Standardbibliothek von Java enthalten ist, ist plattformunabhängig, hat umfangreiche Dokumentation einfache Handhabung. Veraltet im Vergleich zu neueren Technologien, weniger moderne UI.
+
++ [JavaFX](https://openjfx.io/): bietet eine reichhaltige Bibliothek für die Erstellung von ansprechenden grafischen Benutzeroberflächen (moderne UI-Designs, CSS-Styling, FXML für deklarative UI-Definitionen).
+
+**C# (.NET)**
+
++ [Windows Forms](https://learn.microsoft.com/de-de/dotnet/desktop/winforms/overview/?view=netdesktop-8.0): Teil des .NET Frameworks, ermöglicht die schnelle Erstellung von Desktop-Anwendungen für Windows (nur für Windows), gut in Visual Studio integriert aber weniger leistungsfähig und flexibel als neuere Technologien.
+
++ WPF (Windows Presentation Foundation): ein moderneres GUI-Toolkit in .NET, das reichhaltige grafische Benutzeroberflächen (nur für Windows) und Databinding-Funktionen unterstützt. Unterstützt Vektor-Grafiken, umfangreiche Styling- und Animationsmöglichkeiten, leistungsfähiges Databinding, aber eine steilere Lernkurve im Vergleich zu Windows Forms.
+
++ MAUI (Multi-platform App UI): ein neues plattformübergreifendes GUI-Toolkit, das die Erstellung von Anwendungen für Windows, macOS, iOS und Android ermöglicht.
+
+**C++**
+
++ [Qt](https://www.qt.io/): ein plattformübergreifendes GUI-Toolkit, das eine umfassende Bibliothek für die Entwicklung von Desktop- und Embedded-Anwendungen bietet, plattformunabhängig, leistungsfähig, umfangreiche Dokumentation, C++-basierte Signal-Slot-Mechanik, aber komplex.
+
++ [MFC](https://learn.microsoft.com/de-de/cpp/mfc/mfc-application-architecture-classes?view=msvc-170) (Microsoft Foundation Classes): eine Bibliothek von Klassen, die von Microsoft zur Unterstützung der GUI-Entwicklung (nur in Windows) bereitgestellt wird, in Visual Studio integriert, veraltet.
+
 
 ### Einstiegsbeispiel
 
@@ -108,7 +138,6 @@ Was sind die Kernelemente einer GUI-Anwendung?
 + **Ereignisse**: Aktionen, die durch Benutzerinteraktionen ausgelöst werden.
 + **Logik**: Die Programmlogik, die auf Benutzeraktionen reagiert.
 
-
 ## .NET MAUI - mehr als GUI
 
 https://de.wikipedia.org/wiki/.NET_MAUI 
@@ -134,13 +163,20 @@ In einer .NET MAUI-Anwendung schreiben Sie Code, der hauptsächlich mit der .NET
 + macOS 10.15 oder höher mit Mac Catalyst.
 + Windows 11 und Windows 10, Version 1809 oder höher, mit Windows UI Library (WinUI) 3.
 
+> Und was ist mit Linux? https://github.com/dotnet/maui/discussions/339
+
+> Alternativen? https://github.com/dotnet/maui/discussions/7779
 
 **MAUI- Geschichte**:
 
-+ Ursprung: Xamarin.Forms wurde als eine plattformübergreifende UI-Toolkit für .NET-Entwickler eingeführt, um UI-Code zu teilen und native Benutzeroberflächen für iOS, Android und UWP (Universal Windows Platform) zu erstellen, trotz Popularität gab es Einschränkungen hinsichtlich der Wartbarkeit, Erweiterbarkeit und der Unterstützung neuerer Plattformen wie macOS und Linux.
-+ Mai 2020: Microsoft kündigte .NET MAUI erstmals auf der Build-Konferenz. Die Idee war, eine weiterentwickelte Version von Xamarin.Forms zu schaffen, die eine einzige Codebasis bietet, um Anwendungen für iOS, Android, Windows und macOS zu entwickeln.
-+ 2022: Veröffentlichung als als Teil von .NET 6
-+ 2023 - aktuelle Version .NET 8
++ 2004 - Start des Mono Projekts von Miguel de Icaza und Nat Friedman eine Open-Source-Implementierung von Microsofts .NET Framework
++ 2011 - Xamarin wurde gegründet, um die Entwicklung von plattformübergreifenden mobilen Anwendungen zu ermöglichen
++ 2012 - Erste Version von Xamarin.Mac 
++ 2014 - Xamarin.Forms wurde eingeführt, um plattformübergreifende UIs zu erstellen
++ 2016 - Microsoft übernahm Xamarin
++ 2020 -  Microsoft kündigte .NET MAUI erstmals auf der Build-Konferenz. Die Idee war, eine weiterentwickelte Version von Xamarin.Forms zu schaffen, die eine einzige Codebasis bietet, um Anwendungen für iOS, Android, Windows und macOS zu entwickeln.
++ 2022 - Veröffentlichung von MAUI als als Teil von .NET 6
++ 2023 - aktuelle Version MAUI in .NET 8
 
 ![](https://learn.microsoft.com/de-de/previous-versions/xamarin/get-started/what-is-xamarin-forms-images/xamarin-forms-architecture.png "Architektur von Xamarin.Forms https://learn.microsoft.com/de-de/previous-versions/xamarin/get-started/what-is-xamarin-forms-images/xamarin-forms-architecture.png")
 
@@ -204,7 +240,7 @@ Die eXtensible Application Markup Language (XAML) ist eine XML-basierte Sprache,
 
 XAML eignet sich auch gut für die Verwendung mit dem Model-View-ViewModel (MVVM)-Muster für Definition der Ansicht. 
 
-In einer XAML-Datei können komplete Benutzeroberflächen mit allen .NET MAUI-Views, Layouts und Pages sowie benutzerdefinierten Klassen definieren. 
+In einer XAML-Datei können komplette Benutzeroberflächen mit allen .NET MAUI-Views, Layouts und Pages sowie benutzerdefinierten Klassen definieren. 
 
 XAML hat gegenüber gleichwertigem Code einige Vorteile:
 
@@ -443,9 +479,11 @@ XAML ermöglicht es, den Benutzeroberflächencode von dem Verhaltenscode zu tren
 + Der IL-Code aus den XAML-Dateien wird mit dem IL-Code aus den Code-Behind-Dateien (.xaml.cs) und dem restlichen C#-Code der Anwendung zusammengeführt.
 + Der gesamte IL-Code wird dann zu einer ausführbaren Datei für die Zielplattform zusammengeführt.
 
-XAML-Kompilierung kann deaktiviert werden, was jedoch nicht empfohlen wird, da XAML dann zur Laufzeit analysiert und interpretiert wird, wodurch die App-Leistung reduziert wird.
+Verwendung : 
++ Für das **Debugging** stellt die XAML-Kompilierung eine Kompilierungszeitüberprüfung von XAML bereit, konvertiert jedoch nicht den XAML-Code in die Il-Datei in der Assembly. Stattdessen werden XAML-Dateien als eingebettete Ressourcen im App-Paket enthalten und zur Laufzeit ausgewertet. 
++ Für Apps, die mit der Releasekonfiguration erstellt wurden, stellt die XAML-Kompilierung die Kompilierungszeitüberprüfung von XAML bereit und konvertiert den XAML-Code in eine IL, die in die Assembly geschrieben wurde. 
 
-https://learn.microsoft.com/de-de/dotnet/maui/xaml/xamlc?view=net-maui-8.0
+XAML-Kompilierung kann deaktiviert werden, was jedoch nicht empfohlen wird, da XAML dann zur Laufzeit analysiert und interpretiert wird, wodurch die App-Leistung reduziert wird.
 
 
 ## Trennung View Modell
@@ -533,400 +571,37 @@ public static class MauiProgram
 }
 ```
 
+Nachteile:
+
++ Alles läuft in einem Thread.
++ Keine klare Trennung von Daten, Logik und Benutzeroberfläche.
++ Die Testbarkeit ist sehr eingeschränkt.
+
 
 ### Model View Controller
 
-> Model View Controller (MVC, Modell-Ansicht-Steuerung) ist ein Entwurfsmuster zur Unterteilung einer Software in die drei Komponenten Datenmodell (model), Ansicht (view) und Programmsteuerung (controller) ... Ziel des Musters ist ein flexibler Programmentwurf, der eine spätere Änderung oder Erweiterung erleichtert und eine Wiederverwendbarkeit der einzelnen Komponenten ermöglicht - Wikipedia
+> Model View Controller (MVC, Modell-Ansicht-Steuerung) ist ein Entwurfsmuster zur Unterteilung einer Software in die drei Komponenten Datenmodell (model), Ansicht (view) und Programmsteuerung (controller) ... Ziel des Musters ist ein flexibler Programmentwurf, der eine spätere Änderung oder Erweiterung erleichtert und eine Wiederverwendbarkeit der einzelnen Komponenten ermöglicht.
 
 Im den Fällen, wenn das dasselbe Modell mit einem anderen Framework oder für ein anderes Betriebssystem visualisiert werden soll, müssen nur Controller und View neu implementiert werden.
 
-+ **Model** enthält Daten
-+ **View**  ist für die Darstellung der Daten des Modells und die Realisierung der Benutzerinteraktionen zuständig
++ **Model** enthält Daten (und die Geschäftslogik) der Anwendung. Es ist unabhängig von der Benutzeroberfläche und der Programmsteuerung.
++ **View**  ist für die Darstellung der Daten des Modells und die Realisierung der Benutzerinteraktionen zuständig. Der View beobachtet das Modell und aktualisiert sich automatisch, wenn sich die Daten ändern. Gleichzeitig leitet er Benutzerinteraktionen an den Controller weiter.
 + **Contoller** verwaltet die Ansicht und das Modell, im Allgemeinen wertet er die Benutzerinteraktionen von View und passt das Modell an (oder umgekehrt).
 
 ![MVC](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/ModelViewControllerDiagram2.svg/220px-ModelViewControllerDiagram2.svg.png)
 
 ### Model-View-ViewModel
 
-.NET MAUI verwendet in der Regel das "Model-View-ViewModel" (MVVM)-Entwurfsmuster, eine Variante des MVC, das speziell für die Entwicklung von Benutzeroberflächen vorgesehen ist. MVBM sieht vor eine Trennung zwischen Darstellung und Logik der Benutzerschnittstelle (UI) und des Software-Backends.
-
-https://de.wikipedia.org/wiki/Model_View_ViewModel
+> .NET MAUI verwendet in der Regel das "Model-View-ViewModel" (MVVM)-Entwurfsmuster, eine Variante des MVC, das speziell für die Entwicklung von Benutzeroberflächen vorgesehen ist. MVBM sieht vor eine Trennung zwischen Darstellung und Logik der Benutzerschnittstelle (UI) und des Software-Backends.
 
 **Komponenten**:
 
-**Model**: Die Daten- und Geschäftslogikschicht. 
+**Model**: Die Daten- und Geschäftslogikschicht. Diese Komponente sollte unabhängig von der Benutzeroberfläche sein. Veränderungen im Datenbestand sollten automatisch an die ViewModel-Komponente weitergeleitet werden.
 
 **View**: Die Darstellungsschicht ist für das Layout und die Anzeige der Daten verantwortlich. In .NET MAUI wird die View häufig durch XAML-Dateien (eXtensible Application Markup Language) beschrieben.
 
 **ViewModel**: Die Vermittlungsschicht zwischen Model und View enthält die Bindungslogik und verbindet die Daten im Model mit der Darstellung in der View. Das ViewModel übernimmt auch die Benutzerinteraktionen und stellt diese Daten für die View bereit.
 
-![MVVM](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/MVVMPattern.png/440px-MVVMPattern.png)
+![MVVM](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/MVVMPattern.png/440px-MVVMPattern.png "Die Datenbindung (Data Binding) ermöglicht die Trennung von View (z. B. XAML-Markup oder HTML) und Model für die Darstellung. Autor: Ugaya40, MVVM Pattern, https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/MVVMPattern.png/440px-MVVMPattern.png")")
 
-
-### Beispiel 
-
-
-
-
-
-
-## Koordinatensystem und Einheiten
-
-+ Der Ursprungspunkt (0,0) befindet sich in der oberen linken Ecke des Containers (z.B. des Bildschirms, eines Fensters oder eines Panels).
-+ Die x-Achse verläuft horizontal von links nach rechts. Die y-Achse verläuft vertikal von oben nach unten.
-+ Um Elemente präzise zu positionieren, müssen deren x- und y-Koordinaten innerhalb des Containers festgelegt werden (absolute Positionierung). Relative Positionierung bezieht sich auf andere Elemente oder den Container.
-+ Die Breite und Höhe von UI-Elementen können ebenfalls mit festen Größen oder relativ zur Größe des Containers oder anderer Elemente definiert werden werden.
-+ Um die Konsistenz der Benutzeroberfläche auf verschiedenen Geräten mit unterschiedlichen Pixeldichten sicherzustellen verwendet MAUI standardmäßig *geräteunabhängige Einheiten*, die an die Pixeldichte des Bildschirms angepasst werden (Grid, StackLayout, FlexLayout, FontSize, Padding, Margin).
-
-```xml
-<Label Text="Hello, World!"
-       FontSize="16" /> <!-- FontSize in device-independent units (like dp) -->
-```
-
-+ Für die pixelgenaue Positionierung können in Ausnahmefällen jedoch absolute Einheiten verwendet werden, z.B. in spezifischen Layouts wie AbsoluteLayout.
-  
-```csharp
-// Absolute layout in code behind (px example)
-var absoluteLayout = new AbsoluteLayout();
-AbsoluteLayout.SetLayoutBounds(label, new Rectangle(0, 0, 200, 50)); // Position and size in pixels
-```
-
-https://learn.microsoft.com/de-de/dotnet/maui/user-interface/layouts/absolutelayout?view=net-maui-8.0
-
-Beispiel für besonderes Design mit absoluten Angaben:
-
-```
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AbsoluteLayoutDemos.Views.XAML.StylishHeaderDemoPage"
-             Title="Stylish header demo">
-    <AbsoluteLayout Margin="20">
-        <BoxView Color="Silver"
-                 AbsoluteLayout.LayoutBounds="0, 10, 200, 5" />
-        <BoxView Color="Silver"
-                 AbsoluteLayout.LayoutBounds="0, 20, 200, 5" />
-        <BoxView Color="Silver"
-                 AbsoluteLayout.LayoutBounds="10, 0, 5, 65" />
-        <BoxView Color="Silver"
-                 AbsoluteLayout.LayoutBounds="20, 0, 5, 65" />
-        <Label Text="Stylish Header"
-               FontSize="24"
-               AbsoluteLayout.LayoutBounds="30, 25" />
-    </AbsoluteLayout>
-</ContentPage>
-```
-
-Die Werte "0, 10, 200, 5" geben die Position (x=0, y=10) und die Größe (width=200, height=5) des BoxView-Elements in Pixeln an.
-
-Relative Angaben für Position (Größe): 
-
-https://learn.microsoft.com/de-de/dotnet/maui/user-interface/align-position?view=net-maui-8.0
-
-+ Die Ausrichtung einer View, relativ zu ihrem übergeordneten Element, kann gesteuert werden, indem die Eigenschaft HorizontalOptions oder VerticalOptions der View auf eines der öffentlichen Felder aus der LayoutOptions-Struktur festgelegt wird. Die öffentlichen Felder sind Start, Center, End und Fill.
-
-```xml
-<StackLayout>
-  ...
-  <Label Text="Start" BackgroundColor="Gray" HorizontalOptions="Start" />
-  <Label Text="Center" BackgroundColor="Gray" HorizontalOptions="Center" />
-  <Label Text="End" BackgroundColor="Gray" HorizontalOptions="End" />
-  <Label Text="Fill" BackgroundColor="Gray" HorizontalOptions="Fill" />
-</StackLayout>
-```
-
-+ Durch die Einstellung von HorizontalOptions und VerticalOptions auf LayoutOptions.Fill ("Fill") kann erreicht werden, dass ein Element übereinstimmend mit dem übergeordneten Element dargestellt wird.
-
-```xml
-<StackLayout>
-    <BoxView Color="Silver" 
-        HorizontalOptions="Fill" 
-        VerticalOptions="Fill" />
-</StackLayout>
-```
-
-## Steuerelemente
-
-https://learn.microsoft.com/de-de/dotnet/communitytoolkit/maui/views/
-
-Die Benutzeroberfläche einer .NET Multi-Platform (.NET MAUI)-App besteht aus Objekten, die den nativen Steuerelementen jeder Zielplattform zugeordnet sind.
-
-Die Hauptsteuerelementgruppen, die zum Erstellen der Benutzeroberfläche einer .NET MAUI-App verwendet werden, sind Seiten, Layouts und Ansichten. Eine .NET MAUI-Seite nimmt im Allgemeinen den gesamten Bildschirm oder das gesamte Fenster ein. Die Seite enthält normalerweise ein Layout, das Ansichten und möglicherweise andere Layouts enthält. Seiten, Layouts und Ansichten leiten sich von der `VisualElement`-Klasse ab. Diese Klasse stellt eine Vielzahl von Eigenschaften, Methoden und Ereignissen bereit, die in abgeleiteten Klassen nützlich sind.
-
-https://learn.microsoft.com/de-de/dotnet/maui/user-interface/controls/?view=net-maui-8.0
-
-### Pages
-
-![ContentPage](https://learn.microsoft.com/de-de/dotnet/maui/user-interface/pages/media/contentpage/pages.png?view=net-maui-8.0)
-
-https://learn.microsoft.com/de-de/dotnet/maui/user-interface/controls/?view=net-maui-8.0
-
-**ContentPage:** zeigt eine einzelne Ansicht an und ist der am häufigsten verwendete Seitentyp. 
-
-https://learn.microsoft.com/de-de/dotnet/maui/user-interface/pages/contentpage?view=net-maui-8.0
-
-**FlyoutPage:**	ist eine Seite, die zwei verwandte Seiten mit Informationen verwaltet – eine Flyout-Seite, die Elemente darstellt, und eine Detailseite, die Informationen zu Elementen auf der Flyout-Seite darstellt. 
-
-**NavigationPage:** stellt eine hierarchische Navigation bereit, bei welcher Sie wie gewünscht in der Vorwärts- und in der Rückwärtsrichtung durch Seiten navigieren können. 
-
-**TabbedPage:** besteht aus einer Reihe von Seiten, die von Registerkarten über den oberen oder unteren Seitenrand navigierbar sind, wobei jede Registerkarte den Seiteninhalt lädt. 
-
-Seitenwechsel:
-
-```csharp
-button.Clicked += async (sender, args) =>
-{
-    await Navigation.PushAsync(new HelloXamlPage());
-};
-```
-
-![Pages](https://www.plantuml.com/plantuml/png/RP3F2i8m3CRlUOgzmDv0nb3qvf_3y9vkOLJIJjPK4NnugM5gYvUn_BvVFaBR83XBT0neWipOIzKpXb0TpOLwAUdQ-W4Dq_zqo-J82-HMLTVFPkbJHLdPTi2R7TESIKlfsOQ8d4NPWZfqroYpuOGZAKy6TEIkZ4B3bwS_s4nUoCkRAivCsF5ZYb8iwH5Y9ry4-YRxo6BJl4gV1dJEpGwD-Jtcuq1BVeYENm00)
-
-### Layouts
-
-https://learn.microsoft.com/de-de/dotnet/maui/user-interface/layouts/?view=net-maui-8.0
-
-Layoutklassen ermöglichen das Anordnen und Gruppieren von UI-Steuerelementen auf verschedene Art. 
-
-![Layouts](https://learn.microsoft.com/de-de/dotnet/maui/user-interface/layouts/media/layouts.png?view=net-maui-8.0)
-
-+ StackLayout - organisiert Elemente in einem eindimensionalen Stapel, entweder horizontal oder vertikal (auch über Orientation-Eigenschaft)
-+ HorizontalStackLayout
-+ VerticalStackLayout
-+ Grid
-+ FlexLayout: kann Elemente sowohl horizontal als auch vertikal in einem flexiblen Raster anordnen (FlexDirection: Row, Column, RowReverse,ColumnReverse). Es bricht die Zeile oder Spalte um, wenn zu viele Elemente vorhanden sind, um in eine einzelne Zeile oder Spalte zu passen.
-+ AbsoluteLayout : legt Position und Größe von untergeordneten Elementen mit expliziten Werten fest. Die Position wird durch die obere linke Ecke des untergeordneten Elements relativ zur oberen linken Ecke des AbsoluteLayout in geräteunabhängigen Einheiten angegeben.
-
-<StackLayout Margin="20,20,20,20" Spacing="10"">
-    <Button Text="auf die Plätze" />
-    <Button Text="fertig" />
-    <Button Text="los" />
-</StackLayout>
-
-```csharp
-using Microsoft.Maui.Controls;
-
-namespace MauiApp
-{
-    public partial class MainPage : ContentPage
-    {
-        public MainPage()
-        {
-            var grid = new Grid
-            {
-                RowDefinitions =
-                {
-                    new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
-                    new RowDefinition { Height = new GridLength(2, GridUnitType.Star) },
-                },
-                ColumnDefinitions =
-                {
-                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
-                    new ColumnDefinition { Width = new GridLength(2, GridUnitType.Star) },
-                }
-            };
-
-            var label1 = new Label
-            {
-                Text = "Oben links",
-                BackgroundColor = Colors.LightBlue
-            };
-
-            var label2 = new Label
-            {
-                Text = "Oben rechts",
-                BackgroundColor = Colors.LightCoral
-            };
-
-            var label3 = new Label
-            {
-                Text = "Unten links",
-                BackgroundColor = Colors.LightGreen
-            };
-
-            var label4 = new Label
-            {
-                Text = "Unten rechts",
-                BackgroundColor = Colors.LightGoldenrodYellow
-            };
-
-
-			grid.Children.Add(label1);
-            Grid.SetRow(label1, 0);
-            Grid.SetColumn(label1, 0);
-
-            grid.Children.Add(label2);
-            Grid.SetRow(label2, 0);
-            Grid.SetColumn(label2, 1);
-
-            grid.Children.Add(label3);
-            Grid.SetRow(label3, 1);
-            Grid.SetColumn(label3, 0);
-
-            grid.Children.Add(label4);
-            Grid.SetRow(label4, 1);
-            Grid.SetColumn(label4, 1);
-
-            Content = grid;
-        }
-    }
-}
-```
-
-Um gewünschte Layout zu erstellen ist es unter Umständen notwendig die Layouts zu verschachteln.
-
-![Layouts](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuN9CAixFAIr9zKcip2yjKL3GrQsnKu1mkDnoKYkmYRiNPQQWYWIN92PdEoKMfw88At1vv1TbLkNdbIJcW5MW60RNmuLFBYorg2Gp6Rz-XzIy5A1V0000)
-
-### Views (Controls, Widgets) 
-https://learn.microsoft.com/de-de/dotnet/maui/user-interface/controls/?view=net-maui-8.0
-
-.NET MAUI-Ansichten sind die UI-Objekte wie Labels, Schaltflächen und Schieberegler, die häufig als Steuerelemente oder Widgets in anderen Umgebungen bezeichnet werden.
-
-Eine Auswahl der Views:
-
-**Label**: einfache Textausgabe
-
-**Button**: Schalter
-
-**Entry**: Texteingabe
-
-**Editor**: ermöglicht die Eingabe und Bearbeitung mehrerer Textzeilen
-
-**CheckBox**: Ankreuzfeld
-
-![CheckBox](https://learn.microsoft.com/de-de/dotnet/maui/user-interface/controls/media/checkbox/checkbox-databinding.png?view=net-maui-8.0)
-
-RadioButton : Auswahlschalter einer RadioGroup
-
-![RadioButton](https://learn.microsoft.com/de-de/dotnet/maui/user-interface/controls/media/radiobutton/radiobuttons-default.png?view=net-maui-8.0)
-
-**Bild** 
-
-Die .NET Multi-Platform App UI (.NET MAUI) Image zeigt ein Bild an, das aus einer lokalen Datei, einem URI oder einem Datenstrom geladen werden kann. Die standardmäßigen Plattformbildformate werden unterstützt, einschließlich animierter GIFs, und lokale SVG-Dateien (Scalable Vector Graphics) werden ebenfalls unterstützt. 
-
-Eigenschaften: 
-
-+ Aspect, vom Typ Aspect, definiert den Skalierungsmodus des Bilds.
-+ Source, vom Typ ImageSource, gibt die Quelle des Bilds an: FromFile, FromUri, FromStream.
-
-
-```xml
-<Image Source="dotnet_bot.png" />
-<Image Source="https://aka.ms/campus.jpg" />
-```
-
-```csharp
-Image image1 = new Image
-{
-    Source = ImageSource.FromFile("dotnet_bot.png")
-};
-// Image imag1e = new Image { Source = "dotnet_bot.png" };
-
-Image image2 = new Image();
-image2.Source = new UriImageSource
-{
-    Uri = new Uri("https://tu-freiberg.de/themes/custom/tubaf_barrio/logo.svg"),
-    CacheValidity = new TimeSpan(10,0,0,0)
-};
-
-Image image3 = new Image
-{
-    Source = ImageSource.FromStream(() => stream)
-};
-```
-
-Web-View
-
-```xml
-<WebView HeightRequest="800" WidthRequest="400" Source="https://tu-freiberg.de" />
-```
-
-```csharp
-WebView webView = new WebView
-{
-    Source = "https://tu-freiberg.de"
-};
-
-//...
-
-webView.Reload();
-```
-
-
-https://learn.microsoft.com/de-de/dotnet/maui/user-interface/controls/label?view=net-maui-8.0
-
-https://learn.microsoft.com/de-de/dotnet/maui/user-interface/controls/button?view=net-maui-8.0
-
-https://learn.microsoft.com/de-de/dotnet/maui/user-interface/controls/radiobutton?view=net-maui-8.0
-
-https://learn.microsoft.com/de-de/dotnet/maui/user-interface/controls/checkbox?view=net-maui-8.0
-
-https://learn.microsoft.com/de-de/dotnet/maui/user-interface/controls/entry?view=net-maui-8.0
-
-https://learn.microsoft.com/de-de/dotnet/maui/user-interface/controls/editor?view=net-maui-8.0
-
-https://learn.microsoft.com/de-de/dotnet/maui/user-interface/controls/image?view=net-maui-8.0
-
-https://learn.microsoft.com/de-de/dotnet/maui/user-interface/controls/webview?view=net-maui-8.0&pivots=devices-android
-
-
-![Views](https://www.plantuml.com/plantuml/png/ROv1IiOm48NtEKKlq2j8gNGXY8A8hYV9eD59KfA9jU3XfOxbJyA_w_lUrvUPCaFYuac1pfp0y608SXuUzGSQxkdiWWLDUBrT23q6LgqrZEFFpRadYh1-xG6-tDkH6-aSVN6v03LLyuCuk4dLs6ekp36S3MxgzXtDvno_AtGNriB7LyMMm6cNBFKVj8vZwkazQ2I1_tcFXIlmZ7ubOBINDyHHJs1Th4ziLFMAkZjhmc2Bfry0)
-
-Nicht behandelt weitere GUI-Elemente:
-Graphiken, Windows, Dialoge, Toolbars, Menüs
-
-### Handler
-
-https://learn.microsoft.com/de-de/dotnet/maui/user-interface/handlers/?view=net-maui-8.0
-
-.NET Multi-platform App UI (.NET MAUI) bietet eine Sammlung plattformübergreifender Schnittstellendarstellungen, die die Steuerelemente abstrahiert. Plattformübergreifende Steuerelemente, die diese Schnittstellen implementieren, werden als virtuelle Ansichten bezeichnet. Handler ordnen diese virtuellen Ansichten Steuerelementen auf jeder Plattform zu, die als systemeigene Ansichten bezeichnet werden. Handler sind auch für die Instanziierung der zugrunde liegenden nativen Ansicht und das Zuordnen der plattformübergreifenden Steuerelement-API zur nativen Ansichts-API verantwortlich. Beispielsweise ordnet ein Handler unter iOS ein .NET MAUI Button einem iOS UIButtonzu. Unter Android ist die Button Zuordnung zu einem AppCompatButton: 
-
-![ButtonHandler](https://learn.microsoft.com/de-de/dotnet/maui/user-interface/handlers/media/overview/button-handler.png?view=net-maui-8.0)
-
-Auf .NET MAUI-Handler wird über ihre steuerelementspezifische Schnittstelle zugegriffen, z. B. IButton für einen Button.
-
-## Kompletes Beispiel mit verschieden Views
-
-Chaos on the desk:
-
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Chaos.MainPage">
-
-   <ScrollView>
-        <StackLayout Padding="10">            
-            <!-- Zu erledigen -->
-            <Label Text="Zu erledigen" FontAttributes="Bold" FontSize="Large" />
-            <HorizontalStackLayout>
-                <CheckBox IsChecked="False" VerticalOptions="Center"/>
-                <Label Text="Organisieren die Aufgaben" VerticalOptions="Center"/>
-            </HorizontalStackLayout>
-            <HorizontalStackLayout>
-                <CheckBox IsChecked="False" VerticalOptions="Center"/> 
-                <Label Text="Halten den Arbeitsplatz sauber" VerticalOptions="Center"/>
-            </HorizontalStackLayout>
-            <BoxView HeightRequest="10" /> <!-- Spacer -->
-            <!-- Kluge Sprüche -->
-            <Label Text="Computer werden kleiner und kleiner, bald verschwinden sie völlig - Ephraim Kishon" 
-                   FontAttributes="Bold" FontSize="Small" />
-            <BoxView HeightRequest="10" /> <!-- Spacer -->
-            <!-- Mäusebilder aus Ressorces/Images-->
-            <Label Text="Mäusebilder" FontAttributes="Bold" FontSize="Large" />
-            <HorizontalStackLayout>
-                <Image Source="maus1.png" Aspect="AspectFit" HeightRequest="150" />
-                <Image Source="maus2.jpg" Aspect="AspectFit" HeightRequest="150" />
-            </HorizontalStackLayout>
-            <BoxView HeightRequest="10" /> <!-- Spacer -->
-            <!-- Tagebuch -->
-            <Label Text="Tagebuch" FontAttributes="Bold" FontSize="Large" />
-            <Editor Placeholder="Tagebucheinträge..." HeightRequest="100" />
-            <!-- Kalenderansicht -->
-            <Label Text="Kalender" FontAttributes="Bold" FontSize="Large" />
-            <DatePicker FontSize="Large" Date="07/01/2024" />
-            <BoxView HeightRequest="10" /> <!-- Spacer -->
-        </StackLayout>
-    </ScrollView>
-
-</ContentPage>
-```
+> Das Codebeispiel `MauiMVVMMinimal` im Projektordner `/code/27_MAUI/MauiMVVMMinimal` zeigt die Implementierung von Bindings auf der Datenebene eines einfachen MVVM-Beispiweise in .NET MAUI. Das Beispiel fokussiert die Interaktion von View und ViewModel auf der Basis eines Bindings auf der Datenebene.

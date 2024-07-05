@@ -1,6 +1,9 @@
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 
+// Minimal Example
+// ---------------------------------
+
 public class App : Application
 {
     public App()

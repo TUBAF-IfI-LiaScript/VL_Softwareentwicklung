@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiMVVM.MVVC">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+
+            <Label
+                Text="MVC Variant"
+                FontSize="Large"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+            <Entry
+                Text=""
+                Style="{StaticResource Headline}"/>
+
+            <Label
+                Text="{Binding NewName}" />
+
+            <Button
+                Text="Change Name" 
+                SemanticProperties.Hint="Counts the number of times you click"
+                Command="{Binding ChangeNameCommand}"
+                HorizontalOptions="Fill" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
