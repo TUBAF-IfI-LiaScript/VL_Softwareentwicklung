@@ -65,7 +65,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Schema_der_Schichten_der_grafischen_Benutzeroberfl%C3%A4che.svg/1280px-Schema_der_Schichten_der_grafischen_Benutzeroberfl%C3%A4che.svg.png "Fenstersystem-basierte grafische Benutzeroberflächen haben mehrere Schichten, z. B. Gnome-Shell auf Mutter und X.Org-Server - Autor Shmuel Csaba Otto Traian, https://de.wikipedia.org/wiki/Fenstermanager#/media/Datei:Schema_der_Schichten_der_grafischen_Benutzeroberfl%C3%A4che.svg")
 
-Steve Jobs besuchte das Xerox PARC (Palo Alto Research Center) in den späten 1970er Jahren und war beeindruckt von den Technologien, die er dort sah, insbesondere von der grafischen Benutzeroberfläche. Er erkannte sofort das Potenzial und implementierte ähnliche Konzepte in den Apple Lisa und später in den Macintosh. Jobs soll gesagt haben, dass der Besuch bei Xerox PARC einer der inspirierendste Momente seiner Karriere war.
+Steve Jobs besuchte das Xerox PARC (Palo Alto Research Center) in den späten 1970er Jahren und war beeindruckt von den Technologien, die er dort sah, insbesondere von der grafischen Benutzeroberfläche. Er erkannte sofort das Potenzial und implementierte ähnliche Konzepte in den Apple Lisa und später in den Macintosh. Jobs soll gesagt haben, dass der Besuch bei Xerox PARC einer der inspirierendsten Momente seiner Karriere war.
 
 
 ![Xerox Alto](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Xerox_Alto_mit_Rechner.JPG/800px-Xerox_Alto_mit_Rechner.JPG "Xerox Alto (1973) - Autor Jojo345 https://de.wikipedia.org/wiki/Xerox_Alto#/media/Datei:Xerox_Alto_mit_Rechner.JPG")
@@ -90,7 +90,7 @@ Steve Jobs besuchte das Xerox PARC (Palo Alto Research Center) in den späten 19
 
 + Abstract Window Toolkit (AWT): ältere Java-GUI-Bibliothek, ist plattformabhängig, da es direkt auf die nativen GUI-Komponenten des jeweiligen Betriebssystems zugreift, hat eingeschränkte Funktionalität im Vergleich zu neueren Toolkits und ist weniger flexibel.
 
-+ Swing: etablierte GUI-Toolkit-Bibliothek, die in der Standardbibliothek von Java enthalten ist, ist plattformunabhängig, hat umfangreiche Dokumentation einfache Handhabung. Veraltet im Vergleich zu neueren Technologien, weniger moderne UI.
++ Swing: etablierte GUI-Toolkit-Bibliothek, die in der Standardbibliothek von Java enthalten ist, ist plattformunabhängig, hat umfangreiche Dokumentation und eine einfache Handhabung. Veraltet im Vergleich zu neueren Technologien, weniger moderne UI.
 
 + [JavaFX](https://openjfx.io/): bietet eine reichhaltige Bibliothek für die Erstellung von ansprechenden grafischen Benutzeroberflächen (moderne UI-Designs, CSS-Styling, FXML für deklarative UI-Definitionen).
 
@@ -174,8 +174,8 @@ In einer .NET MAUI-Anwendung schreiben Sie Code, der hauptsächlich mit der .NET
 + 2012 - Erste Version von Xamarin.Mac 
 + 2014 - Xamarin.Forms wurde eingeführt, um plattformübergreifende UIs zu erstellen
 + 2016 - Microsoft übernahm Xamarin
-+ 2020 -  Microsoft kündigte .NET MAUI erstmals auf der Build-Konferenz. Die Idee war, eine weiterentwickelte Version von Xamarin.Forms zu schaffen, die eine einzige Codebasis bietet, um Anwendungen für iOS, Android, Windows und macOS zu entwickeln.
-+ 2022 - Veröffentlichung von MAUI als als Teil von .NET 6
++ 2020 -  Microsoft kündigte .NET MAUI erstmals auf der Build-Konferenz an. Die Idee war, eine weiterentwickelte Version von Xamarin.Forms zu schaffen, die eine einzige Codebasis bietet, um Anwendungen für iOS, Android, Windows und macOS zu entwickeln.
++ 2022 - Veröffentlichung von MAUI als Teil von .NET 6
 + 2023 - aktuelle Version MAUI in .NET 8
 
 ![](https://learn.microsoft.com/de-de/previous-versions/xamarin/get-started/what-is-xamarin-forms-images/xamarin-forms-architecture.png "Architektur von Xamarin.Forms https://learn.microsoft.com/de-de/previous-versions/xamarin/get-started/what-is-xamarin-forms-images/xamarin-forms-architecture.png")
@@ -240,7 +240,7 @@ Die eXtensible Application Markup Language (XAML) ist eine XML-basierte Sprache,
 
 XAML eignet sich auch gut für die Verwendung mit dem Model-View-ViewModel (MVVM)-Muster für Definition der Ansicht. 
 
-In einer XAML-Datei können komplette Benutzeroberflächen mit allen .NET MAUI-Views, Layouts und Pages sowie benutzerdefinierten Klassen definieren. 
+In einer XAML-Datei können komplette Benutzeroberflächen mit allen .NET MAUI-Views, Layouts und Pages sowie benutzerdefinierten Klassen definiert werden. 
 
 XAML hat gegenüber gleichwertigem Code einige Vorteile:
 
@@ -249,7 +249,7 @@ XAML hat gegenüber gleichwertigem Code einige Vorteile:
 
 Nachteile bzw. Einschränkungen:
 
-+ XAML darf keinen Code enthalten, z.B. keine Kontroll-Strukturen und in der Regel keine Klassen instanziiren, die keinen parameterlosen Konstruktor definieren, und Methoden aufrufen. 
++ XAML darf keinen Code enthalten, z.B. keine Kontroll-Strukturen und in der Regel keine Klassen instanziieren, die keinen parameterlosen Konstruktor definieren, und Methoden aufrufen. 
 + Alle Ereignishandler müssen in der Regel in einer Codedatei definiert werden.
 
 *************************************
@@ -329,7 +329,7 @@ Die Application-Klasse repräsentiert die gesamte Anwendung. Sie dient als Einst
 Hauptfunktionen:
 
 + Initialisiert die App und ihre Ressourcen.
-+ Verwaltet des Lebenszyklus der App (z.B. Starten, Beenden, Anhalten, Fortsetzen).
++ Verwaltet den Lebenszyklus der App (z.B. Starten, Beenden, Anhalten, Fortsetzen).
 + Definiert globale Ressourcen und Styles, die in der gesamten App verwendet werden können.
 + Gestaltet die Hauptseite der Anwendung, die beim Start angezeigt wird.
 
@@ -370,7 +370,7 @@ public partial class App : Application
 Shell 
 =================
 
-Die Shell-Klasse beschreibt visuelle Hierarchie der App, ist ein Container für die gesamte App-Navigation. Sie bietet eine einheitliche Möglichkeit, die Navigationsstruktur und das Erscheinungsbild der App zu definieren.
+Die Shell-Klasse beschreibt die visuelle Hierarchie der App, ist ein Container für die gesamte App-Navigation. Sie bietet eine einheitliche Möglichkeit, die Navigationsstruktur und das Erscheinungsbild der App zu definieren.
 
 Hauptfunktionen:
 
