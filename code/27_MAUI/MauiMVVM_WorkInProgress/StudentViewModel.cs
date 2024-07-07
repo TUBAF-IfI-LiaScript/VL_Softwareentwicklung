@@ -1,36 +1,30 @@
 using System.ComponentModel;
 
-namespace MauiMVVM;
-
-public class StudentViewModel: INotifyPropertyChanged
+public class StudentViewModel : INotifyPropertyChanged
 {
+    private StudentModel studentModel;
     public Command ChangeNameCommand { private set; get; }
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
-    // Bindable properties
-    private string _name { get; set;}
-
-    public StudentViewModel(string name)
+    public StudentViewModel(StudentModel model)
     {
-        _name = name;
+        studentModel = model;
 
-        ChangeNameCommand = new Command(
-        execute: () =>
+        ChangeNameCommand = new Command(execute: () =>
         {
-            Name = Name.ToUpper();
+            Name = studentModel.ToUpper();
         });
 
         ChangePropertyAfterDelay(5);
     }
 
-    // Business logic
     public string Name
     {
-        get { return _name; }
+        get { return studentModel.Name; }
         set
         {
-            _name = value;
+            studentModel.Name = value;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
         }
     }
@@ -39,6 +33,5 @@ public class StudentViewModel: INotifyPropertyChanged
     {
         await Task.Delay(delayInSeconds * 1000);
         Name = "Jane";
-        Console.WriteLine("Property updated to: " + Name);
     }
 }
