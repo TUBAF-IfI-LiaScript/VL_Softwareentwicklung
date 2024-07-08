@@ -282,7 +282,7 @@ Layoutklassen ermöglichen das Anordnen und Gruppieren von UI-Steuerelementen.
 </StackLayout>
 ```
 
-![StackLayout](./img/27_Maui/StackLayout.png)
+![StackLayout](./img/27_Maui/StackLayout.PNG)
 
 ```csharp
 using Microsoft.Maui.Controls;
@@ -358,7 +358,7 @@ namespace MauiApp
 }
 ```
 
-![Grid](./img/27_Maui/Grid.png)
+![Grid](./img/27_Maui/Grid.PNG)
 
 Um gewünschte Layout zu erstellen ist es unter Umständen notwendig die Layouts zu verschachteln.
 
@@ -549,7 +549,7 @@ Chaos on the desk:
 
 </ContentPage>
 ```
-![Chaos](./img/27_Maui/Chaos.png)
+![Chaos](./img/27_Maui/Chaos.PNG)
 
 ## App-Lebenszyklus
 
@@ -716,7 +716,7 @@ button.Pressed += (sender, args) => { /* Aktion */ };
 button.Released += (sender, args) => { /* Aktion */ };
 ```
 
-![FarbButton](./img/27_Maui/FarbButton.png)
+![FarbButton](./img/27_Maui/FarbButton.PNG)
 
 ```csharp
 public partial class MainPage : ContentPage
@@ -811,7 +811,7 @@ listView.ItemSelected += (sender, args) => { /* Aktion */ };
 | :---- | :------------------------------------------------ |
 | **CheckedChanged** | | 
 
-![Ampel](./img/27_Maui/Ampel.png)`
+![Ampel](./img/27_Maui/Ampel.PNG)`
 
 ```xml
     <ScrollView>
