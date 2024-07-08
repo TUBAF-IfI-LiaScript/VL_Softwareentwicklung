@@ -16,7 +16,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/27_MAUI_II.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/28_MAUI_II.md)
 
 # .NET MAUI Elemente 
 
@@ -27,7 +27,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 | **Semester**             | @config.semester                                                                     |
 | **Hochschule:**          | @config.university                                                                   |
 | **Inhalte:**             | @comment                                                                             |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/27_MAUI_II.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/28_MAUI_II.md |
 | **Autoren**              | @author                                                                              |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
@@ -282,7 +282,7 @@ Layoutklassen ermöglichen das Anordnen und Gruppieren von UI-Steuerelementen.
 </StackLayout>
 ```
 
-![StackLayout](./img/MAUI_I/StackLayout.png)
+![StackLayout](./img/27_Maui/StackLayout.png)
 
 ```csharp
 using Microsoft.Maui.Controls;
@@ -358,7 +358,7 @@ namespace MauiApp
 }
 ```
 
-![Grid](./img/MAUI_I/Grid.png)
+![Grid](./img/27_Maui/Grid.png)
 
 Um gewünschte Layout zu erstellen ist es unter Umständen notwendig die Layouts zu verschachteln.
 
@@ -549,7 +549,7 @@ Chaos on the desk:
 
 </ContentPage>
 ```
-![Chaos](./img/MAUI_I/Chaos.png)
+![Chaos](./img/27_Maui/Chaos.png)
 
 ## App-Lebenszyklus
 
@@ -716,7 +716,7 @@ button.Pressed += (sender, args) => { /* Aktion */ };
 button.Released += (sender, args) => { /* Aktion */ };
 ```
 
-![FarbButton](./img/MAUI_II/FarbButton.png)
+![FarbButton](./img/27_Maui/FarbButton.png)
 
 ```csharp
 public partial class MainPage : ContentPage
@@ -811,7 +811,7 @@ listView.ItemSelected += (sender, args) => { /* Aktion */ };
 | :---- | :------------------------------------------------ |
 | **CheckedChanged** | | 
 
-![Ampel](./img/MAUI_II/Ampel.png)`
+![Ampel](./img/27_Maui/Ampel.png)`
 
 ```xml
     <ScrollView>
