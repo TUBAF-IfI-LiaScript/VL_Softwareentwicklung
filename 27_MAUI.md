@@ -481,7 +481,7 @@ XAML ermöglicht es, den Benutzeroberflächencode von dem Verhaltenscode zu tren
 + Der gesamte IL-Code wird dann zu einer ausführbaren Datei für die Zielplattform zusammengeführt.
 
 Verwendung : 
-+ Für das **Debugging** stellt die XAML-Kompilierung eine Kompilierungszeitüberprüfung von XAML bereit, konvertiert jedoch nicht den XAML-Code in die Il-Datei in der Assembly. Stattdessen werden XAML-Dateien als eingebettete Ressourcen im App-Paket enthalten und zur Laufzeit ausgewertet. 
++ Für das **Debugging** stellt die XAML-Kompilierung eine Kompilierungszeitüberprüfung von XAML bereit, konvertiert jedoch nicht den XAML-Code in die IL-Datei in der Assembly. Stattdessen sind XAML-Dateien als eingebettete Ressourcen im App-Paket enthalten und werden zur Laufzeit ausgewertet. 
 + Für Apps, die mit der Releasekonfiguration erstellt wurden, stellt die XAML-Kompilierung die Kompilierungszeitüberprüfung von XAML bereit und konvertiert den XAML-Code in eine IL, die in die Assembly geschrieben wurde. 
 
 XAML-Kompilierung kann deaktiviert werden, was jedoch nicht empfohlen wird, da XAML dann zur Laufzeit analysiert und interpretiert wird, wodurch die App-Leistung reduziert wird.
@@ -491,7 +491,7 @@ XAML-Kompilierung kann deaktiviert werden, was jedoch nicht empfohlen wird, da X
 
 > Wie bauen wir nun aber eine Anwendung, die nicht nur eine einfache Benutzeroberfläche hat, sondern Daten erfasst, verarbeitet und speichert? Wie können wir die Benutzeroberfläche von der Logik trennen, um die Wartbarkeit und Erweiterbarkeit zu verbessern?
 
-Starten wir zunächst mit einem Gegenbeispiel, das SIe auch im Code Ordner des Projekts unter `/code/27_MAUI/MauiTerrible` finden.
+Starten wir zunächst mit einem Gegenbeispiel, das Sie auch im Code Ordner des Projekts unter `/code/27_MAUI/MauiTerrible` finden.
 
 ```csharp
 // THIS CODE IS A MOTIVATION EXAMPLE FOR MVC OR MVVM PATTERNS. IT IS NOT
@@ -583,11 +583,11 @@ Nachteile:
 
 > Model View Controller (MVC, Modell-Ansicht-Steuerung) ist ein Entwurfsmuster zur Unterteilung einer Software in die drei Komponenten Datenmodell (model), Ansicht (view) und Programmsteuerung (controller) ... Ziel des Musters ist ein flexibler Programmentwurf, der eine spätere Änderung oder Erweiterung erleichtert und eine Wiederverwendbarkeit der einzelnen Komponenten ermöglicht.
 
-Im den Fällen, wenn das dasselbe Modell mit einem anderen Framework oder für ein anderes Betriebssystem visualisiert werden soll, müssen nur Controller und View neu implementiert werden.
+In den Fällen, wenn dasselbe Modell mit einem anderen Framework oder für ein anderes Betriebssystem visualisiert werden soll, müssen nur Controller und View neu implementiert werden.
 
 + **Model** enthält Daten (und die Geschäftslogik) der Anwendung. Es ist unabhängig von der Benutzeroberfläche und der Programmsteuerung.
 + **View**  ist für die Darstellung der Daten des Modells und die Realisierung der Benutzerinteraktionen zuständig. Der View beobachtet das Modell und aktualisiert sich automatisch, wenn sich die Daten ändern. Gleichzeitig leitet er Benutzerinteraktionen an den Controller weiter.
-+ **Contoller** verwaltet die Ansicht und das Modell, im Allgemeinen wertet er die Benutzerinteraktionen von View und passt das Modell an (oder umgekehrt).
++ **Contoller** verwaltet die Ansicht und das Modell, im Allgemeinen wertet er die Benutzerinteraktionen von View aus und passt das Modell an (oder umgekehrt).
 
 Auf einem sehr abstrakten Level kann man den Informationsfluss wie folgt verstehen.
 
