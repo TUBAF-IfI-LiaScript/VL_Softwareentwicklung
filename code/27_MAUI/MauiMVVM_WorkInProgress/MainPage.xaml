@@ -3,30 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiMVVM.MainPage">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
+    <!-- <ContentPage.BindingContext>
+        <StudentViewModel/>
+    </ContentPage.BindingContext> -->
 
+    <ScrollView>
+        <VerticalStackLayout Padding="30,0" Spacing="25">
             <Label
-                Text="Intuitive Variant"
+                Text="Decoupled MVVM with MAUI"
                 FontSize="Large"
                 FontAttributes="Bold"
                 HorizontalOptions="Center" />
             <Entry
                 x:Name="EntryName"
-                Text=""
+                Text="{Binding Name}" 
                 Style="{StaticResource Headline}"/>
 
             <Label
-                x:Name="LabelName"
                 HorizontalTextAlignment="Center"
-                Text="- Student name -" />
+                Text="{Binding Name}" />
 
             <Button
                 x:Name="NewButtonName"
-                Text="Change Name" 
-                Clicked="Button_Clicked"
+                Text="Process Name" 
+                Command="{Binding ChangeNameCommand}" 
                 SemanticProperties.Hint="Changes the student name"
                 HorizontalOptions="Fill" />
         </VerticalStackLayout>

@@ -2,7 +2,7 @@
 
 author:   Galina Rudolf, Sebastian Zug, 
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 comment:  Grundlagen der Programmierung mit MAUI
@@ -10,6 +10,7 @@ tags:
 logo:     
 
 import: https://github.com/liascript/CodeRunner
+        https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
@@ -588,7 +589,20 @@ Im den Fällen, wenn das dasselbe Modell mit einem anderen Framework oder für e
 + **View**  ist für die Darstellung der Daten des Modells und die Realisierung der Benutzerinteraktionen zuständig. Der View beobachtet das Modell und aktualisiert sich automatisch, wenn sich die Daten ändern. Gleichzeitig leitet er Benutzerinteraktionen an den Controller weiter.
 + **Contoller** verwaltet die Ansicht und das Modell, im Allgemeinen wertet er die Benutzerinteraktionen von View und passt das Modell an (oder umgekehrt).
 
-![MVC](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/ModelViewControllerDiagram2.svg/220px-ModelViewControllerDiagram2.svg.png)
+Auf einem sehr abstrakten Level kann man den Informationsfluss wie folgt verstehen.
+
+```ascii 
+              Send Data            Request Information
+          +-----------------+      +-------------------+           
+          |                 |      |                   |        
+          v                 |      |                   v        
+      +------------+     +------------+ Response +------------+  
+      | View       |     | Controller |<---------| Model      |  
+      +------------+     +------------+          +------------+  
+          |                     ^
+ Response |                     | Request
+          .------> User --------. 
+```
 
 ### Model-View-ViewModel
 
@@ -604,4 +618,33 @@ Im den Fällen, wenn das dasselbe Modell mit einem anderen Framework oder für e
 
 ![MVVM](https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/MVVMPattern.png/440px-MVVMPattern.png "Die Datenbindung (Data Binding) ermöglicht die Trennung von View (z. B. XAML-Markup oder HTML) und Model für die Darstellung. Autor: Ugaya40, MVVM Pattern, https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/MVVMPattern.png/440px-MVVMPattern.png")")
 
-> Das Codebeispiel `MauiMVVMMinimal` im Projektordner `/code/27_MAUI/MauiMVVMMinimal` zeigt die Implementierung von Bindings auf der Datenebene eines einfachen MVVM-Beispiweise in .NET MAUI. Das Beispiel fokussiert die Interaktion von View und ViewModel auf der Basis eines Bindings auf der Datenebene.
+
+| **Kriterium**          | **Model-View-Controller (MVC)**                      | **Model-View-ViewModel (MVVM)**                             |
+|------------------------|-------------------------------------------------------|-------------------------------------------------------------|
+| **Komponenten**        | Model, View, Controller                               | Model, View, ViewModel                                      |
+| **Datenfluss**         | Benutzer → View → Controller → Model → View           | Benutzer → View ↔ ViewModel ↔ Model                          |
+| **Zentrale Rolle**     | Controller                                            | ViewModel                                                   |
+| **Interaktion**        | View sendet Ereignisse an den Controller              | View bindet direkt an das ViewModel (Data Binding)          |
+| **Aktualisierung**     | Controller aktualisiert das Model, das Model die View | ViewModel aktualisiert das Model und die View durch Datenbindung |
+
+### Beispiel
+
+```text @plantUML
+@startuml
+View --> ViewModel : Bindings (Name, ChangeNameCommand)
+ViewModel -> Model : Set Initiate Name "John"
+ViewModel -> View : Name "John"
+ViewModel -> ViewModel : Renew Name to "Jane" after 5s
+ViewModel -> Model : Set Initiate Name "Jane"
+ViewModel -> View : Name "Jane"
+User -> View : Push Button "Process Name"
+View -> ViewModel : ChangeNameCommand
+ViewModel -> Model : Call ".toUpper"
+Model -> ViewModel : return string 
+ViewModel -> View : Name with uppers 
+@enduml
+```
+
+> Das Codebeispiel `MauiMVVMMinimal` im Projektordner `/code/27_MAUI/MauiMVVM_WorkInProgress` zeigt die Implementierung des Patterns anhand von "Bindings" in .NET MAUI.
+
+![](./img/27_Maui/MVVMBeispiel.png)

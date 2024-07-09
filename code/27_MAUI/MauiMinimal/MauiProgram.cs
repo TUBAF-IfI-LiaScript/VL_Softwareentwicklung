@@ -20,6 +20,13 @@ public class App : Application
                     {
                         HorizontalTextAlignment = TextAlignment.Center,
                         Text = "Welcome to our new lecture on .NET MAUI!"
+                    },
+                    new Button
+                    {
+                        Text = "Click me!",
+                        Command = new Command(() => { 
+                            MainPage.DisplayAlert("Alert", "You clicked the button!", "OK");
+                        })
                     }
                 }
             }
