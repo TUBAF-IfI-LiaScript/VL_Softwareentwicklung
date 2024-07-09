@@ -88,7 +88,7 @@ Der Ursprungspunkt (0,0) befindet sich in der oberen linken Ecke des Containers 
 ```
 
 + Um Elemente präzise zu positionieren, müssen deren x- und y-Koordinaten innerhalb des Containers festgelegt werden (absolute Positionierung). Relative Positionierung bezieht sich auf andere Elemente oder den Container.
-+ Die Breite und Höhe von UI-Elementen können ebenfalls mit festen Größen oder relativ zur Größe des Containers oder anderer Elemente definiert werden werden.
++ Die Breite und Höhe von UI-Elementen können ebenfalls mit festen Größen oder relativ zur Größe des Containers oder anderer Elemente definiert werden.
 + Für die pixelgenaue Positionierung können in **Ausnahmefällen** absolute Einheiten verwendet werden, z.B. in spezifischen Layouts wie AbsoluteLayout.
   
 ```csharp
@@ -226,7 +226,7 @@ Relative Angaben für Position (Größe):
 
 Die Benutzeroberfläche einer .NET Multi-Platform (.NET MAUI)-App besteht aus Objekten, die den nativen Steuerelementen jeder Zielplattform zugeordnet sind.
 
-Die Hauptsteuerelementgruppen, die zum Erstellen der Benutzeroberfläche einer .NET MAUI-App verwendet werden, sind Seiten, Layouts und Ansichten. Eine .NET MAUI-Seite nimmt im Allgemeinen den gesamten Bildschirm oder das gesamte Fenster ein. Die Seite enthält normalerweise ein Layout, das Ansichten und möglicherweise andere Layouts. Seiten, Layouts und Ansichten leiten sich von der `VisualElement`-Klasse ab. Diese Klasse stellt eine Vielzahl von Eigenschaften, Methoden und Ereignissen bereit, die in abgeleiteten Klassen nützlich sind.
+Die Hauptsteuerelementgruppen, die zum Erstellen der Benutzeroberfläche einer .NET MAUI-App verwendet werden, sind Seiten, Layouts und Ansichten. Eine .NET MAUI-Seite nimmt im Allgemeinen den gesamten Bildschirm oder das gesamte Fenster ein. Die Seite enthält normalerweise ein Layout, das Ansichten und möglicherweise andere Layouts abbildet. Seiten, Layouts und Ansichten leiten sich von der `VisualElement`-Klasse ab. Diese Klasse stellt eine Vielzahl von Eigenschaften, Methoden und Ereignissen bereit, die in abgeleiteten Klassen nützlich sind.
 
 > Neben den Basiselementen von Maui existiert eine Vielzahl von vorgefertigten spezifischen Steuerelementen, die zum Teil im communitytoolkit enthalten sind.
 >
@@ -242,7 +242,7 @@ Die Hauptsteuerelementgruppen, die zum Erstellen der Benutzeroberfläche einer .
 
 **FlyoutPage:**	ist eine Seite, die zwei verwandte Seiten mit Informationen verwaltet – eine Flyout-Seite, die Elemente darstellt, und eine Detailseite, die Informationen zu Elementen auf der Flyout-Seite darstellt. 
 
-**NavigationPage:** stellt eine hierarchische Navigation bereit, bei welcher in der Vorwärts- und in der Rückwärtsrichtung durch Seiten navigieren werden kann. 
+**NavigationPage:** stellt eine hierarchische Navigation bereit, bei welcher in der Vorwärts- und in der Rückwärtsrichtung durch Seiten navigiert werden kann. 
 
 **TabbedPage:** besteht aus einer Reihe von Seiten, die über Registerkarten auf dem oberen oder unteren Seitenrand navigierbar sind.
 
@@ -272,7 +272,7 @@ Layoutklassen ermöglichen das Anordnen und Gruppieren von UI-Steuerelementen.
 
 + **Grid**
 + **FlexLayout**: kann Elemente sowohl horizontal als auch vertikal in einem flexiblen Raster anordnen (FlexDirection: Row, Column, RowReverse, ColumnReverse). Es bricht die Zeile oder Spalte um, wenn zu viele Elemente vorhanden sind, um in eine einzelne Zeile oder Spalte zu passen.
-+ AbsoluteLayout : legt Position und Größe von untergeordneten Elementen mit expliziten Werten fest. Die Position wird durch die obere linke Ecke des untergeordneten Elements relativ zur oberen linken Ecke des AbsoluteLayout in geräteunabhängigen Einheiten angegeben.
++ **AbsoluteLayout**: legt Position und Größe von untergeordneten Elementen mit expliziten Werten fest. Die Position wird durch die obere linke Ecke des untergeordneten Elements relativ zur oberen linken Ecke des AbsoluteLayout in geräteunabhängigen Einheiten angegeben.
 
 ```xml
 <StackLayout Margin="20,20,20,20" Spacing="10">
