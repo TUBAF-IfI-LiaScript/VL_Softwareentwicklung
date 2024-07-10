@@ -503,7 +503,7 @@ https://learn.microsoft.com/de-de/dotnet/maui/user-interface/handlers/?view=net-
 
 https://github.com/dotnet/maui/blob/cf42c193957a530af1a0551284c40e72e55780f9/src/Core/src/Core/IButton.cs
 
-### Kompletes Beispiel mit verschieden Views
+### Komplettes Beispiel mit verschieden Views
 
 Chaos on the desk:
 
@@ -519,11 +519,11 @@ Chaos on the desk:
             <Label Text="Zu erledigen" FontAttributes="Bold" FontSize="Large" />
             <HorizontalStackLayout>
                 <CheckBox IsChecked="False" VerticalOptions="Center"/>
-                <Label Text="Organisieren die Aufgaben" VerticalOptions="Center"/>
+                <Label Text="Organisieren der Aufgaben" VerticalOptions="Center"/>
             </HorizontalStackLayout>
             <HorizontalStackLayout>
                 <CheckBox IsChecked="False" VerticalOptions="Center"/> 
-                <Label Text="Halten den Arbeitsplatz sauber" VerticalOptions="Center"/>
+                <Label Text="Den Arbeitsplatz sauber halten" VerticalOptions="Center"/>
             </HorizontalStackLayout>
             <BoxView HeightRequest="10" /> <!-- Spacer -->
             <!-- Kluge Sprüche -->
@@ -558,13 +558,13 @@ Chaos on the desk:
 ![Lebenszyklus](https://learn.microsoft.com/de-de/dotnet/maui/fundamentals/media/app-lifecycle/app-lifecycle.png?view=net-maui-8.0 "App-Lebenszyklus in Maui - Quelle Maui Dokumentation - https://learn.microsoft.com/de-de/dotnet/maui/fundamentals/app-lifecycle?view=net-maui-8.0")
 
 + Wenn eine App zum ersten Mal installiert oder ein Gerät gestartet wird, kann die App als **Not Running** betrachtet werden. 
-+ Wenn die App gestartet wird, werden die Ereignisse `Created` und `Activated` ausgelöst und die App wechselt zu "**Running**". 
++ Wenn die App gestartet wird, werden die Ereignisse `Created` und `Activated` ausgelöst und die App wechselt zu **Running**. 
 + Wenn ein anderes App-Fenster den Fokus erhält, wird das `Deactivated`-Ereignis ausgelöst und die App wechselt zu **Deactivated**. 
 + Wechselt der Benutzer zu einer anderen App oder kehrt zum Home-Bildschirm des Geräts zurück, sodass das App-Fenster nicht mehr sichtbar ist, werden die Ereignisse `Deactivated` und `Stopped` ausgelöst und die App wird gestoppt (**Stopped**). 
-+ Wenn der Benutzer zur App zurückkehrt, wird das `Resumed`-Ereignis ausgelöst, und die App weckselt zum Zustand **Running**. 
-+ Wennn die App von einem Benutzer beendet wird während sie ausgeführt wird, wird die App erst inaktiv (**Deactived**),  dann gestoppt (**Stopped**) und schlißlich wird das Ereignis `Destroying` ausgelöst und die App beendet. Ebenso kann das Gerät die App beenden, falls sie aufgrund von Ressourcenbeschränkungen bereits gestoppt ist.
++ Wenn der Benutzer zur App zurückkehrt, wird das `Resumed`-Ereignis ausgelöst, und die App wechselt zum Zustand **Running**. 
++ Wennn die App von einem Benutzer beendet wird, während sie ausgeführt wird, wird die App erst inaktiv (**Deactived**),  dann gestoppt (**Stopped**) und schließlich wird das Ereignis `Destroying` ausgelöst und die App beendet. Ebenso kann das Gerät die App beenden, falls sie aufgrund von Ressourcenbeschränkungen bereits gestoppt ist.
 
-Die App-Klasse ist der Einstiegspunkt einer MAUI-Anwendung und wird verwendet, um die Lebensdauer der Anwendung zu verwalten und die Hauptseite der Anwendung MainPage oder MainPage in einem Window festzulegen.
+Die App-Klasse ist der Einstiegspunkt einer MAUI-Anwendung und wird verwendet, um die Lebensdauer der Anwendung zu verwalten und die Hauptseite der Anwendung "MainPage" in einem Window festzulegen.
 Auf Desktop-Plattformen hat das Window-Objekt einen vollständigen Lebenszyklus.
 Mobile Plattformen fokussieren sich auf den Lebenszyklus von Aktivitäten (Android) und View-Controllern (iOS), welche durch die Page-Klasse abstrahiert werden.
 
@@ -699,7 +699,7 @@ Ereignisse können direkt in XAML oder im Code abonniert werden.
 
 ### Benutzeraktion
 
-Benutzeraktionen umfassen alle Interaktionen (mit Mous, Taste, ..., Touch, Swipe, ... ), die der Benutzer mit der Benutzeroberfläche ausführt, wie z.B. Klicken, Tippen, Streichen, usw. Ein Button-Steuerelement kann beispielsweise auf die Ereignisse Clicked, Pressed und Released reagieren, während ein Entry-Steuerelement über Ereignisse wie TextChanged verfügt. Hier eine Auswahl:
+Benutzeraktionen umfassen alle Interaktionen (mit Mouse, Taste, ..., Touch, Swipe, ... ), die der Benutzer mit der Benutzeroberfläche ausführt, wie z.B. Klicken, Tippen, Streichen, usw. Ein Button-Steuerelement kann beispielsweise auf die Ereignisse Clicked, Pressed und Released reagieren, während ein Entry-Steuerelement über Ereignisse wie TextChanged verfügt. Hier eine Auswahl:
 
 + Button- und Mauseingaben:
 
@@ -809,7 +809,7 @@ listView.ItemSelected += (sender, args) => { /* Aktion */ };
 
 | Event | wird ausgelöst |
 | :---- | :------------------------------------------------ |
-| **CheckedChanged** | | 
+| **CheckedChanged** | wenn die Auswahl des Buttons variiert wird | 
 
 ![Ampel](./img/27_Maui/Ampel.PNG)`
 
@@ -871,7 +871,7 @@ public partial class MainPage : ContentPage
 **Ereignismethoden** müssen die folgenden Signaturanforderungen erfüllen:
 
 + Sie können keinen Wert zurückgeben (void).
-+ Sie müssen zwei Parameter übernehmen: ein object-Verweis, der das Objekt angibt, das das Ereignis ausgelöst hat (als Sender bezeichnet), und einen EventArgs-Parameter, der alle Argumente enthält, die vom Sender an den Ereignishandler übergeben werden.
++ Sie müssen zwei Parameter übernehmen: ein object-Verweis, der das Objekt angibt, dass das Ereignis ausgelöst hat (als Sender bezeichnet), und einen EventArgs-Parameter, der alle Argumente enthält, die vom Sender an den Ereignishandler übergeben werden.
 + Der Ereignishandler sollte private sein. Dies ist zwar nicht zwingend erforderlich, aber wenn Sie einen Ereignishandler als öffentlich definieren, kann von außen auf ihn zugegriffen werden, und er könnte von einer anderen Aktion aufgerufen werden.
 + Der Ereignishandler kann `async` sein, wenn asynchrone Vorgänge ausgeführt werden müssen.
 
