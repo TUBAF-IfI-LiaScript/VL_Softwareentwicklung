@@ -1007,13 +1007,13 @@ else
 
 Weitere Methoden:  
 
-| Methode 	| Argumente 	| Rückgabe 	| Zweck | 
-| :---- | :---- | :---- | :------------------------------------------------ |
-| InvokeOnMainThreadAsync<T> 	| Func<T> 	| Task<T> 	| Ruft Func<T> auf dem Hauptthread auf und wartet auf den Abschluss.| 
-| InvokeOnMainThreadAsync 	| Action 	| Task 	| Ruft Action auf dem Hauptthread auf und wartet auf den Abschluss.| 
-| InvokeOnMainThreadAsync<T> 	| Func<Task<T>> 	| Task<T> 	| Ruft Func<Task<T>> auf dem Hauptthread auf und wartet auf den Abschluss.| 
-| InvokeOnMainThreadAsync 	| Func<Task> 	| Task 	| Ruft Func<Task> auf dem Hauptthread auf und wartet auf den Abschluss.| 
-| GetMainThreadSynchronizationContextAsync 		| | Task<SynchronizationContext> 	| Gibt SynchronizationContext für den Hauptthread zurück| 
+| Methode                                    | Argumente       | Rückgabe                       | Zweck                                                                      |
+| :----------------------------------------- | :-------------- | :----------------------------- | :------------------------------------------------------------------------- |
+| `InvokeOnMainThreadAsync<T>`               | `Func<T>`       | `Task<T>`                      | Ruft `Func<T>` auf dem Hauptthread auf und wartet auf den Abschluss.       |
+| `InvokeOnMainThreadAsync`                  | `Action`        | `Task`                         | Ruft `Action` auf dem Hauptthread auf und wartet auf den Abschluss.        |
+| `InvokeOnMainThreadAsync<T>`               | `Func<Task<T>>` | `Task<T>`                      | Ruft `Func<Task<T>>` auf dem Hauptthread auf und wartet auf den Abschluss. |
+| `InvokeOnMainThreadAsync`                  | `Func<Task>`    | `Task`                         | Ruft `Func<Task>` auf dem Hauptthread auf und wartet auf den Abschluss.    |
+| `GetMainThreadSynchronizationContextAsync` |                 | `Task<SynchronizationContext>` | Gibt `SynchronizationContext` für den Hauptthread zurück                   |
 
 Beispiel:
 
