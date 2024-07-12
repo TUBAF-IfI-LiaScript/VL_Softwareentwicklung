@@ -2,10 +2,10 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.2
+version:  1.0.3
 language: de
 narrator: Deutsch Female
-comment:  Zusammenfassung und Ausblick, Anwendung von C# in der Godot Engine
+comment:  Zusammenfassung und Ausblick
 tags:      
 logo:     
 
@@ -15,7 +15,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/27_Anwendungen.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/29_Anwendungen.md)
 
 # Anwendungsbeispiele
 
@@ -33,7 +33,13 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
-## Secrets
+## Bits&Bytes
+
+https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/RoboLabVortraege/main/19_Fussball/README.md#1
+
+![](https://raw.githubusercontent.com/SebastianZug/RoboLabVortraege/main/19_Fussball/image/football_results.png)
+
+## Nachfrage: Secrets
 
 Wie gehen wir mit Schlüsseln, Passwörtern usw. in unseren Codes um?
 
@@ -187,57 +193,38 @@ Ablauf eines Schreibprozesses:
 
 <!--data-type="none"-->
 | Woche | Tag       | Inhalt der Vorlesung                              |
-|:------|-----------|:--------------------------------------------------|
-| 1     | 4. April  | Organisation, Einführung von GitHub und LiaScript |
-|       | 8. April  | Softwareentwicklung als Prozess                   |
-| 2     | 11. April | Konzepte von Dotnet und C#                        |
-|       | 15. April | _Karfreitag_                                      |
-| 3     | 18. April | _Ostermontag_                                     |
-|       | 22. April | Elemente der Sprache C# (Datentypen)              |
-| 4     | 25. April | Elemente der Sprache C# (Forts. Datentypen)       |
-|       | 29. April | Elemente der Sprache C# (Ein-/Ausgaben)           |
-| 5     | 2. Mai    | Programmfluss und Funktionen                      |
-|       | 6. Mai    | Strukturen / Konzepte der OOP                     |
-| 6     | 9. Mai    | Säulen Objektorientierter Programmierung          |
-|       | 13. Mai   | Klassenelemente in C#  / Vererbung                |
-| 7     | 16. Mai   | Klassenelemente in C#  / Vererbung                |
-|       | 20. Mai   | Versionsmanagement im Softwareentwicklungsprozess |
-| 8     | 23. Mai   | UML Konzepte                                      |
-|       | 27. Mai   | UML Diagrammtypen                                 |
-| 9     | 30. Mai   | UML Anwendungsbeispiel                            |
-|       | 3. Juni   | Testen                                            |
-| 10    | 6. Juni   | _Pfingstmontag_                                   |
-|       | 10. Juni  | Dokumentation und Build Toolchains                |
-| 11    | 13. Juni  | Continuous Integration in GitHub                  |
-|       | 17. Juni  | Generics                                          |
-| 12    | 20. Juni  | Container                                         |
-|       | 24. Juni  | Delegaten                                         |
-| 13    | 27. Juni  | Events                                            |
-|       | 1. Juli   | Threadkonzepte in C#                              |
-| 14    | 4. Juli   | Taskmodell                                        |
-|       | 8. Juli   | Language Integrated Query                         |
-| 15    | 11. Juli  | Design Pattern                                    |
-|       | 15. Juli  | Anwendungungsfälle                                |
+| :---- | --------- | :------------------------------------------------ |
+| 1     | 5. April  | Organisation, Einführung von GitHub und LiaScript |
+| 2     | 8. April  | Softwareentwicklung als Prozess                   |
+|       | 12. April | Konzepte von Dotnet und C#                        |
+| 3     | 15. April | Elemente der Sprache C# I                         |
+|       | 19. April | Elemente der Sprache C# II                        |
+| 4     | 22. April | Strukturen / Konzepte der OOP                     |
+|       | 26. April | Säulen Objektorientierter Programmierung          |
+| 5     | 29. April | Klassenelemente in C#  / Vererbung                |
+|       | 3. Mai    | Klassenelemente in C#  / Interfaces               |
+| 6     | 6. Mai    | Generics                                          |
+|       | 10. Mai   | Container                                         |
+| 7     | 13. Mai   | Versionsmanagement im SWE-Prozess I               |
+|       | 17. Mai   | Versionsmanagement im SWE_Pprozess II             |
+| 8     | 20. Mai   | _Pfingstmontag_                                   |
+|       | 24. Mai   | UML Konzepte                                      |
+| 9     | 27. Mai   | UML Diagrammtypen                                 |
+|       | 31. Mai   | UML Anwendungsbeispiel                            |
+| 10    | 3. Juni   | Testen                                            |
+|       | 7. Juni   | Dokumentation und Build Toolchains                |
+| 11    | 10. Juni  | Continuous Integration in GitHub                  |
+|       | 14. Juni  | Delegaten                                         |
+| 12    | 17. Juni  | Events                                            |
+|       | 21. Juni  | Threadkonzepte in C#                              |
+| 13    | 24. Juni  | Taskmodell                                        |
+|       | 28. Juni  | Design Pattern                                    |
+| 14    | 1. Juli   | Language Integrated Query                         |
+|       | 5. Juli   | GUI - MAUI                                        |
+| 15    | 8. Juli   | GUI - MAUI                                        |
+|       | 12. Juli  | Anwendungungsfälle                                |
 
 
-> **Und was kann ich jetzt damit anstellen?**
-
-## Godot 
-
-Godot ist eine plattformübergreifende Open-Source-Spiel-Engine, die unter der MIT-Lizenz veröffentlicht wird. Es wurde ursprünglich von den argentinischen Softwareentwicklern Juan Linietsky und Ariel Manzur[6] für mehrere Unternehmen in Lateinamerika entwickelt, bevor es öffentlich veröffentlicht wurde.
-
-Die Entwicklungsumgebung läuft auf mehreren Betriebssystemen, darunter Linux, FreeBSD, NetBSD, OpenBSD, macOS, Microsoft Windows, Android und Web. Es ist für die Erstellung von 2D- und 3D-Spielen für PC-, Mobil- und Webplattformen konzipiert und kann auch für die Entwicklung von Nicht-Spiele-Software, einschließlich Editoren, verwendet werden.
-
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Godot3.4.png/800px-Godot3.4.png?20211106184510 "Screenshot [^SakuraMiyazono]")
-
-Die aktuelle Version 4 wurde am 1. März 2023 veröffentlicht wurde. Dies definierte einen großen Schritt , unter anderem wurde von Mono zu dotnet gewechselt. Daneben wurde das das Rendering-System überarbeitet, Unterstützung für die Vulkan-Grafik-API hinzufügt, die Leistung und Benutzerfreundlichkeit von GDScript verbessert, Physik- und Animationssysteme verbessert und neue Funktionen einführt viele weitere Funktionen und Fehlerbehebungen.
-
-> Achtung: Die C# API wurde angepasst! - [Link](https://docs.godotengine.org/en/stable/index.html)
-
-!?[](https://www.youtube.com/watch?v=N0LHUOcKXAQ)
-
-[^SakuraMiyazono]: SakuraMiyazono, Godot 3.4 Interface, https://commons.wikimedia.org/wiki/File:Godot3.4.png
-
-## Evaluation der Lehrveranstaltung
+## Aus die Maus
 
 > __Danke für Ihr Interesse! Viel Erfolg bei den Prüfungen__
