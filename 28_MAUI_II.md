@@ -20,15 +20,15 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 # .NET MAUI Elemente 
 
-| Parameter                | Kursinformationen                                                                    |
-| ------------------------ | ------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                      |
-| **Teil:**                | `28/27`                                                                              |
-| **Semester**             | @config.semester                                                                     |
-| **Hochschule:**          | @config.university                                                                   |
-| **Inhalte:**             | @comment                                                                             |
+| Parameter                | Kursinformationen                                                                       |
+|--------------------------|-----------------------------------------------------------------------------------------|
+| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                         |
+| **Teil:**                | `28/27`                                                                                 |
+| **Semester**             | @config.semester                                                                        |
+| **Hochschule:**          | @config.university                                                                      |
+| **Inhalte:**             | @comment                                                                                |
 | **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/28_MAUI_II.md |
-| **Autoren**              | @author                                                                              |
+| **Autoren**              | @author                                                                                 |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
@@ -580,14 +580,14 @@ Eine vereinfachte Darstellung des Android-Aktivitätslebenszyklus:
 
 + Plattformübergreifende Lebenszyklusereignisse sind verschiedenen Plattformereignissen zugeordnet
 
-| Event | Android | Windows |  |
-| :---- |  :---- | :---- |:------------------------------------------------ |
-| **Created** | OnCreate | Created | das systemeigene Fenster wird erstellt, ist aber möglicherweise noch nicht sichtbar | 	
-| **Activated** | OnResume | Activated (CodeActivated und PointerActivated) | das fokussierte Fenster ist oder wird sichtbar | 	
-| **Deactivated**| OnPause | Activated (Deactivated) | das Fenster ist nicht mehr fokussiert, aber möglicherweise weiterhin sichtbar | 	
-| **Stopped** | OnStop | VisibilityChanged | das Fenster ist nicht mehr sichtbar | 	
-| **Resumed** | OnRestart | Resumed |die App wurde gestoppt und dann wieder fortgesetzt |	
-| **Destroying** | OnDestroy | Closed |das systemeigene Fenster wird zerstört| 	
+| Event           | Android   | Windows                                        |                                                                                     |
+|:----------------|:----------|:-----------------------------------------------|:------------------------------------------------------------------------------------|
+| **Created**     | OnCreate  | Created                                        | das systemeigene Fenster wird erstellt, ist aber möglicherweise noch nicht sichtbar |
+| **Activated**   | OnResume  | Activated (CodeActivated und PointerActivated) | das fokussierte Fenster ist oder wird sichtbar                                      |
+| **Deactivated** | OnPause   | Activated (Deactivated)                        | das Fenster ist nicht mehr fokussiert, aber möglicherweise weiterhin sichtbar       |
+| **Stopped**     | OnStop    | VisibilityChanged                              | das Fenster ist nicht mehr sichtbar                                                 |
+| **Resumed**     | OnRestart | Resumed                                        | die App wurde gestoppt und dann wieder fortgesetzt                                  |
+| **Destroying**  | OnDestroy | Closed                                         | das systemeigene Fenster wird zerstört                                              |
 
 ###  App-Lebenszyklus-Methoden
 
@@ -704,7 +704,7 @@ Benutzeraktionen umfassen alle Interaktionen (mit Mous, Taste, ..., Touch, Swipe
 + Button- und Mauseingaben:
 
 | Event        | wird ausgelöst                                                      |
-| :----------- | :------------------------------------------------------------------ |
+|:-------------|:--------------------------------------------------------------------|
 | **Clicked**  | wenn ein Button oder ein anderes klickbares Element angeklickt wird |
 | **Pressed**  | wenn ein Element gedrückt wird                                      |
 | **Released** | wenn ein gedrücktes Element losgelassen wird                        |
@@ -762,10 +762,10 @@ public partial class MainPage : ContentPage
 
 + Button, Label, Image (und einige andere) unterstützen Tap-Gesten; Image, CollectionView (und andere) die Swipe-Gesten. Diese Controls können durch Gestenerkenner (TapGestureRecognizer, SwipeGestureRecognizer, etc.) erweitert werden.
 
-| Event | wird ausgelöst |
-| :---- | :------------------------------------------------ |
+| Event      | wird ausgelöst                                      |
+|:-----------|:----------------------------------------------------|
 | **Tapped** | wenn auf ein Element getippt (doppelt getippt) wird |
-| **Swiped** | wenn eine Wischgeste erkannt wird |
+| **Swiped** | wenn eine Wischgeste erkannt wird                   |
 
 ```csharp
 var tapGestureRecognizer = new TapGestureRecognizer();
@@ -782,10 +782,10 @@ image.GestureRecognizers.Add(swipeGestureRecognizer);
 
 + Eingabefelder (Entry)
 
-| Event | wird ausgelöst |
-| :---- | :------------------------------------------------ |
-| **TextChanged** | wenn der Text in einem Eingabefeld geändert wird |
-| **Completed** | wenn die Eingabe in einem Eingabefeld abgeschlossen wird (z.B. durch Drücken der Enter-Taste) |
+| Event           | wird ausgelöst                                                                                |
+|:----------------|:----------------------------------------------------------------------------------------------|
+| **TextChanged** | wenn der Text in einem Eingabefeld geändert wird                                              |
+| **Completed**   | wenn die Eingabe in einem Eingabefeld abgeschlossen wird (z.B. durch Drücken der Enter-Taste) |
 
 ```csharp
 Entry entry = new Entry { Placeholder = "Enter text" };
@@ -794,10 +794,10 @@ entry.Completed += (sender, args) => { /* Aktion */ };
 ```
 + Listen
 
-| Event | wird ausgelöst |
-| :---- | :------------------------------------------------ |
-| **ItemSelected** | wenn ein Element in einer Liste ausgewählt wird | 
-| **ItemTapped** | wenn auf ein Element in einer Liste getippt wird | 
+| Event            | wird ausgelöst                                   |
+|:-----------------|:-------------------------------------------------|
+| **ItemSelected** | wenn ein Element in einer Liste ausgewählt wird  |
+| **ItemTapped**   | wenn auf ein Element in einer Liste getippt wird |
 
 
 ```csharp
@@ -807,9 +807,9 @@ listView.ItemSelected += (sender, args) => { /* Aktion */ };
 
 + RadioButton
 
-| Event | wird ausgelöst |
-| :---- | :------------------------------------------------ |
-| **CheckedChanged** | | 
+| Event              | wird ausgelöst |
+|:-------------------|:---------------|
+| **CheckedChanged** |                |
 
 ![Ampel](./img/27_Maui/Ampel.PNG)`
 
@@ -903,7 +903,7 @@ Neben benannten Methoden können auch anonyme Methoden oder Lambda-Ausdrücke zu
 - Liste und Sammlung: SelectedItemChangedEventArgs, ItemTappedEventArgs
 
 | Klasse                           | enthaltene Informationen                                                                                            |
-| :------------------------------- | :------------------------------------------------------------------------------------------------------------------ |
+|:---------------------------------|:--------------------------------------------------------------------------------------------------------------------|
 | **EventArgs**                    | Allgemeine Basisklasse für Ereignisdaten, enthält keine spezifischen Informationen                                  |
 | **TappedEventArgs**              | über das Tippen, wie die Anzahl der Taps und die Position                                                           |
 | **SwipedEventArgs**              | über eine Wischgeste, wie die Richtung und die Geschwindigkeit der Geste                                            |
@@ -967,11 +967,11 @@ Connectivity.ConnectivityChanged += (sender, args) =>
 - Gerätezustand und Orientierung: SizeChangedEventArgs, DisplayInfoChangedEventArgs
 - Netzwerkstatus: ConnectivityChangedEventArgs
   
-| Klasse | Informationen |
-| :---- | :------------------------------------------------ |
-| **SizeChangedEventArgs** | Größenänderung eines Elements, einschließlich der neuen und alten Größe | 
-| **DisplayInfoChangedEventArgs** | Änderungen in der Anzeige, wie neue Anzeigeeigenschaften (z.B. Auflösung, Orientierung) | 
-| **ConnectivityChangedEventArgs** | Änderungen im Netzwerkstatus, wie die aktuelle Netzwerkanbindung und verfügbare Verbindungstypen | 
+| Klasse                           | Informationen                                                                                    |
+|:---------------------------------|:-------------------------------------------------------------------------------------------------|
+| **SizeChangedEventArgs**         | Größenänderung eines Elements, einschließlich der neuen und alten Größe                          |
+| **DisplayInfoChangedEventArgs**  | Änderungen in der Anzeige, wie neue Anzeigeeigenschaften (z.B. Auflösung, Orientierung)          |
+| **ConnectivityChangedEventArgs** | Änderungen im Netzwerkstatus, wie die aktuelle Netzwerkanbindung und verfügbare Verbindungstypen |
 
 ## Multi-Threading
 
@@ -1008,7 +1008,7 @@ else
 Weitere Methoden:  
 
 | Methode                                    | Argumente       | Rückgabe                       | Zweck                                                                      |
-| :----------------------------------------- | :-------------- | :----------------------------- | :------------------------------------------------------------------------- |
+|:-------------------------------------------|:----------------|:-------------------------------|:---------------------------------------------------------------------------|
 | `InvokeOnMainThreadAsync<T>`               | `Func<T>`       | `Task<T>`                      | Ruft `Func<T>` auf dem Hauptthread auf und wartet auf den Abschluss.       |
 | `InvokeOnMainThreadAsync`                  | `Action`        | `Task`                         | Ruft `Action` auf dem Hauptthread auf und wartet auf den Abschluss.        |
 | `InvokeOnMainThreadAsync<T>`               | `Func<Task<T>>` | `Task<T>`                      | Ruft `Func<Task<T>>` auf dem Hauptthread auf und wartet auf den Abschluss. |
@@ -1359,7 +1359,7 @@ public partial class App : Application
 //using Microsoft.Extensions.Logging;
 ```
 
-# Praktische Hinweise
+## Praktische Hinweise
 
 + Installation: Maui-Paket, Extensions, Android
 
@@ -1370,3 +1370,9 @@ https://learn.microsoft.com/de-de/dotnet/maui/get-started/installation?view=net-
 https://learn.microsoft.com/de-de/dotnet/maui/get-started/first-app?pivots=devices-android&view=net-maui-8.0&tabs=visual-studio-code
 
 https://learn.microsoft.com/de-de/dotnet/maui/get-started/first-app?pivots=devices-windows&view=net-maui-8.0&tabs=visual-studio-code
+
+## Finales Beispiel
+
+https://github.com/galinarudollf/Silberstadt
+
+![](./img/27_Maui/Freiberg_app.png)
