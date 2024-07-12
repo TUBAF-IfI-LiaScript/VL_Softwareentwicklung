@@ -809,7 +809,7 @@ listView.ItemSelected += (sender, args) => { /* Aktion */ };
 
 | Event              | wird ausgelöst |
 |:-------------------|:---------------|
-| **CheckedChanged** |wenn die Auswahl des Buttons variiert wird |
+| **CheckedChanged** | wenn die Auswahl des Buttons variiert wird |
 
 ![Ampel](./img/27_Maui/Ampel.PNG)`
 
