@@ -380,7 +380,7 @@ public class Program {
 
 + Design Pattern sind spezielle Muster für Interaktionen und Zusammenhänge  der Bestandteile einer Softwarelösung. 
 + Sie präsentieren Implementierungsmodelle, die für häufig wiederkehrende Abläufe (Generierung und Maskierung von Objekten) eine flexible und gut wartbare Realisierung sicherstellen. 
-+ Dafür werden die  Abläufe abstrahiert und auf generisch anwendbare Muster reduziert, die dann mit domänenspezifische Bezeichnern versehen nicht nur für die vereinfachte Umsetzung sondern auch für die Kommunikation dazu genutzt werden. Dies vereinfacht die Interaktion zwischen Softwarearchitekten, Programmierer und andere Projektmitglieder.
++ Dafür werden die  Abläufe abstrahiert und auf generisch anwendbare Muster reduziert, die dann mit domänenspezifischen Bezeichnern versehen nicht nur für die vereinfachte Umsetzung sondern auch für die Kommunikation dazu genutzt werden. Dies vereinfacht die Interaktion zwischen Softwarearchitekten, Programmierer und andere Projektmitglieder.
 
 > Design Pattern sind Strukturen, Modelle, Schablonen und Muster, die sich zur Entwicklung stabiler Softwaremodelle nutzen lassen.
 
@@ -394,7 +394,7 @@ Dabei sollte ein Muster:
 
 + ein oder mehrere Standardprobleme lösen,
 + die Lesbarkeit und Wartbarkeit des Codes erhöhen
-+ auf die Nutzung sprachspezifischer Feature verzichten, um eine Übertragbarkeit sicherzustellen
++ auf die Nutzung sprachspezifischer Features verzichten, um eine Übertragbarkeit sicherzustellen
 + ein eindeutiges Set von Begriffen definieren
 + Denkanstöße für den eigenen Entwurf liefern
 
@@ -562,7 +562,7 @@ Welche Lösung sehen Sie?
                                     {{3-4}}
 ********************************************************************************
 
-Als Lösungsansatz können die Synchronisationsmethoden aus der Laufzeitumgebung
+Als Lösungsansatz können Sie die Synchronisationsmethoden aus der Laufzeitumgebung
 nutzen. `lock` garantiert, dass lediglich ein Thread einen bestimmten
 Codeabschnitt betreten hat und blockiert alle anderen. Eine mögliche Lösung
 könnte wie folgt aussehen:
@@ -652,7 +652,7 @@ public class Program {
 
 ### Strukturmuster Adapter Pattern
 
-Ausgangspunkt für das Beispiel ist die Notwendigkeit eine externes Buchungssystem mit einer Mitarbeiterdatenbank zu verknüpfen. Dabei sind Sie als Entwickler mit zwei Formen der Datenhaltung konfrontiert. Während Ihr Managementsystem für die Mitarbeiter `HRSystem` auf ein Array von strings setzt, erwartet das einzubindende Buchungssystem eine (generische) Liste von strings.
+Ausgangspunkt für das Beispiel ist die Notwendigkeit ein externes Buchungssystem mit einer Mitarbeiterdatenbank zu verknüpfen. Dabei sind Sie als Entwickler mit zwei Formen der Datenhaltung konfrontiert. Während Ihr Managementsystem für die Mitarbeiter `HRSystem` auf ein Array von strings setzt, erwartet das einzubindende Buchungssystem eine (generische) Liste von strings.
 
 ```csharp
 public class HRSystem{
@@ -756,7 +756,7 @@ public class Program {
 ### Erzeugungsmuster (Abstract) Factory Pattern
 
 Der Begriff Factory Pattern bezeichnet ein Entwurfsmuster, das beschreibt, wie
-ein Objekt durch Aufruf einer Methode anstatt durch direkten Aufruf eines
+ein Objekt durch den Aufruf einer Methode anstatt durch den direkten Aufruf eines
 Konstruktors erzeugt wird.
 
 Eine abstrakte "Fabrikmethode" dient dabei als Schnittstelle zur Erstellung
@@ -890,10 +890,10 @@ class Program
 ### Verhaltensmuster State Pattern
 
 Die Abbildung von Zustandsmaschinen ist ein häufig wiederkehrendes Motiv. Nehmen
-wir an, das wir eine Rollenspielfigur modellieren wollen. Dabei bestehen
+wir an, dass wir eine Rollenspielfigur modellieren wollen. Dabei bestehen
 lediglich drei emotionale Zustände, die Figur kann eine neutrale, eine
-aggressive oder eine  freundliche Position einnehmen. Üblicherweise würde sich
-diese Einschätzung auf den Gegenüber beziehen. Bei komplexeren Sozialstrukturen
+aggressive oder eine freundliche Position einnehmen. Üblicherweise würde sich
+diese Einschätzung auf dessen Gegenüber beziehen. Bei komplexeren Sozialstrukturen
 müsste eine Zuordnung zu einzelnen Charakteren gewährleistet sein.
 
 In einer tabellarischen State-Maschine Darstellung ergibt sich dann folgendes Bild:
@@ -1015,12 +1015,12 @@ Transition und einer Zufallsvariablen abhängt.
      Wenn wir annehmen, dass nur im `Feeling.Happy` Fall eine bestimmte Interaktion stattfinden kann, sollten wir in allen anderen Zuständen deren Aufruf auch nicht ermöglichen.
 
 
-Der State Pattern ist ein Entwurfsmuster, das zur Kapselung unterschiedlicher,
-zustandsabhängiger Verhaltensweisen eines Objektes eingesetzt. Grundsätzlich
+Der State Pattern ist ein Entwurfsmuster, dass zur Kapselung unterschiedlicher,
+zustandsabhängiger Verhaltensweisen eines Objektes eingesetzt wird. Grundsätzlich
 gilt, dass das Verhalten eines Objekts abhängig von seinem Zustand dargestellt
 wird.  Entsprechend wird hier jeder Fall der switch-Anweisung in einer eigenen
 Klasse implementiert, so dass der Zustand des Objektes selbst wieder ein Objekt
-ist, das unabhängig von anderen Objekten ist. Gleichzeitig realisieren wir
+ist, dass unabhängig von anderen Objekten ist. Gleichzeitig realisieren wir
 eine Abstraktionsebene durch ein Interface oder eine Basisklasse. Gegen diese
 wird die Anwendung, hier die Klasse `Character` entwickelt.
 
@@ -1147,7 +1147,7 @@ Anti-Pattern bilden das Gegenstück zu Pattern und sind Lösungsansätze, die un
 **Programmierungs-Anti-Pattern**
 
 + Zwiebel - Programmcode, bei dem neue Funktionalität um (oder über) die alte gelegt wird.
-+ Copy and Paste - Programmierer entwickelt den Code nicht neu, sondern bedient sich sich bereits existenter Quelltexte. 
++ Copy and Paste - Programmierer entwickelt den Code nicht neu, sondern bedient sich bereits existenter Quelltexte. 
 + Magische Werte - hartkodierte und nur mit besonderem Wissen über die konkrete Verwendung zu verstehende Werte.
 + ...
 

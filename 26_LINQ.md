@@ -38,7 +38,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 > Frage: Was ist eigentlich eine csv Datei?
 
-Das Dateiformat CSV _comma-separated values_und beschreibt den Aufbau einer Textdatei zur Speicherung oder zum Austausch einfach strukturierter Daten. Die Dateinamenserweiterung lautet .csv.
+Das Dateiformat CSV _comma-separated values_ beschreibt den Aufbau einer Textdatei zur Speicherung oder zum Austausch einfach strukturierter Daten. Die Dateinamenserweiterung lautet .csv.
 
 ```text Prüfungsliste.csv
 # Prüfungen im SoSe
@@ -221,7 +221,7 @@ Die intuitive Lösung könnte folgendermaßen daher kommen:
 Die Dokumentation von `List<T>` findet sich unter folgendem [Link](https://docs.microsoft.com/de-de/dotnet/api/system.collections.generic.list-1.removeall?view=netcore-3.1)
 
 1. Wir "erinnern" uns an das `Count` Member der Klasse `List`.
-2. Für die Filteroperation implementieren Sie eine Loop. Sie können dazu `foreach` verwenden, weil `List<T>` das Interface `IEnumerable` implementiert.
+2. Für die Filteroperation implementieren Sie einen Loop. Sie können dazu `foreach` verwenden, weil `List<T>` das Interface `IEnumerable` implementiert.
 3. Die Sortieroperation bedingt die Anwendung einer Vergleichsoperation zwischen den Elementen der Liste. Eine Variante ist die Implementierung des Interfaces `IComparable` zu diesem Zweck.
 
 ```csharp    Solution
@@ -281,7 +281,7 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-> Eine Menge Aufwand für einen simple Operation! Welche zusätzlichen Probleme werden auftreten, wenn Sie eine solche Kette aus Datenerfassung, Verarbeitung und Ausgabe in realen Anwendungen umsetzen?
+> Eine Menge Aufwand für eine simple Operation! Welche zusätzlichen Probleme werden auftreten, wenn Sie eine solche Kette aus Datenerfassung, Verarbeitung und Ausgabe in realen Anwendungen umsetzen?
 
 ********************************************************************************
 
@@ -292,8 +292,8 @@ Alternativ schauen wir uns weiter im Kanon der `List<T>` Klasse um und realisier
 
 `RemoveAll()` zum Beispiel entfernt alle Elemente, die mit den Bedingungen
 übereinstimmen, die durch das angegebene Prädikat definiert werden. Interessant
-ist dabei die Umsetzung. Ein Prädikat ist eine generischer Delegat der einen
-Instanzen eines Typs `T` auf ein Kriterium hin evaluiert und einen Bool-Wert
+ist dabei die Umsetzung. Ein Prädikat ist ein generischer Delegat der eine
+Instanz eines Typs `T` auf ein Kriterium hin evaluiert und einen Bool-Wert
 als Ausgabe generiert.
 
 ```csharp
@@ -566,7 +566,7 @@ GROUP BY Professor.Name, Professor.PersNr;
 ## LINQ Umsetzung
 
 *Language Integrated Query* (LINQ) zielt auf die direkte Integration von
-Abfragefunktionen in die Sprache. Dafür definieren C# (wie auch VB.NET und F#)
+Abfragefunktionen in die Sprache. Dafür definiert C# (wie auch VB.NET und F#)
 eigene Schlüsselwörter sowie eine Menge an vorbestimmten
 LINQ-Methoden. Diese können aber durch den Anwender in der jeweiligen Sprache
 erweitert werden.
@@ -584,13 +584,13 @@ Verfahren wie *ActiveX Data Objects* ADO und *Open Database Connectivity* ODBC
 hingegen verwenden Abfragestrings. Diese können erst zur Laufzeit interpretiert
 werden; dann wirken Fehler gravierender und sind schwieriger zu analysieren.
 
-> Innerhalb des Quellprogramms in C# oder VB.NET präsentiert LINQ die Abfrage-Ergebnisse als streng typisierte Aufzählungen. Somit gewährleistet es Typsicherheit bereits zur Übersetzungszeit wobei ein minimaler Codeeinsatz zurRealisierung von Filter-, Sortier- und Gruppiervorgänge in Datenquellen investiert wird.
+> Innerhalb des Quellprogramms in C# oder VB.NET präsentiert LINQ die Abfrage-Ergebnisse als streng typisierte Aufzählungen. Somit gewährleistet es Typsicherheit bereits zur Übersetzungszeit wobei ein minimaler Codeeinsatz zur Realisierung von Filter-, Sortier- und Gruppiervorgänge in Datenquellen investiert wird.
 
 ![OOPGeschichte](./img/25_LINQ/AnbieterLINQ.png "LINQ Anwendungsfelder [^LinqAnbieter]")
 
 Merkmale von LINQ
 
-+ Die Arbeit mit Abfrageausdrücken ist einfach, da sie viele vertraute Konstrukte der Sprache C# verwenden.
++ Die Arbeit mit Abfrageausdrücken ist einfach, da sie viele vertraute Konstrukte der Sprache C# verwendet.
 
 + Alle Variablen in einem Abfrageausdruck sind stark typisiert, obwohl dieser in der Regel nicht explizit angegeben wird. Der Compiler übernimmt die Ableitung.
 
@@ -601,7 +601,7 @@ Merkmale von LINQ
 + LINQ kombiniert Abfrageausdrücke und Methodenaufrufe (`count` oder `max`). Hierin liegt die Flexibilität des Konzeptes.
 
 Diese Veranstaltung konzentriert sich auf die *LINQ to Objects* Realisierung von
-LINQ. Dabei können Abfragen mit einer beliebigen `IEnumerable`- oder `IEnumerable<T>`-Auflistungen angewandt werden.
+LINQ. Dabei können Abfragen mit einer beliebigen `IEnumerable`- oder `IEnumerable<T>`-Auflistung angewandt werden.
 
 [^LinqAnbieter]: Wikimedia https://commons.wikimedia.org/wiki/File:AnbieterLINQ.png, Author 'Mussklprozz'
 
@@ -683,7 +683,7 @@ class Program
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Erweiterungsmethoden schaffen uns die Möglichkeit weitere Funktionalität zu
-integrieren und gleichzeitig Datenobjekte durch eine Verarbeitungskette "hindurchzureichen". Erweitern Sie die statische Klasse doch mal um eine Methode, die dem Inhalt der Membervariable `content` zusätzlichen Information einfügt.
+integrieren und gleichzeitig Datenobjekte durch eine Verarbeitungskette "hindurchzureichen". Erweitern Sie die statische Klasse doch mal um eine Methode, die dem Inhalt der Membervariable `content` zusätzliche Information einfügt.
 
 Das Ganze ist natürlich noch recht behäbig, weil wir zwingend von einem bestimmten Typen ausgehen. Dies lässt sich über eine generische Implementierung lösen.
 
@@ -772,7 +772,7 @@ class Program
 Der Vorteil anonymer Typen liegt in ihrer Flexibilität. Die eigentlichen Daten werden entsprechend den Ergebnissen einer Funktion erzeugt.
 
 
-### Exkurs "Enumarables"
+### Exkurs "Enumerables"
 
 ![Collections](https://www.plantuml.com/plantuml/png/VP5FIyD04CNlyoaMl8afVe0GAlw1OZr8nVjsCzeXcrsPp1uKFxma4tN9jhqDx_VcCRnP3s9PKkzXw2XyMBQzSTuEmuq8qpu9RbmCE_f2Smq7Qj4uOkTHvoUKGsnrVY3qBS2qR3Rt8VN8LYAR-gKnTKr1aD-imwOn2zFUOsdwzTn6xz49nN3QiwL19deStz6qR_dJr8zNvdMPCll-KYxU6J7CwdF2XAMy4-kwKjvIwB0zdbIUiOYCBBfxZeyfImvvavTLazSFUODLzQrmDaFMZSBC3Tfh8KEsirgDy5-0xCWJR0mjMQQE8sYHIrMVeK9saJwZaDSOsjJx7m00)<!-- size="350px" -->
 
@@ -793,7 +793,7 @@ Zur Wiederholung soll nochmals ein kurzes Implementierungsbeispiel gezeigt
 werden. An dieser Stelle wird eine Klasse myStrings umgesetzt, die als
 Enumerationstyp realisiert werden soll. Entsprechend implementiert die Klasse
 `IEnumerable` das Interface `IEnumerable<string>` und referenziert einen
-Enumeratortyp `StringEnumerator`, der wiederum das Interface generische
+Enumeratortyp `StringEnumerator`, der wiederum das generische
 Interface `IEnumerator<string>` umsetzt.
 
 Transformieren Sie folgendes Codefragment in eine UML Darstellung.
@@ -939,7 +939,7 @@ Insgesamt sind 7 Query-Klauseln vorimplementiert, können aber durch Erweiterung
 | orderby  | sortiert die Elemente                             |
 | select   | projeziert die Laufvariable auf die Ergebnisfolge |
 | group    | bildet Gruppen innerhalb der Ergebnismenge        |
-| join     | vereinigt Elemente mehrere Datenquellen           |
+| join     | vereinigt Elemente mehrerer Datenquellen           |
 | let      | definiert eine Hilfsvariable                      |
 
 ```csharp
@@ -1065,7 +1065,7 @@ class Program
 ### Hinter den Kulissen
 
 Der Compiler transformiert LINQ-Anfragen in der Abfragesyntax in
-Lambda-Ausdrücke, Erweiterungsmethoden, Objektinitializer und anonyme Typen.
+Lambda-Ausdrücke, Erweiterungsmethode, Objektinitializer und anonyme Typen.
 Dabei sprechen wir von der Methodensyntax. Abfragesyntax und Methodensyntax sind
 semantisch identisch, aber viele Benutzer finden die Abfragesyntax einfacher und
 leichter zu lesen. Da aber einige Abfragen nur in der Methodensyntax möglich
@@ -1108,7 +1108,7 @@ Dabei wird die eigentliche Filterfunktion als Delegat übergeben, dies wiederum
 kann durch eine Lambdafunktion ausgedrückt werden.
 https://learn.microsoft.com/de-de/dotnet/api/system.linq.enumerable.where?view=net-8.0
 
-Dabei beschreiben die Lambdafunktionen sogenannten Prädikate, Funktionen, die eine
+Dabei beschreiben die Lambdafunktionen sogenannte Prädikate, Funktionen, die eine
 bestimmte Bedingung prüfen und einen booleschen Wert zurückgeben.
 
 ```csharp        WhereExample
@@ -1215,7 +1215,7 @@ Die group-Klausel ermöglicht es, die Ergebnisse auf der Basis eines Merkmals
 zusammenzufassen. Die group-Klausel gibt entsprechend eine Sequenz von
 `IGrouping<TKey,TElement>`-Objekten zurück, die null oder mehr Elemente
 enthalten, die mit dem Schlüsselwert `TKey` für die Gruppe übereinstimmen. Der
-Compiler leiten den Typ des Schlüssels anhand der Parameter von `group` her.
+Compiler leitet den Typ des Schlüssels anhand der Parameter von `group` her.
 IGrouping selbst implementiert das Interface `IEnumerable` und kann damit
 iteriert werden.
 
@@ -1410,4 +1410,6 @@ Der Datensatz steht zum Download unter
 https://osf.io/d2vyg/
 bereit.
 
-Im Code-Ordner liegen Beispielimplementierungen für Sie bereit. Damit können Sie 
+Im Code-Ordner liegen Beispielimplementierungen für Sie bereit. Damit können Sie die Implementierung einer LINQ Abfrage testen und mit den eben genannten Funktionalitäten experimentieren.
+
+Viel Spaß!

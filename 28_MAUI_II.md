@@ -88,7 +88,7 @@ Der Ursprungspunkt (0,0) befindet sich in der oberen linken Ecke des Containers 
 ```
 
 + Um Elemente präzise zu positionieren, müssen deren x- und y-Koordinaten innerhalb des Containers festgelegt werden (absolute Positionierung). Relative Positionierung bezieht sich auf andere Elemente oder den Container.
-+ Die Breite und Höhe von UI-Elementen können ebenfalls mit festen Größen oder relativ zur Größe des Containers oder anderer Elemente definiert werden werden.
++ Die Breite und Höhe von UI-Elementen können ebenfalls mit festen Größen oder relativ zur Größe des Containers oder anderer Elemente definiert werden.
 + Für die pixelgenaue Positionierung können in **Ausnahmefällen** absolute Einheiten verwendet werden, z.B. in spezifischen Layouts wie AbsoluteLayout.
   
 ```csharp
@@ -226,7 +226,7 @@ Relative Angaben für Position (Größe):
 
 Die Benutzeroberfläche einer .NET Multi-Platform (.NET MAUI)-App besteht aus Objekten, die den nativen Steuerelementen jeder Zielplattform zugeordnet sind.
 
-Die Hauptsteuerelementgruppen, die zum Erstellen der Benutzeroberfläche einer .NET MAUI-App verwendet werden, sind Seiten, Layouts und Ansichten. Eine .NET MAUI-Seite nimmt im Allgemeinen den gesamten Bildschirm oder das gesamte Fenster ein. Die Seite enthält normalerweise ein Layout, das Ansichten und möglicherweise andere Layouts. Seiten, Layouts und Ansichten leiten sich von der `VisualElement`-Klasse ab. Diese Klasse stellt eine Vielzahl von Eigenschaften, Methoden und Ereignissen bereit, die in abgeleiteten Klassen nützlich sind.
+Die Hauptsteuerelementgruppen, die zum Erstellen der Benutzeroberfläche einer .NET MAUI-App verwendet werden, sind Seiten, Layouts und Ansichten. Eine .NET MAUI-Seite nimmt im Allgemeinen den gesamten Bildschirm oder das gesamte Fenster ein. Die Seite enthält normalerweise ein Layout, das Ansichten und möglicherweise andere Layouts abbildet. Seiten, Layouts und Ansichten leiten sich von der `VisualElement`-Klasse ab. Diese Klasse stellt eine Vielzahl von Eigenschaften, Methoden und Ereignissen bereit, die in abgeleiteten Klassen nützlich sind.
 
 > Neben den Basiselementen von Maui existiert eine Vielzahl von vorgefertigten spezifischen Steuerelementen, die zum Teil im communitytoolkit enthalten sind.
 >
@@ -242,7 +242,7 @@ Die Hauptsteuerelementgruppen, die zum Erstellen der Benutzeroberfläche einer .
 
 **FlyoutPage:**	ist eine Seite, die zwei verwandte Seiten mit Informationen verwaltet – eine Flyout-Seite, die Elemente darstellt, und eine Detailseite, die Informationen zu Elementen auf der Flyout-Seite darstellt. 
 
-**NavigationPage:** stellt eine hierarchische Navigation bereit, bei welcher in der Vorwärts- und in der Rückwärtsrichtung durch Seiten navigieren werden kann. 
+**NavigationPage:** stellt eine hierarchische Navigation bereit, bei welcher in der Vorwärts- und in der Rückwärtsrichtung durch Seiten navigiert werden kann. 
 
 **TabbedPage:** besteht aus einer Reihe von Seiten, die über Registerkarten auf dem oberen oder unteren Seitenrand navigierbar sind.
 
@@ -272,7 +272,7 @@ Layoutklassen ermöglichen das Anordnen und Gruppieren von UI-Steuerelementen.
 
 + **Grid**
 + **FlexLayout**: kann Elemente sowohl horizontal als auch vertikal in einem flexiblen Raster anordnen (FlexDirection: Row, Column, RowReverse, ColumnReverse). Es bricht die Zeile oder Spalte um, wenn zu viele Elemente vorhanden sind, um in eine einzelne Zeile oder Spalte zu passen.
-+ AbsoluteLayout : legt Position und Größe von untergeordneten Elementen mit expliziten Werten fest. Die Position wird durch die obere linke Ecke des untergeordneten Elements relativ zur oberen linken Ecke des AbsoluteLayout in geräteunabhängigen Einheiten angegeben.
++ **AbsoluteLayout**: legt Position und Größe von untergeordneten Elementen mit expliziten Werten fest. Die Position wird durch die obere linke Ecke des untergeordneten Elements relativ zur oberen linken Ecke des AbsoluteLayout in geräteunabhängigen Einheiten angegeben.
 
 ```xml
 <StackLayout Margin="20,20,20,20" Spacing="10">
@@ -503,7 +503,7 @@ https://learn.microsoft.com/de-de/dotnet/maui/user-interface/handlers/?view=net-
 
 https://github.com/dotnet/maui/blob/cf42c193957a530af1a0551284c40e72e55780f9/src/Core/src/Core/IButton.cs
 
-### Kompletes Beispiel mit verschieden Views
+### Komplettes Beispiel mit verschieden Views
 
 Chaos on the desk:
 
@@ -519,11 +519,11 @@ Chaos on the desk:
             <Label Text="Zu erledigen" FontAttributes="Bold" FontSize="Large" />
             <HorizontalStackLayout>
                 <CheckBox IsChecked="False" VerticalOptions="Center"/>
-                <Label Text="Organisieren die Aufgaben" VerticalOptions="Center"/>
+                <Label Text="Organisieren der Aufgaben" VerticalOptions="Center"/>
             </HorizontalStackLayout>
             <HorizontalStackLayout>
                 <CheckBox IsChecked="False" VerticalOptions="Center"/> 
-                <Label Text="Halten den Arbeitsplatz sauber" VerticalOptions="Center"/>
+                <Label Text="Den Arbeitsplatz sauber halten" VerticalOptions="Center"/>
             </HorizontalStackLayout>
             <BoxView HeightRequest="10" /> <!-- Spacer -->
             <!-- Kluge Sprüche -->
@@ -558,13 +558,13 @@ Chaos on the desk:
 ![Lebenszyklus](https://learn.microsoft.com/de-de/dotnet/maui/fundamentals/media/app-lifecycle/app-lifecycle.png?view=net-maui-8.0 "App-Lebenszyklus in Maui - Quelle Maui Dokumentation - https://learn.microsoft.com/de-de/dotnet/maui/fundamentals/app-lifecycle?view=net-maui-8.0")
 
 + Wenn eine App zum ersten Mal installiert oder ein Gerät gestartet wird, kann die App als **Not Running** betrachtet werden. 
-+ Wenn die App gestartet wird, werden die Ereignisse `Created` und `Activated` ausgelöst und die App wechselt zu "**Running**". 
++ Wenn die App gestartet wird, werden die Ereignisse `Created` und `Activated` ausgelöst und die App wechselt zu **Running**. 
 + Wenn ein anderes App-Fenster den Fokus erhält, wird das `Deactivated`-Ereignis ausgelöst und die App wechselt zu **Deactivated**. 
 + Wechselt der Benutzer zu einer anderen App oder kehrt zum Home-Bildschirm des Geräts zurück, sodass das App-Fenster nicht mehr sichtbar ist, werden die Ereignisse `Deactivated` und `Stopped` ausgelöst und die App wird gestoppt (**Stopped**). 
-+ Wenn der Benutzer zur App zurückkehrt, wird das `Resumed`-Ereignis ausgelöst, und die App weckselt zum Zustand **Running**. 
-+ Wennn die App von einem Benutzer beendet wird während sie ausgeführt wird, wird die App erst inaktiv (**Deactived**),  dann gestoppt (**Stopped**) und schlißlich wird das Ereignis `Destroying` ausgelöst und die App beendet. Ebenso kann das Gerät die App beenden, falls sie aufgrund von Ressourcenbeschränkungen bereits gestoppt ist.
++ Wenn der Benutzer zur App zurückkehrt, wird das `Resumed`-Ereignis ausgelöst, und die App wechselt zum Zustand **Running**. 
++ Wennn die App von einem Benutzer beendet wird, während sie ausgeführt wird, wird die App erst inaktiv (**Deactived**),  dann gestoppt (**Stopped**) und schließlich wird das Ereignis `Destroying` ausgelöst und die App beendet. Ebenso kann das Gerät die App beenden, falls sie aufgrund von Ressourcenbeschränkungen bereits gestoppt ist.
 
-Die App-Klasse ist der Einstiegspunkt einer MAUI-Anwendung und wird verwendet, um die Lebensdauer der Anwendung zu verwalten und die Hauptseite der Anwendung MainPage oder MainPage in einem Window festzulegen.
+Die App-Klasse ist der Einstiegspunkt einer MAUI-Anwendung und wird verwendet, um die Lebensdauer der Anwendung zu verwalten und die Hauptseite der Anwendung "MainPage" in einem Window festzulegen.
 Auf Desktop-Plattformen hat das Window-Objekt einen vollständigen Lebenszyklus.
 Mobile Plattformen fokussieren sich auf den Lebenszyklus von Aktivitäten (Android) und View-Controllern (iOS), welche durch die Page-Klasse abstrahiert werden.
 
@@ -699,7 +699,7 @@ Ereignisse können direkt in XAML oder im Code abonniert werden.
 
 ### Benutzeraktion
 
-Benutzeraktionen umfassen alle Interaktionen (mit Mous, Taste, ..., Touch, Swipe, ... ), die der Benutzer mit der Benutzeroberfläche ausführt, wie z.B. Klicken, Tippen, Streichen, usw. Ein Button-Steuerelement kann beispielsweise auf die Ereignisse Clicked, Pressed und Released reagieren, während ein Entry-Steuerelement über Ereignisse wie TextChanged verfügt. Hier eine Auswahl:
+Benutzeraktionen umfassen alle Interaktionen (mit Mouse, Taste, ..., Touch, Swipe, ... ), die der Benutzer mit der Benutzeroberfläche ausführt, wie z.B. Klicken, Tippen, Streichen, usw. Ein Button-Steuerelement kann beispielsweise auf die Ereignisse Clicked, Pressed und Released reagieren, während ein Entry-Steuerelement über Ereignisse wie TextChanged verfügt. Hier eine Auswahl:
 
 + Button- und Mauseingaben:
 
@@ -871,7 +871,7 @@ public partial class MainPage : ContentPage
 **Ereignismethoden** müssen die folgenden Signaturanforderungen erfüllen:
 
 + Sie können keinen Wert zurückgeben (void).
-+ Sie müssen zwei Parameter übernehmen: ein object-Verweis, der das Objekt angibt, das das Ereignis ausgelöst hat (als Sender bezeichnet), und einen EventArgs-Parameter, der alle Argumente enthält, die vom Sender an den Ereignishandler übergeben werden.
++ Sie müssen zwei Parameter übernehmen: ein object-Verweis, der das Objekt angibt, dass das Ereignis ausgelöst hat (als Sender bezeichnet), und einen EventArgs-Parameter, der alle Argumente enthält, die vom Sender an den Ereignishandler übergeben werden.
 + Der Ereignishandler sollte private sein. Dies ist zwar nicht zwingend erforderlich, aber wenn Sie einen Ereignishandler als öffentlich definieren, kann von außen auf ihn zugegriffen werden, und er könnte von einer anderen Aktion aufgerufen werden.
 + Der Ereignishandler kann `async` sein, wenn asynchrone Vorgänge ausgeführt werden müssen.
 
@@ -979,7 +979,7 @@ Notwendigkeit der Thread-Verwendung s. Vorlesung ...
 
 https://learn.microsoft.com/de-de/dotnet/maui/platform-integration/appmodel/main-thread?view=net-maui-8.0
 
-Problem: Die meisten Betriebssysteme verwenden für den Code, der die Benutzeroberfläche umfasst ein Thread. Dieser Thread wird als Hauptthread, Benutzeroberflächenthread oder UI-Thread bezeichnet. Die Verwendung dieses Modells ist notwendig, um Ereignisse der Benutzeroberfläche ordnungsgemäß zu serialisieren.  Der Nachteil dieses Modells ist, dass der Code, der auf Elemente der Benutzeroberfläche zugreift, ebenfalls im Hauptthread der Anwendung ausgeführt werden muss.
+Problem: Die meisten Betriebssysteme verwenden für den Code, der die Benutzeroberfläche umfasst einen Thread. Dieser Thread wird als Hauptthread, Benutzeroberflächenthread oder UI-Thread bezeichnet. Die Verwendung dieses Modells ist notwendig, um Ereignisse der Benutzeroberfläche ordnungsgemäß zu serialisieren. Der Nachteil dieses Modells ist, dass der Code, der auf Elemente der Benutzeroberfläche zugreift, ebenfalls im Hauptthread der Anwendung ausgeführt werden muss.
 
 Ausführen von Code im UI-Thread aus einem sekundären Thread:
 
@@ -1102,7 +1102,7 @@ public partial class MainPage : ContentPage
 
 ## Datenbindung
 
-Eine .NET Multiplattform App UI (.NET MAUI) App besteht aus einer oder mehreren Pages, von denen jede typischerweise mehrere Benutzerschnittstellen-Objekte enthält. Eine der Hauptaufgaben der App besteht darin, diese Views zu synchronisieren. Häufig stehen die Views für Werte einer zugrunde liegenden Datenquelle, und die Benutzer verändern die Views, um die Daten zu verändern. Wenn die View verändert wird, müssen alle zugrunde liegenden Daten und andere View diese Änderung nachvollziehen. Das kann über Eventhandler realisiert werden. 
+Eine .NET Multiplattform App UI (.NET MAUI) App besteht aus einer oder mehreren Pages, von denen jede typischerweise mehrere Benutzerschnittstellen-Objekte enthält. Eine der Hauptaufgaben der App besteht darin, diese Views zu synchronisieren. Häufig stehen die Views für Werte einer zugrunde liegenden Datenquelle, und die Benutzer verändern die Views, um die Daten zu verändern. Wenn die View verändert wird, müssen alle zugrunde liegenden Daten und andere Views diese Änderung nachvollziehen. Das kann über Eventhandler realisiert werden. 
 
 Die Datenbindung automatisiert diesen Prozess und macht Ereignishandler überflüssig. Datenbindungen können sowohl in XAML als auch in Code implementiert werden, sind aber in XAML weitaus häufiger, da sie dazu beitragen, die Größe der Code-Behind-Datei zu reduzieren. Bindungsaktualisierungen werden von .NET MAUI an den UI-Thread automatisch übermittelt. 
 

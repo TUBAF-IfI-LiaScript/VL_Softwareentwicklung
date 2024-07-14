@@ -336,7 +336,7 @@ An den Konstruktor und die Run-Methode können `Action`-Delegate übergeben werd
 
 > Delegaten können durch konkrete Methoden, anonyme Methoden oder Lambda-Ausdrücke realisiert werden.
 
-Der Konstruktor wird nur in erweiterten Szenarien verwendet, wo es erforderlich ist, die Instanziirung und der Start zu trennen.
+Der Konstruktor wird nur in erweiterten Szenarien verwendet, wo es erforderlich ist, die Instanziirung und den Start zu trennen.
 
 ### Überwachung
 
@@ -429,7 +429,7 @@ Für diese Reihe von Aufgaben jeweils durch Aufrufen der `Wait` Methode zu warte
 wäre aufwändig und wenig praktisch. `WaitAll` schließt diese Lücke und erlaubt
 eine übergreifende Überwachung.
 
-Das folgenden Beispiel werden zehn Aufgaben erstellt, die wartet, bis alle zehn abgeschlossen werden, und klicken Sie dann ihren Status angezeigt.
+Im folgenden Beispiel werden zehn Aufgaben erstellt, die warten, bis alle zehn abgeschlossen werden, dann wird ihr Status anzeigt.
 
 ```csharp           WaitForAll
 using System;
@@ -464,7 +464,7 @@ class Program {
 ### Generische Task-Klasse
 
 Die generische Klasse `Task<T>` bildet ebenfalls einen Vorgang zur Lösung einer einzelnen Aufgabe ab, gibt aber im Unterschied zu der nicht generischen `Task`-Klasse einen Wert zurück. 
-Die Konstruktoren und die Run-Methode der Klasse bekommen einen `Func`-Delegat bzw. einen als Lambda-Ausderuck formulierten Code übergeben, der einen Rückgabewert liefert.
+Die Konstruktoren und die Run-Methode der Klasse bekommen einen `Func`-Delegat bzw. einen als Lambda-Ausdruck formulierten Code übergeben, der einen Rückgabewert liefert.
 
 
 ```csharp           TaskClasses
@@ -478,7 +478,7 @@ public class Task<T>: Task{
 ```
 
 Der Kanon der Möglichkeiten wird durch die Klasse `Task<TResult>` deutlich erweitert. 
-Anstatt die Ergebnisse wie bei Threads in eine "außen stehende" Variable (z.B. Datenfeld der einer Klasse) zu speichern, wird das Ergebnis im
+Anstatt die Ergebnisse wie bei Threads in eine "außen stehende" Variable (z.B. Datenfeld einer Klasse) zu speichern, wird das Ergebnis im
 `Task`-Objekt selbst  gespeichert und kann dann über die Eigenschaft `Result` abgerufen werden. 
 
 ```csharp      TaskWithReturn
