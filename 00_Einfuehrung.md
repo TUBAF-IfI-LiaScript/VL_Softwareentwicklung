@@ -93,7 +93,7 @@ der Ausbildung nahezu aus.
 
 ********************************************************************************
 
-### Wozu brauche ich das?
+### Warum das Ganze?
 
 > Anhand der Veranstaltung entwickeln Sie ein "Gefühl" für guten und schlechten
 > Codeentwürfen und hinterfragen den Softwareentwicklungsprozess.
