@@ -21,7 +21,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 | Parameter                | Kursinformationen                                                                           |
 | ------------------------ | ------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**       | `Vorlesung Softwareentwicklung` `Vorlesung Einführung in die Softwareentwicklung`           |
+| **Veranstaltung:**       | `Vorlesung Softwareentwicklung`, `Softwareentwicklung und Objektorientierter Entwurf`, `Vorlesung Einführung in die Softwareentwicklung`           |
 | **Teil:**                | `0/27`                                                                                      |
 | **Semester**             | @config.semester                                                                            |
 | **Hochschule:**          | @config.university                                                                          |
@@ -56,7 +56,7 @@ Studierende sollen ...
 - in der Lage sein, interaktive Programme unter Verwendung einer
   objektorientierten Klassenbibliothek zu erstellen.
 
-[Auszug aus dem Modulhandbuch 2020]
+[Auszug aus dem Modulhandbuch]
 
 
 ### Zielstellung der Veranstaltung
@@ -103,7 +103,7 @@ der Ausbildung nahezu aus.
 
 **Beispiel 1: Mariner 1 Steuerprogramm-Bug (1962)**
 
-![An Atlas-Agena 5 carrying the Mariner 1 spacecraft](./img/00_Einleitung/Atlas_Agena_with_Mariner_1.jpg)[^Atlas-Agena]
+![An Atlas-Agena 5 carrying the Mariner 1 spacecraft](./img/00_Einleitung/Atlas_Agena_with_Mariner_1.jpg "wikimedia, Autor: NASA, [Link](https://de.wikipedia.org/wiki/Datei:Atlas_Agena_with_Mariner_1.jpg)")
 
 Mariner 1 ging beim Start am 22. Juli 1962 durch ein fehlerhaftes Steuerprogramm verloren, als die Trägerrakete vom Kurs abkam und 293 Sekunden nach dem Start gesprengt werden musste. Ein Entwickler hatte einen Überstrich in der handgeschriebenen Spezifikation eines Programms zur Steuerung des Antriebs übersehen und dadurch statt geglätteter Messwerte Rohdaten verwendet, was zu einer fehlerhaften und potenziell gefährlichen Fehlsteuerung des Antriebs führte.
 
@@ -132,20 +132,17 @@ Die On-Board-Units des Systems
 
 *******************************************************************************
 
-[^Atlas-Agena]: wikimedia, Autor: NASA, [Link](https://de.wikipedia.org/wiki/Datei:Atlas_Agena_with_Mariner_1.jpg)
-
 ## Organisatorisches
 
 ![Animation einer Ordnung auf dem Schreibtisch](https://media.giphy.com/media/uMaTkVdfhzlemBQD3g/giphy.gif)<!--style="width: 100%; max-width: 80vh;"-->
 
-
 ### Dozenten
 
-| Name            | Email                                   |
-| :-------------- | :-------------------------------------- |
-| Sebastian Zug   | sebastian.zug@informatik.tu-freiberg.de |
-| Galina Rudolf   | galina.rudolf@informatik.tu-freiberg.de |
-| Martin Heinrich | Martin.Heinrich@imfd.tu-freiberg.de     |
+| Name                    | Email                                   | Fakultät |
+| :---------------------- | :-------------------------------------- | -------- |
+| Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de | 1        |
+| Dr. Galina Rudolf       | galina.rudolf@informatik.tu-freiberg.de | 1        |
+| Dr. Martin Heinrich     | Martin.Heinrich@imfd.tu-freiberg.de     | 4        |
 
 ### Ablauf
 
@@ -158,9 +155,9 @@ Vorlesungen:
 | --------------- | -------------------------------- | ------------------------------------------------------------------------------ |
 | Hörerkreis      | Fakultät 1 + interessierte Hörer | Fakultät 4 - Studiengang Engineering                                           |
 | Leistungspunkte | 9                                | 6                                                                              |
-| Vorlesungen     | 29 (1 Feiertag )                 | 16 (bis 31. Mai 2024)                                                          |
+| Vorlesungen     | 26 (3 Feiertage )                | 15 (bis 31. Mai 2025)                                                          |
 | Übungen         | ab 29. April 2 x wöchentlich     | voraussichtlich ab 13. Mai 1 x wöchentlich (8 Termine)                         |
-| Prüfungsform    | Klausur oder Projekt             | maschinenbauspezifisches Software-Projekt (im Wintersemester 2024/25)          |
+| Prüfungsform    | Klausur oder Projekt             | maschinenbauspezifisches Software-Projekt (im Wintersemester 2025/26)          |
 |                 |                                  | Prüfungsvoraussetzung: Erfolgreiche Bearbeitung der Aufgaben im Sommersemester |
 
 > **Ermunterung an unsere EiS-Hörer**: Nehmen Sie an der ganzen Vorlesungsreihe
@@ -170,37 +167,37 @@ Vorlesungen:
 ### Struktur der Vorlesungen
 
 <!--data-type="none"-->
-| Woche | Tag       | Inhalt der Vorlesung                              | Inhalt der Vorlesung FAK-4                             |
-| :---- | --------- | :------------------------------------------------ | ------------------------------------------------------ |
-| 1     | 5. April  | Organisation, Einführung von GitHub und LiaScript |                                                        |
-| 2     | 8. April  | Softwareentwicklung als Prozess                   |                                                        |
-|       | 12. April | Konzepte von Dotnet und C#                        | Python: Einordnung,Eigenschaften, Entwicklungsumgebung |
-| 3     | 15. April | Elemente der Sprache C# I                         | (Module), Elemente der Sprache                         |
-|       | 19. April | Elemente der Sprache C# II                        | Listen, Kontrollstrukturen, ListComprehension          |
-| 4     | 22. April | Strukturen / Konzepte der OOP                     | Erweiterte Typen: Tupel, Dictionary, Set               |
-|       | 26. April | Säulen Objektorientierter Programmierung          | Funktionen                                             |
-| 5     | 29. April | Klassenelemente in C#  / Vererbung                | Konzepte der OOP                                       |
-|       | 3. Mai    | Klassenelemente in C#  / Interfaces               | OOP, Elemente der Klasse                               |
-| 6     | 6. Mai    | Generics                                          | Private und öffentliche Methoden, Vererbung            |
-|       | 10. Mai   | Container                                         | Datenanalyse /Datenvisualisierung                      |
-| 7     | 13. Mai   | Versionsmanagement im SWE-Prozess I               |                                                        |
-|       | 17. Mai   | Versionsmanagement im SWE_Pprozess II             |                                                        |
-| 8     | 20. Mai   | _Pfingstmontag_                                   |                                                        |
-|       | 24. Mai   | UML Konzepte                                      |                                                        |
-| 9     | 27. Mai   | UML Diagrammtypen                                 |                                                        |
-|       | 31. Mai   | UML Anwendungsbeispiel                            |                                                        |
-| 10    | 3. Juni   | Testen                                            |                                                        |
-|       | 7. Juni   | Dokumentation und Build Toolchains                |                                                        |
-| 11    | 10. Juni  | Continuous Integration in GitHub                  |                                                        |
-|       | 14. Juni  | Delegaten                                         |                                                        |
-| 12    | 17. Juni  | Events                                            |                                                        |
-|       | 21. Juni  | Threadkonzepte in C#                              |                                                        |
-| 13    | 24. Juni  | Taskmodell                                        |                                                        |
-|       | 28. Juni  | GUI - MAUI                                        |                                                        |
-| 14    | 1. Juli   | GUI - MAUI                                        |                                                        |
-|       | 5. Juli   | Language Integrated Query                         |                                                        |
-| 15    | 8. Juli   | Design Pattern                                    |                                                        |
-|       | 12. Juli  | Anwendungungsfälle                                |                                                        |
+| Woche | Tag       | SWE                                      | Einführung in SWE                                      |
+| :---- | --------- | :--------------------------------------- | ------------------------------------------------------ |
+| 1     | 4. April  | Organisation, Einführung                 | gemeinsam                                              |
+| 2     | 7. April  | Softwareentwicklung als Prozess          | gemeinsam                                              |
+|       | 11. April | Konzepte von Dotnet und C#               | Python: Einordnung,Eigenschaften, Entwicklungsumgebung |
+| 3     | 14. April | Elemente der Sprache C# I                | (Module), Elemente der Sprache                         |
+|       | 18. April | _Karfreitag_                             | _Karfreitag_                                           |
+| 4     | 21. April | _Ostermontag_                            | _Ostermontag_                                          |
+|       | 25. April | Elemente der Sprache C# II               | Listen, Kontrollstrukturen, ListComprehension          |
+| 5     | 28. April | Strukturen / Konzepte der OOP            | Erweiterte Typen: Tupel, Dictionary, Set               |
+|       | 2. Mai    | Säulen Objektorientierter Programmierung | Funktionen                                             |
+| 6     | 5. Mai    | Klassenelemente in C#  / Vererbung       | Konzepte der OOP                                       |
+|       | 9. Mai    | Klassenelemente in C#  / Interfaces      | OOP, Elemente der Klasse                               |
+| 7     | 12. Mai   | Versionsmanagement im SWE-Prozess I      | gemeinsam                                              |
+|       | 16. Mai   | Versionsmanagement im SWE_Pprozess II    | gemeinsam                                              |
+| 8     | 19. Mai   | Generics                                 | Private und öffentliche Methoden, Vererbung            |
+|       | 23. Mai   | Container                                | Datenanalyse /Datenvisualisierung                      |
+| 9     | 26. Mai   | UML Konzepte                             | gemeinsam                                              |
+|       | 30. Mai   | UML Diagrammtypen                        | gemeinsam                                              |
+| 10    | 2. Juni   | UML Anwendungsbeispiel                   |--------------------------------------------------------|
+|       | 6. Juni   | Testen                                   |                                                        |
+| 11    | 9. Juni   | _Pfingstmontag_                          |                                                        |
+|       | 13. Juni  | Dokumentation und Build Toolchains       |                                                        |
+| 12    | 16. Juni  | Continuous Integration in GitHub         |                                                        |
+|       | 20. Juni  | Delegaten                                |                                                        |
+| 13    | 23. Juni  | Events                                   |                                                        |
+|       | 27. Juni  | Threadkonzepte in C#                     |                                                        |
+| 14    | 30. Juni  | Taskmodell                               |                                                        |
+|       | 4. Juli   | Design Pattern                           |                                                        |
+| 15    | 7. Juli   | Language Integrated Query                |                                                        |
+|       | 11. Juli  | GUI - MAUI                               |                                                        |
 
 
 ### Durchführung
@@ -217,7 +214,7 @@ im Audimax 1001 statt,
 
 für Studierende der FAK-4 vom 12.4. bis 10.5. in KKB-2030.
 
-Die Vorlesung wurden im Sommersemester 2021 vollständig aufgezeichnet. Die Inhalte finden sich unter
+Die Vorlesung wurden im Sommersemester 2021 vollständig aufgezeichnet. Teile der Inhalte wurden nicht verändert und finden sich unter
 
 https://teach.informatik.tu-freiberg.de/b/seb-blv-unz-kxu
 
@@ -383,11 +380,94 @@ sondern erfordert eine individuelle Suche nach spezifischen Inhalten.
   **Algorithmen**
   + [Codebeispiele](http://www.rosettacode.org/wiki/Category:Programming_Tasks)
 
-- **Bücher:**
+## Wozu brauche ich das?
 
-  + [C# 7.0 in a Nutshell - _J. Albahari, B. Albahari, O'Reilly 2017_](https://www.oreilly.com/library/view/c-70-in/9781491987643/)
-  + [Kompaktkurs C# 7 - _H. Mössenböck, dpunkt.verlag_](https://dpunkt.de/produkt/kompaktkurs-c-7/)
+> __Das nachfolgende Beispiel sollte Ihnen bekannt sein. Welchen Vorteil bringt eine Lösung in Form eines Python Skripts?__
 
+> Gegeben ist ein gleichschenkliges Stabwerk. Dieses besteht aus Stäben $s1$, $s2$ und $s3$ mit den Knoten $A(0,0)$, $B(1,1.5)$ und $C(2,0)$. Dabei ist Knoten $A$ ein Festlager und Knoten $C$ ein Loslager. Im folgenden ist das Stabwerk maßstäblich dargestellt mit der $x$-Achse in horizontaler Richtung und der $y$-Achse in vertikaler Richtung:
+> 
+> ![alt text](./img/00_Einleitung/stabwerk_aufgabe.png)<!--style="width: 100%; max-width: 30vh;"-->
+> 
+> Im Knoten $B$ greift eine Kraft $\boldsymbol{F}$ an mit den Komponenten $\boldsymbol{F} = [-1, -1]\,\text{N}$.
+>
+> __Aufgaben__
+>
+> 1. Leiten Sie aus der Skizze das lineare Gleichungssystem der Form $\boldsymbol{A} \cdot \boldsymbol{x} = \boldsymbol{b}$ her, welches das gezeigte Fachwerk beschreibt und tragen Sie es hier ein. Dabei steht der Lösungsvektor $\boldsymbol{x}$ für die Stab- und Lagerkräfte im Stabwerk.
+> 2. Berechnen Sie die Stab- und Lagerkräfte mit Hilfe der Numpy-Funktion [`numpy.linalg.solve`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html), welche direkt ein System von linearen Gleichungssystemen iterativ lösen kann. Geben Sie die berechneten Kräfte formatiert aus.
+
+Insgesamt gibt es in dieser Aufgabe 6 unbekannte Größen: Die Stabkräfte $F_{s1}$, $F_{s2}$ und $F_{s3}$, die Lagerkräfte im Knoten $A$ in $x$- und $y$-Richtung $F_{Ax}$ und $F_{Ay}$ sowie die Lagerkraft im Knoten $C$ in $y$-Richtung $F_{Cy}$. Daher müssen ebenfalls 6 Gleichungen aufgestellt werden, um die gesuchten Größen berechnen zu können.
+
+Diese 6 Gleichungen erhält man, indem man in den drei Knotenpunkten jeweils das Kräftegleichgewicht in $x$- und $y$-Richtung aufstellt. Beispielhaft soll dieses Vorgehen am Knoten $A$ erläutert werden. In folgender Abbildung sind die Stabkräfte $F_{s1}$ und $F_{s2}$ sowie die Lagerkräfte am Knoten $A$ angezeichnet:
+
+![alt text](./img/00_Einleitung/stabwerk_erlaeuterung.png)
+
+Die zwei Kräftegleichgewichte in $x$- und $y$-Richtung lauten dann wie folgt:
+
+$$ \begin{align*} F_{s1} \cos{\alpha} + F_{s3} + F_{Ax}&= 0 \\ F_{s1} \sin{\alpha} + F_{Ay} &= 0 \end{align*} $$
+
+Analog werden die Kräftegleichgewichte in den Knotenpunkten $B$ und $C$ gebildet. Anschließend können die Koeffizienten für die Koeffizientenmatrix und der konstante Vektor aufgestellt werden.
+
+### **Teilaufgabe 1**
+
+Für alle 6 Gleichungen in den Knoten $A$, $B$ und $C$ gilt:
+
+$$ \begin{align*} F_{s1} \cos{\alpha} + F_{s3} + F_{Ax} &= 0 \\ F_{s1} \sin{\alpha} + F_{Ay} &= 0 \\ -F_{s1} \sin{\frac{\alpha}{2}} + F_{s2} \sin{\frac{\alpha}{2}} - F_x &= 0 \\ -F_{s1} \cos{\frac{\alpha}{2}} - F_{s2} \cos{\frac{\alpha}{2}} - F_y &= 0 \\ - F_{s2} \cos{\alpha} - F_{s3}  &= 0 \\ F_{s2} \sin{\alpha} + F_{Cy} &= 0\end{align*}$$
+
+
+Daraus kannn das linearen Gleichungssystem mit Koeffizientenmatrix $\boldsymbol{A}$ und konstantem Vektor $\boldsymbol{b}$ abgeleitet werden:
+
+$$ \begin{pmatrix} \cos{\alpha} & 0 & 1 & 1 & 0 & 0 \\ \sin{\alpha} & 0 & 0 & 0 & 1 & 0 \\ -\sin{\frac{\beta}{2}} & \sin{\frac{\beta}{2}} & 0 & 0 & 0 & 0 \\ -\cos{\frac{\beta}{2}} & -\cos{\frac{\beta}{2}} & 0 & 0 & 0 & 0 \\ 0 & -\cos{\alpha} & -1 & 0 & 0 & 0 \\ 0 & \sin{\alpha} & 0 & 0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix} F_{s1} \\ F_{s2} \\ F_{s3} \\ F_{Ax} \\ F_{Ay} \\ F_{Cy} \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ F_x \\ F_y \\ 0 \\ 0 \end{pmatrix} $$
+
+Die Winkel $\alpha$ und $\beta$ können mit Hilfe des Arkustangens und der geometrischen Abmessungen direkt bestimmt werden:
+
+$$ \begin{align*} \alpha &= \arctan{\frac{1.5}{1}} \approx 56{,}31^\circ \\ \beta &= 180^\circ - 2\,\alpha \approx 67{,}38^\circ \end{align*} $$
+
+### **Teilaufgabe 2**
+
+```python CalcSolution.py
+# Laden der Module
+import numpy as np
+
+# Berechnung der Winkel
+alpha = np.arctan(1.5/1)
+beta = np.pi - 2*alpha
+
+# Betrag der Komponenten des Kraftvektors
+Fx = 1
+Fy = 1
+
+# Koeffizientenmatrix
+A = np.array([
+    [np.cos(alpha), 0, 1, 1, 0, 0],
+    [np.sin(alpha), 0, 0, 0, 1, 0],
+    [-np.sin(0.5*beta), np.sin(0.5*beta), 0, 0, 0, 0],
+    [-np.cos(0.5*beta), -np.cos(0.5*beta), 0, 0, 0, 0],
+    [0, -np.cos(alpha), -1, 0, 0, 0],
+    [0, np.sin(alpha), 0, 0, 0, 1]]
+    )
+
+b = np.array([0, 0, Fx, Fy, 0, 0])
+x = np.linalg.solve(A, b)
+
+print(f"Die Kräfte im Stabwerk sind wie folgt:")
+print(f"    Stabkraft 1 = {x[0]:.3f} N")
+print(f"    Stabkraft 2 = {x[1]:.3f} N")
+print(f"    Stabkraft 3 = {x[2]:.3f} N")
+print(f"    Lagerkraft Ax = {x[3]:.3f} N")
+print(f"    Lagerkraft Ay = {x[4]:.3f} N")
+print(f"    Lagerkraft Cy = {x[5]:.3f} N")
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`, `*`)
+
+### Zoom in:Informatik  
+
+> _Mmmh ... ich habe nicht nur das Gefühl, dass ich nicht nur "etwas" nicht verstanden habe, sondern mir fehlt das große Bild!_
+>
+> _Ich möchte keine komischen Blicke von den Informatikern sehen, wenn ich zwei mal nachfrage!_
+
+Probeweise bieten wir das Format __Zoom in: Informatik__ an. Damit soll insbesondere die Maschinenbauer in wöchtentlichen Terminen (Freitags 13:00-14:00, ab nächster Woche) die Möglichkeit gegeben werden, Fragen zu stellen und sich mit den Informatikern auszutauschen. Die Termine sind nicht verpflichtend und sollen Ihnen helfen, die Inhalte der Vorlesung besser zu verstehen.
+
+Die Veranstaltung wird in der Universitätsbibliothek stattfinden.
 
 ## Werkzeuge der Veranstaltung
 
