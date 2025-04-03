@@ -122,6 +122,17 @@ Die Norm kann als eine Art Checkliste verstanden werden.
 
 ![](https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif)
 
+1940er-1950er: wird der Begriff "Programmierung" verwendet (Software wird meist direkt in Maschinensprache oder Assembler geschrieben)
+
+1960er: massive Probleme bei der Softwareerstellung ("Softwarekrise")
+
+> "Die Hauptursache für die Softwarekrise liegt darin begründet, dass die Maschinen um einige Größenordnungen leistungsfähiger geworden sind! Um es ganz deutlich zu sagen: Solange es keine Maschinen gab, war Programmierung kein existierendes Problem; als wir ein paar schwache Computer hatten, wurde Programmierung zu einem geringen Problem, und nun, da wir gigantische Computer haben, ist die Programmierung ein ebenso gigantisches Problem." – Edsger Dijkstra: The Humble Programmer [^Dijkstra]
+
+[^Dijkstra]: Edsger Dijkstra: The Humble Programmer (https://www.cs.utexas.edu/~EWD/ewd03xx/EWD340.PDF)
+
+1968: findet NATO Software Engineering Conference statt, 
+"Software Engineering" wird ersmalig als Konzept diskutiert
+
 ### Komplexität von Software
 
                                   {{0-1}}
@@ -202,28 +213,28 @@ Die Zusammenfassung wurde durch die Ausführungen von [^Lemburg] motiviert
 1. Management
 
     + Es wird mit der Codierung sofort angefangen.
-    + Eine Festlegung der Anforderungen/Qualitätsmerkmale fehlt
-    + Eine Abnahme der Phasenergebnisse erfolgt nicht
-    + Ein Vorgehensmodell fehlt, bzw. wird nicht verfolgt
-    + Die Schulung für die Software-Ersteller und -Anwender wird vernachlässigt oder als nicht notwendig angesehen
+    + Eine Festlegung der Anforderungen/Qualitätsmerkmale fehlt.
+    + Eine Abnahme der Phasenergebnisse erfolgt nicht.
+    + Ein Vorgehensmodell fehlt, bzw. wird nicht verfolgt.
+    + Die Schulung für die Software-Ersteller und -Anwender wird vernachlässigt oder als nicht notwendig angesehen.
     + Die Terminvorgaben sind unrealistisch und nicht koordiniert.
-    + Begriffe werden nicht definiert
+    + Begriffe werden nicht definiert.
 
 2. Architektur
 
-    + Die Systemarchitektur ist nicht oder nur sehr umständlich erweiterbar (fehlende Datenkapselung, fehlende Modularität)
-    + Es wird ein unnützes Maß an Komplexität in den Entwurf integriert: "_Es könnte doch sein, dass ..._"
+    + Die Systemarchitektur ist nicht oder nur sehr umständlich erweiterbar (fehlende Datenkapselung, fehlende Modularität).
+    + Es wird ein unnützes Maß an Komplexität in den Entwurf integriert: "_Es könnte doch sein, dass ..._".
 
 3. Entwicklungfluss
 
-    + Die Auswahl der Werkzeuge/Methoden ist unzureichend vorbereitet
+    + Die Auswahl der Werkzeuge/Methoden ist unzureichend vorbereitet.
     + Es wird nicht systematisch bzw. unzureichend getestet.
     + Standards und Richtlinien werden nicht beachtet.
 
 4. Dokumentation
 
-    + Schlechte Namensvergabe wie z.B. File-, Klassen-, Methoden- und Variablennamen
-    + Die Dokumentation fehlt bzw. ist veraltet, unzureichend oder nicht adäquat
+    + Schlechte Namensvergabe wie z.B. File-, Klassen-, Methoden- und Variablennamen.
+    + Die Dokumentation fehlt bzw. ist veraltet, unzureichend oder nicht adäquat.
 
 
 [^Lemburg]: Prof. Dr. Thorsten Lemburg, Einführung in die Softwareentwicklung,
@@ -401,7 +412,7 @@ Welche Probleme sehen Sie im Hinblick auf die zuvor genannten Qualitätsmerkmale
 
 **Der Faktor Mensch**
 
-In einem Projekt stellt sich die Frage wie viele Personen involviert sind und damit welche Komplexität der Entwicklungsfluss hat. In einem Team von 3 Personen wird muss sichergestellt sein, dass eine Information bei 2 Partnern ankommt. Die maximale Anzahl ergibt sich zu
+In einem Projekt stellt sich die Frage wie viele Personen involviert sind und damit welche Komplexität der Entwicklungsfluss hat. In einem Team von 3 Personen wird muss sichergestellt sein, dass eine Information bei 2 Partnern ankommt. Die maximale Anzahl der Kommunikationspfade ergibt sich zu
 
 $$N = \frac{n\cdot(n-1)}{2}$$.
 
@@ -429,15 +440,46 @@ Hier ist eine koordinierte Interaktion und Kommunikation notwendig!
 
 [^Lemburg2]: Prof. Dr. Thorsten Lemburg, Einführung in die Softwareentwicklung - Seminar: Softwareentwicklung in der Wissenschaft, [Link](https://wr.informatik.uni-hamburg.de/_media/teaching/wintersemester_2010_2011/siw-2011-lemburg-einfuehrung_in_die_softwareentwicklung-ausarbeitung.pdf)
 
+**Methoden der Aufwandschätzung**
+
+* Expertenschätzung - subjektiv, erfahrungsbasiert (Delphi-Methode - Diskussionsrunden, T-Shirt-Sizing, Planning Poker - Schätzung mit verdeckten Karten, anschließend Diskussion)
+
+* Algorithmische Modelle
+
+   - Schätzung über Function-Points: basierend auf Ein- und Ausgaben
+   - COCOMO (Constructive Cost Model): Anzahl von Codezeilen
+   - UseCase Points (UCP): basierend auf der Anzahl und Komplexität der Anwendungsfälle
+
+* Empirische und vergleichende Methoden (Analogiemethode, Story Points - basierend auf Komplexität, Unsicherheiten und technische Herausforderungen)
+
+*Optimale Entwicklungsdauer = 2,5 · (Aufwand in MM)^s* mit
+
+*s = 0,38* für Stapel-Systeme
+
+*s = 0,35* für Dialog-Systeme
+
+*s = 0,32* für Echtzeit-Systeme
+
+**Brooks-Gesetz:**
+
+"Der Einsatz zusätzlicher Arbeitskräfte bei bereits verzögerten Softwareprojekten verzögert sie nur noch weiter."
+		– Frederick P. Brooks: The Mythical Man Month: Essays on Software Engineering
+
+Gründe nach Brooks:
+
+* Einarbeitung neuer Team-Mitglieder kostet Kraft
+* Neue Arbeitsaufteilungen sorgen für Unruhe
+* Kommunikationskosten steigen im Quadrat mit der Personenzahl
+
 ## Ansätze zur Strukturierung der Aufgaben
 
 > Ein Vorgehensmodell zur Softwareentwicklung ist ein für die Softwareentwicklung angepasstes Vorgehensmodell bei der professionellen („ingenieursmäßigen“) Anwendungsentwicklung. Es ist ein standardisierter, organisatorischer Rahmen für den idealen Ablauf eines Entwicklungsprojektes und dient dazu, die Softwareentwicklung übersichtlicher zu gestalten und in der Komplexität beherrschbar zu machen. [^WikiVorgehen]
 
 [^WikiVorgehen]: [Wikipedia](https://de.wikipedia.org/wiki/Vorgehensmodell)
 
-Die zwei erstgenannten Vorgehensweisen setzen auf eine Planbarkeit des Projektes, während die agilen Methoden auf die Flexibilität in den Vordergrund stellen. 
+Die zwei erstgenannten Vorgehensweisen setzen auf eine Planbarkeit des Projektes, während die agilen Methoden die Flexibilität in den Vordergrund stellen. 
 
-### Erweitertes Wasserfallmodell
+### Wasserfallmodell
 
 <!--
 style="width: 100%; max-width: 760px; display: block; margin-left: auto; margin-right: auto;"
@@ -473,7 +515,13 @@ Nachteile:
 * Frühes festschreiben der Anforderungen ist sehr problematisch und kann zu teuren Änderungen führen
 * Fehler werden eventuell erst sehr spät erkannt und müssen mit erheblichen Aufwand  entfernt werden
 
+Im erweiterten Wasserfallmodell fällt die strikte Vorgabe eine Phase nach der anderen zu bearbeiten weg, 
+die Rückkehr in eine vorhergehende Phase möglich, um z.B. Fehler zu beheben.
+
 ### V-Modell
+
+Zusätzlich zu den Entwicklungsphasen definiert das V-Modell das Vorgehen zur 
+Qualitätssicherung (Testen), indem den einzelnen Entwicklungsphasen die Testphasen gegenübergestellt werden.
 
 <!--
 style="width: 100%; max-width: 760px; display: block; margin-left: auto; margin-right: auto;"
@@ -496,7 +544,7 @@ Anforderungen        ................>              Abnahmetest
 ```
 
 
-Tätigkeitsbereiche des V-Modell: Softwareerstellung, Qualitätssicherung, Konfigurationsmanagement, Projektmanagement
+Tätigkeitsbereiche des V-Modell: Softwareerstellung, Qualitätssicherung (Reviews, Tests, Verifikationen bzw. Validierungen), Konfigurationsmanagement (Verwaltung und Kontrolle von Versionen, Änderungen und Abhängigkeiten), Projektmanagement (Zeitmanagement, Ressourcenplanung, Risikomanagement und Kommunikation)
 
 Vorteile:
 
@@ -507,7 +555,7 @@ Vorteile:
 Nachteile:
 
 * Für kleine und mittlere Softwareentwicklungen führt das V-Modell zu einem unnötigen Overhead
-* Die im V-Modell definierten Rollen (bis zu 25) sind für gängige Softwareentwicklungen nicht realistisch
+* Die im V-Modell definierten Rollen (bis zu 25: Projektleiter, Auftragsgeber, Qualitätsmanager, Systemarchitekt, Softwareentwickler, Tester / Testmanager, ...) sind für gängige Softwareentwicklungen nicht realistisch
 * explizite Werkzeuge notwendig
 
 
@@ -524,21 +572,56 @@ Nachteile:
 | Planung                        | durch Projektleiter                             | im Team                       |
 | Kundeninteraktion              | Kunde oft unbekannt                             | Kunde als aktiver Teil        |
 
+**Agile Leitsätze**
+
+Vier Leitsätze wurden im Februar 2001 als Agiles Manifest formuliert:
+
+"Wir erschließen bessere Wege, Software zu entwickeln, indem wir es selbst tun und anderen dabei helfen. 
+
+Durch diese Tätigkeit haben wir diese Werte zu schätzen gelernt:
+
+* Individuen und Interaktionen sind wichtiger als Prozesse und Werkzeuge
+* Funktionierende Software ist wichtiger als umfassende Dokumentationen
+* Zusammenarbeit mit dem Kunden ist wichtiger als Vertragsverhandlungen
+* Reagieren auf Veränderung ist wichtiger als das Befolgen eines Plans
+
+Das heißt, obwohl wir die Werte auf der rechten Seite wichtig finden, schätzen wir die Werte auf der linken Seite höher ein."
+	– Kent Beck, Mike Beedle, Arie van Bennekum, Alistair Cockburn, Ward Cunningham, Martin Fowler, James Grenning, Jim Highsmith, Andrew Hunt, Ron Jeffries, Jon Kern, Brian Marick, Robert C. Martin, Steve Mellor, Ken Schwaber, Jeff Sutherland und Dave Thomas [^Manifesto]
+
+[^Manifesto]: Tessen Freund: Software Engineering durch Modellierung wissensintensiver Entwicklungsprozesse, Dissertation, [Manifesto](https://agilemanifesto.org/iso/de/manifesto.html)
+
 Agile Methoden sind z.B.:
 
-* Scrum
+* Scrum: Strukturierter, iterativer Ansatz für Teams
+  
+  - Sprints (Zeitboxen von 1–4 Wochen) mit klaren Zielen
+  - Daily Stand-ups zur Synchronisation
+  - Sprint Reviews & Retrospektiven zur Verbesserung
+
+* Extreme Programming (XP): legt Wert auf technische Exzellenz, Code-Qualität und Best Practices, stark entwicklerorientiertes Model
+  
+  - Test-Driven Development (TDD) - erst Test dann Code
+  - Pair Programming (Arbeiten in Zweierteams)
+  - Continuous Integration (automatisierte Builds und Tests nach jeder Änderung) und schnelle Releases
+  
 * Kanban
-* Extreme Programming (XP)
 * Crystal
 
 
 ## Ok, wir brauchen Unterstützung
 
-> *CASE is the use of computer-based support in the software development process*
+> *CASE (Computer-Aided Software Engineering) is the use of computer-based support in the software development process*
 
                                     {{0}}
 *******************************************************************************
+Was können die CASE-Tools?
 
+* Aufgaben wie Diagrammerstellung, Codegenerierung und Dokumenterstellung automatisieren.
+* Durch Reduzierung des Entwicklungsaufwandes die Entwicklungszeit verkürzen.
+* Softwarequalität verbessern.
+* Verwaltung von Softwareprojekten organisieren.
+* Zusammenarbeit zwischen Teammitgliedern verbessern.
+  
 **Klassifikation nach dem Einsatzzweck**
 
 + Anforderungsanalyse
@@ -568,19 +651,18 @@ Agile Methoden sind z.B.:
 
                                    {{1}}
 *******************************************************************************
-**Grad der Integration verschiedener Funktionalitäten**
+**Grad der Integration verschiedener Entwicklungswerkzeuge**
 
-* Tools - einzelne Aktivitäten im Software Life-cycle
-* Workbenches - mehrere Werkzeuge
-* Integrated Development Environments - Kombination mehrerer Workbenches und Werkzeuge zur
-  Unterstützung des kompletten Software Life-cycle
+* Tools - spezialisierte Werkzeuge für einzelne Aktivitäten im Software Life-cycle
+* Workbenches - Sammlungen mehrerer Tools für bestimmte Aufgaben (z. B. Modellierungs-, Test-Frameworks)
+* Integrated Development Environments (IDEs) - vollständig integrierte Entwicklungsumgebungen, die den gesamten Software-Lifecycle unterstützen (z. B. VS Code, Eclipse, IntelliJ)
 
 > Texteditor vs. Integrated Development Environment (IDE) ... worfür soll ich mich entscheiden?
 
-* Analyse des Workflows und der Formen der Zusammenarbeit
-* Analyse der verwendeten Spezifikations und Modellierungstechniken,
-  Programmiersprachen, etc.
-* Analyse der Komplexität des Vorhabens, der erforderlichen Unterstützung
+* Analyse des Workflows und der Formen der Zusammenarbeit (agil oder klassisch?)
+* Analyse der verwendeten Spezifikations und Modellierungstechniken (wird Modelierungstool benötigt?),
+  Programmiersprachen (Debugging? Code-Vervollständigung?), etc.
+* Analyse der Komplexität des Vorhabens, der erforderlichen Unterstützung mit Versionskontrolle, Debugger, Build-Tools
 * Analyse der Rahmenbedingungen (Betriebssysteme, Kosten)
 
 *******************************************************************************
