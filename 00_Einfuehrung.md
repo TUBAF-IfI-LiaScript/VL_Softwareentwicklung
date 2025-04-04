@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug; Galina Rudolf; André Dietrich; Fritz Apelt; `KoKoKotlin`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.8
+version:  1.0.9
 language: de
 narrator: Deutsch Female
 comment:  Motivation der Vorlesung "Softwareentwicklung" und Beschreibung der Organisation der Veranstaltung
@@ -222,6 +222,10 @@ https://teach.informatik.tu-freiberg.de/b/seb-blv-unz-kxu
 
 Die Materialien der Vorlesung sind als Open-Educational-Ressources konzipiert
 und stehen unter Github bereit.
+
+https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung
+
+https://tubaf-ifi-liascript.github.io/softwareentwicklung.html
 
 > Wie können Sie sich einbringen?
 >
