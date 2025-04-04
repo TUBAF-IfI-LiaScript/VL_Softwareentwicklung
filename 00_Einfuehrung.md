@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug; Galina Rudolf; André Dietrich; Fritz Apelt; `KoKoKotlin`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.7
+version:  1.0.8
 language: de
 narrator: Deutsch Female
 comment:  Motivation der Vorlesung "Softwareentwicklung" und Beschreibung der Organisation der Veranstaltung
@@ -65,8 +65,8 @@ Studierende sollen ...
 
 | Genereller Anspruch                                                                           | Spezifischer Anspruch                                                                                  |
 | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Verstehen verschiedener Programmierparadigmen UNABHÄNGIG von der konkreten Programmiersprache | Objektorientierte (und funktionale) Programmierung am Beispiel von C# / Python                                 |
-| Praktische Einführung in die methodische Softwareentwicklung                                  | Systematisierung der Anforderungen an einen Code, Arbeit mit UML Diagrammen und Entwurfsmustern                                             |
+| Verstehen verschiedener Programmierparadigmen UNABHÄNGIG von der konkreten Programmiersprache | Objektorientierte (und funktionale) Programmierung am Beispiel von C# / Python                         |
+| Praktische Einführung in die methodische Softwareentwicklung                                  | Systematisierung der Anforderungen an einen Code, Arbeit mit UML Diagrammen und Entwurfsmustern        |
 | Grundlagen der kooperativ/kollaborative Programmierung und Projektentwicklung                 | Verwendung von Projektmanagementtools und einer Versionsverwaltung für den Softwareentwicklungsprozess |
 
 ### Im Fokus: Teamwork
@@ -128,7 +128,7 @@ Die On-Board-Units des Systems
 - zeigten unterschiedliche Mauthöhen auf identischen Strecken an
 - wiesen Autobahnstrecken fehlerhaft als mautfrei/mautpflichtig aus
 
-> **Potentieller Lösungsansatz**: Testen auf Integrationsebene, Projektkoordination
+> **Potentieller Lösungsansatz**: vollständige Spezifikation, Testen auf Integrationsebene, Projektkoordination
 
 *******************************************************************************
 
@@ -151,14 +151,14 @@ Jetzt wird es etwas komplizierter ... die Veranstaltung kombiniert nämlich zwei
 Vorlesungen:
 
 <!--data-type="none"-->
-|                 | _Softwareentwicklung (SWE)_      | _Einführung in die Softwareentwicklung (EiS)_                                  |
-| --------------- | -------------------------------- | ------------------------------------------------------------------------------ |
-| Hörerkreis      | Fakultät 1 + interessierte Hörer | Fakultät 4 - Studiengang Engineering                                           |
-| Leistungspunkte | 9                                | 6                                                                              |
-| Vorlesungen     | 26 (3 Feiertage )                | 15 (bis 31. Mai 2025)                                                          |
-| Übungen         | ab 29. April 2 x wöchentlich     | voraussichtlich ab 13. Mai 1 x wöchentlich (8 Termine)                         |
-| Prüfungsform    | Klausur oder Projekt             | maschinenbauspezifisches Software-Projekt (im Wintersemester 2025/26)          |
-|                 |                                  | Prüfungsvoraussetzung: Erfolgreiche Bearbeitung der Aufgaben im Sommersemester |
+|                 | _Softwareentwicklung (SWE)_      | _Einführung in die Softwareentwicklung (EiS)_                               |
+| --------------- | -------------------------------- | --------------------------------------------------------------------------- |
+| Hörerkreis      | Fakultät 1 + interessierte Hörer | Fakultät 4 - Studiengang Engineering                                        |
+| Leistungspunkte | 9                                | 6                                                                           |
+| Vorlesungen     | 26 (3 Feiertage )                | 15 (bis 31. Mai 2025)                                                       |
+| Übungen         | ab 28. April 2 x wöchentlich     | voraussichtlich ab XXX Mai 1 x wöchentlich (8 Termine)                      |
+| Prüfungsform    | Klausur oder Projekt             | PVL-Testat in der zweiten Junihälftet für den ersten Teil der Veranstaltung |
+|                 |                                  | maschinenbauspezifisches Software-Projekt (im Wintersemester 2025/26)       |
 
 > **Ermunterung an unsere EiS-Hörer**: Nehmen Sie an der ganzen Vorlesungsreihe
 > teil. Den Einstieg haben Sie ja schon gelegt ...
@@ -326,7 +326,7 @@ Verständnis auch die Werkzeuge der Softwareentwicklung adressiert!
 Mit der Veranstaltung Softwareentwicklung verdienen Sie sich `9 CP`/`6 CP`. Eine
 Hochrechnung mit der von der Kultusministerkonferenz vorgegebenen Formel
 `1 CP = 30 Zeitstunden` bedeutet, dass Sie dem Fach im Mittel über dem Semester
-`270 Stunden` widmen sollten ... entsprechend bleibt neben den Vorlesungen und
+`270 / 180 Stunden` widmen sollten ... entsprechend bleibt neben den Vorlesungen und
 Übungen genügend Zeit für die Vor- und Nachbereitung der Lehrveranstaltungen,
 die eigenständige Lösung von Übungsaufgaben sowie die Prüfungsvorbereitung.
 
@@ -407,7 +407,7 @@ $$ \begin{align*} F_{s1} \cos{\alpha} + F_{s3} + F_{Ax}&= 0 \\ F_{s1} \sin{\alph
 
 Analog werden die Kräftegleichgewichte in den Knotenpunkten $B$ und $C$ gebildet. Anschließend können die Koeffizienten für die Koeffizientenmatrix und der konstante Vektor aufgestellt werden.
 
-### **Teilaufgabe 1**
+### Teilaufgabe 1
 
 Für alle 6 Gleichungen in den Knoten $A$, $B$ und $C$ gilt:
 
@@ -422,7 +422,7 @@ Die Winkel $\alpha$ und $\beta$ können mit Hilfe des Arkustangens und der geome
 
 $$ \begin{align*} \alpha &= \arctan{\frac{1.5}{1}} \approx 56{,}31^\circ \\ \beta &= 180^\circ - 2\,\alpha \approx 67{,}38^\circ \end{align*} $$
 
-### **Teilaufgabe 2**
+### Teilaufgabe 2
 
 ```python CalcSolution.py
 # Laden der Module
@@ -477,6 +477,7 @@ Was sind die zentralen Tools unserer Veranstaltung?
 * _Vorlesungstool_ -> BigBlueButton für die Aufzeichnungen aus dem vergangenen Semester 
 * _Entwicklungsplattform_ -> [GitHub](https://github.com/)
 * _Beschreibungssprache für Lerninhalte_ -> [LiaScript](https://liascript.github.io/)
+* _KIs_ 
 
 ### Markdown
 
@@ -597,7 +598,7 @@ umsetzen kann.
   \section{Überschrift}
   \textit{eine \emph{Betonung} in kursiver Umgebung}
   \begin{itemize}
-    \item Punkt 1
+    \item Punkt 19
     \item Punkt 2
   \end{itemize}
   Und noch eine Zeile mit einer mathematischen Notation $a=cos(b)$!
@@ -675,12 +676,14 @@ annotation SuppressWarnings
 *******************************************************************************
 
 
-**Ausführbarer C# Code**
+**Ausführbarer Code**
+
+> Ausführbaren Python-Code haben wir beim Stabwerk bereits gesehen. Hier wollen wir jetzt auf C# eingehen.
 
     --{{2}}--
 Wichtig für uns sind die ausführbaren Code-Blöcke, die ich in der Vorlesung nutze, um Beispielimplementierungen zu evaluieren. Dabei werden zwei Formen unterschieden:
 
-**C# 9 mit dotnet Unterstützung**
+**C# 10 mit dotnet Unterstützung**
 
 ```csharp  Coderunner.cs9
 using System;
@@ -786,13 +789,23 @@ https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung
 
   !?[Tutorial](https://www.youtube.com/watch?v=rOzXt--TXLg)
 
-* [VIM/gVIM](https://www.vim.ort) / [neoVIM](https://neovim.io/)
+* [neoVIM](https://neovim.io/)
 
   !?[C# Vim Development Setup](https://www.youtube.com/watch?v=qGl_Mb2C87c)
 
 * weitere ...
 
+### LLMs
+
+In der Veranstaltung ist es ausdrücklich erwünscht, dass Sie mit LLMs wie ChatGPT, CoPilot oder ClaudAI arbeiten. Diese Tools sind nicht nur für die Vorlesung nützlich, sondern auch für Ihre zukünftige Karriere als Softwareentwickler. Sie können Ihnen helfen, Code zu generieren, Fehler zu beheben und komplexe Probleme zu lösen.
+
+> Die Effizienz der Nutzung hängt stark von der Qualität der Eingabeaufforderung ab. Diese wiederum können Sie nur generieren, wenn Sie ein solides Wissen zur Algorithmenen- und Softwareentwicklung haben. 
+
+In der Klausur und den Testaten haben Sie keinen Zugriff darauf!
+
 ## Aufgaben
+
+https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung
 
 - [ ] Legen Sie sich einen GitHub Account an (sofern dies noch nicht geschehen ist).
 - [ ] Installieren Sie einen Editor Ihrer Wahl auf Ihrem Rechner, mit dem Sie Markdown-Dateien komfortabel bearbeiten können.
