@@ -350,7 +350,7 @@ Zum Vergleich sei auf eine Darstellung der **vor dem Erscheinen von .NET 5** ver
 
 
 > .NET 9 ist als LTS-Version im November 2024 erscheinen und wird für 3 Jahre unterstützt.
-> Der Xamarin-Support endete im Mai 2024 enden.
+> Der Xamarin-Support endete im Mai 2024.
 
 ********************************************************************************
 
@@ -403,10 +403,10 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ```ascii
-Sourccode (.c, .cpp, .h)             |
+Sourcecode (.c, .cpp, .h)             |
                                      v
                                 Preprocessing  Schritt 1: Präprozessor (cpp)
-Erweiterer Sourcecode                |
+Erweiterter Sourcecode                |
                                      v
                                 Compilation    Schritt 2: Compiler (gcc, g++)
 Assembler Code (.s)                  |
