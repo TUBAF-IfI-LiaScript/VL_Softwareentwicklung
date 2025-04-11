@@ -653,7 +653,7 @@ Baum von Projektdateien.
 └── visual_studio_code.csproj
 ```
 
-*C) .NET Visual Code*
+*D) .NET Visual Code*
 
 Alternativ können Sie auch die Microsoft Visual Studio oder Visual Code Suite nutzen.
 Diese kann man zum Beispiel auf unser gerade erstelltes Projekt anwenden
