@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `fjangfaragesh`, `KoKoKotlin` & `Lina`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 comment:  Programmierparadigmen und Einordnung von C#, Eigenschaften der Programmiersprache C#, .NET, Unterschiede zu anderen Sprachen/Konzepten
@@ -296,7 +296,9 @@ C#
 | 2020 | .NET 5.0         | 9.0        | Datensatztypen (Records),   Eigenschafteninitialisierung, Anweisungen außerhalb von Klassen, Verbesserungen beim Pattern Matching                                                           |
 | 2021 | .NET 6.0         | 10.0       | Erforderliche Eigenschaften, Null-Parameter-Prüfung, globale Using-Statements                                                                                                               |
 | 2022 | .NET 7.0         | 11.0       | Generische Attribute, Zeilenumbrüche bei Stringinterpolation, Benötigte Member-Datenfelder, Default-Werte in struct-Datenstrukturen                                                         |
-| 2024 | .NET 8.0         | 12.0       | Primäre Konstruktoren, Sammlungsausdrücke (u.a. für Arraytypen und generische Collections), Standardwerte für Lambdaausdrücke, ref readonly-Parameter, semantische Alias für Datentypen ... |
+| 2023 | .NET 8.0         | 12.0       | Primäre Konstruktoren, Sammlungsausdrücke (u.a. für Arraytypen und generische Collections), Standardwerte für Lambdaausdrücke, ref readonly-Parameter, semantische Alias für Datentypen ... |
+| 2024 | .NET 9.0         | 13.0       | Partielle Properties und partielle Indexer, Prioritäten bei der Auflösung von Überladungen, Neue Escape-Sequenzen, Indizierung vom Ende her mit einem neuen Operator                        |
+
 
 Die Sprache selbst ist unmittelbar mit der Ausführungsumgebung, dem .NET Konzept verbunden und war ursprünglich stark auf Windows Applikationen zugeschnitten.
 
@@ -313,14 +315,16 @@ Die Sprache selbst ist unmittelbar mit der Ausführungsumgebung, dem .NET Konzep
 + die Plattform Mono und darauf basierende Techniken (von Microsoft meist als Xamarin bezeichnet). Diese unterstützt seit längerem .NET auf verschiedenen Plattformen (in der Vergangenheit jedoch oft unvollständig implementiert).
 
     --{{0}}--
-Mono ist eine alternative, ursprünglich unabhängige Implementierung von Microsofts .NET Standards. Sie ermöglicht die Entwicklung von plattformunabhängiger Software auf den Standards der Common Language Infrastructure und der Programmiersprache C#. Entstanden ist das Mono-Projekt 2001 unter Führung von Miguel de Icaza von der Firma Ximian, die 2003 von Novell aufgekauft wurde. Die Entwickler wurden 2011 in eine neue Firma namens Xamarin übernommen, die im Jahr 2016 eine Microsoft-Tochtergesellschaft wurde. In der Folge wurde Microsoft Hauptsponsor des Projektes.
+Mono war eine alternative, ursprünglich unabhängige Implementierung von Microsofts .NET Standards. Sie ermöglicht die Entwicklung von plattformunabhängiger Software auf den Standards der Common Language Infrastructure und der Programmiersprache C#. Entstanden ist das Mono-Projekt 2001 unter Führung von Miguel de Icaza von der Firma Ximian, die 2003 von Novell aufgekauft wurde. Die Entwickler wurden 2011 in eine neue Firma namens Xamarin übernommen, die im Jahr 2016 eine Microsoft-Tochtergesellschaft wurde. In der Folge wurde Microsoft Hauptsponsor des Projektes. Nach meiner Wahrnehmung ist die Mono Community nicht mehr sonderlich aktiv.
 
-Mono "hinkt" als Open Source Projekt der eigentlichen Entwicklung etwas nach.
+https://www.mono-project.com/
 
 ********************************************************************************
 
                                         {{1-2}}
 ********************************************************************************
+
+Die Neuordnung von .NET geschah 2020 mit .NET 5.0, die Version führte verschiedenen Frameworks zusammen.
 
 ```ascii
        .NET Core 3.1
@@ -345,9 +349,8 @@ Zum Vergleich sei auf eine Darstellung der **vor dem Erscheinen von .NET 5** ver
 | iOS                      |                |           | X       |
 
 
-> .NET 8 ist als LTS-Version im November 2023 erscheinen und wird für 3 Jahre unterstützt.
-> Die Veröffentlichung von .NET 9 ist für November 2024 geplant.
-> Der Xamarin-Support soll im Mai 2024 enden.
+> .NET 9 ist als LTS-Version im November 2024 erscheinen und wird für 3 Jahre unterstützt.
+> Der Xamarin-Support endete im Mai 2024 enden.
 
 ********************************************************************************
 
@@ -546,11 +549,11 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
              |                             |                        |  
              |                             |                        |
    A) Vorlesungsmaterialien          B) Webseiten               C) Lokal
-          interaktiv                       |
+          interaktiv                       |                     dotnet CLI
              |                             |
     .--------+---------.         .---------+---------.
     |                  |         |                   |
-  mono (C#8)    dotnet (C#10)    |                   |
+  mono (C#8)    dotnet (C#12)    |                   |
                                  |                   |
                           dotnetfiddle.net        repl.it
                              bis C#11               C#10                        .
@@ -584,7 +587,7 @@ Console.WriteLine("Hello, world!");
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
@@ -657,9 +660,13 @@ Diese kann man zum Beispiel auf unser gerade erstelltes Projekt anwenden
 
 https://code.visualstudio.com/docs/languages/csharp
 
+> Installieren Sie sich den GitHub CoPilot in Ihrer Umgebung.
+
+https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf
+
 
 ## Aufgaben
 
-- [ ] Installieren Sie das .NET 8 auf Ihrem Rechner und erfreuen Sie sich an einem ersten "Hello World"
+- [ ] Installieren Sie das .NET 9 auf Ihrem Rechner und erfreuen Sie sich an einem ersten "Hello World"
 - [ ] Testen Sie mit einem Kommilitonen die Features von repl.it! Arbeiten Sie probeweise an einem gemeinsamen Dokument.
 - [ ] Legen Sie sich einen GitHub-Account an.
