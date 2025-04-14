@@ -326,12 +326,14 @@ print(my_list)
 ```
 @LIA.eval(`["main.py"]`, `python3 -m compileall .`, `python3 main.py`)
 
-> **Merke:** Datentypen definieren unter anderem den möglichen "Inhalt", Speichermechanismen (Größe, Organisation) und dienen der Evaluation zulässiger Eingaben.
+> **Merke:** Datentypen definieren unter anderem den möglichen "Inhalt", Speichermechanismen (Größe, Organisation) und dienen der Evaluation zulässiger Eingaben und Funktionsaufrufe.
 
-Interessanterweise bedient python diesen Aspekt seit der Version 3.5 mit den _type hints_ und ergänzt zug um zug weitere Feature.
+Interessanterweise bedient python diesen Aspekt seit der Version 3.6 mit den _type hints_ und ergänzt Zug um Zug weitere Feature.
 
+```python  Typehints.py
+from typing import Union
+from pathlib import Path 
 
-```python 
 # Input string / output string
 def greet(name: str) -> str:
     return "Hello, " + name
@@ -344,7 +346,13 @@ def load_model(filename: str, cache_folder: Union[str, Path]):
     model_path = os.join(filename, cache_folder)
     model = torch.load(model_path)
     return model
+
+print(greet("World"))
+print(greet(23))
 ```
+
+Rufen Sie das Beispiel zum Beispiel mit `mypy Typehints.py` auf, um die Typen zu überprüfen.
+
 
 ********************************************************************************
 
@@ -365,8 +373,8 @@ Schaubild realisiert dies auf 2 Ebenen (nach Mössenböck, Kompaktkurs C# 7 )
          |       |         |        |        |       |         |       |
      Vordefi-  Enumer-  Structs   Tupel   Klassen  Inter    Arrays  Delegates
  nierte Typen  ation                     (String) -faces
-         |
-         |      ...............................................................
+         |     
+         |      <----------------------------------------------------------->
          |           Klassenbibliotheksbasierte / Benutzerdefinierte Typen
          |
          .----+------+-----------+-------------.
@@ -375,7 +383,7 @@ Schaubild realisiert dies auf 2 Ebenen (nach Mössenböck, Kompaktkurs C# 7 )
                      |
              .------+---------.
              |                |
-     mit Vorzeichen     vorzeichenlos                                            .
+     mit Vorzeichen     vorzeichenlos                                                                 .
 ```
 
 Die Zuordnung zu Wert- und Referenzdatentypen ergibt sich dabei aus den zwei
