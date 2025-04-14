@@ -625,7 +625,7 @@ public class Program
 
 Im Beispielprogramm wird ein Dezimalpunkt als Trennzeichen verwendet. Diese
 Darstellung ist jedoch kulturspezifisch. In Deutschland gelten das Komma als
-Dezimaltrennzeichen und der Punkt als Tauschender-Trennzeichen. Speziell bei
+Dezimaltrennzeichen und der Punkt als Tausender-Trennzeichen. Speziell bei
 Ein- und Ausgaben kann das zu Irritationen führen. Diese können durch die
 Verwendung der Klasse **System.Globalization.CultureInfo** beseitigt werden.
 
@@ -893,7 +893,7 @@ public class Program
                         {{0-2}}
 **********************************************************************
 
-In anderen Sprachen kann die bool Variable (logischen Werte `true` and `false`)  mit äquivalent Zahlenwerten kombiniert werden.
+In anderen Sprachen kann die bool Variable (logischen Werte `true` and `false`)  mit äquivalenten Zahlenwerten kombiniert werden.
 
 ```python    noTypes.py
 x = True
@@ -904,7 +904,7 @@ print(y==True)
 @LIA.eval(`["main.py"]`, `python3 -m compileall .`, `python3 main.py`)
 
 
-In C# existieren keine impliziten cast-Operatoren, die numerische Werte und umgekehrt wandeln!
+In C# existieren keine impliziten cast-Operatoren, die numerische Werte in Boolsche und umgekehrt wandeln!
 
 ```csharp                BoolOperation.cs
 using System;
@@ -1098,7 +1098,7 @@ Die Typkonvertierung von einem Zahlenwert in eine enum kann wiederum mit `checke
 ********************************************************************************
 
 Dabei schließen sich die Instanzen nicht gegenseitig aus, mit einem entsprechenden
-Attribut können wir auch Mehrfachbelegungen realisieren.
+Attribut können wir auch Mehrfachbelegungen realisieren (vgl. [Dokumentation]([https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/operators/conditional-operator](https://docs.microsoft.com/de-de/dotnet/api/system.flagsattribute?view=netframework-4.7.2))).
 
 <!-- --{{1}}-- Idee des Codefragments:
   * Hinweis auf Zahlenzuordnung mit Zweierpotenzen
