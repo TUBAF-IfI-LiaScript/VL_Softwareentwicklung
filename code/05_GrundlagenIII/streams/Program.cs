@@ -15,7 +15,7 @@ public class Example
       Console.Out.WriteLine();
 
       // Redirect output to a file named Files.txt and write file list.
-      StreamWriter sw = new StreamWriter(@".\Files.txt");
+      StreamWriter sw = new StreamWriter(@"./Files.txt");
       sw.AutoFlush = true;
       Console.SetOut(sw);
       Console.Out.WriteLine("Display filenames to a file:");

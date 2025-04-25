@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 comment:  Werte- und Referenzdatentypen, Array, String, implizite Variablendefinition und Nullables
@@ -69,7 +69,7 @@ diskutiert.
                      |
              .------+---------.
              |                |
-     mit Vorzeichen     vorzeichenlos                                            .
+     mit Vorzeichen     vorzeichenlos                                                                      .
 ```
 
 
@@ -93,9 +93,7 @@ int y = 6;
 int[] array = new int[] { 4, 5, 7};
 ```
 
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
+
 ```ascii
 
           STACK                        HEAP
@@ -109,7 +107,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
    | 0x1234          | --+     | 7               |
    +-----------------+         +-----------------+
                                | ...             |
-                               +-----------------+                             .
+                               +-----------------+                                                         .
 ```
 
 **Und was bedeutet dieser Unterschied?**
@@ -143,9 +141,7 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
+
 ```ascii
 
                     STACK                        HEAP
@@ -159,7 +155,7 @@ y            | 6               |   +-->  | 55              |  0x1234
 intArrayA    | 0x1234          | --+     | 3               |
              +-----------------+   |     +-----------------+
 intArrayB    | 0x1234          | --+     | ...             |
-             +-----------------+         +-----------------+                   .
+             +-----------------+         +-----------------+                                                 .
 ```
 
 Muss die Referenz immer auf ein Objekt auf dem Heap zeigen?
@@ -185,7 +181,7 @@ public class Program
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
@@ -300,9 +296,7 @@ public class Program
 C# unterscheidet zwei Typen mehrdimensionaler Arrays, die sich bei der
 Initalisierung und Indizierung unterschiedlich verhalten.
 
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
+
 ```ascii
   Rechteckige Arrays
                       +-----+-----+-----+-----+
@@ -319,7 +313,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
                     |[1]|       |[1],[0]│[1],[1]|
                     +---+       +-------+-------+-------+
                     |[2]|       |[2],[0]│[2],[1]│[2],[2]|
-                    +---+       +-------+-------+-------+                      .
+                    +---+       +-------+-------+-------+                                           .
 ```
 
 ```csharp
@@ -422,7 +416,7 @@ public class Program
 
 | `const`                                 | `readonly`                                                |
 | --------------------------------------- | --------------------------------------------------------- |
-| Muss zur Kompilierzeit definiert werden | Kann zur Kompilierzeit oder zur Laufzeit definiert werden |
+| Muss zur Compilezeit definiert werden   | Kann zur Kompilierzeit oder zur Laufzeit definiert werden |
 | Implizit statisch                       | Instanz-Ebene oder statisch                               |
 | Assembler-übergreifend kopiert          | Assembler-übergreifend gemeinsam genutzt                  |
 | Speicher nicht zuweisen                 | Speicher zuweisen                                         |
