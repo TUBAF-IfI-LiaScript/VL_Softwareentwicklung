@@ -637,7 +637,7 @@ public class Program
 
 ### Übergeben von Parametern
 
-                                       {{0-2}}
+                                       {{0-1}}
 ********************************************************************************
 
 Ohne weitere Refrenzparameter werden Variablen an Funktionen bei
@@ -675,6 +675,40 @@ public class Program
 
 Welche Lösungen sind möglich den Zugriff einer Funktion auf eine übergebene
 Variable generell sicherzustellen?
+
+********************************************************************************
+
+                                     {{1-2}}
+********************************************************************************
+
+> **Exkurs nach Python**
+
+```python    Immutable.py
+def versuche_aenderung(x):
+    x = 10  # Ändert x nur innerhalb der Funktion
+    print(id(x))  # Gibt die Adresse von a aus
+
+a = 5
+versuche_aenderung(a)
+print(a)  
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+
+```python    Mutable.py
+def versuche_aenderung(liste):
+    liste.append(4)
+    print(id(liste))
+
+meine_liste = [1, 2, 3]
+versuche_aenderung(meine_liste)
+print(meine_liste) 
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
++ Pass by Value: Gilt für unveränderbare Objekte wie Zahlen, Strings und Tupel. In diesen Fällen wird eine Kopie des Werts übergeben, und Änderungen innerhalb der Funktion wirken sich nicht auf das ursprüngliche Objekt aus.
++ Pass by Reference: Gilt für veränderbare Objekte wie Listen, Dictionaries und Sets. Änderungen innerhalb der Funktion wirken sich auf das ursprüngliche Objekt aus.
+
 
 ********************************************************************************
 
