@@ -33,7 +33,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
-## Structs
+## Structs als Datencontainer
 
                                          {{0-1}}
 *******************************************************************************
@@ -50,7 +50,6 @@ in C.
 
 > Machen Sie sich, wenn Ihnen hier die Grundidee noch unklar ist mit den `structs` anhand weiterer Materialien vertraut.
 
-!?[Einführung in Structs](https://www.youtube.com/watch?v=lxDFeuCln3Q)
 
 ```c         struct.c
 #include <stdio.h>
@@ -130,9 +129,11 @@ int main(int argc, char const *argv[])
 C sieht keine Möglichkeit vor Funktion und Daten "dichter" zusammenzubringen,
 wenn man von Funktionspointern im `struct` absieht.
 
+!?[Einführung in Structs](https://www.youtube.com/watch?v=lxDFeuCln3Q)
+
 *******************************************************************************
 
-### Structs in C#
+## Structs in C#
 
 > Wir fokussieren uns zunächst auf `structs` und übertragen das dabei gewonnene Verständnis dann auf die Klassen. Dabei gilt es einige Unterschiede zu beachten!
 
