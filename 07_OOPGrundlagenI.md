@@ -436,6 +436,7 @@ public class Program
       animal.MakeNoise();
     }
   }
+}
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
@@ -515,7 +516,7 @@ public class Program
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
@@ -673,7 +674,7 @@ public class Animal
   public Animal(string name, uint born, string sound = "Miau"){
     this.name = name;
     this.sound = sound;
-    age = (byte) (2019 - born);
+    age = (byte) (2025 - born);
   }
   public void MakeNoise() {
   	Console.WriteLine("{0} ({1} years old) makes {2}", name, age, sound);
