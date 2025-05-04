@@ -803,7 +803,7 @@ https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung
 
 In der Veranstaltung ist es ausdrücklich erwünscht, dass Sie mit LLMs wie ChatGPT, CoPilot oder ClaudAI arbeiten. Diese Tools sind nicht nur für die Vorlesung nützlich, sondern auch für Ihre zukünftige Karriere als Softwareentwickler. Sie können Ihnen helfen, Code zu generieren, Fehler zu beheben und komplexe Probleme zu lösen.
 
-> Die Effizienz der Nutzung hängt stark von der Qualität der Eingabeaufforderung ab. Diese wiederum können Sie nur generieren, wenn Sie ein solides Wissen zur Algorithmenen- und Softwareentwicklung haben. 
+> Die Effizienz der Nutzung hängt stark von der Qualität der Eingabeaufforderung ab. Diese wiederum können Sie nur generieren, wenn Sie ein solides Wissen zur Algorithmen- und Softwareentwicklung haben. 
 
 In der Klausur und den Testaten haben Sie keinen Zugriff darauf!
 
