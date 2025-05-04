@@ -318,7 +318,7 @@ Verständnis auch die Werkzeuge der Softwareentwicklung adressiert!
   Konventionelle Klausur __ODER__ Programmieraufgabe in Zweier-Team anhand einer selbstgewählten Aufgabe
 
 - **Einführung in die Softwareentwicklung:**
-  Teamprojekt und Projektpräsentationen (im Wintersemester 2023/24) bei bestandener Prüfungsvorleistung in Form einer Teamaufgabe im Sommersemester
+  Teamprojekt und Projektpräsentationen (im Wintersemester 2025/26) bei bestandener Prüfungsvorleistung in Form einer Teamaufgabe im Sommersemester
 
 
      {{1}}
