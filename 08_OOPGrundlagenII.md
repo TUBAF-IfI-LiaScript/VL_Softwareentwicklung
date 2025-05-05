@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 comment:  OOP-Konzepte (Kapselung, Vererbung, Polymorphie), Klassen und Klassenmembers, Operatorenüberladung
@@ -50,8 +50,6 @@ dotnet sln add MyClass
 cd MyApp
 dotnet add reference ../MyClass
 ```
-
-Kopieren Sie noch die Dateien aus dem [Mono Verzeichnis](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/tree/master/code/08_OOP/assemblies_mono) in die entsprechenden Ordner.
 
 Starten Sie die Kompilierung, in dem Sie `dotnet run` im Ordner `MyApp` aufrufen. Was beobachten Sie?
 
@@ -188,17 +186,17 @@ Standardidentifier für Daten- und Methodenzugriffe sind dabei:
 ```ascii
                                  public struct Position{float x; float y};
 +---------------------------+
-| Spieler                   |      public class Spieler{ // oder struct !!!
+| Spieler                   |      public class Spieler{
 +---------------------------+        enum Rolle {Stürmer, Tormann, Verteidiger};
 | - name: string            |          private string Name;                |
 | - alter: byte             |          private byte? Alter;                |  Geschützte
 | - player: Rolle           |          private Rolle player;               |  Felder
-| ...                       |          private Position position;          |
+| …                         |          private Position position;          |
 +---------------------------+
 | ✛ FängtDenBall(): void    |          public get ... set ...              |  Zugriffsmethoden für
 | ✛ SchießtDenBall(): Kraft |                                                  Felder
 | - Foul()                  |          public void FängtDenBall(Ball);
-| ...                       |          public Kraft = SchießtDenBall(Ball);
+| …                         |          public Kraft = SchießtDenBall(Ball);
 +---------------------------+          private Foul(SpielerX);             |  Event an SpielerX im
                                     }                                         "Erfolgsfall"
 ```
@@ -247,25 +245,25 @@ Die vererbende Klasse wird meist Basisklasse (auch Super-, Ober- oder Elternklas
   | Spieler               |
   +-----------------------+
   |"+" Position           |
-  | ...                   | --.
+  | …                     | --.
   +-----------------------+   |
   |"+" FängtDenBall()     |   |   +------------------------+
   |"+" SchießtDenBall()   |   |   | Person                 |
   |"-" Foul()             |   |   +------------------------+
-  | ...                   |   '--▷| - Name                 |
+  |                       |   '--▷| - Name                 |
   +-----------------------+       | - Alter                |
-                                  | ...                    |
+                                  |                        |
   +-----------------------+       +------------------------+
   | Schiedsrichter        |       |"+"SetName()            |
   +-----------------------+   .--▷|"+"SetAge()             |
-  |"+" ...                |   |   | ...                    |
-  |"+" ...                |   |   +------------------------+
+  |"+"                    |   |   |                        |
+  |"+"                    |   |   +------------------------+
   +-----------------------+   |
   |"+" StartetSpiel()     |   |
   |"+" BeendetDasSpiel()  | --'
   |"+" ErkenntFoul()      |
-  | ...                   |
-  +-----------------------+
+  |                       |
+  +-----------------------+                                                                                          .
 
 ````
 
@@ -411,8 +409,6 @@ public class Zuschauer: Person {
 | Objekt      | ... ist ein Element, welches Funktionen, Methoden, Prozeduren, einen inneren Zustand, oder mehrere dieser Dinge besitzt. Es leitet sich von  einer Spezifikation ab.                                                                     |
 | Entität     | ... ist ein Objekt, welches eine Identität besitzt, welche unveränderlich ist. Beispielsweise kann eine Person ihre Adresse, Telefonnummer oder Namen ändern, ohne zu einer anderen Person zu werden. Eine Person ist also eine Entität. |
 | Eigenschaft | ... bestimmt den Zustands eines Objekts. Der Zustand des Objektes setzt sich aus seinen Eigenschaften und Verbindungen zu anderen Objekten zusammen.                                                                                                                                                                                     |
-| Prozedur    | ... verändert den Zustand eines Objektes, ohne einen Rückgabewert zu liefern. Eine Prozedur kann andere Objekte als Parameter entgegennehmen.                                                                                        |
-| Funktion    | ... ordnet einer gegebenen Eingabe einen bestimmten Rückgabewert zu. Eine Funktion zeichnet sich insbesondere dadurch aus, dass sie nicht den Zustand eines Objekts verändert.                                                       |
 | Methode    | ... ist ein Unterprogramm (Funktion oder Prozedur), welches das Verhalten von Objekten beschreibt und implementiert. Über Methoden können Objekte untereinander in Verbindung treten.           |                                                                                       |
 
 
@@ -515,7 +511,7 @@ gemischt verfügen.
 
 ```ascii
 
-  +-----------------+   +-----------------+  +-----------------+               .
+  +-----------------+   +-----------------+  +-----------------+                                                         .
   | Instanz 0       |   | Instanz 1       |  | Instanz 2       |
   +-----------------+   +-----------------+  +-----------------+
   | - Intanzfeld0   |   | - Intanzfeld0   |  | - Intanzfeld0   |
@@ -1067,14 +1063,13 @@ den Operatoren eine spezifische Bedeutung für die Klassen gegeben.
 
 **Überladbare Operatoren**
 
-| Opererator                           | Bedeutug                                                                |
-| ------------------------------------ | ----------------------------------------------------------------------- |
-| `+`, `-`, `!`, `~`, `++`, `--`, `true`, `false`      | unäre Operatoren, überladbar                                            |
-| `+`, `-`, `\*`, `/`, `%`, `&`, `^`, `<<`, `>>`          | binäre Operatoren, überladbar                                           |
-| `==`, `!=`, `<`, `>`, `<=`, `>=`                   | Vergleichsoperatoren, überladbar                                        |
-| `[]`                                   | nicht überladbar, aber selbe Funktion mit Indexern                      |
-| `()`                                   | nicht überladbar, aber mittels custom conversion gleiche Funktionalität |
-| `+=`, `-=`, `\*=`, `/=`, `%=`, `&=`, `^=`, `<<=`, `>>=` | Werden durch die zugehörigen binären Operatoren automatisch überladen           |
+| Opererator                                              | Bedeutug                                                              |
+| ------------------------------------------------------- | --------------------------------------------------------------------- |
+| `+`, `-`, `!`, `~`, `++`, `--`, `true`, `false`         | unäre Operatoren, überladbar                                          |
+| `+`, `-`, `\*`, `/`, `%`, `&`, `^`, `<<`, `>>`          | binäre Operatoren, überladbar                                         |
+| `==`, `!=`, `<`, `>`, `<=`, `>=`                        | Vergleichsoperatoren, überladbar                                      |
+| `[]`, `()`                                              | nicht überladbar                                                      |
+| `+=`, `-=`, `\*=`, `/=`, `%=`, `&=`, `^=`, `<<=`, `>>=` | Werden durch die zugehörigen binären Operatoren automatisch überladen |
 
 
 ******************************************************************************
@@ -1230,8 +1225,7 @@ Point pt2 = new Point(10, -10);
 
 ## Beispiel der Woche ...
 
-Entwickeln Sie eine Klassenstruktur für die Speicherung der Daten eines
-Studenten.
+Entwickeln Sie eine Klassenstruktur für die Speicherung der Daten eines Studierenden.
 
 ```csharp    StaticConstructor
 using System;
@@ -1255,7 +1249,7 @@ public class Student
     Eingeschrieben = true;
     uid = globalerZähler;
     fächer = new List<string>();
-    Console.WriteLine("Der Student {0} (Nr. {1}) ist angelegt!", Name, uid);
+    Console.WriteLine("Der Studierende {0} (Nr. {1}) ist angelegt!", Name, uid);
     globalerZähler++;
   }
 
@@ -1268,7 +1262,7 @@ public class Student
         eingeschrieben = value;
       else
       {
-        if (value) Console.WriteLine("!Student {0} ist schon eingeschrieben!", Name);
+        if (value) Console.WriteLine("!Studierende {0} ist schon eingeschrieben!", Name);
         else Console.WriteLine("!Student {0} ist schon exmatrikuliert!", Name);
       }
      }
