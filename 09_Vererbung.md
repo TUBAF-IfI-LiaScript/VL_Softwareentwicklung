@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.7
+version:  1.0.8
 language: de
 narrator: Deutsch Female
 comment:  Abstrakte Klassen und Methodens, Interface-Definition und -bedeutung, `cast` Operationen
@@ -311,7 +311,7 @@ class Zug
   public Zug(string nummer)
   {
     this.nummer = nummer;
-    Console.WriteLine("Spezifischer Zug-ctor");
+    Console.WriteLine("Generischer Zug-ctor");
   }
 }
 
@@ -319,7 +319,7 @@ class PersonenZug : Zug
 {
   public PersonenZug() : base("Freiberg")
   {
-    Console.WriteLine("PersonenZug-ctor");
+    Console.WriteLine("Personen Zug-ctor");
   }
 }
 
@@ -445,7 +445,62 @@ public class Program
 
 Objekte einer Basisklasse können somit Instanzen einer abgeleiteten Klassen
 umfassen. Damit lassen sich ähnlich einem Container sehr unterschiedliche
-Objekte einer Vererbungslinie bündeln. Welche Frage ergibt sich dann?
+Objekte einer Vererbungslinie bündeln. 
+
+> Warum ist das wichtig? Was bringt mir das?
+
+```csharp    Polymorphie
+using System;
+using System.Reflection;
+using System.ComponentModel.Design;
+
+class Zug
+{
+  public Zug()
+  {
+    Console.WriteLine("Zug-ctor");
+  }
+}
+
+class PersonenZug : Zug
+{
+  public PersonenZug() : base()
+  {
+    Console.WriteLine("PersonenZug-ctor");
+  }
+}
+
+class Ice : PersonenZug
+{
+  public Ice()
+  {
+    Console.WriteLine("ICE-ctor");
+  }
+}
+
+class Abfahrtszeit
+{
+  public int stunde;
+  public int minute;
+  public Abfahrtszeit(int stunde, int minute, Zug zug)
+  {
+    this.zug = zug
+    this.stunde = stunde;
+    this.minute = minute;
+  }
+}
+
+public class Program
+{
+  public static void Main(string[] args)
+  {
+    Zug IC239 = new Ice();
+    Abfahrtszeit abfahrt = new Abfahrtszeit(12, 30, IC239);
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
 
 > **Wir haben schon gesehen, dass die Vererbung unter anderem Methoden umfasst. Auf welche Klassenmember greife ich überhaupt zurück?**
 
@@ -644,6 +699,16 @@ der DrawRectangle-Methode in Ihrer Anwendung bestimmen müssen.  Welche
 Möglichkeiten haben Sie - override oder new oder umbenennen? Welche Konsequenzen
 ergeben sich daraus?
 
+### Zusammenfassung 
+
+| Kriterium            | Virtuelle Methode       | Nicht-virtuelle Methode      |
+| -------------------- | ----------------------- | ---------------------------- |
+| Schlüsselwort        | `virtual` / `override`  | (kein Schlüsselwort) / `new` |
+| Überschreibbar?      | Ja                      | Nein (nur versteckbar)       |
+| Laufzeitbindung      | Spät (dynamic dispatch) | Früh (static dispatch)       |
+| Polymorphie möglich? | Ja                      | Nein                         |
+
+
 ## Versiegeln von Klassen oder Membern
 
 Die Mechanismen der Vererbung und Polymorphie können aber auch aufgehoben werden,
@@ -740,8 +805,15 @@ public class Program
       Console.WriteLine(" x " + field.Name);
     }
     Person human = champ;     // Castoperation Fußballspieler -> Person
+    
+    Console.WriteLine("Felder in der Instanz '{0}' von '{1}'", human.name, human);
+    var fields2 = human.GetType().GetFields();
+    foreach (FieldInfo field in fields2){
+      Console.WriteLine(" x " + field.Name);
+    }    
+    
     Console.WriteLine("human ist ein Fußballspieler? " + (human is Fußballspieler));
-    //Console.WriteLine(human.rückennummer);
+    // Console.WriteLine(human.rückennummer);
   }
 }
 ```
@@ -752,8 +824,6 @@ Basisklasse wird auf einen abgeleiteten Typ gemappt.
 
 ```csharp    Downcast
 using System;
-using System.Reflection;
-using System.ComponentModel.Design;
 
 public class Person {
   public int geburtsjahr;
@@ -768,12 +838,20 @@ public class Program
 {
   public static void Main(string[] args)
   {
-    Fußballspieler champ = new Fußballspieler {geburtsjahr = 1956,
-                                               name = "Maier",
-                                               rückennummer = 13};
-    Person mensch = champ;
-    Fußballspieler champ2 = (Fußballspieler) mensch;
-    Console.WriteLine(champ2.rückennummer);
+    // Erzeuge eine Instanz der abgeleiteten Klasse
+    Fußballspieler original = new Fußballspieler {
+      geburtsjahr = 1956,
+      name = "Maier",
+      rückennummer = 1
+    };
+
+    // Upcast: speichere sie in einer Person-Variablen
+    Person human = original;
+
+    // Downcast: jetzt ist es sicher!
+    Fußballspieler champ = (Fußballspieler) human;
+
+    Console.WriteLine($"{champ.name} trägt die Nummer {champ.rückennummer}");
   }
 }
 ```
