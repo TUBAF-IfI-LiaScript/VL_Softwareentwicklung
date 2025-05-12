@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich & `JohannaKlinke`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.11
+version:  1.0.12
 language: de
 narrator: Deutsch Female
 comment:  Motivation der Versionsverwaltung in der Softwareentwicklung, Diskussion der zentraler / dezentraler Ansätze, Umsetzung von merge Operation, Einführung in die Verwendung von Git
@@ -388,7 +388,7 @@ Dahinter steht das _Longest Common Subsequence_ Problem, dessen Umsetzung kurz d
 def lcs_algo(S1, S2, m, n):
     L = [[0 for x in range(n+1)] for x in range(m+1)]
 
-    # Building the matrix in bottom-up way
+    # Teil 1: Matrixaufbau
     for i in range(m+1):
         for j in range(n+1):
             if i == 0 or j == 0:
@@ -400,6 +400,7 @@ def lcs_algo(S1, S2, m, n):
 
     index = L[m][n]
 
+    # Teil 2: Rückverfolgung der LCS
     lcs_algo = [""] * (index+1)
     lcs_algo[index] = ""
 
@@ -423,13 +424,15 @@ def lcs_algo(S1, S2, m, n):
     print("LCS: " + "".join(lcs_algo))
 
 
-S1 = "Das ist ein Test"
-S2 = "und das ist ein weiterer Test mit mehr Zeichen"
+S1 = "ABCDGH"
+S2 = "AEDFHR"
 m = len(S1)
 n = len(S2)
 lcs_algo(S1, S2, m, n)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+> Erschließen Sie sich den Algorithmus mit einem LLM! Gesucht ist eine grafische Darstellung des Algorithmus, die den Aufbau der Matrix und die Rückverfolgung der LCS zeigt.
 
 **Schritt 2: Mischen**
 
@@ -516,12 +519,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
               Zentrales     +-----------------+ | |
               Repository    | V 21.11         | | |
                             |                 | |-+
-                            |                 | |
-                            |                 |-+
-                            |                 |
-                            +-----------------+
-                                    |
-          +-------------------------+--------------------------+
+
           |                         |                          |
     +-----------------+      +-----------------+         +-----------------+
     | V 21.09         |      | V 21.09         |         | V 21.09         |
@@ -576,8 +574,7 @@ Die Entwicklungsgeschichte von git ist mit der des Linux Kernels verbunden:
 
 2. Variante 2: als unabhänigige Installation - Unter [Link](https://www.heise.de/tipps-tricks/Git-auf-Windows-installieren-und-einrichten-5046134.html) findet sich eine Schritt-für-Schritt Beschreibung für die Installation von Git unter Windows. Dabei wird sowohl ein Shell als auch eine GUI installiert.
 
-3. Variante 3: mittels cygwin
-Cygwin emuliert Linuxbefehle und Tools der Shell. Neben Compilern und einer Vielzahl von Entwicklertools können auch verschiedene Versionsverwaltungen installiert werden.
+3. Variante 3: mittels cygwin - Cygwin emuliert Linuxbefehle und Tools der Shell. Neben Compilern und einer Vielzahl von Entwicklertools können auch verschiedene Versionsverwaltungen installiert werden.
 
 4. ....
 
