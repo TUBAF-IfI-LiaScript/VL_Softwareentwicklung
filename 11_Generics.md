@@ -113,6 +113,7 @@ public class Program{
       
       Console.WriteLine("\nTotal length of the array = {0:d}", myArray.Length);
       //myArray.Add(7);   // Methode existiert nicht!
+      //myArray[5]=6; 
     }
 }
 ```
@@ -379,6 +380,8 @@ public class Program{
      float y = 1.2345F;
      Swap<float>(ref x, ref y);
      System.Console.WriteLine("x=" + x + " ,y=" + y);
+     //Swap(ref x, ref y);
+     //System.Console.WriteLine("x=" + x + " ,y=" + y);
   }
 }
 ```
@@ -473,15 +476,10 @@ Interface implementieren, existieren müssen.
 
 https://learn.microsoft.com/de-de/dotnet/api/system.icomparable?view=net-9.0
 
-> Achtung: Dieses Beispiel benutzt die typbehaftete Variante des IComparable
-> Interfaces! Diese generiert über das Boxing und Unboxing einen unnötigen
-> Aufwand und ist wie zu Beginn gezeigt nicht typsicher. Ersetzen Sie
-> IComparable durch Icomparable <T>.
-
 ```csharp      IComparable
 using System;
 
-public class Animal : IComparable {
+public class Animal : IComparable<T> {
   private string name;
   private int weight;
 
@@ -502,19 +500,18 @@ public class Animal : IComparable {
     return name + " weights " + weight + " kg";
   }
 
-  public int CompareTo (object obj){
+  public int CompareTo (Animal? obj){
     if (obj == null)
        throw new ArgumentException("Object is not a valid");
     else {
-      Animal otherAnimal = obj as Animal;
-      return (otherAnimal.weight - weight);
+      return (obj.weight - weight);
       }
     }
   }
 
 public class Program{
 
-  static void SwapIfGreater<T>(ref T lhs, ref T rhs) where T : System.IComparable{
+  static void SwapIfGreater<T>(ref T lhs, ref T rhs) where T : System.IComparable<T>{
     T temp;
     if (lhs.CompareTo(rhs) > 0)
     {
@@ -545,8 +542,6 @@ Wie bereits bei den generischen Methoden angedeutet können wir mittels "Beschr�
 
 
 ```csharp    initKeyword
-using System;
-
 using System;
 
 public class Program{
@@ -585,8 +580,8 @@ beschränken. Man definiert Beschänkungen oder *Constraints*, die die Breite de
 
 > Unter `net7` lässt sich obiges Problem sehr elegant mit einem `where T : INumber<T>` lösen. Testen Sie dieses Feature auf Ihrem lokalen Rechner. [Link](https://devblogs.microsoft.com/dotnet/dotnet-7-generic-math/)
 
-Das folgende Beispiel setzt die Möglichkeiten der Beschränkung konsequent um und lässt nur
-`Employee` selbst oder abgeleitete Typen zu. Damit wird sichergestellt, dass die Methoden,
+Das folgende Beispiel setzt die Möglichkeiten der Beschränkung konsequent um und lässt nur Klasse
+`Employee` zu. Damit wird sichergestellt, dass die Methoden,
 die in GenericList verwendet werden, im Parametertypen auch existieren.
 
 ```csharp          Constraints
@@ -597,17 +592,17 @@ public class Human
     public int ID { get; set; }
 }
 
-public class Employee : Human
+public class Employee : Human, IComparable<Employee>
 {
-...
+    //...
 }
 
 public class Customer : Human
 {
-...
+    //...
 }
 
-public class GenericList<T> where T : Human, IComparable {
+public class GenericList<T> where T : Human, IComparable<T> {
 
     // hier werden Methoden oder Felder der Klasse Employee unter Ausnutzung
     // der Vergleichbarkeit genutzt.
@@ -677,8 +672,8 @@ class BaseNode { }
 class BaseNodeGeneric<T> { }
 
 class NodeConcrete<T> : BaseNode { }            // concrete type
-class NodeClosed<T> : BaseNodeGeneric<int> { }  //closed constructed type
-class NodeOpen<T> : BaseNodeGeneric<T> { }      //open constructed type
+class NodeClosed<T> : BaseNodeGeneric<int> { }  // closed constructed type
+class NodeOpen<T> : BaseNodeGeneric<T> { }      // open constructed type
 ```
 
 Spannend wird die Typparameterisierung für generische Klassen, die von offenen konstruierten Typen erben. Hier müssen für sämtliche Basisklassen-Typparameter Typargumente bereitgestellt werden.
