@@ -479,7 +479,7 @@ https://learn.microsoft.com/de-de/dotnet/api/system.icomparable?view=net-9.0
 ```csharp      IComparable
 using System;
 
-public class Animal : IComparable<T> {
+public class Animal : IComparable<Animal> {
   private string name;
   private int weight;
 
@@ -500,7 +500,7 @@ public class Animal : IComparable<T> {
     return name + " weights " + weight + " kg";
   }
 
-  public int CompareTo (Animal? obj){
+  public int CompareTo (Animal obj){
     if (obj == null)
        throw new ArgumentException("Object is not a valid");
     else {
