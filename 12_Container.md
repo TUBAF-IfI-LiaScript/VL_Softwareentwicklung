@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.7
+version:  1.0.8
 language: de
 narrator: Deutsch Female
 comment:  Generelle Container und Datenkonzepte, Collections, Implementierung in Csharp und Anwendung der generischen Collections
@@ -58,7 +58,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
                      |
              .------+---------.
              |                |
-     mit Vorzeichen     vorzeichenlos                                            .
+     mit Vorzeichen     vorzeichenlos                                                                    .
 ```
 
 Die bisher behandelten Userdatentypen `struct` und `class` erfahren in C# 9.0 eine Erweiterung - `records`. Es wurden zwei Varianten integriert
@@ -110,7 +110,7 @@ public class Program
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
@@ -183,7 +183,7 @@ public class Program{
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
@@ -247,7 +247,7 @@ public class ArrayExamples  {
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
@@ -269,20 +269,20 @@ Die Methoden von `ArrayList` sind zum Beispiel unter https://learn.microsoft.com
 
 ### Einordnung
 
-                              {{0-1}}
+                              {{0-3}}
 ********************************************************************************
 
 Neben den genannten existieren weitere Typen, die spezifischere Aufgaben umsetzen. Diese können entweder als sequenzielle oder als assoziative Container klassifiziert werden.
 
 Container (in der C#-Welt sprechen wir von Collections) können durch die folgenden drei Eigenschaften charakterisiert werden:
 
-1. Zugriff, d.h. die Art und Weise, wie auf die Objekte des Containers zugegriffen wird. Im Falle von Arrays erfolgt der Zugriff über den Array-Index. Im Falle von Stapeln (_Stack_) erfolgt der Zugriff nach der LIFO-Reihenfolge (last in, first out) und im Falle von Warteschlangen (_Queue_) nach der FIFO-Reihenfolge (first in, first out);
-2. Speicherung, d.h. die Art und Weise, wie die Objekte des Containers gelagert werden;
-3. Durchlaufen, d.h. die Art und Weise, wie die Objekte des Containers iteriert werden.
+1. __Zugriff__, d.h. die Art und Weise, wie auf die Objekte des Containers zugegriffen wird. Im Falle von Arrays erfolgt der Zugriff über den Array-Index. Im Falle von Stapeln (_Stack_) erfolgt der Zugriff nach der LIFO-Reihenfolge (last in, first out) und im Falle von Warteschlangen (_Queue_) nach der FIFO-Reihenfolge (first in, first out);
+2. __Speicherung__, d.h. die Art und Weise, wie die Objekte des Containers gelagert werden;
+3. __Durchlaufen__, d.h. die Art und Weise, wie die Objekte des Containers iteriert werden.
 
 ********************************************************************************
 
-                                        {{1-2}}
+                                        {{1-3}}
 ***************************************************************************
 
 Von den Containerklassen wird entsprechend erwartet, dass sie folgende Methoden implementieren:
@@ -447,24 +447,24 @@ Die Methoden für das Handling der Daten beschränken sich aber auf ein `Add()` 
                 Non-generic                             Generic
 
             +----------------+                     +-----------------+
-            | IEnumerator    |                     | IEnumerator﹤T﹥  |
+            | IEnumerator    |                     | IEnumerator﹤T﹥|
             +----------------+                     +-----------------+
 
             +----------------+                     +-----------------+
-            | IEnumerable    | ⊲------------------ | IEnumerable﹤T﹥  |
+            | IEnumerable    | ⊲------------------ | IEnumerable﹤T﹥|
             +----------------+                     +-----------------+
                     ∆                                       ∆
                     |                                       |
             +----------------+                     +-----------------+
-            | ICollection    |                     | ICollection﹤T﹥  |
+            | ICollection    |                     | ICollection﹤T﹥|
             +----------------+                     +-----------------+
                     ∆                                       ∆
                     |                                       |
         .-----------+----------.                  .---------+----------.
         |                      |                  |                    |
  +----------------+  +----------------+   +-----------------+  +----------------+
- | IDictionary    |  | IList          |   | IDictionary﹤T﹥  |  | IList﹤T﹥       |
- +----------------+  +----------------+   +-----------------+  +----------------+
+ | IDictionary    |  | IList          |   | IDictionary﹤T﹥|  | IList﹤T﹥     |
+ +----------------+  +----------------+   +-----------------+  +----------------+                        .
 ````````````
 
 An dieser Stelle greift das Interface `ICollection` und definiert die Methoden `Add`, `Clear`, `Contains`, `CopyTo` und `Remove`. Mit `Contains` kann geprüft werden, ob ein bestimmter Wert im Container enthalten ist. `CopyTo` extrahiert die Werte des Containers in ein Array. Dabei können bestimmte Ranges definiert werden. Die anderen Methoden sind selbsterklärend.
@@ -506,6 +506,8 @@ List<T>
 using System;
 using System.Reflection;
 using System.Collections.Generic;
+// Wird für die elementweise Verarbeitung benötigt
+using System.Linq;
 
 public class Program{
   public static void Main(string[] args){
@@ -515,10 +517,9 @@ public class Program{
     animals.Add("lion");
     // Fügt mehrere Objekte in die Liste ein
     animals.InsertRange(1, new string[] { "frog", "snake" });
-    foreach (string value in animals)
-    {
-        Console.WriteLine("RESULT: " + value);
-    }
+    animals.ForEach(name => Console.WriteLine(name.ToUpper()));
+    animals.ForEach(Console.WriteLine);
+
     Console.WriteLine("In der Liste finden sich " + animals.Count + " Elemente");
     Console.WriteLine("Für die Liste reservierter Speicher (Einträge) " + animals.Capacity);
     Console.WriteLine("lion findet sich an " + animals.IndexOf("lion") + " Stelle");
@@ -570,7 +571,7 @@ public class Program{
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
