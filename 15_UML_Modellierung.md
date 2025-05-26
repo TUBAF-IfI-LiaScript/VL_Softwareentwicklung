@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 comment:  Prinzipien des (objektorientierten) Softwareentwurfs, Motivation der Modellierung von Software, Unified Modeling Language
@@ -36,14 +36,172 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
+## Organisatorisches 
+
+Projektarbeiten als Leistungsnachweis für die Vorlesung Softwareentwicklung.
+
+https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2025_Projektaufgaben
+
+
 ## Motivation des Modellierungsgedankens
 
-Um gedanklich wieder in die C# Entwicklung einzutauchen, finden Sie in dem Ordner [code](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/tree/master/code/13_UML_Modellierung) zwei Beispiele für die:
+
+               {{0-1}}
+************************************************
+
+```python   ugly_version.py
+class Report:
+    def __init__(self, title, content):
+        self.title = title
+        self.content = content
+
+    def generate_report(self):
+        return f"Report: {self.title}\n{self.content}"
+
+    def save_to_file(self, filename):
+        with open(filename, 'w') as f:
+            f.write(self.generate_report())
+
+    def send_via_email(self, email_address):
+        print(f"Sending report to {email_address}...")
+        # (Hier würde tatsächliche E-Mail-Logik stehen)
+
+
+# Verwendung
+report = Report("Monatsbericht", "Umsatz ist gestiegen.")
+report.save_to_file("bericht.txt")
+report.send_via_email("chef@firma.de")
+```
+
+> Was gefällt Ihnen nicht an diesem Code?
+
+************************************************
+
+               {{1-2}}
+************************************************
+
+```python   improved_version.py
+from abc import ABC, abstractmethod
+
+# ----- Domänenmodell -----
+class Report:
+    def __init__(self, title, content):
+        self.title = title
+        self.content = content
+
+    def generate(self):
+        return f"Report: {self.title}\n{self.content}"
+
+
+# ----- Abstrakte Klassen -----
+class ReportSaver(ABC):
+    def __init__(self, target: str):
+        self.target = target
+
+    @abstractmethod
+    def save(self, report: Report):
+        pass
+
+
+class ReportSender(ABC):
+    def __init__(self, target: str):
+        self.target = target
+
+    @abstractmethod
+    def send(self, report: Report):
+        pass
+
+
+# ----- Implementierungen -----
+class FileSaver(ReportSaver):
+    def save(self, report: Report):
+        with open(self.target, 'w') as f:
+            f.write(report.generate())
+        print(f"Report saved to {self.target}")
+
+
+class EmailSender(ReportSender):
+    def send(self, report: Report):
+        print(f"Sending report to {self.target}...")
+        print(report.generate())
+
+
+if __name__ == "__main__":
+    report = Report("Monatsbericht", "Umsatz ist gestiegen.")
+    
+    saver = FileSaver("bericht.txt")
+    saver.save(report)
+
+    sender = EmailSender("chef@firma.de")
+    sender.send(report)
+```
+
+> Was stört Sie, wenn wir uns einen so langen Code anschauen? Die übersichtlichkeit leidet!
+
+************************************************
+
+            {{2-3}}
+************************************************
+
+```text @plantUML
+@startuml
+
+' ===== Abstrakte Basisklassen =====
+abstract class ReportSaver {
+    - target: str
+    + __init__(target: str)
+    + save(report: Report)
+}
+
+abstract class ReportSender {
+    - target: str
+    + __init__(target: str)
+    + send(report: Report)
+}
+
+' ===== Konkrete Implementierungen =====
+class FileSaver {
+    + save(report: Report)
+}
+
+class EmailSender {
+    + send(report: Report)
+}
+
+' ===== Datenklasse =====
+class Report {
+    - title: str
+    - content: str
+    + __init__(title: str, content: str)
+    + generate(): str
+}
+
+' ===== Vererbungsbeziehungen =====
+ReportSaver <|-- FileSaver
+ReportSender <|-- EmailSender
+
+' ===== Verwendungsbeziehungen =====
+FileSaver ..> Report : uses
+EmailSender ..> Report : uses
+
+@enduml
+```
+
+
+************************************************
+
+
+            {{3-4}}
+************************************************
+
+> Um gedanklich wieder in die C# Entwicklung einzutauchen, finden Sie in dem Ordner [code](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/tree/master/code/13_UML_Modellierung) zwei Beispiele für die:
 
 + Nutzung abstrakter Klassen
 + Verwendung von Interfaces
 
 Überlegen Sie sich alternative Lösungsansätze mit Vor- und Nachteilen für die beschriebenen Implementierungen.
+
+***********************************************
 
 ## Prinzipien des (objektorientierten) Softwareentwurfs
 
@@ -110,19 +268,10 @@ public class Book
 
 ```
 
-```csharp
-public class Employee
-{
-  public Money calculatePay() ...
-  public void save() ...
-  public String reportHours() ...
-}
-```
-
 * Mehrere Verantwortlichkeiten innerhalb eines Software-Moduls führen zu zerbrechlichem Design, da Wechselwirkungen bei den Verantwortlichkeit nicht ausgeschlossen werden können
 
 
-```csharp                       SpaceStation
+```csharp
 public class SpaceStation{
   public initialize() ...
   public void run_sensors() ...
@@ -173,55 +322,105 @@ aber die Einheit um zusätzliche Funktionen oder Daten. Überschriebene Methoden
 verändern auch nicht das Verhalten der Basisklasse, sondern nur das der
 abgeleiteten Klasse.
 
-Gegenbeispiel: Ausgangspunkt ist eine Klasse `Employee`, die für unterschiedliche
-Angestelltentypen um verschiedenen Algorithmen zur Bonusberechnung versehen werden soll.
-Intuitiv ist der Ansatz ein weiteres Feld einzufügen, dass den Typ des Angestellten
-erfasst und dazu eine entsprechende Verzweigung zu realisiert ... ein Verstoß gegen das OCP, der sich über eine Vererbungshierachie deutlich wartungsfreundlicher realisieren lässt!
 
-```csharp                                      Iniitalisation
+```csharp                                      PriceCalculator.cs  
 using System;
+using System.Collections.Generic;
 
-public class Employee
+// Basisklasse mit abstrakter Methode
+public abstract class Product
 {
-  public string Name {set; get;}
-  public int ID {set; get;}
-
-  public Employee(int id, string name){
-     this.ID = id; this.Name = name;
-  }
-
-  public decimal CalculateBonus(decimal salary){
-    //if ...
-    return salary * 0.1M;
-  }
+    public string Name { get; set; }
+    public abstract decimal GetPrice();
 }
 
-public class Program
+// Erweiterung 1: Einfaches Produkt
+public class StandardProduct : Product
 {
-  public static void Main(string[] args){
-    Employee Bernhard = new Employee(1, "Bernhard");
-    Console.WriteLine($"Bonus = {Bernhard.CalculateBonus(11234)}");
-  }
+    public decimal BasePrice { get; set; }
+
+    public override decimal GetPrice()
+    {
+        return BasePrice;
+    }
+}
+
+// Erweiterung 2: Produkt mit Rabatt
+public class DiscountedProduct : Product
+{
+    public decimal BasePrice { get; set; }
+    public decimal DiscountPercent { get; set; }
+
+    public override decimal GetPrice()
+    {
+        return BasePrice * (1 - DiscountPercent / 100m);
+    }
+}
+
+// Erweiterung 3: Premium-Produkt mit Aufschlag
+public class PremiumProduct : Product
+{
+    public decimal BasePrice { get; set; }
+    public decimal PremiumFee { get; set; }
+
+    public override decimal GetPrice()
+    {
+        return BasePrice + PremiumFee;
+    }
+}
+
+// Verwenderklasse
+public class PriceCalculator
+{
+    public decimal CalculateTotalPrice(List<Product> products)
+    {
+        decimal total = 0;
+        foreach (var product in products)
+        {
+            total += product.GetPrice();
+        }
+        return total;
+    }
+}
+
+// Testprogramm
+class Program
+{
+    static void Main()
+    {
+        var products = new List<Product>
+        {
+            new StandardProduct { Name = "Buch", BasePrice = 20m },
+            new DiscountedProduct { Name = "Stift", BasePrice = 5m, DiscountPercent = 10 },
+            new PremiumProduct { Name = "Laptop", BasePrice = 1000m, PremiumFee = 150m }
+        };
+
+        var calculator = new PriceCalculator();
+        var total = calculator.CalculateTotalPrice(products);
+
+        Console.WriteLine($"Gesamtpreis: {total} EUR");
+    }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-Achtung: Die Einbettung der `CalculateBonus()` Methode in die jeweiligen `Employee` Klassen ist selbst fragwürdig! Dadurch wird eine Funktion an verschiedenen Stellen realisiert, so dass pro Klasse unterschiedliche "Zwecke" umgesetzt werden. Damit liegt ein Verstoß gegen die Idee des SRP vor.
+
+Die Klasse PriceCalculator muss nicht geändert werden, wenn ein neuer Produkttyp hinzukommt. Stattdessen kann man durch Vererbung und Polymorphie neue Klassen hinzufügen (GiftProduct, Leihprodukt, etc.). Die Erweiterung erfolgt über neue Klassen, nicht durch Änderung des bestehenden Codes.
 
 [^Meyer]: Bertrand Meyer, "Object Oriented Software Construction" Prentice Hall, 1988,
 
 ###  Liskovsche Substitutionsprinzip (LSP)
 
-> Das Liskovsche Substitutionsprinzip (LSP) oder Ersetzbarkeitsprinzip besagt, dass ein Programm, das Objekte einer Basisklasse T verwendet, auch mit Objekten der davon abgeleiteten Klasse S korrekt funktionieren muss, ohne dabei das Programm zu verändern:
 > *"Sei $q(x)$ eine beweisbare Eigenschaft von Objekten $x$ des Typs $T$. Dann soll $q(y)$ für Objekte $y$ des Typs $S$ wahr sein, wobei $S$ein Untertyp von $T$ ist.“* [^Liskov]
+> Das Liskovsche Substitutionsprinzip (LSP) oder Ersetzbarkeitsprinzip besagt, dass ein Programm, das Objekte einer Basisklasse T verwendet, auch mit Objekten der davon abgeleiteten Klasse S korrekt funktionieren muss, ohne dabei das Programm zu verändern.
 
 Beispiel: Grafische Darstellung von verschiedenen Primitiven
 
-![Liskov](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuN8lIapBB4xEI2rspKdDJSqhKR2fqTLL24fDpYX9JSx69U-QavDPK9oAIpeajQA42we68k9Tb9fPp8L5lPL2LMfcSaPUgeOcbqDgNWhGKG00)<!-- width="60%" -->
+![Liskov](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuN8lIapBB4xEI2rspKdDJSqhKR2fqTLL24fDpYX9JSx69U-QavDPK9oAIpeajQA42we68k9Tb9fPp8L5lPL2LMfcSaPUgeOcbqDgNWhGKG00)<!-- width="30%" -->
 
 Entsprechend sollte eine Methode, die `GrafischesElement` verarbeitet, auch auf  `Ellipse` und `Kreis` anwendbar sein. Problematisch ist dabei allerdings deren unterschiedliches Verhalten. `Kreis` weist zwei gleich lange Halbachsen auf. Die zugehörigen Membervariablen sind nicht unabhängig voneinander.
 
-[^liskov]: Liskov, Barbara H., and Jeannette M. Wing. “A Behavioral Notion of Subtyping.” ACM Transactions on Programming Languages and Systems, vol. 16, no. 6, 1994, pp. 1811–41. doi:10.1145/197320.197383
+[^Liskov]: Liskov, Barbara H., and Jeannette M. Wing. “A Behavioral Notion of Subtyping.” ACM Transactions on Programming Languages and Systems, vol. 16, no. 6, 1994, pp. 1811–41. doi:10.1145/197320.197383
 
 ### Interface Segregation Prinzip
 
@@ -378,6 +577,9 @@ Niedrige Abstraktionsebenen (Low-level modules) sind Komponenten, die konkrete A
 
 > Die High-level Module sollen nicht direkt von den Low-level Modulen abhängig sein. Stattdessen sollten beide Arten von Modulen von Abstraktionen abhängen, wie Schnittstellen oder abstrakte Klassen.
 
+                                       {{0-1}}
+****************************************************************************
+
 Beispiel:
 High-level Modul ist ein Rechnungsservice, und ein Low-level Modul ist ein konkretes Datenrepository. Rechnungsservice soll nicht direkt vom Datenrepository abhängen, sondern von einer Abstraktion (IDataRepository). Das konkrete Datenrepository implementiert dann diese Schnittstelle.
 
@@ -464,6 +666,7 @@ class Program
 
 ```
 
+
 ```python
 from abc import ABC, abstractmethod
 
@@ -503,6 +706,12 @@ if __name__ == "__main__":
     notification_service.notify("Notification via Email.", email_sender)
     notification_service.notify("Notification via SMS.", sms_sender)
 ```
+
+
+****************************************************************************
+
+                     {{1-2}}
+**************************************************
 
 Das folgende Beispiel entstammt der Webseite
 https://exceptionnotfound.net/simply-solid-the-dependency-inversion-principle/
@@ -558,7 +767,13 @@ public class Notification
 
 ```
 
-Lösung
+> Warum ist dieser Code nicht DIP konform?
+
+**************************************************
+
+
+                     {{2-3}}
+**************************************************
 
 ```csharp
 // Schritt 1: Interface Definition
@@ -624,6 +839,7 @@ public class Notification
 
 Beispiel aus https://exceptionnotfound.net/simply-solid-the-dependency-inversion-principle/
 
+**************************************************
 
 ## Herausforderungen bei der Umsetzung der Prinzipien
 
