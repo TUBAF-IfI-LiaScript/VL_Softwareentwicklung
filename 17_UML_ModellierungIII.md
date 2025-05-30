@@ -74,11 +74,35 @@ Nach welchen Aspekten lassen die Anforderungen des Kunden strukturieren:
 + Verhalten
      - Kundensicht - "Kunden dürfen wählen"
      - Betreibersicht - "Diese [Versandkosten] fallen ja nach Land unterschiedlich hoch aus"
-+ Systemparameter
++ Systemparameter - "Kunden- und Bestelldaten im jeweils richtigen Format weitergegeben" (Distributorspezifisches Exportformat)
 
 [^UMLTutorial]: Boris Schäling, "Der moderne Softwareentwicklungsprozess mit UML, Kapitel 3: Das Aktivitätsdiagramm" http://www.highscore.de/uml/titelseite.html
 
+**Womit beginnen?**
+
 ### Use-Case Diagramm
+
+**Verwendung:**
+
+- Anwendungsfalldiagramm visualisiert/spezifiziert funktionale Anforderungen an das Gesamtsystem aus der Sicht der Nutzer.
+- Weitere Aufgabe des Anwendungsfalldiagramms ist Dokumentation.
+- Anwendungsfalldiagramm bildet außerdem Basis für die Verständigung von Entwicklern, Endanwendern und Fachleuten für den Anwendungsbereich.
+
+**Was wird dargestellt:**
+
+- Benutzer eines Systems (Akteure)
+- Anwendungsabläufe (Interaktionen von System und Nutzern)
+- Zuerst Sunny-Day-Szenario
+
+**Was wird nicht dargestellt:**
+
+- Keine internen Abläufe, nur welche aus Sicht des Kunden
+- Use-Case Diagramm zeigt keine Implementierung
+
+**Was muss man dabei beachten:**
+
+- Aktive Formulierungen (Subjekt, Prädikat, Objekt) nutzen
+- Exakte, kurze Formulierung (kein sollte/müsste) verwenden
 
 **Basisabläufe**
 
@@ -86,6 +110,8 @@ Nach welchen Aspekten lassen die Anforderungen des Kunden strukturieren:
 
 Welche Elemente unserer Anforderungsliste werden in Bezug auf Anwendungsfälle
 mit dieser  Darstellung nicht abgedeckt?
+
+Gibt es weitere allgemeine Use-Cases u.a. welche mit einer indirekten Nutzerbeteiligung bzw. welche, die Unregelmäßigkeiten berücksichtigen (`include`, `extend`)
 
 **Verfeinerung des Anwendungsfalldiagramms**
 
@@ -100,7 +126,18 @@ Was fehlt noch?
 
 ![UseCaseOnlineShopIII](https://www.plantuml.com/plantuml/png/ZP6nJWCn343tV8L76DeFGAYgK65bPqiJ9sV9vrIE8mR4dtNhZv6xfLUXaswBu-VunJvMysfjPCUO3Ao0KXuC8Ya6eoBE1oiA9wgcT6xzxAQCbym8dy8aM8To-N6jOl0LuUchPQMKwXaxE1Zb9XbkrnvUz7PDACztzfs4IyuFTszO3PcZDnI8vRiJFZuGfpb5OtUT6_JWe-Ze3QQUP7FzLB711LxtIuqN80dS8hfL3zWVjYlSt_jrYnd2RdTO_-a_SZcd8qhi-_e3)
 
-Welche Zusammenhänge konnten wir bisher nicht abbilden?
+- Welche Zusammenhänge konnten wir bisher nicht abbilden?
+- Wie kann man die Abläufe weiter verfeinern?
+
+### Aktivitätsdiagramm vs. Sequenzdiagramm
+
+| Kriterium                | Aktivitätsdiagramm                        | Sequenzdiagramm                             |
+|--------------------------|-------------------------------------------|---------------------------------------------|
+| **Fokus**                | Ablauf von Aktivitäten (Logik)            | Nachrichtenfluss zwischen Objekten          |
+| **Perspektive**          | Workflow-orientiert                       | Interaktionsorientiert                      |
+| **Verwendung bei Use Cases** | Visualisierung kompletter Abläufe     | Ausarbeitung spezifischer Szenarien         |
+| **Vorteil**              | Übersicht & Verzweigungen                 | Kommunikation & zeitliche Ordnung           |
+
 
 ### Aktivitätsdiagramme
 
@@ -121,6 +158,8 @@ auf eine Grafik des Originaltutorials zurückgegriffen wird:
 ![ActivityDiagram](./img/15_UML_III/aktivitaet_zugriffsberechtigungueberpruefen.gif "Aktivitätsdiagramm aus dem [^UMLTutorial]")
 
 ### Klassendiagramme
+
+Das **Klassendiagramm** ist eines der zentralen Strukturdiagramme der UML und bildet das **Rückgrat der statischen Modellierung** in objektorientierten Systemen. 
 
 Konzentrieren wir uns zunächst auf einzelne Aspekte der Modellierung, um darauf aufbauend das gesamte Diagramm zu entwerfen.
 
@@ -156,7 +195,6 @@ Die Klasse Anschrift enthält zahlreiche private Eigenschaften vom Typ `string`.
 
 **Zahlungsmethoden**
 
-
 Das Anforderungsset des Kunden beschreibt 3 Zahlungsmethoden für die Abrechnung der Bestellung: Bankeinzug, Nachnahme, Vorauskasse. Lediglich im Falle des Bankeinzuges müssen weitere Daten erhoben werden. Bitte beachten Sie, das die Basisklasse Zahlungsmethode als abstrakte Klasse definiert wurde, um zu vermeiden, dass davon (sinnlose) Instanzen gebildet werden können.
 
 ![](https://www.plantuml.com/plantuml/png/TOwnIiH048RxUOe1Eo5WBI9tKP0WN7DWOJVPZDabkxCoEzkS-cPslfY9edSSfFpd_-RdsnGZjPeYb2d8AoabT95AsPffwAjnvxBimu7n2YA_65f63QCt78Aoiv05V1WONL0N6U3d6riknZ5M6O7wOahEyBTv9h-SIsBpUU0tGBp01-w_FhrUutskVMJu-DyXcJZ8eOuBs3nciImr9PxP_MmeutBksktkDBVTtLzSfk1eWvVDBPuxm5d6c_UcmHqvB-JJIlsKbMgPPiaLuAWE6vQXflWD)<!-- width="60%" -->
@@ -167,7 +205,42 @@ Was bisher fehlte, war der Distributor, der, wie in unserem Use-Case Diagramm mo
 
 ![](https://www.plantuml.com/plantuml/png/bLB1RjGm4BtxAwmzGS6Lk4O8TLSL0b4j5KX5uZP99ecrpbWQZpcqxBVm8zpwOymgJaftjOVcz2RptlCRZw-I04iUWmdOYPLesVU3sDOpDk8ZcIP0IdPDFTPHveh5xp0y65SGvN54hZwJO8zit1P6hBuBU-gDksNqgRgEkGvet1roz_Ythu6hJOm1WSo-s6um2OOWkFXR_ToQxc48ixcoIzk-_-tSYQXu_G16saMkYyb34X3VxEsNg7pg6FswdaCT66y6J-Zf5KmsssSJlRNmBCJhwbVqxQA3d5wasvjodtRrRcMZSnyKN5vUhEmycZ7B0AMlpPDHpRLFmhxE4jakBWinKt_2-1Xv13adl05gpPDwEdfDgHdOTrBP6uyTCim__gTU756_OJEGDj8Jkwnc8UbgTBcCBIguYqmm7j0MLAcG5EiRWiS_gEWJv3GzCorkOvA0NWvtg-LN5htJnNVASZJBzFEd2hH88yeGzLoeap0qOgTen-sZUdfn9T-PhiwXINVgTeQm0TgXf_lScvDuozBD5LARn_0F)<!-- width="100%" -->
 
+**Wie viele Klassendiagramme soll man erstellen?**
+
+- Typischerweise wird **ein Übersichtsdiagramm** erstellt, das die wichtigsten Klassen und Beziehungen zeigt. Es verzichtet oft auf vollständige Methodensignaturen oder sekundäre Attribute, um die Komplexität gering zu halten.
+- Zusätzlich sind **mehrere Detaildiagramme** evtl. sinnvoll, z. B. für einzelne Subsysteme oder Module, spezifische Use Cases, technische Komponenten.
+- Ziel ist die **Balance zwischen Übersichtlichkeit und Detailtiefe**.
+
+**Was ist die richtige Vorgehensweise: von Detaildiagrammen zum Übersichtsdiagramm oder umgekehrt?**
+
+Abhängig vom Entwicklungsstand und Kontext:
+
+1. **Top-down (vom Übersichtsdiagramm zu Detaildiagrammen):**
+- Häufig in der frühen Analyse- oder Entwurfsphase
+- Zuerst grobe Struktur, dann schrittweise Verfeinerung
+- Gut geeignet bei unklaren Anforderungen oder großer Systemkomplexität
+
+2. **Bottom-up (von detaillierten Klassen zu einem Übersichtsdiagramm):**
+- Praktisch bei bereits existierendem Code oder wiederverwendbaren Komponenten
+- Zuerst detaillierte Modellierung einzelner Bereiche, später Zusammenführung
+- Nützlich bei agilen oder inkrementellen Projekten
+
 **Wie kann es weiter gehen**
+
+### Sequenzdiagramme
+
+Sequenzdiagramme (und Aktivitätsdiagramme) sind gut geeignet zur Darstellung von Methodenabläufen.
+
+In einem Sequenzdiagramm: 
+
+- Wird zeitliche Abfolge explizit dargestellt.
+- Es wird genau gezeigt, welche Objekte (Instanzen) an der Ausführung beteiligt sind. Interaktionen über mehrere Objekte hinweg werden damit deutlich.
+- Methodenaufrufe und Rückgaben werden unterschiedlich dagestellt.
+- Sequenzdiagramme können sowohl synchrone als auch asynchrone Nachrichten zeigen.
+- Entwickler können anhand des Sequenzdiagramms den Aufbau und Ablauf einer Methode schnell erfassen, insbesondere bei komplexer Geschäftslogik (Unterstützung bei der Implementierung).
+
+Aber: 
+Für kontrollflussorientierte, parallele Abläufe oder frühe Anforderungsanalysen (keine Klassenstruktur vorhanden) eignen sich besser Aktivitätsdiagramme –  Sequenzdiagramme fokussieren stärker auf Objektinteraktionen und Nachrichtenaustausch.
 
 | GebuehrenBerechnen | Klassendiagramm |
 | ---------- | ----------- |
