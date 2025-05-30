@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 comment:  Klassifikation von UML Diagrammtypen, Anwendungsfall Diagramm, Aktivitätsdiagramm, Sequenzdiagramm, Klassendiagramm, Objektdiagramm, UML Tools
@@ -35,11 +35,75 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
+## Warum die Formalisierung?
+
+**Lastenheft und Pflichtenheft**:
+
+1. Das Lastenheft beschreibt alle Anforderungen und Wünsche des Auftraggebers an ein zukünftiges System,  u.a. *funktionale Anforderungen*: was soll das System tun? (Features, Anwendungsfälle). 
+
+   Beispiel aus dem Lastenheft (was? — Kundensicht): _Der Webshop soll es Endkunden ermöglichen, Produkte aus dem Bereich Haushaltswaren online zu bestellen. Ziel ist es, einen nutzerfreundlichen, performanten und responsiven Online-Shop bereitzustellen, der eine einfache Produktsuche, einen sicheren Bestellprozess sowie gängige Zahlungsmethoden (z. B. PayPal, Kreditkarte) unterstützt._
+
+2. Das Pflichtenheft beschreibt, wie die Anforderungen des Lastenhefts umgesetzt werden sollen, d.h. es enthält detaillierte Spezifikationen und Entwürfe für die Realisierung des Systems und enthält ebenfalls einen Abschnitt zu funktionalen Anforderungen.
+
+   Beispiel aus dem Pflichtenheft (wie? — Entwicklersicht): _Der Webshop wird mit dem Framework Django umgesetzt und verwendet eine PostgreSQL-Datenbank. Die Produktsuche wird über ein Volltext-Suchfeld mit Autovervollständigung realisiert. Der Bestellprozess besteht aus folgenden Schritten:_
+
+    - Warenkorb anzeigen und bearbeiten
+    - Benutzer-Login oder Gastbestellung
+    - Eingabe der Lieferadresse
+    - Auswahl der Zahlungsart (Stripe-Integration für Kreditkarte und PayPal)
+    - Bestellübersicht mit Bestätigungsfunktion
+    - Automatischer E-Mail-Versand der Bestellbestätigung
+
+
+```text @plantUML.png
+@startuml
+actor Auftraggeber
+actor Auftragnehmer
+
+== Initiale Anforderungen ==
+Auftraggeber -> Auftragnehmer : übermittelt Lastenheft
+note right of Auftraggeber
+Lastenheft: beschreibt Ziel, Zweck, Anforderungen
+aus Sicht des Auftraggebers
+end note
+
+== Analyse und Rückfragen ==
+Auftragnehmer -> Auftraggeber : stellt Verständnisfragen
+Auftraggeber -> Auftragnehmer : klärt offene Punkte
+
+== Erstellung Pflichtenheft ==
+Auftragnehmer -> Auftragnehmer : erstellt Pflichtenheft
+note right of Auftragnehmer
+Pflichtenheft: technische Umsetzung
+basierend auf Lastenheft
+end note
+Auftragnehmer -> Auftraggeber : übergibt Pflichtenheft
+
+== Abstimmung ==
+Auftraggeber -> Auftragnehmer : gibt Rückmeldung
+alt Änderungen notwendig?
+    Auftragnehmer -> Auftragnehmer : überarbeitet Pflichtenheft
+    Auftragnehmer -> Auftraggeber : übermittelt aktualisiertes Pflichtenheft
+end
+
+== Freigabe ==
+Auftraggeber -> Auftragnehmer : gibt Pflichtenheft frei
+note right of Auftraggeber
+Nach Freigabe beginnt die Umsetzung
+end note
+
+@enduml
+```
+
+> **Merke:** Das Lastenheft beschreibt die Anforderungen aus Sicht des Auftraggebers, während das Pflichtenheft die technische Umsetzung dieser Anforderungen aus Sicht des Auftragnehmers beschreibt.
+
+> **Merke:** UML-Diagramme sind ein wichtiges Hilfsmittel, um die Anforderungen und das Design eines Systems zu visualisieren und zu kommunizieren. Sie helfen dabei, komplexe Zusammenhänge verständlich darzustellen und dienen als Grundlage für die Implementierung.
+
 ## UML Diagrammtypen
 
-![OOPGeschichte](./img/13_UML/UML-Diagrammhierarchie.png " [^WikiUMLDiagrammTypes]")
+![OOPGeschichte](./img/13_UML/UML-Diagrammhierarchie.png "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/UML-Diagrammhierarchie.svg/1200px-UML-Diagrammhierarchie.svg.png, Autor "Stkl"- derivative work: File: UML-Diagrammhierarchie.png: Sae1962, CC BY-SA 4.0")
 
-[^WikiUMLDiagrammTypes]: https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/UML-Diagrammhierarchie.svg/1200px-UML-Diagrammhierarchie.svg.png, Autor "Stkl"- derivative work: File: UML-Diagrammhierarchie.png: Sae1962, CC BY-SA 4.0
+> [OMG-Spezifikation](https://www.omg.org/spec/UML/2.5.1/PDF)
 
 Im folgenden werden wir uns aus den beiden Hauptkategorien jeweils folgende Diagrammtypen genauer anschauen:
 
@@ -60,16 +124,9 @@ Im folgenden werden wir uns aus den beiden Hauptkategorien jeweils folgende Diag
 > Verhalten eines Systems und wird dafür eingesetzt, die Anforderungen an ein
 > System zu spezifizieren.
 
-**Lastenheft und Pflichtenheft (Wiederholung?)**:
-
-Das Lastenheft beschreibt alle Anforderungen und Wünsche des Auftraggebers an ein zukünftiges System,  u.a. *funktionale Anforderungen*: was soll das System tun? (Features, Anwendungsfälle). 
-Das Pflichtenheft beschreibt, wie die Anforderungen des Lastenhefts umgesetzt werden sollen, d.h. es enthält detaillierte Spezifikationen und Entwürfe für die Realisierung des Systems und enthält ebenfalls einen Abschnitt zu funktionalen Anforderungen.
-
 Ein Anwendungsfalldiagramm ist eine grafische Darstellung der *funktionalen Anforderungen* eines Systems. Es zeigt die verschiedenen Anwendungsfälle (Use Cases), Akteure und deren Interaktionen.
 
-Ein Anwendungsfalldiagramm stellt keine
-Ablaufbeschreibung dar! Diese kann stattdessen mit einem Aktivitäts-, einem
-Sequenz- oder einem Kommunikationsdiagramm dargestellt werden.
+> Achtung: Ein Anwendungsfalldiagramm stellt keine Ablaufbeschreibung dar! Diese kann stattdessen mit einem Aktivitäts-, einem Sequenz- oder einem Kommunikationsdiagramm dargestellt werden.
 
 **Basiskonzepte**
 
@@ -96,8 +153,48 @@ Use-Case Diagramme erlauben die Abstraktion von Elementen auf der Basis von Gene
 
 
 
-![PartyUCD](https://www.plantuml.com/plantuml/png/bLAnQiCm4Dtr5OUdPaWW6OinWT9cA8GEIQSkidorXTLJa4vG4l8t-OPEsVnZbPrGkqqBwVQiU-_TtJlFFKl7uSq8gTWwM4ZF0rXYZkxy_MIDtg8Mmg5YIQL1K1MgsWQ6dGWUbVG8wxifI0-9M22xva0rM5UW8p4U2tnd9AyjmSPgOlz2i9IgygeAEQoSfXffaeY1r-paTUyzqhL6aNooQHU0SGOtAqbRf57_i2P6Lqd3mzSu-G3FUlQYENX6g3J9u7ECY-jEABuIwcZz1AT1Hp_g3wWZak7LD1--qvyJ7LPp5pOCEI8L7UL21PF9toF1BQIf9cL2WLacVZVzZuCW6qb9cZvRbsEXgGnKPXd4m7UFpR4oSM4dgOOIDwOvHd_7-wGzsd8gBXE9hTl2SXf15tZRhJjc4PjT8PXz4-p5F8Buytu2 "Party als Anwendungsfalldiagramm - Beispiel motiviert aus dem Beispiel von [^Jeckle] Seite 240")
+```text @plantUML.png
+@startuml
+left to right direction
 
+actor Kunde
+
+usecase "Produkte anzeigen" as UC1
+usecase "In den Warenkorb legen" as UC2
+usecase "Bestellung abschließen" as UC3
+usecase "Zahlung durchführen" as UC4
+usecase "Gutschein einlösen" as UC5
+usecase "Rabattinformationen anzeigen" as UC6
+
+' Basis-Interaktionen
+Kunde -- UC1
+Kunde -- UC2
+Kunde -- UC3
+
+' include: Immer bei Bestellung
+UC3 ..> UC4 : <<include>>
+
+' extend: Optionaler Gutschein
+UC3 <.. UC5 : <<extend>>\n[Bedingung: Gutschein vorhanden]
+
+' extend: Optional Rabattinfo
+UC1 <.. UC6 : <<extend>>\n[Bedingung: Premiumkunde]
+
+' Detaillierte Bedingungen als Notizen
+note right of UC5
+Bedingung für Erweiterung:
+Nur wenn ein gültiger Gutschein
+im Kundenkonto oder Warenkorb vorhanden ist
+end note
+
+note right of UC6
+Bedingung für Erweiterung:
+Nur wenn der Kunde eingeloggt
+und als Premiumkunde markiert ist
+end note
+
+@enduml
+```
 
 **Anwendungsfälle**
 
@@ -113,28 +210,52 @@ Use-Case Diagramme erlauben die Abstraktion von Elementen auf der Basis von Gene
 + ... Use-Case Analysen aus Entwicklersicht durchzuführen
 + ... zu viele Use-Cases in einem Diagramm abzubilden (max. 10)
 
-[^Jeckle]: Mario Jeckle, Christine Rupp, Jürgen Hahn, Barbara Zengler, Stefan Queins, UML 2 glasklar, Hanser Verlag, 2004
+> Halten Sie komplexe `<extend>` Bedingungen in separaten Dokumenten fest.
 
 ### Aktivitätsdiagramm
 
-> Aktivitätsdiagramme stellen die Vernetzung von elementaren Aktionen und deren
-> Verbindungen mit Kontroll- und Datenflüssen grafisch dar.
+> Aktivitätsdiagramme stellen die Vernetzung von elementaren Aktionen und deren Verbindungen mit Kontroll- und Datenflüssen grafisch dar.
+
+
+      {{0-1}}
+*******************************
 
 **Aktivitätsmodellierung in UML1**
 
 | <img src="https://www.plantuml.com/plantuml/svg/JOynRW9134LxdyAY8bTOYX3gz3Gq1lxkM3Fn8i-CLk8iANCJBXOJjaXdVV_tfB-lJRprhqBqTn4vRf16pCE7DyqeNFibmNR_8pM-mlXaHqaEoxEVkM2ArihpahI0jqTeWuDNyFsDdew0dG-uIohTffFnylX9vKcFisSQ7jzd-0AjyNrbB9EeqN0Gor2xzyXXLtxrDv-A4IvMBybrR66KNbVfPXVJvXlHFe1O-Wi0"> | <img src="https://www.plantuml.com/plantuml/png/JOz1JiD034NtFeKbDic60oIBDX8tgA3hQVlRCPgwmUE0LCrTs706Bf2BCQe8PUdlxoU_TVPWFfqJbUSCAtIRoJ0YE7MRVJJ83a_1eJt9aPlD2Db76BzVKbgrx17AZKAq9Uw6AP_23hoqJZP_pv_e2Ic3czTGIrmU1dLvcx2DuYZ3uInQQjwz_1tO7T4JtxdNAJ_-sq0FSbnUxvPS-ry1_eYImCqMuZ3mJIFFNtx5ggsgbv7M5L7rVm00">|
 |Aktivitätsdiagramme.plantUML | ActivityUser.plantUML |
 
-Bis UML 1.x waren Aktivitätsdiagramme eine Mischung aus Zustandsdiagramm,
-Petrinetz und Ereignisdiagramm, was zu theoretischen und praktischen Problemen
-führte.
+Elemente UML 1.x: 
 
-Elemente UML 1.x: Aktivitätszustände (Activity States), Übergänge (Transitions), Startzustand (Initial State), Endzustand (Final State), Entscheidungsknoten (Decision Nodes), Synchronisationsbalken, Aktivitätspartitionen.
++ Aktivitätszustände (Activity States)
++ Übergänge (Transitions) 
++ Startzustand (Initial State)
++ Endzustand (Final State) 
++ Entscheidungsknoten (Decision Nodes)
++ Synchronisationsbalken
++ Aktivitätspartitionen.
+
+Bis UML 1.x waren Aktivitätsdiagramme eine Mischung aus Zustandsdiagramm, Petrinetz und Ereignisdiagramm, was zu theoretischen und praktischen Problemen führte.
+
+*******************************
+
+      {{1-2}}
+*******************************
 
 **Erweiterung des Konzeptes in UML2**
 
-Erweiterte und umbenannte Elemente UML 2.x: Aktionen (Actions): Call Behavior Action, Call Operation Action, Send Signal Action und weitere Action,
-Kontrollknoten (Control Nodes): Initial Node, Activity Final Node, Flow Final Node, Decision Node, Merge Node, Fork Node, Join Node, Objektknoten (Object Nodes), Aktivitätspartitionen (Activity Partitions, auch Swimlanes genannt), Interruptible Activity Region, Pins.
+| Bereich                           | UML 1.x                                               | UML 2.x                                                                                     |
+| --------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| **Strukturmodell**                | einfaches Kontrollflussmodell (ähnlich Flussdiagramm) | basiert auf **aktivitätsbasiertem Zustandsautomaten** mit Tokens (ähnlich **Petri-Netzen**) |
+| **Objektfluss**                   | rudimentär                                            | **explizite Darstellung von Datenflüssen** zwischen Aktionen möglich                        |
+| **Pins**                          | nicht vorhanden                                       | **Input- und Output-Pins** ermöglichen feingranulare Kontrolle über Daten                   |
+| **Partitions (Swimlanes)**        | einfach                                               | weiterhin vorhanden, aber besser formalisiert                                               |
+| **Unteraktivitäten**              | eingeschränkt                                         | **Call Behavior Action** für Wiederverwendung anderer Aktivitäten                           |
+| **Nebenläufigkeit (Concurrency)** | schwer modellierbar                                   | durch **Fork/Join-Nodes** sauber formalisiert                                               |
+| **Signale und Ereignisse**        | kaum genutzt                                          | erweiterte Unterstützung für **Signal Send/Receive Actions**                                |
+| **Exception Handling**            | nicht vorhanden                                       | neu eingeführt mit **Interruptible Regions** und **Exception Handlers**                     |
+| **Zustandsübergänge**             | implizit                                              | explizite Modellierung möglich                                                              |
+
 
 > "Was früher Aktivitäten waren sind heute Aktionen."
 
@@ -146,7 +267,7 @@ Kontrollfluss auch der Objektfluss modelliert wird.
 + Aktivitäten definieren Strukturierungselemente für Aktionen, die durch Ein- und Ausgangsparameter, Bedingungen, zugehörige Aktionen und Objekte sowie einen Bezeichner gekennzeichnet sind.
 
 <!--
-style="width: 80%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
+style="width: 60%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ````ascii
 
@@ -163,7 +284,6 @@ style="width: 80%; max-width: 860px; display: block; margin-left: auto; margin-r
      |                                                   |
      .---------------------------------------------------.
 ````
-
 
 + Aktionen stehen für den Aufruf eines Verhaltens oder die Bearbeitung von Daten, die innerhalb einer Aktivität nicht weiter zerlegt wird.
 
@@ -232,9 +352,10 @@ style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-r
  +--------------.       .----------------+
 ````
 
+
 **Beispiel**
 
-![Aktivitätsdiagramme](./img/14_UML_II/ActivityDiagram.png "Beispiel eines Aktivitätsdiagramms [^WikiActivityDiagram]")
+![Aktivitätsdiagramme](./img/14_UML_II/ActivityDiagram.png "Beispiel eines Aktivitätsdiagramms - Wikimedia, Autor Gubaer, UML2 Aktivitätsdiagramm,  https://commons.wikimedia.org/wiki/File:Uml-Activity-Beispiel2.svg")
 
 **Anwendung**
 
@@ -242,9 +363,11 @@ style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-r
 + Darstellung von Abläufen mit fachlichen Ausführungsbedingungen
 + Darstellung für Aktionen im Fehlerfall oder Ausnahmesituationen
 
+> Das nachfolgende Video zeigt die Erstellung von Aktivitätsdiagrammen und arbeitet dabei die Unterschiede von UML 1.x und UML 2.x heraus.
+
 !?[Link](https://www.youtube.com/watch?v=VaKCZOhVJkQ)
 
-[^WikiActivityDiagram]: Wikimedia, Autor Gubaer, UML2 Aktivitätsdiagramm,  https://commons.wikimedia.org/wiki/File:Uml-Activity-Beispiel2.svg
+*******************************
 
 ### Sequenzdiagramm
 
@@ -268,7 +391,58 @@ Die schmalen Rechtecke, die auf den Lebenslinien liegen, sind **Aktivierungsbalk
 
 **Beispiel**
 
-![Aktivitätsdiagramme](./img/14_UML_II/SequenzCheckEmail.png "Sequenzdiagramm der Interaktion zwischen Emailclient und Server [^WikiSequenceDiagram]")<!-- width="70%" -->
+```text @plantUML.png
+@startuml
+actor Kunde
+participant "Webbrowser" as Browser
+participant "Webshop-Frontend" as Frontend
+participant "Webshop-Backend" as Backend
+participant "Zahlungsdienst" as Payment
+
+Kunde -> Browser : Produktseite aufrufen
+activate Browser
+Browser -> Frontend : HTTP GET /produkt/123
+activate Frontend
+Frontend -> Backend : Produktdaten abrufen
+activate Backend
+Backend --> Frontend : Produktdetails
+deactivate Backend
+Frontend --> Browser : HTML mit Produktinformationen
+deactivate Frontend
+deactivate Browser
+
+Kunde -> Browser : In den Warenkorb legen
+activate Browser
+Browser -> Frontend : HTTP POST /warenkorb
+activate Frontend
+Frontend -> Backend : Warenkorb aktualisieren
+activate Backend
+Backend --> Frontend : OK
+deactivate Backend
+Frontend --> Browser : Rückmeldung „Produkt im Warenkorb“
+deactivate Frontend
+deactivate Browser
+
+Kunde -> Browser : Bestellung auslösen
+activate Browser
+Browser -> Frontend : HTTP POST /checkout
+activate Frontend
+Frontend -> Backend : Bestellung erstellen
+activate Backend
+Backend -> Payment : Zahldaten prüfen
+activate Payment
+Payment --> Backend : Zahlung bestätigt
+deactivate Payment
+Backend --> Frontend : Bestellung abgeschlossen
+deactivate Backend
+Frontend --> Browser : Bestellbestätigung
+deactivate Frontend
+deactivate Browser
+
+Browser -> Kunde : Anzeige „Vielen Dank für Ihre Bestellung!“
+@enduml
+```
+
 
 **Bestandteile**
 
@@ -279,15 +453,44 @@ Die schmalen Rechtecke, die auf den Lebenslinien liegen, sind **Aktivierungsbalk
 | Aktivitätsbalken       | Repräsentiert die Zeit, die ein Objekt zum Abschließen einer Aufgabe benötigt.                                        |
 | Akteur                | Repräsentiert einen Nutzer (Strichmännchen)                                                                            |
 | Lebenslinien-Symbol    | Stellt durch die Ausdehnung nach unten den Zeitverlauf dar.                                                           |
-| Fragmente              | Kapseln Sequenzen in Szenarien, wie optionalen Interaktionen (opt), Alternativen (Alt), Schleifen (Loop), Parallelität (par)  |
+| Fragmente              | Kapseln Sequenzen in Szenarien, wie optionalen Interaktionen (opt), Alternativen (alt), Schleifen (Loop), Parallelität (par)  |
 | Interaktionsreferenzen | Binden Submodelle und deren Ergebnisse ein  (ref)                                                                     |
+
+
+
+```text @plantUML.png
+@startuml
+actor User
+participant System
+participant ServiceA
+participant ServiceB
+
+User -> System : Anfrage starten
+activate System
+
+System -> ServiceA : Task A starten
+activate ServiceA
+
+System -> ServiceB : Task B starten
+activate ServiceB
+
+' Beide Services arbeiten parallel
+ServiceA --> System : Task A Ergebnis
+deactivate ServiceA
+
+ServiceB --> System : Task B Ergebnis
+deactivate ServiceB
+
+' System wartet auf beide Ergebnisse
+System -> User : Ergebnis liefern
+deactivate System
+@enduml
+```
 
 **Beispiel**
 
 | <img src="https://www.plantuml.com/plantuml/png/ZPCn3jim34LtdUBt00NQ8Ok15idGR0K2z0IApTX2PCgGw0w6ZzQj5wiYrqOP1sYM26B8pwTF-fZ4HXbxRuPykjeDbWLdsqMAAdG9taqkYGgUxg4BNYZ9K_Pfb63C8eEFNxVg2Z_gpbjkYRrZHxWzKjZOMjnFAxHstkvRMpFFdm_pRDP0LlsRNC5oPxtiPJO0HR1cL-5k6jftQkXPPXzvFDO0hs0k55DWwnqnXlZxrutO0FismBCeiBmH1lWlEV2A7TYpaa-aMSjuglB_H6CxZKaiD-_IbjcY79fl4to7RnKYReonNfHl7xuWt14QYflc4dljULPAGgubXhSfvMFa1hqJfgudrWxeodEqBO5jtU7aopOlH64Gw1Arx5M-vLSuYielbRFCyrFUMQZul-s_KqeZjoXVePOgAKfatOaTowfofSnEektNKeSzZXhXjzZIbLs2vQaugfHKOJ7gc7_6tly1"> |
 |Alkoholkontrolle.plantUML |
-
-[^WikiSequenceDiagram]: Wikimedia, Autor Coupling_loss_graph.svg, UML of message sequence, https://commons.wikimedia.org/wiki/File:CheckEmail.svg
 
 **Anwendung**
 
@@ -377,7 +580,7 @@ Order "1" *-- "1" ShippingInfo
 Klassen werden durch Rechtecke dargestellt, die entweder nur den Namen der
 Klasse (fett gedruckt, abstrakte und Interfaces evtl. kursiv) tragen oder zusätzlich auch Attribute, Operationen und
 Eigenschaften spezifiziert haben.  Oberhalb des Klassennamens können
-Schlüsselwörter in Guillemets und unterhalb des Klassennamens in
+Schlüsselwörter in _Guillemets_ ('<< >>') und unterhalb des Klassennamens in
 geschweiften Klammern zusätzliche Eigenschaften (wie {abstrakt}) stehen.
 Mit Schlüsselwörtern können zusätzliche Informationen oder Meta-Eigenschaften zur Standardsemantik der Elemente hinzugefügt werden. Sie bieten eine Möglichkeit, benutzerdefinierte Modellierungskonzepte hinzuzufügen oder vorhandene Konzepte zu präzisieren.
 
@@ -405,8 +608,8 @@ Wenn die Klasse keine Eigenschaften oder Operationen besitzt, können die entspe
 | Klassendiagramm                                                                                                                                                                                                                                                                                                                                   | Beispielhaftes Objektdiagramm                                                                          |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | <img src="https://www.plantuml.com/plantuml/png/TP2_JWCn3CRtF8Lr4r1LWXKn5C7I1OPxWjGnhKNYd1o7WJ_lJhXhInYOelm-Vpz7sHJpQZL5vyeho-JL9y3eIxatKzvLeorc6VcTuDeTE10WAqPoRfw2Xrei9rBuS01h49y8Rc5iNTdF96Rqnbbwke924fura5vSpdSb97wZ4_ewwHiukuEt7_TZEvPTDUr86zcAqPvq5c6M5zPqr6BCXNhVKzRauwzr1O7Bv0qFVn-oT8wbSIBaVrjjRadkFjVhVa6FUuKx_zbmCq0BXwi1bcH34cgAtm00" width="228"> | <img src="https://www.plantuml.com/plantuml/png/TSwnJiCm4CRntKznojvWEss7gaIL8h4HaF84RdmK8pj6b_DKyMPil1WnY10ARDRdltwwmyY6E0KlF3umS0HofqS6wmXxTd4G8XwVfYSK-rGtQUGOa7PmZuoqlqfr0MQ4vYm64n2kFtUuVNlr7adus9kCJ1ytXEw8T18lFyGsKZ3-Zcn6LQNqUaPRTHRMS5OBfKkvARNKiX132XCqhHzvzlu7rzKIrD-Wbd-1ERyui7l6tisWtcotizSj3wnAMLrwkSvS0wjL3Qs27SJieFsQzA-fMrO776mA_Xq0" width="300">  |
+_ Gegenüberstellung motiviert nach _What is Object Diagram?_, https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-object-diagram/, Autor unbekannt_
 
-Darstellung motiviert nach _What is Object Diagram?_, https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-object-diagram/, Autor unbekannt
 
 **Objektdiagramm** stellt die Instanzen von Klassen und ihre Beziehungen zueinander zu einem bestimmten Zeitpunkt dar basierend auf einem Klassendiagramm
 (ein „Schnappschuss“ der Objekte innerhalb eines Systems) und enthält als Elemente: Objekte (Instanzen der Klasse), Links (Instanzen von Assoziationen), Attribute (Werte von Eigenschaften von Objekten).
@@ -498,7 +701,27 @@ style="width: 100%; display: block; margin-left: auto; margin-right: auto;"
 Die Sichtbarkeitsattribute `public` und `private` sind unabhängig vom Vererbungs-, Instanzierungs- oder Paketstatus einer Klasse. Im Beispiel kannn der TrafficOperator nicht
 auf die Geschwindigkeiten der Instanzen von Car zurückgreifen.
 
-![PublicPrivate](https://www.plantuml.com/plantuml/png/NP51pjCm48NtFiLJLd-XhNwsMRK2KR6eYbJ4Xh9mx4aonBKZUr944RVX6EnwCPoaWEZspJVVFCkR93hAS7OgTUnx7VKPnkcKjYAHgq7edGd-o5V2ishP4Wn7uqXD45xh-5q1AwIUo9QmOQWSpGd9SGoVvcmc5ddq4hi_emN-hlnGT-M7gEkQpQ6dg2NSzH-fvNmrbUF5Jvydopvupi3MkPobfyMeU5X6yQh0YzKAnNEvNgF884eKJIIk1TS1UgWBfNmGWeGUeSQCJ6MXNSBx6B9ClYrFliz5sQ0XmPwa3PQMo6daYnP2-XV_9toiLEADJZXKNwWJTDhxiGGiKtRjA9dsAtlBJKSib6VEKSHRtSOh3GsTV6uTRxzCDxs1_1A92RhAa6VJ2YuKRp-zfUZNQaFUvg_z3G00 "Private member [PublicPrivate.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/publicPrivate.plantUML)")
+```text @plantUML.png
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+class Car{
+  - speed: double
+  - setSpeed(double speed)
+  + GetSpeed() : double
+}
+
+class TrafficOperator{
+  - Vehicles: Car[]
+  + MonitorAllCars()
+}
+
+TrafficOperator "1" *-- "0:.. "Car : "greift zu auf"
+
+note top of Car : speed als Property,\npublic get Methode, \nprivate set Methode
+note top of TrafficOperator : Das Objekt kann auf die \nGeschwindigkeiten aller Fahrzeuge\n zurückgreifen, sie aber nicht verändern.
+@enduml
+```
 
 **protected**
 
@@ -506,13 +729,70 @@ Die abgeleitete Klassen Bus und PassagerCar erben von Car und übernehmen damit 
 der Sitze wird beispielsweise mit ihrem Initialisierungswert von 5 auf 40 gesetzt.
 Zudem muss die Methode `StopAtStation` auch auf die Geschwindigkeit zurückgreifen können.
 
-![Protected](https://www.plantuml.com/plantuml/png/XKy_Jm8n5D_lK_nI5z10CD7beWd8v8J94HVZqEkzWuPUUsbV7L2_kuKgXXjqQPhV_pSFB3t7pXHXfsqllUoWZ0nXmUnr7PaUbRELtXDcnLOt1AMzCbJ8Eh2NYhCQI-dV2s22q1Cr9HeNQqD7nCQk9hzgAv8S4dA1G5mTPAEiofvnegwm-Q76E8Ly5aKkUKeFsGtvt3RCBg4junwtluw76FuGtioEdSijgTrQgnrn6EKP5Rj-mHLBriucx1Iuzh9jjLhrv2MxxnNFjDNAK8cqw-Nr6D0vgnE_C2PX8IUa7-u-9fF3AfGGv6l6cxFYn9nTU2uP54DS2rmcXvYLqod4qBZnf5l6FaB6zbzt7ZGqpSasiJDV "Protected Member[protected.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/protected.plantUML)")
+```text @plantUML.png
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+abstract class Car{
+  - speed: double
+  - numberOfSeats
+  # setSpeed(double speed)
+  + getSpeed() : double
+}
+
+class PassengerCar{
+  - numberOfSeats: int = 5
+}
+
+class Bus{
+  - numberOfSeats: int = 40
+  + CheckTickets()
+  + StopAtStation()
+}
+
+class TrafficOperator{
+  - Vehicle: Car[]
+  + monitorAllCars()
+}
+
+Car <|-- Bus : "erbt von"
+Car <|-- PassengerCar : "erbt von"
+TrafficOperator "1" *-- "0:.. "PassengerCar : "greift zu auf"
+TrafficOperator "1" *-- "0:.. "Bus : "greift zu auf"
+@enduml
+```
 
 **internal**
 
 Ein Member vom Typ `internal` einer Basisklasse kann von jedem Typ innerhalb seiner enthaltenden Assembly aus zugegriffen werden.
 
-![Protected](https://www.plantuml.com/plantuml/png/JOwzRkf044RxVOfFha38YDjQ2463T2b3b2PACUoExH7hjRK_HKZ8iqTcRONspCmvim-HV4oTLU4gRY1F7RIb40unUhcaoFzrxyvoOsnKAuQXnMlBQY1zfORnqfDvzLJNeh7T7djhsEzs-5B87hnnAzho280IOM0s5KoVBfOVx0U1utd4Yqpppl8nNA6PXykdgxkwAvNzf-HqbDwDWHAQVAWmFLHLKpoyVwZHTPOkMOfyecwn_5CSn0-M76T5ozB45a-r5OxsCn_CDHJ_2fGbYasrNgEOEgXGD9wbZhWbKAeBDRjHVkymhQazEvCw-mi0 "Internal Member [internal.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/internal.plantUML)")
+
+```text @plantUML.png
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+package RoadTraffic <<Folder>> {
+  class Vehicle{
+    - speed: double
+    ~ setSpeed(double speed)
+    + getSpeed(): double
+  }
+}
+
+class Junction{
+  - cars: Traffic::Vehicles[]
+  + SimulateJam()
+}
+
+class Airplane{
+  - heigth : double
+  + Fly()
+}
+
+Junction "1" -- "0:.. "Vehicle : "greift zu auf"
+Airplane -|> Vehicle
+@enduml
+```
 
 > **Merke: ** Der UML Standard kennt nur `+ public`, `- private`, `# protected` und `~ internal`. Das C# spezifische `internal protected` ist als weitere Differenzierungsmöglichlichkeit nicht vorgesehen.
 
@@ -582,22 +862,18 @@ Daraus ergeben sich UML-korrekte Darstellungen
 ```csharp    AttributeExample
 using System;
 
-namespace Rextester
+class Example
 {
-  class Example
-  {
-    int attribute1;
-    public int attribute2;
-    public static double pi = 3.14;
-    private bool attribute3;
-    protected short attribute4;
-    internal const string attribute5 = "Test";
-    B attribute6;
-    System.Collections.Speciallized.StringCollection attribute7;
-    private int wert;
-    Object attribute8{
-      get{return wert * 10;}
-    }
+  int attribute1;
+  public int attribute2;
+  public static double pi = 3.14;
+  private bool attribute3;
+  protected short attribute4;
+  internal const string attribute5 = "Test";
+  B attribute6;
+  System.Collections.Speciallized.StringCollection attribute7;
+  Object attribute8{
+    get{return wert * 10;}
   }
 }
 ```
@@ -637,7 +913,7 @@ Dabei ist die Parameterliste durch folgende Elemente definiert:
 + *Eigenschaftswert* ... Angaben zu besonderen Charakteristika der Operation
 
 
-![Protected](https://www.plantuml.com/plantuml/png/HO_1IiH044JlynK5NhAAYzdLIq1O5G-UzoWUnfb66oSzeTC1DSHlTpQ1pQtegbT57thpQaERNF_5qddrBKBoVVzWflm-6Bs4B4V-9TouJuw4m1eIkJc4vs_VTeb61-0AOoap3XDoHrfKbhhQdAphzRAhM33lr0rO3FUusongLF8nI_gPJip5okmBamTRi1qQFCsjVslYjZhx-mP7KvOFlDRRxUKRngoHbE9KPXxTv0uaiJpy3m00 "Korrespondierendes UML-Klassendiagramm [OperationsExample.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/OperationsExample.plantUML)")
+![Protected](https://www.plantuml.com/plantuml/png/HO_1IiH044JlynK5NhAAYzdLIq1O5G-UzoWUnfb66oSzeTC1DSHlTpQ1pQtegbT57thpQaERNF_5qddrBKBoVVzWflm-6Bs4B4V-9TouJuw4m1eIkJc4vs_VTeb61-0AOoap3XDoHrfKbhhQdAphzRAhM33lr0rO3FUusongLF8nI_gPJip5okmBamTRi1qQFCsjVslYjZhx-mP7KvOFlDRRxUKRngoHbE9KPXxTv0uaiJpy3m00 "Korrespondierendes UML-Klassendiagramm")
 
 ```csharp    OperationsExample
 using System;
@@ -654,7 +930,7 @@ class Example
     return value;
   }
 
-  protected void operation3 (ref C param3)
+  protected void operation3 (ref C param2)
   {
     // Implementierung
     param3 = ...
@@ -676,7 +952,7 @@ class Example
 
 Eine Schnittstelle wird ähnlich wie eine Klasse mit einem Rechteck dargestellt, zur Unterscheidung aber mit dem Schlüsselwort `interface` gekennzeichnet.
 
-![Protected](https://www.plantuml.com/plantuml/png/NP1D3e9038NtFKMNke0J48BHZOc91p0kIgbnp30aCtNXZtSN5K9nsUzxRvffbPIYNbiFPzS8ieli1O7gf95OaJsbXAjXtBcaanlfklDUM5qNm0MLU28M_4InABOZA4iZfyPV17wrPvxFTzg2aNOrJCnaisp-a1q67IFTlWw6puu07u2uho_2UZYYU6abw8QKUfpSNHPBU44beUdFzmO0 "Darstellung von Schnittstellen in UML-Klassendiagrammen [PublicPrivate.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/OperationsExample.plantUML)")
+![Protected](https://www.plantuml.com/plantuml/png/NP1D3e9038NtFKMNke0J48BHZOc91p0kIgbnp30aCtNXZtSN5K9nsUzxRvffbPIYNbiFPzS8ieli1O7gf95OaJsbXAjXtBcaanlfklDUM5qNm0MLU28M_4InABOZA4iZfyPV17wrPvxFTzg2aNOrJCnaisp-a1q67IFTlWw6puu07u2uho_2UZYYU6abw8QKUfpSNHPBU44beUdFzmO0 "Darstellung von Schnittstellen in UML-Klassendiagrammen")
 
 Eine alternative Darstellung erfolgt in der LolliPop Notation, die die grafische Darstellung etwas entkoppelt.
 
@@ -720,13 +996,8 @@ Abstraktionseben der UML-Modellierung:
 
 + M3 - Metametamodell-Ebene: Diese Ebene beschreibt die Struktur und Semantik von Metamodellen auf der M2-Ebene. Metametamodelle definieren die Regeln und Konzepte, die verwendet werden, um Metamodelle zu erstellen. 
 
-[Metamodel-Hierarchy](https://de.wikipedia.org/wiki/Unified_Modeling_Language#/media/Datei:MetamodelHierarchy_de.svg)
+![Metamodel-Hierarchy](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/MetamodelHierarchy_de.svg/1920px-MetamodelHierarchy_de.svg.png "Von Jens von Pilgrim - created by author, based on OMG: Unified Modeling Language: Infrastructure. Page 31, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=9914721")
 
-## Links
-
-[Wikipedia-übersicht der Diagramm Elemente](https://de.wikipedia.org/wiki/Unified_Modeling_Language#/media/Datei:UML-Diagramme.svg)
-
-[OMG-Spezifikation](https://www.omg.org/spec/UML/2.5.1/PDF)
 
 ## Verwendung von UML Tools
 
