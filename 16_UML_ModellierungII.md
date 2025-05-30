@@ -101,7 +101,7 @@ end note
 
 ## UML Diagrammtypen
 
-![OOPGeschichte](./img/13_UML/UML-Diagrammhierarchie.png "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/UML-Diagrammhierarchie.svg/1200px-UML-Diagrammhierarchie.svg.png, Autor "Stkl"- derivative work: File: UML-Diagrammhierarchie.png: Sae1962, CC BY-SA 4.0")
+![OOPGeschichte](https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/UML-Diagrammhierarchie.svg/1200px-UML-Diagrammhierarchie.svg.png "Autor `Stkl`- derivative work: File: UML-Diagrammhierarchie.png: Sae1962, CC BY-SA 4.0, https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/UML-Diagrammhierarchie.svg/1200px-UML-Diagrammhierarchie.svg.png")
 
 > [OMG-Spezifikation](https://www.omg.org/spec/UML/2.5.1/PDF)
 
@@ -388,10 +388,10 @@ Für synchrone und asynchrone Operationsaufrufe (Nachrichten) gibt es verschiede
 
 Die schmalen Rechtecke, die auf den Lebenslinien liegen, sind **Aktivierungsbalken**, die den Focus of Control anzeigen, also jenen Bereich, in dem ein Objekt über den Kontrollfluss verfügt, und aktiv an Interaktionen beteiligt ist.
 
-
 **Beispiel**
 
 ```text @plantUML.png
+
 @startuml
 actor Kunde
 participant "Webbrowser" as Browser
