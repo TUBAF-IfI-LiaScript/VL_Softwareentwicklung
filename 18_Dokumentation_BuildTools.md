@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.8
+version:  1.0.9
 language: de
 narrator: Deutsch Female
 comment:  Ziele von Dokumentation, Build Tools dotnet, MSBuild und Make
@@ -39,7 +39,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2024_Projektaufgaben/tree/main
 
-## Neues aus der Github-Woche
+## Github-Aktivitäten in 2022
 
 > Forschungsfrage: Arbeiten Studentische Teams kollaborativ oder kooperativ? Können wir als Lehrende dieses Verhalten beeinflussen?
 
@@ -135,7 +135,7 @@ Technischer Redakteur:
 
 > E. Aghajani et al., "Software Documentation: The Practitioners' Perspective," 2020 IEEE/ACM 42nd International Conference on Software Engineering (ICSE), Seoul, Korea (South), 2020, pp. 590-601.
 
-https://emadpres.github.io/pdfs/icse2020.pdf
+https://homepages.dcc.ufmg.br/~figueiredo/disciplinas/papers/icse20aghajani.pdf
 
 ### Programmiererdokumentation
 
