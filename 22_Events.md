@@ -183,7 +183,7 @@ C# etabliert für die Nutzung der Pub-Sub Kommunikation *Events*. Dies sind spez
 {{0-1}}
 ********************************************************************************
 
-Der Publisher ist eine Klasse, die ein Delegaten enthält. Der Publisher entscheidet damit darüber, wann Nachrichten versandt werden.
+Der Publisher ist eine Klasse, die eine Delegate-Variable enthält. Der Publisher entscheidet damit darüber, wann Nachrichten versandt werden.
 Auf der anderen Seite finden sich die Subscriber-Methoden, die ausgehend vom aktivierten Delegaten im Publisher zur Ausführung kommen. Ein Subscriber hat keine Kenntnis von anderen Subscribern. Events sind ein Feature aus C# dass dieses Pattern formalisiert.
 
 > Merke: Ein Event ist ein Klassenmember, dass die Features des Delegatenkonzepts nutzt, um eine Publisher-Subscribe Interaktion zu realisieren.
@@ -205,7 +205,7 @@ public class Publisher{
 
   // Schritt 3
   // Wir implementieren das "Feuern" des Events
-  public magicMethod(){
+  public void magicMethod(){
      if (oldA != newA) OnAChangedHandler();
   }
 }
@@ -214,7 +214,7 @@ public class Publisher{
 // Implementieren des Subscribers - in diesem Fall wurde eine separate Klasse
 // gewählt. 
 public class Subscriber{
-  public static void m_OnPropertyChanged(){
+  public void m_OnPropertyChanged(){
       Console.WriteLine("A was changed!");
   }
 }
@@ -225,6 +225,7 @@ public static void Main(string[] args){
   Publisher myPub = new Publisher();
   Subscriber mySub = new Subscriber();
   myPub.OnAChangedHandler += new varAChangedHandler(mySub.m_OnPropertyChanged);
+  myPub.magicMethod();
 }
 ```
 
@@ -234,7 +235,7 @@ Welche Konsequenzen ergeben sich daraus?
 
 + Es ist eine 1:n Relation. Ein Ereignis entstammt einem Publisher, kann aber mehrere Subscriber adressieren.
 
-+ Ereignisse, die keine Subscriber haben, werden nie ausgelöst. Das bedeutet, dass ein Publisher die Subscriber kennen muss.
++ Achtung: Ereignisse, die keine Subscriber haben werfen NullReferenzException aus, wenn sie ausgelöst werden (OnAChangedHandler?.Invoke();).
 
 + Ereignisse werden in der Regel verwendet, um Benutzeraktionen wie Mausklicks oder Menüauswahlen in GUI-Schnittstellen zu signalisieren.
 
@@ -268,7 +269,7 @@ public event VarAChangedHandler AChanged
 }
 ```
 
-2. Der Compiler sucht innerhalb der Publisher Klasse nach Referenzen, die auf AChanged und lenkt diese auf das private Delegate um.
+2. Der Compiler sucht innerhalb der Publisher Klasse nach Referenzen auf AChanged und lenkt diese auf das private Delegate um.
 3. Der Compiler mappt alle += Operationen außerhalb auf die Zugriffsmethoden add and remove.
 
 ********************************************************************************
@@ -372,13 +373,21 @@ class Program {
 **Ja, aber ... ** Was unterscheidet eine Delegate von einem Event? Was würde passieren, wenn wir
 das Key-Wort aus dem Code entfernen?
 
-Die Implementierung wäre nicht so robust, da folgende Möglichkeiten offen ständen:
+Die Implementierung wäre nicht so robust, da folgende Möglichkeiten offen ständen und damit :
 
 | Eingriff                                                                                            | Bedeutung                                              | Verhindert |
 | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------ | ---------- |
 | `GoogleStock.OnPropertyPriceChanged = null;`                                                        | Löscht alle Callback-Handler                           | ja         |
 | `GoogleStock.OnPropertyPriceChanged = DelPriceChangedHandler(MailService.stock_OnPropertyChanged);` | Setzt einen einzigen Handler (und löscht alle anderen) | ja         |
 | `GoogleStock.OnPropertyPriceChanged.Invoke();`                                                      | Auslösen des Events innerhalb eines Subscribers                                                       | ja         |
+
+Das Weglassen des Schlüsselwortes event untergräbt das Prinzip der Kapselung und führt leicht zu unbeabsichtigtem Verhalten wie z. B. doppelte Aufrufe.
+
+Das event-Keyword dient als Zugriffsmodifizierer für Delegaten und stellt sicher, dass:
+
+- Nur der Publisher das Event auslösen kann,
+
+- Externe Objekte keinen direkten Zugriff auf den Delegaten selbst bekommen.
 
 Was fehlt Ihnen an der Implementierung?
 
