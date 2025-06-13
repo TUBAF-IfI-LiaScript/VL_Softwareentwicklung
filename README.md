@@ -22,14 +22,14 @@
 | 9     | 26. Mai   | UML Konzepte                                      |gemeinsam          |
 |       | 30. Mai   | UML Diagrammtypen                                 |gemeinsam          |
 | 10    | 2. Juni   | UML Anwendungsbeispiel                            |gemeinsam          |
-|       | 6. Juni   | Testen                                            |                   | 
+|       | 6. Juni   | Dokumentation und Build Toolchains                |                   | 
 | 11    | 9. Juni   | _Pfingstmontag_                                   | _Pfingstmontag_   |
-|       | 13. Juni  | Dokumentation und Build Toolchains                |                   |
-| 12    | 16. Juni  | Continuous Integration in GitHub                  |                   |
-|       | 20. Juni  | Delegaten                                         |                   |
-| 13    | 23. Juni  | Events                                            |                   |
-|       | 27. Juni  | Threadkonzepte in C#                              |                   |
-| 14    | 30. Juni  | Taskmodell                                        |                   |
+|       | 13. Juni  | Delegaten                                         |                   |
+| 12    | 16. Juni  | Events                                            |                   |
+|       | 20. Juni  | Threadkonzepte in C#                              |                   |
+| 13    | 23. Juni  | Taskmodell                                        |                   |
+|       | 27. Juni  | Testen                                            |                   |
+| 14    | 30. Juni  | Continuous Integration in GitHub                  |                   |
 |       | 4. Juli   | Design Pattern                                    |                   |
 | 15    | 7. Juli   | Language Integrated Query                         |                   |
 |       | 11. Juli  | GUI - MAUI                                        |                   |
