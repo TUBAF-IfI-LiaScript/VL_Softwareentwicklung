@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.7
+version:  1.0.8
 language: de
 narrator: Deutsch Female
 comment:  Grundidee, Multicast Delegaten, Anonyme/Lambda Funktionen, generische Delegaten, Action und Func
@@ -36,6 +36,8 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 ## Hinweise zu den praktischen Prüfungsprojekten
 
 [Projektaufgaben](https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2023_Projektaufgaben)
+
+> Bitte teilen Sie Ihr Repo mit uns! Schreiben Sie dazu eine Einladungsemail an Frau Dr. Rudolf.
 
 ## Motivation und Konzept der Delegaten
 
@@ -138,6 +140,24 @@ int main()
 ```
 @LIA.evalWithDebug(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
+Und auch noch ein Python Beispiel, um die Anwendung in einer nicht typisierte Sprache zu zeigen:
+
+```python
+def quadriere(x):
+    return x * x
+
+def wende_an(funktion, wert):
+    print("Wende Funktion an:", funktion.__name__)
+    result = funktion(wert)
+    print("Ergebnis:", result)
+    return result
+
+ergebnis = wende_an(quadriere, 5)
+print(ergebnis)  # Ausgabe: 25
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`, `*`)
+
+
 ### Grundidee
 
 > Merke: Ein Delegat ist ein Methodentyp und dient zur Deklaration von Variablen,
@@ -150,7 +170,7 @@ Für die Anwendung sind drei Vorgänge nötig:
 3. Aufruf der Instanz
 
 ```csharp  Concept.cs
-// Schritt 1
+// Schritt 1 - Spezifikation
 //[Zugriffsattribut] delegate Rückgabewert DelegatenName(Parameterliste);
 public delegate int Rechenoperation(int x, int y);
 
@@ -282,8 +302,6 @@ Sollten wir uns mit dem Aufruf einer Methode zufrieden geben?
 ```csharp           MultiCast
 using System;
 using System.Reflection;
-using System.Collections.Generic;
-
 
 public class Program
 {
@@ -324,6 +342,37 @@ public class Program
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > **Merke:** Es werden alle referenzierten Methoden ausgeführt - der Rückgabewert des Aufrufes entspricht dem der letzten Methode.
+> Wir haben es nicht mit einer Verkettung von Methoden zu tuen, sondern mit einer Liste separater Aufrufe!
+
+```csharp           ChainedMultiCast
+using System;
+using System.Reflection;
+
+public class Program
+{
+  public delegate int Transformierer(int eingabe);
+
+  static int Verdoppeln(int x) => x * 2;
+  static int PlusEins(int x) => x + 1;
+  static int Quadrieren(int x) => x * x;
+
+  static Transformierer Verkette(Transformierer a, Transformierer b)
+  {
+      return x => b(a(x)); // Ergebnis von a wird an b weitergereicht
+  }
+
+  public static void Main(string[] args){
+        Transformierer pipeline = Verkette(Verdoppeln, PlusEins);
+        pipeline = Verkette(pipeline, Quadrieren);
+
+        int ergebnis = pipeline(3); // ((3 * 2) + 1)^2 = 49
+        Console.WriteLine(ergebnis); // Ausgabe: 49
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+
 
 
 ### Schnittstellen vs. Delegaten
@@ -361,8 +410,7 @@ Methode zur Methodensignatur des Delegaten passt.
 | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | repräsentiert eine Methodensignatur                                                                  | wenn eine Klasse eine Schnittstelle implementiert, dann implementiert sie deren gesamte Methoden |
 | lässt sich nur auf Methoden anwenden                                                                 | deckt sowohl Methoden als auch Eigenschaften ab                                                  |
-| verwendbar, wenn ein Delegat im Scope verfügbar ist                                                  | kann nur verwendet werden, wenn die Klasse diese Schnittstelle implementiert                     |
-| wird für die Behandlung von Ereignissen verwendet                                                    | findet keine Anwendung bei der Behandlung von Ereignissen.                             |
+| wird für die Behandlung von Ereignissen verwendet                                                    |                             |
 | kann auf anonyme Methoden zugreifen                                                                  | kann nicht auf anonyme Methoden zugreifen.                                                       |
 | beim Zugriff auf eine Methode über Delegaten ist kein Zugriff auf das Objekt der Klasse erforderlich | beim Methodenzugriff benötigen Sie das Objekt der Klasse, die eine Schnittstelle implementiert   |
 | unterstützt keine Vererbung                                                                          | unterstützt Vererbung                                                                            |
@@ -505,7 +553,7 @@ Das Erstellen anonymer Methoden verkürzt den Code, da nunmehr ein Codeblock als
 
 ```csharp
 // Declare a delegate pointing at an anonymous function.
-Del d = delegate(int k) { /* ... */ };
+DelgatenType d = delegate(int k) { /* ... */ };
 
 ```
 Das folgende Codebeispiel illustriert die Verwendung. Dabei wird auch deutlich, wie
@@ -574,7 +622,7 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-Jeder Lambdaausdruck kann in einen Delegat-Typ konvertiert werden. Der Delegattyp, in den ein Lambdaausdruck konvertiert werden kann, wird durch die Typen seiner Parameter und Rückgabewerte definiert.
+Jeder Lambdaausdruck kann in einen Delegat-Typ konvertiert werden. Der Delegat-Typ, in den ein Lambdaausdruck konvertiert werden kann, wird durch die Typen seiner Parameter und Rückgabewerte definiert.
 
 ```csharp           LambdaDelegate
 using System;  
@@ -727,6 +775,79 @@ Console.WriteLine(MyLambdaAction("Tests"));
 ```
 
 Warum würde die Verwendung von Action an dieser Stelle einen Fehler generieren?
+
+## Abgrenzung zu c++
+
+> Gibt es in C++ Delegaten?
+
+In C++ gibt es kein direktes Äquivalent zu C#-Delegaten. Stattdessen werden in C++ Funktionszeiger oder Funktionsobjekte (auch bekannt als Funktoren) verwendet, um ähnliche Funktionalitäten zu erreichen.
+
+```c++           CppDelegates.cpp
+#include <iostream>
+#include <functional>  // std::function, std::bind
+using namespace std;
+
+// Normale Funktion
+void PrintHello(string text)
+{
+    cout << text << endl;
+}
+
+// Normale Funktion
+void Square(int x)
+{
+    cout << "This is method Square(int x)" << endl;
+    cout << x * x << endl;
+}
+
+// Funktion mit Rückgabewert
+int SquareReturn(int x)
+{
+    return x * x;
+}
+
+int main()
+{
+    // --- Funktionszeiger ---
+    void (*myOutput)(string) = PrintHello;
+    myOutput("Das ist eine Textausgabe");
+
+    // --- Funktionsobjekt (Lambda) ---
+    auto myLambdaAction = [](string text) {
+        cout << text << " modifiziert durch Lambda" << endl;
+    };
+    myLambdaAction("Tests");
+
+    // --- Funktionsobjekt (Lambda mit Rückgabewert) ---
+    auto myFuncOutput = [](int x) {
+        return x * x;
+    };
+    cout << myFuncOutput(5) << endl;
+
+    // --- std::function mit freier Funktion ---
+    std::function<void(string)> f1 = PrintHello;
+    f1("Ausgabe über std::function mit freier Funktion");
+
+    // --- std::function mit Lambda ---
+    std::function<void(string)> f2 = [](string t) {
+        cout << "Lambda via std::function: " << t << endl;
+    };
+    f2("Test");
+
+    // --- std::function mit std::bind (z. B. um Argumente zu binden) ---
+    std::function<void()> f3 = std::bind(Square, 7);
+    f3();  // Gibt 49 aus
+
+    // --- std::function mit Rückgabewert ---
+    std::function<int(int)> f4 = SquareReturn;
+    cout << "Quadrat über std::function<int(int)>: " << f4(6) << endl;
+
+    return 0;
+}
+```
+@LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o main`, `./main`)
+
+
 
 ## Aufgaben der Woche
 
