@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 comment:  Multithreading Konzepte, Thread-Modell und Interaktion, Implementierung in C#, Datenaustausch, Locking, Thread-Pool
@@ -34,12 +34,43 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
+## Rückfrage letzte Woche 
+
+https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/21_Delegaten.md#10
+
+> Hier gab es eine Rückfrage zum `ref` im Aufruf von Transformers. Dies ist nicht notwendig. Warum?
+
+```csharp           ReplaceArray.cs
+using System;
+
+class Program
+{
+    static void ReplaceArray(int[] arr)
+    {
+        arr [0] = 42;  // Modifiziert nur die Werte im ursprüngliche Array
+        //arr = new int[] { 99, 100, 101 };  // Neue Referenzzuweisung
+    }
+
+    static void Main()
+    {
+        int[] myArray = { 1, 2, 3 };
+        ReplaceArray(myArray);
+
+        foreach (int i in myArray)
+            Console.Write(i + " ");  // Ausgabe: 1 2 3 (NICHT verändert!)
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+
+
 ## Motivation - Threads
 
 Bisher haben wir rein sequentiell ablaufende Programme entworfen. Welches Problem generiert dieser Ansatz aber, wenn wir in unserer App einen Update-Service integrieren?
 
 
-![BlockedGUI](./img/23_Multithreading/WindowsFormBlocked.png "Erweiterte Variante unseres Windows Form Beispiels aus der vergangenen Vorlesung")
+![BlockedGUI](./img/23_Multithreading/WindowsFormBlocked.png "Erweiterte Variante unseres Windows Form Beispiels")
 
 
 ### Grundlagen
@@ -51,20 +82,23 @@ Die Implementierung von Threads und Prozessen unterscheidet sich von Betriebssys
 
 Innerhalb eines Prozesses können mehrere Threads existieren, die gleichzeitig ausgeführt werden und Ressourcen wie Speicher gemeinsam nutzen, während verschiedene Prozesse diese Ressourcen nicht gemeinsam nutzen. Insbesondere teilen sich die Threads eines Prozesses seinen ausführbaren Code und die Werte seiner dynamisch zugewiesenen Variablen und seiner nicht thread-lokalen globalen Variablen zu einem bestimmten Zeitpunkt.
 
-![Prozess vs Thread](./img/23_Multithreading/ProcessVsThread.png "Darstellung eines Prozesses mit mehreren Tasks [^Cburnett]")<!-- width="40%" -->
+![Prozess vs Thread](./img/23_Multithreading/ProcessVsThread.png "Darstellung eines Prozesses mit mehreren Tasks https://commons.wikimedia.org/wiki/File:Multithreaded_process.svg, Autor I, Cburnett, GNU Free Documentation License,")<!-- width="40%" -->
 
-Auf einem Single-Core Rechner organisiert das Betriebssystem Zeitscheiben (unter
-Windows üblicherweise 20ms) um Nebenläufigkeit zu simulieren. Eine Multiprozessor-Maschine kann aber auch direkt auf die Rechenkapazität eines weiteren Prozessors
-ausweichen und eine echte Parallelisierung umsetzen, die allerdings im Beispiel
-durch den gemeinsamen Zugriff auf die Konsole limitiert ist.
+| **Kriterium**          | **Prozess**                                                     | **Thread**                                                            |
+| ---------------------- | --------------------------------------------------------------- | --------------------------------------------------------------------- |
+| **Definition**         | Eigenständiges Programm in Ausführung                           | Ausführungsstrang innerhalb eines Prozesses                           |
+| **Adressraum**         | Getrennt von anderen Prozessen                                  | Gemeinsamer Adressraum mit anderen Threads desselben Prozesses        |
+| **Ressourcenteilung**  | Ressourcen wie Dateien, Speicher sind nicht automatisch geteilt | Ressourcen wie Dateien, Speicher werden gemeinsam genutzt             |
+| **Stack und Register** | Hat eigenen Stack und Registersatz                              | Hat eigenen Stack, aber gemeinsame Datenstruktur                      |
+| **Kommunikation**      | Über Interprozesskommunikation (Pipes, Sockets, Shared Memory)  | Über gemeinsame Speicherbereiche möglich (direkt, schneller)          |
+| **Erstellungsaufwand** | Relativ hoch                                                    | Gering                                                                |
+| **Kontextwechsel**     | Teurer (mehr Daten müssen gespeichert/geladen werden)           | Schneller (weniger Overhead)                                          |
+| **Fehlertoleranz**     | Stabiler – Fehler in einem Prozess beeinflussen andere nicht    | Fehler kann alle Threads im Prozess betreffen                         |
+| **Sicherheit**         | Höher – Prozesse sind voneinander isoliert                      | Geringer – Threads können sich gegenseitig beeinflussen               |
+| **Synchronisation**    | Komplex – durch IPC                                             | Notwendig, aber einfacher – z. B. durch Mutex, Semaphore              |
+| **Typische Nutzung**   | Große, unabhängige Programme oder Module                        | Leichtgewichtige, parallele Aufgaben im selben Programm               |
+| **Beispiel**           | Jeder Browser-Tab als eigener Prozess (z. B. Chrome)            | Jeder Client-Request im Server als Thread (z. B. Apache, Java-Server) |
 
-> Vorteile von Multi-Threading Applikationen:
->
-> - Ausnutzung der Hardwarefähigkeiten (MultiCore-Systeme) 
-> - Effizienzsteigerung bei Wartevorgängen
-> - Verhinderung eines "Verhungerns" der Anwendung
-
-[^Cburnett]: https://commons.wikimedia.org/wiki/File:Multithreaded_process.svg, Autor I, Cburnett, GNU Free Documentation License, [Link](https://commons.wikimedia.org/wiki/Commons:GNU_Free_Documentation_License,_version_1.2)
 
 ### Erfassung der Performance
 
@@ -173,88 +207,6 @@ class Program
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-### Thread-Interaktion
-
-Wie lässt sich eine Serialisierung von Threads realisieren? Im Beispiel soll die Ausführung des "Printers C" erst starten, wenn die beiden anderen Druckaufträge abgearbeitet wurden.
-
-| Methode          | Bedeutung                                                               |
-| ---------------- | ----------------------------------------------------------------------- |
-| `t.Join()`       | Es wird so lange gewartet, bis der Thread t zum Abschluss gekommen ist. |
-| `Thread.Sleep(n)` | Es wird für n Millisekunden gewartet.                                   |
-| `Thread.Yield()` | Gibt den erteilten Zugriff auf die CPU sofort zurück.                   |
-
-```csharp           ThreadBasic
-using System;
-using System.Threading;
-
-class Printer{
-  char ch;
-  int sleepTime;
-  public Printer(char c, int t){
-    ch = c;
-    sleepTime = t;
-  }
-  public void Print(){
-    for (int i = 0; i<10;  i++){
-      Console.Write(ch);
-      //Thread.Sleep(sleepTime);
-      Thread.Yield();
-    }
-  }
-}
-class Program {
-    public static void Main(string[] args){
-        Printer a = new Printer ('a', 10);
-        Printer b = new Printer ('b', 50);
-        Printer c = new Printer ('c', 70);
-        Thread PrinterA = new Thread(new ThreadStart(a.Print));
-        Thread PrinterB = new Thread(new ThreadStart(b.Print));
-        PrinterA.Start();
-        PrinterB.Start();
-        Thread.Sleep(1000);    // Zeitabhängige Verzögerung des Hauptthreads
-        //PrinterA.Join();     // <-
-        //PrinterB.Join();
-        c.Print();
-    }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-Aus dem Gesamtkonzept des Threads ergeben sich mehrere Zustände, in denen sich dieser befinden kann:
-
-```text @plantUML.png
-@startuml
-hide empty description
-[*] --> Unstarted
-Unstarted --> Running : Start
-Running --> WaitSleepJoin  : Thread Blocks
-WaitSleepJoin --> Running  : Thread Unblocks
-WaitSleepJoin --> StopRequested : Interrupt
-Running --> Stopped : Thread Ends
-Running --> StopRequested : Interrupt
-StopRequested --> Stopped : Thread Ends
-@enduml
-```
-| Zustand       | Bedeutung                                                                                             | 
-| ------------- | ----------------------------------------------------------------------------------------------------- | 
-| Unstarted     | Thread ist initialisiert                                                                              | 
-| Running       | Thread befindet sich gerade in der Ausführung                                                         | 
-| WaitSleepJoin | Thread wird wegen eines Sleep oder eines Join-Befehls nicht ausgeführt. Er nutzt keine Prozessorzeit. Oder der Thread wird blockiert, weil er auf eine Ressource wartet, die von einem anderen Thread gehalten wird.| 
-| StopRequested | Thread wird zum Stoppen aufgefordert. Dies ist nur für den internen Gebrauch bestimmt.                |
-| Stopped       | Bearbeitung beendet                                                                                   |
-
-Jeder Thread umfasst ein Feld vom Typ `ThreadState`, dass auf verschiedenen Ebenen dessen Parameter abbildet. Das Enum ist dabei als Bitfeld konfiguriert (vgl [Doku](https://learn.microsoft.com/en-us/dotnet/api/system.flagsattribute?view=net-7.0)).
-
-```csharp
-public static ThreadState DetermineThreadState(this ThreadState ts){
-  return ts & (ThreadState.Unstarted |
-               ThreadState.Running |
-               ThreadState.WaitSleepJoin |
-               ThreadState.Stopped);
-
-}
-```
 
 ### Thread-Initialisierung
 
@@ -382,6 +334,93 @@ class Program {
 
 Zur Übergabe von mehreren Parametern können Tupel oder Objekte benutzerdefinierter Klassen verwendet werden.
 
+### Thread-Status
+
+Aus dem Gesamtkonzept des Threads ergeben sich mehrere Zustände, in denen sich dieser befinden kann:
+
+```text @plantUML.png
+@startuml
+hide empty description
+[*] --> Unstarted
+Unstarted --> Running : Start
+Running --> WaitSleepJoin  : Thread Blocks
+WaitSleepJoin --> Running  : Thread Unblocks
+WaitSleepJoin --> StopRequested : Interrupt
+Running --> Stopped : Thread Ends
+Running --> StopRequested : Interrupt
+StopRequested --> Stopped : Thread Ends
+@enduml
+```
+
+| Zustand       | Bedeutung                                                                                             | 
+| ------------- | ----------------------------------------------------------------------------------------------------- | 
+| Unstarted     | Thread ist initialisiert                                                                              | 
+| Running       | Thread befindet sich gerade in der Ausführung                                                         | 
+| WaitSleepJoin | Thread wird wegen eines Sleep oder eines Join-Befehls nicht ausgeführt. Er nutzt keine Prozessorzeit. Oder der Thread wird blockiert, weil er auf eine Ressource wartet, die von einem anderen Thread gehalten wird.| 
+| StopRequested | Thread wird zum Stoppen aufgefordert. Dies ist nur für den internen Gebrauch bestimmt.                |
+| Stopped       | Bearbeitung beendet                                                                                   |
+
+Jeder Thread umfasst ein Feld vom Typ `ThreadState`, dass auf verschiedenen Ebenen dessen Parameter abbildet. Das Enum ist dabei als Bitfeld konfiguriert (vgl [Doku](https://learn.microsoft.com/en-us/dotnet/api/system.flagsattribute?view=net-7.0)).
+
+```csharp
+public static ThreadState DetermineThreadState(this ThreadState ts){
+  return ts & (ThreadState.Unstarted |
+               ThreadState.Running |
+               ThreadState.WaitSleepJoin |
+               ThreadState.Stopped);
+
+}
+```
+
+### Thread-Serialisierung
+
+Wie lässt sich eine Serialisierung von Threads realisieren? Im Beispiel soll die Ausführung des "Printers C" erst starten, wenn die beiden anderen Druckaufträge abgearbeitet wurden.
+
+| Methode          | Bedeutung                                                               |
+| ---------------- | ----------------------------------------------------------------------- |
+| `t.Join()`       | Es wird so lange gewartet, bis der Thread t zum Abschluss gekommen ist. |
+| `Thread.Sleep(n)` | Es wird für n Millisekunden gewartet.                                   |
+| `Thread.Yield()` | Gibt den erteilten Zugriff auf die CPU sofort zurück.                   |
+
+```csharp           ThreadBasic
+using System;
+using System.Threading;
+
+class Printer{
+  char ch;
+  int sleepTime;
+  public Printer(char c, int t){
+    ch = c;
+    sleepTime = t;
+  }
+  public void Print(){
+    for (int i = 0; i<10;  i++){
+      Console.Write(ch);
+      Thread.Sleep(sleepTime);
+      //Thread.Yield();         // Freiwillige Abgabe an die CPU
+    }
+  }
+}
+class Program {
+    public static void Main(string[] args){
+        Printer a = new Printer ('a', 10);
+        Printer b = new Printer ('b', 50);
+        Printer c = new Printer ('c', 5);
+        Thread PrinterA = new Thread(new ThreadStart(a.Print));
+        Thread PrinterB = new Thread(new ThreadStart(b.Print));
+        PrinterA.Start();
+        PrinterB.Start();
+        Thread.Sleep(1000);    // Zeitabhängige Verzögerung des Hauptthreads
+        //PrinterA.Join();     // <-
+        //PrinterB.Join();
+        c.Print();
+        Console.Write("Alle Threads beendet!");
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+
 ### Datenaustausch zwischen Threads
 
 Jeder Thread realisiert dabei seinen eigenen Speicher, so dass die lokalen
@@ -450,6 +489,16 @@ class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
+> Ein Word zum Attribute `[ThreadStatic]` ... Warum das Ganze?
+
+| Kriterium                     | Lokale Variable           | `[ThreadStatic]`                   |
+| ----------------------------- | ------------------------- | ---------------------------------- |
+| Sichtbarkeit                  | Nur innerhalb der Methode | Innerhalb der ganzen Klasse        |
+| Lebensdauer                   | Pro Methodenausführung    | So lange wie der Thread lebt       |
+| Automatisch thread-sicher?    | Ja (liegt auf dem Stack)  | Ja (jede Thread hat eigene Kopie)  |
+| Geeignet für Wiederverwendung | Nein                      | Ja (z. B. Objektpools)             |
+| Initialisierung möglich?      | Ja                        | Nein (muss manuell gemacht werden) |
+
 
 ```csharp           ThreadMemberVariable
 using System;
@@ -469,6 +518,11 @@ class Program
 {
     public static void Main(string[] args){
         Calc c = new Calc();
+
+        // Beide nachfolgende Thread teilen sich ein Objekt c, so dass
+        // die Variable paramA von beiden Threads gemeinsam genutzt wird.
+        // Das bedeutet, dass die Variable nicht thread-sicher ist!
+
         ThreadStart delThreadA = new ThreadStart(c.Inc);
         Thread newThread_A = new Thread(delThreadA);
         newThread_A.Start();
@@ -528,30 +582,42 @@ lock(locker){
 using System;
 using System.Threading;
 
-class InteractiveThreads{
-  public int count = 0;
-  public void AddOne(){
-    lock(this)
-    {
-       count = count + 1;
-       count = count + 1;
-       count = count + 1;
-       count = count + 1;
-    }
-    Console.WriteLine("count {0}", count);
-  }
-}
+class Program
+{
+    static int counter = 0;
+    static readonly object lockObj = new object();
 
-class Program {
-    public static void Main(string[] args){
-        InteractiveThreads myThreads = new InteractiveThreads();
-        for (int i = 0; i<10; i++){
-          new Thread(myThreads.AddOne).Start();
+    static void Main()
+    {
+        Thread[] threads = new Thread[10];
+
+        for (int i = 0; i < threads.Length; i++)
+        {
+            threads[i] = new Thread(Increment);
+            threads[i].Start();
+        }
+
+        foreach (var t in threads)
+            t.Join();
+
+        Console.WriteLine($"Endwert (mit lock): {counter}");
+    }
+
+    static void Increment()
+    {
+        for (int i = 0; i < 10000; i++)
+        {
+            lock (lockObj)
+            {
+                counter++;
+            }
         }
     }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+> `lock` ist eine syntaktische Abkürzung für die Verwendung des `Monitor`-Objekts. Es stellt sicher, dass nur ein Thread gleichzeitig auf den geschützten Codeabschnitt zugreifen kann.
 
 ### Hintergrund und Vordergrund-Threads
 
@@ -593,12 +659,13 @@ class Program {
         Thread MainThread = Thread.CurrentThread;
         MainThread.Name = "MainThread";
         printThreadProperties(MainThread);
-        Printer a = new Printer ('a', 170);
+        Printer a = new Printer ('a', 10);
         Printer b = new Printer ('b', 50);
-        Printer c = new Printer ('c', 10);
+        Printer c = new Printer ('c', 1);
         Thread PrinterA = new Thread(new ThreadStart(a.Print));
         PrinterA.IsBackground = false;
         Thread PrinterB = new Thread(new ThreadStart(b.Print));
+        PrinterB.IsBackground = false;
         printThreadProperties(PrinterA);
         printThreadProperties(PrinterB);
         PrinterA.Start();
@@ -613,7 +680,7 @@ class Program {
 
 Threads, die explizit mit der Thread-Klasse erstellt werden, sind standardmäßig Vordergrund-Threads.
 
-### Ausnahmebehandlung mit Threads
+## Ausnahmebehandlung mit Threads
 
 Ab .NET Framework, Version 2.0, erlaubt die CLR bei den meisten Ausnahmefehlern in Threads deren ordnungsgemäße Fortsetzung. Allerdings ist zu beachten, dass die
 Fehlerbehandlung innerhalb des Threads zu erfolgen hat. Unbehandelte Ausnahmen auf der Thread-Ebene führen in der Regel zum Abbruch des gesamten Programms.
@@ -673,6 +740,43 @@ class Program {
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
+## Unterschiede für die Thread-Implementierung 
+
+| Aspekt           | C# (Delegat `ThreadStart`)                                                            | Java/C++ (Vererbung von `Thread`)                                         |
+| ---------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| **Grundidee**    | Delegation: Eine Methode wird als Parameter übergeben.                                | Vererbung: Die Funktionalität wird durch eine Subklasse definiert.        |
+| **Thread-Logik** | Beliebige Methode mit passender Signatur kann als Thread-Startpunkt verwendet werden. | Die `run()`-Methode muss in der abgeleiteten Klasse überschrieben werden. |
+
+```csharp           Csharp.cs
+Thread t = new Thread(() => Console.WriteLine("Hello from thread!"));
+t.Start();
+```
+
+```java           Java.java
+class MyThread extends Thread {
+    public void run() {
+        System.out.println("Hello from thread!");
+    }
+}
+new MyThread().start();
+```
+
+| Kriterium                       | C# Delegat                     | Java Vererbung                |
+| ------------------------------- | ------------------------------ | ----------------------------- |
+| **Flexibilität**                | ⭐⭐⭐⭐                       | ⭐⭐                          |
+| **OOP-Konsistenz**              | ⭐⭐                           | ⭐⭐⭐⭐                      |
+| **Moderne Best Practices**      | Besser mit Lambdas oder `Task` | Besser mit `Runnable`         |
+| **Geeignet für komplexe Logik** | Sehr gut                       | Eingeschränkt durch Vererbung |
+
+
+| Sprache    | Typischer Ansatz                                                   | Beschreibung                                                           |
+| ---------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| **C#**     | Delegat (`ThreadStart`)                                            | Delegat oder Lambda für Startmethode, keine Vererbung notwendig        |
+| **Java**   | `Thread`-Vererbung oder `Runnable`                                 | Entweder durch Vererbung oder durch Übergabe eines `Runnable`-Objekts  |
+| **Python** | `threading.Thread` mit Vererbung **oder** Übergabe eines Callables | Sehr flexibel: beides möglich                                          |
+| **C++**    | `std::thread` mit Funktionsobjekten, Lambdas oder Funktionen       | Keine Vererbung, stattdessen Templates und generische Callable-Objekte |
+
+
 ## Thread-Pool
 
 Wann immer ein neuer Thread gestartet wird, bedarf es einiger 100 Millisekunden, um Speicher anzufordern, ihn zu initialisieren, usw. Diese relativ aufwändige Verfahren
@@ -710,3 +814,10 @@ Das klingt sehr praktisch, was aber sind die Einschränkungen?
 + Pooled Threads sind immer Background-Threads
 + Sie können keine individuellen Prioritäten festlegen.
 + Blockierte Threads im Pool senken die entsprechende Performance des Pools
+
+| Ebene         | Wer steuert?         | Beschreibung                                                                    |
+| ------------- | -------------------- | ------------------------------------------------------------------------------- |
+| Prozess       | Betriebssystem       | CLR läuft in einem OS-Prozess                                                   |
+| Native Thread | Betriebssystem       | `Thread`-Objekte in C# sind OS-Threads                                          |
+| ThreadPool    | CLR + Betriebssystem | CLR entscheidet über Ausführung im Pool; OS entscheidet über Hardware-Zuteilung |
+
