@@ -33,7 +33,105 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
-## Logging
+## Exkurs - Paketmanagement
+
+> **Merke:** Erfinde das Rad nicht neu!
+
+Wie schaffen es erfahrene Entwickler innerhalb kürzester Zeit Prototypen mit beeindruckender Funktionalität zu entwerfen? Sicher, die Erfahrung spielt hier eine große Rolle aber auch die Wiederverwendung von existierendem Code. Häufig wiederkehrende Aufgaben wie zum Beispiel:
+
++ das Logging
++ der Zugriff auf Datenquellen
++ mathematische Operationen
++ Datenkapselung und Abstraktion
++ ...
+
+werden bereits durch umfangreiche Bibliotheken implementiert und werden entsprechend nicht neu geschrieben.
+
+Ok, dann ziehe ich mir eben die zugehörigen Repositories in mein Projekt und kann die Bibliotheken nutzen. In individuell genutzten Implementierungen mag das ein gangbarer Weg sein, aber das Wissen um die zugehörigen Abhängigkeiten - Welche Subbibliotheken und welches .NET Framework werden vorausgesetzt? -  liegt so nur implizit vor.
+
+Entsprechend brauchen wir ein Tool, mit dem wir die Abhängigkeiten UND den eigentlichen Code kombinieren und einem Projekt hinzufügen können.
+`NuGet` löst diese Aufgabe für .NET und schließt auch gleich die Mechanismen zur Freigabe von Code ein. NuGet definiert dabei, wie Pakete für .NET erstellt, gehostet und verarbeitet werden.
+
+Ein `NuGet`-Paket ist eine gepackte Datei mit der Erweiterung `.nupkg` die:
+
++ den kompilierten Code (DLLs),
++ ein beschreibendes Manifest, in dem Informationen wie die Versionsnummer des Pakets, ggf. der Speicherort des Source Codes oder die Projektwebseite enthalten sind sowie
++ die Abhängigkeiten von anderen Paketen und dessen Versionen
+enthalten sind
+Ein Entwickler, der seinen Code veröffentlichen möchte generiert die zugehörige Struktur und läd diese auf einen `NuGet` Server. Unter dem [Link](https://www.nuget.org/) kann dieser durchsucht werden.
+
+**Anwendungsbeispiel: Symbolisches Lösen von Mathematischen Gleichungen**
+
+Eine entsprechende Bibliothek steht unter [Projektwebseite](https://symbolics.mathdotnet.com/). Das Ganze wird als `Nuget` Paket gehostet [MathNet](https://www.nuget.org/packages/MathNet.Symbolics/).
+
+Unter der Annahme, dass wir `dotnet` als Buildtool benutzen ist die Einbindung denkbar einfach.
+
+```
+dotnet new console -o SymbolicMath
+cd SymbolicMath
+dotnet add package MathNet.Symbolics
+Determining projects to restore...
+Writing /tmp/tmpNsaYtc.tmp
+info : Adding PackageReference for package 'MathNet.Symbolics' into project '/home/zug/Desktop/Vorlesungen/VL_Softwareentwicklung/code/16_Testen/ConditionalBuild/ConditionalBuild.csproj'.
+info :   GET https://api.nuget.org/v3/registration5-gz-semver2/mathnet.symbolics/index.json
+...
+```
+
+Danach findet sich in unserer Projektdatei `.csproj` ein entsprechender Eintrag
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MathNet.Symbolics" Version="0.24.0" />
+  </ItemGroup>
+</Project>
+```
+
+```csharp PreprocessorConsts.cs
+using System;
+using System.Collections.Generic;
+using MathNet.Symbolics;
+using Expr = MathNet.Symbolics.SymbolicExpression;  // Platzhalter für verkürzte Schreibweise
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    Console.WriteLine("Beispiele für die Verwendung des MathNet.Symbolics Paketes");
+    var x = Expr.Variable("x");
+    var y = Expr.Variable("y");
+    var a = Expr.Variable("a");
+    var b = Expr.Variable("b");
+    var c = Expr.Variable("c");
+    var d = Expr.Variable("d");
+    Console.WriteLine("a+a+a =" + (a + a + a).ToString());
+    Console.WriteLine("(2 + 1 / x - 1) =" + (2 + 1 / x - 1).ToString());
+    Console.WriteLine("((a / b / (c * a)) * (c * d / a) / d) =" + ((a / b / (c * a)) * (c * d / a) / d).ToString());
+    Console.WriteLine("Der zugehörige Latex Code lautet " + ((a / b / (c * a)) * (c * d / a) / d).ToLaTeX());
+  }
+}
+```
+```-xml  PreprocessorConsts.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MathNet.Symbolics" Version="0.24.0" />
+  </ItemGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+
+
+## Exkurse: Logging
 
 Wie arbeiten wir bisher in Bezug auf Textausgaben?
 
@@ -75,6 +173,20 @@ public class Program
 Dieses Vorgehen kann auf Dauer ziemlich nerven ...
 
 > Lösung: Verwenden Sie ein Logging Framework, z.B. NLog - ein Logging-Framework für .NET-Anwendungen!
+
+| **Merkmal**            | **Beschreibung**                                                              | **`print()`** | **Logging-Framework** |
+| ---------------------- | ----------------------------------------------------------------------------- | ------------- | --------------------- |
+| **Zentrale Steuerung** | Konfiguration und Steuerung der Ausgabe zentral möglich                       | ❌            | ✅                    |
+| **Log-Level**          | Nachrichten können je nach Wichtigkeit kategorisiert werden                   | ❌            | ✅                    |
+| **Formatierung**       | Ausgaben können standardisiert formatiert werden (z. B. mit Zeitstempel)      | ❌            | ✅                    |
+| **Dateihandling**      | Logs können automatisch in Dateien geschrieben und rotiert werden             | ❌            | ✅                    |
+| **Mehrere Ausgaben**   | Gleichzeitige Ausgabe an Konsole, Datei, Netzwerk usw.                        | ❌            | ✅                    |
+| **Thread-Sicherheit**  | Gleichzeitige Ausgaben mehrerer Threads führen nicht zu vermischten Zeilen    | ❌            | ✅                    |
+| **Integration**        | Logs können mit externen Tools (z. B. Logserver, Dashboards) verwendet werden | ❌            | ✅                    |
+
+
+                              {{1-2}}
+***********************************************************************
 
 NLog:
 
@@ -121,6 +233,8 @@ public class Program
 + https://github.com/NLog
 + https://riptutorial.com/nlog
 
+***********************************************************************
+
 ## Rückblick: Multithreading
 
 Die prozedurale/objektorientierte Programmierung basiert auf der Idee, dass ausgehend von einem
@@ -147,9 +261,11 @@ class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-An dieser Stelle spricht man von **synchronen** Methodenaufrufen. Das
+> An dieser Stelle spricht man von **synchronen** Methodenaufrufen. Das
 Hauptprogramm (Rufer oder Caller) stoppt, wartet auf den Abschluss des
-aufgerufenen Programms und setzt seine  Bearbeitung erst dann fort. Das
+aufgerufenen Programms und setzt seine  Bearbeitung erst dann fort. 
+
+Das
 blockierende Verhalten des Rufers generiert aber einen entscheidenden Nachteil -
 eine fehlende Reaktionsfähigkeit für die Zeit, in der die aufgerufene Methode
 zum Beispiel eine Netzwerkverbindung aufbaut, Daten speichert oder Berechnungen
@@ -173,7 +289,7 @@ zu finden.
 
 Eine Lösung für diesen Ansatz könnten Threads bieten.
 
-```csharp           AsynchonousBehaviour
+```csharp           Program.cs
 using System;
 using System.Threading;
 
@@ -185,6 +301,8 @@ class Program {
     Console.WriteLine("Thread {0} started!", Thread.CurrentThread.ManagedThreadId);
     // doing some fancy things here
     int delay = rnd.Next(200, 500);
+    // int delay = Random.Shared.Next(200, 500);
+    //static ThreadLocal<Random> rnd = new ThreadLocal<Random>(() => new Random());
     Thread.Sleep(delay);  // arbitrary duration
     Result[(int)index]= delay;
     Console.WriteLine("\nThread {0} says Hello", Thread.CurrentThread.ManagedThreadId);
@@ -213,7 +331,18 @@ class Program {
   }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+```-xml  AsynchonousBehaviour.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MathNet.Symbolics" Version="0.24.0" />
+  </ItemGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
 Welche Nachteile sehen Sie in dieser Lösung?
 
@@ -286,15 +415,18 @@ C# stellt für die asynchrone Programmierung die neuen Typen `Task`  und `Task<T
 Verfügung. Diese sind zentrale Komponenten von den 
 aufgabenbasierten asynchronen Muster (TAP - Task based Asynchronous Pattern), die in .NET Framework 4 eingeführt wurden.
 
-Unterschied zwischen Task und Thread:
+| Aspekt                  | `Thread`                                                                                                   | `Task`                                                                                |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| **Zweck**               | Repräsentiert einen physischen Ausführungspfad (Thread of Execution).                                      | Repräsentiert eine asynchrone, geplante Arbeitseinheit auf höherer Abstraktionsebene. |
+| **Erstellung**          | Mit `new Thread()` explizit erstellt.                                                                      | Mit `Task.Run()` oder `Task.Factory.StartNew()` gestartet, meist über Thread-Pool.    |
+| **Verwaltung**          | Muss manuell gestartet und verwaltet werden.                                                               | Wird vom .NET-Thread-Pool verwaltet.                                                  |
+| **Rückgabewert**        | Kein direkter Rückgabewert. Ergebnisse müssen über gemeinsame Variablen oder Callbacks verarbeitet werden. | Kann ein Ergebnis mit `Task<TResult>` zurückgeben.                                    |
+| **Stornierung**         | Keine native Unterstützung. Muss manuell implementiert werden.                                             | Unterstützt Abbruch über `CancellationToken`.                                         |
+| **Async-Unterstützung** | Nicht für `async`/`await` geeignet.                                                                        | Vollständig integrierbar mit `async`/`await`.                                         |
+| **Ressourcenverbrauch** | Teurer, da jeder Thread eigene Ressourcen verwendet.                                                       | Ressourcenschonender durch Wiederverwendung im Thread-Pool.                           |
+| **Nebenläufigkeit**     | Führt exakt einen Codepfad aus.                                                                            | Kann beliebig viele Tasks gleichzeitig verwalten (abhängig von Systemressourcen).     |
+| **Abstraktionsebene**   | Niedrig – direkte Steuerung der Threads.                                                                   | Höher – Fokus auf *was* getan werden soll, nicht *wie*.                               |
 
-+ Die Klasse Thread wird zum Erstellen und Bearbeiten einer Thread-Instanz verwendet. Ein Task stellt eine asynchrone Operation dar und ist Teil der Task Parallel Library, einer Reihe von APIs zur asynchronen und parallelen Ausführung von Tasks.
-+ Der Task kann ein Ergebnis zurückgeben. Es gibt keinen direkten Mechanismus, um das Ergebnis von einem Thread zurückzugeben.
-+ Task unterstützt die Stornierung durch die Verwendung von Storno-Tokens, Thread hingegen nicht.
-+ Ein Task kann mehrere Prozesse gleichzeitig ablaufen lassen. Bei Threads kann immer nur eine Aufgabe gleichzeitig laufen.
-+ Mit den Schlüsselwörtern 'async' und 'await' können wir Asynchronous leicht implementieren.
-+ Ein neuer Thread() hat nichts mit dem Thread-Pool zu tun, während jeder Task durch den Thread-Pool verwaltet wird.
-+ Ein Task ist ein Konzept auf höherer Ebene als ein Thread.
 
 ### Task-Klasse
 
@@ -365,7 +497,6 @@ public class Example
                            Thread.CurrentThread.ManagedThreadId);
                         };
 
-      // Create a task but do not start it.
       Task t1 = new Task(action, "alpha");
       t1.Start();
       Console.WriteLine("t1 has been launched. (Main Thread={0})",

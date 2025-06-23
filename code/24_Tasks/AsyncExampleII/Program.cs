@@ -4,9 +4,10 @@ using System.Threading.Tasks;
 
 public class Program
 {
-    public static Task Main()
-    {   Console.WriteLine("Beispiel mit Download");
-        int n=await DownloadFileAsync();
+    public static async Task Main()
+    {
+        Console.WriteLine("Beispiel mit Download");
+        int n = await DownloadFileAsync();
         Console.WriteLine("Zurück in Main()");
         Console.WriteLine(n);
         Console.WriteLine("Download abgeschlossen!");
@@ -17,10 +18,9 @@ public class Program
         using (var httpClient = new HttpClient())
         {
             Console.WriteLine("Starte den Download...");
-            var url = "https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/24_Tasks.md";
+            var url = "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/24_Tasks.md";
             var response = await httpClient.GetAsync(url);
             var content = await response.Content.ReadAsStringAsync();
-            //Console.WriteLine("Datei heruntergeladen: " + content);
             return content.Length;
         }
     }
