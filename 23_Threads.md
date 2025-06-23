@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.7
+version:  1.0.8
 language: de
 narrator: Deutsch Female
 comment:  Multithreading Konzepte, Thread-Modell und Interaktion, Implementierung in C#, Datenaustausch, Locking, Thread-Pool
@@ -784,29 +784,68 @@ wird durch die Nutzung von ThreadPools beschränkt, da diese als wiederverwendba
 
 Die `System.Threading.ThreadPool`-Klasse stellt einer Anwendung einen Pool von "Arbeitsthreads" bereit, die vom System verwaltet werden und Ihnen die Möglichkeit bieten, sich mehr auf Anwendungsaufgaben als auf die Threadverwaltung zu konzentrieren.
 
+                              
+                            {{0-1}}
+********************************************************************
+
 ```csharp           ThreadPool
 using System;
 using System.Threading;
 
-class Program {
-  // This thread procedure performs the task.
-  static void Operate(object stateInfo)
-  {
-      Console.WriteLine("Hello from the thread pool.");
-  }
+class Program
+{
+    static void Main(string[] args)
+    {
+        // ThreadPool konfigurieren
+        ThreadPool.SetMinThreads(4, 4);   // Warum geben wir hier mehrere Parameter an?
+        ThreadPool.SetMaxThreads(8, 8);
 
-  public static void Main(string[] args){
-    ThreadPool.QueueUserWorkItem(Operate);
-    //Fügt der Warteschlange eine auszuführende Methode hinzu. 
-    //Die Methode wird ausgeführt, wenn ein Thread des Threadpools verfügbar wird
-   
-    Console.WriteLine("Main thread does some work, then sleeps.");
-    Thread.Sleep(1000);
-    Console.WriteLine("Main thread exits.");
-  }
+        Console.WriteLine("Starte mehrere Aufgaben im ThreadPool...");
+            
+        // Kommentar 2:
+        int taskCount = 5;
+        CountdownEvent countdown = new CountdownEvent(taskCount);
+
+        for (int i = 0; i < taskCount; i++)
+        {
+            // Kommentar 1:
+            // Schleifenvariable in lokale Variable kopieren sonst "Gefangene Schleifenvariable" (Closure)
+            int taskNum = i; 
+
+            // Lambda-Ausdruck
+            ThreadPool.QueueUserWorkItem(state => 
+            {
+                Console.WriteLine($"[Task {taskNum}] gestartet auf Thread {Thread.CurrentThread.ManagedThreadId}");
+                ThreadPool.GetAvailableThreads(out int worker, out int iocp);
+                Console.WriteLine($"Noch frei: {worker} WorkerThreads, {iocp} IOCP-Threads");
+
+                // Simulierte Arbeit
+                Thread.Sleep(500);
+
+                Console.WriteLine($"[Task {taskNum}] beendet");
+                countdown.Signal();
+            });
+        }
+
+        // Zeige verfügbare Threads im Pool
+        ThreadPool.GetAvailableThreads(out int workerThreads, out int completionPortThreads);
+        Console.WriteLine($"Verfügbare WorkerThreads: {workerThreads}");
+        Console.WriteLine($"Verfügbare CompletionPortThreads: {completionPortThreads}");
+
+        // Warten, bis Threads ihre Arbeit tun können
+        Console.WriteLine("Main-Thread wartet auf Aufgaben...");
+        Thread.Sleep(2000); // grobes Warten – kein sauberes Synchronisieren !!!
+        //countdown.Wait(); // wartet, bis alle Tasks fertig
+        Console.WriteLine("Main-Thread beendet sich.");
+    }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+********************************************************************
+
+                            {{1-2}}
+********************************************************************
 
 Das klingt sehr praktisch, was aber sind die Einschränkungen?
 
@@ -815,9 +854,33 @@ Das klingt sehr praktisch, was aber sind die Einschränkungen?
 + Sie können keine individuellen Prioritäten festlegen.
 + Blockierte Threads im Pool senken die entsprechende Performance des Pools
 
+
+********************************************************************
+
+                            {{2-3}}
+********************************************************************
+
+> Wie weit kann ich mit Blick auf die Reihung eingreifen?
+
+Noch mal zur Abgrenzung ...
+
+```csharp         StartProcess.cs
+using System;
+using System.Diagnostics;
+
+class Program {
+    static void Main() {
+        Process.Start("notepad.exe");  // Öffnet den Windows-Editor
+    }
+}
+```
+
+... und was bedeutet das?
+
 | Ebene         | Wer steuert?         | Beschreibung                                                                    |
 | ------------- | -------------------- | ------------------------------------------------------------------------------- |
 | Prozess       | Betriebssystem       | CLR läuft in einem OS-Prozess                                                   |
 | Native Thread | Betriebssystem       | `Thread`-Objekte in C# sind OS-Threads                                          |
 | ThreadPool    | CLR + Betriebssystem | CLR entscheidet über Ausführung im Pool; OS entscheidet über Hardware-Zuteilung |
 
+********************************************************************
