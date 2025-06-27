@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 comment:  Erweiterungsmethode, anonyme Typen, Enumerables, LINQ-Grundlagen und Basisfunktionen
@@ -33,6 +33,16 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
+
+## Diskussion der Evaluation 
+
+...
+
+
+## Prüfung Eingebettete Systeme 
+
+Prüfung und Terminabstimmung gern nach der Vorlesung.
+
 
 ## Fragen aus den Projekten
 
@@ -103,7 +113,7 @@ class ReadingCSV
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
@@ -230,6 +240,7 @@ using System.Collections.Generic;
 
 
 public class Character: IComparable{
+
   protected string name;
   public int geburtsjahr;
   private static int Count;
@@ -263,6 +274,8 @@ public class Program
     Console.WriteLine($"\nEinträge in der Datenbank: {ComicHeros.Count}");
     Console.WriteLine("\nGefilterte Einträge in der Datenbank:");
     Console.WriteLine("| Index | Name            | Ursprung |");
+
+    // Filterung der Einträge
     List<Character> ComicHerosFiltered = new List<Character>();
     foreach (Character c in ComicHeros){
       if (c.geburtsjahr < 1950) ComicHerosFiltered.Add(c);
@@ -514,7 +527,7 @@ FROM Vorlesung;
 ```
 @AlaSQL.eval
 
-Eine erste Form der Filterung kann nun darin bestehen, zunächst die Anzahl der überhaupt aktiven Studierenden zu bestimmen. Diese müssten in der Tabelle `hoert` eingetragen sein. `DISTINCT` implementiert die Auswahl von eindeutigen Werten.
+Eine erste Form der Filterung kann nun darin bestehen, zunächst die Anzahl der überhaupt aktiven Studierenden zu bestimmen. Diese müssten in der Tabelle `hoert` eingetragen sein. `DISTINCT` implementiert die Auswahl von eindeutigen Werten, Dublikate werden entfernt.
 
 ``` sql      Abfrage mit eindeutigen Werten
 SELECT DISTINCT MatrNr
@@ -529,6 +542,7 @@ FROM hoert;
 SELECT VorlNr, Titel
 FROM Vorlesung
 WHERE Titel = 'ET';
+-- WHERE Titel LIKE '_T';
 ```
 @AlaSQL.eval
 
@@ -551,6 +565,8 @@ INNER JOIN Vorlesung ON Professor.PersNr = Vorlesung.PersNr;
 ```
 @AlaSQL.eval
 
+Die Abfrage liefert die Vorlesungsnummer, den Titel der Vorlesung sowie die Personalnummer und den Namen des Professors für alle Vorlesungen, die von einem Professor gehalten werden.
+
 `GROUP BY` ermöglicht die Gruppierung von Zeilen, die ein gemeinsames Merkmal aufweisen. `COUNT` zählt die Anzahl der Zeilen, die in die Gruppe fallen.
 
 ``` sql   Gruppierung mit Aggregat-Funktionen
@@ -562,6 +578,45 @@ GROUP BY Professor.Name, Professor.PersNr;
 @AlaSQL.eval
 
 ****************************************************************
+
+### Übliche Umsetzung "von außen"
+
+> Was bewirkt die folgende nicht-typisierte Umsetzung?
+
+```python
+import sqlite3
+connection = sqlite3.connect("company.db")
+
+cursor = connection.cursor()
+
+# delete 
+#cursor.execute("""DROP TABLE employee;""")
+
+sql_command = """
+CREATE TABLE employee ( 
+staff_number INTEGER PRIMARY KEY, 
+fname VARCHAR(20), 
+lname VARCHAR(30), 
+gender CHAR(1), 
+joining DATE,
+birth_date DATE);"""
+
+cursor.execute(sql_command)
+
+sql_command = """INSERT INTO employee (staff_number, fname, lname, gender, birth_date)
+    VALUES (NULL, "William", "Shakespeare", "m", "1564-04-??");"""
+cursor.execute(sql_command)
+
+
+sql_command = """INSERT INTO employee (staff_number, fname, lname, gender, birth_date)
+    VALUES (NULL, "Friedrich", "Schiller", "m", "1759-11-10");"""
+cursor.execute(sql_command)
+
+# never forget this, if you want the changes to be saved:
+connection.commit()
+
+connection.close()
+```
 
 ## LINQ Umsetzung
 
@@ -662,6 +717,8 @@ class MyString
 // Erweiterungsmethode in einer separaten Klasse
 static class Exporter
 {
+    // Wichtig! Das this vor dem ersten Parameter macht daraus eine Erweiterungsmethode
+    //                       ----
     public static void print(this MyString input, string newString)
     {
        Console.WriteLine(input.content + newString);
@@ -902,6 +959,7 @@ class Program {
       IEnumerable<int> scoreQuery =
           from score in scores    // Bezug zur Datenquelle
           where score > 80        // Filterkriterium
+          //where score == "A"    // nur zum Testen des Compilers:-)
           select score;           // "Projektion" des Rückgabewertes
       // Execute the query.
       foreach (int i in scoreQuery)
@@ -932,15 +990,15 @@ Variante.
 
 Insgesamt sind 7 Query-Klauseln vorimplementiert, können aber durch Erweiterungsmethoden ergänzt werden.
 
-| Ausdruck | Bedeutung                                         |
-| -------- | ------------------------------------------------- |
-| from     | definieren der Laufvariable und einer Datenquelle |
-| where    | filtert die Daten nach bestimten Kriterien      |
-| orderby  | sortiert die Elemente                             |
-| select   | projeziert die Laufvariable auf die Ergebnisfolge |
-| group    | bildet Gruppen innerhalb der Ergebnismenge        |
-| join     | vereinigt Elemente mehrerer Datenquellen           |
-| let      | definiert eine Hilfsvariable                      |
+| Ausdruck  | Bedeutung                                         |
+| --------- | ------------------------------------------------- |
+| `from`    | definieren der Laufvariable und einer Datenquelle |
+| `where`   | filtert die Daten nach bestimten Kriterien        |
+| `orderby` | sortiert die Elemente                             |
+| `select`  | projeziert die Laufvariable auf die Ergebnisfolge |
+| `group`   | bildet Gruppen innerhalb der Ergebnismenge        |
+| `join`    | vereinigt Elemente mehrerer Datenquellen          |
+| `let`     | definiert eine Hilfsvariable                      |
 
 ```csharp
 class Student{
@@ -977,40 +1035,6 @@ Die Berechnung der Folge wird nicht als Ganzes realisiert sondern bei einer
 Iteration durch den Datentyp `List<Student>`.
 
 Für nicht-generische Typen (die also `IEnumerable` anstatt `IEnumerable<T>` unmittelbar) implementieren, muss zusätzlich der Typ der Laufvariable angegeben werden, da diese nicht aus der Datenquelle ermittelt werden kann.
-
-```csharp           StudentListExample
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-public class Student
-{
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public int[] Scores { get; set; }
-}
-
-class Program {
-  public static void Main(string[] args){
-    //ArrayList StudentList = new ArrayList();  <-- Nicht mehr benutzen
-    List<Student> StudentList = new List<Student>();
-    StudentList.Add(
-        new Student{
-            FirstName = "Svetlana", LastName = "Müller", Scores = new int[] { 98, 92, 81, 60 }
-            });
-    StudentList.Add(
-        new Student {
-            FirstName = "Claire", LastName = "O’Donnell", Scores = new int[] { 75, 84, 91, 39 }
-            });
-    var query = from student in StudentList
-                where student.Scores[0] > 95
-                select student;
-    foreach (Student s in query)
-        Console.WriteLine(s.LastName + ": " + s.Scores[0]);
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Welche Struktur ergibt sich dabei generell für eine LINQ-Abfrage? Ein Query
 beginnt immer mit einer `from`-Klausel und endet mit einer `select` oder `group`-Klausel.
@@ -1275,13 +1299,17 @@ class Program {
                 Console.WriteLine("    {0}", student.Name);
           }
        }
+
        var query2 = from s in students
                     group s by s.Subject into sg
                     select new {Subject = sg.Key, Count = sg.Count()};
-       Console.WriteLine();
+
        foreach (var group in query2){
          Console.WriteLine(group.Count + " students attend in " + group.Subject);
        }
+       Console.WriteLine(query2.GetType().Name);
+       var firstElement = query2.Cast<object>().FirstOrDefault();
+       Console.WriteLine(firstElement.GetType().FullName);
     }
 }
 ```
