@@ -8,6 +8,10 @@ class Program
 {
     static void Main(string[] args)
     {
+        string current_dir = System.IO.Directory.GetCurrentDirectory();
+        string parent = System.IO.Directory.GetParent(current_dir).FullName;
+        string path = Path.Combine(parent, "babynames.csv");
+        Console.WriteLine("Current Directory: " + parent);
         var path = @"../babynames.csv";
         List<BabyName> namelist = new List<BabyName>();
         using (TextFieldParser csvReader = new TextFieldParser(path))

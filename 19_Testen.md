@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.9
+version:  1.0.10
 language: de
 narrator: Deutsch Female
 comment:  Softwarefehler, Testen zur Qualitätssicherung, Planung von Tests, Konzepte und Umsetzung in dotnet
@@ -23,113 +23,16 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 | Parameter                | Kursinformationen                                                                      |
 | ------------------------ | -------------------------------------------------------------------------------------- |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                        |
-| **Teil:**                | `19/27`                                                                                 |
+| **Teil:**                | `19/27`                                                                                |
 | **Semester**             | @config.semester                                                                       |
 | **Hochschule:**          | @config.university                                                                     |
 | **Inhalte:**             | @comment                                                                               |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/16_Testen.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/19_Testen.md |
 | **Autoren**              | @author                                                                                |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
-
-## Exkurs - Abhängigkeitsmanagment / Paketmanagement
-
-> **Merke:** Erfinde das Rad nicht neu!
-
-Wie schaffen es erfahrene Entwickler innerhalb kürzester Zeit Prototypen mit beeindruckender Funktionalität zu entwerfen? Sicher, die Erfahrung spielt hier eine Große Rolle aber auch die Wiederverwendung von existierendem Code. Häufig wiederkehrende Aufgaben wie zum Beispiel:
-
-+ das Logging
-+ der Zugriff auf Datenquellen
-+ mathematische Operationen
-+ Datenkapselung und Abstraktion
-+ ...
-
-werden bereits durch umfangreiche Bibliotheken implementiert und werden entsprechend nicht neu geschrieben.
-
-Ok, dann ziehe ich mir eben die zugehörigen Repositories in mein Projekt und kann die Bibliotheken nutzen. In individuell genutzten Implementierungen mag das ein gangbarer Weg sein, aber das Wissen um die zugehörigen Abhängigkeiten - Welche Subbibliotheken und welches .NET Framework werden vorausgesetzt? -  liegt so nur implizit vor.
-
-Entsprechend brauchen wir ein Tool, mit dem wir die Abhängigkeiten UND den eigentlichen Code kombinieren und einem Projekt hinzufügen können.
-`NuGet` löst diese Aufgabe für .NET und schließt auch gleich die Mechanismen zur Freigabe von Code ein. NuGet definiert dabei, wie Pakete für .NET erstellt, gehostet und verarbeitet werden.
-
-Ein `NuGet`-Paket ist eine gepackte Datei mit der Erweiterung `.nupkg` die:
-
-+ den kompilierten Code (DLLs),
-+ ein beschreibendes Manifest, in dem Informationen wie die Versionsnummer des Pakets, ggf. der Speicherort des Source Codes oder die Projektwebseite enthalten sind sowie
-+ die Abhängigkeiten von anderen Paketen und dessen Versionen
-enthalten sind
-Ein Entwickler, der seinen Code veröffentlichen möchte generiert die zugehörige Struktur und läd diese auf einen `NuGet` Server. Unter dem [Link](https://www.nuget.org/) kann dieser durchsucht werden.
-
-**Anwendungsbeispiel: Symbolisches Lösen von Mathematischen Gleichungen**
-
-Eine entsprechende Bibliothek steht unter [Projektwebseite](https://symbolics.mathdotnet.com/). Das Ganze wird als `Nuget` Paket gehostet [MathNet](https://www.nuget.org/packages/MathNet.Symbolics/).
-
-Unter der Annahme, dass wir `dotnet` als Buildtool benutzen ist die Einbindung denkbar einfach.
-
-```
-dotnet new console -o SymbolicMath
-cd SymbolicMath
-dotnet add package MathNet.Symbolics
-Determining projects to restore...
-Writing /tmp/tmpNsaYtc.tmp
-info : Adding PackageReference for package 'MathNet.Symbolics' into project '/home/zug/Desktop/Vorlesungen/VL_Softwareentwicklung/code/16_Testen/ConditionalBuild/ConditionalBuild.csproj'.
-info :   GET https://api.nuget.org/v3/registration5-gz-semver2/mathnet.symbolics/index.json
-...
-```
-
-Danach findet sich in unserer Projektdatei `.csproj` ein entsprechender Eintrag
-
-```xml
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="MathNet.Symbolics" Version="0.24.0" />
-  </ItemGroup>
-</Project>
-```
-
-```csharp PreprocessorConsts.cs
-using System;
-using System.Collections.Generic;
-using MathNet.Symbolics;
-using Expr = MathNet.Symbolics.SymbolicExpression;  // Platzhalter für verkürzte Schreibweise
-
-class Program
-{
-  static void Main(string[] args)
-  {
-    Console.WriteLine("Beispiele für die Verwendung des MathNet.Symbolics Paketes");
-    var x = Expr.Variable("x");
-    var y = Expr.Variable("y");
-    var a = Expr.Variable("a");
-    var b = Expr.Variable("b");
-    var c = Expr.Variable("c");
-    var d = Expr.Variable("d");
-    Console.WriteLine("a+a =" + (a + a + a).ToString());
-    Console.WriteLine("(2 + 1 / x - 1) =" + (2 + 1 / x - 1).ToString());
-    Console.WriteLine("((a / b / (c * a)) * (c * d / a) / d) =" + ((a / b / (c * a)) * (c * d / a) / d).ToString());
-    Console.WriteLine("Der zugehörige Latex Code lautet " + ((a / b / (c * a)) * (c * d / a) / d).ToLaTeX());
-  }
-}
-```
-```-xml  PreprocessorConsts.csproj
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="MathNet.Symbolics" Version="0.24.0" />
-  </ItemGroup>
-</Project>
-```
-@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
 
 ## Softwarefehler
@@ -302,8 +205,8 @@ Welche Unterschiede sehen Sie in den Definitionen?
 
 > Unterschied Verifikation vs. Validierung
 >
-> + **Verifikation** ... ist der Prozess, der sicherstellt, dass ein Softwareprodukt die Spezifikationen erfüllt und korrekt implementiert wurde.
-> + **Validierung** ... ist der Prozess, der sicherstellt, dass das Softwareprodukt die Bedürfnisse des Kunden erfüllt und die richtige Software entwickelt wurde.
+> + **Verifikation** ... ist der Prozess, der sicherstellt, dass ein Softwareprodukt die Spezifikationen erfüllt und korrekt implementiert wurde. (_Bauen wir das Produkt richtig?_)
+> + **Validierung** ... ist der Prozess, der sicherstellt, dass das Softwareprodukt die Bedürfnisse des Kunden erfüllt und die richtige Software entwickelt wurde. (_Bauen wir das richtige Produkt?_)
 
 ### Ablauf beim Testen
 
@@ -372,7 +275,7 @@ Abbildung motivierte aus [^Liggesmeyer]
 
 **Statische Code Analysen**
 
-... ist ein Software-Testverfahren, das zur Übersetzungszeit durchgeführt wird. Der
+... ohne eine Ausführung allein anhand des Codes durchgeführt. Der
 Quelltext wird hierbei einer Reihe formaler Prüfungen unterzogen, bei denen
 bestimmte Sorten von Fehlern entdeckt werden können, noch bevor die
 entsprechende Software (z. B. im Modultest) ausgeführt wird. Die Methodik gehört
@@ -387,13 +290,15 @@ bestimmt.
 
 ![instruction-set](./img/16_Testen/SonarLinterVS.png)
 
-Eine Übersicht zu den Standard-Regeln findet sich unter [Link](https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/DOCUMENTATION.md).
+https://learn.microsoft.com/de-de/dotnet/fundamentals/code-analysis/overview?tabs=net-9
 
 + **Codereviews** ... Reviews sind manuelle Überprüfungen der Arbeitsergebnisse der Softwareentwicklung. Jedes Arbeitsergebnis kann einer Durchsicht durch eine andere Person unterzogen werden.
 
     Der untersuchte Gegenstand eines Reviews kann verschieden sein. Es wird vor
     allem zwischen einem Code-Review (Quelltext) und einem Architektur-Review
     (Softwarearchitektur, insbesondere Design-Dokumente) unterschieden.
+ 
+https://www.codereviewchecklist.com/ 
 
 + ...
 
@@ -622,6 +527,7 @@ Attribute werden in rechteckigen Klammern den jeweiligen Codeelementen vorangest
 ```csharp   ConditionalExample.cs
 #define CONDITION1
 #define CONDITION2
+
 using System;
 using System.Diagnostics;
 
@@ -697,7 +603,7 @@ class Test
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <DefineConstants>CONDITION2;</DefineConstants>
   </PropertyGroup>
 </Project>
