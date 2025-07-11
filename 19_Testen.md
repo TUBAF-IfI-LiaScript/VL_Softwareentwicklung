@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.10
+version:  1.0.11
 language: de
 narrator: Deutsch Female
 comment:  Softwarefehler, Testen zur Qualitätssicherung, Planung von Tests, Konzepte und Umsetzung in dotnet
@@ -109,7 +109,7 @@ Betrieb und Wartung:
 + Die Schulung der Anwender wird vernachlässigt.
 + Das Konfigurationsmanagement ist unzureichend.
 
-<!--
+<!--https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/refs/heads/master/19_Testen.md
 style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
 -->
 ````````````
@@ -791,3 +791,260 @@ reportgenerator "-reports:.coverage/**/*.cobertura.xml" "-targetdir:.coverage-re
 Das Argument "XPlat Code Coverage" bezieht sich auf das Zwischenformat der Darstellung. Das `./.coverage` dient zur Angabe des Verzeichnisses, in dem die Ergebnisse gespeichert werden sollen. Wenn keines angegeben wird, wird standardmäßig ein TestResults-Verzeichnis innerhalb jedes Projekts verwendet. `reportgenerator` erzeugt dann die entsprechende html-Repräsentation.
 
 ![instruction-set](./img/16_Testen/ReportGenerator.png)
+
+
+> Im Projektordner finden Sie die gesamte Testimplementierung. Diese wurde um eine Python Applikation erweitert, die eine Sprachübergreifende Nutzung einer Csharp Bibliothek illustriert.
+
+## Fazit
+
+> Testen auf Modulebene - reicht das aus?
+
+Testen auf Modulebene ist ein wichtiger Bestandteil der Softwareentwicklung, aber es ist nicht ausreichend, um die Qualität eines gesamten Systems zu gewährleisten. Es deckt nur die kleinsten Einheiten ab und stellt sicher, dass diese korrekt funktionieren. Allerdings können Fehler in der Interaktion zwischen Modulen oder in der Systemintegration unentdeckt bleiben.
+
+
+## Erweiterung
+
+| Testart                | Fokus            | Isolation   | Beispiel                          |
+| ---------------------- | ---------------- | ----------- | --------------------------------- |
+| Unit-Test              | Methode/Funktion | vollständig | `Addiere(int a, int b)`           |
+| Modul-/Komponententest | Klasse/Modul     | teilweise   | `Warenkorb.AddArtikel()`          |
+| Integrationstest       | mehrere Module   | gering      | Bestellung -> Lager -> Versand    |
+| Systemtest             | gesamte App      | keine       | App starten und Bestellung testen |
+
+### Testen auf Modulebene
+ 
+                           {{0-1}}
+****************************************************************
+
+Modul oder Komponententests sind Tests, die sich auf einzelne Module oder Komponenten einer Software konzentrieren. Sie überprüfen die Funktionalität und das Verhalten dieser Module isoliert von anderen Teilen des Systems. 
+
+```csharp
+using Xunit;
+
+public class WarenkorbTests {
+    [Fact]
+    public void Test_Gesamtpreis_fuer_mehrere_Artikel() {
+        // Arrange
+        var korb = new Warenkorb();
+        korb.Hinzufügen(new Artikel { Name = "Buch", Preis = 10.0m });
+        korb.Hinzufügen(new Artikel { Name = "Stift", Preis = 2.0m });
+
+        // Act
+        var gesamt = korb.Gesamtpreis();
+
+        // Assert
+        Assert.Equal(12.0m, gesamt);
+    }
+}
+```
+
+****************************************************************
+
+                           {{1-2}}
+****************************************************************
+
+
+In der realen Software bestehen viele Klassen aus Abhängigkeiten zu anderen Komponenten – z. B. Datenbanken, externe Dienste oder Services.
+
+**Mocks** sind Test-Doubles, mit denen du diese Abhängigkeiten im Test ersetzen kannst, um:
+
+- das Verhalten der Komponente isoliert zu testen
+- kontrollierte Rückgaben zu simulieren
+- Seiteneffekte zu vermeiden
+
+
+__Warum ist Mocking wichtig?__
+
+Ohne Mocks würdest du in jedem Testfall:
+
+- eine echte Datenbank ansprechen 
+- eine E-Mail versenden 
+- einen Webservice kontaktieren 
+
+Das macht Tests langsam, fehleranfällig und unzuverlässig.
+
+__Best Practices beim Mocking__
+
+- Mocke nur explizite Abhängigkeiten (nicht alles!)
+- Nutze Interfaces oder abstrakte Klassen als Testanker
+- Verwende `.Setup(...)` nur für erwartetes Verhalten
+- Nutze `.Verify(...)` zur Kontrolle von Aufrufen (z. B. ob ein E-Mail-Versand ausgelöst wurde)
+
+****************************************************************
+
+                           {{2-3}}
+****************************************************************
+
+Produktionscode:
+
+```csharp
+public interface IPreisDienst {
+    decimal GibPreis(string artikelId);
+}
+
+public class Kasse {
+    private readonly IPreisDienst _preisDienst;
+
+    public Kasse(IPreisDienst preisDienst) {
+        _preisDienst = preisDienst;
+    }
+
+    public decimal BerechneGesamtpreis(string artikelId, int menge) {
+        var einzelpreis = _preisDienst.GibPreis(artikelId);
+        return einzelpreis * menge;
+    }
+}
+```
+
+Testcode mit Mocking:
+
+```csharp
+using Moq;
+using Xunit;
+
+public class KasseTests {
+    [Fact]
+    public void BerechneGesamtpreis_mit_MockDienst() {
+        // Arrange
+        var mockDienst = new Mock<IPreisDienst>();
+        mockDienst.Setup(d => d.GibPreis("A1")).Returns(10.0m);
+                                  
+        var kasse = new Kasse(mockDienst.Object);
+
+        // Act
+        var gesamt = kasse.BerechneGesamtpreis("A1", 3);
+
+        // Assert
+        Assert.Equal(30.0m, gesamt);
+    }
+}
+```
+
+***************************************************************
+
+### Integrationstests
+
+Ein **Integrationstest** prüft das **Zusammenspiel mehrerer Module oder Klassen**, z. B.:
+
+- Controller ↔ Service ↔ Datenbank  
+- UI ↔ Backend ↔ API  
+- Repository ↔ Domain-Logik
+
+> Ziel ist es, **Schnittstellenfehler** und **Zusammenarbeitsprobleme** zu erkennen – bevor das System als Ganzes getestet wird.
+
+Produktionscode:
+
+```csharp
+// Domainmodell
+public class Artikel {
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Preis { get; set; }
+}
+
+// Repository
+public class ArtikelRepository {
+    private readonly DbContext _ctx;
+    public ArtikelRepository(DbContext ctx) => _ctx = ctx;
+
+    public void Speichern(Artikel a) {
+        _ctx.Add(a);
+        _ctx.SaveChanges();
+    }
+
+    public Artikel? Finde(int id) => _ctx.Set<Artikel>().Find(id);
+}
+```
+
+Testcode mit Mocking:
+
+```csharp
+using Xunit;
+using Microsoft.EntityFrameworkCore;
+
+public class ArtikelRepositoryTests {
+    [Fact]
+    public void Speichern_und_Lesen_von_Artikeln() {
+        // Arrange: In-Memory-Kontext
+        var options = new DbContextOptionsBuilder<DbContext>()
+            .UseInMemoryDatabase("TestDB")
+            .Options;
+
+        using var ctx = new DbContext(options);
+        var repo = new ArtikelRepository(ctx);
+        var artikel = new Artikel { Name = "Test", Preis = 5.0m };
+
+        // Act
+        repo.Speichern(artikel);
+        var gelesen = repo.Finde(artikel.Id);
+
+        // Assert
+        Assert.NotNull(gelesen);
+        Assert.Equal("Test", gelesen?.Name);
+    }
+}
+```
+
+> Anstatt einen echten Datenbankserver zu verwenden, nutzen wir eine **In-Memory-Datenbank** für die Tests. Diese ermöglicht aber auch wesentlich konkrete Umsetzungen als die Mock-Objekte, da sie die tatsächliche Datenbank-Logik "simuliert".
+
+### Testen auf Systemebene
+
+Ein **Systemtest** überprüft das **gesamte Systemverhalten** aus Sicht des Endnutzers.  
+Dabei wird die gesamte Anwendung als Black Box getestet – **alle Komponenten, Module und Schnittstellen** sind integriert.
+
+> Ziel: Sicherstellen, dass das System als Ganzes die Anforderungen erfüllt.
+
+---
+
+### Abgrenzung zu anderen Tests
+
+| Testart          | Fokus                         | Perspektive     |
+| ---------------- | ----------------------------- | --------------- |
+| Unittest         | Einzelne Methode              | Entwickler      |
+| Komponententest  | Klasse/Modul                  | Entwickler      |
+| Integrationstest | Zusammenspiel mehrerer Module | Entwickler      |
+| **Systemtest**   | Gesamtsystem                  | **Nutzer / Tester** |
+
+
+### Eigenschaften von Systemtests
+
+- Arbeiten mit **realen oder simulierten Datenbanken, Schnittstellen, UI**
+- Testen **End-to-End-Szenarien** (z. B. Anmeldung, Bestellung, Zahlung)
+- Häufig **automatisiert** mit Tools wie Selenium, Playwright oder TestServer
+- Können auch **manuell** durchgeführt werden (z. B. nach Checklisten)
+
+
+## Vergleich 
+
+| Kriterium               | **Methodentest** (Unit Test)       | **Komponententest**                            | **Integrationstest**                         | **Systemtest**                              |
+| ----------------------- | ---------------------------------- | ---------------------------------------------- | -------------------------------------------- | ------------------------------------------- |
+| **Testobjekt**          | Einzelne Methode oder Funktion     | Klasse oder Modul mit internen Abhängigkeiten  | Zusammenspiel mehrerer Komponenten/Module    | Gesamtsystem (End-to-End)                   |
+| **Ziel**                | Korrektheit der kleinsten Einheit  | Zusammenarbeit mehrerer Funktionen             | Schnittstellen und Zusammenarbeit testen     | Verhalten des Systems aus Sicht des Nutzers |
+| **Abhängigkeiten**      | Werden meist gemockt oder isoliert | Können teilweise eingebunden oder ersetzt sein | Echte Implementierungen (z. B. DB, Services) | Realitätsnahe, echte Umgebung               |
+| **Beispiel**            | `CalculateSum(int a, int b)`       | `UserService` mit `EmailService`               | `UserController` ↔ `UserRepository` (mit DB) | REST-API ↔ Datenbank ↔ Frontend             |
+| **Tools**               | xUnit, NUnit                       | xUnit + Moq/Fakes                              | xUnit + InMemory DB / Testcontainers         | Selenium, Postman, TestServer               |
+| **Laufzeit**            | Sehr kurz                          | Mittel                                         | Mittel bis lang                              | Lang                                        |
+| **Testgeschwindigkeit** | 🔵 Schnell                        | 🟡 Mittel                                     | 🟡 Mittel                                   | 🔴 Langsam                                 |
+| **Zuverlässigkeit**     | Hoch (bei guter Isolation)         | Mittel (Abhängigkeiten können stören)          | Mittel (mehr Fehlerquellen möglich)          | Niedriger (viele beteiligte Komponenten)    |
+| **Fehlersuche**         | Sehr präzise                       | Eingrenzbar                                    | Eingrenzbar mit Fokus auf Schnittstellen     | Schwieriger (viele beteiligte Komponenten)  |
+| **CI/CD-Einsatz**       | Immer                              | Häufig                                         | Häufig / nach jedem Build                    | Selektiv / nachts                           |
+
+Andere Darstellung
+
+```ascii 
+        +---------------------------+
+        |     Systemtests           |  🔴 Langsam, teuer, realistisch
+        +---------------------------+
+          +-----------------------+
+          |   Integrationstests   |  🟡 Echte Zusammenarbeit prüfen
+          +-----------------------+
+            +-------------------+
+            |  Komponententests |  🟡 Module mit Abhängigkeiten
+            +-------------------+
+              +---------------+
+              |   Unittests   |  🔵 Schnell, stabil, viele
+              +---------------+
+
+> 🔺 Je weiter oben, desto aufwändiger  
+> 🔻 Je weiter unten, desto mehr Tests sollten existieren                                                     .
+```

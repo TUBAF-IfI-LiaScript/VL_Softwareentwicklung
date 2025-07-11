@@ -277,7 +277,7 @@ print("Phone Numbers:")
 for phone in data['person']['phoneNumbers']:
     print(f"  {phone['type']}: {phone['number']}")
 ```
-@LIA.eval(`["data.csv", "main.py"]`, `none`, `python3 main.py`)
+@LIA.eval(`["data.yaml", "main.py"]`, `none`, `python3 main.py`)
 
 
 ## Continuous integration (CI)
@@ -347,18 +347,27 @@ Techniken des CD sind:
 + Blue-Green Deployment (harter Wechsel zwischen zwei Produktionsumgebung)
 + Canary Deployment (Selektives Ausrollen der neuen Version)
 
-## DevOps
+## Einordnung
 
-DevOps betrachtet den gesamten Softwareentwicklungs- und Bereitstellungsprozess, von der Planung und Codierung bis zum Testen, Bereitstellen und Betrieb.
+DevOps (eine Kombination aus Development und Operations) ist ein ganzheitlicher Ansatz, der den gesamten Lebenszyklus von Software betrachtet – von der Planung und Entwicklung über das Testen, die Bereitstellung bis hin zum Betrieb und der Überwachung von Anwendungen im Produktivsystem.
 
-+ DevOps ist ein umfassenderer Ansatz, der die Kultur, Praktiken und Werkzeuge umfasst, um die Zusammenarbeit zwischen Entwicklungs- und Betriebsteams zu verbessern und die Softwarebereitstellung zu optimieren.
-+ CI/CD sind spezifische Praktiken innerhalb von DevOps, die sich auf die Automatisierung der Integration und Bereitstellung von Codeänderungen konzentrieren.
+Ziel von DevOps ist es, die Zusammenarbeit zwischen Entwicklungs- und Betriebsteams zu verbessern. Historisch waren diese beiden Bereiche oft getrennt: Entwickler wollten neue Funktionen möglichst schnell implementieren, während das Betriebsteam auf Stabilität und Sicherheit achtete – oft mit widersprüchlichen Zielen. DevOps überbrückt diese Kluft, indem es eine gemeinsame Verantwortung für den gesamten Prozess schafft.
 
+Dabei spielen Kultur, Prozesse und Werkzeuge eine zentrale Rolle:
+
++ Kultureller Wandel: DevOps fördert eine offene Kommunikationskultur, gegenseitiges Vertrauen und geteilte Verantwortlichkeit. Fehler werden nicht als Versagen, sondern als Chance zur Verbesserung gesehen.
++ Prozesse: DevOps strebt kontinuierliche Verbesserungen durch kurze Feedbackzyklen, häufige Releases und automatisierte Qualitätssicherung an.
++ Werkzeuge: Die Nutzung von Automatisierungstools zur Codeintegration, Testausführung, Infrastrukturverwaltung und Überwachung ist essenziell, um manuelle Fehler zu reduzieren und schnell auf Änderungen reagieren zu können.
+
+> Continuous Integration (CI) und Continuous Delivery bzw. Deployment (CD) sind zentrale Bausteine innerhalb von DevOps.
 
 ## CI Umsetzung mit GitHub
 
                                    {{0-1}}
 *******************************************************************************
+
+> Achtung: Wir gehen hier hauptsächlich auf GitHub-Actions ein. Die Konzepte sind auf andere Git-Repositories wie Gitlab oder Bitbucket übertragbar. Die Syntax unterscheidet sich allerdings.
+
 Welche Elemente machen somit eine CI Pipeline aus:
 
 * **Wann** (Trigger) soll
