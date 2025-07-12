@@ -1133,20 +1133,20 @@ dessen Länge manipulieren.
 
 ```csharp
 // Es müssen beide Varianten implementiert werden!
-public static Point operator *(Point p1, double ratio)
+public static Vector operator *(Vector p1, double ratio)
 {
-  new Point(p1.X * ratio, p1.Y * ratio);
+  return new Vector(p1.X * ratio, p1.Y * ratio);
 }
 
-public static Point operator *(int ratio, Point p1)
+public static Vector operator *(int ratio, Vector p1)
 {
-  new Point(p1.X * ratio, p1.Y * ratio);
+  return new Vector(p1.X * ratio, p1.Y * ratio);
 }
 
 static void Main(string[] args)
 {
-  Point ptOne = new Point(100, 100);
-  Point ptTwo = new Point(40, 40);
+  Vector ptOne = new Vector(100, 100);
+  Vector ptTwo = new Vector(40, 40);
 }
 Console.WriteLine((ptOne * 2.5));
 Console.WriteLine((1 * ptOne));
