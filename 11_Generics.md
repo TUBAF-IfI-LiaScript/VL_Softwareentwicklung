@@ -587,7 +587,7 @@ die in GenericList verwendet werden, im Parametertypen auch existieren.
 ```csharp          Constraints
 public class Human
 {
-    public Employee(string s, int i) => (Name, ID) = (s, i);
+    public Human(string s, int i) => (Name, ID) = (s, i);
     public string Name { get; set; }
     public int ID { get; set; }
 }
