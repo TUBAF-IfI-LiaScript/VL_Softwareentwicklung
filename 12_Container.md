@@ -257,7 +257,7 @@ public class ArrayExamples  {
 
 Worin liegt der Unterschied zu den bereits bekannten `Array` Implementierung?
 
-| Feature             | Array                          | `ArrayList`                             | `Array<T>`        |
+| Feature             | Array                          | `ArrayList`                             | `List<T>`        |
 | ------------------- | ------------------------------ | --------------------------------------- | ----------------- |
 | Generisch?          | nein                           | nein                                    | ja                |
 | Anzahl der Elemente | feste Größe                    | variabel                               | variabel          |
