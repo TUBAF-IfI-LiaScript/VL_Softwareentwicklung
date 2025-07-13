@@ -843,7 +843,7 @@ definierbar:
 | `redefines` | überschreiben eines ererbten Attributes                                       |
 | `ordered`   | Inhaltes eines Attributes treten in geordneter Reihenfolge ohne Dublikate auf |
 | `bag`       | Attribute dürfen ungeordnet und mit Dublikaten versehen enthalten sein        |
-| `sequence`  | legt fest, dass der Inhalt sortiert, aber ohne Dublikate ist                  |
+| `sequence`  | legt fest, dass der Inhalt sortiert ist, Duplikate sind erlaubt               |
 | `composite` | starke Abhängigkeitsbeziehungen                                               |
 
 Daraus ergeben sich UML-korrekte Darstellungen
