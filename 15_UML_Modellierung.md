@@ -815,7 +815,7 @@ public class Notification
     }
     public void Send()
     {
-        message.SendMessage();
+        _message.SendMessage();
     }
 }
 
@@ -831,7 +831,7 @@ public class Notification
 //    {
 //        foreach(var message in _messages)
 //        {
-//            messages.SendMessage();
+//            message.SendMessage();
 //        }
 //    }
 //}
