@@ -270,7 +270,7 @@ public event VarAChangedHandler AChanged
 ```
 
 2. Der Compiler sucht innerhalb der Publisher Klasse nach Referenzen auf AChanged und lenkt diese auf das private Delegate um.
-3. Der Compiler mappt alle += Operationen außerhalb auf die Zugriffsmethoden add and remove.
+3. Der Compiler mappt alle += bzw. -= Operationen außerhalb auf die Zugriffsmethoden add bzw. remove.
 
 ********************************************************************************
 
