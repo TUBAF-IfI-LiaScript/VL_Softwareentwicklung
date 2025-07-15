@@ -378,7 +378,7 @@ public class Program
 ### Schnittstellen vs. Delegaten
 
 ```csharp    DelegatesVsInterfaces
-void delegate XYZ(int p);
+delegate void XYZ(int p);
 
 interface IXyz {
     void doit(int p);
