@@ -337,10 +337,10 @@ public class Stock{
     public decimal Price{
       get { return price; }
       set { if (price != value){
-              if (OnPropertyPriceChanged != null){
-                 OnPropertyPriceChanged();
-                 price = value;
-              }
+                price = value;
+                if (OnPropertyPriceChanged != null){
+                    OnPropertyPriceChanged();
+                }
             }
           }
     }
