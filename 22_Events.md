@@ -337,10 +337,10 @@ public class Stock{
     public decimal Price{
       get { return price; }
       set { if (price != value){
-              if (OnPropertyPriceChanged != null){
-                 OnPropertyPriceChanged();
-                 price = value;
-              }
+                price = value;
+                if (OnPropertyPriceChanged != null){
+                    OnPropertyPriceChanged();
+                }
             }
           }
     }
@@ -431,10 +431,10 @@ public class Stock{
     public decimal Price{
       get { return price; }
       set { if (price != value){
-              if (OnPropertyPriceChanged != null){
-                 OnPropertyPriceChanged(this, EventArgs.Empty );
-                 price = value;
-              }
+                price = value;
+                if (OnPropertyPriceChanged != null){
+                    OnPropertyPriceChanged(this, EventArgs.Empty); 
+                }
             }
           }
     }
@@ -503,12 +503,12 @@ public class Stock{
     public decimal Price{
       get { return price; }
       set { if (price != value){
-              if (OnPropertyPriceChanged != null){
-                 PriceChangedEventArgs myEventArgs = new PriceChangedEventArgs();
-                 myEventArgs.Difference = price - value;
-                 OnPropertyPriceChanged(this, myEventArgs );
-                 price = value;
-              }
+                if (OnPropertyPriceChanged != null){
+                    PriceChangedEventArgs myEventArgs = new PriceChangedEventArgs();
+                    myEventArgs.Difference = price - value;
+                    OnPropertyPriceChanged(this, myEventArgs);
+                }
+                price = value;
             }
           }
     }
