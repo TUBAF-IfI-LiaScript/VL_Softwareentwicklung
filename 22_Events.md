@@ -503,12 +503,12 @@ public class Stock{
     public decimal Price{
       get { return price; }
       set { if (price != value){
-                price = value;
                 if (OnPropertyPriceChanged != null){
                     PriceChangedEventArgs myEventArgs = new PriceChangedEventArgs();
                     myEventArgs.Difference = price - value;
                     OnPropertyPriceChanged(this, myEventArgs);
                 }
+                price = value;
             }
           }
     }
