@@ -453,10 +453,10 @@ Die Instanziirung erfolgt über einen Konstruktor, die Ausführung wird durch de
 
 ```csharp
 Task task = new Task(() => {... Anweisungsblock ...});
-Task.Start();
+task.Start();
 ```
 
-> Bis hierher ist die API völlig identisch zu einem Tread (abgesehen von den Typen). 
+> Bis hierher ist die API völlig identisch zu einem Thread (abgesehen von den Typen). 
 
 Der verkürzte Aufruf mittels der statischen `Run`-Methode realisiert das gleiche Verhalten:
 
@@ -616,7 +616,7 @@ Anstatt die Ergebnisse wie bei Threads in eine "außen stehende" Variable (z.B. 
 Task<int> task = Task.Run(() => {int i;
                                  //... Anweisungsblock ...;
                                  return i;});
- Console.WriteLine("Finished ith result {0}", task.Result);
+ Console.WriteLine("Finished with result {0}", task.Result);
 ```
 
 Wie ist dieser Aufruf zu verstehen? Unser Task gibt anders als bei der synchronen
@@ -662,7 +662,7 @@ public class Program
 ```
 
 Die Initiierung und der Abschluss eines asynchronen Vorgangs wird in TAP in einer Methode realisiert, die 
-das `async`-Suffix hat und dadurch eine `await`-Anweisung enthalten darf, wenn sie Awaitable-Typen zurückgibt, 
+das `async`-Präfix hat und dadurch eine `await`-Anweisung enthalten darf, wenn sie Awaitable-Typen zurückgibt, 
 wie z. B. Task oder Task<TResult>.
 
 Eine asynchrone Methode ruft einen Task auf, setzt die eigene Bearbeitung aber
@@ -672,7 +672,7 @@ fort und wartet auf dessen Beendigung.
 async void DoAsync(){
   Task<int> task = Task.Run(() => {int i;
                                    // Berechnungen
-                                   return i;}
+                                   return i;};
   // Instruktionen I
   // Methoden, die unabhängig von task ausgeführt werden
   int result = await task;
@@ -697,7 +697,7 @@ mit await erreicht hat (Quasi-Synchroner Fall)
                                |
                                v
                                                     ()=＞{..}
-                      task=Task.Run(()=＞{..};   - - - >|
+                      task=Task.Run(()=＞{..});   - - >|
                                |                       |
               Instruktionen I  |        results        v
                                | < - - - - - - - - - - -
@@ -722,14 +722,14 @@ Während dieser Wartezeit wird der Thread, auf dem DoAsync() ausgeführt wird, n
                                |
                                v
                                                     ()=＞{..}
-                      task=Task.Run(()=＞{..}; - - - - >|
+                      task=Task.Run(()=＞{..}); - - - >|
                                |                       |
-              Instruktionen I  |        results        |
-                               |                       |
+              Instruktionen I  |                       |
+                               v                       |
          < - - - - - - - - - - -                       |
         |                                              |
-        |                                              |
-        |                      |<----------------------|
+        |                              results         v
+        |                      |<- - - - - - - - - - - -
         |     Instruktionen II |
         |                      |
         |                      v
