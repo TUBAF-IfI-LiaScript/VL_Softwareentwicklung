@@ -672,7 +672,7 @@ fort und wartet auf dessen Beendigung.
 async void DoAsync(){
   Task<int> task = Task.Run(() => {int i;
                                    // Berechnungen
-                                   return i;};
+                                   return i;});
   // Instruktionen I
   // Methoden, die unabhängig von task ausgeführt werden
   int result = await task;
