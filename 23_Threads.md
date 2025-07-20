@@ -167,7 +167,7 @@ Definitionen:
 public delegate void ThreadStart();
 public delegate void ParameterizedThreadStart(object? obj);
 public enum ThreadPriority (Lowest = 0, BelowNormal = 1, Normal = 2, AboveNormal = 3, Highest = 4);
-public enum ThreadState (Running = 0, Unstarted = 8, Stopped = 16, Suspended = 64, Stopped = 16, Aborted = 256, ...);
+public enum ThreadState (Running = 0, Unstarted = 8, Stopped = 16, Suspended = 64, Aborted = 256, ...);
 
 public sealed class Thread{
   public Thread (ThreadStart start);
