@@ -835,12 +835,13 @@ Der Vorteil anonymer Typen liegt in ihrer Flexibilität. Die eigentlichen Daten 
 
 ```csharp
 public interface IEnumerable<out T> : System.Collections.IEnumerable{
-  public IEnumerator<T> = GetEnumerator();
+  public IEnumerator<T> GetEnumerator();
 }
 
 public interface IEnumerator<out T> : IDisposable,
                                       System.Collections.IEnumerator{
-  public object Current { get; }
+  public T Current { get; }
+  public void Dispose();
   public bool MoveNext ();
   public void Reset ();
 }
@@ -1005,21 +1006,21 @@ class Student{
   public string Name;
   public int Id;
   public string Subject{get; set;}
-  public Student(){}
+  public Student(string name){ this.Name = name; }
 }
 
 // Collection Initialization
 List<Student> students = new List<Student>{
-  new Student("Max Müller"){Subject = "Technische Informatik", id = 1},
-  new Student("Maria Maier"){Subject = "Softwareentwicklung", id = 2},
-  new Student("Martin Morawschek"){Subject = "Höhere Mathematik I", id = 3}
-}
+  new Student("Max Müller"){Subject = "Technische Informatik", Id = 1},
+  new Student("Maria Maier"){Subject = "Softwareentwicklung", Id = 2},
+  new Student("Martin Morawschek"){Subject = "Höhere Mathematik I", Id = 3}
+};
 
 // Implizite Typdefinition
 var result = from s in students         // Spezifikation der Datenquelle
-             where s.Subject == "Softwarentwicklung"
+             where s.Subject == "Softwareentwicklung"
              orderby s.Name
-             select new (s.Name, s.Id)  // Projektion der Ausgabe
+             select new { s.Name, s.Id };  // Projektion der Ausgabe
 
 // explizite Typdefinition
 IEnumerable<Student> result = from s in students
@@ -1405,7 +1406,7 @@ class Program {
         new Student("Karl Tischer"){Subject = "Softwareentwicklung", id = 5},
       };
        var query = from s in students
-                   select new {Surname = s.Name.Split(' ')[0]};
+                   select new {Surname = s.Name.Split(' ')[1]};
        Console.WriteLine(query.GetType());
        foreach (var student in query){
          Console.WriteLine(student.Surname);
