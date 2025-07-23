@@ -605,7 +605,7 @@ Varianten "konstanter" Variablen in C#
 | Attribute           | `const`      | `readonly`            | `readonly static`     |
 | Veränderbar bis ... | Kompilierung | Ende des Konstruktors | Ende des Konstruktors |
 | Statisch            | Standard, ja | Nein                  | Ja                    |
-| Zugriff             | Klasse       | Instanz               | Instanz               |
+| Zugriff             | Klasse       | Instanz               | Klasse                |
 
 <!-- --{{0}}-- Idee des Codefragments:
   * Versuchen Sie die Variable innnerhalb von Main zu manipulieren
