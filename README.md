@@ -4,32 +4,34 @@
 
 | Woche | Tag       | SWE                                               | Einführung in SWE |
 | :---- | --------- | :------------------------------------------------ |-------------------|
-| 1     | 4. April  | Organisation, Einführung                          |gemeinsam          |
-| 2     | 7. April  | Softwareentwicklung als Prozess                   |gemeinsam          |
-|       | 11. April | Konzepte von Dotnet und C#                        |                   |
-| 3     | 14. April | Elemente der Sprache C# I                         |                   |
-|       | 18. April | _Karfreitag_                                      |_Karfreitag_       |
-| 4     | 21. April | _Ostermontag_                                     |_Ostermontag_      |
-|       | 25. April | Elemente der Sprache C# II                        |                   |
-| 5     | 28. April | Strukturen / Konzepte der OOP                     |                   |
-|       | 2. Mai    | Säulen Objektorientierter Programmierung          |                   |
-| 6     | 5. Mai    | Klassenelemente in C#  / Vererbung                |                   |
-|       | 9. Mai    | Klassenelemente in C#  / Interfaces               |                   |
+| 1     | 10. April  | Organisation, Einführung                         |gemeinsam         |
+| 2     | 13. April  | Softwareentwicklung als Prozess                  |gemeinsam         |
+|       | 17. April | Konzepte von Dotnet und C#                        |                   |
+| 3     | 20. April | Elemente der Sprache C# I                         | **Beginn der Übungen** |
+|       | 24. April | Elemente der Sprache C# II                        |                   |
+| 4     | 27. April | Strukturen / Konzepte der OOP                     |                   |
+|       | 01. Mai   | _Erster Mai_                                      |  _Erster Mai_     |
+| 5     | 4. Mai    | Säulen Objektorientierter Programmierung          |gemeinsam          |
+|       | 8. Mai    | Klassenelemente in C#  / Vererbung                |                   |
+| 6     | 11. Mai   | Klassenelemente in C#  / Interfaces               |                   |
+|       | 15. Mai   | Anwendungsbeispiel **TODO** Godot?                |                   |
 | 7     | 12. Mai   | Versionsmanagement im SWE-Prozess I               |gemeinsam          |
 |       | 16. Mai   | Versionsmanagement im SWE_Pprozess II             |gemeinsam          |
-| 8     | 19. Mai   | Generics                                          |                   |
-|       | 23. Mai   | Container                                         |                   |
-| 9     | 26. Mai   | UML Konzepte                                      |gemeinsam          |
-|       | 30. Mai   | UML Diagrammtypen                                 |gemeinsam          |
-| 10    | 2. Juni   | UML Anwendungsbeispiel                            |gemeinsam          |
-|       | 6. Juni   | Dokumentation und Build Toolchains                |                   | 
-| 11    | 9. Juni   | _Pfingstmontag_                                   | _Pfingstmontag_   |
-|       | 13. Juni  | Delegaten                                         |                   |
-| 12    | 16. Juni  | Events                                            |                   |
-|       | 20. Juni  | Threadkonzepte in C#                              |                   |
-| 13    | 23. Juni  | Taskmodell                                        |                   |
-|       | 27. Juni  | Testen                                            |                   |
-| 14    | 30. Juni  | Continuous Integration in GitHub                  |                   |
-|       | 4. Juli   | Design Pattern                                    |                   |
-| 15    | 7. Juli   | Language Integrated Query                         |                   |
-|       | 11. Juli  | GUI - MAUI                                        |                   |
+| 8     | 18. Mai   | Generics                                          |                   |
+|       | 22. Mai   | Container                                         |                   |
+| 9     | 25. Mai   | _Pfingstmontag_                                   |   _Pfingstmontag_ |
+|       | 29. Mai   | UML Konzepte                                      |gemeinsam          |
+| 10    | 01. Juni  | UML Diagrammtypen                                 |gemeinsam          |
+|       | 5. Juni   | UML Anwendungsbeispiel                            |gemeinsam          |
+| 11    | 8. Juni   | Dokumentation und Build Toolchains                |                   | 
+|       | 12. Juni  | Delegaten                                         |                   |
+| 12    | 15. Juni  | Events                                            |                   |
+|       | 19. Juni  | Threadkonzepte in C#                              |                   |
+| 13    | 22. Juni  | Taskmodell                                        |                   |
+|       | 26. Juni  | Testen                                            |                   |
+| 14    | 29. Juni  | Continuous Integration in GitHub                  |                   |
+|       | 03. Juli  | Design Pattern                                    |                   |
+| 15    | 06. Juli  | Language Integrated Query                         |                   |
+|       | 10. Juli  | GUI - MAUI                                        |                   |
+| 16    | 13. Juli  | Puffer                                            |                   |
+|       | 17. Juli  | Puffer                                            |                   |
