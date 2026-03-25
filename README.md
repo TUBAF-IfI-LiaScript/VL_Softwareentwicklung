@@ -57,11 +57,11 @@ tbody tr:nth-child(2n) td:first-child {
   color: var(--tubaf-blue-dark);
 }
 
-.icon-easter::before   { content: "🥚"; } /* Egg */
-.icon-mayday::before   { content: "🌿"; } /* Leaf/Maypole vibe */
-.icon-pentecost::before { content: "🕊️"; } /* Dove (Pfingsten/Pentecost) */
-.icon-exercise::before { content: "✍️"; } /* Writing hand */
-.icon-joined::before   { content: "🔗"; } /* Link for conjoined */
+.icon-easter::before   { content: "🥚 "; } /* Egg */
+.icon-mayday::before   { content: "🌿 "; } /* Leaf/Maypole vibe */
+.icon-pentecost::before { content: "🕊️ "; } /* Dove (Pfingsten/Pentecost) */
+.icon-exercise::before { content: "✍️ "; } /* Writing hand */
+.icon-joined::before   { content: "🔗 "; } /* Link for conjoined */
 
 /* 1. Target the TD or TR that contains a holiday class */
 /* This colors the entire row if any cell has a holiday span */
