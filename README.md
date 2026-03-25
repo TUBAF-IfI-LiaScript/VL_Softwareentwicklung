@@ -11,75 +11,63 @@ link: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css
 
 @style
 :root {
-  --tubaf-blue: #00305e;
-  --tubaf-light-blue: #e6ebf0;
-  --tubaf-grey: #adb5bd;
-  --tubaf-text: #333333;
+  --tubaf-blue-dark: #00497f;
+  --tubaf-blue-uni: #0069b4;
+  --tubaf-grey-light: #f0f2f5;
+  --tubaf-silver: #adb5bd;
+  --tubaf-holiday-bg: #fff5f5; /* Light red for holidays */
+  --tubaf-holiday-text: #b02a37;
 }
 
+/* Base table styling */
 table {
   border-collapse: collapse;
   width: 100%;
-  font-family: "Open Sans", Arial, sans-serif;
-  color: var(--tubaf-text);
-  margin: 20px 0;
+  font-family: sans-serif;
 }
 
 thead th {
-  text-align: left;
-  padding: 14px 12px;
-  background-color: var(--tubaf-blue);
-  color: #ffffff;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border-bottom: 4px solid var(--tubaf-grey);
-}
-
-td {
+  background-color: var(--tubaf-blue-dark);
+  color: white;
   padding: 12px;
-  border-bottom: 1px solid #dee2e6;
+  text-align: left;
+  border-bottom: 3px solid var(--tubaf-blue-uni);
 }
 
-tbody tr:nth-child(4n+1),
+/* Row grouping logic (Every 2 rows) */
+tbody tr:nth-child(4n+1), 
 tbody tr:nth-child(4n+2) {
-  background-color: var(--tubaf-light-blue);
+  background-color: var(--tubaf-grey-light);
 }
 
+/* The vertical "Join" indicator */
+tbody tr td:first-child {
+  border-left: 5px solid transparent;
+}
 tbody tr:nth-child(2n+1) td:first-child,
 tbody tr:nth-child(2n) td:first-child {
-  border-left: 5px solid var(--tubaf-blue);
+  border-left-color: var(--tubaf-blue-uni);
 }
 
-tbody tr:nth-child(2n+1) td:first-child {
-  font-weight: bold;
-  color: var(--tubaf-blue);
-}
-
-tbody tr:hover {
-  background-color: #d1d9e0 !important;
-}
-
-.icon-event::before {
-  font-family: "Font Awesome 6 Free";
-  font-weight: 900;
+/* Icon Classes using UTF-8 */
+.icon::before {
   margin-right: 8px;
-  color: #00305e;
+  font-style: normal;
   display: inline-block;
-  width: 20px;
-  text-align: center;
+  color: var(--tubaf-blue-dark);
 }
 
-.icon-easter::before { content: "\f706"; color: #d4a017; }
-.icon-mayday::before { content: "\f06c"; color: #c0392b; }
-.icon-pentecost::before { content: "\f6d9"; color: #5dade2; }
-.icon-exercise::before { content: "\f303"; }
-.icon-joined::before { content: "\f0c1"; font-size: 0.8em; }
+.icon-easter::before   { content: "🥚"; } /* Egg */
+.icon-mayday::before   { content: "🌿"; } /* Leaf/Maypole vibe */
+.icon-pentecost::before { content: "🕊️"; } /* Dove (Pfingsten/Pentecost) */
+.icon-exercise::before { content: "✍️"; } /* Writing hand */
+.icon-joined::before   { content: "🔗"; } /* Link for conjoined */
 
-.holiday {
-  color: #777;
-  font-style: italic;
-  background-color: #fff5f5 !important;
+/* 1. Target the TD or TR that contains a holiday class */
+/* This colors the entire row if any cell has a holiday span */
+tbody tr:has(.holiday) {
+  background-color: var(--tubaf-holiday-bg) !important;
+  color: var(--tubaf-holiday-text);
 }
 @end
 
