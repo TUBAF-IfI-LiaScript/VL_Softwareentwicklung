@@ -7,69 +7,8 @@ language: de
 version: 2026.1
 icon: https://tu-freiberg.de/sites/default/files/styles/crop_landscape_1300/public/2023-08/Bild2.png
 
-link: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-
-@style
-:root {
-  --tubaf-blue-dark: #00497f;
-  --tubaf-blue-uni: #0069b4;
-  --tubaf-grey-light: #f0f2f5;
-  --tubaf-silver: #adb5bd;
-  --tubaf-holiday-bg: #fff5f5; /* Light red for holidays */
-  --tubaf-holiday-text: #b02a37;
-}
-
-/* Base table styling */
-table {
-  border-collapse: collapse;
-  width: 100%;
-  font-family: sans-serif;
-}
-
-thead th {
-  background-color: var(--tubaf-blue-dark);
-  color: white;
-  padding: 12px;
-  text-align: left;
-  border-bottom: 3px solid var(--tubaf-blue-uni);
-}
-
-/* Row grouping logic (Every 2 rows) */
-tbody tr:nth-child(4n+1), 
-tbody tr:nth-child(4n+2) {
-  background-color: var(--tubaf-grey-light);
-}
-
-/* The vertical "Join" indicator */
-tbody tr td:first-child {
-  border-left: 5px solid transparent;
-}
-tbody tr:nth-child(2n+1) td:first-child,
-tbody tr:nth-child(2n) td:first-child {
-  border-left-color: var(--tubaf-blue-uni);
-}
-
-/* Icon Classes using UTF-8 */
-.icon::before {
-  margin-right: 8px;
-  font-style: normal;
-  display: inline-block;
-  color: var(--tubaf-blue-dark);
-}
-
-.icon-easter::before   { content: "🥚 "; } /* Egg */
-.icon-mayday::before   { content: "🌿 "; } /* Leaf/Maypole vibe */
-.icon-pentecost::before { content: "🕊️ "; } /* Dove (Pfingsten/Pentecost) */
-.icon-exercise::before { content: "✍️ "; } /* Writing hand */
-.icon-joined::before   { content: "🔗 "; } /* Link for conjoined */
-
-/* 1. Target the TD or TR that contains a holiday class */
-/* This colors the entire row if any cell has a holiday span */
-tbody tr:has(.holiday) {
-  background-color: var(--tubaf-holiday-bg) !important;
-  color: var(--tubaf-holiday-text);
-}
-@end
+link: https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css
+link: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/refs/heads/master/css/styles.css
 
 -->
 
