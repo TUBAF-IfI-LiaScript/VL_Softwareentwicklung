@@ -7,6 +7,8 @@ language: de
 version: 2026.1
 icon: https://tu-freiberg.de/sites/default/files/styles/crop_landscape_1300/public/2023-08/Bild2.png
 
+link: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+
 @style
 :root {
   --tubaf-blue: #00305e;
@@ -57,6 +59,28 @@ tbody tr:nth-child(2n+1) td:first-child {
 tbody tr:hover {
   background-color: #d1d9e0 !important;
 }
+
+.icon-event::before {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-right: 8px;
+  color: #00305e;
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+}
+
+.icon-easter::before { content: "\f706"; color: #d4a017; }
+.icon-mayday::before { content: "\f06c"; color: #c0392b; }
+.icon-pentecost::before { content: "\f6d9"; color: #5dade2; }
+.icon-exercise::before { content: "\f303"; }
+.icon-joined::before { content: "\f0c1"; font-size: 0.8em; }
+
+.holiday {
+  color: #777;
+  font-style: italic;
+  background-color: #fff5f5 !important;
+}
 @end
 
 -->
@@ -67,26 +91,26 @@ tbody tr:hover {
 
 | Woche | Tag       | SWE                                               | Einführung in SWE |
 | :---- | --------- | :------------------------------------------------ |-------------------|
-| 1     | 06. April | _Ostermontag_                                     | _Ostermontag_     |
-|       | 10. April  | Organisation, Einführung                         | gemeinsam         |
-| 2     | 13. April  | Softwareentwicklung als Prozess                  | gemeinsam         |
+| 1     | 06. April | _Ostermontag_<!-- class="holiday icon-easter" --> | _Ostermontag_<!-- class="holiday icon-easter" -->      |
+|       | 10. April  | Organisation, Einführung                         | gemeinsam<!-- class="icon-joined" -->         |
+| 2     | 13. April  | Softwareentwicklung als Prozess                  | gemeinsam<!-- class="icon-joined" -->         |
 |       | 17. April | Konzepte von Dotnet und C#                        |                   |
-| 3     | 20. April | Elemente der Sprache C# I                         | **Beginn der Übungen** |
+| 3     | 20. April | Elemente der Sprache C# I                         | **Beginn der Übungen**<!-- class="icon-exercise" --> |
 |       | 24. April | Elemente der Sprache C# II                        |                   |
 | 4     | 27. April | Strukturen / Konzepte der OOP                     |                   |
-|       | 01. Mai   | _Erster Mai_                                      |  _Erster Mai_     |
-| 5     | 4. Mai    | Säulen Objektorientierter Programmierung          | gemeinsam          |
+|       | 01. Mai   | _Erster Mai_<!-- class="holiday icon-mayday" -->                                       |  _Erster Mai_<!-- class="holiday icon-mayday" -->      |
+| 5     | 4. Mai    | Säulen Objektorientierter Programmierung          | gemeinsam<!-- class="icon-joined" -->          |
 |       | 8. Mai    | Klassenelemente in C#  / Vererbung                |                   |
 | 6     | 11. Mai   | Klassenelemente in C#  / Interfaces               |                   |
 |       | 15. Mai   | Anwendungsbeispiel **TODO** Godot?                |                   |
-| 7     | 12. Mai   | Versionsmanagement im SWE-Prozess I               | gemeinsam          |
-|       | 16. Mai   | Versionsmanagement im SWE_Pprozess II             | gemeinsam          |
+| 7     | 12. Mai   | Versionsmanagement im SWE-Prozess I               | gemeinsam<!-- class="icon-joined" -->          |
+|       | 16. Mai   | Versionsmanagement im SWE_Pprozess II             | gemeinsam<!-- class="icon-joined" -->          |
 | 8     | 18. Mai   | Generics                                          |                   |
 |       | 22. Mai   | Container                                         |                   |
-| 9     | 25. Mai   | _Pfingstmontag_                                   |   _Pfingstmontag_ |
-|       | 29. Mai   | UML Konzepte                                      | gemeinsam          |
-| 10    | 01. Juni  | UML Diagrammtypen                                 | gemeinsam          |
-|       | 5. Juni   | UML Anwendungsbeispiel                            | gemeinsam          |
+| 9     | 25. Mai   | _Pfingstmontag_<!-- class="holiday icon-pentecoste" -->                                    |   _Pfingstmontag_<!-- class="holiday icon-pentecoste" -->  |
+|       | 29. Mai   | UML Konzepte                                      | gemeinsam<!-- class="icon-joined" -->          |
+| 10    | 01. Juni  | UML Diagrammtypen                                 | gemeinsam<!-- class="icon-joined" -->          |
+|       | 5. Juni   | UML Anwendungsbeispiel                            | gemeinsam<!-- class="icon-joined" -->          |
 | 11    | 8. Juni   | Dokumentation und Build Toolchains                |                   | 
 |       | 12. Juni  | Delegaten                                         |                   |
 | 12    | 15. Juni  | Events                                            |                   |
