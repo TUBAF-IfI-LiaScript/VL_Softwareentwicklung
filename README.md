@@ -2,13 +2,16 @@
 author: Sebastian Zug, Volker Göhler
 email: sebastian.zug@informatik.tu-freiberg.de, volker.goehler@informatik.tu-freiberg.de
 date: 25.03.2026
+edit: true
+language: de
+version: 2026.1
+icon: https://tu-freiberg.de/sites/default/files/styles/crop_landscape_1300/public/2023-08/Bild2.png
 
 @style
-/* TU Freiberg Color Palette */
 :root {
-  --tubaf-blue: #00305e;      /* Primary Blue */
-  --tubaf-light-blue: #e6ebf0; /* Soft background tint */
-  --tubaf-grey: #adb5bd;       /* Secondary Grey */
+  --tubaf-blue: #00305e;
+  --tubaf-light-blue: #e6ebf0;
+  --tubaf-grey: #adb5bd;
   --tubaf-text: #333333;
 }
 
@@ -20,7 +23,6 @@ table {
   margin: 20px 0;
 }
 
-/* Header: Bold TUBAF Blue with white text */
 thead th {
   text-align: left;
   padding: 14px 12px;
@@ -32,33 +34,26 @@ thead th {
   border-bottom: 4px solid var(--tubaf-grey);
 }
 
-/* General cell padding */
 td {
   padding: 12px;
   border-bottom: 1px solid #dee2e6;
 }
 
-/* The "Logical Join": Alternating background for row pairs */
-/* Groups rows 1-2, 5-6, 9-10... in a light grey-blue tint */
 tbody tr:nth-child(4n+1),
 tbody tr:nth-child(4n+2) {
   background-color: var(--tubaf-light-blue);
 }
 
-/* Graphic Notion: Vertical blue bar on the left of joined rows */
-/* This visually "clips" the two rows together */
 tbody tr:nth-child(2n+1) td:first-child,
 tbody tr:nth-child(2n) td:first-child {
   border-left: 5px solid var(--tubaf-blue);
 }
 
-/* Optional: Make the 'Week' number stand out in the first row of a pair */
 tbody tr:nth-child(2n+1) td:first-child {
   font-weight: bold;
   color: var(--tubaf-blue);
 }
 
-/* Hover effect for better readability */
 tbody tr:hover {
   background-color: #d1d9e0 !important;
 }
