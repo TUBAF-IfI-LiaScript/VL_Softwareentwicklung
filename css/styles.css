@@ -15,17 +15,17 @@ table {
 }
 
 thead th {
-  background-color: var(--tubaf-blue-dark);
+  background-color: var(--tubaf-blue-dark) !important;
   color: white;
   padding: 12px;
   text-align: left;
-  border-bottom: 3px solid var(--tubaf-blue-uni);
+  border-bottom: 3px solid var(--tubaf-blue-uni) !important;
 }
 
 /* Row grouping logic (Every 2 rows) */
 tbody tr:nth-child(4n+1), 
 tbody tr:nth-child(4n+2) {
-  background-color: var(--tubaf-grey-light);
+  background-color: var(--tubaf-grey-light) !important;
 }
 
 /* The vertical "Join" indicator */
