@@ -1,6 +1,6 @@
 <!--
-author: Sebastian Zug, Volker Göhler
-email: sebastian.zug@informatik.tu-freiberg.de, volker.goehler@informatik.tu-freiberg.de
+author: "Sebastian Zug", "Volker Göhler"
+email: "sebastian.zug@informatik.tu-freiberg.de", "volker.goehler@informatik.tu-freiberg.de"
 date: 25.03.2026
 edit: true
 language: de
