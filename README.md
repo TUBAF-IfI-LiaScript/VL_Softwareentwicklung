@@ -38,7 +38,7 @@ link: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklu
 | 8     | 25. Mai   | _Pfingstmontag_<!-- class="holiday icon-pentecoste" -->                                    |   _Pfingstmontag_<!-- class="holiday icon-pentecoste" -->  |
 |       | 29. Mai   | UML Konzepte                                      | gemeinsam<!-- class="icon-joined" -->          |
 | 9     | 01. Juni  | UML Diagrammtypen                                 | gemeinsam<!-- class="icon-joined" -->          |
-|       | 05. Juni  | UML Anwendungsbeispiel                            | gemeinsam<!-- class="icon-joined" -->          |
+|       | 05. Juni  | Anwendung und Fehlerfälle von KI                  | gemeinsam<!-- class="icon-joined" -->          |
 | 10    | 08. Juni  | Generics                                          |                   |
 |       | 12. Juni  | Container                                         |                   |
 | 11    | 15. Juni  | Dokumentation und Build Toolchains                |                   | 
