@@ -34,7 +34,7 @@ link: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklu
 | 6     | 11. Mai   | Klassenelemente in C#  / Interfaces               |                   |
 |       | 15. Mai   | Anwendungsbeispiel **TODO** Godot?                |                   |
 | 7     | 18. Mai   | Versionsmanagement im SWE-Prozess I               | gemeinsam<!-- class="icon-joined" -->          |
-|       | 22. Mai   | Versionsmanagement im SWE_Pprozess II             | gemeinsam<!-- class="icon-joined" -->          |
+|       | 22. Mai   | Versionsmanagement im SWE_Prozess II             | gemeinsam<!-- class="icon-joined" -->          |
 | 8     | 25. Mai   | _Pfingstmontag_<!-- class="holiday icon-pentecoste" -->                                    |   _Pfingstmontag_<!-- class="holiday icon-pentecoste" -->  |
 |       | 29. Mai   | UML Konzepte                                      | gemeinsam<!-- class="icon-joined" -->          |
 | 9     | 01. Juni  | UML Diagrammtypen                                 | gemeinsam<!-- class="icon-joined" -->          |
