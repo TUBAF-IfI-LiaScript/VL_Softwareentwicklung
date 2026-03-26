@@ -1,0 +1,28 @@
+name: Update LiaScript Badge
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  update-badge:
+    name: Update LiaScript badge to latest commit
+    runs-on: ubuntu-latest
+    if: github.event.head_commit.author.name != 'github-actions[bot]'
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update LiaScript badge URL and commit
+        run: |
+          COMMIT_SHA="${{ github.sha }}"
+          sed -i -E "s|(https://LiaScript\.github\.io/course/\?https://raw\.githubusercontent\.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/)[^)]+/README\.md|\1${COMMIT_SHA}/README.md|g" README.md
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --staged --quiet || git commit -m "ci: update LiaScript badge to commit ${COMMIT_SHA::7} [skip ci]"
+          git push
