@@ -1,0 +1,36 @@
+/* linklayout.css – styles for injected PDF download links */
+
+.card-links {
+  margin-top: 0.4rem;
+  margin-bottom: 0.2rem;
+}
+
+.card-links ul.list-inline {
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+.card-links .list-inline-item a {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border: 1px solid #0066a3;
+  border-radius: 0.25rem;
+  color: #0066a3;
+  font-size: 0.82rem;
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.card-links .list-inline-item a:hover {
+  background-color: #0066a3;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.release-not-found {
+  display: inline-block;
+  margin-top: 0.3rem;
+  font-size: 0.78rem;
+  color: #888;
+  font-style: italic;
+}

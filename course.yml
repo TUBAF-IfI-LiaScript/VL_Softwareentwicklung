@@ -1,0 +1,73 @@
+title: >
+  <span style="background-color: rgba(0,106,179,0.75); padding: 5px; color: white">
+    Vorlesung Softwareentwicklung
+  </span>
+
+comment: >
+  <span style="color: rgb(0,106,179); background-color: rgba(255,255,255,0.85)">
+    Arbeitsgruppe Softwareentwicklung und Robotik (TU Bergakademie Freiberg)
+  </span>
+
+logo: https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Universitaetsbibliothek_Freiberg_Fassade.jpg/1024px-Universitaetsbibliothek_Freiberg_Fassade.jpg
+
+icon: https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Logo_TU_Bergakademie_Freiberg.svg/242px-Logo_TU_Bergakademie_Freiberg.svg.png
+
+footer: >
+  Kontakt - Prof. Dr.-Ing. Sebastian Zug -
+  <a href="https://tu-freiberg.de/fakult1/inf/professuren/softwaretechnologie-und-robotik" target="_blank">Lehrstuhl für Softwaretechnologie und Robotik</a>
+  -
+  <a href="mailto:Sebastian.Zug@informatik.tu-freiberg.de">Sebastian.Zug@informatik.tu-freiberg.de</a>
+
+meta:
+  title: VL Softwareentwicklung
+  description: Vorlesungsmaterialien zur Lehrveranstaltung Softwareentwicklung (TU Bergakademie Freiberg)
+
+collection:
+  - title: Softwareentwicklung / Einführung in die Softwareentwicklung (SoSe 2026)
+    comment: >
+      <p>Die Lehrveranstaltung vermittelt Konzepte objektorientierter und interaktiver Programmierung,
+      Syntax und Semantik der Programmiersprache C# sowie die Fähigkeiten, Probleme kollaborativ
+      bei verteilter Verantwortlichkeit von Klassen zu lösen.</p>
+      <p>Die „Quellcodes" aller Vorlesungsmaterialien finden Sie im zugehörigen
+      <a href="https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung">GitHub-Repository</a>.</p>
+    grid: true
+    tags:
+      - C# / dotnet
+      - Programmierparadigmen
+      - Objektorientierung
+      - Versionsverwaltung
+      - GitHub
+      - UML-Modellierung
+      - Softwaretest
+      - Entwurfsmuster
+    collection:
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/00_Einfuehrung.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/01_Software.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/02_DotNet.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/03_CsharpGrundlagenI.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/04_CsharpGrundlagenII.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/05_CsharpGrundlagenIII.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/06_ProgrammflussUndFunktionen.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/07_OOPGrundlagenI.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/08_OOPGrundlagenII.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/09_Vererbung.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/10_AbstrakteKlassenUndInterfaces.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/11_Generics.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/12_Container.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/13_VersionsverwaltungI.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/14_VersionsverwaltungII.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/15_UML_Modellierung.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/16_UML_ModellierungII.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/17_UML_ModellierungIII.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/18_Dokumentation_BuildTools.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/19_Testen.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/20_ContinuousIntegration.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/21_Delegaten.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/22_Events.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/23_Threads.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/24_Tasks.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/25_DesignPattern.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/26_LINQ.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/27_MAUI.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/28_MAUI_II.md
+      - url: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/29_Anwendungen.md

@@ -9,3 +9,5 @@ output/
 bin/
 obj/
 .vscode/
+__pycache__/
+docs/index*.js
