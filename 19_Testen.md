@@ -719,7 +719,7 @@ public class Test_DivideTwoValues
     }
 
     [Fact]
-    public void Check_StateZeroAsDivended()
+    public void Check_StateZeroAsDivisor()
     {
         // Arrange
         double result = 0;
