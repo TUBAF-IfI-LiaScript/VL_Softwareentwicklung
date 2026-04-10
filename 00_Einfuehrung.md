@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug; Galina Rudolf; André Dietrich; Fritz Apelt; `KoKoKotlin`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.9
+version:  1.0.10
 language: de
 narrator: Deutsch Female
 comment:  Motivation der Vorlesung "Softwareentwicklung" und Beschreibung der Organisation der Veranstaltung
@@ -93,7 +93,7 @@ der Ausbildung nahezu aus.
 
 ********************************************************************************
 
-### Warum das Ganze?
+### Warum das Ganze (Big Picture)? 
 
 > Anhand der Veranstaltung entwickeln Sie ein "Gefühl" für guten und schlechten
 > Codeentwürfen und hinterfragen den Softwareentwicklungsprozess.
@@ -106,8 +106,6 @@ der Ausbildung nahezu aus.
 ![An Atlas-Agena 5 carrying the Mariner 1 spacecraft](./img/00_Einleitung/Atlas_Agena_with_Mariner_1.jpg "wikimedia, Autor: NASA, [Link](https://de.wikipedia.org/wiki/Datei:Atlas_Agena_with_Mariner_1.jpg)")
 
 Mariner 1 ging beim Start am 22. Juli 1962 durch ein fehlerhaftes Steuerprogramm verloren, als die Trägerrakete vom Kurs abkam und 293 Sekunden nach dem Start gesprengt werden musste. Ein Entwickler hatte einen Überstrich in der handgeschriebenen Spezifikation eines Programms zur Steuerung des Antriebs übersehen und dadurch statt geglätteter Messwerte Rohdaten verwendet, was zu einer fehlerhaften und potenziell gefährlichen Fehlsteuerung des Antriebs führte.
-
-[Link auf Beschreibung des Bugs](http://www.nfranze.de/download/Diplomarbeit_Nico_Franze.pdf)
 
 > **Potentieller Lösungsansatz**: Testen & Dokumentation
 
@@ -132,17 +130,144 @@ Die On-Board-Units des Systems
 
 *******************************************************************************
 
+### Warum das Ganze (Detail)? 
+
+> __Das nachfolgende Beispiel sollte Ihnen bekannt sein. Welchen Vorteil bringt eine Lösung in Form eines Python Skripts?__
+
+> Gegeben ist ein gleichschenkliges Stabwerk. Dieses besteht aus Stäben $s1$, $s2$ und $s3$ mit den Knoten $A(0,0)$, $B(1,1.5)$ und $C(2,0)$. Dabei ist Knoten $A$ ein Festlager und Knoten $C$ ein Loslager. Im folgenden ist das Stabwerk maßstäblich dargestellt mit der $x$-Achse in horizontaler Richtung und der $y$-Achse in vertikaler Richtung:
+> 
+> ![alt text](./img/00_Einleitung/stabwerk_aufgabe.png)<!--style="width: 100%; max-width: 30vh;"-->
+> 
+> Im Knoten $B$ greift eine Kraft $\boldsymbol{F}$ an mit den Komponenten $\boldsymbol{F} = [-1, -1]\,\text{N}$.
+>
+> __Aufgaben__
+>
+> 1. Leiten Sie aus der Skizze das lineare Gleichungssystem der Form $\boldsymbol{A} \cdot \boldsymbol{x} = \boldsymbol{b}$ her, welches das gezeigte Fachwerk beschreibt und tragen Sie es hier ein. Dabei steht der Lösungsvektor $\boldsymbol{x}$ für die Stab- und Lagerkräfte im Stabwerk.
+> 2. Berechnen Sie die Stab- und Lagerkräfte mit Hilfe der Numpy-Funktion [`numpy.linalg.solve`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html), welche direkt ein System von linearen Gleichungssystemen iterativ lösen kann. Geben Sie die berechneten Kräfte formatiert aus.
+
+Insgesamt gibt es in dieser Aufgabe 6 unbekannte Größen: Die Stabkräfte $F_{s1}$, $F_{s2}$ und $F_{s3}$, die Lagerkräfte im Knoten $A$ in $x$- und $y$-Richtung $F_{Ax}$ und $F_{Ay}$ sowie die Lagerkraft im Knoten $C$ in $y$-Richtung $F_{Cy}$. Daher müssen ebenfalls 6 Gleichungen aufgestellt werden, um die gesuchten Größen berechnen zu können.
+
+Diese 6 Gleichungen erhält man, indem man in den drei Knotenpunkten jeweils das Kräftegleichgewicht in $x$- und $y$-Richtung aufstellt. Beispielhaft soll dieses Vorgehen am Knoten $A$ erläutert werden. In folgender Abbildung sind die Stabkräfte $F_{s1}$ und $F_{s2}$ sowie die Lagerkräfte am Knoten $A$ angezeichnet:
+
+![alt text](./img/00_Einleitung/stabwerk_erlaeuterung.png)
+
+Die zwei Kräftegleichgewichte in $x$- und $y$-Richtung lauten dann wie folgt:
+
+$$ \begin{align*} F_{s1} \cos{\alpha} + F_{s3} + F_{Ax}&= 0 \\ F_{s1} \sin{\alpha} + F_{Ay} &= 0 \end{align*} $$
+
+Analog werden die Kräftegleichgewichte in den Knotenpunkten $B$ und $C$ gebildet. Anschließend können die Koeffizienten für die Koeffizientenmatrix und der konstante Vektor aufgestellt werden.
+
+#### Schritt 1: Modellierung
+
+Für alle 6 Gleichungen in den Knoten $A$, $B$ und $C$ gilt:
+
+$$ \begin{align*} F_{s1} \cos{\alpha} + F_{s3} + F_{Ax} &= 0 \\ F_{s1} \sin{\alpha} + F_{Ay} &= 0 \\ -F_{s1} \sin{\frac{\alpha}{2}} + F_{s2} \sin{\frac{\alpha}{2}} - F_x &= 0 \\ -F_{s1} \cos{\frac{\alpha}{2}} - F_{s2} \cos{\frac{\alpha}{2}} - F_y &= 0 \\ - F_{s2} \cos{\alpha} - F_{s3}  &= 0 \\ F_{s2} \sin{\alpha} + F_{Cy} &= 0\end{align*}$$
+
+
+Daraus kannn das linearen Gleichungssystem mit Koeffizientenmatrix $\boldsymbol{A}$ und konstantem Vektor $\boldsymbol{b}$ abgeleitet werden:
+
+$$ \begin{pmatrix} \cos{\alpha} & 0 & 1 & 1 & 0 & 0 \\ \sin{\alpha} & 0 & 0 & 0 & 1 & 0 \\ -\sin{\frac{\beta}{2}} & \sin{\frac{\beta}{2}} & 0 & 0 & 0 & 0 \\ -\cos{\frac{\beta}{2}} & -\cos{\frac{\beta}{2}} & 0 & 0 & 0 & 0 \\ 0 & -\cos{\alpha} & -1 & 0 & 0 & 0 \\ 0 & \sin{\alpha} & 0 & 0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix} F_{s1} \\ F_{s2} \\ F_{s3} \\ F_{Ax} \\ F_{Ay} \\ F_{Cy} \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ F_x \\ F_y \\ 0 \\ 0 \end{pmatrix} $$
+
+Die Winkel $\alpha$ und $\beta$ können mit Hilfe des Arkustangens und der geometrischen Abmessungen direkt bestimmt werden:
+
+$$ \begin{align*} \alpha &= \arctan{\frac{1.5}{1}} \approx 56{,}31^\circ \\ \beta &= 180^\circ - 2\,\alpha \approx 67{,}38^\circ \end{align*} $$
+
+#### Schritt 2: Transformation
+
+```python CalcSolution.py
+# Laden der Module
+import numpy as np
+
+# Berechnung der Winkel
+alpha = np.arctan(1.5/1)
+beta = np.pi - 2*alpha
+
+# Komponenten des Kraftvektors
+Fx = -1
+Fy = -1
+
+# Koeffizientenmatrix
+A = np.array([
+    [np.cos(alpha), 0, 1, 1, 0, 0],
+    [np.sin(alpha), 0, 0, 0, 1, 0],
+    [-np.sin(0.5*beta), np.sin(0.5*beta), 0, 0, 0, 0],
+    [-np.cos(0.5*beta), -np.cos(0.5*beta), 0, 0, 0, 0],
+    [0, -np.cos(alpha), -1, 0, 0, 0],
+    [0, np.sin(alpha), 0, 0, 0, 1]]
+    )
+
+b = np.array([0, 0, Fx, Fy, 0, 0])
+x = np.linalg.solve(A, b)
+
+print(f"Die Kräfte im Stabwerk sind wie folgt:")
+print(f"    Stabkraft 1 = {x[0]:.3f} N")
+print(f"    Stabkraft 2 = {x[1]:.3f} N")
+print(f"    Stabkraft 3 = {x[2]:.3f} N")
+print(f"    Lagerkraft Ax = {x[3]:.3f} N")
+print(f"    Lagerkraft Ay = {x[4]:.3f} N")
+print(f"    Lagerkraft Cy = {x[5]:.3f} N")
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`, `*`)
+
+#### Schritt 3: Analyse
+
+Ein entscheidender Vorteil der skriptbasierten Lösung wird sichtbar, sobald wir die Eingangsgrößen variieren wollen. Im folgenden Beispiel wird $F_x$ im Bereich $[-5, 5]\,\text{N}$ durchlaufen (bei konstantem $F_y = -1\,\text{N}$) und die resultierende Stabkraft $F_{s1}$ aufgetragen.
+
+> **Hinweis:** Da die Koeffizientenmatrix $\boldsymbol{A}$ nur von der Geometrie abhängt und der Vektor $\boldsymbol{b}$ linear in $F_x$ ist, ist auch die Lösung $\boldsymbol{x} = \boldsymbol{A}^{-1} \boldsymbol{b}$ **linear** in $F_x$. Die resultierende Kurve ist also eine Gerade — ein erster Hinweis auf den linearen Charakter des Modells.
+
+```python ParameterStudy.py
+import numpy as np
+import matplotlib.pyplot as plt
+
+alpha = np.arctan(1.5/1)
+beta = np.pi - 2*alpha
+Fy = -1
+
+A = np.array([
+    [np.cos(alpha), 0, 1, 1, 0, 0],
+    [np.sin(alpha), 0, 0, 0, 1, 0],
+    [-np.sin(0.5*beta), np.sin(0.5*beta), 0, 0, 0, 0],
+    [-np.cos(0.5*beta), -np.cos(0.5*beta), 0, 0, 0, 0],
+    [0, -np.cos(alpha), -1, 0, 0, 0],
+    [0, np.sin(alpha), 0, 0, 0, 1]]
+    )
+
+Fx_range = np.linspace(-5, 5, 101)
+Fs1 = np.zeros_like(Fx_range)
+
+for i, Fx in enumerate(Fx_range):
+    b = np.array([0, 0, Fx, Fy, 0, 0])
+    x = np.linalg.solve(A, b)
+    Fs1[i] = x[0]
+
+plt.figure(figsize=(7, 4))
+plt.plot(Fx_range, Fs1, label=r"$F_{s1}(F_x)$")
+plt.axhline(0, color="gray", linewidth=0.5)
+plt.axvline(0, color="gray", linewidth=0.5)
+plt.xlabel(r"$F_x$ in N")
+plt.ylabel(r"$F_{s1}$ in N")
+plt.title(r"Stabkraft $F_{s1}$ in Abhängigkeit von $F_x$ (bei $F_y=-1\,$N)")
+plt.grid(True)
+plt.legend()
+plt.tight_layout()
+plt.savefig("Fs1_vs_Fx.png", dpi=120)
+print("Plot gespeichert als Fs1_vs_Fx.png")
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`, `*`)
+
 ## Organisatorisches
 
 ![Animation einer Ordnung auf dem Schreibtisch](https://media.giphy.com/media/uMaTkVdfhzlemBQD3g/giphy.gif)<!--style="width: 100%; max-width: 80vh;"-->
 
 ### Dozenten
 
-| Name                    | Email                                   | Fakultät |
-| :---------------------- | :-------------------------------------- | -------- |
-| Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de | 1        |
-| Dr. Galina Rudolf       | galina.rudolf@informatik.tu-freiberg.de | 1        |
-| Dr. Martin Heinrich     | Martin.Heinrich@imfd.tu-freiberg.de     | 4        |
+<!--data-type="none"-->
+| Name                    | Email                                    | Fakultät |
+| :---------------------- | :--------------------------------------- | -------- |
+| Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de  | 1        |
+| Volker Göhler           | volker.goehler@informatik.tu-freiberg.de | 1        |
+| Niclas Laaser           |                                          | 1         |
+| Dr. Martin Heinrich     | Martin.Heinrich@imfd.tu-freiberg.de      | 4        |
 
 ### Ablauf
 
@@ -155,10 +280,11 @@ Vorlesungen:
 | --------------- | -------------------------------- | --------------------------------------------------------------------------- |
 | Hörerkreis      | Fakultät 1 + interessierte Hörer | Fakultät 4 - Studiengang Engineering                                        |
 | Leistungspunkte | 9                                | 6                                                                           |
-| Vorlesungen     | 26 (3 Feiertage )                | 15 (bis 31. Mai 2025)                                                       |
-| Übungen         | ab 28. April 2 x wöchentlich     | voraussichtlich ab XXX Mai 1 x wöchentlich (8 Termine)                      |
+| Vorlesungen     | 27 (3 Feiertage )                | 15 (bis 5. Juni 2026)                                                       |
+| Übungen         | ab 20. April 2 x wöchentlich     | voraussichtlich ab XXX Mai 1 x wöchentlich (8 Termine)                      |
 | Prüfungsform    | Klausur oder Projekt             | PVL-Testat in der zweiten Junihälftet für den ersten Teil der Veranstaltung |
 |                 |                                  | maschinenbauspezifisches Software-Projekt (im Wintersemester 2025/26)       |
+| OPAL Link | https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/53739290626?13 | https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/29670014981/CourseNode/1711683291041972009 |
 
 > **Ermunterung an unsere EiS-Hörer**: Nehmen Sie an der ganzen Vorlesungsreihe
 > teil. Den Einstieg haben Sie ja schon gelegt ...
@@ -166,38 +292,42 @@ Vorlesungen:
 
 ### Struktur der Vorlesungen
 
-<!--data-type="none"-->
-| Woche | Tag       | SWE                                      | Einführung in SWE                                      |
-| :---- | --------- | :--------------------------------------- | ------------------------------------------------------ |
-| 1     | 4. April  | Organisation, Einführung                 | gemeinsam                                              |
-| 2     | 7. April  | Softwareentwicklung als Prozess          | gemeinsam                                              |
-|       | 11. April | Konzepte von Dotnet und C#               | Python: Einordnung,Eigenschaften, Entwicklungsumgebung |
-| 3     | 14. April | Elemente der Sprache C# I                | (Module), Elemente der Sprache                         |
-|       | 18. April | _Karfreitag_                             | _Karfreitag_                                           |
-| 4     | 21. April | _Ostermontag_                            | _Ostermontag_                                          |
-|       | 25. April | Elemente der Sprache C# II               | Listen, Kontrollstrukturen, ListComprehension          |
-| 5     | 28. April | Strukturen / Konzepte der OOP            | Erweiterte Typen: Tupel, Dictionary, Set               |
-|       | 2. Mai    | Säulen Objektorientierter Programmierung | Funktionen                                             |
-| 6     | 5. Mai    | Klassenelemente in C#  / Vererbung       | Konzepte der OOP                                       |
-|       | 9. Mai    | Klassenelemente in C#  / Interfaces      | OOP, Elemente der Klasse                               |
-| 7     | 12. Mai   | Versionsmanagement im SWE-Prozess I      | gemeinsam                                              |
-|       | 16. Mai   | Versionsmanagement im SWE_Pprozess II    | gemeinsam                                              |
-| 8     | 19. Mai   | Generics                                 | Private und öffentliche Methoden, Vererbung            |
-|       | 23. Mai   | Container                                | Datenanalyse /Datenvisualisierung                      |
-| 9     | 26. Mai   | UML Konzepte                             | gemeinsam                                              |
-|       | 30. Mai   | UML Diagrammtypen                        | gemeinsam                                              |
-| 10    | 2. Juni   | UML Anwendungsbeispiel                   |--------------------------------------------------------|
-|       | 6. Juni   | Testen                                   |                                                        |
-| 11    | 9. Juni   | _Pfingstmontag_                          |                                                        |
-|       | 13. Juni  | Dokumentation und Build Toolchains       |                                                        |
-| 12    | 16. Juni  | Continuous Integration in GitHub         |                                                        |
-|       | 20. Juni  | Delegaten                                |                                                        |
-| 13    | 23. Juni  | Events                                   |                                                        |
-|       | 27. Juni  | Threadkonzepte in C#                     |                                                        |
-| 14    | 30. Juni  | Taskmodell                               |                                                        |
-|       | 4. Juli   | Design Pattern                           |                                                        |
-| 15    | 7. Juli   | Language Integrated Query                |                                                        |
-|       | 11. Juli  | GUI - MAUI                               |                                                        |
+<!--
+  data-type="none"
+-->
+| Woche | Tag       | SWE                                               | Einführung in SWE |
+| :---- | --------- | :------------------------------------------------ |-------------------|
+| 1     | 06. April | _Ostermontag_<!-- class="holiday icon-easter" --> | _Ostermontag_<!-- class="holiday icon-easter" -->      |
+|       | 10. April | Organisation, Einführung                         | gemeinsam<!-- class="icon-joined" -->         |
+| 2     | 13. April | Softwareentwicklung als Prozess                  | gemeinsam<!-- class="icon-joined" -->         |
+|       | 17. April | Konzepte von Dotnet und C#                        |                   |
+| 3     | 20. April | Elemente der Sprache C# I                         | **Beginn der Übungen**<!-- class="icon-exercise" --> |
+|       | 24. April | Elemente der Sprache C# II                        |                   |
+| 4     | 27. April | Strukturen / Konzepte der OOP                     |                   |
+|       | 01. Mai   | _Erster Mai_<!-- class="holiday icon-mayday" -->                                       |  _Erster Mai_<!-- class="holiday icon-mayday" -->      |
+| 5     | 04. Mai   | Säulen Objektorientierter Programmierung          | gemeinsam<!-- class="icon-joined" -->          |
+|       | 08. Mai   | Klassenelemente in C#  / Vererbung                |                   |
+| 6     | 11. Mai   | Klassenelemente in C#  / Interfaces               |                   |
+|       | 15. Mai   | Anwendungsbeispiel **TODO** Godot?                |                   |
+| 7     | 18. Mai   | Versionsmanagement im SWE-Prozess I               | gemeinsam<!-- class="icon-joined" -->          |
+|       | 22. Mai   | Versionsmanagement im SWE_Prozess II             | gemeinsam<!-- class="icon-joined" -->          |
+| 8     | 25. Mai   | _Pfingstmontag_<!-- class="holiday icon-pentecoste" -->                                    |   _Pfingstmontag_<!-- class="holiday icon-pentecoste" -->  |
+|       | 29. Mai   | UML Konzepte                                      | gemeinsam<!-- class="icon-joined" -->          |
+| 9     | 01. Juni  | UML Diagrammtypen                                 | gemeinsam<!-- class="icon-joined" -->          |
+|       | 05. Juni  | Anwendung und Fehlerfälle von KI                  | gemeinsam<!-- class="icon-joined" -->          |
+| 10    | 08. Juni  | Generics                                          |                   |
+|       | 12. Juni  | Container                                         |                   |
+| 11    | 15. Juni  | Dokumentation und Build Toolchains                |                   | 
+|       | 19. Juni  | Delegaten                                         |                   |
+| 12    | 22. Juni  | Events                                            |                   |
+|       | 26. Juni  | Threadkonzepte in C#                              |                   |
+| 13    | 29. Juni  | Taskmodell                                        |                   |
+|       | 03. Juli  | Testen                                            |                   |
+| 14    | 06. Juli  | Continuous Integration in GitHub                  |                   |
+|       | 10. Juli  | Design Pattern                                    |                   |
+| 15    | 13. Juli  | Language Integrated Query                         |                   |
+|       | 17. Juli  | GUI - MAUI                                        |                   |
+
 
 
 ### Durchführung
@@ -207,18 +337,12 @@ Vorlesungen:
 
 Die Vorlesung findet
 
-- Montags, 11:30 - 13:00
-- Freitags, 9:45 - 11:15
+- Montags,  18:00 - 19:30
+- Freitags, 08:00 - 09:30
 
-im Audimax 1001 statt,
+im Audimax 1001 (**SWE**) und in KKB-2030 (**Einführung in SWE**) statt,
 
-für Studierende der FAK-4 vom 12.4. bis 10.5. in KKB-2030.
-
-Die Vorlesung wurden im Sommersemester 2021 vollständig aufgezeichnet. Teile der Inhalte wurden nicht verändert und finden sich unter
-
-https://teach.informatik.tu-freiberg.de/b/seb-blv-unz-kxu
-
-> Diese Materialien können der Nachbereitung der Veranstaltung dienen, ersetzen aber nicht den Besuch der Vorlesung, da diese sich an vielen Stellen gewandelt hat.
+> Achten Sie im Zeitplan auf die mit "gemeinsam" gekennzeichneten Termine, die wir hier im Audimax übergreifend anbieten.
 
 Die Materialien der Vorlesung sind als Open-Educational-Ressources konzipiert
 und stehen unter Github bereit.
@@ -258,54 +382,9 @@ Lösungen im Detail besprochen werden. Wir werden die Realisierung der Übungsau
 > * __Individuelle Fragen__ ... an die Übungsleiter per Mail oder in einer
 >   individuellen Session
 
-Für die Übungen  werden wir Aufgaben
-vorbereiten, mit denen die Inhalte der Vorlesung vertieft werden. Wir motivieren
-Sie sich dafür ein Gruppen von 2 Studierenden zu organisieren.
+Für die Übungen  werden wir Aufgaben vorbereiten, mit denen die Inhalte der Vorlesung vertieft werden. 
 
-<!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 815px;" -->
-```ascii
-                   .-.       .-.
- Einführung C#    (0-2)     ( 3 ) Einführung Git/ GitHub
-                   '-'       '-'  Teamarbeit
-                     \       /
-                      \     /
-                       v   v
-                        .-.
-                       ( 4 )  Objektorientierte Programmierung
-                        '-'
-                         |
-                         v
-                        .-.
-  Alle Teilnehmer      ( 5 )  Objektorientierte Programmierung
-                        '-'
-                         |
-                         v
-  Informatiker          .-.
-  Mathematiker         ( 6 )  Erweiterte OOP Konzepte, Generics
-                        '-'   Entwurfsmuster
-                         |
-                         v
-                        .-.
-                       ( 7 )  Collections, Delegaten, Events
-                        '-'
-```
-
-<!--data-type="none"-->
-| Index | C#     | GitHub | Teamarbeit | Inhalte / Teilaufgaben                                         | Woche |
-| ----- | ------ | ------ | ---------- | -------------------------------------------------------------- |:-----:|
-| 0     | Basics | nein   | nein       | Toolchain, Datentypen, Fehler, Ausdrücke,                      |   5   |
-| 1     |        |        |            | Kontrollfluss, Arrays                                          |   6   |
-| 2     |        |        |            | static Funktionen, Klasse und Struktur, Nullables              |   7   |
-| 3     | -      | ja     | ja         | Github am Beispiel von Markdown                                |   8   |
-| 4     | OOP    | ja     | ja         | Einführungsbeispiel OOP,                                       |   9   |
-|       |        |        |            | *Anwendungsbeispiel:* Computersimulation                       |       |
-| 5     | OOP    | ja     | ja         | Vererbung, virtuelle Methoden, Indexer, Überladene Operatoren, | 10-11 |
-|       |        |        |            | *Anwendungsbeispiel:*  Smartphone (Entwurf mit UML)            |       |
-| 6     | OOP    | ja     | ja         | Vererbung, abstract, virtuell, Generics                        | 12-13 |
-|       |        |        |            | *Anwendungsbeispiel:* Zoo                                      |       |
-| 7     | OOP    | ja     | ja         | Genererische Collections, Delegaten, Events                    | 14-15 |
-|       |        |        |            | *Anwendungsbeispiel:* ???????                                  |       |
-
+> Hinweis auf das Agententeam und den damit einhergehenden Versuch während des Semester.
 
 ************************************************************************
 
@@ -384,104 +463,31 @@ sondern erfordert eine individuelle Suche nach spezifischen Inhalten.
   **Algorithmen**
   + [Codebeispiele](http://www.rosettacode.org/wiki/Category:Programming_Tasks)
 
-## Wozu brauche ich das?
-
-> __Das nachfolgende Beispiel sollte Ihnen bekannt sein. Welchen Vorteil bringt eine Lösung in Form eines Python Skripts?__
-
-> Gegeben ist ein gleichschenkliges Stabwerk. Dieses besteht aus Stäben $s1$, $s2$ und $s3$ mit den Knoten $A(0,0)$, $B(1,1.5)$ und $C(2,0)$. Dabei ist Knoten $A$ ein Festlager und Knoten $C$ ein Loslager. Im folgenden ist das Stabwerk maßstäblich dargestellt mit der $x$-Achse in horizontaler Richtung und der $y$-Achse in vertikaler Richtung:
-> 
-> ![alt text](./img/00_Einleitung/stabwerk_aufgabe.png)<!--style="width: 100%; max-width: 30vh;"-->
-> 
-> Im Knoten $B$ greift eine Kraft $\boldsymbol{F}$ an mit den Komponenten $\boldsymbol{F} = [-1, -1]\,\text{N}$.
->
-> __Aufgaben__
->
-> 1. Leiten Sie aus der Skizze das lineare Gleichungssystem der Form $\boldsymbol{A} \cdot \boldsymbol{x} = \boldsymbol{b}$ her, welches das gezeigte Fachwerk beschreibt und tragen Sie es hier ein. Dabei steht der Lösungsvektor $\boldsymbol{x}$ für die Stab- und Lagerkräfte im Stabwerk.
-> 2. Berechnen Sie die Stab- und Lagerkräfte mit Hilfe der Numpy-Funktion [`numpy.linalg.solve`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html), welche direkt ein System von linearen Gleichungssystemen iterativ lösen kann. Geben Sie die berechneten Kräfte formatiert aus.
-
-Insgesamt gibt es in dieser Aufgabe 6 unbekannte Größen: Die Stabkräfte $F_{s1}$, $F_{s2}$ und $F_{s3}$, die Lagerkräfte im Knoten $A$ in $x$- und $y$-Richtung $F_{Ax}$ und $F_{Ay}$ sowie die Lagerkraft im Knoten $C$ in $y$-Richtung $F_{Cy}$. Daher müssen ebenfalls 6 Gleichungen aufgestellt werden, um die gesuchten Größen berechnen zu können.
-
-Diese 6 Gleichungen erhält man, indem man in den drei Knotenpunkten jeweils das Kräftegleichgewicht in $x$- und $y$-Richtung aufstellt. Beispielhaft soll dieses Vorgehen am Knoten $A$ erläutert werden. In folgender Abbildung sind die Stabkräfte $F_{s1}$ und $F_{s2}$ sowie die Lagerkräfte am Knoten $A$ angezeichnet:
-
-![alt text](./img/00_Einleitung/stabwerk_erlaeuterung.png)
-
-Die zwei Kräftegleichgewichte in $x$- und $y$-Richtung lauten dann wie folgt:
-
-$$ \begin{align*} F_{s1} \cos{\alpha} + F_{s3} + F_{Ax}&= 0 \\ F_{s1} \sin{\alpha} + F_{Ay} &= 0 \end{align*} $$
-
-Analog werden die Kräftegleichgewichte in den Knotenpunkten $B$ und $C$ gebildet. Anschließend können die Koeffizienten für die Koeffizientenmatrix und der konstante Vektor aufgestellt werden.
-
-### Teilaufgabe 1
-
-Für alle 6 Gleichungen in den Knoten $A$, $B$ und $C$ gilt:
-
-$$ \begin{align*} F_{s1} \cos{\alpha} + F_{s3} + F_{Ax} &= 0 \\ F_{s1} \sin{\alpha} + F_{Ay} &= 0 \\ -F_{s1} \sin{\frac{\alpha}{2}} + F_{s2} \sin{\frac{\alpha}{2}} - F_x &= 0 \\ -F_{s1} \cos{\frac{\alpha}{2}} - F_{s2} \cos{\frac{\alpha}{2}} - F_y &= 0 \\ - F_{s2} \cos{\alpha} - F_{s3}  &= 0 \\ F_{s2} \sin{\alpha} + F_{Cy} &= 0\end{align*}$$
-
-
-Daraus kannn das linearen Gleichungssystem mit Koeffizientenmatrix $\boldsymbol{A}$ und konstantem Vektor $\boldsymbol{b}$ abgeleitet werden:
-
-$$ \begin{pmatrix} \cos{\alpha} & 0 & 1 & 1 & 0 & 0 \\ \sin{\alpha} & 0 & 0 & 0 & 1 & 0 \\ -\sin{\frac{\beta}{2}} & \sin{\frac{\beta}{2}} & 0 & 0 & 0 & 0 \\ -\cos{\frac{\beta}{2}} & -\cos{\frac{\beta}{2}} & 0 & 0 & 0 & 0 \\ 0 & -\cos{\alpha} & -1 & 0 & 0 & 0 \\ 0 & \sin{\alpha} & 0 & 0 & 0 & 1\end{pmatrix} \cdot \begin{pmatrix} F_{s1} \\ F_{s2} \\ F_{s3} \\ F_{Ax} \\ F_{Ay} \\ F_{Cy} \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ F_x \\ F_y \\ 0 \\ 0 \end{pmatrix} $$
-
-Die Winkel $\alpha$ und $\beta$ können mit Hilfe des Arkustangens und der geometrischen Abmessungen direkt bestimmt werden:
-
-$$ \begin{align*} \alpha &= \arctan{\frac{1.5}{1}} \approx 56{,}31^\circ \\ \beta &= 180^\circ - 2\,\alpha \approx 67{,}38^\circ \end{align*} $$
-
-### Teilaufgabe 2
-
-```python CalcSolution.py
-# Laden der Module
-import numpy as np
-
-# Berechnung der Winkel
-alpha = np.arctan(1.5/1)
-beta = np.pi - 2*alpha
-
-# Betrag der Komponenten des Kraftvektors
-Fx = 1
-Fy = 1
-
-# Koeffizientenmatrix
-A = np.array([
-    [np.cos(alpha), 0, 1, 1, 0, 0],
-    [np.sin(alpha), 0, 0, 0, 1, 0],
-    [-np.sin(0.5*beta), np.sin(0.5*beta), 0, 0, 0, 0],
-    [-np.cos(0.5*beta), -np.cos(0.5*beta), 0, 0, 0, 0],
-    [0, -np.cos(alpha), -1, 0, 0, 0],
-    [0, np.sin(alpha), 0, 0, 0, 1]]
-    )
-
-b = np.array([0, 0, Fx, Fy, 0, 0])
-x = np.linalg.solve(A, b)
-
-print(f"Die Kräfte im Stabwerk sind wie folgt:")
-print(f"    Stabkraft 1 = {x[0]:.3f} N")
-print(f"    Stabkraft 2 = {x[1]:.3f} N")
-print(f"    Stabkraft 3 = {x[2]:.3f} N")
-print(f"    Lagerkraft Ax = {x[3]:.3f} N")
-print(f"    Lagerkraft Ay = {x[4]:.3f} N")
-print(f"    Lagerkraft Cy = {x[5]:.3f} N")
-```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`, `*`)
-
-### Zoom in:Informatik  
-
-> _Mmmh ... ich habe nicht nur das Gefühl, dass ich nicht nur "etwas" nicht verstanden habe, sondern mir fehlt das große Bild!_
->
-> _Ich möchte keine komischen Blicke von den Informatikern sehen, wenn ich zwei mal nachfrage!_
-
-Probeweise bieten wir das Format __Zoom in: Informatik__ an. Damit soll insbesondere die Maschinenbauer in wöchtentlichen Terminen (Freitags 13:00-14:00, ab nächster Woche) die Möglichkeit gegeben werden, Fragen zu stellen und sich mit den Informatikern auszutauschen. Die Termine sind nicht verpflichtend und sollen Ihnen helfen, die Inhalte der Vorlesung besser zu verstehen.
-
-Die Veranstaltung wird in der Universitätsbibliothek stattfinden.
-
 ## Werkzeuge der Veranstaltung
 
     --{{0}}--
 Was sind die zentralen Tools unserer Veranstaltung?
 
-* _Vorlesungstool_ -> BigBlueButton für die Aufzeichnungen aus dem vergangenen Semester 
-* _Entwicklungsplattform_ -> [GitHub](https://github.com/)
+* _Editoren_
 * _Beschreibungssprache für Lerninhalte_ -> [LiaScript](https://liascript.github.io/)
+* _Entwicklungsplattform_ -> [GitHub](https://github.com/)
 * _KIs_ 
+
+
+### Entwicklungsumgebungen
+
+    --{{0}}--
+**Seien Sie neugierig und probieren Sie verschiedene Tools und Editoren aus!**
+
+* [Visual Studio Code](https://code.visualstudio.com/)
+
+  !?[Tutorial](https://www.youtube.com/watch?v=rOzXt--TXLg)
+
+* [neoVIM](https://neovim.io/)
+
+  !?[C# Vim Development Setup](https://www.youtube.com/watch?v=qGl_Mb2C87c)
+
+* weitere ...
 
 ### Markdown
 
@@ -722,28 +728,7 @@ foreach(int prime in primes) Console.Write($" {prime}");
 ```
 @LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
----
-
-**C# 8 mit mono**
-
-```csharp    HelloWorld.cs
-using System;
-
-namespace HelloWorld
-{
-  public class Program
-  {
-    static void Main(string[] args)
-    {
-      Console.WriteLine("Glück auf!");
-    }
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-> **Frage:**
-> Welche Unterschiede sehen Sie zwischen C#8 und C#10 Code schon jetzt?
+> Das Beispiel illustriert wie wichtig die EXPLIZITE Konfiguration ist. Auf dem Coderunnerserver ist die dotnet SDK in der Version 8.0 installiert. Um das Beispiel zum Laufen zu bringen, muss die Anforderung in der Konfigurationsdatei angepasst werden.
 
 *******************************************************************************
 
@@ -754,14 +739,10 @@ namespace HelloWorld
 
 * Das Projekt: https://github.com/liascript/liascript
 * Die Webseite: https://liascript.github.io
-* Nützliches
+* [Dokumentation zu LiaScript](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md#1)
+* LiveEditor: https://liascript.github.io/LiveEditor/
 
-  * [Dokumentation zu LiaScript](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md#1)
-  * [YouTube Kanal zu LiaScript](https://www.youtube.com/channel/UCyiTe2GkW_u05HSdvUblGYg)
-
-* Editoren
-
-  !?[Tutorial](https://www.youtube.com/watch?v=8vFYMo5xqyY)
+> Demo: Einsatz eines LLM für die Generierung eines LiaScript Kurses
 
 *******************************************************************************
 
@@ -784,37 +765,59 @@ https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung
 >    das Projektmanagement wie das Open Source Projekt GitLab oder weitere
 >    kommerzielle Tools BitBucket, Google Cloud Source Repositories etc.
 
-### Entwicklungsumgebungen
+!?[](https://private-user-images.githubusercontent.com/10922356/293702414-00a24602-dc63-4b9a-894b-80967b914513.mp4?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NzU3OTMzNzgsIm5iZiI6MTc3NTc5MzA3OCwicGF0aCI6Ii8xMDkyMjM1Ni8yOTM3MDI0MTQtMDBhMjQ2MDItZGM2My00YjlhLTg5NGItODA5NjdiOTE0NTEzLm1wND9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNjA0MTAlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjYwNDEwVDAzNTExOFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWIzODYwNjY0YTZmYTA0NTI4N2JmNmRhOGYwYTU4OTBlYTdjMmM0YTc3ZDFkNDk0YjA1Mzg3NGViOGQ4MTE0ZmUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.lPQaYMVlY-zR28_6VH2W0rxiOdOiHTvqx-LUrlaBsoc)
 
-    --{{0}}--
-**Seien Sie neugierig und probieren Sie verschiedene Tools und Editoren aus!**
 
-* [Visual Studio Code](https://code.visualstudio.com/)
+### LLMs und KI-gestützte Programmierung
 
-  !?[Tutorial](https://www.youtube.com/watch?v=rOzXt--TXLg)
+In der Veranstaltung ist es ausdrücklich erwünscht, dass Sie mit LLMs wie ChatGPT, GitHub Copilot, Claude oder Cursor arbeiten. Diese Werkzeuge sind aus dem professionellen Arbeitsalltag nicht mehr wegzudenken und werden auch Ihre Tätigkeit als Softwareentwicklerin oder Softwareentwickler prägen. Sie können beim Generieren von Code helfen, beim Debuggen unterstützen, Refactorings vorschlagen, Tests erzeugen und Dokumentation schreiben.
 
-* [neoVIM](https://neovim.io/)
+#### Werkzeuglandschaft
 
-  !?[C# Vim Development Setup](https://www.youtube.com/watch?v=qGl_Mb2C87c)
+Die KI-Werkzeuge unterscheiden sich in der Art, wie sie in den Entwicklungsprozess eingebunden sind:
 
-* weitere ...
+<!--data-type="none"-->
+| Werkzeugtyp | Beispiele | Arbeitsweise |
+|-------------|-----------|--------------|
+| **Chat-Interface** | ChatGPT, Claude.ai, Gemini | Dialogbasiert, außerhalb der IDE |
+| **IDE-Integration (Autocomplete)** | GitHub Copilot, Supermaven | Inline-Vorschläge während des Tippens |
+| **Agentische IDE** | Cursor, Windsurf, VS Code + Copilot Chat | Mehrdateien-Edits, Kontext aus dem Projekt |
+| **Terminal-Agenten** | Claude Code, Aider, Codex CLI | Autonome Ausführung mit Tool-Zugriff |
 
-### LLMs
+#### Nutzung
 
-In der Veranstaltung ist es ausdrücklich erwünscht, dass Sie mit LLMs wie ChatGPT, CoPilot oder ClaudAI arbeiten. Diese Tools sind nicht nur für die Vorlesung nützlich, sondern auch für Ihre zukünftige Karriere als Softwareentwickler. Sie können Ihnen helfen, Code zu generieren, Fehler zu beheben und komplexe Probleme zu lösen.
+Der entscheidende Punkt: LLMs sind **Werkzeuge, keine Orakel**. Ihre Qualität als Ergebnisquelle hängt direkt von drei Faktoren ab:
 
-> Die Effizienz der Nutzung hängt stark von der Qualität der Eingabeaufforderung ab. Diese wiederum können Sie nur generieren, wenn Sie ein solides Wissen zur Algorithmen- und Softwareentwicklung haben. 
+1. **Kontext, den Sie geben:** Je präziser Sie das Problem, die Randbedingungen und den existierenden Code beschreiben, desto brauchbarer der Vorschlag. "Schreib mir eine Sortierfunktion" ist schlechter als "Sortiere diese `List<Order>` nach `CreatedAt` absteigend, stabil, in C# mit LINQ".
+2. **Ihre Fähigkeit, Vorschläge zu bewerten:** Ein Vorschlag, den Sie nicht verstehen, dürfen Sie nicht übernehmen. Das ist keine didaktische Phrase, sondern eine professionelle Anforderung — Sie sind für den Code verantwortlich, den Sie committen, nicht das Modell.
+3. **Iteratives Vorgehen:** Selten ist der erste Vorschlag der beste. Nachfragen, präzisieren, Alternativen erbitten, Begründungen einfordern.
 
-In der Klausur und den Testaten haben Sie keinen Zugriff darauf!
+> Die Effizienz der Nutzung hängt stark von der Qualität der Eingabeaufforderung ab. Diese wiederum können Sie nur generieren, wenn Sie ein solides Wissen zur Algorithmen- und Softwareentwicklung haben.
+
+#### Grenzen und typische Fehlerfälle
+
+LLMs produzieren Text, der statistisch plausibel wirkt — nicht notwendigerweise Text, der korrekt ist. Typische Probleme, auf die Sie stoßen werden:
+
+- **Halluzinierte APIs:** Das Modell schlägt Methoden oder Bibliotheken vor, die es nicht gibt, die aber plausibel klingen.
+- **Veraltete Syntax:** Trainingsdaten haben einen Stichtag. Neue Sprachfeatures oder API-Änderungen kennt das Modell möglicherweise nicht.
+- **Subtil falscher Code:** Der Code kompiliert und sieht richtig aus, enthält aber einen Off-by-One-Fehler, eine Race Condition oder eine fehlende Randfall-Behandlung.
+- **Sicherheitslücken:** SQL-Injection, fehlende Input-Validierung, unsichere Kryptografie — all das wird mitgeneriert, wenn es im Kontext nicht ausgeschlossen wird.
+- **Plausible, aber falsche Erklärungen:** Besonders heimtückisch, wenn Sie das Thema noch nicht kennen.
+
+Ein wesentliches Ziel dieser Vorlesung ist es, dass Sie lernen, solche Fehler zu erkennen. Die Vorlesung in Woche 9 widmet sich den Anwendungsmöglichkeiten und Fehlerfällen von KI im Detail.
+
+#### KI-Agenten im Übungsbetrieb
+
+Die Übungen gehen einen Schritt weiter: Sie arbeiten in einem GitHub-Repository mit **mehreren KI-Agenten**, die Teammitglieder mit unterschiedlichen Persönlichkeiten simulieren — eine erfahrene Maintainerin, einen sorglosen Junior-Entwickler, eine skeptische Senior-Reviewerin und einen übermotivierten Projektmanager. Ziel ist nicht nur der Umgang mit den Werkzeugen, sondern auch die Erfahrung, wie Kommunikation, Code Reviews und Anforderungsmanagement in einem realistischen Team ablaufen. Details dazu finden Sie im Übungskonzept.
+
+#### Klausur und Prüfungsleistungen
+
+In der Klausur und in den Testaten haben Sie **keinen Zugriff** auf LLMs. Das hat einen einfachen Grund: Wir prüfen, ob Sie die Konzepte selbst verstanden haben. Wer sich in den Übungen ausschließlich auf KI-generierten Code verlässt, wird in der Prüfung scheitern. Nutzen Sie die Werkzeuge daher so, dass Sie dabei *lernen* — lassen Sie sich Dinge erklären, hinterfragen Sie Vorschläge, schreiben Sie zentrale Teile auch mal bewusst selbst.
 
 ## Aufgaben
 
 https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung
 
-- [ ] Legen Sie sich einen GitHub Account an (sofern dies noch nicht geschehen ist).
+- [ ] Legen Sie sich einen GitHub Account an. Sie können neben Ihrem privaten Account auch einen temporären Account nutzen.
 - [ ] Installieren Sie einen Editor Ihrer Wahl auf Ihrem Rechner, mit dem Sie Markdown-Dateien komfortabel bearbeiten können.
-- [ ] Nutzen Sie das Wiki der Vorlesung um Ihre neuen Markdown-Kenntnisse zu erproben und versuchen Sie sich an folgenden Problemen:
-
- - Recherchieren Sie weitere Softwarebugs. Dabei interessieren uns insbesondere solche, wo der konkrete Fehler direkt am Code nachvollzogen werden konnte.
-
- - Fügen Sie eine kurze Referenz auf Ihren Lieblingseditor ein und erklären Sie, warum Sie diesen anderen Systemen vorziehen. Ergänzen Sie Links auf Tutorials und Videos, die anderen nützlich sein können.
+- [ ] Seien Sie der erste der am aktuellen LiaScript Dokument "meckert" ...
