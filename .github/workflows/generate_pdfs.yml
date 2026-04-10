@@ -46,6 +46,89 @@ jobs:
           echo "changed_files=${files}" >> "$GITHUB_OUTPUT"
           echo "Files to process: ${files}"
 
+      # -----------------------------------------------------------------------
+      # Validate that every changed file has a version tag and auto-increment
+      # the patch component when the corresponding release tag already exists.
+      #
+      # Logic:
+      #   1. Extract version from the <!-- ... --> frontmatter.
+      #      → Fail hard if the tag is absent.
+      #   2. Compute the release tag (same algorithm as the PDF step below).
+      #      → If the release tag already exists on GitHub, the user forgot to
+      #        bump the version.  We increment the patch component in the file.
+      #   3. Commit & push any modified files with "[skip ci]" so the PDF step
+      #      reads the correct (bumped) version from the working tree.
+      # -----------------------------------------------------------------------
+      - name: Check versions and auto-increment patch if tag already exists
+        if: steps.changes.outputs.changed_files != ''
+        run: |
+          set -euo pipefail
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          bumped_files=""
+          error_files=""
+
+          for file in ${{ steps.changes.outputs.changed_files }}; do
+            [ -f "$file" ] || continue
+
+            filename=$(basename "$file" .md)
+
+            # ── 1. Require a version tag ───────────────────────────────────
+            version=$(grep -oP '(?m)^version:\s*\K[\d.]+' "$file" | head -1 || true)
+            if [ -z "$version" ]; then
+              echo "ERROR: $file has no 'version:' tag in its frontmatter." >&2
+              error_files="$error_files $file"
+              continue
+            fi
+
+            # ── 2. Compute safe release tag ───────────────────────────────
+            safe_tag=$(echo "$filename" \
+              | tr '[:upper:]' '[:lower:]' \
+              | sed -e 's/ä/ae/g' -e 's/ö/oe/g' -e 's/ü/ue/g' -e 's/ß/ss/g' \
+                    -e 's/Ä/ae/g' -e 's/Ö/oe/g' -e 's/Ü/ue/g' \
+                    -e 's/[^a-z0-9_-]//g')
+            release_tag="${safe_tag}_v${version}"
+
+            # ── 3. Auto-increment patch if release tag already exists ─────
+            if gh release view "$release_tag" > /dev/null 2>&1; then
+              echo "Tag '$release_tag' already exists for $file – auto-incrementing patch."
+
+              # Increment last numeric component: e.g. 1.0.10 → 1.0.11
+              new_version=$(echo "$version" | awk -F. '{$NF = $NF + 1; print}' OFS='.')
+
+              # Replace the version line inside the HTML comment frontmatter.
+              # The sed pattern handles optional spaces around the colon.
+              sed -i -E "s/^(version:[[:space:]]*)[0-9]+(\.[0-9]+)*/\1${new_version}/" "$file"
+
+              echo "  $file: $version → $new_version"
+              bumped_files="$bumped_files $file"
+            else
+              echo "Tag '$release_tag' is new – no version bump needed for $file."
+            fi
+          done
+
+          # ── Fail if any file was missing a version tag ───────────────────
+          if [ -n "$error_files" ]; then
+            echo ""
+            echo "The following files are missing a 'version:' tag:" >&2
+            for f in $error_files; do echo "  $f" >&2; done
+            echo "Please add 'version: X.Y.Z' to the HTML comment frontmatter." >&2
+            exit 1
+          fi
+
+          # ── Commit & push version bumps ───────────────────────────────────
+          if [ -n "$bumped_files" ]; then
+            git add $bumped_files
+            git commit -m "ci: auto-increment patch version for changed courses [skip ci]"
+            git pull --rebase origin master || true
+            git push
+            echo "Version bumps pushed to master."
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Set up Node.js
         if: steps.changes.outputs.changed_files != ''
         uses: actions/setup-node@v4
@@ -74,8 +157,9 @@ jobs:
                     -e 's/Ä/ae/g' -e 's/Ö/oe/g' -e 's/Ü/ue/g' \
                     -e 's/[^a-z0-9_-]//g')
 
-            # Extract version from frontmatter (e.g. "version:  1.0.10")
-            version=$(grep -oP 'version:\s*\K[\d.]+' "$file" | head -1 || echo "unknown")
+            # Re-read version from the file (may have been bumped in the
+            # previous step; the version tag is guaranteed to exist by now).
+            version=$(grep -oP '(?m)^version:\s*\K[\d.]+' "$file" | head -1)
 
             asset_name="${filename}_v${version}_Documentation"
             release_tag="${safe_tag}_v${version}"
@@ -92,20 +176,15 @@ jobs:
             pdf_path="/tmp/pdf_build/${asset_name}.pdf"
 
             if [ ! -f "$pdf_path" ]; then
-              echo "WARNING: PDF not created for $file – skipping release."
-              continue
+              echo "ERROR: PDF not created for $file" >&2
+              exit 1
             fi
 
-            # Create or update the GitHub Release
-            if gh release view "$release_tag" > /dev/null 2>&1; then
-              echo "Release $release_tag already exists – uploading updated asset."
-              gh release upload "$release_tag" "$pdf_path" --clobber
-            else
-              gh release create "$release_tag" \
-                --title "PDF – ${filename} (v${version})" \
-                --notes "Automated PDF export for \`${file}\` – version ${version}" \
-                "$pdf_path"
-            fi
+            # The version-check step guarantees the tag is new at this point.
+            gh release create "$release_tag" \
+              --title "PDF – ${filename} (v${version})" \
+              --notes "Automated PDF export for \`${file}\` – version ${version}" \
+              "$pdf_path"
           done
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -123,6 +202,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Pull any version-bump commits pushed by the generate_pdfs job so that
+      # liaex fetches up-to-date metadata from raw.githubusercontent.com.
+      - name: Pull latest commits (including any version bumps)
+        run: git pull --ff-only origin master || git pull origin master
 
       - name: Set up Node.js
         uses: actions/setup-node@v4

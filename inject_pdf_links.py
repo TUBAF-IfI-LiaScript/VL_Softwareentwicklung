@@ -20,6 +20,7 @@ import os
 import re
 import sys
 from pathlib import Path
+from typing import Dict, Optional
 from urllib.parse import urlparse
 import posixpath
 
@@ -143,7 +144,7 @@ def release_exists(url: str, timeout: int = 10) -> bool:
 # Build the course-info lookup table from JSON-LD
 # ---------------------------------------------------------------------------
 
-def build_course_map(json_ld: dict) -> dict:
+def build_course_map(json_ld: dict) -> Dict[str, Dict[str, str]]:
     """
     Returns a dict keyed by SHA-256( id_url ) with values::
 
@@ -153,7 +154,7 @@ def build_course_map(json_ld: dict) -> dict:
             "pdf_url":  str,
         }
     """
-    result: dict = {}
+    result: Dict[str, Dict[str, str]] = {}
     outer_list = json_ld.get("itemListElement", [])
     for outer in outer_list:
         for item in outer.get("itemListElement", []):
@@ -176,7 +177,7 @@ def _get_cards(soup: BeautifulSoup):
     return soup.select("div.card-body div.row div.card-body")
 
 
-def _get_card_course_key(card, course_map: dict) -> str | None:
+def _get_card_course_key(card, course_map: Dict[str, Dict[str, str]]) -> Optional[str]:
     """Return the course_map key for the course card, or None if not found."""
     link = card.find("a", href=True)
     if not link:
@@ -208,7 +209,7 @@ def _build_no_release_span(soup: BeautifulSoup) -> Tag:
     return span
 
 
-def inject_pdf_links(soup: BeautifulSoup, course_map: dict) -> int:
+def inject_pdf_links(soup: BeautifulSoup, course_map: Dict[str, Dict[str, str]]) -> int:
     """
     Walk every course card, check for an existing PDF release and inject a
     download link.  Returns the number of cards that received a link.
