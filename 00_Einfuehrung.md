@@ -814,6 +814,7 @@ Die Übungen gehen einen Schritt weiter: Sie arbeiten in einem GitHub-Repository
 
 In der Klausur und in den Testaten haben Sie **keinen Zugriff** auf LLMs. Das hat einen einfachen Grund: Wir prüfen, ob Sie die Konzepte selbst verstanden haben. Wer sich in den Übungen ausschließlich auf KI-generierten Code verlässt, wird in der Prüfung scheitern. Nutzen Sie die Werkzeuge daher so, dass Sie dabei *lernen* — lassen Sie sich Dinge erklären, hinterfragen Sie Vorschläge, schreiben Sie zentrale Teile auch mal bewusst selbst.
 
+
 ## Aufgaben
 
 https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung
