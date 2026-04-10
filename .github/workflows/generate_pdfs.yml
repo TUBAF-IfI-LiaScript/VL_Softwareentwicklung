@@ -1,4 +1,4 @@
-name: Generate PDFs and Deploy Docs
+name: Generate PDFs
 
 # Triggered by:
 #   - push to master that changes lecture markdown files
@@ -189,67 +189,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  # -------------------------------------------------------------------------
-  # Job 2 – regenerate docs/index.html and inject PDF links
-  # -------------------------------------------------------------------------
-  deploy_docs:
-    name: Build and deploy docs
-    runs-on: ubuntu-latest
-    needs: generate_pdfs
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      # Pull any version-bump commits pushed by the generate_pdfs job so that
-      # liaex fetches up-to-date metadata from raw.githubusercontent.com.
-      - name: Pull latest commits (including any version bumps)
-        run: git pull --ff-only origin master || git pull origin master
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Install LiaScript exporter
-        run: npm install -g @liascript/exporter
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-
-      - name: Install Python dependencies
-        run: pip install beautifulsoup4 requests
-
-      - name: Generate docs/index.html from course.yml
-        run: |
-          mkdir -p docs
-          liaex \
-            --input course.yml \
-            --format project \
-            --output docs/index \
-            --project-category-blur
-
-      - name: Copy CSS into docs/
-        run: cp linklayout.css docs/linklayout.css
-
-      - name: Inject PDF download links
-        run: python inject_pdf_links.py docs/index.html docs/index.html
-
-      - name: Commit docs/ to repository
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/
-          if git diff --staged --quiet; then
-            echo "No changes in docs/ – nothing to commit."
-          else
-            if ! git pull --rebase origin master; then
-              echo "WARNING: git pull --rebase failed; attempting to push without rebase."
-            fi
-            git commit -m "ci: update docs/index.html with PDF links [skip ci]"
-            git push
-          fi
