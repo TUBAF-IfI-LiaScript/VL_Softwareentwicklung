@@ -12,6 +12,7 @@ logo:
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liaTemplates/tau-prolog/master/README.md
         https://raw.githubusercontent.com/liaTemplates/AlaSQL/master/README.md
+        https://raw.githubusercontent.com/LiaTemplates/mermaid_template/master/README.md
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
@@ -35,7 +36,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
-## Einschub: Programmierparadigmen
+## Programmierparadigmen
 
 Ein Programmierparadigma bezeichnet die gedankliche, konzeptionelle Grundstruktur
 die der Darstellung des Problems in Code zugrunde liegt.
@@ -66,27 +67,24 @@ style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-
 *******************************************************************************
 
 + __Imperative Programmierung__ - Quellcode besteht aus einer Folge von Befehlen die in einer festen Reihenfolge abgearbeitet werden.
-
-| Paradigma                        | Leitidee                                                |
-| -------------------------------- | ------------------------------------------------------- |
-| Prozedurale Programmierung       | Zerlegung von Programmen in überschaubare Teile         |
-| Objektorientierte Programmierung | Abbildung von Daten und Funktionalität in einem Konzept |
-|                                  |                                                         |
-
 + __Deklarative Programmierung__ - es wird kein Lösungsweg implementiert, sondern nur angegeben, was gesucht ist.
 
-| Paradigma            | Leitidee                                                                               |
-| -------------------- | -------------------------------------------------------------------------------------- |
-| Funktionale Sprachen | Abbildung der Algorithmen auf funktionale Darstellungen                                |
-| Logische Sprachen    | Ableitung einer Lösung aus einer Menge von Fakten, Generierung einer Auswahl von Daten |
+| Paradigma                        | Leitidee                                                                               |
+| -------------------------------- | -------------------------------------------------------------------------------------- |
+| Prozedurale Programmierung       | Zerlegung von Programmen in überschaubare Teile                                        |
+| Objektorientierte Programmierung | Abbildung von Daten und Funktionalität in einem Konzept                                |
+| Funktionale Programmierung       | Abbildung der Algorithmen auf funktionale Darstellungen                                |
+| Logische Programmierung          | Ableitung einer Lösung aus einer Menge von Fakten, Generierung einer Auswahl von Daten |
 
 
 *******************************************************************************
 
-                                      {{2-3}}
+### Beispiele  
+
+                                      {{0-1}}
 *******************************************************************************
 
-__Beispiel 1: Prolog__
+> **Beispiel 1: Deklarativ mit Prolog**
 
 ```prolog    Prolog.pro
 % Prolog Text mit Fakten
@@ -96,26 +94,57 @@ mann(frank).
 frau(eva).
 frau(daniela).
 frau(ulrike).
-vater(adam,tobias).
+vater(adam,tobias).    % Adam ist Vater von Tobias
 vater(tobias,frank).
 vater(tobias,ulrike).
 mutter(eva,tobias).
 mutter(daniela,frank).
 mutter(daniela,ulrike).
 
+% Prolog Text mit Regeln
 grossvater(X,Y) :-
      vater(X,Z),
      vater(Z,Y).
 ```
 @Tau.program(Prolog.pro)
 
+> Das Ganze ist ein gutes Beispiel für die Eignung unterschiedlicher Wissensrepräsentation für eine Maschine und den Menschen. 
+
+Die modellierten Verwandtschaftsbeziehungen für den besseren Überblick:
+
+```mermaid @mermaid
+graph TD
+    Adam["Adam"] -->|vater| Tobias["Tobias"]
+    Eva["Eva"] -->|mutter| Tobias
+    Tobias -->|vater| Frank["Frank"]
+    Tobias -->|vater| Ulrike["Ulrike"]
+    Daniela["Daniela"] -->|mutter| Frank
+    Daniela -->|mutter| Ulrike
+
+    classDef mann fill:#cce5ff,stroke:#004085,color:#000;
+    classDef frau fill:#f8d7da,stroke:#721c24,color:#000;
+    class Adam,Tobias,Frank mann;
+    class Eva,Daniela,Ulrike frau;
+```
+
 ```prolog Query
+% Frage: Ist Adam der Großvater von Frank?
 grossvater(adam,frank).
 ```
 @Tau.query(Prolog.pro)
 
+```prolog Query
+% Frage: Wer ist der Großvater von Frank?
+grossvater(X, frank).
+```
+@Tau.query(Prolog.pro)
 
-__Beispiel 2: SQL__
+*******************************************************************************
+
+                                      {{1-2}}
+*******************************************************************************
+
+> **Beispiel 2: Deklarativ mit SQL**
 
 ``` sql
 CREATE TABLE one;
@@ -150,54 +179,40 @@ Sub-Saharan Africa,Senegal,Household,Offline,L,8/27/2012,247802054,9/8/2012,8989
 
 
 ``` sql
-/*
-select some stuff
-*/
-SELECT Region FROM one;
-```
-@AlaSQL.eval
-
-``` sql
 SELECT * FROM one Where Region == "North America";
 ```
 @AlaSQL.eval
 
 
-
 *******************************************************************************
 
+### Abgrenzung zu anderen Konzepten
 
-                                      {{3-4}}
-*******************************************************************************
++ **Strukturierte Programmierung** ... Verzicht bzw. Einschränkung des `Goto` Statements zugunsten von Kontrollstrukturen (Kernkonzepte: Verzweigungen,
+   Schleifen)
++ **Nebenläufig** ... gleichzeitig ausgeführte Abläufe (z.B. Threads, `async/await`)
++ **Reflektiv** ... Programm kann zur Laufzeit eigene Struktur inspizieren und verändern (`System.Reflection`)
++ **Generisch** ... Typen und Methoden über Typparameter (`List<T>`)
++ **Aspektorientiert** ... Funktionalität als „Aspekt" modular auslagern und über Join Points in den Programmablauf einweben (klassisch: Logging, Security — generell aber beliebige Belange)
 
-* **Weiter Konzepte** ... keine spezifische Zuordenbarkeit
-
-  + **Strukturierte  Programmierung** ... Verzicht bzw. Einschränkung des `Goto` Statements zugunsten von Kontrollstrukturen (Kernkonzepte: Verzweigungen,
-     Schleifen)
-  + **Nebenläufig**, **Reflektiv**, **Generisch**, ...
-  + **Aspektorientierte Programmierung**, ...
-
-
-******************************************************************************
-
-                                    {{4-5}}
-*******************************************************************************
+### Paradigmen in der Praxis
 
 Viele Sprachen unterstützen verschiedene Elemente der Paradigmen, bzw. entwickeln
 sich in dieser Richtung weiter.
 
-| Sprache | imperativ                    | deklarativ |
-| ------- | ---------------------------- | ---------- |
-| Pascal  | prozedural                   |            |
-| C       | prozedural                   |            |
-| Ada     | objektorientiert             |            |
-| Java    | objektorientiert             |            |
-| Python  | objektorientiert,            | funktional |
-| C#      | prozedural, objektorientiert | funktional |
-| C++     | prozedural, objektorientiert | funktional |
-| Haskell |                              | funktional |
-| Prolog  |                              | Logisch    |
-| SQL     |                              | Logisch    |
+<!--data-type="none"-->
+| Sprache | Jahr | imperativ                    | deklarativ             |
+| ------- | ---- | ---------------------------- | ---------------------- |
+| Pascal  | 1970 | prozedural                   |                        |
+| C       | 1972 | prozedural                   |                        |
+| Prolog  | 1972 |                              | logisch                |
+| SQL     | 1974 |                              | logisch (rel./deklar.) |
+| Ada     | 1980 | prozedural, objektorientiert |                        |
+| C++     | 1985 | prozedural, objektorientiert | funktional             |
+| Haskell | 1990 |                              | funktional             |
+| Python  | 1991 | prozedural, objektorientiert | funktional             |
+| Java    | 1995 | objektorientiert             | funktional             |
+| C#      | 2002 | objektorientiert             | funktional             |
 
 Viele Paradigmen in einer Sprache am Beispiel eines Python Programmes ...
 Berechnen Sie die Summe der Ziffern eines Arrays.
@@ -239,12 +254,7 @@ print("Result in functional style      :" + str(result))
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 
-
-*******************************************************************************
-
-                                  {{5}}
-*******************************************************************************
-
+### Ja, aber ...
 
 **"Das ist ja alles gut und schön, aber ich ich bin C Programmierer!"**
 
@@ -258,7 +268,6 @@ Lösungsansätze:
 
 Weitere Diskussion unter: [https://sourcemaking.com/antipatterns/golden-hammer](https://sourcemaking.com/antipatterns/golden-hammer)
 
-*******************************************************************************
 
 ## Warum also C#?
 
@@ -270,15 +279,16 @@ Anspielung auf C++)
 
 C#
 
-+ ist eine moderne und nur in überschaubarem Maße durch die eigene Entwicklung "verschandelte" Sprache
-+ enthält Elemente vieler verschiedener Paradigmen
-+ ist plattformunabhängig
-+ bietet eine breite Sammlung von Bibliotheken
-+ integriert Bibliotheken und Konzepte für die GUI-Programmierung
-+ kann mit anderen Sprachen über .NET interagieren
-+ unterstützt Multi-Processing problemlos
-+ ist typsicher
-+ ...
++ ist **typsicher** mit expliziter Unterscheidung von Wert- und Referenztypen (`struct` vs. `class`)
++ bietet **automatische Speicherverwaltung** durch den Garbage Collector
++ enthält Elemente mehrerer Paradigmen (imperativ, objektorientiert, funktional)
++ ist **plattformunabhängig** (seit .NET Core / .NET 5+) für Windows, Linux, macOS, Android, iOS
++ integriert mit **LINQ** eine einheitliche Syntax für Datenabfragen über Collections, XML, JSON, Datenbanken
++ unterstützt **asynchrone Programmierung** nativ über `async`/`await` sowie parallele Verarbeitung über Tasks und die TPL
++ bietet **Pattern Matching, Records und Properties** als komfortable Sprachkonstrukte
++ stellt **Events und Delegaten** als First-Class-Konstrukte bereit (relevant u.a. für GUI-Programmierung mit MAUI/WPF)
++ ermöglicht **sprachübergreifende Interoperabilität** via Common Language Runtime (C#, F#, VB.NET)
++ verfügt über eine umfassende Standardbibliothek und ein etabliertes Ökosystem (NuGet)
 
 ### Historie der Sprache C#
 
@@ -298,6 +308,24 @@ C#
 | 2022 | .NET 7.0         | 11.0       | Generische Attribute, Zeilenumbrüche bei Stringinterpolation, Benötigte Member-Datenfelder, Default-Werte in struct-Datenstrukturen                                                         |
 | 2023 | .NET 8.0         | 12.0       | Primäre Konstruktoren, Sammlungsausdrücke (u.a. für Arraytypen und generische Collections), Standardwerte für Lambdaausdrücke, ref readonly-Parameter, semantische Alias für Datentypen ... |
 | 2024 | .NET 9.0         | 13.0       | Partielle Properties und partielle Indexer, Prioritäten bei der Auflösung von Überladungen, Neue Escape-Sequenzen, Indizierung vom Ende her mit einem neuen Operator                        |
+| 2025 | .NET 10.0        | 14.0       | Extension Types, `field`-Schlüsselwort in Properties                                             |
+
+**Take-aways aus der Versionshistorie:**
+
+1. **Release-Rhythmus hat sich dramatisch beschleunigt.**
+   2002 → 2006 vergingen vier Jahre bis zu Generics (C# 2.0), heute erscheint **jährlich** eine neue Version. Das erzwingt Dauerlernen und macht „C# gelernt" zu einem bewegten Ziel.
+
+2. **Die Sprache driftet weg vom reinen OOP.**
+   Wegmarken: LINQ/Lambdas (2007, funktional), `async/await` (2012, nebenläufig), Pattern Matching + Tupel (2017), Records/Immutability (2020), `required`/Primary Constructors (2021–23), Extension Types (2025). OOP ist nur noch *eines* der Paradigmen.
+
+3. **Additive Evolution, kein Aufräumen.**
+   Nichts wird entfernt. Alte Muster bleiben gültig neben neuen — die Sprache wächst monoton. Für ein einfaches Property existieren heute mehrere Schreibweisen.
+
+4. **Viel Syntax-Zucker, weniger neue Konzepte.**
+   Ab etwa C# 10 dominieren Schreibverkürzungen (Collection Expressions, Primary Constructors, `field`) statt grundlegend neuer Paradigmen. Das senkt die *lokale* Lernhürde, erhöht aber die *globale* Sprachgröße.
+
+5. **Co-Evolution mit der Runtime.**
+   Features wie `async`, `Span<T>` oder `ref struct` sind ohne Weiterentwicklung der .NET-Laufzeit nicht möglich — Sprache und Plattform werden gemeinsam entwickelt.
 
 
 Die Sprache selbst ist unmittelbar mit der Ausführungsumgebung, dem .NET Konzept verbunden und war ursprünglich stark auf Windows Applikationen zugeschnitten.
@@ -308,60 +336,43 @@ Die Sprache selbst ist unmittelbar mit der Ausführungsumgebung, dem .NET Konzep
 ********************************************************************************
 
 
-.NET ist ein Sammelbegriff für mehrere von Microsoft/Dritten herausgegebene Software-Plattformen, die der Entwicklung und Ausführung von Anwendungsprogrammen dienen. Dabei erlebt die Plattform einen permanenten Wandel. Die Bedeutung der einzelnen Teile und Technologien, die .NET umfasst, hat sich im Laufe der Zeit gewandelt. Stand November 2020 spielen folgende Frameworks eine herausgehobene Rolle in der Praxis:
+.NET ist ein Sammelbegriff für mehrere Software-Plattformen von Microsoft (und Dritten) zur Entwicklung und Ausführung von Anwendungen. Die Plattform hat sich über zwei Jahrzehnte deutlich gewandelt — vom Windows-zentrierten .NET Framework hin zu einem plattformübergreifenden, einheitlichen .NET.
 
-+ das nur unter Windows unterstützte klassische .NET Framework, das mit der Version 4.8 in der letzten Version vorliegt.
-+ das als dessen Nachfolger positionierte, auf verschiedenen Plattformen unterstützte Framework .NETx (bei dem auch einige Techniken gekündigt wurden). Es wurde mehrere Jahre parallel unter der Bezeichnung .NET Core entwickelt.
-+ die Plattform Mono und darauf basierende Techniken (von Microsoft meist als Xamarin bezeichnet). Diese unterstützt seit längerem .NET auf verschiedenen Plattformen (in der Vergangenheit jedoch oft unvollständig implementiert).
+**Heute (Stand 2026)** existiert im Wesentlichen *ein* .NET: das seit Version 5.0 (2020) vereinheitlichte, quelloffene und plattformübergreifende .NET. Die aktuelle LTS-Version ist .NET 10 (Nov. 2025, 3 Jahre Support).
 
-    --{{0}}--
-Mono war eine alternative, ursprünglich unabhängige Implementierung von Microsofts .NET Standards. Sie ermöglicht die Entwicklung von plattformunabhängiger Software auf den Standards der Common Language Infrastructure und der Programmiersprache C#. Entstanden ist das Mono-Projekt 2001 unter Führung von Miguel de Icaza von der Firma Ximian, die 2003 von Novell aufgekauft wurde. Die Entwickler wurden 2011 in eine neue Firma namens Xamarin übernommen, die im Jahr 2016 eine Microsoft-Tochtergesellschaft wurde. In der Folge wurde Microsoft Hauptsponsor des Projektes. Nach meiner Wahrnehmung ist die Mono Community nicht mehr sonderlich aktiv.
+**Historischer Kontext** — drei Stränge wurden in das heutige .NET zusammengeführt:
 
-https://www.mono-project.com/
++ **.NET Framework** (2002–2019): das klassische, ausschließlich unter Windows laufende Framework. Letzte Version ist 4.8; es erhält nur noch Sicherheitsupdates und gilt als Legacy.
++ **.NET Core** (2016–2019): die plattformübergreifende Neuentwicklung, die ab .NET 5.0 in den Hauptstrang übergegangen ist. Der Namenszusatz "Core" wurde mit der Vereinheitlichung fallengelassen.
++ **Mono / Xamarin**: eine ursprünglich unabhängige .NET-Implementierung für Linux/macOS/mobile Plattformen. Der Support für Xamarin endete im Mai 2024; die Nachfolge tritt MAUI (Teil von .NET) an.
+
+Das Mono-Projekt wurde 2001 von Miguel de Icaza (Ximian) als freie .NET-Implementierung gestartet, kam 2003 zu Novell, 2011 zu Xamarin und 2016 mit Xamarin zu Microsoft. Mono hat die plattformübergreifende Entwicklung mit C# überhaupt erst ermöglicht und damit den Weg für das heutige .NET geebnet — auch wenn das Projekt selbst heute kaum noch eigenständig weiterentwickelt wird (https://www.mono-project.com/).
 
 ********************************************************************************
 
                                         {{1-2}}
 ********************************************************************************
 
-Die Neuordnung von .NET geschah 2020 mit .NET 5.0, die Version führte verschiedenen Frameworks zusammen.
+**Unterstützte Plattformen und Anwendungstypen (.NET 10)**
 
-```ascii
-       .NET Core 3.1
-       Teile von .NET Framework
-       Teile von Mono
-    +  neue Features
-    ------------------                                                                                  .
-       .NET 5.0
-```
+| Anwendungstyp                         |             Windows              | Linux | macOS | Android | iOS |
+| ------------------------------------- | :------------------------------: | :---: | :---: | :-----: | :-: |
+| Konsole / Server / Web (ASP.NET Core) |                ✓                |  ✓   |  ✓   |         |     |
+| Desktop — WPF / WinForms              |                ✓                |       |       |         |     |
+| Cross-Platform UI — .NET MAUI         |                ✓                |       |  ✓   |   ✓    | ✓  |
+| Web-Frontend — Blazor (WebAssembly)   | im Browser auf allen Plattformen |       |       |         |     |
 
-Der Artikel in [heise](https://www.heise.de/developer/meldung/NET-5-Zweite-Preview-bringt-viel-Feinschliff-4696009.html) fasst diesen Status gut zusammen.
+Unterstützte Architekturen sind x64, ARM64 (inkl. Apple Silicon) sowie eingeschränkt x86/ARM32.
 
-Zum Vergleich sei auf eine Darstellung der **vor dem Erscheinen von .NET 5** verwiesen:
+> **Release-Kadenz:** Microsoft veröffentlicht jährlich im November eine neue .NET-Version. Gerade Versionsnummern (8, 10, ...) sind **LTS** (Long Term Support, 3 Jahre); ungerade (7, 9, ...) sind **STS** (Standard Term Support, 18 Monate). Aktuell: .NET 10 (LTS, Nov. 2025), .NET 9 (STS, Nov. 2024).
 
-| Betriebssystem           | .NET Framework | .NET Core | Xamarin |
-| ------------------------ | -------------- | --------- | ------- |
-| Windows 7/8              | X              | X         |         |
-| Windows 10 Desktop       | X              | X         |         |
-| Windows 10 Mobile Geräte |                |           | X       |
-| Linux                    |                | X         |         |
-| macOS                    |                | X         |         |
-| iOS                      |                |           | X       |
-
-
-> .NET 9 ist als LTS-Version im November 2024 erscheinen und wird für 3 Jahre unterstützt.
-> Der Xamarin-Support endete im Mai 2024.
+Ziel des .NET-Ökosystems ist die Erhöhung der Anwendungskompatibilität zwischen verschiedenen Systemen und Plattformen. Programme, die das .NET Framework verwenden, werden in der Regel so ausgeliefert, dass benötigte Komponenten des Frameworks automatisch mit installiert werden.
 
 ********************************************************************************
 
                                       {{2-3}}
 ********************************************************************************
 
-Ziel des .NET-Ökosystems ist die Erhöhung der Anwendungskompatibilität zwischen verschiedenen Systemen und Plattformen. Programme, die das .NET Framework verwenden, werden in der Regel so ausgeliefert, dass benötigte Komponenten des Frameworks automatisch mit installiert werden.
-
-<!--
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
 ```ascii
  +--------------------------------------------------+
  |               .NET Anwendungen                   |
@@ -377,7 +388,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
  +--------------------------------------------------+
  |     Betriebssystem (Windows, Linux, macOS)       |
- +--------------------------------------------------+                         .
+ +--------------------------------------------------+                                                                                               .
 ```
 
 * die Laufzeitumgebung (CLR) implementiert die Ausführungsplattform des .NET Codes. Sie umfasst die Sicherheitsmechanismen, Versionierung, automatische Speicherbereinigung und vor allem die Entkopplung der Programmausführung vom Betriebssystem.
@@ -416,7 +427,7 @@ Maschinencode (.o, .obj)             |
                                      v
 Statische Libs (.lib, .a)  ---->  Linken       Schritt 4: Linker (ld)
                                      |
-Ausführbarer Maschinencode           v                                         .
+Ausführbarer Maschinencode           v                                                                                     .
 ```
 
 ********************************************************************************
@@ -512,22 +523,20 @@ Ein Assembly bildet:
 
 ### Abgrenzung zu Java
 
-vgl. Vortrag von Mössenböck ([link](https://fodok.jku.at/fodok/person.xsql?PER_ID=1071))
-
 <!--data-type="none"-->
-|                  | Java                                        | C#                                         |
-| ---------------- | ------------------------------------------- | ------------------------------------------ |
-| Veröffentlichung | 1995                                        | 2001                                       |
-| Plattform        | (Java) Unix/Linux,  Windows, MacOS, Android | (.NET) Windows, Linux, Android, iOS, MacOS |
-| VM               | Java-VM                                     | CLR                                        |
-| Zwischencode     | Java-Bytecode                               | CIL                                        |
-| JIT              | per Methoden                                | per Methode / gesamt                       |
-| Komponenten      | Beans                                       | Assemblies                                 |
-| Versionierung    | nein                                        | ja                                         |
-| Leitidee         | Eine Sprache auf vielen Plattformen         | Viele Sprachen auf vielen Plattformen        |
+|                            | Java                                                 | C# / .NET                                          |
+| -------------------------- | ---------------------------------------------------- | -------------------------------------------------- |
+| Veröffentlichung           | 1995                                                 | 2001                                               |
+| Plattformen                | Linux, Windows, macOS, Android                       | Windows, Linux, macOS, Android, iOS                |
+| Laufzeitumgebung           | JVM (z. B. HotSpot, OpenJ9)                          | CLR (.NET)                                         |
+| Zwischencode               | Java-Bytecode                                        | CIL (Common Intermediate Language)                 |
+| Ausführung                 | JIT; optional AOT über GraalVM Native Image          | JIT (RyuJIT); optional Native AOT / ReadyToRun     |
+| Module / Komponenten       | JAR, JPMS-Module (seit Java 9)                       | Assemblies (`.dll` / `.exe`)                       |
+| Paketmanagement            | Maven, Gradle                                        | NuGet                                              |
+| Sprachen auf der Plattform | Java, Kotlin, Scala, Clojure, Groovy, …              | C# (dominant), F#, VB.NET                          |
 
 
-## Es wird konkret ... Hello World
+## Es wird konkret ...
 
 Die organisatorischen Schlüsselkonzepte in C# sind: **Programme**, **Namespaces**,
 **Typen**, **Member** und **Assemblys**. C#-Programme bestehen aus mindestens einer
@@ -556,7 +565,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
   mono (C#8)    dotnet (C#12)    |                   |
                                  |                   |
                           dotnetfiddle.net        repl.it
-                             bis C#11               C#10                        .
+                             bis C#10               C#10                        .
 ```
 
 
@@ -587,7 +596,7 @@ Console.WriteLine("Hello, world!");
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
@@ -596,7 +605,7 @@ Console.WriteLine("Hello, world!");
 
 *B) Repl.it*
 
-https://replit.com/
+https://dotnetfiddle.net/
 
 *C) .NET Kommandozeile*
 
@@ -607,50 +616,6 @@ für verschiedene Betriebssystem heruntergeladen werden. Das SDK umfasst sowohl 
 > dotnet new console
 > dotnet build
 > dotnet run
-```
-
-Aus dem Generieren eines neuen Konsolenprojektes ergibt sich ein beeindruckender
-Baum von Projektdateien.
-
-``` bash
-> dotnet new console
-
-> tree
-.
-├── bin
-│   └── Debug
-│       └── net8.0
-│           ├── ref
-│           │   └── visual_studio_code.dll
-│           ├── visual_studio_code
-│           ├── visual_studio_code.deps.json
-│           ├── visual_studio_code.dll
-│           ├── visual_studio_code.pdb
-│           ├── visual_studio_code.runtimeconfig.dev.json
-│           └── visual_studio_code.runtimeconfig.json
-├── obj
-│   ├── Debug
-│   │   └── net8.0
-│   │       ├── apphost
-│   │       ├── ref
-│   │       │   └── visual_studio_code.dll
-│   │       ├── visual_studio_code.AssemblyInfo.cs
-│   │       ├── visual_studio_code.AssemblyInfoInputs.cache
-│   │       ├── visual_studio_code.assets.cache
-│   │       ├── visual_studio_code.csprojAssemblyReference.cache
-│   │       ├── visual_studio_code.csproj.CoreCompileInputs.cache
-│   │       ├── visual_studio_code.csproj.FileListAbsolute.txt
-│   │       ├── visual_studio_code.dll
-│   │       ├── visual_studio_code.GeneratedMSBuildEditorConfig.editorconfig
-│   │       ├── visual_studio_code.genruntimeconfig.cache
-│   │       └── visual_studio_code.pdb
-│   ├── project.assets.json
-│   ├── project.nuget.cache
-│   ├── visual_studio_code.csproj.nuget.dgspec.json
-│   ├── visual_studio_code.csproj.nuget.g.props
-│   └── visual_studio_code.csproj.nuget.g.targets
-├── Program.cs
-└── visual_studio_code.csproj
 ```
 
 *D) .NET Visual Code*
@@ -664,6 +629,143 @@ https://code.visualstudio.com/docs/languages/csharp
 
 https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf
 
+## Hello World
+
+Wir gehen den typischen Ablauf einmal Schritt für Schritt durch — vom leeren Ordner bis zur laufenden Anwendung — und sehen dabei, welche Dateien die `dotnet`-CLI in welcher Phase erzeugt.
+
+```csharp    HelloWorld.cs
+using System;
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Hello, world!");
+    }
+}
+```
+
+### Schritt 1 — Projekt anlegen
+
+```bash
+> mkdir HelloWorld && cd HelloWorld
+> dotnet new console
+```
+
+`dotnet new` ist der Template-Generator der CLI. Die Vorlage `console` erzeugt das minimale Gerüst einer Konsolenanwendung — **genau zwei Dateien**, die man fortan von Hand pflegt:
+
+```csharp    Program.cs
+// See https://aka.ms/new-console-template for more information
+Console.WriteLine("Hello, World!");
+```
+
+```xml    HelloWorld.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>HelloWorld</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+</Project>
+```
+
+Bemerkenswert an `Program.cs`: es gibt weder `Main`-Methode noch Klassenhülle. Das ist kein Sonderfall, sondern der Standard seit C# 9 / .NET 6 (**Top-Level-Statements**) — der Compiler generiert Klasse und `Main` im Hintergrund.
+
+Die `.csproj` ist der Steuerstand des Projekts. Die Eigenschaften im Detail:
+
++ `Sdk="Microsoft.NET.Sdk"` — das Basis-SDK mit allen MSBuild-Regeln für ein .NET-Projekt.
++ `OutputType=Exe` — ausführbare Anwendung (Alternative: `Library` → DLL ohne Einstiegspunkt).
++ `TargetFramework=net10.0` — die Ziel-Laufzeit, gegen die kompiliert wird.
++ `ImplicitUsings=enable` — häufig genutzte `using`-Direktiven (`System`, `System.IO`, …) werden automatisch injiziert.
++ `Nullable=enable` — aktiviert die statische Null-Analyse (`string?` vs. `string`).
+
+### Schritt 2 — Kompilieren
+
+```bash
+> dotnet build
+```
+
+Das ruft im Hintergrund **MSBuild** auf. MSBuild liest die `.csproj`, lädt das angegebene SDK, löst NuGet-Abhängigkeiten auf und übergibt die Quellen an den Roslyn-Compiler. Ergebnis: eine `.dll` mit CIL-Code unter `bin/Debug/net10.0/`.
+
+### Schritt 3 — Ausführen
+
+```bash
+> dotnet run
+```
+
+`dotnet run` baut bei Bedarf neu und startet anschließend die Anwendung. Alternativ lässt sich die erzeugte DLL direkt starten:
+
+```bash
+> dotnet bin/Debug/net10.0/HelloWorld.dll      # portabel, überall lauffähig
+> ./bin/Debug/net10.0/HelloWorld               # nativer Launcher (Apphost)
+```
+
+### Schritt 4 — Was ist entstanden?
+
+Nach dem ersten Build sieht der Projektordner deutlich voller aus als vorher:
+
+``` bash
+> tree
+.
+├── bin
+│   └── Debug
+│       └── net10.0
+│           ├── ref
+│           │   └── HelloWorld.dll
+│           ├── HelloWorld
+│           ├── HelloWorld.deps.json
+│           ├── HelloWorld.dll
+│           ├── HelloWorld.pdb
+│           ├── HelloWorld.runtimeconfig.dev.json
+│           └── HelloWorld.runtimeconfig.json
+├── obj
+│   ├── Debug
+│   │   └── net10.0
+│   │       ├── apphost
+│   │       ├── ref
+│   │       │   └── HelloWorld.dll
+│   │       ├── HelloWorld.AssemblyInfo.cs
+│   │       ├── HelloWorld.AssemblyInfoInputs.cache
+│   │       ├── HelloWorld.assets.cache
+│   │       ├── HelloWorld.csprojAssemblyReference.cache
+│   │       ├── HelloWorld.csproj.CoreCompileInputs.cache
+│   │       ├── HelloWorld.csproj.FileListAbsolute.txt
+│   │       ├── HelloWorld.dll
+│   │       ├── HelloWorld.GeneratedMSBuildEditorConfig.editorconfig
+│   │       ├── HelloWorld.genruntimeconfig.cache
+│   │       └── HelloWorld.pdb
+│   ├── project.assets.json
+│   ├── project.nuget.cache
+│   ├── HelloWorld.csproj.nuget.dgspec.json
+│   ├── HelloWorld.csproj.nuget.g.props
+│   └── HelloWorld.csproj.nuget.g.targets
+├── Program.cs
+└── HelloWorld.csproj
+```
+
+Im Projektstamm sind weiterhin nur die beiden selbst geschriebenen Dateien (`Program.cs` und `HelloWorld.csproj`) zu sehen — alles Übrige ist Build-Ausgabe und verteilt sich auf zwei Verzeichnisse. Beide darf man jederzeit löschen (`dotnet clean`); der nächste Build stellt sie wieder her. Entsprechend gehören sie per `.gitignore` **nicht** ins Repository.
+
+**`obj/` — Zwischenprodukte des Builds**
+
+Alles, was *während* des Übersetzens entsteht: Caches, generierter Code, Auflösung der NuGet-Pakete.
+
++ `HelloWorld.AssemblyInfo.cs` — automatisch generierte Metadaten (Version, Copyright, …), die früher von Hand gepflegt wurden.
++ `project.assets.json`, `*.nuget.*` — das Ergebnis der NuGet-Auflösung: welche Paketversionen, von wo.
+
+**`bin/` — das Build-Ergebnis**
+
+Unter `bin/Debug/net10.0/` liegt die fertige Anwendung. Der Pfad spiegelt *Konfiguration* (`Debug`/`Release`) und *Ziel-Framework* (`net10.0`) wider.
+
++ `HelloWorld.dll` — das eigentliche **Assembly** mit dem kompilierten CIL-Code. Das ist die portable Ausgabe, die auf jeder .NET-Laufzeit läuft.
++ `HelloWorld` (ohne Endung, unter Windows `.exe`) — der **Apphost**: ein kleiner nativer Launcher, der die CLR startet und die DLL lädt. Nur deshalb lässt sich `./HelloWorld` direkt aufrufen.
++ `HelloWorld.pdb` — Debug-Symbole, die Stacktraces und Debugging auf Quellcode-Ebene erlauben.
++ `HelloWorld.deps.json` — der Abhängigkeitsgraph zur Laufzeit: welche Assemblies und NuGet-Pakete geladen werden müssen.
++ `HelloWorld.runtimeconfig.json` — Laufzeit-Konfiguration: welche .NET-Version, GC-Einstellungen, Rollforward-Verhalten.
++ `ref/HelloWorld.dll` — eine **Reference Assembly**: nur öffentliche Signaturen, kein ausführbarer Code. Wird beim *Kompilieren* abhängiger Projekte verwendet und verkleinert inkrementelle Builds.
+
+> **Fazit:** Die eigentliche Anwendung besteht aus genau *einer* DLL plus einer Handvoll JSON-Konfigurationsdateien. Der Rest ist Build-Infrastruktur — vom Compiler erzeugt, jederzeit löschbar, nicht ins Repository.
 
 ## Aufgaben
 
