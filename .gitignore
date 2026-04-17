@@ -9,3 +9,6 @@ output/
 bin/
 obj/
 .vscode/
+
+code/01_Software/improved
+code/01_Software/withBugs

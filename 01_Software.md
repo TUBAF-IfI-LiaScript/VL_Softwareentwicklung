@@ -494,6 +494,8 @@ Das Programm schließt zwei Bugs ein:
 1. Der Vergleich schließt die Werte mit dem Index 0 aus da die Bedingung `i=2` lautet, aber die Indizes von 0 bis 9 gehen. Das führt zu einem unvollständigen Sortieren.
 2. `l++` in Zeile 14 bewirkt das `l` hinter das Ende des Arrays zeigt. Damit sind Zugriffe auf `a[j]` wegen `j=l` in Zeile 25 undefiniert und können zu einem Absturz führen.
 
+Eine überarbeitete studentische Lösung (Nico Seidler, SoSe 2026) findet sich unter [code/01_Software/](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/tree/master/code/01_Software) — inklusive einer [README](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/code/01_Software/README.md), die Stärken und offene Diskussionspunkte gegenüberstellt.
+
 *******************************************************************************
 
 ## Herausforderungen
