@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina` & `Florian2501`
+author:   Sebastian Zug, Galina Rudolf, André Dietrich, Volker Göhler, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.7
+version:  1.0.8
 language: de
 narrator: Deutsch Female
 comment:  Werte- und Referenzdatentypen, Array, String, implizite Variablendefinition und Nullables
@@ -44,7 +44,74 @@ beschäftigt und die Notwendigkeit
 
 diskutiert.
 
-> Natürlich ist das kein ausgemachtes Problem von C# ... Codebeispiel in Python
+> - Natürlich ist das kein ausgemachtes Problem von C#
+> - In Java sollten wir Maven nutzen und in Python zum Beispiel Poetry.
+
+| Aktion | dotnet (C#) | poetry (Python) | maven (Java) |
+| --- | --- | --- | --- |
+| Erstellung | `dotnet new console -n Projektname` | `poetry new Projektname` | `mvn archetype:generate -DgroupId=com.example -DartifactId=Projektname -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false` |
+| Kompilieren | `cd Projektname && dotnet build` | `cd Projektname && poetry install` | `cd Projektname && mvn compile` |
+| Ausführung | `dotnet run` | `poetry run python Projektname/main.py (oder poetry shell + python main.py)` | `mvn exec:java -cp target/classes com.example.Projektname.App` |
+
+> Ein Beispiel in Python könnte so aussehen:
+
+```yaml pyproject.toml
+[project]
+name = "keyword-extraction"
+version = "0.1.1"
+description = "Extraktion von Keywords aus PDF-Dokumenten"
+authors = [
+{name = "Sebastian Zug",email = "sebastian.zug@informatik.tu-freiberg.de"},
+{name = "Volker Göhler",email = "volker.goehler@informatik.tu-freiberg.de"}
+]
+license = {text = "CC-BY-SA-4.0"}
+readme = "README.md"
+requires-python = ">=3.11,<=3.12.3"
+dependencies = [
+  "ollama (>=0.5.1,<0.6.0)",
+  "pymupdf (>=1.25.5,<1.26.0)",
+  "pandas (>=2.2.3,<2.3.0)",
+  "pyyaml (>=6.0.2,<6.1.0)",
+  "tqdm (>=4.67.1,<4.68.0)",
+  "urllib3 (>=2.4.0,<2.5.0)",
+  "ipykernel (>=6.29.5,<6.30.0)",
+  "jupyter (>=1.1.1,<1.2.0)",
+  "jupyterlab (>=4.4.3,<4.5.0)",
+  "networkx (>=3.5,<4.0)",
+  "matplotlib (>=3.10.3,<4.0.0)",
+  "langchain[openai] (>=0.3.26,<0.4.0)",
+  "pypdf (>=5.8.0,<6.0.0)",
+  "langchain-ollama (>=0.3.6,<0.4.0)",
+  "langchain-chroma (>=0.2.5,<0.3.0)",
+  "langchain-community (>=0.3.27,<0.4.0)",
+  "langchain-text-splitters (>=0.3.8,<0.4.0)",
+  "langgraph (>=0.5.4,<0.6.0)"
+]
+
+[project.scripts]
+extract = "keyword_extraction.main:main"
+
+[tool.poetry]
+packages = [
+  { include = "keyword_extraction", from = "src" }
+]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.5"
+
+[tool.pytest.ini_options]
+pythonpath = "src"
+testpaths = [
+  "tests"
+]
+filterwarnings = [
+  'ignore::DeprecationWarning',
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+```
 
 ## Referenzdatentypen
 
