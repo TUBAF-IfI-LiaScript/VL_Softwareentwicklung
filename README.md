@@ -12,7 +12,7 @@ link: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklu
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/f3c355853367871c5d29783ab9dbd3adb2324d58/README.md) ![GitHub contributors](https://img.shields.io/github/contributors/TUBAF-IfI-LiaScript/VL_Softwareentwicklung)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/a439843dce02b61ff7ce1d05ac33a8adf1c0e7a1/README.md) ![GitHub contributors](https://img.shields.io/github/contributors/TUBAF-IfI-LiaScript/VL_Softwareentwicklung)
 
 # Übersicht zur Vorlesung (Sommersemester 2026)
 
