@@ -498,6 +498,50 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
+
+Min und Max Werte der Datentypen können über die statischen Eigenschaften `MinValue` und `MaxValue` abgefragt werden. Diese sind in der Klasse des jeweiligen Datentyps definiert.
+Über Reflection können diese Informationen auch zur Laufzeit abgefragt werden, ohne den Datentyp explizit zu kennen.
+
+```csharp   DataTypes_mit_Reflection.cs
+using System;
+using System.Reflection;
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        int i = 5;
+        PrintTypeLimits(i);
+
+        uint u = 10;
+        PrintTypeLimits(u);
+
+        long l = 20;
+        PrintTypeLimits(l);
+    }
+
+    static void PrintTypeLimits(object value)
+    {
+        Type type = value.GetType();
+        Console.WriteLine(type);
+
+        FieldInfo minValueField = type.GetField("MinValue", BindingFlags.Public | BindingFlags.Static);
+        FieldInfo maxValueField = type.GetField("MaxValue", BindingFlags.Public | BindingFlags.Static);
+
+        if (minValueField != null && maxValueField != null)
+        {
+            Console.WriteLine(minValueField.GetValue(null));
+            Console.WriteLine(maxValueField.GetValue(null));
+        }
+        else
+        {
+            Console.WriteLine("Keine MinValue/MaxValue Eigenschaften für diesen Typ gefunden.");
+        }
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
 {{1-2}}
 ********************************************************************************
 
