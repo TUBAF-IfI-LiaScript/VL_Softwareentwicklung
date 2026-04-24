@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich & `Lina`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.4
+version:  1.0.5
 language: de
 narrator: Deutsch Female
 comment:  Ein-und Ausgabeoperationen, Ausnahmebehandlung
@@ -410,45 +410,7 @@ Zur Erinnerung, in Markdown werden Tabellen nach folgendem Muster aufgebaut:
 | Astrid   | 23        | Level Designer  |
 ```
 
-<!-- data-type="none" -->
-| Name   | Alter | Aufgabe         |
-|:------ | -----:|:--------------- |
-| Peter  |    42 | C-Programmierer |
-| Astrid |    23 | Level Designer  |
-
 Geben Sie die Daten bestimmte Fußballvereine in einer Markdown-Tabelle aus.
-
-     {{0}}
-```csharp   GenerateMarkDownTable
-using System;
-
-public class Program
-{
-  static void Main(string[] args)
-  {
-    string [] clubs = {"Blau Weiß", "Grün Gelb 1905", "Borussia Tralla Trulla", "Eintracht"};
-    int [] punkte = {12, 10, 9, 5};
-    // Wie lang ist ein Clubname maximal?
-    int maxlength = 0;
-    foreach(string club in clubs)
-    {
-      maxlength =  club.Length < maxlength ? maxlength : club.Length ;
-    }  
-    maxlength += 1;
-    // Ausgabe
-    string output;
-    output  = "| ";
-
-    // Hier sind Sie gefragt
-    Console.WriteLine(output);
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-
-                         {{1}}
-***************************************************************************
 
 ```csharp   GenerateMarkDownTable
 using System;
@@ -483,8 +445,6 @@ public class Program
 
 
 > **Frage:** Welche Annahmen werden implizit bei der Erstellung der Tabelle getroffen? Wo sehen Sie Verbesserungsbedarf?
-
-***************************************************************************
 
 ## I/O Leseoperationen
 

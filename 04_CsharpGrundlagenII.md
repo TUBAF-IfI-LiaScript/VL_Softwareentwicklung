@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, Volker Göhler, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.8
+version:  1.0.9
 language: de
 narrator: Deutsch Female
 comment:  Werte- und Referenzdatentypen, Array, String, implizite Variablendefinition und Nullables
@@ -481,12 +481,14 @@ public class Program
 
 > In C# gibt es auch das Schlüsselwort `readonly`, das eine Variable als konstant kennzeichnet, aber erst zur Laufzeit initialisiert wird.
 
-| `const`                                 | `readonly`                                                |
-| --------------------------------------- | --------------------------------------------------------- |
-| Muss zur Compilezeit definiert werden   | Kann zur Kompilierzeit oder zur Laufzeit definiert werden |
-| Implizit statisch                       | Instanz-Ebene oder statisch                               |
-| Assembler-übergreifend kopiert          | Assembler-übergreifend gemeinsam genutzt                  |
-| Speicher nicht zuweisen                 | Speicher zuweisen                                         |
+| Aspekt                  | `const`                                                                    | `readonly`                                                          |
+| ----------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Wert bekannt            | zur **Compilezeit**                                                        | spätestens nach dem **Konstruktor** (zur Laufzeit)                  |
+| Zuweisung erlaubt       | nur bei der Deklaration                                                    | bei der Deklaration **oder** im Konstruktor                         |
+| Klassenbindung          | implizit `static` (gehört zur Klasse)                                      | wahlweise Instanz-Feld oder `static`                                |
+| Erlaubte Typen          | nur primitive Typen, `string` und `null`                                   | **alle** Typen                                                      |
+| Speicher zur Laufzeit   | kein eigenes Feld — der Wert wird an jede Verwendungsstelle einkompiliert  | echtes Feld im Objekt bzw. in der Klasse                            |
+| Verhalten über Assembly-Grenzen | Wert wird in jede nutzende Assembly **einkopiert** — Änderungen erfordern Neukompilieren aller Nutzer | Wert wird zur Laufzeit aus der definierenden Assembly **gelesen** — Änderungen wirken sofort |
 
 ### Implizit typisierte Variablen
 
@@ -598,6 +600,7 @@ public struct Nullable <T>{
 
 https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/keywords/default-values-table
 
+> Warum hat das Csharp Team in Version 8.0 plötzlich die Möglichkeit eingeführt, Referenztypen als nullable zu deklarieren? Was könnte der Grund dafür sein?
 
 ## Aufgaben
 
