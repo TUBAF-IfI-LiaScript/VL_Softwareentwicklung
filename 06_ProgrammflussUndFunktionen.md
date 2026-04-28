@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina` & `KoKoKotlin`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 comment:  Kontrollstrukturen, Funktionen, Parameterübergabe, Überladen von Funktionen, Lebensdauer und Sichtbarkeit von Variablen
@@ -328,7 +328,15 @@ int value = 1;
     }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+```xml   -myproject.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
 
 C# 7.0 führt darüber hinaus das _pattern matching_ mit switch ein. Damit werden
@@ -809,39 +817,84 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-`ref` kann auch auf Referenzdatentypen angewendet werden. Dort wirkt es sich nur dann aus, wenn an den betreffenden Parameter zugewiesen wird.
+`ref` kann auch auf Referenzdatentypen angewendet werden. Hier ist allerdings sorgfältig zu unterscheiden zwischen *Mutation des referenzierten Objekts* und *Neuzuweisung der Referenz selbst* — nur Letztere benötigt `ref`.
+
+**Speichermodell.** Eine Variable vom Referenztyp ist selbst ein kleiner Wert auf dem Stack (eine Adresse, die auf ein Objekt im Heap zeigt). Standardmäßig wird *dieser Wert* — die Adresse — beim Funktionsaufruf kopiert. Mit `ref` erhält die Methode dagegen einen Alias auf die Caller-Variable.
+
+```ascii
+Ohne ref:
+   Stack (Main)         Stack (Methode)        Heap
+   ┌───────────┐        ┌───────────┐         ┌─────────────┐
+   │ a      ●──┼───┬───>│ w      ●──┼────────>│ [1, 2, 3]   │
+   └───────────┘   │    └───────────┘         └─────────────┘
+                   │                            ▲
+                   └────────────────────────────┘
+                  (a zeigt direkt auf das Array;
+                   w erhält eine Kopie der Adresse)
+
+Mit ref:
+   Stack (Main)         Stack (Methode)        Heap
+   ┌───────────┐        ┌───────────┐         ┌─────────────┐
+   │ a      ●──┼───┬───>│ w (Alias) │         │ [5, 6, 7]   │
+   └───────────┘   │    └─────┬─────┘         └─────────────┘
+                   │          │                 ▲
+                   │          └─────────────────┤
+                   └────────────────────────────┘
+                  (w und a verweisen auf dieselbe
+                   Stack-Slot; beide zeigen auf das Array)
+```
+
+**Die zwei Effekte getrennt betrachtet.** Das folgende Beispiel isoliert die beiden Operationen in eigenen Methoden, sodass sich ihre Wirkung einzeln beobachten lässt.
 
 ```csharp         UsageOfRefWithClasses
 using System;
 
 public class Program
 {
-  static void Test1(int []  w)
-  {
-    w[0] = 22;
-    w = new int [] {50,60,70};
-  }
-
-  static void Test2(ref int [] w)
-  {
-    w[0] = 22;
-    w = new int [] {50,60,70};
-  }
+  static void NurMutieren(int[] w)              { w[0] = 22; }
+  static void NurMutierenRef(ref int[] w)       { w[0] = 22; }
+  static void NurNeuzuweisen(int[] w)           { w = new int[] {50,60,70}; }
+  static void NurNeuzuweisenRef(ref int[] w)    { w = new int[] {50,60,70}; }
 
   static void Main(string[] args)
   {
-    //Test1:
-    int [] array = new int [] {1,2,3};
-    Test1(array);
-    Console.WriteLine("Test1() without ref: array[0] = {0}", array[0]);
-    //Test2:
-    array = new int [] {5,6,7};
-    Test2(ref array);
-    Console.WriteLine("Test2() with ref   : array[0] = {0}", array[0]);
+    int[] a;
+
+    a = new int[] {1,2,3};
+    NurMutieren(a);
+    Console.WriteLine("NurMutieren           : a[0]={0}, Length={1}", a[0], a.Length);
+
+    a = new int[] {1,2,3};
+    NurMutierenRef(ref a);
+    Console.WriteLine("NurMutierenRef        : a[0]={0}, Length={1}", a[0], a.Length);
+
+    a = new int[] {1,2,3};
+    NurNeuzuweisen(a);
+    Console.WriteLine("NurNeuzuweisen        : a[0]={0}, Length={1}", a[0], a.Length);
+
+    a = new int[] {1,2,3};
+    NurNeuzuweisenRef(ref a);
+    Console.WriteLine("NurNeuzuweisenRef     : a[0]={0}, Length={1}", a[0], a.Length);
   }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+| Aufruf                     | `a[0]` danach | `a.Length` | Erklärung |
+|----------------------------|---------------|------------|-----------|
+| `NurMutieren(a)`           | 22            | 3          | Adresse wurde kopiert, zeigt aber auf dasselbe Heap-Array → Mutation sichtbar |
+| `NurMutierenRef(ref a)`    | 22            | 3          | Identisches Ergebnis: für reine Mutation bringt `ref` *keinen* Unterschied |
+| `NurNeuzuweisen(a)`        | 1             | 3          | Nur die *lokale Kopie* der Adresse zeigt auf das neue Array; `a` im Caller unverändert |
+| `NurNeuzuweisenRef(ref a)` | 50            | 3          | `w` ist Alias für `a` → Neuzuweisung schlägt im Caller durch |
+
+**Brücke zu C/C++.** Für Leser*innen mit C-Hintergrund:
+
+| C#                          | C-Äquivalent (sinngemäß) |
+|-----------------------------|--------------------------|
+| `void f(int[] w)`           | `void f(int* w)` — `w[0]=…` wirkt, `w = …` ist lokal |
+| `void f(ref int[] w)`       | `void f(int** w)` — `*w = …` schlägt im Caller durch |
+
+> **Faustregel:** `ref` für Referenztypen ist selten nötig und meist ein Code-Smell. Wer es braucht, möchte in der Regel etwas aus der Methode zurückgeben — ein regulärer Rückgabewert oder `out` (siehe nächster Abschnitt) ist dann meist klarer.
 
 Nur der Vollständigkeit halber sei erwähnt, dass Sie auch unter C# die Pointer-Direktiven wie unter C oder C++ verwenden können. Allerdings müssen
 Sie Ihre Methoden dann explizit als `unsafe` deklarieren.

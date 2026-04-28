@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich & `Lina`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 comment:  Ein-und Ausgabeoperationen, Ausnahmebehandlung
@@ -696,8 +696,8 @@ public class Program
     int c=0;
     try
     {
-        checked {c = a + b;}        // Fall 1
-        // c = a / b;                // Fall 2
+        //checked {c = a + b;}        // Fall 1
+        c = a / b;                // Fall 2
     }
     catch (OverflowException e)
     {
