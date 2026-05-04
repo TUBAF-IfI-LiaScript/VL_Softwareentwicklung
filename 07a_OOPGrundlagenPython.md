@@ -1,13 +1,12 @@
 <!--
 
-author:   Sebastian Zug, Galina Rudolf, André Dietrich
+author:   Sebastian Zug, Galina Rudolf, André Dietrich, Volker Göhler
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.0
+version:  1.0.1
 language: de
 narrator: Deutsch Female
-comment:  Konzeptioneller Einstieg in die Objektorientierung anhand von Python — für Teilnehmer ohne C#-Hintergrund. Klassen, Objekte, Konstruktor, Methoden, Vererbung.
-tags:
-logo:
+comment:  Konzeptioneller Einstieg in die Objektorientierung anhand von Python -- für Teilnehmer ohne C#-Hintergrund. Klassen, Objekte, Konstruktor, Methoden, Vererbung.
+tags: python, oop, objektorientierung, klasse, objekt, konstruktor, self, vererbung, super, kapselung
 
 import: https://github.com/liascript/CodeRunner
 
@@ -47,23 +46,10 @@ Nach der Vorlesung können Sie ...
 - den Unterschied zwischen Klassenattributen und Instanzattributen benennen,
 - die ersten Schritte der **Kapselung** anwenden (`_`-Konvention).
 
-### Zeitplan (90 Minuten)
-
-| Zeit       | Thema                                          |
-| ---------- | ---------------------------------------------- |
-| 0 – 10 min | Motivation: Warum OOP?                         |
-| 10 – 20 min | Bauplan/Instanz, Begriffsbildung              |
-| 20 – 35 min | Erste Klasse `Animal`, `__init__`, `self`     |
-| 35 – 45 min | Klassen- vs. Instanzattribute, `__str__`      |
-| 45 – 50 min | Pause                                          |
-| 50 – 60 min | Komposition: `Farm` enthält `Animal`s         |
-| 60 – 70 min | Kapselung mit `_`-Konvention                  |
-| 70 – 85 min | Vererbung, Override, `super()`, Polymorphie   |
-| 85 – 90 min | Brücke zu C#, Aufgabenüberblick               |
-
 ## Warum Objektorientierung?
 
-### Ausgangsproblem
+Ausgangsproblem
+====================
 
 Stellen Sie sich vor, Sie verwalten einen kleinen Bauernhof in einem Programm. Drei Tiere sollen gespeichert werden — jeweils mit Name, Geräusch und Alter.
 
@@ -90,7 +76,7 @@ print(f"{name3} ({age3} Jahre) macht {sound3}")
 
 > **Frage:** Was passiert, wenn der Bauernhof auf 50 Tiere wächst? Was, wenn sich „macht" in „sagt" ändert?
 
-                                       {{1-2}}
+{{1-2}}
 *******************************************************************************
 
 Probleme dieses Ansatzes:
@@ -104,10 +90,12 @@ Probleme dieses Ansatzes:
 
 *******************************************************************************
 
-                                       {{2-3}}
+{{2-4}}
 *******************************************************************************
 
-### Erster Lösungsversuch: Dictionaries und Funktionen
+
+Erster Lösungsversuch: Dictionaries und Funktionen
+====================
 
 Bevor wir Klassen einführen, schauen wir uns an, wie weit man mit den bisher bekannten Mitteln kommt. Wir bündeln die Daten zu einem Tier in einem **Dictionary** und schreiben eine Funktion, die darauf arbeitet:
 
@@ -125,11 +113,18 @@ make_noise(berta)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
+> **Frage:** Sehen Sie hier schon die Idee von OOP? Was ist besser als vorher, und was könnte noch verbessert werden?
+
+*******************************************************************************
+
+{{3-4}}
+*******************************************************************************
+
 Das ist schon deutlich besser. Aber drei Probleme bleiben:
 
-1. **Keine Garantie, dass die Daten zusammenpassen.** Niemand hindert uns daran, ein Dictionary ohne `sound` zu bauen — der Fehler erscheint erst beim Aufruf.
+1. **Keine Garantie, dass die Daten zusammenpassen.** Niemand hindert uns daran, ein Dictionary ohne `sound` zu bauen. Der Fehler erscheint erst beim Aufruf.
 2. **Daten und Funktionen sind getrennt.** Wer das Dictionary benutzt, muss wissen, *welche* Funktionen dazu gehören. Das steht nirgends im Code.
-3. **Keine Bauplan-Beschreibung.** Was ein „Tier" ist, ergibt sich nur indirekt aus den Schlüsseln, die zufällig benutzt werden.
+3. **Keine Bauplan-Beschreibung.** Was ein „Tier" ist, ergibt sich nur indirekt aus den Keys, die benutzt werden.
 
 > **Frage:** Wie könnte eine Sprache uns helfen, Daten und passende Funktionen *zusammenzuhalten* und einen *Bauplan* zu beschreiben, an den sich alle Tiere halten müssen?
 
@@ -163,7 +158,8 @@ style="width: 100%; max-width: 700px; display: block; margin-left: auto; margin-
 
 ## Die erste Klasse
 
-### Aufbau
+Aufbau
+==========
 
 In Python schreiben wir den Bauplan mit dem Schlüsselwort `class`:
 
@@ -183,7 +179,7 @@ class Animal:
 Drei Bestandteile sind neu und brauchen eine Erklärung:
 
 - **`__init__`** — der **Konstruktor**. Wird *einmal* beim Erzeugen eines Objekts aufgerufen. Hier werden die Attribute initialisiert.
-- **`self`** — der Verweis auf *dieses konkrete Objekt*. (In C# heißt das später `this`.) Er muss als erster Parameter jeder Methode stehen.
+- **`self`** — der Verweis auf *dieses konkrete Objekt*. (In C# heißt es `this`.) Er muss als erster Parameter jeder Methode stehen. Ist aber nur eine Konvention.
 - **`self.name = name`** — legt das Attribut `name` *am Objekt* ab. Ohne `self.` wäre `name` nur eine lokale Variable in der Funktion.
 
 ### Objekte erzeugen und nutzen
@@ -244,10 +240,11 @@ kitty.have_birthday()
 
 ### Klassenattribute vs. Instanzattribute
 
-Manche Eigenschaften gehören *zu jedem einzelnen Objekt* (jedes Tier hat einen anderen Namen). Andere Eigenschaften gehören *zur ganzen Klasse* — sie sind für alle Tiere gleich. Beispiel: Alle Tiere auf dem Planeten leben auf demselben Planeten.
+Manche Eigenschaften gehören *zu jedem einzelnen Objekt* (jedes Tier hat einen anderen Namen). Andere Eigenschaften gehören *zur ganzen Klasse* — sie sind für alle Tiere gleich. Beispiel: Alle Tiere atmen Luft und leben auf demselben Planeten.
 
 ```python      ClassAttribute.py
 class Animal:
+    atmen = "Luft"           # Klassenattribut — gehört zur Klasse
     planet = "Erde"          # Klassenattribut — gehört zur Klasse
 
     def __init__(self, name, sound):
@@ -312,7 +309,7 @@ print(f"Mein Tier: {kitty}")
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-> **Hintergrund:** Methoden, deren Namen in `__` eingerahmt sind (man spricht „Dunder-Methoden"), sind Haken, die Python automatisch aufruft. Wir werden in C# später ähnliche Mechanismen sehen — dort heißen sie `ToString()`, `Equals()` etc.
+> **Hintergrund:** Methoden, deren Namen in `__` eingerahmt sind (man spricht „Dunder-Methoden"), sind Hooks, die Python automatisch aufruft. Wir werden in C# später ähnliche Mechanismen sehen — dort heißen sie `ToString()`, `Equals()` etc.
 
 ## Mehrere Objekte zusammenführen
 
@@ -356,7 +353,8 @@ farm.morning_call()
 
 ## Kapselung — Was darf nach außen sichtbar sein?
 
-### Das Problem
+Das Problem
+====================
 
 Bisher konnten wir auf jedes Attribut von außen direkt zugreifen — auch schreibend. Das ist gefährlich:
 
@@ -406,17 +404,77 @@ print(f"{kitty.name} ist {kitty.get_age()} Jahre alt.")
 
 | Schreibweise         | Bedeutung                                                                |
 | -------------------- | ------------------------------------------------------------------------ |
-| `name`               | öffentlich — jeder darf lesen/schreiben                                  |
-| `_name`              | „bitte nicht von außen anfassen" — nur für die Klasse selbst             |
-| `__name` (zwei `_`)  | erzwingt Namensumbenennung intern — selten gebraucht                     |
+| `name`               | öffentlich — jeder darf lesen/schreiben (public)                         |
+| `_name`              | „bitte nicht von außen anfassen" — nur für die Klasse selbst (protected) |
+| `__name` (zwei `_`)  | erzwingt Namensumbenennung intern (private)                              |
 
 > **Merke:** Kapselung trennt das *Was* (öffentliches Verhalten) vom *Wie* (interne Umsetzung). Wer die Klasse benutzt, soll nur das Was sehen müssen — wir können das Wie ändern, ohne dass Aufrufer kaputt gehen.
 
-> In C# werden wir dafür echte Modifizierer (`public`, `private`) und sogenannte **Properties** kennenlernen — Vorlesung 07/08.
+> In C# werden wir dafür echte Modifizierer (`public`, `private`) und sogenannte **Properties** kennenlernen — Vorlesung 07/08. Das geht in Python auch — siehe nächster Slide.
+
+### Python Properties: Elegante Kapselung mit `@property`
+
+In Python können **Properties** verwendet werden, um den Zugriff auf Attribute zu kontrollieren, ohne die Syntax für den Zugriff zu ändern. Dies ermöglicht eine saubere Trennung zwischen öffentlicher Schnittstelle und interner Implementierung.
+
+```python      EncapsulationProperties.py
+class Animal:
+    def __init__(self, name, age):
+        self.name = name
+        self._age = age  # Internes Attribut
+
+    @property
+    def age(self):
+        """Getter für das Alter."""
+        return self._age
+
+    @age.setter
+    def age(self, new_age):
+        """Setter für das Alter mit Validierung."""
+        if new_age < 0:
+            raise ValueError(f"Ungültiges Alter: {new_age}")
+        self._age = new_age
+
+    @age.deleter
+    def age(self):
+        """Löscht das Alter."""
+        print(f"Alter von {self.name} wird gelöscht.")
+        del self._age
+
+# Verwendung
+kitty = Animal("Kitty", 5)
+print(f"{kitty.name} ist {kitty.age} Jahre alt.")  # Getter
+
+kitty.age = 6  # Setter
+print(f"{kitty.name} ist {kitty.age} Jahre alt.")
+
+try:
+    kitty.age = -100  # Wird abgelehnt
+except ValueError as e:
+    print(e)
+
+del kitty.age  # Deleter
+```
+@LIA.eval(`["EncapsulationProperties.py"]`, `none`, `python3 EncapsulationProperties.py`)
+
+---
+
+| Dekorator          | Bedeutung                                                                 |
+|--------------------|---------------------------------------------------------------------------|
+| `@property`        | Definiert den **Getter** für ein Attribut.                               |
+| `@<property>.setter` | Definiert den **Setter** für ein Attribut (mit Validierung).            |
+| `@<property>.deleter` | Definiert den **Deleter** für ein Attribut.                              |
+
+---
+> **Vorteil von Properties:**
+>
+> - Der Zugriff auf Attribute bleibt **intuitiv** (`obj.age` statt `obj.get_age()`).
+> - Die **Validierung** und **Logik** bleiben in der Klasse verborgen.
+> - Änderungen an der internen Implementierung (z. B. Berechnung von `_age`) haben **keine Auswirkungen** auf den Code, der die Klasse nutzt.
 
 ## Vererbung
 
-### Motivation
+Motivation
+====================
 
 Auf unserem Bauernhof sollen verschiedene Tierarten leben. Ein **Hund** kann zusätzlich `fetch()` (Stöckchen apportieren), eine **Kuh** liefert `milk()`. Beide sind aber *immer noch Tiere* — sie haben Namen, Alter, Geräusch.
 
@@ -490,6 +548,8 @@ class Cat(Animal):
         # Wir überschreiben die Methode aus Animal
         print(f"{self.name} macht {self.sound} ... und schnurrt.")
 
+animal = Animal("Berta", "Muuh", 8)
+animal.make_noise()  # Berta macht Muuh
 
 kitty = Cat("Kitty", "Miau", 5)
 kitty.make_noise()
@@ -532,7 +592,7 @@ kitty.make_noise()
 
 ### Eine gemeinsame Liste verschiedener Tiere
 
-Weil `Dog` und `Cat` *beide* `Animal`s sind, dürfen sie in derselben Liste stehen — und beim Aufruf von `make_noise()` reagiert jedes auf seine eigene Art.
+Da `Dog` und `Cat` *beide* `Animal`s sind, haben sie die `make_noise` Methode und wir können diese aufrufen und erwarten, dass jedes Tier das passende Geräusch macht.
 
 ```python      Polymorphism.py
 class Animal:
@@ -633,11 +693,32 @@ Zum Abschluss verbinden wir alle Konzepte in einem etwas größeren Beispiel. Ei
 class Product:
     def __init__(self, name, price, stock):
         self.name = name
-        self._price = price        # intern, über Methoden zugreifen
-        self._stock = stock
+        self._price = price        # Intern, über Property zugreifen
+        self._stock = stock        # Intern, über Property zugreifen
 
-    def get_price(self):
+    @property
+    def price(self):
+        """Getter für den Preis."""
         return self._price
+
+    @price.setter
+    def price(self, new_price):
+        """Setter für den Preis mit Validierung."""
+        if new_price < 0:
+            raise ValueError(f"Ungültiger Preis: {new_price}")
+        self._price = new_price
+
+    @property
+    def stock(self):
+        """Getter für den Bestand."""
+        return self._stock
+
+    @stock.setter
+    def stock(self, new_stock):
+        """Setter für den Bestand mit Validierung."""
+        if new_stock < 0:
+            raise ValueError(f"Ungültiger Bestand: {new_stock}")
+        self._stock = new_stock
 
     def is_available(self, amount):
         return self._stock >= amount
@@ -649,8 +730,7 @@ class Product:
         return True
 
     def __str__(self):
-        return f"{self.name} ({self._price:.2f} €, {self._stock} auf Lager)"
-
+        return f"{self.name} ({self.price:.2f} €, {self.stock} auf Lager)"
 
 class DigitalProduct(Product):
     def __init__(self, name, price, size_mb):
@@ -659,8 +739,7 @@ class DigitalProduct(Product):
         self.size_mb = size_mb
 
     def __str__(self):
-        return f"{self.name} (digital, {self._price:.2f} €, {self.size_mb} MB)"
-
+        return f"{self.name} (digital, {self.price:.2f} €, {self.size_mb} MB)"
 
 class Cart:
     def __init__(self):
@@ -674,14 +753,13 @@ class Cart:
             print(f"  ! {product.name} nicht ausreichend verfügbar")
 
     def total(self):
-        return sum(p.get_price() * n for p, n in self.items)
+        return sum(p.price * n for p, n in self.items)
 
     def show(self):
         print("Warenkorb:")
         for product, amount in self.items:
             print(f"  - {amount} x {product}")
         print(f"  = Summe: {self.total():.2f} €")
-
 
 buch    = Product("OOP-Lehrbuch", 29.90, stock=3)
 ebook   = DigitalProduct("OOP-Lehrbuch (PDF)", 14.90, size_mb=12)
@@ -758,6 +836,7 @@ In den Vorlesungen 07, 08 und 09 gehen wir tiefer:
 6. **Hierarchie modellieren.** Modellieren Sie eine Klassenhierarchie für Verkehrsmittel: `Vehicle` (mit `name` und Methode `move()`), darunter `Car`, `Bicycle`, `Boat`. Jede Klasse soll `move()` passend überschreiben (z. B. „rollt", „tritt", „schwimmt"). Legen Sie eine Liste aus drei verschiedenen Verkehrsmitteln an und rufen Sie `move()` in einer Schleife auf.
 
 7. **Quizfragen zur Selbstkontrolle.**
+
    - Was ist der Unterschied zwischen einer Klasse und einem Objekt?
    - Warum ist `self` als erster Parameter jeder Methode notwendig?
    - Wann verwenden Sie Vererbung, wann eher Komposition?
