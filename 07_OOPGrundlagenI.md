@@ -645,6 +645,130 @@ public class Program
 
 > **Vertiefung:** Vorlesung 08 zeigt **Properties** als idiomatische C#-Lösung für „kontrollierter Zugriff auf private Felder" (statt expliziter Getter/Setter wie in 07a). Vorlesung 09 erklärt `protected` und die Wechselwirkungen mit Vererbung.
 
+## Beispiel: `internal` in Aktion
+
+`public` und `private` sind in einem einzigen `.cs`-File leicht zu sehen. `internal` braucht eine **zweite Assembly**, damit der Effekt überhaupt sichtbar wird — innerhalb *einer* Assembly verhält sich `internal` wie `public`. Dazu steigen wir kurz in ein echtes Mini-Projekt unter [`code/08_OOP/assemblies_dotnet/`](code/08_OOP/assemblies_dotnet/) ein.
+
+```ascii
+assemblies_dotnet/
+│
+├── assemblies_dotnet.slnx               <- Solution: Klammer um beide Projekte (XML, ab .NET 9)
+│
+├── MyApp/                               <- Projekt 1: ausführbar
+│   ├── MyApp.csproj                     (OutputType = Exe, ProjectReference -> MyClass)
+│   └── Program.cs
+│
+└── MyClass/                             <- Projekt 2: Bibliothek
+    ├── MyClass.csproj                   (kein OutputType -> Default: Library)
+    └── Farmland.cs
+
+       Nach 'dotnet build' entstehen:
+       MyClass/bin/Debug/net9.0/MyClass.dll      <- Assembly 1
+       MyApp/bin/Debug/net9.0/MyApp.dll          <- Assembly 2 (lädt MyClass.dll)
+```
+
+| Begriff       | Was es ist                                | Wofür                                                      |
+| ------------- | ----------------------------------------- | ---------------------------------------------------------- |
+| **Solution** (`.slnx`) | Verwaltungs-Container für mehrere Projekte | nur Tooling-Hilfe, baut selbst nichts. Klassisches Format `.sln` ist im Industrieumfeld noch verbreitet, das schlankere XML-Format `.slnx` ist seit .NET 9 verfügbar |
+| **Projekt** (`.csproj`) | Beschreibung, was kompiliert wird     | erzeugt jeweils **eine** Assembly                         |
+| **Assembly** (`.dll`/`.exe`) | physische Build-Ausgabe              | Deployment-Einheit + Sichtbarkeitsgrenze für `internal`   |
+
+> **Häufige Verwechslung — bitte einmal explizit klarstellen:**
+>
+> | Achse        | Wer steuert?            | Sichtbarkeit                                  |
+> | ------------ | ----------------------- | --------------------------------------------- |
+> | **Namespace** | `namespace Farm { ... }` | logischer Name, hat *nichts* mit Sichtbarkeit zu tun |
+> | **Assembly** | `.csproj` / Build       | physische Grenze; `internal` operiert *hier*  |
+>
+> `using Farm;` erlaubt den **Namespace**-Zugriff. `<ProjectReference>` erlaubt den **Assembly**-Zugriff. Beide sind unabhängig.
+
+### Inhaltlicher Aufbau des Beispiels
+
+In `MyClass/Farmland.cs` liegen zwei Typen mit unterschiedlicher Sichtbarkeit:
+
+```csharp
+namespace Farm
+{
+    internal struct Animal                       // <- nur in MyClass.dll sichtbar
+    {
+        public string name;
+        public string sound;
+
+        public Animal(string name, string sound = "Miau") { ... }
+        public override string ToString() => $"Mein Name ist {name}, {sound}!";
+    }
+
+    public class FarmFacade                      // <- öffentliche Schnittstelle
+    {
+        private List<Animal> animals = new();
+
+        public void   Register(string name, string sound = "Miau") { ... }   // legt Animal an
+        public string MorningCall() { ... }                                  // gibt Text zurück
+    }
+}
+```
+
+`FarmFacade` *darf* `Animal` benutzen, weil beide zur selben Assembly gehören. Von außen — etwa aus `MyApp.dll` — ist nur `FarmFacade` sichtbar; `Animal` bleibt unsichtbar, obwohl der Quellcode in derselben Repository-Datei offen lesbar steht.
+
+> **Beachten Sie das Fassaden-Muster:** `MorningCall()` gibt nur einen `string` zurück, also einen Standardtyp. Der interne `Animal`-Typ überquert die Assembly-Grenze nie. Das ist *die* idiomatische Verwendung von `internal`.
+
+### Drei Schritte, die Sie selbst ausprobieren
+
+**Schritt 1 — bauen und ausführen:**
+
+```bash
+cd code/08_OOP/assemblies_dotnet
+dotnet build                       # baut MyClass.dll, dann MyApp.dll
+dotnet run --project MyApp
+```
+
+Erwartete Ausgabe:
+
+```
+Mein Name ist Kitty, Miau!
+Mein Name ist Wally, Wuff!
+Mein Name ist Berta, Muuh!
+```
+
+Die App ruft `FarmFacade` auf, registriert drei Tiere und holt sich den `MorningCall`-Text. Das funktioniert — `FarmFacade` ist `public`.
+
+**Schritt 2 — den verbotenen Zugriff sehen:**
+
+In `MyApp/Program.cs` ist im `Main` ein Experimentier-Block enthalten. Entfernen Sie die führenden `//` vor der Animal-Zeile:
+
+```csharp
+var cat = new Animal("Kitty");
+```
+
+`dotnet build` liefert:
+
+```
+error CS0122: 'Farm.Animal' is inaccessible due to its protection level
+```
+
+Der Compiler **sieht** den Typ `Animal` (er steht ja im Quellcode der referenzierten DLL), erlaubt aber den Zugriff nicht — `internal` blockt über die Assembly-Grenze hinweg.
+
+**Schritt 3 — die Grenze öffnen:**
+
+In `MyClass/Farmland.cs` das `internal` durch `public` ersetzen:
+
+```csharp
+public struct Animal { ... }
+```
+
+`dotnet build` läuft wieder durch. Genau dieser Toggle macht den Unterschied erfahrbar: Eine Bibliothek entscheidet, *was* sie nach außen anbietet — und versteckt den Rest.
+
+### Was Sie aus dem Beispiel mitnehmen sollten
+
+| Erkenntnis                                                                                  | Warum es wichtig ist                                       |
+| ------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| Ein .NET-Programm kann aus mehreren Projekten und Assemblies bestehen                       | Realität jenseits der „eine `Main`-Datei"-Vorlesungssicht  |
+| `internal` operiert auf **Assembly-Grenze**, nicht auf Namespace-Grenze                     | Häufigste Verwechslung — einmal richtig verstehen          |
+| **Öffentliche Fassade + interne Implementierung** ist *das* Standardmuster für Bibliotheken | Genau dafür existiert `internal`                           |
+| `dotnet build` erkennt Abhängigkeitsreihenfolge und baut nur, was sich geändert hat         | Modulare Builds = schnellere Iteration                     |
+
+> **Vertiefung in 08:** Wir schauen uns dort an, wie diese Struktur per `dotnet new sln` / `dotnet new console` / `dotnet new classlib` / `dotnet add reference` von Hand erzeugt wird — und warum NuGet-Pakete im Kern dasselbe Konzept sind, nur mit zusätzlicher Distribution.
+
 ## Aufgaben
 
 1. **Übersetzen.** Übertragen Sie das `Animal`-Beispiel aus 07a (mit `make_noise`) nach C#. Erzeugen Sie drei Instanzen und rufen Sie `MakeNoise()` in einer Schleife auf.
