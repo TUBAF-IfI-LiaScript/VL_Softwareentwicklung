@@ -2,10 +2,10 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.8
+version:  2.0.1
 language: de
 narrator: Deutsch Female
-comment:  Abstrakte Klassen und Methodens, Interface-Definition und -bedeutung, `cast` Operationen
+comment:  Vererbung in C# — explizite virtual/override-Disziplin, base-Konstruktoren, Zugriffsmodifizierer (protected, internal protected), Polymorphie und Methoden-Bindung, new-Verdecken vs. override, sealed, Casts mit is/as und Pattern Matching
 tags:      
 logo:     
 
@@ -32,6 +32,81 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
+
+## Brücke: Vererbung von Python (07a) nach C#
+
+In **07a** haben Sie Vererbung in Python kennengelernt — `class Dog(Animal):`, `super().__init__(...)`, beliebiges Überschreiben. C# behandelt dasselbe Konzept *strenger und expliziter*, weil große Codebasen und die Statik des Compilers das brauchen.
+
+| Aspekt                       | Python (07a)                          | C# (heute)                                                |
+| ---------------------------- | ------------------------------------- | --------------------------------------------------------- |
+| Erben von einer Basisklasse  | `class Dog(Animal):`                  | `public class Dog : Animal { ... }`                       |
+| Mehrfachvererbung            | erlaubt                               | **nicht erlaubt** (nur über Interfaces — siehe VL 10)     |
+| Eltern-Konstruktor aufrufen  | `super().__init__(name)`              | `: base(name)`                                            |
+| Eltern-Methode aufrufen      | `super().make_noise()`                | `base.MakeNoise()`                                        |
+| Methode überschreiben        | implizit (gleicher Name reicht)       | **explizit:** `virtual` in Basis + `override` in Kind     |
+| Geschützter Zugriff für Erben | Konvention `_x`                      | **`protected`** (Compiler-erzwungen)                       |
+| Versiegeln                   | nicht vorgesehen                      | `sealed` auf Klasse oder Methode                          |
+| Typprüfung zur Laufzeit      | `isinstance(obj, Dog)`                | `obj is Dog`, Pattern Matching mit `switch`               |
+
+> **Lernziele:** Sie können (1) eine C#-Vererbungshierarchie korrekt aufbauen, (2) erklären, *warum* C# `virtual`/`override` explizit verlangt, (3) `protected` von `private` und `internal` abgrenzen, (4) `new`-Verdecken von `override` unterscheiden, (5) Casts mit `is`/`as` und Pattern Matching anwenden.
+
+> **Was kommt in 10?** — Abstrakte Klassen und **Interfaces** als C#-Lösung für Mehrfach-„Vererbung von Verträgen".
+
+## Warum `virtual` und `override`? — Die C#-Disziplin
+
+In Python überschreibt jede gleichnamige Methode in einer Kindklasse implizit die Elternmethode. Das ist bequem, hat aber einen Preis: **niemand sieht im Basisklassen-Code, ob jemand die Methode später überschreiben darf.** Bei großen Codebasen führt das zu unbeabsichtigten Überschreibungen und schwer zu findenden Fehlern.
+
+C# verlangt deshalb zwei explizite Markierungen:
+
+- **`virtual`** an der Basisklassen-Methode: *„Diese Methode darf überschrieben werden."*
+- **`override`** in der abgeleiteten Klasse: *„Ich überschreibe bewusst diese virtuelle Methode."*
+
+```csharp      VirtualOverride
+using System;
+
+public class Animal
+{
+    public string name;
+    public Animal(string name) { this.name = name; }
+
+    public virtual void MakeNoise()                     // <- darf überschrieben werden
+    {
+        Console.WriteLine($"{name} macht ein Geräusch.");
+    }
+
+    public void Greet()                                 // <- NICHT virtual
+    {
+        Console.WriteLine($"Hallo, ich heiße {name}.");
+    }
+}
+
+public class Dog : Animal
+{
+    public Dog(string name) : base(name) { }
+
+    public override void MakeNoise()                    // <- bewusst überschrieben
+    {
+        Console.WriteLine($"{name}: WUFF!");
+    }
+
+    // public override void Greet() { ... }             // Fehler: Greet ist nicht virtual
+}
+
+public class Program
+{
+    static void Main(string[] args)
+    {
+        Animal a = new Dog("Rex");
+        a.MakeNoise();    // -> "Rex: WUFF!"  (späte Bindung über vtable)
+        a.Greet();        // -> "Hallo, ich heiße Rex."
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+> **Merke:** Wer in C# eine Methode *überschreibbar* machen will, muss das **bewusst entscheiden** und dokumentieren. Dieser Mehraufwand zahlt sich in größeren Projekten aus, weil er erzwungene Verträge zwischen Basis- und Kindklassen schafft.
+
+> **Python-Vergleich:** Python hat *keine* Trennung zwischen virtuellen und nicht-virtuellen Methoden — alles ist „virtual". Die Disziplin liegt allein bei der Programmiererin. Bei einem Modulwechsel kann das gefährlich werden.
 
 ## Vererbung in C#
 
@@ -768,6 +843,8 @@ public class Program
 
 ## Casts über Klassen
 
+> **Kompakt-Abschnitt.** Wir behandeln hier nur die Grundlagen (Upcast, Downcast, `is`/`as`). Die Vertiefung **Pattern Matching** mit `switch`-Typmustern verschieben wir in eine der späteren Vorlesungen (Generics / Container).
+
 Konvertierungen zwischen unterschiedlichen Datentypen lassen sich auch
 auf Klassen anwenden, allerdings sind hier einige Besonderheiten zu beachten.
 
@@ -910,3 +987,17 @@ public class Program
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+## Aufgaben
+
+1. **Übersetzen (Animal → Dog → Puppy).** Übertragen Sie die mehrstufige Hierarchie aus 07a (Python: `Animal` → `Dog` → `Puppy` mit `super()`-Kette) nach C#. Markieren Sie `describe()` als `virtual` und in jeder Stufe als `override`. Rufen Sie über eine `Animal`-Variable, der ein `Puppy` zugewiesen ist, `describe()` auf und beobachten Sie die Ausgabe.
+
+2. **`new` vs. `override`.** Schreiben Sie dieselbe Hierarchie mit `new` statt `override` in `Dog.describe()`. Was ändert sich, wenn Sie über eine `Animal`-Variable auf das Objekt zugreifen? Erklären Sie das Ergebnis im Hinblick auf statische und dynamische Bindung.
+
+3. **`protected` ausprobieren.** Geben Sie `Animal` ein `protected int age;` und schreiben Sie in `Dog` eine Methode, die das Alter erhöht. Versuchen Sie anschließend, von außerhalb der Klassenhierarchie auf `age` zuzugreifen — der Compiler sollte Sie ablehnen.
+
+4. **`is` und Pattern Matching.** Erweitern Sie den `Logger.printPerson` aus dem Beispiel um eine `switch`-Anweisung mit Typmustern (`case Fußballspieler s when s.rückennummer == 10 => ...`).
+
+5. **`sealed`.** Versiegeln Sie eine Methode in `Dog`, sodass `Puppy` sie *nicht* mehr überschreiben darf. Erklären Sie in einem Satz, warum man das tun könnte.
+
+6. **Reflexion.** Vergleichen Sie Python und C# bei der Vererbung in 3–4 Sätzen: *Was* erzwingt C# explizit, *warum* tut es das, und in welchem Szenario ist Pythons Lockerheit ein Vorteil — in welchem ein Risiko?
