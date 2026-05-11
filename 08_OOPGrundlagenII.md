@@ -2,15 +2,16 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, `Lina`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.6
+version:  2.0.1
 language: de
 narrator: Deutsch Female
-comment:  OOP-Konzepte (Kapselung, Vererbung, Polymorphie), Klassen und Klassenmembers, Operatorenüberladung
-tags:      
-logo:     
-titel: OOP-Konzepte
+comment:  Klassenelemente in C# — was C# der Klasse spendiert: Felder, statische Mitglieder, Konstanten (const/readonly), Konstruktoren, Properties, Indexer, Operatorenüberladung, Finalizer
+tags:
+logo:
+titel: Klassenelemente in C#
 
 import: https://github.com/liascript/CodeRunner
+        https://raw.githubusercontent.com/LiaTemplates/mermaid_template/master/README.md
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
@@ -18,7 +19,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/08_OOPGrundlagenII.md)
 
-# OOP Konzepte I
+# Klassenelemente in C#
 
 | Parameter                | Kursinformationen                                                                               |
 | ------------------------ | ----------------------------------------------------------------------------------------------- |
@@ -33,25 +34,6 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
-
-## Auf Nachfrage ...
-
-> **Wie verhält es sich mit mehreren Dateien in einem Ordner und wie stellt man die Relationen zwischen separaten Assemblies her?**
-
-
-<!-- data-theme="chaos" -->
-```
-dotnet new sln -o assemblies_dotnet
-cd assemblies_dotnet
-dotnet new console -o MyApp
-dotnet new classlib -o MyClass
-dotnet sln add MyApp
-dotnet sln add MyClass
-cd MyApp
-dotnet add reference ../MyClass
-```
-
-Starten Sie die Kompilierung, in dem Sie `dotnet run` im Ordner `MyApp` aufrufen. Was beobachten Sie?
 
 ## Visionen der Objektorientierung
 
@@ -70,8 +52,6 @@ Ideen der OOP:
 * Im Zentrum der objektorientierten Programmierung stehen Objekte, die miteinander kommunizieren
 
 > **Merke** Wir haben zwei Herausforderungen zu meistern - Modellierung und Realisierung.
-
-![OOPGeschichte](./img/08_OOP_Csharp/OOPHistory.png "Historische Entwicklung Objektorientierter Sprachen [^WikiOOP]")<!-- width="70%" -->
 
 *******************************************************************************
 
@@ -134,146 +114,101 @@ Einige der Eigenschaften ...
 + `WirftDenBall()`
 + `Foul(Spieler gefoulterSpieler)` -> Wirkt sich auf die Fitness von `gefoulterSpieler` aus
 
-Welche Schwachstellen sehen Sie bei unserem Modellierungsansatz / der
-Realisierung?
+Welche Schwachstellen sehen Sie bei unserem Modellierungsansatz — und welche Antworten hat OOP darauf?
+
+> **Genau hier zahlt sich Objektorientierung aus:** Jede der drei Säulen aus 07a löst ein konkretes Problem, das wir gerade selbst gesehen haben.
+>
+> + **Redundanz** zwischen `Spieler`/`Trainer`/`Schiedsrichter` (Name, Alter, Position) → **Vererbung** aus einer gemeinsamen Basisklasse `Person`.
+> + Zugriff auf fremden Zustand (`Foul()` verändert die Fitness eines anderen Spielers) → **Kapselung**: Änderungen laufen kontrolliert über Methoden, nicht über offene Felder.
+> + Gleiches Methoden-Konzept mit unterschiedlichem Verhalten je Rolle (`ändertPosition()` für Spieler vs. Schiedsrichter) → **Polymorphie**: ein Aufruf, viele Reaktionen.
+>
+> Das ist der „große Wurf" der OOP — die Konzepte sind nicht akademisch, sondern direkte Antworten auf die Modellierungs-Schmerzen, die schon ein einfaches Fußballspiel auslöst.
 
 *******************************************************************************
 
-[^WikiOOP]:(Wikimedia, Autor Nepomuk Frädrich)
+[^WikiOOP]: Eigene Darstellung in Anlehnung an die historische Übersicht von Nepomuk Frädrich (Wikimedia), erweitert um Sprachen ab 2000.
 
-### Kapselung
+### Begriffe
 
-                                     {{0-1}}
-*******************************************************************************
-
->  Die Verkapselung bezieht sich auf die "Einhüllung" von Daten und Methoden innerhalb einer Struktur (Klasse), die die Objektimplementierung verbirgt und den unmittelbaren Datenzugriff außerhalb vorbestimmter Dienste unterbindet.
-
-Vom Innenleben einer Klasse soll der Verwender – gemeint sind sowohl die Algorithmen, die mit der Klasse arbeiten, als auch der Programmierer, der diese entwickelt – möglichst wenig wissen müssen (Geheimnisprinzip). Durch die Kapselung werden nur Angaben über das „Was“ (Funktionsweise) einer Klasse nach außen sichtbar, nicht aber das „Wie“ (die interne Darstellung).
-
-Standardidentifier für Daten- und Methodenzugriffe sind dabei:
-
-| Bezeichner | UML Kürzel | Bedeutung                                                                         |
-| ---------- | ---------- | --------------------------------------------------------------------------------- |
-| public     | +          | Zugreifbar für alle Objekte (auch die anderer Klassen)                            |
-| private    | -          | Nur für Objekte der eigenen Klasse zugreifbar                                     |
-| protected  | #          | Nur für Objekte der eigenen Klasse und von Spezialisierungen derselben zugreifbar |
-| internal   |            | Der Zugriff ist auf die aktuelle Assembly beschränkt                              |
+| Begriff     | Bedeutung                                                                                                                                                                                                                        |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Klassen     | ... sind Vorlagen (Baupläne), aus denen Instanzen Objekte erzeugt werden.                                                                                                                                         |
+| Objekt      | ... ist ein Element, welches Funktionen, Methoden, Prozeduren, einen inneren Zustand, oder mehrere dieser Dinge besitzt. Es leitet sich von  einer Spezifikation ab.                                                                     |
+| Entität     | ... ist ein Objekt, welches eine Identität besitzt, welche unveränderlich ist. Beispielsweise kann eine Person ihre Adresse, Telefonnummer oder Namen ändern, ohne zu einer anderen Person zu werden. Eine Person ist also eine Entität. |
+| Eigenschaft | ... bestimmt den Zustands eines Objekts. Der Zustand des Objektes setzt sich aus seinen Eigenschaften und Verbindungen zu anderen Objekten zusammen.                                                                                                                                                                                     |
+| Methode    | ... ist ein Unterprogramm (Funktion oder Prozedur), welches das Verhalten von Objekten beschreibt und implementiert. Über Methoden können Objekte untereinander in Verbindung treten.           |                                                                                       |
 
 
-**Vorteile**
+### Historische Entwicklung von OOP
 
-+ Da die Implementierung einer Klasse anderen Klassen nicht bekannt ist, kann ihre Implementierung geändert werden, ohne die Zusammenarbeit mit anderen Klassen zu beeinträchtigen.
-+ Beim Zugriff über eine Zugriffsfunktion spielt es von außen keine Rolle, ob diese Funktion komplett im Inneren der Klasse existiert, das Ergebnis einer Berechnung ist oder möglicherweise aus anderen Quellen (z. B. einer Datei oder Datenbank) stammt.
-+ Es ergibt sich eine erhöhte Übersichtlichkeit, da nur die öffentliche Schnittstelle einer Klasse betrachtet werden muss.
-+ Deutlich verbesserte Testbarkeit, Stabilität und Änderbarkeit der Software bzw. deren Teile (Module).
+Objektorientierung ist kein Phänomen der 1990er Jahre. Der Grundgedanke entstand mit **Simula 67** in Oslo: einer Simulationssprache, die als erste Klassen, Vererbung und Objekte als eigenständige Sprachkonstrukte einführte (motiviert durch [^WikiOOP]). Aus Simula gehen zwei Linien hervor, die den OOP-Diskurs bis heute prägen:
 
-**Nachteile**
++ **Smalltalk-Linie** (Xerox PARC, ab 1972) — *alles* ist ein Objekt, Kommunikation läuft über Nachrichten, dynamische Typisierung. Diese Vision lebt in Objective-C, Ruby und Python weiter.
++ **C++-Linie** (Bjarne Stroustrup, ab 1979) — OOP-Konstrukte werden auf das prozedurale C aufgesetzt, statisch typisiert, hardwarenah. Aus dieser Tradition stammen Java, C# und in jüngerer Zeit Rust.
 
-+ In Abhängigkeit vom Anwendungsfall Geschwindigkeitseinbußen durch den Aufruf von Zugriffsfunktionen (direkter Zugriff auf die Datenelemente wäre schneller).
-+ Zusätzlicher Programmieraufwand für die Erstellung von Zugriffsfunktionen.
+```mermaid @mermaid
+flowchart LR
+    classDef pillar fill:#cce5ff,stroke:#004085,color:#000,stroke-width:2px;
 
-*******************************************************************************
+    subgraph d1960["1960er"]
+        Simula["Simula 67"]
+    end
+    subgraph d1970["1970er"]
+        Smalltalk["Smalltalk-80"]
+    end
+    subgraph d1980["1980er"]
+        Cpp["C++ (1985)"]
+        ObjC["Objective-C (1984)"]
+        Eiffel["Eiffel (1986)"]
+    end
+    subgraph d1990["1990er"]
+        Python["Python (1991)"]
+        Java["Java (1995)"]
+        Ruby["Ruby (1995)"]
+        Delphi["Delphi (1995)"]
+    end
+    subgraph d2000["2000er"]
+        CSharp["C# 1.0 (2000)"]
+        Scala["Scala (2004)"]
+    end
+    subgraph d2010["seit 2010"]
+        Kotlin["Kotlin (2011)"]
+        TS["TypeScript (2012)"]
+        Swift["Swift (2014)"]
+        Rust["Rust (2015)"]
+    end
 
-                                     {{1-2}}
-*******************************************************************************
+    Simula --> Smalltalk
+    Simula --> Cpp
+    Smalltalk --> ObjC
+    Smalltalk --> Eiffel
+    Cpp --> Java
+    Cpp --> Python
+    Eiffel --> CSharp
+    Cpp --> CSharp
+    Java --> CSharp
+    Java --> Kotlin
+    Java --> Scala
+    Java --> TS
+    ObjC --> Swift
+    Cpp --> Rust
 
-**Beispiel Fußballsimulation**
-
-1. Die Position x,y eines jeden Spielers und des Balls sollte nur über entsprechende Zugriffsmethoden manipuliert werden.
-2. Die `Foul` kann nur aus dem Spieler heraus aufgerufen werden :-)
-
-
-```ascii
-                                 public struct Position{float x; float y};
-+---------------------------+
-| Spieler                   |      public class Spieler{
-+---------------------------+        enum Rolle {Stürmer, Tormann, Verteidiger};
-| - name: string            |          private string Name;                |
-| - alter: byte             |          private byte? Alter;                |  Geschützte
-| - player: Rolle           |          private Rolle player;               |  Felder
-| …                         |          private Position position;          |
-+---------------------------+
-| ✛ FängtDenBall(): void    |          public get ... set ...              |  Zugriffsmethoden für
-| ✛ SchießtDenBall(): Kraft |                                                  Felder
-| - Foul()                  |          public void FängtDenBall(Ball);
-| …                         |          public Kraft = SchießtDenBall(Ball);
-+---------------------------+          private Foul(SpielerX);             |  Event an SpielerX im
-                                    }                                         "Erfolgsfall"
+    class Python,Cpp,CSharp pillar
 ```
 
-*******************************************************************************
+> *Blau hervorgehoben:* C++, Python (Vorlesung 07a) und C# (Vorlesung 07 ff.) — die Sprachen, auf die wir in dieser Reihe regelmäßig Bezug nehmen.
 
-### Vererbung
+Unsere drei Bezugssprachen positionieren sich in dieser Geschichte sehr unterschiedlich:
 
+| Sprache    | Jahr | OOP-Charakteristik                                                                            |
+| ---------- | ---- | --------------------------------------------------------------------------------------------- |
+| **C++**    | 1985 | OOP als *Option* — Mehrfachvererbung, Templates; prozedurales C bleibt vollständig zugänglich |
+| **Python** | 1991 | OOP als Default, aber multi-paradigmatisch; dynamische Typisierung, Duck Typing               |
+| **C#**     | 2000 | OOP als *Leitparadigma* — Einzelvererbung + Interfaces; ab C# 7 zunehmend funktionale Züge    |
 
-                                     {{0-1}}
-*******************************************************************************
-> Die Vererbung dient dazu, aufbauend auf existierenden Klassen neue zu
-> schaffen. Aus der Klassenspezifikation einer Klasse wird eine neue Klasse
-> hergeleitet. Diese ist dann entweder eine Erweiterung oder eine Einschränkung
-> der ursprünglichen Klasse.
+Seit den 2010er Jahren verschwimmen die Lager: Kotlin, TypeScript, Swift und Rust bedienen sich aus *beiden* Traditionen und ergänzen sie um funktionale, nebenläufige und speichersichere Konzepte. „Reine" OOP-Sprachen sind heute die Ausnahme — der Mainstream ist multi-paradigmatisch.
 
-Die vererbende Klasse wird meist Basisklasse (auch Super-, Ober- oder Elternklasse) genannt, die erbende abgeleitete Klasse (auch Sub-, Unter- oder Kindklasse). Den Vorgang des Erbens nennt man meist Ableitung oder Spezialisierung.
-
-![Vererbungsbeispiel](./img/08_OOP_Csharp/Vererbungsbeispiel.png "Beispiel einer Vererbungshierarchie in UML Notation [^WikiInheri] ")
-
-**Vorteile**
-
-+ Abbildung der Eigenschaften und Daten in einem hierarchischen Konzept
-+ Steigerung der Wartbarkeit und Erweiterbarkeit
-
-**Nachteile**
-
-+ Eine Klasse, die als Subklasse aus anderen Klassen entsteht, ist kein autonomer Baustein. Bei der Verwendung der Klasse wird es immer wieder zu Rückgriffen auf die Basisklasse(n) kommen.
-+ Bisweilen schwierige Modellierung
-+ Schaffung von Abhängigkeitsverhältnissen, die dem Modularisierungsgedanken nicht entsprechen.
-
-
-*******************************************************************************
-
-                                     {{1-2}}
-*******************************************************************************
-
-
-**Am Beispiel Fußballspiel**
-
-````ascii
-
-   Erbende Klasse                  Höherabstrakte Klasse                       .
-
-  +-----------------------+
-  | Spieler               |
-  +-----------------------+
-  |"+" Position           |
-  | …                     | --.
-  +-----------------------+   |
-  |"+" FängtDenBall()     |   |   +------------------------+
-  |"+" SchießtDenBall()   |   |   | Person                 |
-  |"-" Foul()             |   |   +------------------------+
-  |                       |   '--▷| - Name                 |
-  +-----------------------+       | - Alter                |
-                                  |                        |
-  +-----------------------+       +------------------------+
-  | Schiedsrichter        |       |"+"SetName()            |
-  +-----------------------+   .--▷|"+"SetAge()             |
-  |"+"                    |   |   |                        |
-  |"+"                    |   |   +------------------------+
-  +-----------------------+   |
-  |"+" StartetSpiel()     |   |
-  |"+" BeendetDasSpiel()  | --'
-  |"+" ErkenntFoul()      |
-  |                       |
-  +-----------------------+                                                                                          .
-
-````
-
-*******************************************************************************
-
-                                     {{2-3}}
-*******************************************************************************
-
-
-**Zentrale Objekt-Klasse**
+### Objekt-Klasse
 
 https://docs.microsoft.com/de-de/dotnet/api/system.object?view=netframework-4.8
 
@@ -290,7 +225,7 @@ die Deklaration von Variablen, denen ein Objekt jeder beliebigen Klasse
 zugewiesen werden kann. Dies ist besonders hilfreich zur Implementierung von
 Containerklassen, wenn eine Sprache keine generische Programmierung unterstützt.
 
-```csharp                                      Iniitalisation
+```csharp                                      Initialisation
 using System;
 
 public class Program
@@ -321,98 +256,8 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-*******************************************************************************
+## Klassenelemente im Detail
 
-[^WikiInheri]: Wikimedia, Beispiel einer Vererbungshierarchie in UML Notation, Autor Cactus26, [Link](https://commons.wikimedia.org/wiki/File:InheritancePgmExample.svg)
-
-### Polymorphie
-
-> Polymorphie oder Polymorphismus (griechisch für Vielgestaltigkeit) ermöglicht, dass ein Objekt sich in seiner Funktionalität in Abhängigkeit von den Datentypen verändert.
-
-Die Polymorphie der objektorientierten Programmierung ist eine Eigenschaft, die
-immer im Zusammenhang mit Vererbung und Schnittstellen (Interfaces) auftritt.
-Eine Methode ist polymorph, wenn sie in verschiedenen Klassen die gleiche
-Signatur hat, jedoch erneut implementiert ist.
-
-```csharp
-public class Shape
-{
-    public int X { get; private set; }
-    ....
-    // Virtual method
-    public virtual void Draw()
-    {
-        Console.WriteLine("Performing base class drawing tasks");
-    }
-}
-
-class Circle : Shape
-{
-    public override void Draw()
-    {
-        // Code to draw a circle...
-        Console.WriteLine("Drawing a circle");
-        base.Draw();
-    }
-}
-
-class Square : Shape {}
-...
-
-```
-In C# ist jeder Typ polymorph, da alle Typen, einschließlich
-benutzerdefinierten Typen, von `Object` erben.
-
-Beim Vererben erhält die abgeleitete Klasse alle Methoden, Felder, Eigenschaften
-und Ereignisse der Basisklasse. Dabei gilt es zu entscheiden, welche davon
-unverändert übernommen und welche auf die spezifischen Anforderungen angepasst
-werden sollen.
-
-**Am Beispiel Fußballspiel**
-
-```csharp
-public class Person{
-  private int alter;
-  public virtual void setAge(int alter) {
-    this.alter = alter;
-  }
-}
-
-public class Spieler: Person {
-  public override void setAge(int alter) {
-      // hier wird noch getestet ob der Spieler älter als 16 ist
-      // und überhaupt eingesetzt werden darf
-  }
-}
-
-public class Zuschauer: Person {
-  public override void setAge(int alter) {
-      // hier wird noch getestet ob ein Zuschauer jünger als 6 ist und
-      // kostenlos ins Stadion darf
-  }
-}
-```
-
-### Weitere Beispiele
-
-| Beispiel  | Kapselung                                                                                                         | Vererbung                                                      | Polymorphie                                                                                                              |
-| --------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Auto      | Interne Daten (CAN-Nachrichten zwischen Motor und Getriebe, Zündzeitpunkte, etc.) sind für mich nicht interessant | Kleinwagen und Kombis sind lediglich spezielle Arten von Autos | Ein Maserati Quattroporte und ein C Corsa können beide fahren. Trotzdem sind die Auswirkungen verschieden                |
-| Säugetier | Die genauen Vorgänge der Verdauung interessieren nicht. Nur das benötigte Futter ist wichtig                      | Eine Springmaus und eine Hausratte sind beide aus der Ordnung der Nagetiere. Beide Tiere teilen viele gleiche Eigenschaften                                                           | Fortbewegen ist eine Eigenschaft jedes Säugetieres. Ein Wal schwimmt jedoch und ein Känguru hüpft. Ein Pferd galoppiert. |
-
-
-### Begriffe
-
-| Begriff     | Bedeutung                                                                                                                                                                                                                        |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Klassen     | ... sind Vorlagen (Baupläne), aus denen Instanzen Objekte erzeugt werden.                                                                                                                                         |
-| Objekt      | ... ist ein Element, welches Funktionen, Methoden, Prozeduren, einen inneren Zustand, oder mehrere dieser Dinge besitzt. Es leitet sich von  einer Spezifikation ab.                                                                     |
-| Entität     | ... ist ein Objekt, welches eine Identität besitzt, welche unveränderlich ist. Beispielsweise kann eine Person ihre Adresse, Telefonnummer oder Namen ändern, ohne zu einer anderen Person zu werden. Eine Person ist also eine Entität. |
-| Eigenschaft | ... bestimmt den Zustands eines Objekts. Der Zustand des Objektes setzt sich aus seinen Eigenschaften und Verbindungen zu anderen Objekten zusammen.                                                                                                                                                                                     |
-| Methode    | ... ist ein Unterprogramm (Funktion oder Prozedur), welches das Verhalten von Objekten beschreibt und implementiert. Über Methoden können Objekte untereinander in Verbindung treten.           |                                                                                       |
-
-
-## Klassen in C#
 
 > Klassen [und Strukturen] sind zwei der grundlegenden Konstrukte des allgemeinen Typsystems in .NET Framework. Bei beiden handelt es sich um eine Datenstruktur, die einen als logische Einheit zusammengehörenden Satz von Daten und Verhalten kapselt.
 
@@ -422,7 +267,7 @@ public class Zuschauer: Person {
 Entsprechend können Klassenspezifikationen folgende Elemente umfassen:
 
 | Member / Elemente   | englische Bezeichnung | Funktion                                                                                    |
-|:------------------- | --------------------- |:------------------------------------------------------------------------------------------- |
+| :------------------ | --------------------- | :------------------------------------------------------------------------------------------ |
 | Felder              | *fields*              | Daten                                                                                       |
 | Konstanten          | *constant*            | konstante Daten                                                                             |
 | Eigenschaften       | *property*            | Daten und Zugriffsmethoden                                                                  |
@@ -454,7 +299,7 @@ class Person{
   int AktuellesAlter () => DateTime.Today.Year - Geburtsjahr;
 
   public override string ToString(){
-     return name + " ist " + AktuellesAlter().ToString() + "Jahre alt."
+     return name + " ist " + AktuellesAlter().ToString() + " Jahre alt.";
   }
 
   // ************* Operatoren **********************************************
@@ -487,7 +332,7 @@ die an den entsprechenden Konstruktor übergeben wird.
 | Zugriffsattribute            | `public`, `internal`, `private`, `protected` | `public`, `internal`, `private`, `protected` |
 | Vererbungsattribut           |                                              | `virtual`, `abstract`, `override`, `sealed`  |
 | Unsafe Attribute             | `unsafe`                                     |                                              |
-| Attribut Teilimplementierung |                                              | `partitial`                                  |
+| Attribut Teilimplementierung |                                              | `partial`                                    |
 | Unmanaged Code Attribute     |                                              | `unsafe extern`                              |
 | Read-only Attribute          | `readonly`                                   |                                              |
 | Threading Attribute          | `volatile`                                   |                                              |
@@ -514,8 +359,8 @@ gemischt verfügen.
   +-----------------+   +-----------------+  +-----------------+                                                         .
   | Instanz 0       |   | Instanz 1       |  | Instanz 2       |
   +-----------------+   +-----------------+  +-----------------+
-  | - Intanzfeld0   |   | - Intanzfeld0   |  | - Intanzfeld0   |
-  | - Intanzfeld1   |   | - Intanzfeld1   |  | - Intanzfeld1   |
+  | - Instanzfeld0  |   | - Instanzfeld0  |  | - Instanzfeld0  |
+  | - Instanzfeld1  |   | - Instanzfeld1  |  | - Instanzfeld1  |
   |                 |   |                 |  |                 |
   | ..................... ✛ StatischesFeld0 .................. |
   | ..................... ✛ StatischesFeld1 .................. |
@@ -566,194 +411,24 @@ public class Program
 
 ******************************************************************************
 
-                                     {{1-2}}
-******************************************************************************
+> **Erinnerung:** `const` und `readonly` als Modifizierer für unveränderliche Felder wurden bereits in Vorlesung **04** (`### Konstante Werte`) eingeführt — inklusive Vergleichstabelle und Compilezeit- vs. Laufzeit-Initialisierung. Für den Klassenkontext genügt hier ein Verweis auf zwei Anwendungsfälle:
+>
+> + `readonly` — jede Instanz erhält ein eigenes Feld, das im Instanz-Konstruktor *einmal* gesetzt und danach unveränderbar ist.
+> + `static readonly` — die Klasse hält *einen gemeinsamen* Wert für alle Instanzen, der typischerweise im **statischen Konstruktor** initialisiert wird (siehe unten).
 
-Felder können mit der Deklaration oder im Konstruktor  initialisiert werden.
-Desweiteren kann mit `readonly` der Wert nach dem Ende des
-Konstruktorabarbeitung geschützt werden. Eine solche Variable kann als static
-deklariert werden, um zu vermeiden, dass eine entsprechende Zahl von Kopien
-erstellt wird.
+### Statische Konstruktoren
 
-```csharp          ReadOnlyExample
-public class Person{
-  string name;
-  int index = 0;
-  readonly string Kategorie = "Student";
-  readonly string Hochschule;
+> **Wiederholung aus 07:** Die Grundlagen der Konstruktoren in C# — Standardkonstruktor, Überladung, Verkettung mit `: this(...)` und Object Initializer — wurden in [Vorlesung 07](07_OOPGrundlagenI.md) eingeführt. Hier ergänzen wir, was C# auf Klassenebene zusätzlich anbietet: **statische Konstruktoren**.
 
-  public Person(){
-    //...
-    Hochschule = "TU Freiberg";
-    //...
-  }
-```
+Statische Konstruktoren ...
 
-******************************************************************************
-
-### Konstanten
-
-Konstanten sind unveränderliche Datensätze, die zur Kompilierzeit(!) bekannt
-sind und sich danach nicht mehr verändern lassen. Nur die in C# integrierten
-Typen - einfache Datentypen und string können als `const` deklariert
-werden.
-
-Varianten "konstanter" Variablen in C#
-
-|                     | Konstante    | Readonly              | Readonly statisch     |
-| ------------------- | ------------ | --------------------- | --------------------- |
-| Attribute           | `const`      | `readonly`            | `readonly static`     |
-| Veränderbar bis ... | Kompilierung | Ende des Konstruktors | Ende des Konstruktors |
-| Statisch            | Standard, ja | Nein                  | Ja                    |
-| Zugriff             | Klasse       | Instanz               | Klasse                |
-
-<!-- --{{0}}-- Idee des Codefragments:
-  * Versuchen Sie die Variable innnerhalb von Main zu manipulieren
-  * Wechseln Sie readonly gegen const? Welche Anpassungen müssen Sie vornehmen?
--->
-```csharp    ReadOnlyVsConst
-using System;
-
-public class Person{
-  public readonly string name;
-  public Person(string name){
-    this.name = name;
-  }
-}
-public class Program
-{
-  static void Main(string[] args){
-    Person Student1 = new Person("Mickey");
-    Console.WriteLine(Student1.name);
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-### Konstuktoren
-
-                                     {{0-1}}
-******************************************************************************
-
-Beim Erzeugen einer Instanz einer `class` oder eines `structs` wird deren
-Konstruktor aufgerufen. Dieser ist für die Initialisierung der Instanz auf der
-Zustandsebene verantwortlich. Konstruktoren können überladen werden und
-verschiedene Signaturen abbilden.
-
-Wenn für eine Klasse kein Konstuktor vorgegeben wird, erstellt der Kompiler
-standardmäßig einen, der das Objekt instanziiert und Membervariablen auf die
-Standardwerte festlegt.
-
-```csharp    Constructors
-public class Wine
-{
-   public decimal Price;
-   public int Year;
-
-   // public Wine() // <- Implzit vorhanden, kann aber überschrieben werden
-                    // Standardkonstruktor
-   public Wine (decimal price){Price = price;}
-   public Wine (decimal price, int year) : this (price) {Year = year;}
-}
-```
-
-Der Standardkonstruktor wird implizit generiert, wenn kein anderer Konstruktor
-durch den Entwickler spezifiziert wurde. Sofern das geschieht, steht dieser auch
-nicht mehr bereit.
-
-```csharp                                      missingStandardConstructor
-using System;
-
-public class Animal
-{
-  public string name;
-  public string sound;
-  public int age;
-
-  public Animal(string name, string sound, int age) {
-    this.name = name;
-  	this.sound = sound;
-    this.age = age;
-  }  
-}
-
-public class Program
-{
-  static void Main(string[] args){
-    Animal kitty = new Animal("Kitty", "Miau", 5);
-    Console.WriteLine(kitty.sound);
-    Animal tom = new Animal();
-    Console.WriteLine(tom.sound);
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-******************************************************************************
-
-                                     {{1-2}}
-******************************************************************************
-
-Ein Konstruktor kann einen anderen Konstruktor der gleichen Klasse über das
-Schlüsselwort `this` aufrufen. Dabei kann der Aufruf mit oder ohne Parameter
-erfolgen.
-
-```csharp    ConstructorCallWithThis
-using System;
-
-class Car
-{
-  public readonly int NumberOfSeats;
-  public readonly int MaxSpeed;
-  private int CurrentSpeed;
-
-  public Car(int maxSpeed, int numberOfSeats)
-  {
-     Console.WriteLine("2 arg ctor");
-     this.MaxSpeed = maxSpeed;
-     this.NumberOfSeats = numberOfSeats;
-  }
-
-  public Car(int maxSpeed) : this(maxSpeed, 5)
-  {
-     Console.WriteLine("1 arg ctor");
-  }
-
-  public Car() : this(100)
-  {
-     Console.WriteLine("0 arg ctor");
-  }
-}
-
-public class Program
-{
-  static void Main(string[] args){
-     Car myVehicle = new Car(5);
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-
-******************************************************************************
-
-                                     {{2-3}}
-******************************************************************************
-
-
-**Statische Konstruktoren**
-
-+ ... werden verwendet, um static-Daten zu initialisieren oder um eine bestimmte Aktion auszuführen, die nur einmal ausgeführt werden muss.
-
++ ... werden verwendet, um `static`-Daten zu initialisieren oder um eine bestimmte Aktion auszuführen, die nur einmal ausgeführt werden muss.
 + ... können nicht über Zugriffsmodifizierer oder Parameter verfügen.
-
-+ ...  können nicht vererbt oder überladen werden. 
-
++ ... können nicht vererbt oder überladen werden.
 + ... werden automatisch vor dem Erzeugen der ersten Instanz ausgeführt und können nicht direkt aufgerufen werden. Damit hat der Nutzer keine Kontrolle, wann der Konstruktor ausgeführt wird.
++ ... werden kein zweites Mal aufgerufen, wenn eine Ausnahme ausgelöst wird.
 
-+ ... werden kein zweites mal aufgerufen, wenn eine Ausnahme ausgelöst wird.
-
-```csharp    StatitcConstructor
+```csharp    StaticConstructor
 using System;
 
 public class BAFStudent
@@ -782,68 +457,46 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-******************************************************************************
+> **Ausblick:** Das `required`-Schlüsselwort ab C# 11 ergänzt die in 07 gezeigten Object Initializer um eine Pflicht-Setzung — Felder, die mit `required` markiert sind, müssen beim Initialisieren gesetzt werden. So lassen sich Initializer auch für Klassen einsetzen, in denen bestimmte Werte zwingend belegt sein müssen.
 
-                                    {{3-4}}
-******************************************************************************
+Im folgenden Beispiel verlangt `Name` zwingend einen Wert im Object Initializer, `Alter` ist optional. Versucht man eine `Person` *ohne* `Name` anzulegen, meldet der Compiler einen Fehler (CS9035).
 
-Für die Objektinitialisierung besteht neben den Konstruktoren und dem
-unmittelbaren Zugriff auf die Membervariablen (vermeiden!) die Möglichkeit
-direkt nach dem Konstruktoraufruf die Belegung abzubilden.
-
-```csharp    ObjectInitializer
+```csharp     RequiredMembers
 using System;
 
-public class Wine
+public class Person
 {
-   public decimal Price;
-   public int Year;
-   public string Vinyard;
-   public Wine () {}
-   public Wine (decimal price){Price = price;}
-   public Wine (decimal price, int year, string vinyard = "Chateau Lafite" ){
-     Price = price;
-     Year = year;
-     Vinyard = vinyard;
-   }
-   public override string ToString()
-   {
-     return String.Format("| {0,5} Euro | {1,5} | {2,-18}|", Price, Year, Vinyard );
-   }
+    public required string Name { get; init; }
+    public int? Alter { get; init; }
+
+    public override string ToString()
+        => $"{Name}" + (Alter is int a ? $" ({a})" : "");
 }
 
 public class Program
 {
-   static void Main(string[] args){
-     // Initalisierung über Standardkonstruktor und direkten Feldzugriff
-     Wine bottle0 = new Wine();
-     bottle0.Vinyard = "Chateau Latour";
-     Console.WriteLine(bottle0);
-     // Initialisierung über die Konstruktoren
-     Wine bottle1 = new Wine(23);
-     Console.WriteLine(bottle1);
-     Wine bottle2 = new Wine(3432, 1956);
-     Console.WriteLine(bottle2);
-     // Initialisierung über Initalizer
-     Wine bottle3 = new Wine() {Price = 19, Year = 1910};
-     Console.WriteLine(bottle3);
-   }
+    static void Main(string[] args)
+    {
+        var humboldt = new Person { Name = "Alexander von Humboldt", Alter = 89 };
+        var anonym   = new Person { Name = "Unbekannt" };
+
+        Console.WriteLine(humboldt);
+        Console.WriteLine(anonym);
+
+        // Fehler CS9035: Required member 'Person.Name' must be set ...
+        // var ohneName = new Person();
+    }
 }
 ```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-3 Varianten, und was ist nun besser? Der Aufruf über den Konstruktor ermöglicht
-die Initialisierung von `readonly` Variablen.
-
-Initalizer werden als atomare Funktion realisiert, sind damit Thread-sicher,
-sind damit aber auch schwieriger zu debuggen. Zudem können nur `public`
-Member damit adressiert werden. An dieser Stelle wird deutlich, dass
-Initializier ggf. beim schnellen Testen Tipparbeit sparen, in realen Anwendungen
-aber nicht zum Einsatz kommen sollten.
-
-> Achtung: _The `required` modifier is available beginning with C# 11._ Der hilft uns, in Ordnung in das Konzept der Initializer zu bringen.
-
-******************************************************************************
+```xml   -myproject.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
 ### Destruktoren / Finalizer
 
@@ -889,7 +542,7 @@ Ausgangspunkt:
   * Fügen Sie eine Lese / Schreibmethode für die Variable Wochentag ein, die
     Prüft, ob die Eingabe zwischen Mo = 0 und Freitag = 4 liegt.
 -->
-```csharp    ReadOnlyVsConst
+```csharp    PropertyAusgangspunkt
 using System;
 
 public class Vorlesung{
@@ -944,9 +597,9 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-Die Assessoren können beliebig kombiniert werden. Eine Eigenschaft ohne einen
-`set`-Accessor ist schreibgeschützt. Eine Eigenschaft ohne einen `get`-Accessor
-ist lesegeschützt.
+Die Accessoren können beliebig kombiniert werden. Eine Eigenschaft ohne einen
+`set`-Accessor ist schreibgeschützt (nur lesbar). Eine Eigenschaft ohne einen
+`get`-Accessor ist umgekehrt nur schreibbar (nicht lesbar).
 
 Zudem lassen sich mit der *Fat Arrow* Notation die Darstellungen wiederum
 verkürzen. Beispielhaft ist an folgendem Beispiel auch, dass sich die Properties
@@ -976,6 +629,45 @@ public decimal Worth
 Und wie sieht es mit dem Zugriffsschutz der Eigenschaften aus? Insbesondere
 `set` sollte soweit wie möglich eingeschränkt werden. Dafür können `internal`,
 `private` und `protected` genutzt werden.
+
+Tatsächlich dürfen `get` und `set` **unterschiedliche Zugriffsattribute** tragen. Dabei gelten zwei Regeln:
+
++ höchstens *einer* der beiden Accessoren bekommt ein eigenes Modifizierer-Schlüsselwort,
++ dieses muss **strenger** sein als das der Eigenschaft selbst.
+
+```csharp
+public  string Name { get; private set; }     // ✓ außen lesbar, intern setzbar
+public  string Name { get; protected set; }   // ✓ in Subklassen setzbar
+public  string Name { protected get; set; }   // ✗ beide Seiten lockerer als sinnvoll
+public  string Name { public get; set; }      // ✗ get nicht lockerer als die Property
+private string Name { get; public set; }      // ✗ set lockerer als die Property
+```
+
+Das Standardmuster *„von außen nur lesen, intern setzen"* sieht damit so aus:
+
+```csharp    AccessorAccessibility
+using System;
+
+public class Person
+{
+  public string Name { get; private set; }
+  public Person(string name) => Name = name;
+  public void Umbenennen(string neu) => Name = neu;   // intern erlaubt
+}
+
+public class Program
+{
+  static void Main(string[] args)
+  {
+    Person p = new Person("Humboldt");
+    Console.WriteLine(p.Name);     // ok — get ist public
+    p.Umbenennen("von Humboldt");
+    Console.WriteLine(p.Name);
+    // p.Name = "X";                // Compiler-Fehler: set ist private
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Wenn in den Eigenschaftenzugriffsmethoden keine zusätzliche Logik erforderlich ist, bietet sich die Verwendung von automatisch implementierten Eigenschaften.
 
@@ -1036,6 +728,8 @@ public class Program
 Was ist der Vorteil der Klasse + Indexer Lösung? Wie würden Sie die Indizierung
 noch absichern?
 
+> **Stichworte zur Auflösung:** Das interne Array bleibt `private` → keine Außenmanipulation; nur `get` → read-only. Absichern z. B. durch **Range-Check** im Getter (`throw new ArgumentOutOfRangeException(...)`) oder eleganter durch einen typsicheren Index, etwa `enum Monat { Jan, Feb, ..., Dez }` — dann erzwingt der Compiler gültige Werte.
+
 ### Operatorenüberladung in C\#
 
                                          {{0-1}}
@@ -1054,7 +748,7 @@ string s2 = "World";
 string s3 = s1 + " " + s2;       // + für String Konkatenation
 ```
 
-Analog zu Methoden werden können Operatoren überladen werden. Entsprechend wird
+Analog zu Methoden können Operatoren überladen werden. Entsprechend wird
 den Operatoren eine spezifische Bedeutung für die Klassen gegeben.
 
 + Operatoren werden in der Klasse überladen
@@ -1063,14 +757,13 @@ den Operatoren eine spezifische Bedeutung für die Klassen gegeben.
 
 **Überladbare Operatoren**
 
-| Opererator                                              | Bedeutug                                                              |
+| Operator                                                | Bedeutung                                                             |
 | ------------------------------------------------------- | --------------------------------------------------------------------- |
 | `+`, `-`, `!`, `~`, `++`, `--`, `true`, `false`         | unäre Operatoren, überladbar                                          |
 | `+`, `-`, `\*`, `/`, `%`, `&`, `^`, `<<`, `>>`          | binäre Operatoren, überladbar                                         |
 | `==`, `!=`, `<`, `>`, `<=`, `>=`                        | Vergleichsoperatoren, überladbar                                      |
 | `[]`, `()`                                              | nicht überladbar                                                      |
 | `+=`, `-=`, `\*=`, `/=`, `%=`, `&=`, `^=`, `<<=`, `>>=` | Werden durch die zugehörigen binären Operatoren automatisch überladen |
-
 
 ******************************************************************************
 
@@ -1093,9 +786,9 @@ public class Vector {
     this.Y = y;
   }
 
-  //public static Vector operator +(Vector p1, Vector p2){
-  //  return new Vector(p1.X + p2.X, p1.Y + p2.Y);
-  //}
+  public static Vector operator +(Vector p1, Vector p2){
+    return new Vector(p1.X + p2.X, p1.Y + p2.Y);
+  }
 
   public static Vector operator -(Vector p1, Vector p2){
     return new Vector(p1.X - p2.X, p1.Y - p2.Y);
@@ -1138,7 +831,7 @@ public static Vector operator *(Vector p1, double ratio)
   return new Vector(p1.X * ratio, p1.Y * ratio);
 }
 
-public static Vector operator *(int ratio, Vector p1)
+public static Vector operator *(double ratio, Vector p1)
 {
   return new Vector(p1.X * ratio, p1.Y * ratio);
 }
@@ -1147,9 +840,9 @@ static void Main(string[] args)
 {
   Vector ptOne = new Vector(100, 100);
   Vector ptTwo = new Vector(40, 40);
+  Console.WriteLine((ptOne * 2.5));
+  Console.WriteLine((1 * ptOne));
 }
-Console.WriteLine((ptOne * 2.5));
-Console.WriteLine((1 * ptOne));
 ```
 
 Unäre Operatoren (++, --) können in gleicher Art und Weise überschrieben werden.
@@ -1169,7 +862,7 @@ Gibt es besondere Felder, deren Übereinstimmung relevanter sind?
 | Tier  | Art, Rasse, Geschlecht                               |
 | Datei | Typ, Inhalt, Namen                                   |
 
-```csharp    Upcast
+```csharp    EqualityOperator
 using System;
 using System.Reflection;
 using System.ComponentModel.Design;
@@ -1207,19 +900,43 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-Die unären Operatoren `True` und `False` nehmen eine kleine Sonderrolle
-ein:
+Eine redundanzfreie `Equals`-Implementierung delegiert über Pattern Matching an den bereits vorhandenen `operator ==`. Weil `Equals` und `GetHashCode` *konsistent* sein müssen (gleicher Inhalt → gleicher Hash), wird letzterer gleich mit überschrieben:
 
 ```csharp
-public static bool operator true(Point p1) => (p1.X>0) && (p1.Y>0);
-public static bool operator false(Point p1) => (p1.X < 0) && (p1.Y < 0);
-
-Point pt1 = new Point(10, 10);
-if (pt1) Console.WriteLine("true"); // true
-
-// Point is neither true nor false:
-Point pt2 = new Point(10, -10);
+public override bool Equals(object p) => p is Vector v && this == v;
+public override int GetHashCode()      => HashCode.Combine(X, Y);
 ```
+
+**Warum überhaupt `Equals` *und* `==` parallel?** C# besitzt zwei getrennte Gleichheits-Mechanismen, die an unterschiedlichen Stellen automatisch greifen:
+
+| | `==` (Operator) | `.Equals()` (Methode) |
+| --- | --- | --- |
+| **Dispatch** | statisch — beim *Compilieren* anhand der *deklarierten* Typen aufgelöst | dynamisch (virtual) — zur *Laufzeit* anhand des *tatsächlichen* Typs aufgelöst |
+| **Aufrufquelle** | Code mit konkretem Typ | Generics, Collections, Reflection, alles auf `object` |
+
+Sobald ein `Vector` durch eine `object`- oder generische Variable wandert, greift `operator ==` nicht mehr — der Operator ist statisch gebunden und sieht den Typ an dieser Stelle nicht. Nur die virtuelle `Equals`-Methode zieht weiter durch. Praktisch zubeißend wird das bei jedem Container und LINQ-Aufruf:
+
+```csharp
+var liste = new List<Vector> { new Vector(3, 4) };
+liste.Contains(new Vector(3, 4));            // greift auf Equals + GetHashCode
+
+new HashSet<Vector> { new Vector(3, 4), new Vector(3, 4) };   // dito
+new[] { new Vector(3, 4) }.Distinct();                         // dito
+new Dictionary<Vector, string>();                              // dito
+```
+
+`List<T>.Contains`, `HashSet<T>`, `Dictionary<K,V>` und `Distinct()` rufen **`Equals` + `GetHashCode`** auf — niemals den überladenen `==`-Operator. Wenn nur `==` überschrieben ist, sind zwei wertgleiche Vektoren im `HashSet` plötzlich „verschieden" und `Contains` findet sie nicht.
+
+> **Merke:** Wer Wertgleichheit will, überschreibt **alle vier zusammen** — `Equals`, `GetHashCode`, `operator ==`, `operator !=` — und hält sie konsistent. Genau diesen Boilerplate spart `record` automatisch ein.
+
+> **Ausblick — `record` ab C# 9:** Der ganze Boilerplate aus `==`, `!=`, `Equals`, `GetHashCode` und `ToString` lässt sich seit C# 9 in einer einzigen Zeile erschlagen, sobald der Compiler die Klasse als **Record** kennt. Der Compiler generiert dann *wertbasierte* Gleichheit (Inhaltsvergleich aller Felder) automatisch — `Vector(3, 4) == Vector(3, 4)` ergibt `true`, ohne dass du einen einzigen Operator selbst schreibst.
+>
+> ```csharp
+> public record Vector(double X, double Y);
+> ```
+>
+> Für Klassen mit reiner Wert-Semantik (Koordinaten, Geld, Maße, DTOs) ist `record` heute die idiomatische Wahl — die manuelle Operator-Überladung bleibt dort relevant, wo Sie *abweichendes* Verhalten brauchen (z. B. Toleranz bei Gleitkomma: `Math.Abs(X - v.X) < 1e-9`).
+
 
 ******************************************************************************
 
@@ -1227,7 +944,7 @@ Point pt2 = new Point(10, -10);
 
 Entwickeln Sie eine Klassenstruktur für die Speicherung der Daten eines Studierenden.
 
-```csharp    StaticConstructor
+```csharp    StudentBeispiel
 using System;
 using System.Collections.Generic;
 
@@ -1268,11 +985,11 @@ public class Student
      }
   }
 
-  public void addTopic(string Fächername){
+  public void AddTopic(string Fächername){
     fächer.Add(Fächername);
   }
 
-  public void printTopics(){
+  public void PrintTopics(){
     Console.WriteLine("Student {0} hat folgende Fächer absolviert:", Name);
     foreach (string topic in fächer){
       Console.Write(topic + " ");
@@ -1285,10 +1002,10 @@ public class Program
 {
   static void Main(string[] args){
     Student student0 = new Student("Humboldt");
-    student0.addTopic("Softwareentwicklung");
-    student0.addTopic("Höhere Mathematik I");
-    student0.addTopic("Prozedurale Programmierung");
-    student0.printTopics();
+    student0.AddTopic("Softwareentwicklung");
+    student0.AddTopic("Höhere Mathematik I");
+    student0.AddTopic("Prozedurale Programmierung");
+    student0.PrintTopics();
     student0.Eingeschrieben = true;
   }
 }
@@ -1298,6 +1015,26 @@ public class Program
 
 ## Aufgaben
 
-- [ ] Setzen Sie sich anhand von [Tutorials](https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/classes-and-structs/) mit den Konzepten der objektorientierten Programmierung auseinander!
+Die folgenden Aufgaben erweitern das `Beispiel der Woche` um die in diesem Kapitel *neu* eingeführten Klassenelemente. Sie bauen aufeinander auf, lassen sich aber auch isoliert lösen.
 
-!?[alt-text](https://www.youtube.com/watch?v=t2SPg6IuT3k)
+- [ ] Fügen Sie einen Indexer `public string this[int i]` hinzu, der das *i*-te Fach aus `fächer` liefert. Nur `get`, kein `set` — die Liste bleibt von außen unveränderlich. Sichern Sie den Zugriff gegen Bereichsüberschreitung mit `ArgumentOutOfRangeException` ab.
+
+```csharp
+Console.WriteLine(student0[0]);   // erwartet: Softwareentwicklung
+Console.WriteLine(student0[99]);  // erwartet: ArgumentOutOfRangeException
+```
+
+- [ ] Zwei `Student`-Instanzen sind genau dann „gleich", wenn ihre `uid` übereinstimmt — *nicht*, wenn Name oder Fächerliste zufällig identisch sind. Überladen Sie `operator ==` und `operator !=` und ziehen Sie `Equals(object)` und `GetHashCode()` **konsistent** mit (siehe Merke-Kasten im Abschnitt Operatorenüberladung). Prüfen Sie mit einem `HashSet`:
+
+```csharp
+var s1 = new Student("Humboldt");
+var s2 = new Student("Humboldt");
+var menge = new HashSet<Student> { s1, s2 };
+Console.WriteLine(menge.Count);   // erwartet: 2 (verschiedene uid!)
+Console.WriteLine(s1 == s2);      // erwartet: False
+```
+
+> *Diskussionspunkt:* Diese Wahl unterscheidet sich vom `Vector`-Beispiel weiter oben (dort: Inhaltsvergleich). Warum ist `uid` hier richtiger? Was bedeutet das für zwei Studierende, die beide „Schmidt" heißen?
+
+- [ ] Schreiben Sie eine Variante `StudentRecord` als `record` mit `Name` und `Geburtsjahr`. Was bekommen Sie „kostenlos" (Gleichheit, `ToString`, Dekonstruktion)? Welches Problem entsteht, wenn die `uid` automatisch in den Wertvergleich einbezogen würde? Begründen Sie, warum `record` für **entitätsartige** Klassen mit eigener Identität *nicht* die richtige Wahl ist, für **wertartige** Typen wie `Vector` dagegen schon.
+
