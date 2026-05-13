@@ -1,0 +1,28 @@
+'@context': https://schema.org/
+creativeWorkStatus: Published
+type: LearningResource
+name: Einführung
+description: >-
+  Motivation der Vorlesung "Softwareentwicklung" und Beschreibung der
+  Organisation der Veranstaltung
+license: https://creativecommons.org/publicdomain/zero/1.0/deed.de
+id: >-
+  https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/00_Einfuehrung.md#1
+creator:
+  - givenName: Sebastian
+    familyName: Zug
+    id: https://orcid.org/0000-0001-9949-6963
+    type: Person
+    affiliation:
+      name: Technische Universität Bergakademie Freiberg
+      id: https://ror.org/031vc2293
+      type: Organization
+keywords:
+  - Organisation
+  - Motivation
+about:
+  - https://w3id.org/kim/hochschulfaechersystematik/n71
+learningResourceType:
+  - https://w3id.org/kim/hcrt/course
+educationalLevel:
+  - https://w3id.org/kim/educationalLevel/level_A
