@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  2.0.1
+version:  2.0.2
 language: de
 narrator: Deutsch Female
 comment:  Vererbung in C# — explizite virtual/override-Disziplin, base-Konstruktoren, Zugriffsmodifizierer (protected, internal protected), Polymorphie und Methoden-Bindung, new-Verdecken vs. override, sealed, Casts mit is/as und Pattern Matching
@@ -52,63 +52,7 @@ In **07a** haben Sie Vererbung in Python kennengelernt — `class Dog(Animal):`,
 
 > **Was kommt in 10?** — Abstrakte Klassen und **Interfaces** als C#-Lösung für Mehrfach-„Vererbung von Verträgen".
 
-## Warum `virtual` und `override`? — Die C#-Disziplin
-
-In Python überschreibt jede gleichnamige Methode in einer Kindklasse implizit die Elternmethode. Das ist bequem, hat aber einen Preis: **niemand sieht im Basisklassen-Code, ob jemand die Methode später überschreiben darf.** Bei großen Codebasen führt das zu unbeabsichtigten Überschreibungen und schwer zu findenden Fehlern.
-
-C# verlangt deshalb zwei explizite Markierungen:
-
-- **`virtual`** an der Basisklassen-Methode: *„Diese Methode darf überschrieben werden."*
-- **`override`** in der abgeleiteten Klasse: *„Ich überschreibe bewusst diese virtuelle Methode."*
-
-```csharp      VirtualOverride
-using System;
-
-public class Animal
-{
-    public string name;
-    public Animal(string name) { this.name = name; }
-
-    public virtual void MakeNoise()                     // <- darf überschrieben werden
-    {
-        Console.WriteLine($"{name} macht ein Geräusch.");
-    }
-
-    public void Greet()                                 // <- NICHT virtual
-    {
-        Console.WriteLine($"Hallo, ich heiße {name}.");
-    }
-}
-
-public class Dog : Animal
-{
-    public Dog(string name) : base(name) { }
-
-    public override void MakeNoise()                    // <- bewusst überschrieben
-    {
-        Console.WriteLine($"{name}: WUFF!");
-    }
-
-    // public override void Greet() { ... }             // Fehler: Greet ist nicht virtual
-}
-
-public class Program
-{
-    static void Main(string[] args)
-    {
-        Animal a = new Dog("Rex");
-        a.MakeNoise();    // -> "Rex: WUFF!"  (späte Bindung über vtable)
-        a.Greet();        // -> "Hallo, ich heiße Rex."
-    }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-> **Merke:** Wer in C# eine Methode *überschreibbar* machen will, muss das **bewusst entscheiden** und dokumentieren. Dieser Mehraufwand zahlt sich in größeren Projekten aus, weil er erzwungene Verträge zwischen Basis- und Kindklassen schafft.
-
-> **Python-Vergleich:** Python hat *keine* Trennung zwischen virtuellen und nicht-virtuellen Methoden — alles ist „virtual". Die Disziplin liegt allein bei der Programmiererin. Bei einem Modulwechsel kann das gefährlich werden.
-
-## Vererbung in C#
+## Vererbung
 
                                       {{0-1}}
 *****************************************************************************
@@ -150,7 +94,7 @@ public class Person {
 }
 
 public class Fußballspieler : Person {
-  public byte rückennumemr;
+  public byte rückennummer;
 }
 
 public class Schiedsrichter : Person {
@@ -172,9 +116,12 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
+> Wir sehen, dass die abgeleiteten Klassen `Fußballspieler` und `Schiedsrichter` die Member der Basisklasse `Person` erben. Damit können wir auf diese Member auch über Instanzen der abgeleiteten Klassen zugreifen. Alle Instanzen von `Person`, `Fußballspieler` und `Schiedsrichter` haben die Felder `geburtsjahr` und `name`.
+
 > *Merke*: Im Unterschied zu Klassen ist für Structs unter C# keine Vererbung möglich!
 
-In C# kann jede Klassendefinition nur eine Basisklasse referenzieren. Im Sinne
+> [!CAUTION]
+> In C# kann jede Klassendefinition nur eine Basisklasse referenzieren. Im Sinne
 einer realitätsnahen Modellierung wären Mehrfachvererbungen aber
 durchaus zielführend. Ein Amphibienfahrzeug leitet sich aus den Basisklassen
 Wasserfahrzeug und Landfahrzeug ab, ein Touchpad integriert die Member von
@@ -190,19 +137,19 @@ ausschließen zu können, die aus gleichnamige Membern hervorgehen.
 Konstruktoren werden nicht vererbt, jedoch
 
 + kann mit dem Schlüsselwort `base` auf die Konstruktoren der Basisklasse zurückgegriffen werden.
-+ wird sofern aus der abgeleiteten Klasse kein expliziter Aufruf erfolgt, der Standardkonstruktor der Basisklasse aufgerufen.
++ wird sofern aus der abgeleiteten Klasse kein expliziter Aufruf erfolgt, der **parameterlose** Konstruktor der Basisklasse aufgerufen.
++ existiert dieser nicht (weil die Basisklasse nur parametrisierte Konstruktoren hat), **muss** `: base(...)` explizit angegeben werden — der Compiler erzwingt das.
 
-Ein Beispiel für den impliziten Aufruf des Standardkonstruktors:
+**Drei Fälle, drei Regeln:**
 
-<!-- --{{0}}-- Idee des Codefragments:
-  * Fügen Sie einen leeren Standardkonstruktor mit einer Ausgabe in Fußballspieler ein
-    public Fußballspieler(){
-       Console.WriteLine("ctor of Fußballspieler");
-     }
-  * nutzen Sie nun base um den zweiten in Person exisitierenden Konstruktor zu
-    adressieren.
-       public Fußballspieler() : base(1)
--->
+| Situation in der Basisklasse          | Was muss die abgeleitete Klasse tun?                |
+| ------------------------------------- | --------------------------------------------------- |
+| Kein Konstruktor definiert            | Nichts — Compiler ergänzt parameterlosen Default    |
+| Parameterloser Konstruktor existiert  | Nichts — wird implizit aufgerufen                   |
+| Nur parametrisierte Konstruktoren     | **`: base(...)` Pflicht** — sonst Compilerfehler    |
+
+Das folgende Beispiel stellt beide Varianten direkt gegenüber — die abgeleitete Klasse `Fußballspieler` hat zwei Konstruktoren: einer ruft `Person()` *implizit* auf, der andere wählt *explizit* `Person(int)` über `: base(1)`.
+
 ```csharp    ImplicitConstructorCall
 using System;
 using System.Reflection;
@@ -212,31 +159,52 @@ public class Person {
   public int geburtsjahr;
   public string name;
 
-  public Person(){
+  public Person() {
     geburtsjahr = 1984;
-    name = "Orwell";
-    Console.WriteLine("ctor of Person");
+    name = "Unbekannt";
+    Console.WriteLine("ctor of Person()");
   }
 
-  public Person(int auswahl){
-    if (auswahl == 1) {name = "Micky Maus";}
-    else {name = "Donald Duck";}
+  public Person(string name, int geburtsjahr) {
+    this.name = name;
+    this.geburtsjahr = geburtsjahr;
+    Console.WriteLine($"ctor of Person({name}, {geburtsjahr})");
   }
 }
 
 public class Fußballspieler : Person {
   public byte rückennummer;
+
+  // Variante A: implizit — Compiler ergänzt : base() → ruft Person() auf
+  public Fußballspieler() {
+    Console.WriteLine("ctor of Fußballspieler()");
+  }
+
+  // Variante B: explizit — reicht name und geburtsjahr an Person(string, int) weiter
+  public Fußballspieler(string name, int geburtsjahr, byte nr) : base(name, geburtsjahr) {
+    rückennummer = nr;
+    Console.WriteLine("ctor of Fußballspieler(string, int, byte)");
+  }
 }
 
 public class Program
 {
   public static void Main(string[] args){
-    Fußballspieler champ = new Fußballspieler();
-    Console.WriteLine("{0,4} - {1}", champ.geburtsjahr, champ.name );
+    Console.WriteLine("--- Variante A: impliziter base()-Aufruf ---");
+    Fußballspieler unbekannt = new Fußballspieler();
+    Console.WriteLine("{0,4} - {1}", unbekannt.geburtsjahr, unbekannt.name);
+
+    Console.WriteLine("--- Variante B: expliziter base(name, geburtsjahr)-Aufruf ---");
+    Fußballspieler maier = new Fußballspieler("Maier", 1956, 7);
+    Console.WriteLine("{0} ({1}) trägt Nummer {2}", maier.name, maier.geburtsjahr, maier.rückennummer);
   }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+> **Reihenfolge der Ausgabe beachten:** Erst läuft der Basisklassen-Konstruktor, dann der der abgeleiteten Klasse. Eine Instanz wird also „von innen nach außen" aufgebaut — die Eltern-Felder sind initialisiert, bevor das Kind sie nutzen kann.
+
+> **Was passiert, wenn `Person()` fehlt?** Entfernen Sie probehalber den parameterlosen `Person()`-Konstruktor. Variante A schlägt dann mit einem Compilerfehler fehl, weil der implizit erwartete `: base()`-Aufruf ins Leere greift — Variante B funktioniert weiter.
 
 *****************************************************************************
 
@@ -258,7 +226,7 @@ der Vererbung steigt die Komplexität der Sichtbarkeitsregeln nochmals an.
 
 `protected` definiert eine differenzierten Zugriff für geerbte und Instanz-Methoden. Während
 bei geerbten Elementen uneingeschränkt zugegriffen werden kann, bleiben diese bei der
-bloßenn Anwendung geschützt.
+bloßen Anwendung geschützt.
 
 Die Konzepte von `internal` setzen diese Überlegung fort und kontrollieren den Zugriff über Assembly-Grenzen.
 
@@ -310,47 +278,6 @@ Kriterien der Zugriffsattribute:
                                       : -'                                -'
 ```
 
-                              {{2-3}}
-*****************************************************************************
-
-
-
-Für Methoden, Membervariablen etc. ist das klar, aber macht es Sinn geschützte
-private Konstruktoren zu definieren?
-
-Private Konstruktoren werden verwendet, um die Instanziierung einer Klasse zu
-verhindern, die ausschließlich statische Elemente hat. Ein Beispiel dafür ist
-die `Math` Klasse, die Methoden definiert, die ohne eine Instanz der Klasse
-aufgerufen werden. Wenn alle Methoden in der Klasse statisch sind, wäre es ggf.
-sinnvoll die gesamte Klasse statisch anzulegen.
-
-```csharp    privateConstructors
-using System;
-
-public class Counter
-{
-    private Counter() { }
-    public static int currentCount;
-
-    public static int IncrementCount()
-    {
-        return ++currentCount;
-    }
-}
-
-public class Program
-{
-  public static void Main(string[] args){
-    Counter myCounter = new Counter();
-    //Console.WriteLine()
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-
-*****************************************************************************
-
 ### Klasse
 
 Auch für Klassen selbst können Zugriffsattribute das Verhalten bestimmen:
@@ -358,269 +285,181 @@ Auch für Klassen selbst können Zugriffsattribute das Verhalten bestimmen:
 + Jede Klasse kann entweder als `public` oder `internal` deklariert sein (Standard: `internal`)
 + Klassen können mit `sealed` versiegelt werden. Damit ist das Erben davon ausgeschlossen (Bsp.: System.String)
 
+## Statischer und dynamischer Typ
+
+Bevor wir zur Polymorphie kommen, brauchen wir eine wichtige Unterscheidung. In einer Vererbungshierarchie kann eine Variable vom Basistyp eine Instanz einer abgeleiteten Klasse aufnehmen — der **statische Typ** (so wie er deklariert wurde) und der **dynamische Typ** (die tatsächlich referenzierte Instanz) können auseinanderlaufen.
+
+```csharp    StaticDynamicType
+using System;
+
+class Animal
+{
+  public string Name;
+  public Animal(string name) { Name = name; }
+}
+
+class Duck : Animal
+{
+  public Duck(string name) : base(name) { }
+}
+
+public class Program
+{
+  public static void Main(string[] args)
+  {
+    Animal a = new Animal("Bernd");   // statisch Animal, dynamisch Animal
+    Animal b = new Duck("Alfred");    // statisch Animal, dynamisch Duck (Upcast — implizit ok)
+    // Duck   c = new Animal("Erna"); // Compilerfehler: Animal ist nicht zwangsläufig eine Duck
+
+    Console.WriteLine($"a: deklariert als Animal, tatsächlich {a.GetType().Name}");
+    Console.WriteLine($"b: deklariert als Animal, tatsächlich {b.GetType().Name}");
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+| Zuweisung                          | statischer Typ | dynamischer Typ | erlaubt?                  |
+| ---------------------------------- | -------------- | --------------- | ------------------------- |
+| `Animal a = new Animal("Bernd")`   | Animal         | Animal          | ja                        |
+| `Animal b = new Duck("Alfred")`    | Animal         | Duck            | ja (Upcast, implizit)     |
+| `Animal c = new Cow("Hilde")`      | Animal         | Cow             | ja (Upcast, implizit)     |
+| `Duck d = new Animal("Erna")`      | —              | —               | **nein** (Compilerfehler) |
+
+> [!CAUTION]
+> Warum diese Unterscheidung wichtig ist: Zur Compile-Zeit weiß der Compiler nicht, welche konkreten Objekte das Programm zur Laufzeit erzeugen wird — die hängen von Benutzereingaben, Dateien, Datenbanken oder Listen ab, die erst während der Ausführung entstehen. Der Compiler kann also nur den statischen Typ garantieren ("hier wird irgendein Animal stehen"), während der dynamische Typ ("genau diese Duck") erst zur Laufzeit feststeht. Genau deshalb müssen Methodenaufrufe wie anim.makeSound() zur Laufzeit aufgelöst werden — und genau das ist Polymorphie. **Wäre alles zur Compile-Zeit bekannt, gäbe es keinen Bedarf für die Unterscheidung.**
+
+> **Merke:** Der statische Typ wird vom Compiler verwendet, um zu prüfen, *welche Member überhaupt aufgerufen werden dürfen*. Der dynamische Typ entscheidet zur Laufzeit, *welche Implementierung tatsächlich läuft* — das ist die Grundlage für Polymorphie.
+
+> **Merke:** Zuweisung *zur Basisklasse* (Upcast) ist immer sicher und passiert implizit. *Zur abgeleiteten Klasse* (Downcast) braucht einen expliziten Cast und kann zur Laufzeit fehlschlagen — Details im Abschnitt **Casts über Klassen** weiter unten.
+
+## Laufzeit-Typprüfung mit `is`
+
+Der dynamische Typ einer Variable lässt sich zur Laufzeit prüfen. Das ist nützlich, wenn eine Methode unterschiedliche Tiertypen entgegennimmt und je nach echtem Typ unterschiedlich reagieren soll.
+
++ `obj is Typ` liefert `true`, wenn `obj` dem angegebenen Typ *oder* einem davon abgeleiteten Typ entspricht
++ bei `null` liefert die Prüfung immer `false`
+
+```csharp    IsCheck
+using System;
+
+class Animal
+{
+  public string Name;
+  public Animal(string name) { Name = name; }
+}
+
+class Duck : Animal
+{
+  public Duck(string name) : base(name) { }
+}
+
+class Mallard : Duck        // Stockente — leitet von Duck ab
+{
+  public Mallard(string name) : base(name) { }
+}
+
+public class Program
+{
+  public static void Main(string[] args)
+  {
+    Animal a = new Mallard("Donald");
+
+    Console.WriteLine($"a is Animal?  {a is Animal}");   // true
+    Console.WriteLine($"a is Duck?    {a is Duck}");     // true (via Vererbung)
+    Console.WriteLine($"a is Mallard? {a is Mallard}");  // true (exakter Typ)
+
+    a = null;
+    Console.WriteLine($"null is Animal? {a is Animal}"); // false
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
 ## Polymorphie in C#
 
-                                   {{0-2}}
-******************************************************************************
+> **Merke:** *Polymorphie* (griech. „Vielgestaltigkeit") bezeichnet die Tatsache, dass derselbe Methodenaufruf — abhängig vom *dynamischen* Typ des Objekts — unterschiedliches Verhalten erzeugt.
 
-Strukturieren Sie die Klassen "Zug", "GüterZug", "PersonenZug" und "ICE" in einer
-sinnvolle Vererbungshierarchie. Wie setzen Sie diese in C# Code um?
+Konkret: Methoden mit *gleicher Signatur* können auf verschiedenen Ebenen einer Vererbungshierarchie unterschiedliche Implementierungen haben. Welche Implementierung beim Aufruf tatsächlich läuft, wird erst *zur Laufzeit* entschieden — anhand des dynamischen Typs. Diese Auflösung heißt **dynamische Bindung**.
 
-******************************************************************************
-
-                                  {{1-2}}
-******************************************************************************
-
-```csharp    Constructors
-using System;
-using System.Reflection;
-using System.ComponentModel.Design;
-
-class Zug
-{
-  string nummer;
-  public Zug()
-  {
-    Console.WriteLine("Zug-ctor");
-  }
-  public Zug(string nummer)
-  {
-    this.nummer = nummer;
-    Console.WriteLine("Generischer Zug-ctor");
-  }
-}
-
-class PersonenZug : Zug
-{
-  public PersonenZug() : base("Freiberg")
-  {
-    Console.WriteLine("Personen Zug-ctor");
-  }
-}
-
-class Ice : PersonenZug
-{
-  public Ice()
-  {
-    Console.WriteLine("ICE-ctor");
-  }
-}
-
-class GueterZug : Zug
-{
-  public GueterZug()
-  {
-    Console.WriteLine("GueterZug-ctor");
-  }
-}
-
-
-public class Program
-{
-  public static void Main(string[] args)
-  {
-    Console.WriteLine("Generiere neuen ICE ");
-    Ice ice = new Ice();
-    Console.WriteLine("Generieren neuen Güterzug");
-    GueterZug gueter = new GueterZug();
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-> **Merke:** Konstruktoren werden nicht geerbt! Jede Unterklasse deklariert (implizit) eigene Konstruktoren.
-
-Die Konstruktoren der Basisklasse können jeweils mit `base()` aufgerufen werden. Erfolgt dies nicht, wird der parameterlose Konstruktor der Basisklasse automatisch aufgerufen.
-
-Die Ausgabe des oben aufgeführten Beispiels illustriert diese Aufrufhierachie. Entfernen Sie dem `base` Aufruf in Zeile 23 und erklären Sie den Unterschied.
-
-
-******************************************************************************
-
-                                   {{2-3}}
-******************************************************************************
-
-In diesem Fall ist `Zug` die Basisklasse und `PersonenZug`, `GueterZug` und `ICE` sind
-abgeleitete Klassen.
-
-Eine Variablen vom Basisdatentyp kann immer eine Instanz einer abgeleiteten
-Klasse zugewiesen werden. Entsprechend unterscheidet man dann zwischen dem
-statischen und dem dynamischen Typ der Variablen. Der statische Typ ist
-immer der, der auch deklariert wurde. Der dynamische Typ wird durch die aktuelle
-Referenz einer Instanz einer abgeleiteten Klasse von Zug bestimmt und ist
-veränderlich.
-
-| Zuweisung                  | statischer Typ von Zug | dynamischer Typ von Zug |
-| -------------------------- | ---------------------- | ----------------------- |
-| `Zug RB51 = new Zug()`     | Zug                    | Zug                     |
-| `RB51 = new PersonenZug()` | Zug                    | PersonenZug             |
-| `RB51 = new Ice`           | Zug                    | ICE                     |
-
-******************************************************************************
-
-### Laufzeitprüfung
-
-Entsprechend brauchen wir eine Typprüfung, die untersucht, ob die Variable von
-einem bestimmten dynamischen Typ  oder einem daraus abgeleiteten Typ ist.
-
-
-+ der dynamische Typ einer Klasse kann zur Laufzeit geprüft werden
-+ Typtest liefert bei null-Werten immer `false`
-
-```csharp    Typprüfung
-using System;
-using System.Reflection;
-using System.ComponentModel.Design;
-
-class Zug
-{
-  public Zug()
-  {
-    Console.WriteLine("Zug-ctor");
-  }
-}
-
-class PersonenZug : Zug
-{
-  public PersonenZug() : base()
-  {
-    Console.WriteLine("PersonenZug-ctor");
-  }
-}
-
-class Ice : PersonenZug
-{
-  public Ice()
-  {
-    Console.WriteLine("ICE-ctor");
-  }
-}
-
-public class Program
-{
-  public static void Main(string[] args)
-  {
-    Zug IC239 = new Ice();
-    Console.WriteLine($"Statischer Typ von IC239 {IC239.GetType()}");
-    Console.WriteLine("IC239 ist ein Zug? " + (IC239 is Zug)); // true
-    Console.WriteLine("IC239 ist ein PersonenZug? " + (IC239 is PersonenZug)); // true
-    Console.WriteLine("IC239 ist ein Ice? " + (IC239 is Ice)); // true
-    IC239 = null;
-    Console.WriteLine("IC239 ist ein Ice? " + (IC239 is Ice)); // false
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-
-### Grundidee der Polymorphie
-
-                             {{0-1}}
-*******************************************************************************
-
-Objekte einer Basisklasse können somit Instanzen einer abgeleiteten Klassen
-umfassen. Damit lassen sich ähnlich einem Container sehr unterschiedliche
-Objekte einer Vererbungslinie bündeln. 
-
-> Warum ist das wichtig? Was bringt mir das?
-
-```csharp    Polymorphie
-using System;
-using System.Reflection;
-using System.ComponentModel.Design;
-
-class Zug
-{
-  public Zug()
-  {
-    Console.WriteLine("Zug-ctor");
-  }
-}
-
-class PersonenZug : Zug
-{
-  public PersonenZug() : base()
-  {
-    Console.WriteLine("PersonenZug-ctor");
-  }
-}
-
-class Ice : PersonenZug
-{
-  public Ice()
-  {
-    Console.WriteLine("ICE-ctor");
-  }
-}
-
-class Abfahrtszeit
-{
-  public int stunde;
-  public int minute;
-  public Abfahrtszeit(int stunde, int minute, Zug zug)
-  {
-    this.zug = zug
-    this.stunde = stunde;
-    this.minute = minute;
-  }
-}
-
-public class Program
-{
-  public static void Main(string[] args)
-  {
-    Zug IC239 = new Ice();
-    Abfahrtszeit abfahrt = new Abfahrtszeit(12, 30, IC239);
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-
-> **Wir haben schon gesehen, dass die Vererbung unter anderem Methoden umfasst. Auf welche Klassenmember greife ich überhaupt zurück?**
-
-*******************************************************************************
-
-                            {{1-2}}
-*******************************************************************************
-
-> **Merke** Polymorphie bezeichnet die Tatsache, dass Klassenmember ausgehend
-> von Ihrer Nutzung ein unterschiedliches Verhalten erzeugen.
-
-Das heißt, die Methoden der Klassen einer Vererbungshierarchie können auf
-verschiedenen Ebenen gleiche Signatur, aber unterschiedliche Implementierungen
-haben. Welche der Methoden für ein gegebenes Objekt aufgerufen wird, wird erst
-zur Laufzeit bestimmt (dynamische Bindung).
-
-> **Merke** Dynamische Bindung bezeichnet die Tatsache, dass bei Aufruf einer
-> überschriebenen Methode über eine Basisklassenreferenz oder ein
-> Interface trotzdem die Implementierung der abgeleiteten Klasse zum
-> Einsatz kommt.
-
-Dynamische Bindung erlaubt den Aufruf von überschriebenen Methoden aus der
-Basisklasse heraus, wobei das Überschreiben muss in der Basisklasse explizit
-erlaubt werden muss.
-
-*******************************************************************************
-
-### Überschreiben von Methoden
-
-In C# können abgeleitete Klassen Methoden mit dem gleichen Namen wie
-Basisklassen-Methoden enthalten. Diese Methoden müssen dann in der Basisklasse
-mittels `virtual` als explizit überschreibbar deklariert werden:
+> **Warum brauchen wir das?** Stellen Sie sich vor, Sie wollen für unterschiedliche Tiere — Enten, Kühe, Hunde — jeweils das richtige Geräusch ausgeben. *Ohne* Polymorphie müssten Sie an jeder Aufrufstelle den Typ prüfen:
 
 ```csharp
-public virtual void makeSound() => Console.WriteLine("I'm an Animal");
+// Mühsam, fehleranfällig, wächst mit jeder neuen Tierart
+if (tier is Duck)      Console.WriteLine("Quack");
+else if (tier is Cow)  Console.WriteLine("Muh");
+else if (tier is Dog)  Console.WriteLine("Wuff");
 ```
 
-Zum Überschreiben wird das Schlüsselwort `override` genutzt, welches ein
-erneutes Deklarieren ermöglicht:
+*Mit* Polymorphie schreiben Sie stattdessen:
 
 ```csharp
-public override void makeSound() => Console.WriteLine("Quack!");
+tier.makeSound();      // die richtige Implementierung läuft automatisch
 ```
 
-Dabei müssen beide Methoden die gleiche Signatur haben, d.h. sie sollen die den gleichen Namen und eine identische Parameterliste besitzen. Ansonsten ist es nur Überladung!
+Eine neue Tierart hinzuzufügen heißt dann *nur*: eine neue Klasse anlegen — kein einziger `if`-Zweig muss angepasst werden. Das ist der eigentliche Wert der Vererbung.
+
+### Überschreiben mit `virtual` und `override`
+
+Damit das funktioniert, müssen wir dem Compiler explizit sagen, dass eine Methode überschreibbar ist und dass eine abgeleitete Klasse sie bewusst überschreibt. C# verlangt dafür zwei Schlüsselwörter:
+
+- **`virtual`** an der Basisklassen-Methode: *„Diese Methode darf überschrieben werden."*
+- **`override`** in der abgeleiteten Klasse: *„Ich überschreibe bewusst diese virtuelle Methode."*
+
+```csharp    VirtualOverrideMinimal
+using System;
+
+class Animal
+{
+  public virtual void makeSound()              // <- darf überschrieben werden
+  {
+    Console.WriteLine("I'm an Animal");
+  }
+}
+
+class Duck : Animal
+{
+  public override void makeSound()             // <- bewusst überschrieben
+  {
+    Console.WriteLine("Quack!");
+  }
+}
+
+public class Program
+{
+  public static void Main(string[] args)
+  {
+    Animal a = new Animal();
+    Animal d = new Duck();                     // statisch Animal, dynamisch Duck
+
+    a.makeSound();    // -> "I'm an Animal"
+    d.makeSound();    // -> "Quack!"   (dynamische Bindung greift)
+  }
+}
+```
+```xml   -myproject.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo -warnaserror:CS0108`, `dotnet run -nologo`)
+
+> **Hinweis:** Hier nutzen wir ausnahmsweise `dotnet build` statt `mcs`/`mono`, weil wir gleich eine Compiler-*Warnung* sehen wollen — und die zeigt `mono` nicht zuverlässig an.
+
+Beide Methoden müssen dieselbe **Signatur** haben (Name + Parameterliste). Sonst handelt es sich um *Überladung* — eine ganz andere Mechanik.
+
+**Probieren Sie aus:**
+
+1. **`virtual` entfernen** (in `Animal`): **Compilerfehler** — `Duck.makeSound()` hat nichts zum Überschreiben.
+2. **`override` entfernen** (in `Duck`): Der Code kompiliert mit *Warnung* `CS0108`, aber `d.makeSound()` druckt jetzt `"I'm an Animal"` — obwohl `d` doch eine `Duck` ist!
+
+Punkt 2 ist überraschend und zugleich der Schlüssel zum Verständnis: Ohne `override` ist `Duck.makeSound()` für den Compiler eine *neue, unabhängige* Methode, die die Basisklassen-Methode *verdeckt* — keine Überschreibung. Der Compiler entscheidet die Methodenauswahl dann anhand des **statischen Typs** (`Animal`), nicht des dynamischen (`Duck`). Genau diesen Mechanismus behandeln wir gleich unter „Verdecken von Methoden" ausführlich.
+
+> **Python-Vergleich:** In Python ist *jede* Methode implizit überschreibbar. C# verlangt die bewusste Entscheidung in der Basisklasse — was in größeren Codebasen unbeabsichtigte Überschreibungen verhindert.
+
+### Polymorphie in Aktion
 
 ```csharp    Polymorphy.cs
 using System;
@@ -655,26 +494,23 @@ class Cow : Animal
 public class Program
 {
   public static void Main(string[] args){
-    Animal[] animals = new Animal[3]; // <- Statischer Typ  Animal
-    animals[0] = new Duck("Alfred");  // <- Dynamischer Typ Duck
-    animals[1] = new Cow("Hilde");
-    animals[2] = new Animal("Bernd");
+    Animal[] animals = new Animal[3];   // statischer Typ aller Elemente: Animal
+    animals[0] = new Duck("Alfred");    // dynamischer Typ: Duck
+    animals[1] = new Cow("Hilde");      // dynamischer Typ: Cow
+    animals[2] = new Animal("Bernd");   // dynamischer Typ: Animal
     foreach (Animal anim in animals)
-      anim.makeSound();
+      anim.makeSound();                  // dynamische Bindung
   }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-Die verschiedenen Tierklassen werden auf ihre Basisklasse gecastet, trotzdem
-aber die individuelle Implementierung von makeSound ausgeführt. Damit erlaubt die
-Polymorphie ein gleichartiges Handling unterschiedlicher Klassen, die über die
-Vererbung miteinander verknüpft sind.
+Obwohl die Schleifenvariable `anim` den statischen Typ `Animal` hat, läuft jeweils die Implementierung der *abgeleiteten* Klasse. Damit erlaubt die Polymorphie ein **gleichartiges Handling unterschiedlicher Klassen**, die über die Vererbung miteinander verknüpft sind.
 
 Interessant ist die Möglichkeit die ursprüngliche Implementierung der Methode
 aus der Basisklasse weiterhin zu nutzen und zu erweitern:
 
-```charp
+```csharp
 class Horse : Animal
 {
   public Horse(string name) : base(name) { }
@@ -848,8 +684,8 @@ public class Program
 Konvertierungen zwischen unterschiedlichen Datentypen lassen sich auch
 auf Klassen anwenden, allerdings sind hier einige Besonderheiten zu beachten.
 
-+ implizit auf die Basisklasse  (upcast)
-+ explizit auf die abgeleitete Klasse (downcast)
++ **Upcast** (Kind → Basis): immer sicher → Compiler lässt ihn *implizit* zu
++ **Downcast** (Basis → Kind): zur Compile-Zeit nicht garantierbar → muss *explizit* geschrieben werden
 
 gecastet werden. Zunächst ein Beispiel für einen *upcast* anhand unseres
 Fußballbeispiels. Zugriffe auf Member, die  in der Basisklasse nicht enthalten
@@ -857,8 +693,6 @@ sind führen logischerweise zum Fehler.
 
 ```csharp    Upcast
 using System;
-using System.Reflection;
-using System.ComponentModel.Design;
 
 public class Person {
   public int geburtsjahr;
@@ -873,31 +707,33 @@ public class Program
 {
   public static void Main(string[] args)
   {
-    Fußballspieler champ = new Fußballspieler {geburtsjahr = 1956,
-                                               name = "Maier",
-                                               rückennummer = 13};
-    Console.WriteLine("Felder in der Instanz '{0}' von '{1}'", champ.name, champ);
-    var fields = champ.GetType().GetFields();
-    foreach (FieldInfo field in fields){
-      Console.WriteLine(" x " + field.Name);
-    }
-    Person human = champ;     // Castoperation Fußballspieler -> Person
-    
-    Console.WriteLine("Felder in der Instanz '{0}' von '{1}'", human.name, human);
-    var fields2 = human.GetType().GetFields();
-    foreach (FieldInfo field in fields2){
-      Console.WriteLine(" x " + field.Name);
-    }    
-    
-    Console.WriteLine("human ist ein Fußballspieler? " + (human is Fußballspieler));
+    Fußballspieler champ = new Fußballspieler {
+      geburtsjahr = 1956,
+      name = "Maier",
+      rückennummer = 13
+    };
+
+    // Upcast: implizit, immer sicher
+    Person human = champ;
+
+    // Was geht?
+    Console.WriteLine($"{human.name} ({human.geburtsjahr})");  // ok — in Person definiert
+
+    // Was geht NICHT?
     // Console.WriteLine(human.rückennummer);
+    // → Compilerfehler: 'Person' enthält keine Definition für 'rückennummer'.
+    //   Der Compiler sieht nur, was der STATISCHE Typ (Person) zulässt —
+    //   obwohl das Objekt selbst weiterhin eine Fußballspieler-Instanz ist:
+    Console.WriteLine($"Dynamischer Typ: {human.GetType().Name}");           // -> Fußballspieler
+    Console.WriteLine($"human is Fußballspieler? {human is Fußballspieler}"); // -> True
   }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-In umgekehrter Richtung vollzieht sich der *Downcast*, eine Instanz der
-Basisklasse wird auf einen abgeleiteten Typ gemappt.
+> **Merke:** Beim Upcast verändert sich nicht das Objekt, sondern die Brille, durch die der Compiler es sieht. Die `rückennummer` ist im Speicher weiterhin da — sie ist nur über die `Person`-Variable nicht mehr ansprechbar.
+
+In umgekehrter Richtung vollzieht sich der *Downcast*: eine Variable vom Basistyp wird auf einen abgeleiteten Typ gecastet. Der Compiler kann diese Sicherheit nicht garantieren — also muss der Cast **explizit** geschrieben werden und kann zur **Laufzeit** fehlschlagen.
 
 ```csharp    Downcast
 using System;
@@ -915,42 +751,45 @@ public class Program
 {
   public static void Main(string[] args)
   {
-    // Erzeuge eine Instanz der abgeleiteten Klasse
-    Fußballspieler original = new Fußballspieler {
-      geburtsjahr = 1956,
-      name = "Maier",
-      rückennummer = 1
+    // Fall 1: sicherer Downcast — das Objekt IST in Wahrheit ein Fußballspieler
+    Person human = new Fußballspieler {
+      geburtsjahr = 1956, name = "Maier", rückennummer = 7
     };
-
-    // Upcast: speichere sie in einer Person-Variablen
-    Person human = original;
-
-    // Downcast: jetzt ist es sicher!
-    Fußballspieler champ = (Fußballspieler) human;
-
+    Fußballspieler champ = (Fußballspieler) human;             // ok
     Console.WriteLine($"{champ.name} trägt die Nummer {champ.rückennummer}");
+
+    // Fall 2: unsicherer Downcast — das Objekt ist KEIN Fußballspieler
+    Person echterMensch = new Person { name = "Schmidt", geburtsjahr = 1980 };
+    try {
+      Fußballspieler x = (Fußballspieler) echterMensch;        // wirft InvalidCastException
+      Console.WriteLine(x.rückennummer);
+    }
+    catch (InvalidCastException ex) {
+      Console.WriteLine($"Cast fehlgeschlagen: {ex.Message}");
+    }
   }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-### Beispiel
+> **Merke:** Ein Downcast ist nur dann erlaubt, wenn der *dynamische* Typ tatsächlich passt. Den Compiler interessiert das nicht — er lässt jeden Downcast zu, weil er den dynamischen Typ ja nicht kennt. Die Laufzeit prüft dann *wirklich* und wirft im Fehlerfall eine `InvalidCastException`.
 
-*Upcast* und *Downcast* ...  wozu brauche ich das den? Nehmen wir an, dass wir
-eine Ausgabemethode für beide Typen - Person und Fußballspieler - benötigen.
-Ja, es wäre möglich diese als Memberfunktion zu implementieren, problematisch
-wäre aber dann, dass wir an unterschiedlichen Stellen im Code spezifische
-Befehle für die Ausgabe in der Konsole zu stehen haben. Sollen die Log-Daten
-nun plötzlich in eine Datei ausgegeben werden, müsste diese Anpassung überall
-vollzogen werden. Entsprechend ist eine externe (statische) Logger-Klasse
-wesentlich geeigneter diese Funktionalität zu kapseln. Allerdings wäre dann ein
-überladen der entsprechenden Ausgabefunktion mit allen vorkommenden Typen notwendig.
-Dies kann durch entsprechende Casts umgangen werden.
+### `as` — Downcast ohne Exception
 
-```csharp    UpCastExample
+Statt mit Cast-Klammern `(T) x` lässt sich ein Downcast auch mit dem `as`-Operator schreiben. Der Unterschied: Bei einem **fehlerhaften** Cast liefert `as` einfach `null` zurück, statt eine Exception zu werfen. Das ist genau dann nützlich, wenn der Cast *vielleicht* klappt und Sie ohne `try/catch` reagieren möchten.
+
+| Operator | bei Erfolg         | bei Misserfolg         |
+| -------- | ------------------ | ---------------------- |
+| `(T) x`  | Referenz vom Typ T | `InvalidCastException` |
+| `x as T` | Referenz vom Typ T | `null`                 |
+| `x is T` | `true`             | `false`                |
+
+### Wozu brauche ich das? — Ein typisches Beispiel
+
+Nehmen wir an, wir schreiben einen Logger, der *beliebige* `Person`-Objekte ausgeben soll — einschließlich der spezielleren `Fußballspieler`. Wäre die Ausgabe als Methode an die Klasse selbst gebunden, würde sie sich im Code verstreuen — eine zentrale Logger-Klasse ist meist die bessere Lösung. Diese muss aber den *dynamischen* Typ erkennen, um die richtigen Felder auszugeben — und genau dafür kombinieren wir `is` und `as`:
+
+```csharp    LoggerCast
 using System;
-using System.Reflection;
-using System.ComponentModel.Design;
 
 public class Person
 {
@@ -965,10 +804,16 @@ public class Fußballspieler : Person
 
 public static class Logger
 {
-  public static void printPerson(Person person){
-      Console.WriteLine("{0} - {1}", person.name, person.geburtsjahr);
-      if (person is Fußballspieler)
-        Console.WriteLine("{0} - {1}", person.name, (person as Fußballspieler).rückennummer);
+  public static void Print(Person person)
+  {
+    Console.WriteLine($"{person.name} ({person.geburtsjahr})");
+
+    // Erst prüfen, dann sicher casten:
+    if (person is Fußballspieler)
+    {
+      Fußballspieler spieler = person as Fußballspieler;       // sicher, weil is-true
+      Console.WriteLine($"  Rückennummer: {spieler.rückennummer}");
+    }
   }
 }
 
@@ -976,28 +821,24 @@ public class Program
 {
   public static void Main(string[] args)
   {
-     Person Mensch = new Person {geburtsjahr = 1956,
-                                name = "Maier"};
-     Logger.printPerson(Mensch);
-     Fußballspieler Champ = new Fußballspieler{geburtsjahr = 1967,
-                                               name = "Müller",
-                                               rückennummer = 13};
-     Logger.printPerson(Champ);
+    Person mensch = new Person { name = "Schmidt", geburtsjahr = 1956 };
+    Logger.Print(mensch);
+
+    Fußballspieler champ = new Fußballspieler {
+      name = "Müller", geburtsjahr = 1967, rückennummer = 13
+    };
+    Logger.Print(champ);
   }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
+> **Praxis-Hinweis:** Das `is`-then-`as`-Muster ist so häufig, dass C# eine Abkürzung anbietet — `if (person is Fußballspieler spieler) { ... }` deklariert die typisierte Variable direkt mit. Dieses **Pattern Matching** behandeln wir in einer späteren Vorlesung ausführlich.
+
 ## Aufgaben
 
-1. **Übersetzen (Animal → Dog → Puppy).** Übertragen Sie die mehrstufige Hierarchie aus 07a (Python: `Animal` → `Dog` → `Puppy` mit `super()`-Kette) nach C#. Markieren Sie `describe()` als `virtual` und in jeder Stufe als `override`. Rufen Sie über eine `Animal`-Variable, der ein `Puppy` zugewiesen ist, `describe()` auf und beobachten Sie die Ausgabe.
+- [ ] **Übersetzen (Animal → Dog → Puppy).** Übertragen Sie die mehrstufige Hierarchie aus 07a (Python: `Animal` → `Dog` → `Puppy` mit `super()`-Kette) nach C#. Markieren Sie `describe()` als `virtual` und in jeder Stufe als `override`. Rufen Sie über eine `Animal`-Variable, der ein `Puppy` zugewiesen ist, `describe()` auf und beobachten Sie die Ausgabe.
 
-2. **`new` vs. `override`.** Schreiben Sie dieselbe Hierarchie mit `new` statt `override` in `Dog.describe()`. Was ändert sich, wenn Sie über eine `Animal`-Variable auf das Objekt zugreifen? Erklären Sie das Ergebnis im Hinblick auf statische und dynamische Bindung.
+- [ ]  **`new` vs. `override`.** Schreiben Sie dieselbe Hierarchie mit `new` statt `override` in `Dog.describe()`. Was ändert sich, wenn Sie über eine `Animal`-Variable auf das Objekt zugreifen? Erklären Sie das Ergebnis im Hinblick auf statische und dynamische Bindung.
 
-3. **`protected` ausprobieren.** Geben Sie `Animal` ein `protected int age;` und schreiben Sie in `Dog` eine Methode, die das Alter erhöht. Versuchen Sie anschließend, von außerhalb der Klassenhierarchie auf `age` zuzugreifen — der Compiler sollte Sie ablehnen.
-
-4. **`is` und Pattern Matching.** Erweitern Sie den `Logger.printPerson` aus dem Beispiel um eine `switch`-Anweisung mit Typmustern (`case Fußballspieler s when s.rückennummer == 10 => ...`).
-
-5. **`sealed`.** Versiegeln Sie eine Methode in `Dog`, sodass `Puppy` sie *nicht* mehr überschreiben darf. Erklären Sie in einem Satz, warum man das tun könnte.
-
-6. **Reflexion.** Vergleichen Sie Python und C# bei der Vererbung in 3–4 Sätzen: *Was* erzwingt C# explizit, *warum* tut es das, und in welchem Szenario ist Pythons Lockerheit ein Vorteil — in welchem ein Risiko?
+- [ ]  **`protected` ausprobieren.** Geben Sie `Animal` ein `protected int age;` und schreiben Sie in `Dog` eine Methode, die das Alter erhöht. Versuchen Sie anschließend, von außerhalb der Klassenhierarchie auf `age` zuzugreifen — der Compiler sollte Sie ablehnen.

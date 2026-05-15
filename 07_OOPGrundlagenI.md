@@ -453,6 +453,36 @@ public class Program
 
 > **Aufgabe:** Übersetzen Sie das `Cat`-Beispiel mit `super().__init__(...)` aus 07a nach C# — denken Sie an `: base(...)` (kommt in 09 ausführlich).
 
+### Sonderfall: privater Konstruktor
+
+Konstruktoren sind normalerweise `public`. Es gibt aber einen typischen Fall, in dem ein `private`-Konstruktor sinnvoll ist: **die Instanziierung einer Klasse soll von außen verhindert werden.** Das passt zu Klassen, die ausschließlich *statische* Mitglieder anbieten — etwa Utility-Sammlungen wie `Math` aus der Standardbibliothek (`Math.PI`, `Math.Sqrt(...)` — niemand erzeugt je ein `Math`-Objekt).
+
+```csharp    PrivateConstructor
+using System;
+
+public class Counter
+{
+    private Counter() { }                       // verhindert 'new Counter()'
+
+    public static int CurrentCount;
+    public static int Increment() => ++CurrentCount;
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        // Counter c = new Counter();           // Compilerfehler: ctor ist privat
+        Counter.Increment();
+        Counter.Increment();
+        Console.WriteLine(Counter.CurrentCount);
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+> **Idiomatischer:** Wenn ohnehin *alle* Mitglieder statisch sind, deklarieren Sie die ganze Klasse als `static class Counter { ... }`. Der Compiler verhindert dann Instanziierung automatisch *und* lehnt nicht-statische Mitglieder direkt ab — die Absicht ist auf einen Blick sichtbar. Der private Konstruktor bleibt für Sonderfälle (z. B. Singleton-Muster) reserviert.
+
 ## ... und structs?
 
 Kurzer Blick zurück auf die Datentypen in C#.
