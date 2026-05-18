@@ -105,7 +105,9 @@ Eine Versionsverwaltung ist ein System, das zur Erfassung von Änderungen an Dok
 
 Ein Beispiel, wie ein Versionsmanagementsystem die Arbeit von verteilten Autoren unterstützt ist die Implementierung von Wikipedia. Jede Änderung eines Artikels wird dokumentiert. Alle Versionen bilden eine Kette, in der die letzte Version als gültige angezeigt wird. Entsprechend der Angaben kann nachvollzogen werden: wer wann was geändert hat. Damit ist bei Bedarf eine Rückkehr zu früheren Version möglich.
 
-![VersionsmanagementWikipedia](./img/11_VersionsverwaltungI/VersionenVonVersionsverwaltung.png "Versionen des Artikels Versionsverwaltung auf der Webseite Wikipedia")
+Schauen Sie sich live an, wie Wikipedia die Versionsgeschichte des Artikels *Versionsverwaltung* verwaltet — jede Bearbeitung ist mit Zeitstempel, Autor und Diff dokumentiert:
+
+<iframe src="https://de.wikipedia.org/w/index.php?title=Versionsverwaltung&action=history" width="100%" height="500px" style="border: 1px solid #ccc;"></iframe>
 
                                 {{1-2}}
 ******************************************************************************
@@ -432,15 +434,59 @@ lcs_algo(S1, S2, m, n)
 ```
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
-> Erschließen Sie sich den Algorithmus mit einem LLM! Gesucht ist eine grafische Darstellung des Algorithmus, die den Aufbau der Matrix und die Rückverfolgung der LCS zeigt.
+**Warum ist das Ergebnis `ADH`?**
+
+LCS steht für *Longest Common **Subsequence*** — nicht *Substring*! Der Unterschied ist entscheidend:
+
+- Eine **Substring** wäre ein zusammenhängender Teil (z. B. `ABC` in `ABCDGH`).
+- Eine **Subsequence** ist eine Folge von Zeichen, die in *beiden* Strings in der *gleichen Reihenfolge* vorkommen — aber **nicht zusammenhängend** sein müssen.
+
+Gehen wir Zeichen für Zeichen durch:
+
+```
+S1: A B C D G H
+S2: A E D F H R
+```
+
+Welche Zeichen erscheinen in **beiden** Strings, und zwar in der **gleichen Reihenfolge**?
+
+| Zeichen | Position in S1 | Position in S2 | Reihenfolge konsistent? |
+| ------- | -------------- | -------------- | ----------------------- |
+| **A**   | 0              | 0              | ✓                       |
+| **D**   | 3              | 2              | ✓ (kommt nach A)        |
+| **H**   | 5              | 4              | ✓ (kommt nach D)        |
+
+Daraus ergibt sich `ADH` — Länge 3.
+
+Die Matrix `L[i][j]` im Python-Code speichert für jedes Präfix-Paar `(S1[:i], S2[:j])` die Länge der jeweils längsten gemeinsamen Subsequence; die Rückverfolgung am Ende rekonstruiert dann die Zeichenfolge selbst.
+
+> **Bezug zur Versionsverwaltung:** Genau das ist das Prinzip hinter `diff` — das Tool findet die längste gemeinsame Subsequence zwischen zwei Dateien und markiert alles, was *nicht* dazugehört, als Änderung (hinzugefügt oder gelöscht).
 
 **Schritt 2: Mischen**
 
+Das LCS-Ergebnis ist die **Grundlage für das Mischen**. Bleiben wir bei unserem Beispiel `S1 = "ABCDGH"` und `S2 = "AEDFHR"` mit LCS = `ADH`:
+
+```
+S1:  A   B C D     G H
+S2:  A E     D F     H R
+LCS: A       D       H    <- gemeinsames Skelett
+```
+
+Die LCS bildet das **gemeinsame Skelett** beider Versionen. Alles, was *zwischen* den LCS-Zeichen liegt, ist eine Änderung gegenüber der jeweils anderen Seite:
+
+| Position relativ zur LCS | Nur in S1 (entfernt in S2) | Nur in S2 (hinzugefügt in S2) |
+| ------------------------ | -------------------------- | ----------------------------- |
+| nach `A`, vor `D`        | `B C`                      | `E`                           |
+| nach `D`, vor `H`        | `G`                        | `F`                           |
+| nach `H`                 | —                          | `R`                           |
+
+Beim **Mischen** stellt sich nun für jede dieser Lücken die Frage: *Was übernehmen wir?* Wenn beide Seiten an derselben Lücke unterschiedliche Inhalte einfügen (wie `B C` vs. `E`), entsteht ein **Konflikt**.
+
 In der Praxis wird zwischen zwei Szenarien unterschieden:
 
-1. Mischen unabhängiger Dokumente (2-Wege-Mischen) - Ziel ist die Erzeugung eines neuen Dokumentes, dass die gemeinsamen Komponenten und individuelle Teilmengen vereint.
+1. Mischen unabhängiger Dokumente (2-Wege-Mischen) - Ziel ist die Erzeugung eines neuen Dokumentes, dass die gemeinsamen Komponenten und individuelle Teilmengen vereint. Die LCS liefert hier direkt das gemeinsame Skelett.
 
-2. Mischen von Dokumenten mit gemeinsamen Ursprung (3-Wege-Mischen) - Ziel ist die Integration möglichst aller Änderungen der neuen Dokumente in eine weiterentwickelte Version des Ursprungsdokumentes
+2. Mischen von Dokumenten mit gemeinsamen Ursprung (3-Wege-Mischen) - Ziel ist die Integration möglichst aller Änderungen der neuen Dokumente in eine weiterentwickelte Version des Ursprungsdokumentes. Hier werden *zwei* LCS-Berechnungen durchgeführt: D0↔D1 und D0↔D2. Aus dem Vergleich beider Diffs erkennt das System, ob Änderungen kompatibel sind oder kollidieren.
 
 > Ein Paar von Änderung aus D1 bzw. D2 gegenüber einen Ausgangsdokument D0 kann unverträglich sein, wenn die Abbildung beider Änderungen in einem gemeinsamen Dokument nicht möglich ist. In diesem Fall spricht man von einem Konflikt.
 
@@ -561,8 +607,8 @@ Die Entwicklungsgeschichte von git ist mit der des Linux Kernels verbunden:
 | ---- | -------------------------------------------------------------- |
 | 1991 | Änderungen am Linux Kernel via patches und archive files       |
 | 2002 | Linux Kernel mit dem Tool BitKeeper verwaltet                  |
-| 2005 | Bruch zwischen der vertreibenden Firma und der Linux Community |
-| 2023 | Die aktuelle Version ist 2.40.1                                |
+| 2005 | Bruch zwischen der vertreibenden Firm> Erschließen Sie sich den Algorithmus mit einem LLM! Gesucht ist eine grafische Darstellung des Algorithmus, die den Aufbau der Matrix und die Rückverfolgung der LCS zeigt.a und der Linux Community |
+| 2026 | Die aktuelle Version ist 2.43.x                                |
 
 2005 wurde einen Anforderungsliste für eine Neuentwicklung definiert. Dabei wurde hervorgehoben, dass sie insbesondere sehr große Projekte (Zahl der Entwickler, Features und Codezeilen, Dateien) unterstützen können muss. Daraus entstand `Git` als freie Software zur verteilten Versionsverwaltung von Dateien.
 
@@ -722,23 +768,40 @@ Nun wird es aber interessanter! Lassen Sie uns jetzt aber zwischen den Varianten
 
 `git reset` löscht die Historie bis zu einem Commit. Adressieren können wir die Commits relativ zum `HEAD` `git reset HEAD~1` oder mit der jeweiligen ID `git reset <commit-id>`.
 
-Wichtig sind dabei die Parameter des Aufrufes:
-
-| Attribut            |         | Vorgang                                                       |
-| ------------------- | ------- | ------------------------------------------------------------- |
-| `git reset --soft`  |         | uncommit changes, changes are left staged (index).            |
-| `git reset --mixed` | default | uncommit + unstage changes, changes are left in working tree. |
-| `git reset --hard`  |         | uncommit + unstage + delete changes, nothing left.            |
-
 ``` text @ExplainGit.eval
 git commit -m V1
 git commit -m V2
 git commit -m V3
 ```
+
+Wichtig sind dabei die Parameter des Aufrufes. Erinnern Sie sich an die drei Ebenen aus dem Zustandsmodell: **Arbeitsverzeichnis** (Ihre Dateien auf der Platte), **Staging-Bereich** (das, was mit `git add` markiert wurde) und **Repository** (die committeten Versionen). Die drei Reset-Varianten unterscheiden sich darin, *wie weit* sie diese Ebenen zurückdrehen:
+
+| Attribut            | Standard?         | Repository (HEAD) | Staging-Bereich | Arbeitsverzeichnis | Wirkung in Worten                                                                                                                                                       |
+| ------------------- | ----------------- | ----------------- | --------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `git reset --soft`  |                   | zurückgesetzt     | unverändert     | unverändert        | Der Commit wird "rückgängig gemacht" — die Änderungen liegen aber weiterhin staged bereit. **Anwendungsfall:** Sie wollen einen Commit aufteilen oder neu formulieren.   |
+| `git reset --mixed` | ✓ (Default)       | zurückgesetzt     | zurückgesetzt   | unverändert        | Commit und Staging werden zurückgenommen, Ihre Datei-Änderungen bleiben aber erhalten. **Anwendungsfall:** Sie wollen `git add`-Entscheidungen neu treffen.              |
+| `git reset --hard`  |                   | zurückgesetzt     | zurückgesetzt   | zurückgesetzt      | Alles wird auf den Stand des Ziel-Commits zurückgesetzt — **Ihre lokalen Änderungen gehen verloren!** ⚠️ **Anwendungsfall:** Sie wollen einen Fehlversuch komplett wegwerfen. |
+
+**Konkretes Mini-Szenario:** Sie haben gerade `git commit -m "Add feature X"` gemacht und merken sofort, dass die Commit-Message Murks ist:
+
+- `git reset --soft HEAD~1` → Commit weg, Dateien bleiben staged. Sie können sofort mit einer besseren Message neu committen.
+- `git reset --mixed HEAD~1` → Commit weg, Staging weg. Sie können einzelne Dateien selektiv neu staged committen.
+- `git reset --hard HEAD~1` → Commit weg, Dateien zurückgesetzt. **Alle Änderungen seit dem Vor-Commit sind gelöscht.**
+
+> **Merke:** `--hard` ist eine der wenigen Git-Operationen, die wirklich Daten *vernichten* kann. Wenn Sie unsicher sind, prüfen Sie vorher mit `git status` und `git log`, was Sie verlieren würden.
+
 
 **Variante 2 - Revert**
 
-Häufig möchte man nicht die gesamte Historie zurückgehen und alle Änderungen verwerfen, sondern vielmehr eine Anpassung zurücknehmen und deren Auswirkung korrigieren. Eine Anpassung würde aber bedeuten, dass alle nachgeordneten Commits angepasst werden müssten.
+Häufig möchte man nicht die gesamte Historie zurückgehen und alle Änderungen verwerfen, sondern vielmehr eine einzelne Anpassung zurücknehmen. Genau das leistet `git revert`: Statt einen Commit aus der Historie zu *entfernen*, erzeugt es einen **neuen Commit**, der die Änderungen des Ziel-Commits aufhebt.
+
+| Aspekt              | `git reset`                              | `git revert`                                            |
+| ------------------- | ---------------------------------------- | ------------------------------------------------------- |
+| Wirkung auf Historie | **Schreibt sie um** — Commits verschwinden | **Erweitert sie** — neuer "Anti-Commit"                 |
+| Sicher für Remote?  | ❌ Nein (Force-Push nötig)               | ✓ Ja (ganz normaler Push)                               |
+| Anwendung           | Lokale Fehlversuche wegwerfen            | Bereits gepushte Commits zurücknehmen                   |
+
+> **Faustregel:** Geteilte Historie nie umschreiben. Sobald ein Commit gepusht ist und andere damit arbeiten könnten, ist `revert` der einzige saubere Weg.
 
 ``` text @ExplainGit.eval
 git commit -m V1
@@ -746,45 +809,7 @@ git commit -m V2
 git commit -m V3
 ```
 
-**Variante 3 - Rebase**
-
-Ein sehr mächtiges Werkzeug ist der interaktive Modus von `git rebase`. Damit kann die
-Geschichte neugeschrieben werden, wie es die git Dokumentation beschreibt. Im Grund können Sie damit Ihre Versionsgeschichte "aufräumen". Einzelne Commits umbenennen, löschen oder fusionieren. Dafür besteht ein eigenes Interface, dass Sie mit dem folgenden Befehl aufrufen können:
-
-```console
-▶git rebase -i HEAD~5
-
-pick d2a06e4 Update main.yml
-pick 78839b0 Reconfigures checkout
-pick f70cfc7 Replaces wildcard by specific filename
-pick 05b76f3 New pandoc command line
-pick c56a779 Corrects md filename
-
-# Rebase a3b07d4..c56a779 onto a3b07d4 (5 commands)
-#
-# Commands:
-# p, pick = use commit
-# r, reword = use commit, but edit the commit message
-# e, edit = use commit, but stop for amending
-# s, squash = use commit, but meld into previous commit
-# f, fixup = like "squash", but discard this commit's log message
-# x, exec = run command (the rest of the line) using shell
-# d, drop = remove commit
-#
-# These lines can be re-ordered; they are executed from top to bottom.
-#
-# If you remove a line here THAT COMMIT WILL BE LOST.
-#
-# However, if you remove everything, the rebase will be aborted.
-#
-# Note that empty commits are commented out
-```
-
-Als Anwendungsfall habe ich mir meine Aktivitäten im Kontext einiger Experimente
-mit den GitHub Actions, die im nächsten Abschnitt kurz eingeführt werden, ausgesucht.
-Schauen wir zunächst auf den ursprünglichen Stand. Alle Experimente drehten sich darum, eine Datei anzupassen und dann auf dem Server die Korrektheit zu testen.
-
-> Wir werden `git rebase` im Zusammenhang mit der Arbeit in  Branches wieder aufgreifen.
+> Eine dritte Variante — `git rebase` — werden wir in Versionsverwaltung II im Kontext der Arbeit mit Branches kennenlernen.
 
 ### Was kann schief gehen?
 
@@ -796,7 +821,8 @@ Schauen wir zunächst auf den ursprünglichen Stand. Alle Experimente drehten si
 ... wir wollen schnell sein und fügen alle Änderungen als staged ein
 git add *
 ... Aber halt! Die beiden Dinge gehören doch nicht zusammen!
-git reset
+git reset    # default Konfiguration entspricht reset --mixed HEAD
+... Alle Änderungen sind jetzt unstaged, wir können sie jetzt selektiv hinzufügen
 ```
 
 2. **Ups, eine Datei in der Version vergessen! (Unvollständiger Commit)**
@@ -916,7 +942,7 @@ create origin
 
 Die Editoren unterstützen den Nutzer bei der Arbeit, in dem Sie die eigentlichen Commandozeilentools rund um die Arbeitsfläche anordnen.
 
-![ScreenShot](./img/12_VersionsverwaltungII/ArbeitmitGitImEditor.png)<!-- width="100%" -->
+![ScreenShot](./img/11_VersionsverwaltungI/ArbeitmitGitImEditor.png)<!-- width="100%" -->
 
 | Bereich | Bedeutung                                                                                                                                                                                                                                  |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -930,51 +956,37 @@ Die identischen Informationen lassen sich auch auf der Kommandozeile einsehen:
 
 ```console
 ▶git status
-On branch SoSe2020dev
-Your branch is up to date with 'origin/SoSe2020dev'.
+On branch master
+Your branch is up to date with 'origin/master'.
 
 Changes to be committed:
-  (use "git reset HEAD <file>..." to unstage)
+  (use "git restore --staged <file>..." to unstage)
 
         modified:   .gitignore
 
 Changes not staged for commit:
-  (use "git add/rm <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
 
-
-        modified:   02_Versionsverwaltung.md
-        deleted:    03_ContinuousIntegration.md
+        modified:   11_VersionsverwaltungI.md
+        deleted:    alt_ContinuousIntegration.md
 
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
-        03_VersionsverwaltungII.md
+        12_VersionsverwaltungII.md
         code/
-        img/03_VersionsverwaltungII/
+        img/11_VersionsverwaltungI/
 ```
 
 ```console
-▶git log
-commit d7603554c958c478f1ec600bd3ccea437d91ae9a (HEAD -> SoSe2020dev, origin/SoSe2020dev)
-Author: Sebastian Zug <Sebastian.Zug@informatik.tu-freiberg.de>
-Date:   Thu Apr 9 13:16:38 2020 +0200
-
-    First version of L3
-
-commit 39fc168222f4c7a7d062adcaccff17fe34bccbe3
-Author: Sebastian Zug <Sebastian.Zug@informatik.tu-freiberg.de>
-Date:   Thu Apr 9 13:16:12 2020 +0200
-
-    First version of L02
-
-commit 350c127c7dfbc61a81edc8bd148f605ee681a07a
-
-Author: Sebastian Zug <Sebastian.Zug@informatik.tu-freiberg.de>
-Date:   Tue Apr 7 07:01:02 2020 +0200
-
-    Final version of L1
-....
+▶git log --oneline
+5b04f0b (HEAD -> master, origin/master) Merge branch 'master'
+4563132 Revise L07 and L09
+585f88c ci: update LiaScript badge
+8143af0 Merge branch 'master'
+54dc14e Replace Wildcards
+...
 ```
 
 ## Aufgaben

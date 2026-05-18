@@ -35,10 +35,6 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
-## Ein Beispiel
-
-> __Auftrag 1:__ Erstellen Sie ein Python Projekt, dass eine Textdatei liest und die Sprache einer Datei erkennt. Nutzen Sie dabei die Ihnen bekannten Git-Vorgehensmuster.
-
 ## Arbeiten mit Branches
 
 Die Organisation von Versionen in unterschiedlichen Branches ist ein zentrales
@@ -69,21 +65,36 @@ SoSe2020dev    O->O---->O---->O->O---->O-->O->O      ....
 Ein Branch in Git ist einfach ein Zeiger auf einen Commit zeigt. Der zentrale Branch wird zumeist als `master`/`main` bezeichnet.
 
 ### Generieren und Navigation über Branches
-<!--
-@@ Hinweis für die Realisierung
-    git branch feature
-    git checkout feature
-    git checkout 0e8bf9e
-    git branch newFeature
--->
 
-Wie navigieren wir nun konkret über den verschiedenen Entwicklungszweigen.
+Ein Branch ist technisch gesehen lediglich ein **Zeiger auf einen Commit**. Das macht Branches in Git extrem leichtgewichtig — anders als bei älteren Systemen wird *keine* Kopie der Dateien angelegt.
+
+Die zentralen Befehle:
+
+| Befehl                          | Wirkung                                                              |
+| ------------------------------- | -------------------------------------------------------------------- |
+| `git branch`                    | Listet alle lokalen Branches auf, markiert den aktiven mit `*`       |
+| `git branch <name>`             | Legt einen neuen Branch an (ohne dorthin zu wechseln)                |
+| `git switch <name>`             | Wechselt auf einen existierenden Branch (seit Git 2.23 empfohlen)    |
+| `git switch -c <name>`          | Legt einen neuen Branch an und wechselt direkt dorthin               |
+| `git branch -d <name>`          | Löscht einen Branch (nur wenn gemerged)                              |
+| `git branch -D <name>`          | Erzwingt das Löschen — Vorsicht!                                     |
+
+> **Hinweis:** Die früher verbreiteten Befehle `git checkout <branch>` bzw. `git checkout -b <branch>` funktionieren weiterhin, vermischen aber das Wechseln zwischen Branches mit dem Wiederherstellen einzelner Dateien. Die neueren Befehle `git switch` und `git restore` trennen diese Aufgaben sauberer.
+
+Probieren wir das interaktiv aus. Wir legen drei Commits auf `master` an, verzweigen dann in einen Feature-Branch und ergänzen dort weitere Versionen:
 
 ``` text @ExplainGit.eval
 git commit -m V1
 git commit -m V2
+git branch newFeature
+git checkout newFeature
+git commit -m FeatureV1
+git commit -m FeatureV2
+git checkout master
 git commit -m V3
 ```
+
+Beobachten Sie, wie sich die beiden Zweige unabhängig voneinander entwickeln. Der `HEAD`-Zeiger gibt jeweils an, an welcher Position Sie aktuell arbeiten.
 
 
 ### Mergoperationen über Branches
@@ -124,14 +135,18 @@ git commit -m FeatureV2
 Mergen ist eine nicht-destruktive Operation. Die bestehenden Branches werden auf keine Weise verändert. Das Ganze "bläht" aber den Entwicklungsbaum auf.
 
 ### Rebase mit einem Branch
-<!--
-@@ Hinweis für die Realisierung
-    git checkout master
-    git rebase newFeature
-    git branch -d newFeature
--->
 
-Zum `merge` existiert auch noch eine alternative Operation. Mit `rebase` werden die Änderungen eins branches in einem Patch zusammengefasst. Dieser wird dann auf head angewandt.
+Zum `merge` existiert eine alternative Operation: `rebase`. Während `merge` einen neuen Merge-Commit erzeugt, der zwei Entwicklungsstränge zusammenführt, **schreibt `rebase` die Historie um**: Die Commits eines Branches werden so umgeschrieben, als wären sie nacheinander auf einem anderen Branch entstanden.
+
+```ascii
+   Ausgangslage:                Nach 'git rebase master':
+
+   A---B---C  master            A---B---C  master
+        \                                  \
+         D---E  newFeature                  D'---E'  newFeature
+```
+
+Die Commits `D` und `E` werden zu *neuen* Commits `D'` und `E'` — gleicher Inhalt, aber neue Commit-Hashes und neuer Basis-Commit.
 
 ``` text @ExplainGit.eval
 git branch newFeature
@@ -142,7 +157,38 @@ git checkout master
 git commit -m V1
 ```
 
-> Achtung: Ein Rebase kann fatale Auswirkungen auf die Gesamte Projektstruktur haben!
+#### Interaktiver Rebase
+
+Ein mächtiges Werkzeug ist der interaktive Modus mit `git rebase -i HEAD~5`. Damit können Sie Ihre Versionsgeschichte "aufräumen": Commits umbenennen (`reword`), zusammenfassen (`squash`), neu ordnen oder löschen (`drop`):
+
+```console
+▶git rebase -i HEAD~5
+
+pick d2a06e4 Update main.yml
+squash 78839b0 Reconfigures checkout
+pick f70cfc7 Replaces wildcard by specific filename
+reword 05b76f3 New pandoc command line
+drop c56a779 Corrects md filename
+
+# Commands:
+# p, pick    = use commit
+# r, reword  = use commit, but edit the commit message
+# s, squash  = use commit, but meld into previous commit
+# f, fixup   = like "squash", but discard this commit's log message
+# d, drop    = remove commit
+```
+
+#### Warum ist Rebase gefährlich?
+
+> **Achtung:** Wenden Sie `rebase` **niemals auf bereits gepushte Commits an**, an denen andere Personen weiterarbeiten könnten!
+
+Die "fatalen Auswirkungen" sind konkret:
+
+1. **Divergierende Historien:** Weil `rebase` neue Commit-Hashes erzeugt, hat Ihr lokales Repository nach einem Rebase eine *andere* Geschichte als das Remote-Repository. Ein `git push` wird abgelehnt — und ein `git push --force` würde die Commits Ihrer Mitstreiter überschreiben.
+2. **Verlorene Arbeit für andere:** Wenn ein Kollege auf einem der "alten" Commits aufgebaut hat, hängt seine Arbeit nach Ihrem Force-Push an einem Commit, der offiziell nicht mehr existiert.
+3. **Konflikte pro Commit:** Bei einem `merge` lösen Sie Konflikte *einmal*. Bei einem `rebase` müssen Sie potenziell für *jeden* umgeschriebenen Commit einzeln auflösen.
+
+**Faustregel:** Rebase nur auf lokalen, noch nicht gepushten Branches einsetzen. Auf geteilten Branches (`master`, `main`, `develop`) immer `merge`.
 
 ### Am Beispiel
 
@@ -246,22 +292,57 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
 GitHub gliedert diese Punkte in _Workflows_ und _Jobs_ in einer hierachischen Struktur, die über `yaml` Files beschrieben werden. Eine kurze Einführung zur Syntax findet sich unter [Wikipedia](https://de.wikipedia.org/wiki/YAML).
 
-```yaml   main.yaml
+Ein minimales Beispiel zur Veranschaulichung der Struktur:
+
+```yaml   hello.yaml
 name: Hello World
 on: [push]
 
 jobs:
-  build-and-run:
-    name: Print Hello World
+  greet:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout files (master branch)
-        uses: actions/checkout@v2
-      - name: Show all files
-        run: pwd && whoami && ls -all
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Show environment
+        run: pwd && whoami && ls -la
 ```
 
-Spannend wird die Sache nun dadurch, dass es eine breite Community rund um die Actions gibt. Diese stellen häufig benötigte _Steps_ bereits zur Verfügung, fertige Tools für das Bauen und Testen von .NET Code.
+Realistischer wird es bei einem Workflow, der einen .NET-Build kompiliert und Tests ausführt — also genau das, was später Ihre Übungsaufgaben prüft:
+
+```yaml   dotnet-ci.yaml
+name: .NET Build and Test
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Run tests
+        run: dotnet test --no-build --configuration Release --verbosity normal
+```
+
+Beobachten Sie die Struktur: Der Workflow wird durch `push` oder `pull_request` auf `master` ausgelöst, läuft auf einem frischen Ubuntu-Container und durchläuft vier Schritte (Checkout, Setup, Build, Test). Schlägt ein Schritt fehl, bricht der Workflow ab und der zugehörige PR wird in GitHub rot markiert.
+
+Spannend wird die Sache durch die breite Community rund um die Actions. Diese stellt häufig benötigte _Steps_ bereits fertig zur Verfügung — wie hier `actions/checkout` und `actions/setup-dotnet`.
 
 Die Dokumentation zu den GitHub-Actions findet sich unter [https://github.com/features/actions](https://github.com/features/actions). Ein umfangreicheres Beispiel finden Sie in unserem Projektordner im aktuellen Branch `SoSe2020`. Hier werden alle LiaScript-Dateien in ein pdf umgewandelt.
 
@@ -331,12 +412,6 @@ Vermeiden Sie es,
 + ... Commits ohne Issue-Referenz zu erstellen
 + ... Branches "offen" zu lassen 
 + ... 
-
-## Ausblick auf Aufgabe 3
-
-![](http://www.plantuml.com/plantuml/png/hLN1RXit4BthAwRf9IaYBThU3AY8OzUkORWndBI79aR0NOvsMNF9BMSermxyD_sCtl9Z7Iwn6qcGjpxa850S3cVclJV3VKMi0iVMpbJ5Fi25CexbXo4Ru1ZNQ7qd--KIVlUXn826ewjXkPnzyORv_AUDomTmXLM3GNvm7rEKbN66ZNUmbjyPKKHuXsrd5IEzX0_kP-DAP4O7c0AaL5RL2CQ1LWINmV-9Don537_XB0LKrf31yF_r73gBDJfu_xvXxkYWAEfeDDAYDjp4Sb7vjbYXuXYG2YFroVBfGX5ZCAxE5TD3Ng-luLbtnurt7zVqiQ96XUxP1tU2n3c9nW1lOycARWYUdxb6MNu99xvLd8jDY8-ynX8DTGOjHBfTl81T02Fv1m1_n5jnZaCjYOapuGzRT3moa4GpQyMuWNsA5RZmmg9F44UAXwHxl8iYAoUYTC7N0OcAualEyUOGOm-Ch4DMcU1rK4vwX3OkxFXlOfHhty-SPuHWwePdyDqOpc6K_8hH9Ekvxx9x4eB_PiWIO3exyK5aoCVA4hGwMOyDtKGYu_ETtnnZeAeng14kUwbXJGiuwhLE5rA_gfXWc1e3lBlhlFInDf83e8-nGRiqlqO7vAsTeTEGC4nmTEJRrh1SU7w5grJeFQYuohf_y-B9NFsmmzMRDvUG0S1cxn4CXndexk6-WlVNctho2jS6RwKL9_31s_Je86mCe_RLrYYYA_Akg8GqLVeWchbwVYl6UHxFkN9wtaLhvm7_aZrJKGNCRchh03wTfbctnecOOeUGxGzRk-lhHriVqlknya7dEVlQPOjVv2sRh8b6-ZRWOCgmidqJK2QSG8GxxLC_G3O9dgd9JoeFQXLmBXAY70Pyz0qI4hPO-5LLJOb4_GvTRZQBAvwzDim8iPMddpx_m_VML4q_UtMzMlI99Shu5gQ3NuoxZwlF_zROVo26jqYdWKQNFDBtX6KY0vhoneSWfp6ClVdacVXnPoREXr3zo9vWOp6CbHvgrV7m91ohG8pMIiLZsgc6WP4530uZ8mc6BDyKnOCaggnHu5fFX6vIoCCo-KMYhMwUQTppBY-NikcilvC1VM9GZJdmqAsJrqvHrYoh0B6e2AMGVH-bL-XqREr_)<!--style="width: 80%;"-->
-
-> **Wichtig:** Schließen Sie Ihre Arbeit mit einem Release ab! Damit ist für uns erkennbar, dass Sie die Aufgabe erfolgreich umgesetzt haben.
 
 ## Aufgaben
 
