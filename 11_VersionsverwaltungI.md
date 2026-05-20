@@ -603,28 +603,48 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
 Die Entwicklungsgeschichte von git ist mit der des Linux Kernels verbunden:
 
-| Jahr | Methode der Versionsverwaltungen                               |
-| ---- | -------------------------------------------------------------- |
-| 1991 | Änderungen am Linux Kernel via patches und archive files       |
-| 2002 | Linux Kernel mit dem Tool BitKeeper verwaltet                  |
-| 2005 | Bruch zwischen der vertreibenden Firm> Erschließen Sie sich den Algorithmus mit einem LLM! Gesucht ist eine grafische Darstellung des Algorithmus, die den Aufbau der Matrix und die Rückverfolgung der LCS zeigt.a und der Linux Community |
-| 2026 | Die aktuelle Version ist 2.43.x                                |
+| Jahr | Methode der Versionsverwaltungen                         |
+| ---- | -------------------------------------------------------- |
+| 1991 | Änderungen am Linux Kernel via patches und archive files |
+| 2002 | Linux Kernel mit dem Tool BitKeeper verwaltet            |
+| 2005 | Entwicklung von Git                                      |
+| 2026 | Die aktuelle Version ist 2.43.x                          |
 
 2005 wurde einen Anforderungsliste für eine Neuentwicklung definiert. Dabei wurde hervorgehoben, dass sie insbesondere sehr große Projekte (Zahl der Entwickler, Features und Codezeilen, Dateien) unterstützen können muss. Daraus entstand `Git` als freie Software zur verteilten Versionsverwaltung von Dateien.
 
 > Git dominiert entweder als einzelne Installation oder aber eingebettet in verschiedene Entwicklungsplattformen die Softwareentwicklung!
 
-**Wie bekommen sie Git auf Ihren Windows-Rechner?**
+Heute findet sich Git praktisch überall — sowohl in den großen Hosting-Plattformen (GitHub, GitLab, Bitbucket, Azure DevOps) als auch in nahezu allen Entwicklungsumgebungen (VS Code, JetBrains, Visual Studio) als integrierter Bestandteil.
 
-1. Variante 1: als Integralen Bestandteil in Ihrer Entwicklungsumgebung (Visual Studio Code) -Die großen IDEs umfassen einen eigenen Git-Client, für einfachere Editoren muss dieser meist nachinstalliert werden.
+### Installation und Erstkonfiguration
 
-2. Variante 2: als unabhänigige Installation - Unter [Link](https://www.heise.de/tipps-tricks/Git-auf-Windows-installieren-und-einrichten-5046134.html) findet sich eine Schritt-für-Schritt Beschreibung für die Installation von Git unter Windows. Dabei wird sowohl ein Shell als auch eine GUI installiert.
+**Installation**
 
-3. Variante 3: mittels cygwin - Cygwin emuliert Linuxbefehle und Tools der Shell. Neben Compilern und einer Vielzahl von Entwicklertools können auch verschiedene Versionsverwaltungen installiert werden.
+| Plattform   | Vorgehen                                                                                                       |
+| ----------- | -------------------------------------------------------------------------------------------------------------- |
+| **Windows** | [git-scm.com/download/win](https://git-scm.com/download/win) — Installer inkl. Git Bash (Linux-Shell-Emulation) |
+| **macOS**   | `brew install git` (Homebrew) oder über die Xcode Command Line Tools                                            |
+| **Linux**   | `sudo apt install git` (Debian/Ubuntu) bzw. `sudo dnf install git` (Fedora)                                     |
 
-4. ....
+In den meisten IDEs ist Git bereits integriert. Eine *separate* Installation ist trotzdem sinnvoll, weil die Kommandozeile (a) volles Feature-Set bietet und (b) bei Problemen besseres Debugging erlaubt.
 
-Eine übergreifende Erklärung für die Installation gibt zum Beispiel dieses [Tutorial](https://www.youtube.com/watch?v=Fk12ELJ9Bww).
+**Erstkonfiguration**
+
+Bevor Sie Ihren ersten Commit anlegen können, muss Git wissen, *wer* committed. Diese Information wird in jeden Commit eingebettet und ist später nicht ohne weiteres änderbar:
+
+```console
+▶ git config --global user.name  "Max Mustermann"
+▶ git config --global user.email "max.mustermann@student.tu-freiberg.de"
+```
+
+Empfehlenswert ist außerdem, den Standard-Branch-Namen auf `main` zu setzen und einen sinnvollen Editor für Commit-Messages festzulegen:
+
+```console
+▶ git config --global init.defaultBranch main
+▶ git config --global core.editor "code --wait"   # VS Code als Commit-Editor
+```
+
+> **Merke:** Nutzen Sie die **gleiche E-Mail-Adresse** wie in Ihrem GitHub-Account — sonst werden Ihre Commits dort später nicht Ihrem Profil zugeordnet.
 
 ### Zustandsmodell einer Datei in Git
 
@@ -670,8 +690,8 @@ Unmodified --> Untracked : Löschen aus dem Repository   <color:Red>  ""git remo
 | ----------------------------------------------------------------- | ---------- | ---- |
 | _Git_ - Lokale Verwendung von Git in einer Sequenz von Änderungen | X          | X    |
 | _Git_ - Interaktion mit einem Remote-Repository                   | X          | X    |
-| _Git_ - Nutzung von Branches                                      |            |      |
-| _Github_ - Verknüpfungen                                          |            |      |
+| _Git_ - Nutzung von Branches                                      |            | X    |
+| _Github_ - Verknüpfungen                                          |            | X    |
 
 > GitExplain eröffnet die Möglichkeit einer visuellen Darstellung der Änderungen im Repository, bringt aber einige Einschränkungen bei der Nutzung des Befehlsumfanges mit.
 
