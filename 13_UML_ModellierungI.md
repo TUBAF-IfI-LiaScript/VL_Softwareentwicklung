@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.7
+version:  1.0.8
 language: de
 narrator: Deutsch Female
 comment:  Motivation der Modellierung von Software, Anforderungserhebung (Lasten-/Pflichtenheft), V-Modell, OO-Analyse und Design, Unified Modeling Language
@@ -239,7 +239,7 @@ müssen daraus erst ein lauffähiges System ableiten. Wie kommt man dort hin?
 + Wer ist eigentlich der **wirtschaftliche Betreiber**? Die Universität selbst darf als öffentliche Einrichtung nicht einfach Handel treiben — braucht es einen Förderverein oder eine Tochtergesellschaft?
 + Welche **Daten** speichert der Shop über die Nutzer:innen — und wer darf sie sehen? *(Stichwort: Datenschutz/DSGVO)*
 + Wer ist verantwortlich, wenn etwas schiefläuft — eine Falschlieferung, ein Hackerangriff, ein Ausfall am Black Friday? *(Stichwort: AGB, Impressum, Haftung)*
-+ Wer kümmert sich um das System **in zwei Jahren**, wenn Sie als Entwickler:in längst woanders arbeiten? *(häufig vergessen: Software ist nicht "fertig" mit dem Go-Live)*
++ Wer kümmert sich um das System **in zwei Jahren**? *(häufig vergessen: Software ist nicht "fertig" mit dem Go-Live)*
 
 > **Was Profis außerdem noch prüfen würden — als Stichworte zum Selbstweiterlesen:**
 > Barrierefreiheit (BITV 2.0 für öffentliche Stellen), PCI-DSS bei Kreditkartenzahlungen, Umsatzsteuer bei EU- und Drittland-Verkäufen, Markenrecht beim TUBAF-Logo, Service-Level-Agreements, Backup-Konzepte, Lasttests für Semesterstart-Spitzen. Diese Themen sind kein Vorlesungs­stoff, aber gut zu wissen, dass es sie gibt.
@@ -349,20 +349,22 @@ UML-Diagramme adressieren vor allem die funktionalen Anforderungen — nicht-fun
 
 ### Wann ist eine Anforderung *gut*?
 
-Eine Anforderung aufzuschreiben ist leicht — sie *brauchbar* zu formulieren ist die eigentliche Kunst. Die häufigsten Fehler: zu **vage**, **nicht überprüfbar** oder **mehrdeutig**. Vergleichen Sie:
+Gute Formulierung betrifft vor allem das **Lastenheft**: Hier hält der Auftraggeber fest, *was* das System leisten soll — und genau hier richtet vage Sprache den größten Schaden an. Eine Anforderung aufzuschreiben ist leicht; sie *brauchbar* zu formulieren ist die eigentliche Kunst. Die häufigsten Fehler: zu **vage**, **nicht überprüfbar** oder **mehrdeutig**. Vergleichen Sie diese Lastenheft-Einträge:
 
 | ❌ schlecht                                    | ✅ gut                                                                                          |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| „Das System soll **schnell** sein.“           | „Die Produktsuche liefert bei 1.000 Artikeln Ergebnisse in **unter 200 ms**.“                 |
+| „Das System soll **schnell** sein.“           | „Bei einer Produktdatenbank mit 1.000 Artikeln liefert die Suche unter Normal-Last (50 gleichzeitige Nutzeranfragen) in 95 % der Fälle innerhalb von 200 ms Ergebnisse; Nachweis im Lasttest bis Ende Q3/2026.“                 |
 | „Der Shop soll **benutzerfreundlich** sein.“  | „Ein Erstnutzer schließt eine Bestellung **ohne Hilfe in unter 3 Minuten** ab.“               |
 | „Studierende bekommen einen **Rabatt**.“      | „Nutzer mit gültigem TUBAF-Login erhalten **10 % Rabatt** auf Bekleidung (nicht auf Sammlerstücke).“ |
-| „Das System soll **sicher** sein.“            | „Passwörter werden mit **bcrypt** gehasht; nach 5 Fehlversuchen wird das Konto für 15 min gesperrt.“ |
+| „Das System soll **sicher** sein.“            | „Anmeldedaten werden **verschlüsselt** gespeichert; nach **5 Fehlversuchen** wird das Konto für **15 Minuten** gesperrt.“ |
 
 Die linke Spalte klingt sinnvoll, lässt sich aber **nicht abnehmen**: Woran würde der Abnahmetest (vgl. V-Modell) erkennen, ob „schnell“ erfüllt ist? Die rechte Spalte ist *testbar* — und genau das ist das entscheidende Kriterium.
 
 > **Merkregel — die Testbarkeitsfrage:** *„Könnte ich einen Test schreiben, der eindeutig mit ja oder nein beantwortet, ob diese Anforderung erfüllt ist?“* Wenn nicht, ist die Anforderung noch zu vage.
 
 Eine gängige Eselsbrücke für gute Anforderungen ist **SMART**: **S**pezifisch, **M**essbar, **A**kzeptiert, **R**ealistisch, **T**erminiert. Vor allem *messbar* trennt die beiden Spalten oben.
+
+> **Lastenheft vs. Pflichtenheft:** Die *gute* Spalte beschreibt weiterhin nur das **Was** (Lastenheft) — sie sagt etwa „verschlüsselt gespeichert“, aber nicht, *mit welchem Verfahren*. Das **Wie** (z.B. „Passwörter werden mit dem bcrypt-Algorithmus gehasht“) legt erst das **Pflichtenheft** fest, wenn der Auftragnehmer die Anforderung technisch umsetzt. Eine gut formulierte Lastenheft-Anforderung ist die Vorlage, die das Pflichtenheft dann präzisiert.
 
 > **Brücke:** Genau diese testbaren Anforderungen werden später in der Vorlesung [zum Testen](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/19_Testen.md) zur Grundlage konkreter Testfälle. Eine nicht-testbare Anforderung kann man auch nicht automatisiert prüfen.
 
@@ -393,7 +395,20 @@ style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-
 
 > Das V-Modell ist ein Vorgehensmodell, das den Softwareentwicklungsprozess in Phasen organisiert. Zusätzlich zu den Entwicklungsphasen definiert das V-Modell auch die Evaluationsphasen, in welchen den einzelnen Entwicklungsphasen Testphasen gegenübergestellt werden. (vgl. zum Beispiel [Link](https://www.johner-institut.de/blog/iec-62304-medizinische-software/v-modell/))
 
-Für uns relevant ist die **linke Hälfte**: Analyse, Grob- und Feinentwurf sind genau die Phasen, in denen **modelliert** wird — mit Lasten-/Pflichtenheft als Grundlage und UML-Diagrammen als Werkzeug. Die rechte Hälfte zeigt: Jede Modellierungsphase hat eine korrespondierende Testphase. Der Abnahmetest prüft direkt gegen das Lastenheft — und damit gegen das, was der Kunde wollte.
+Für uns relevant ist die **linke Hälfte**: Analyse, Grob- und Feinentwurf sind genau die Phasen, in denen **modelliert** wird — mit Lasten-/Pflichtenheft als Grundlage und UML-Diagrammen als Werkzeug. Die rechte Hälfte zeigt: Jede Modellierungsphase hat eine korrespondierende Testphase.
+
+Der entscheidende Gedanke des V-Modells ist, dass **jedes Dokument der linken Seite seinen Prüfstein auf der rechten Seite hat**. In einer typischen Lesart:
+
+| Entwicklungsphase (links) | Dokument            | Testphase (rechts) | prüft gegen …      |
+| ------------------------- | ------------------- | ------------------ | ------------------ |
+| Analyse                   | **Lastenheft** (Was) | Abnahmetest        | das Lastenheft     |
+| Grobentwurf               | **Pflichtenheft** (Wie) | Systemtest         | das Pflichtenheft  |
+| Feinentwurf               | techn. Spezifikation | Integrationstest   | die Schnittstellen |
+| Implementierung           | Code                | Modultest          | die einzelnen Units |
+
+So schließt sich der Bogen: Das **Lastenheft** steht am Anfang (links oben) *und* ist gleichzeitig der Maßstab für die **Abnahme** ganz am Ende (rechts oben) — geprüft wird gegen das, was der Kunde ursprünglich wollte. Genau deshalb muss eine Lastenheft-Anforderung *testbar* formuliert sein (siehe oben).
+
+> **Achtung — keine starre Norm:** Die obige Zuordnung ist eine didaktische Vereinfachung. Lasten- und Pflichtenheft sind ursprünglich Begriffe aus dem Projektmanagement (DIN 69901), nicht originär V-Modell-Artefakte; je nach V-Modell-Variante (klassisches V-Modell, V-Modell 97, V-Modell XT) heißen die Phasen und Dokumente unterschiedlich und werden teils anders zugeordnet. Wichtig ist das *Prinzip* — Entwicklungsphase ↔ zugehörige Testphase —, nicht die exakte Benennung.
 
 > **Achtung:** Das V-Modell ist nur eine Variante eines Vorgehensmodells. Moderne, **agile Entwicklungsansätze** (Scrum, Kanban) durchlaufen diese Phasen iterativ in kurzen Zyklen, statt sie einmal sequentiell zu durchlaufen — vgl. zum Beispiel [diesen Überblick](https://entwickler.de/online/agile/agile-methoden-einfuehrung-209035.html). Auch agile Methoden brauchen Anforderungen — sie kapseln sie meist in *User Stories* statt in einem großen Lastenheft. Das **Bedürfnis nach Modellen** bleibt in beiden Welten gleich.
 
@@ -451,7 +466,7 @@ Bestellung "1" --> "*" Artikel : umfasst
 
 ## Unified Modeling Language
 
-> Die Unified Modeling Language, kurz UML, dient zur Modellierung, Dokumentation, Spezifikation und Visualisierung komplexer Softwaresysteme unabhängig von deren Fach- und Realsierungsgebiet. Sie liefert die Notationselemente gleichermaßen für statische und dynamische Modelle zur Analyse, Design und Architektur und unterstützt insbesondere objektorientierte Vorgehensweisen. [^Jeckle]
+> Die Unified Modeling Language, kurz UML, dient zur Modellierung, Dokumentation, Spezifikation und Visualisierung komplexer Softwaresysteme unabhängig von deren Fach- und Realisierungsgebiet. Sie liefert die Notationselemente gleichermaßen für statische und dynamische Modelle zur Analyse, Design und Architektur und unterstützt insbesondere objektorientierte Vorgehensweisen. [^Jeckle]
 
 UML ist die etablierte, **standardisierte Notation** für die Modellierung objektorientierter Softwaresysteme. Im Projektalltag von 2026 koexistiert sie zunehmend mit leichtgewichtigeren Notationen wie *Mermaid* (für Doc-as-Code direkt in Git-Repositories) oder dem *C4-Modell* (für Architektur­skizzen). Sie alle teilen denselben Grundgedanken: strukturierte grafische Sprache statt Freihand-Skizze. UML bleibt der umfangreichste Werkzeugkasten — und dadurch der natürliche Einstieg.
 
@@ -479,7 +494,7 @@ UML enthält dabei Bezeichner (Begriffe) für die meisten Elemente der Modellier
 
 **UML-Modell**: ist eine abstrakte Darstellung eines Systems, das alle relevanten Informationen über die Struktur und das Verhalten des Systems enthält. Es umfasst nicht nur Diagramme, sondern auch die (nicht darstellbaren) Beziehungen, Constraints und anderen Metadaten, die die Modellierung ausmachen.
 
-**UML-Diagramme**: sind verschiedene grafische Darstellungen, die unterschiedliche Aspekte des Systems betonen. Es gibt mehrere Arten von UML-Diagrammen, die um unterschiedliche Perspektiven auf ein realweltliches Problem zeigen. Ein UML-Modell beinhaltet die Menge aller seiner Diagramme. 
+**UML-Diagramme**: sind verschiedene grafische Darstellungen, die unterschiedliche Aspekte des Systems betonen. Es gibt mehrere Arten von UML-Diagrammen, die unterschiedliche Perspektiven auf ein realweltliches Problem zeigen. Ein UML-Modell beinhaltet die Menge aller seiner Diagramme. 
 
 ![Modelle](https://www.plantuml.com/plantuml/png/JSj1oi9030NW_PmYpFA7ARG7-Ed2fLrwW3WJsq3IWIIzlwAYhXxlVRpP0oqEbIHq2uWEnkiMqDYe1lSzRTm8bFHAvgzIsQfGIbNG7V9bEPUbDnB9W0xFTVh54-DggFhbyNsU88yPIlb_v33yvO_EjBT3vGu0 "Modell vs. Diagramm")
 
@@ -507,7 +522,7 @@ UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die I
 
     *Herausforderungen:* Abstraktionskonzept der Modelle führt zu verallgemeinernden Darstellungen, die ggf. Konzepte des Codes nicht reflektieren.
 
-![OOPGeschichte](./img/13_UML/Doxygen.png "Nutzung einer adaptierten Variante in Doxygen [^WikiDoxygen]")
+![DoxygenScreenshot](./img/13_UML/Doxygen.png "Nutzung einer adaptierten Variante in Doxygen [^WikiDoxygen]")
 
 
 **Darstellung von UML im Rahmen dieser Vorlesung**
@@ -561,7 +576,7 @@ WB is Waiting
 
 ### Diagramm-Typen
 
-![OOPGeschichte](./img/13_UML/UML-Diagrammhierarchie.png "UML Diagramm-Typen [^WikiUMLDiagrammTypes]")
+![Diagrammtypen](./img/13_UML/UML-Diagrammhierarchie.png "UML Diagramm-Typen [^WikiUMLDiagrammTypes]")
 
 [^WikiUMLDiagrammTypes]: https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/UML-Diagrammhierarchie.svg/1200px-UML-Diagrammhierarchie.svg.png, Autor "Stkl"- derivative work: File: UML-Diagrammhierarchie.png: Sae1962, CC BY-SA 4.0
 
@@ -583,7 +598,7 @@ WB is Waiting
 | ------------------------------ | --------------------------------------------------------------------------------------------- |
 | Use-Case-Diagramm              | Was leistet mein System überhaupt? Welche Anwendungen müssen abgedeckt werden?                |
 | Aktivitätsdiagramm             | Wie lassen sich die Stufen eines Prozesses beschreiben? Fließen auch Daten in den Prozess?    |
-| Zustandsautomat                | Welche Abfolge von Zuständen wird für eine eine Sequenz von Einganginformationen realisiert   |
+| Zustandsautomat                | Welche Abfolge von Zuständen wird für eine Sequenz von Einganginformationen realisiert   |
 | Sequenzdiagramm                | Wer tauscht mit wem welche Informationen aus? Wie bedingen sich lokale Abläufe untereinander? Wie ist die zeitliche Reihenfolge des Nachrichtenaustauschs? |
 | Kommunikationsdiagramm         | Wer tauscht mit wem welche Informationen aus?                                                 |
 | Timing-Diagramm                | Wie hängen die Zustände verschiedener Akteure zeitlich voneinander ab?                        |
