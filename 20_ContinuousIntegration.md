@@ -13,54 +13,10 @@ import: https://github.com/liascript/CodeRunner
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
-
-@style
-.flex-container {
-    display: flex;
-    flex-wrap: wrap; /* Allows the items to wrap as needed */
-    align-items: stretch;
-}
-
-.flex-child,
-.flex-child-1 { flex: 1; }
-.flex-child-2 { flex: 2; }
-.flex-child-3 { flex: 3; }
-.flex-child-4 { flex: 4; }
-.flex-child-5 { flex: 5; }
-.flex-child-6 { flex: 6; }
-.flex-child-7 { flex: 7; }
-.flex-child-8 { flex: 8; }
-
-.flex-child,
-.flex-child-1,
-.flex-child-2,
-.flex-child-3,
-.flex-child-4,
-.flex-child-5,
-.flex-child-6,
-.flex-child-7,
-.flex-child-8 {
-    margin-right: 20px; /* Adds space between the columns */
-}
-
-@media (max-width: 600px) {
-    .flex-child,
-    .flex-child-1,
-    .flex-child-2,
-    .flex-child-3,
-    .flex-child-4,
-    .flex-child-5,
-    .flex-child-6,
-    .flex-child-7,
-    .flex-child-8 {
-        flex: 100%; /* Makes the child divs take up the full width on slim devices */
-        margin-right: 0; /* Removes the right margin */
-    }
-}
-@end
-
+link: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/css/styles.css
 
 -->
+
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/20_ContinuousIntegration.md)
 

@@ -58,3 +58,53 @@ tbody tr:has(.holiday) {
   color: var(--tubaf-holiday-text);
 }
 
+/* ===== Flexbox-Layout-Hilfsklassen =====
+   Inhalte nebeneinander anordnen. Verwendung:
+   <section class="flex-container">
+     <div class="flex-child" style="min-width: 300px"> ... </div>
+     <div class="flex-child" style="min-width: 300px"> ... </div>
+   </section>
+   flex-child-1 .. -8 erlauben unterschiedliche Spaltengewichte. */
+.flex-container {
+  display: flex;
+  flex-wrap: wrap; /* Items brechen auf schmalen Displays um */
+  align-items: stretch;
+}
+
+.flex-child,
+.flex-child-1 { flex: 1; }
+.flex-child-2 { flex: 2; }
+.flex-child-3 { flex: 3; }
+.flex-child-4 { flex: 4; }
+.flex-child-5 { flex: 5; }
+.flex-child-6 { flex: 6; }
+.flex-child-7 { flex: 7; }
+.flex-child-8 { flex: 8; }
+
+.flex-child,
+.flex-child-1,
+.flex-child-2,
+.flex-child-3,
+.flex-child-4,
+.flex-child-5,
+.flex-child-6,
+.flex-child-7,
+.flex-child-8 {
+  margin-right: 20px; /* Abstand zwischen den Spalten */
+}
+
+@media (max-width: 600px) {
+  .flex-child,
+  .flex-child-1,
+  .flex-child-2,
+  .flex-child-3,
+  .flex-child-4,
+  .flex-child-5,
+  .flex-child-6,
+  .flex-child-7,
+  .flex-child-8 {
+    flex: 100%; /* volle Breite auf schmalen Geräten */
+    margin-right: 0;
+  }
+}
+

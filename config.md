@@ -10,51 +10,6 @@ comment:  This file provides commonly used meta information for all LiaScript co
 @config.semester: `Sommersemester 2026`
 @config.university: `Technische Universität Freiberg`
 
-@style
-.flex-container {
-    display: flex;
-    flex-wrap: wrap; /* Items brechen auf schmalen Displays um */
-    align-items: stretch;
-}
-
-.flex-child,
-.flex-child-1 { flex: 1; }
-.flex-child-2 { flex: 2; }
-.flex-child-3 { flex: 3; }
-.flex-child-4 { flex: 4; }
-.flex-child-5 { flex: 5; }
-.flex-child-6 { flex: 6; }
-.flex-child-7 { flex: 7; }
-.flex-child-8 { flex: 8; }
-
-.flex-child,
-.flex-child-1,
-.flex-child-2,
-.flex-child-3,
-.flex-child-4,
-.flex-child-5,
-.flex-child-6,
-.flex-child-7,
-.flex-child-8 {
-    margin-right: 20px; /* Abstand zwischen den Spalten */
-}
-
-@media (max-width: 600px) {
-    .flex-child,
-    .flex-child-1,
-    .flex-child-2,
-    .flex-child-3,
-    .flex-child-4,
-    .flex-child-5,
-    .flex-child-6,
-    .flex-child-7,
-    .flex-child-8 {
-        flex: 100%; /* volle Breite auf schmalen Geräten */
-        margin-right: 0;
-    }
-}
-@end
-
 -->
 
 # Config variables
@@ -66,8 +21,19 @@ comment:  This file provides commonly used meta information for all LiaScript co
 
 # Layout-Hilfsklassen (Flexbox)
 
-Über die zentrale `config.md` stehen allen Kursen Flexbox-Klassen zur Verfügung,
-um Inhalte nebeneinander anzuordnen. Verwendung:
+Die Flexbox-Klassen `flex-container` / `flex-child` werden über die zentrale
+CSS-Datei [`css/styles.css`](css/styles.css) bereitgestellt. Damit sie wirken,
+muss die Vorlesung diese CSS-Datei per `link:`-Direktive im Kopf einbinden:
+
+```text
+link: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/css/styles.css
+```
+
+> **Hinweis:** `@style`-Blöcke werden über `import:` **nicht** zuverlässig in die
+> importierende Vorlesung übernommen — CSS muss daher per `link:` direkt in der
+> jeweiligen Vorlesung eingebunden werden.
+
+Verwendung im Dokument:
 
 ```html
 <section class="flex-container">
