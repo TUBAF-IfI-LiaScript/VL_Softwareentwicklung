@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug, Galina Rudolf, André Dietrich & `Lesestein`
+author:   Sebastian Zug, Galina Rudolf, Volker Göhler, André Dietrich & `Lesestein`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.3
+version:  1.0.4
 language: de
 narrator: Deutsch Female
 comment:  Versionsverwaltung mit Git und GitHub, Automatisierung von Arbeitsabläufen auf dem Versionsserver
@@ -12,6 +12,7 @@ logo:
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
         https://raw.githubusercontent.com/liaTemplates/ExplainGit/master/README.md
+        https://raw.githubusercontent.com/liaScript/mermaid_template/master/README.md
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
@@ -48,19 +49,38 @@ die Stabilität des Gesamtsystems zu gefährden. Gleichzeitig haben die Entwickl
 
 Wie sieht das zum Beispiel für unsere Kursmaterialien aus?
 
-```ascii
-
-        vSoSe2019                                                   vSoSe2020
-main     O-----------------------------------------  ....  ---------O
-          \                                                        ^
-           \               Offizielle Versionen                   /
-SoSe2020    \              O-->O                 O          ---->O
-             \            ^     \               /
-              v          /       v             /
-SoSe2020dev    O->O---->O---->O->O---->O-->O->O      ....
-               Vorlesung      Vorlesung
-               00             01
+```mermaid @mermaid
+---
+title: "Branches in Git"
+---
+%%{init: {'theme': 'base', 'themeVariables': { 'gitGraph': { 'colors': ['#f9f', '#bbf', '#fff'] } } }}%%
+gitGraph
+    commit id: "vSoSe2019"
+    branch SoSe2020
+    checkout SoSe2020
+    commit
+    branch SoSe2020dev
+    checkout SoSe2020dev
+    commit id: "Vorlesung 00"
+    commit
+    commit
+    checkout SoSe2020
+    commit
+    checkout SoSe2020dev
+    commit
+    checkout SoSe2020
+    commit
+    merge SoSe2020dev id: "Offizielle Versionen"
+    checkout SoSe2020dev
+    commit
+    checkout SoSe2020
+    commit
+    commit
+    checkout main
+    commit
+    merge SoSe2020 id: "vSoSe2020"
 ```
+
 
 Ein Branch in Git ist einfach ein Zeiger auf einen Commit zeigt. Der zentrale Branch wird zumeist als `master`/`main` bezeichnet.
 

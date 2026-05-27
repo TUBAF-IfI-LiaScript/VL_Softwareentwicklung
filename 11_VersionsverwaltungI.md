@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich & `JohannaKlinke`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.12
+version:  1.0.13
 language: de
 narrator: Deutsch Female
 comment:  Motivation der Versionsverwaltung in der Softwareentwicklung, Diskussion der zentraler / dezentraler Ansätze, Umsetzung von merge Operation, Einführung in die Verwendung von Git
