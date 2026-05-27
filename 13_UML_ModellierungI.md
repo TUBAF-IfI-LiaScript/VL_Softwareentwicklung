@@ -5,7 +5,7 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.6
 language: de
 narrator: Deutsch Female
-comment:  Prinzipien des (objektorientierten) Softwareentwurfs, Motivation der Modellierung von Software, Unified Modeling Language
+comment:  Motivation der Modellierung von Software, Anforderungserhebung (Lasten-/Pflichtenheft), V-Modell, OO-Analyse und Design, Unified Modeling Language
 tags:      
 logo:     
 title: Modellierung von Software I
@@ -38,14 +38,11 @@ link: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklu
 
 ---------------------------------------------------------------------
 
-## Organisatorisches 
-
-Projektarbeiten als Leistungsnachweis für die Vorlesung Softwareentwicklung.
-
-https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2025_Projektaufgaben
-
-
 ## Motivation des Modellierungsgedankens
+
+> **Motivation:** Warum modellieren wir Software? Warum nicht einfach losprogrammieren? Was sind die Vorteile von Modellen — und was sind die Risiken?
+
+### Modellierung aus der Codeperspektive
 
 
                {{0-1}}
@@ -79,8 +76,14 @@ report.send_via_email("chef@firma.de")
 
 ************************************************
 
-               {{1-2}}
+            {{1-2}}
 ************************************************
+
+<section class="flex-container">
+
+<div class="flex-child" style="min-width: 300px">
+
+> Besser! Aber was genau ist jetzt besser ... und wie kann ich bei einem größeren Projekt den Überblick behalten? Hier kommt die **Modellierung** ins Spiel: Sie hilft uns, die Struktur und die Beziehungen in unserem Code zu visualisieren — und damit schneller zu verstehen, was wo passiert.
 
 ```python   improved_version.py
 from abc import ABC, abstractmethod
@@ -138,14 +141,13 @@ if __name__ == "__main__":
     sender.send(report)
 ```
 
-> Was stört Sie, wenn wir uns einen so langen Code anschauen? Die übersichtlichkeit leidet!
+</div>
 
-************************************************
+<div class="flex-child" style="min-width: 300px">
 
-            {{2-3}}
-************************************************
+> Wir stellen die Relationen im Code grafisch dar und haben damit die Möglichkeit die "Architektur" unseres Codes zu verstehen. In diesem Fall haben wir drei Klassen: `Report`, `ReportSaver` und `ReportSender`. `ReportSaver` und `ReportSender` sind abstrakte Klassen, die von `FileSaver` und `EmailSender` implementiert werden.
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 
 ' ===== Abstrakte Basisklassen =====
@@ -171,7 +173,7 @@ class EmailSender {
 }
 
 ' ===== Datenklasse =====
-class Report {
+class Report { https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
     - title: str
     - content: str
     + __init__(title: str, content: str)
@@ -189,682 +191,185 @@ EmailSender ..> Report : uses
 @enduml
 ```
 
+</div>
+
+</section>
 
 ************************************************
 
-
-            {{3-4}}
-************************************************
-
-> Um gedanklich wieder in die C# Entwicklung einzutauchen, finden Sie in dem Ordner [code](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/tree/master/code/13_UML_Modellierung) zwei Beispiele für die:
-
-+ Nutzung abstrakter Klassen
-+ Verwendung von Interfaces
-
-Überlegen Sie sich alternative Lösungsansätze mit Vor- und Nachteilen für die beschriebenen Implementierungen.
-
-***********************************************
-
-## Prinzipien des (objektorientierten) Softwareentwurfs
-
-> **Merke:** Software lebt!
-
-Gibt es für ein Problem mehrere Lösungen? Sind sie alle gleich gut? Ist das einfachste und nahliegende nach KISS-Prinzip (Keep It Simple, Stupid) immer am besten?
-
-+ Prinzipien zum Entwurf von Systemen: Modularität, Trennung von Zuständigkeiten (Separation of Concerns), Schichtenarchitektur, lose Kopplung und hohe Kohäsion von Modulen
-+ Prinzipien zum Entwurf einzelner Klassen: Single Responsibility (einzige Verantwortlichkeit) Principle, Kapselung, Immutable Objects
-+ Prinzipien zum Entwurf miteinander kooperierender Klassen: O, L, I, D, Law of Demeter (Kommunikation nur unter "verwandten" Klassen, keine langen Aufrufketten)
-
-[Robert C. Martin](https://de.wikipedia.org/wiki/Robert_Cecil_Martin)
-fasste eine wichtige Gruppe von Prinzipien zur Erzeugung wartbarer und
-erweiterbarer Software unter dem Begriff "SOLID" zusammen [^UncleBob]. Robert
-C. Martin erklärte diese Prinzipien zu den wichtigsten Entwurfsprinzipien. Die
-SOLID-Prinzipien bestehen aus:
-
-* **S** ingle Responsibility Prinzip
-* **O** pen-Closed Prinzip
-* **L** iskovsches Substitutionsprinzip
-* **I** nterface Segregation Prinzip
-* **D** ependency Inversion Prinzip
-
-Die folgende Darstellung basiert auf den Referenzen [^Just]. Eine
-sehr gute, an einem Beispiel vorangetrieben Erläuterung ist unter [^Krämer] zu finden.
-
-[^Krämer]: Andre Krämer, "SOLID - Die 5 Prinzipien für objektorientiertes Softwaredesign", [Link](https://www.informatik-aktuell.de/entwicklung/methoden/solid-die-5-prinzipien-fuer-objektorientiertes-softwaredesign.html)
-
-[^Just]: Markus Just, IT Designers Gruppe, "Entwurfsprinzipien", Foliensatz Fachhochschule Esslingen [Link](http://www.it-designers-gruppe.de/fileadmin/Inhalte/Studentenportal/Die_SOLID-Prinzipien__Folien___1_.pdf)
-
-[^UncleBob]: Robert C. Martin, Webseite "The principles of OOD", http://www.butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod
-
-### Prinzip einer einzigen Verantwortung (Single-Responsibility-Prinzip SRP)
-
-In der objektorientierten Programmierung sagt das SRP aus, dass jede Klasse nur
-eine fest definierte Aufgabe zu erfüllen hat. In einer Klasse sollten lediglich
-Funktionen vorhanden sein, die direkt zur Erfüllung dieser Aufgabe beitragen.
-
-> “There should never be more than one reason for a class to change. [^UncleBob]
-
-+  Verantwortlichkeit = Grund für eine Änderung (multiple Veränderungen == multiple Verantwortlichkeiten)
-
-```csharp
-public class Book
-{
-    // nur eine Verantwortlichkeit: die Verwaltung der Buchdetails
-    public string Title { get; private set; }
-    public string Author { get; private set; }
-    public string ISBN { get; private set; }
-
-    public Book(string title, string author, string isbn)
-    {
-        Title = title;
-        Author = author;
-        ISBN = isbn;
-    }
-
-    public string GetBookDetails()
-    {
-        return $"Title: {Title}, Author: {Author}, ISBN: {ISBN}";
-    }
-    //Speichern von Büchern in einer Datenbank, das Drucken der Buchdetails erfolgt in den separaten Klassen
-}
-
-```
-
-* Mehrere Verantwortlichkeiten innerhalb eines Software-Moduls führen zu zerbrechlichem Design, da Wechselwirkungen bei den Verantwortlichkeit nicht ausgeschlossen werden können
-
-
-```csharp
-public class SpaceStation{
-  public initialize() ...
-  public void run_sensors() ...
-  public void show_sensors() ...
-  public void load_supplies(type, quantity) ...
-  public void use_supplies(type, quantity) ...
-  public void report_supplies () ...
-  public void load_fuel(quantity) ...
-  public void report_fuel() ...
-  public void activate_thrusters() ...
-}
-```
-
-Eine mögliche separaten Realisierung findet sich unter [Link](https://medium.com/@severinperez/writing-flexible-code-with-the-single-responsibility-principle-b71c4f3f883f)
-
-> **Merke:** Vermeiden Sie "God"-Objekte, die alles wissen.
-
-
-**Verallgemeinerung**
-
-Eine Verallgemeinerung des SRP stellt Curly’s Law [CodingHorror](https://blog.codinghorror.com/curlys-law-do-one-thing/) dar, welches das Konzept
-"methods should do one thing" bis "single source of truth" zusammenfasst und
-auf alle Aspekte eines Softwareentwurfs anwendet. Dazu gehören
-nicht nur Klassen, sondern unter anderem auch Funktionen und Variablen.
-
-> Jedes Wissenselement muss eine einzigartige, eindeutige Darstellung innerhalb eines Systems haben.
-
-```csharp
-var numbers = new [] { 5,8,4,3,1 };
-numbers = numbers.OrderBy(i => i);
-
-var numbers = new [] { 5,8,4,3,1 };
-var orderedNumbers = numbers.OrderBy(i => i);
-```
-
-Da die Variable `numbers` zuerst die unsortierten Zahlen repräsentiert und später
-die sortierten Zahlen, wird Curly’s Law verletzt. Dies lässt sich auflösen,
-indem eine zusätzliche Variable eingeführt wird.
-
-### Open-Closed Prinzip
-
-Bertrand Meyer beschreibt das Open-Closed-Prinzip durch:
-*Module sollten sowohl offen (für Erweiterungen) als auch verschlossen (für Modifikationen) sein.* [^Meyer]
-
-Eine Erweiterung im Sinne des Open-Closed-Prinzips ist beispielsweise die
-Vererbung. Diese verändert das vorhandene Verhalten der Einheit nicht, erweitert
-aber die Einheit um zusätzliche Funktionen oder Daten. Überschriebene Methoden
-verändern auch nicht das Verhalten der Basisklasse, sondern nur das der
-abgeleiteten Klasse.
-
-
-```csharp                                      PriceCalculator.cs  
-using System;
-using System.Collections.Generic;
-
-// Basisklasse mit abstrakter Methode
-public abstract class Product
-{
-    public string Name { get; set; }
-    public abstract decimal GetPrice();
-}
-
-// Erweiterung 1: Einfaches Produkt
-public class StandardProduct : Product
-{
-    public decimal BasePrice { get; set; }
-
-    public override decimal GetPrice()
-    {
-        return BasePrice;
-    }
-}
-
-// Erweiterung 2: Produkt mit Rabatt
-public class DiscountedProduct : Product
-{
-    public decimal BasePrice { get; set; }
-    public decimal DiscountPercent { get; set; }
-
-    public override decimal GetPrice()
-    {
-        return BasePrice * (1 - DiscountPercent / 100m);
-    }
-}
-
-// Erweiterung 3: Premium-Produkt mit Aufschlag
-public class PremiumProduct : Product
-{
-    public decimal BasePrice { get; set; }
-    public decimal PremiumFee { get; set; }
-
-    public override decimal GetPrice()
-    {
-        return BasePrice + PremiumFee;
-    }
-}
-
-// Verwenderklasse
-public class PriceCalculator
-{
-    public decimal CalculateTotalPrice(List<Product> products)
-    {
-        decimal total = 0;
-        foreach (var product in products)
-        {
-            total += product.GetPrice();
-        }
-        return total;
-    }
-}
-
-// Testprogramm
-class Program
-{
-    static void Main()
-    {
-        var products = new List<Product>
-        {
-            new StandardProduct { Name = "Buch", BasePrice = 20m },
-            new DiscountedProduct { Name = "Stift", BasePrice = 5m, DiscountPercent = 10 },
-            new PremiumProduct { Name = "Laptop", BasePrice = 1000m, PremiumFee = 150m }
-        };
-
-        var calculator = new PriceCalculator();
-        var total = calculator.CalculateTotalPrice(products);
-
-        Console.WriteLine($"Gesamtpreis: {total} EUR");
-    }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-
-Die Klasse PriceCalculator muss nicht geändert werden, wenn ein neuer Produkttyp hinzukommt. Stattdessen kann man durch Vererbung und Polymorphie neue Klassen hinzufügen (GiftProduct, Leihprodukt, etc.). Die Erweiterung erfolgt über neue Klassen, nicht durch Änderung des bestehenden Codes.
-
-[^Meyer]: Bertrand Meyer, "Object Oriented Software Construction" Prentice Hall, 1988,
-
-###  Liskovsche Substitutionsprinzip (LSP)
-
-> *"Sei $q(x)$ eine beweisbare Eigenschaft von Objekten $x$ des Typs $T$. Dann soll $q(y)$ für Objekte $y$ des Typs $S$ wahr sein, wobei $S$ein Untertyp von $T$ ist.“* [^Liskov]
-> Das Liskovsche Substitutionsprinzip (LSP) oder Ersetzbarkeitsprinzip besagt, dass ein Programm, das Objekte einer Basisklasse T verwendet, auch mit Objekten der davon abgeleiteten Klasse S korrekt funktionieren muss, ohne dabei das Programm zu verändern.
-
-Beispiel: Grafische Darstellung von verschiedenen Primitiven
-
-![Liskov](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuN8lIapBB4xEI2rspKdDJSqhKR2fqTLL24fDpYX9JSx69U-QavDPK9oAIpeajQA42we68k9Tb9fPp8L5lPL2LMfcSaPUgeOcbqDgNWhGKG00)<!-- width="30%" -->
-
-Entsprechend sollte eine Methode, die `GrafischesElement` verarbeitet, auch auf  `Ellipse` und `Kreis` anwendbar sein. Problematisch ist dabei allerdings deren unterschiedliches Verhalten. `Kreis` weist zwei gleich lange Halbachsen auf. Die zugehörigen Membervariablen sind nicht unabhängig voneinander.
-
-[^Liskov]: Liskov, Barbara H., and Jeannette M. Wing. “A Behavioral Notion of Subtyping.” ACM Transactions on Programming Languages and Systems, vol. 16, no. 6, 1994, pp. 1811–41. doi:10.1145/197320.197383
-
-### Interface Segregation Prinzip
-
-Zu große Schnittstellen sollten in mehrere Schnittstellen aufgeteilt werden,
-so dass die implementierende Klassen keine unnötigen Methoden umfasst.
-Schnittstellen müssen aufgeteilt werden, falls implementierende Klassen unnötige
-Methoden haben. Nach erfolgreicher Anwendung dieses Entwurfprinzips würde
-ein Modul, das eine Schnittstelle benutzt, nur die Methoden implementieren, die es auch wirklich braucht.
-
-
-```csharp
-public interface IVehicle
-{
-    void Drive();
-    void Fly();
-}
-
-
-public class MultiFunctionalCar : IVehicle
-{
-    public void Drive()
-    {
-        //actions to start driving car
-        Console.WriteLine("Drive a multifunctional car");
-    }
-
-    public void Fly()
-    {
-        //actions to start flying
-        Console.WriteLine("Fly a multifunctional car");
-    }
-}
-
-public class Car : IVehicle
-{
-    public void Drive()
-    {
-        //actions to drive a car
-        Console.WriteLine("Driving a car");
-    }
-
-    public void Fly()
-    {
-        throw new NotImplementedException();
-    }
-}
-```
-
-Lösung unter Beachtung des Interface Segregation Prinzip
-
-```csharp
-public interface ICar
-{
-    void Drive();
-}
-
-public interface IAirplane
-{
-    void Fly();
-}
-
-public class Car : ICar
-{
-    public void Drive()
-    {
-        //actions to drive a car
-        Console.WriteLine("Driving a car");
-    }
-}
-
-
-public class MultiFunctionalCar : ICar, IAirplane
-{
-    public void Drive()
-    {
-        //actions to start driving car
-        Console.WriteLine("Drive a multifunctional car");
-    }
-
-    public void Fly()
-    {
-        //actions to start flying
-        Console.WriteLine("Fly a multifunctional car");
-    }
-}
-```
-
-Man könnte jetzt sogar ein Highlevel Interface realisieren, dass beide Aspekte
-integriert.
-
-```csharp
-public interface IMultiFunctionalVehicle : ICar, IAirplane
-{
-}
-
-public class MultiFunctionalCar : IMultiFunctionalVehicle
-{
-}
-```
-**Vorteil**
-
-+ übersichtlichere kleinere Schnittstellen, die flexibler kombiniert werden können
-+ Klassen umfassen keine Methoden, die sie nicht benötigen
-
--> Das Prinzip der Schnittstellentrennung verbessert die Lesbarkeit und Wartbarkeit unseres Codes.
-
-
-### Dependency Inversion Prinzip
-
-> "High-level modules should not depend on low-level modules. Both should
-> depend on abstractions. Abstractions should not depend upon details. Details
-> should depend upon abstractions" [UncleBob]
-
-Lösungsansatz für die Realisierung ist eine veränderte Sicht auf die
-klassischerweise hierachische Struktur von Klassen.
-
-<!--
-style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
--->
-````ascii
-
-  Traditionelle Sicht                 Objektorientierte Perspektive
-
-  +-----------------------+           +-------------------------------+
-  | Präsentation          |           |          Präsentation         |
-  +-----------------------+           | Realisierung        Interface |
-              |                       +-------------------------^-----+
-              |                                                 |
-              |                                                 |
-              v                               +-----------------+
-  +-----------------------+           +-------|-----------------------+
-  | Anwendung             |           |       |  Anwendung            |
-  +-----------------------+           | Realisierung        Interface |
-              |                       +-------------------------^-----+
-              |                                                 |
-              |                                                 |
-              v                               +-----------------+
-  +-----------------------+           +-------|-----------------------+
-  | Verarbeitung          |           |       |  Verarbeitung         |
-  +-----------------------+           | Realisierung        Interface |
-             |                        +-------------------------^-----+
-             |                                                  |
-             |                                                  |
-             v                                +-----------------+
-  +-----------------------+           +-------|-----------------------+
-  | Daten                 |           |       |     Daten             |
-  +-----------------------+           | Realisierung        Interface |
-                                      +-------------------------------+
-````
-
-Hohe Abstraktionsebenen (High-level modules) sind die Komponenten des Systems, die höhere Logik oder Funktionalität implementieren (z.B. Benutzeroberfläche). 
-
-Niedrige Abstraktionsebenen (Low-level modules) sind Komponenten, die konkrete Aufgaben wie Datenzugriff, Netzwerkkommunikation oder hardwarebezogene Operationen ausführen.
-
-> Die High-level Module sollen nicht direkt von den Low-level Modulen abhängig sein. Stattdessen sollten beide Arten von Modulen von Abstraktionen abhängen, wie Schnittstellen oder abstrakte Klassen.
-
-                                       {{0-1}}
-****************************************************************************
-
-Beispiel:
-High-level Modul ist ein Rechnungsservice, und ein Low-level Modul ist ein konkretes Datenrepository. Rechnungsservice soll nicht direkt vom Datenrepository abhängen, sondern von einer Abstraktion (IDataRepository). Das konkrete Datenrepository implementiert dann diese Schnittstelle.
-
-```csharp
-public interface IDataRepository
-{
-    void SaveInvoice(Invoice invoice);
-}
-
-public class DatabaseRepository : IDataRepository //Low-level Modul
-{
-    public void SaveInvoice(Invoice invoice)
-    {
-        // Konkrete Implementierung zum Speichern der Rechnung in der Datenbank
-    }
-}
-
-public class InvoiceService //High-level Modul
-{
-    private IDataRepository repository;
-
-    public InvoiceService(IDataRepository repository)
-    {
-        this.repository = repository;
-    }
-
-    public void CreateInvoice(Invoice invoice)
-    {
-        // Geschäftslogik zur Erstellung einer Rechnung
-        repository.SaveInvoice(invoice);
-    }
-}
-
-class Program
-{
-    static void Main()
-    {
-        IDataRepository repository = new DatabaseRepository();
-        InvoiceService invoiceService = new InvoiceService(repository);
-
-        Invoice invoice = new Invoice();
-        invoiceService.CreateInvoice(invoice);
-    }
-}
-```
-
-> Abstraktionen (wie Schnittstellen oder abstrakte Klassen) sollen nicht von konkreten Implementierungen abhängig sein, sondern nur von (anderen) Abstraktionen.
-
-```csharp
-public interface INotificationSender
-{
-    void Send(string message);
-}
-
-//EmailSender, SmsSender
-
-public interface INotificationService //abhängige Abstraktion
-{
-    void Notify(string message, INotificationSender sender);
-}
-
-public class NotificationService : INotificationService 
-{
-    public void Notify(string message, INotificationSender sender)
-    {
-        // Geschäftslogik zur Benachrichtigung
-        sender.Send(message);
-    }
-}
-
-class Program
-{
-    static void Main()
-    {
-        INotificationSender emailSender = new EmailSender();
-        INotificationSender smsSender = new SmsSender();
-        
-        INotificationService notificationService = new NotificationService();
-
-        notificationService.Notify("Notification via Email.", emailSender);
-        notificationService.Notify("Notification via SMS.", smsSender);
-    }
-}
-
-```
-
-
-```python
-from abc import ABC, abstractmethod
-
-# Definition des Interface INotificationSender
-class INotificationSender(ABC):
-    @abstractmethod
-    def send(self, message: str):
-        pass
-
-# Definition des Interface INotificationService
-class INotificationService(ABC):
-    @abstractmethod
-    def notify(self, message: str, sender: INotificationSender):
-        pass
-
-# Implementierung des EmailSender
-class EmailSender(INotificationSender):
-    def send(self, message: str):
-        print(f"Sending email: {message}")
-
-# Implementierung des SmsSender
-class SmsSender(INotificationSender):
-    def send(self, message: str):
-        print(f"Sending SMS: {message}")
-
-# Implementierung des NotificationService
-class NotificationService(INotificationService):
-    def notify(self, message: str, sender: INotificationSender):
-        # Geschäftslogik zur Benachrichtigung
-        sender.send(message)
-
-# Hauptprogramm
-if __name__ == "__main__":
-    email_sender = EmailSender()
-    sms_sender = SmsSender()
-    notification_service = NotificationService()
-    notification_service.notify("Notification via Email.", email_sender)
-    notification_service.notify("Notification via SMS.", sms_sender)
-```
-
-
-****************************************************************************
-
-                     {{1-2}}
-**************************************************
-
-Das folgende Beispiel entstammt der Webseite
-https://exceptionnotfound.net/simply-solid-the-dependency-inversion-principle/
-
-Beachten Sie, dass die Benachrichtigungsklasse, eine übergeordnete Klasse, eine
-Abhängigkeit sowohl von der E-Mail-Klasse als auch von der SMS-Klasse hat, bei
-denen es sich um untergeordnete Klassen handelt. Mit anderen Worten, die
-Benachrichtigung hängt von der konkreten Implementierung von E-Mail und SMS ab
-und nicht von einer Abstraktion der Implementierung. Da DIP verlangt, dass
-sowohl Klassen der höheren als auch der unteren Ebenen von Abstraktionen
-abhängen, verstoßen wir derzeit gegen das Prinzip der Abhängigkeitsinversion.
-
-
-```csharp
-public class Email
-{
-    public string ToAddress { get; set; }
-    public string Subject { get; set; }
-    public string Content { get; set; }
-    public void SendEmail()
-    {
-        //Send email
-    }
-}
-
-public class SMS
-{
-    public string PhoneNumber { get; set; }
-    public string Message { get; set; }
-    public void SendSMS()
-    {
-        //Send sms
-    }
-}
-
-public class Notification
-{
-    private Email _email;
-    private SMS _sms;
-
-    public Notification()
-    {
-        _email = new Email();
-        _sms = new SMS();
-    }
-
-    public void Send()
-    {
-        _email.SendEmail();      // Abhängigkeit von Email
-        _sms.SendSMS();          // Abhängigkeit von SMS
-    }
-}
-
-```
-
-> Warum ist dieser Code nicht DIP konform?
-
-**************************************************
-
-
-                     {{2-3}}
-**************************************************
-
-```csharp
-// Schritt 1: Interface Definition
-public interface IMessage
-{
-    void SendMessage();
-}
-
-// Schritt 2: Die niederwertigeren Klassen implmentieren das Interface
-public class Email : IMessage
-{
-    public string ToAddress { get; set; }
-    public string Subject { get; set; }
-    public string Content { get; set; }
-    public void SendMessage()
-    {
-        //Send email
-    }
-}
-
-public class SMS : IMessage
-{
-    public string PhoneNumber { get; set; }
-    public string Message { get; set; }
-    public void SendMessage()
-    {
-        //Send sms
-    }
-}
-
-// Schritt 3: Die höherwertige Klasse wird gegen das Interface implementiert
-public class Notification
-{
-    private IMessage _message;
-
-    public Notification(IMessage messages)
-    {
-        this._message = message;
-    }
-    public void Send()
-    {
-        _message.SendMessage();
-    }
-}
-
-// Variante für multiple Messages
-//public class Notification
-//{
-//    private ICollection<IMessage> _messages;
-//    public Notification(ICollection<IMessage> messages)
-//    {
-//        this._messages = messages;
-//    }
-//    public void Send()
-//    {
-//        foreach(var message in _messages)
-//        {
-//            message.SendMessage();
-//        }
-//    }
-//}
-```
-
-Beispiel aus https://exceptionnotfound.net/simply-solid-the-dependency-inversion-principle/
-
-**************************************************
-
-## Herausforderungen bei der Umsetzung der Prinzipien
+### Modellierung aus der Projektperspektive
+
+Im ersten Abschnitt haben wir gesehen, wie aus *unstrukturiertem* Code ein
+*strukturiertes* objektorientiertes Programm entsteht — und wie hilfreich ein
+Klassendiagramm bei dieser Reise war. Doch im realen Projekt fehlt am Anfang
+nicht nur die Struktur, es fehlt sogar der Code: Wir bekommen einen *Auftrag* und
+müssen daraus erst ein lauffähiges System ableiten. Wie kommt man dort hin?
 
                                        {{0-2}}
 ****************************************************************************
 
-Kunde TU Freiberg: *Entwickeln Sie für mich ein webbasiertes System, mit dem Sie die Anmeldung und Bewertung von Prüfungsleistung erfassen.*
+**Kunde TU Bergakademie Freiberg (Rektorat):** *„Entwickeln Sie für uns einen Online-Shop, über den Studierende, Alumni und Mitarbeitende TUBAF-Merchandising — Hoodies, Tassen, Notizbücher, Bergmannsabzeichen — bestellen können.“*
 
-> Welche Fragen sollten Sie dem Kunden stellen, bevor Sie sich daran machen und munter Code schreiben?
-
-****************************************************************************
-                                        {{1-2}}
-****************************************************************************
-
-Betrachten Sie die Darstellung auf der [Webseite](https://www.programmwechsel.de/lustig/management/schaukel-baum.html). Welche hier scherzhaft beschriebenen Herausforderungen sehen Sie im Projekt?
-
-Wie verzahnen wir den Entwicklungsprozess? Wie können wir sicherstellen,
-dass am Ende die erwartete Anwendung realisiert wird?
+> [!CAUTION]
+> Das klingt überschaubar ... welche Fragen würden Sie aber mit dem Kunden klären, bevor Sie sich daran machen und munter Code schreiben?
 
 ****************************************************************************
 
-                                         {{2-3}}
+                                       {{1-2}}
 ****************************************************************************
+
+**Mögliche Rückfragen — schauen wir den Auftrag genauer an:**
+
+*Wer soll das eigentlich nutzen?*
+
++ Wer ist "Studierende:r" — nur aktuell Immatrikulierte? Auch Beurlaubte? Promovierende? Erasmus-Gäste?
++ Sollen **Alumni** Sonderkonditionen behalten — und wie weist man später nach, dass jemand TUBAF-Alumnus ist?
++ Dürfen auch **Externe** bestellen (Schüler:innen am Tag der offenen Tür, Tagungsgäste, Eltern)?
++ Wie loggen sich Studierende ein? Mit dem TUBAF-Login (Sie kennen das aus OPAL/SELMA) — oder mit einem neuen Konto? Und was passiert nach der Exmatrikulation?
+
+*Was passiert eigentlich nach dem Bestellen?*
+
++ Wer **packt und verschickt** die Pakete? Der Shop ist nicht "fertig" damit, dass eine Bestellung in der Datenbank steht.
++ Was passiert bei einer **Rücksendung**? Wer prüft die Ware, wer erstattet das Geld?
++ Wer **pflegt den Produktkatalog** — Texte, Bilder, Preise, Lagerbestand? Eine einzelne Person? Ein dezentrales Team?
++ Was, wenn ein Artikel **ausverkauft** ist? Vorbestellung, Warteliste, einfach ausblenden?
+
+*Wer trägt die Verantwortung — und was kostet das?*
+
++ Wer ist eigentlich der **wirtschaftliche Betreiber**? Die Universität selbst darf als öffentliche Einrichtung nicht einfach Handel treiben — braucht es einen Förderverein oder eine Tochtergesellschaft?
++ Welche **Daten** speichert der Shop über die Nutzer:innen — und wer darf sie sehen? *(Stichwort: Datenschutz/DSGVO)*
++ Wer ist verantwortlich, wenn etwas schiefläuft — eine Falschlieferung, ein Hackerangriff, ein Ausfall am Black Friday? *(Stichwort: AGB, Impressum, Haftung)*
++ Wer kümmert sich um das System **in zwei Jahren**, wenn Sie als Entwickler:in längst woanders arbeiten? *(häufig vergessen: Software ist nicht "fertig" mit dem Go-Live)*
+
+> **Was Profis außerdem noch prüfen würden — als Stichworte zum Selbstweiterlesen:**
+> Barrierefreiheit (BITV 2.0 für öffentliche Stellen), PCI-DSS bei Kreditkartenzahlungen, Umsatzsteuer bei EU- und Drittland-Verkäufen, Markenrecht beim TUBAF-Logo, Service-Level-Agreements, Backup-Konzepte, Lasttests für Semesterstart-Spitzen. Diese Themen sind kein Vorlesungs­stoff, aber gut zu wissen, dass es sie gibt.
+
+> **Beobachtung:** Aus einem einzigen Satz („Bauen Sie uns einen Online-Shop.“) wurden in wenigen Minuten **zwölf konkrete Fragen** — und das war noch die *Kurzliste*. Genau deshalb braucht es ein **strukturiertes Vorgehen** zur Anforderungs­erhebung — und genau das ist das nächste Thema.
+
+****************************************************************************
+
+                                        {{2-3}}
+****************************************************************************
+
+Betrachten Sie die klassische Karikatur („Wie das Projekt vom Kunden beschrieben wurde, wie der Projektleiter es verstand, …, was der Kunde wirklich wollte“). Diese fasst die bisherige Diskussion auf humorvolle Weise zusammen: Es zeigt, wie leicht es zu Missverständnissen kommen kann, wenn Anforderungen nicht klar und präzise formuliert werden — und wie wichtig es ist, diese Anforderungen sorgfältig zu erheben und zu dokumentieren.
+
+Die Grafik konnte aus urheberrechtlichen Gründen nicht eingebunden werden. Sie ist aber unter [diesem Link](https://www.programmwechsel.de/lustig/management/schaukel-baum.html) zu finden.
+
+> **Kernbotschaft:** Die größte Quelle für gescheiterte Software­projekte sind nicht Bugs, sondern **unvollständig oder falsch verstandene Anforderungen**. Bevor wir über Code, Klassen oder Diagrammtypen sprechen, müssen wir *präzise* festhalten, was das System leisten soll — und für wen.
+
+****************************************************************************
+
+## Formalisierung des Prozesses
+
+                                       {{0-1}}
+****************************************************************************
+
+Die klassische Antwort auf das Anforderungsproblem ist eine zweistufige Dokumentation. Sie trennt die Sicht des **Auftraggebers** („Was soll das System können?“) von der Sicht des **Auftragnehmers** („Wie wird es umgesetzt?“):
+
+1. Das **Lastenheft** beschreibt alle Anforderungen und Wünsche des Auftraggebers an ein zukünftiges System, u.a. *funktionale Anforderungen*: Was soll das System tun? (Features, Anwendungsfälle).
+
+   Beispiel aus dem Lastenheft (was? — Kundensicht): _Der TUBAF-Merchandising-Shop soll es Studierenden, Alumni, Mitarbeitenden und externen Besuchern ermöglichen, Hochschul-Merchandising (Bekleidung, Schreibwaren, Sammlerstücke wie Bergmannsabzeichen) online zu bestellen. Ziel ist ein nutzerfreundlicher, performanter und mobiltauglicher Shop mit einfacher Produktsuche, sicherem Bestellprozess sowie gängigen Zahlungsmethoden (Rechnung, Kreditkarte, PayPal). Studierende mit gültigem TUBAF-Login sollen Sonderkonditionen erhalten._
+
+2. Das **Pflichtenheft** beschreibt, wie die Anforderungen des Lastenhefts umgesetzt werden sollen, d.h. es enthält detaillierte Spezifikationen und Entwürfe für die Realisierung des Systems und enthält ebenfalls einen Abschnitt zu funktionalen Anforderungen.
+
+   Beispiel aus dem Pflichtenheft (wie? — Entwicklersicht): _Der TUBAF-Merchandising-Shop wird als ASP.NET-Core-Anwendung in C# umgesetzt und verwendet eine PostgreSQL-Datenbank. Die Produktsuche wird über ein Volltext-Suchfeld mit Autovervollständigung realisiert. Die Authentifizierung erfolgt wahlweise über das zentrale TUBAF-Shibboleth-SSO (für Studierende und Mitarbeitende) oder als Gastbestellung. Der Bestellprozess besteht aus folgenden Schritten:_
+
+    - Warenkorb anzeigen und bearbeiten
+    - Anmeldung via TUBAF-Login oder Gastbestellung
+    - Anwendung der Studierenden-Sonderkonditionen bei gültigem TUBAF-Status
+    - Eingabe der Lieferadresse
+    - Auswahl der Zahlungsart (Stripe-Integration für Kreditkarte und PayPal, Rechnungskauf nur mit TUBAF-Login)
+    - Bestellübersicht mit Bestätigungsfunktion
+    - Automatischer E-Mail-Versand der Bestellbestätigung
+
+****************************************************************************
+
+                                       {{1-2}}
+****************************************************************************
+
+Der Übergang vom Lasten- zum Pflichtenheft ist selbst schon ein
+Kommunikationsprozess zwischen Auftraggeber und Auftragnehmer. Genau diesen
+Ablauf kann man — als kleinen Vorgeschmack auf die nächste Vorlesung — bereits
+mit einem **Sequenzdiagramm** in UML beschreiben:
+
+```text @plantUML.png
+@startuml
+actor Auftraggeber
+actor Auftragnehmer
+
+== Initiale Anforderungen ==
+Auftraggeber -> Auftragnehmer : übermittelt Lastenheft
+note right of Auftraggeber
+Lastenheft: beschreibt Ziel, Zweck, Anforderungen
+aus Sicht des Auftraggebers
+end note
+
+== Analyse und Rückfragen ==
+Auftragnehmer -> Auftraggeber : stellt Verständnisfragen
+Auftraggeber -> Auftragnehmer : klärt offene Punkte
+
+== Erstellung Pflichtenheft ==
+Auftragnehmer -> Auftragnehmer : erstellt Pflichtenheft
+note right of Auftragnehmer
+Pflichtenheft: technische Umsetzung
+basierend auf Lastenheft
+end note
+Auftragnehmer -> Auftraggeber : übergibt Pflichtenheft
+
+== Abstimmung ==
+Auftraggeber -> Auftragnehmer : gibt Rückmeldung
+alt Änderungen notwendig?
+    Auftragnehmer -> Auftragnehmer : überarbeitet Pflichtenheft
+    Auftragnehmer -> Auftraggeber : übermittelt aktualisiertes Pflichtenheft
+end
+
+== Freigabe ==
+Auftraggeber -> Auftragnehmer : gibt Pflichtenheft frei
+note right of Auftraggeber
+Nach Freigabe beginnt die Umsetzung
+end note
+
+@enduml
+```
+
+> **Merke:** Das Lastenheft beschreibt die Anforderungen aus Sicht des Auftraggebers, während das Pflichtenheft die technische Umsetzung dieser Anforderungen aus Sicht des Auftragnehmers beschreibt.
+
+> **Merke:** Bereits hier sehen wir, dass UML-Diagramme nicht nur am Ende eines Projekts zur Dokumentation entstehen — sie sind ein **Kommunikationswerkzeug** schon in der Auftragsphase, lange bevor der erste Code geschrieben wird.
+
+*******************************************
+
+### Kategorien von Anforderungen
+
+Anforderungen lassen sich grob in zwei Klassen einteilen:
+
++ **Funktionale Anforderungen** beschreiben, *was* das System tun soll: konkrete Features, Anwendungsfälle, Eingaben und erwartete Ausgaben („Der Nutzer kann einen TUBAF-Hoodie in den Warenkorb legen“, „Studierende mit gültigem TUBAF-Login erhalten 10 % Rabatt“).
++ **Nicht-funktionale Anforderungen** beschreiben *Qualitätseigenschaften* des Systems: Performance, Sicherheit, Wartbarkeit, Verfügbarkeit, Benutzbarkeit („Die Produktsuche liefert in unter 200 ms Ergebnisse“, „personenbezogene Daten werden gemäß DSGVO verschlüsselt gespeichert“, „der Shop ist auch zum Semesterstart bei Lastspitzen verfügbar“).
+
+UML-Diagramme adressieren vor allem die funktionalen Anforderungen — nicht-funktionale Anforderungen werden meistens textuell oder durch andere Mittel (Lasttests, Sicherheitskonzepte) erfasst.
+
+### Wann ist eine Anforderung *gut*?
+
+Eine Anforderung aufzuschreiben ist leicht — sie *brauchbar* zu formulieren ist die eigentliche Kunst. Die häufigsten Fehler: zu **vage**, **nicht überprüfbar** oder **mehrdeutig**. Vergleichen Sie:
+
+| ❌ schlecht                                    | ✅ gut                                                                                          |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| „Das System soll **schnell** sein.“           | „Die Produktsuche liefert bei 1.000 Artikeln Ergebnisse in **unter 200 ms**.“                 |
+| „Der Shop soll **benutzerfreundlich** sein.“  | „Ein Erstnutzer schließt eine Bestellung **ohne Hilfe in unter 3 Minuten** ab.“               |
+| „Studierende bekommen einen **Rabatt**.“      | „Nutzer mit gültigem TUBAF-Login erhalten **10 % Rabatt** auf Bekleidung (nicht auf Sammlerstücke).“ |
+| „Das System soll **sicher** sein.“            | „Passwörter werden mit **bcrypt** gehasht; nach 5 Fehlversuchen wird das Konto für 15 min gesperrt.“ |
+
+Die linke Spalte klingt sinnvoll, lässt sich aber **nicht abnehmen**: Woran würde der Abnahmetest (vgl. V-Modell) erkennen, ob „schnell“ erfüllt ist? Die rechte Spalte ist *testbar* — und genau das ist das entscheidende Kriterium.
+
+> **Merkregel — die Testbarkeitsfrage:** *„Könnte ich einen Test schreiben, der eindeutig mit ja oder nein beantwortet, ob diese Anforderung erfüllt ist?“* Wenn nicht, ist die Anforderung noch zu vage.
+
+Eine gängige Eselsbrücke für gute Anforderungen ist **SMART**: **S**pezifisch, **M**essbar, **A**kzeptiert, **R**ealistisch, **T**erminiert. Vor allem *messbar* trennt die beiden Spalten oben.
+
+> **Brücke:** Genau diese testbaren Anforderungen werden später in der Vorlesung [zum Testen](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/19_Testen.md) zur Grundlage konkreter Testfälle. Eine nicht-testbare Anforderung kann man auch nicht automatisiert prüfen.
+
+### Wie verzahnen wir den Entwicklungsprozess?
+
+Lasten- und Pflichtenheft sind die *Artefakte* — aber wie ordnen sich diese in den **Gesamtprozess** der Softwareentwicklung ein? Ein klassisches Vorgehensmodell ist das **V-Modell**:
+
 <!--
 style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
 -->
@@ -886,13 +391,12 @@ style="width: 100%; max-width: 860px; display: block; margin-left: auto; margin-
          v
 ````````````
 
-> Das V-Modell ist ein Vorgehensmodell, das den Softwareentwicklungsprozess in Phasen organisiert. Zusätzlich zu den Entwicklungsphasen definiert das V-Modell auch die Evaluationsphasen, in welchen den einzelnen Entwicklungsphasen Testphasen gegenübergestellt werden.
+> Das V-Modell ist ein Vorgehensmodell, das den Softwareentwicklungsprozess in Phasen organisiert. Zusätzlich zu den Entwicklungsphasen definiert das V-Modell auch die Evaluationsphasen, in welchen den einzelnen Entwicklungsphasen Testphasen gegenübergestellt werden. (vgl. zum Beispiel [Link](https://www.johner-institut.de/blog/iec-62304-medizinische-software/v-modell/))
 
-vgl. zum Beispiel [Link](https://www.johner-institut.de/blog/iec-62304-medizinische-software/v-modell/)
+Für uns relevant ist die **linke Hälfte**: Analyse, Grob- und Feinentwurf sind genau die Phasen, in denen **modelliert** wird — mit Lasten-/Pflichtenheft als Grundlage und UML-Diagrammen als Werkzeug. Die rechte Hälfte zeigt: Jede Modellierungsphase hat eine korrespondierende Testphase. Der Abnahmetest prüft direkt gegen das Lastenheft — und damit gegen das, was der Kunde wollte.
 
-> Achtung: Das V-Modell ist nur eine Variante eines Vorgehensmodells, moderne Entwicklungen stellen eher agile Methoden in den Vordergrund vgl. zum Beispiel [Link](https://entwickler.de/online/agile/agile-methoden-einfuehrung-209035.html)
+> **Achtung:** Das V-Modell ist nur eine Variante eines Vorgehensmodells. Moderne, **agile Entwicklungsansätze** (Scrum, Kanban) durchlaufen diese Phasen iterativ in kurzen Zyklen, statt sie einmal sequentiell zu durchlaufen — vgl. zum Beispiel [diesen Überblick](https://entwickler.de/online/agile/agile-methoden-einfuehrung-209035.html). Auch agile Methoden brauchen Anforderungen — sie kapseln sie meist in *User Stories* statt in einem großen Lastenheft. Das **Bedürfnis nach Modellen** bleibt in beiden Welten gleich.
 
-****************************************************************************
 ### Objektorientierte Analyse, objektorientiertes Design
 
 Die **objektorientierte Analyse (OO-Analyse)** ist der Prozess der Analyse von Anforderungen aus der Perspektive von Objekten und deren Interaktionen. Die Anforderungen werden in verschiedene Klassen (Objekte) zerlegt, die Daten und Verhalten gemeinsam haben, typische Benutzungsabläufe (Use Cases) werden dokumentiert, um das Verhalten des Systems aus Sicht der Benutzer darzustellen. Ziel ist es, ein **Modell** zu erstellen, das das System und seine Eigenschaften klar darstellt.
@@ -901,31 +405,75 @@ Das **objektorientierte Design (OO-Design)** setzt das Modell aus der Analyse in
 
 Als Standardnotation für OOA/OOD wird UML (Unified Modeling Language) verwendet. 
 
+**Wie kommt man vom Text zum Modell?** Eine bewährte erste Heuristik ist die *Substantiv-Verb-Analyse*: Man unterstreicht im Anforderungstext die **Substantive** (Kandidaten für Klassen und Attribute) und die **Verben** (Kandidaten für Methoden und Beziehungen).
+
+Nehmen wir einen Satz aus unserem Lastenheft:
+
+> *„Ein **Kunde** legt **Artikel** in einen **Warenkorb** und löst damit eine **Bestellung** aus. Studierende erhalten einen **Rabatt**.“*
+
+Die unterstrichenen Substantive liefern die ersten **Klassen-Kandidaten**:
+
+<section class="flex-container">
+
+<div class="flex-child" style="min-width: 280px">
+
+| Substantiv  | wird zu …                       |
+| ----------- | ------------------------------- |
+| Kunde       | Klasse `Kunde`                  |
+| Artikel     | Klasse `Artikel`                |
+| Warenkorb   | Klasse `Warenkorb`              |
+| Bestellung  | Klasse `Bestellung`             |
+| Rabatt      | Attribut/Strategie an `Kunde`?  |
+
+</div>
+
+<div class="flex-child" style="min-width: 280px">
+
+```text @plantUML.png
+@startuml
+class Kunde
+class Artikel
+class Warenkorb
+class Bestellung
+
+Kunde "1" --> "1" Warenkorb : besitzt
+Warenkorb "1" --> "*" Artikel : enthält
+Kunde "1" --> "*" Bestellung : löst aus
+Bestellung "1" --> "*" Artikel : umfasst
+@enduml
+```
+
+</div>
+
+</section>
+
+> **Achtung — keine Mechanik, sondern Heuristik:** Die Substantiv-Verb-Analyse liefert *Kandidaten*, keine fertige Lösung. Nicht jedes Substantiv wird eine Klasse (ist „Rabatt“ eine eigene Klasse, ein Attribut oder eine Berechnungsregel?), und manche Klassen tauchen im Text gar nicht wörtlich auf. Modellierung bleibt eine **Entwurfsentscheidung** — das Werkzeug hilft beim Start, ersetzt aber nicht das Nachdenken.
+
 ## Unified Modeling Language
 
 > Die Unified Modeling Language, kurz UML, dient zur Modellierung, Dokumentation, Spezifikation und Visualisierung komplexer Softwaresysteme unabhängig von deren Fach- und Realsierungsgebiet. Sie liefert die Notationselemente gleichermaßen für statische und dynamische Modelle zur Analyse, Design und Architektur und unterstützt insbesondere objektorientierte Vorgehensweisen. [^Jeckle]
 
-UML ist heute die dominierende Sprache für die Softwaresystem-Modellierung. Der erste Kontakt zu UML besteht häufig darin, dass Diagramme in UML im Rahmen von Softwareprojekten zu erstellen, zu verstehen oder zu beurteilen sind:
+UML ist die etablierte, **standardisierte Notation** für die Modellierung objektorientierter Softwaresysteme. Im Projektalltag von 2026 koexistiert sie zunehmend mit leichtgewichtigeren Notationen wie *Mermaid* (für Doc-as-Code direkt in Git-Repositories) oder dem *C4-Modell* (für Architektur­skizzen). Sie alle teilen denselben Grundgedanken: strukturierte grafische Sprache statt Freihand-Skizze. UML bleibt der umfangreichste Werkzeugkasten — und dadurch der natürliche Einstieg.
+
+**Was ist UML — und was ist sie nicht?**
+
+Bevor wir uns in Diagrammtypen vertiefen, lohnt ein nüchterner Blick. UML ist ein *Werkzeug*, kein Allheilmittel. Sie ist…
+
++ … **keine** Programmiersprache (sie wird nicht ausgeführt, nur gelesen),
++ … **keine** rein formale Sprache (verschiedene Interpretationen sind möglich),
++ … **kein** vollständiger Ersatz für textuelle Beschreibungen,
++ … **keine** vollständige, eindeutige Abbildung aller Anwendungsfälle,
++ … **keine** Methode oder Vorgehensmodell — UML *bietet die Notation*, der Prozess (V-Modell, Scrum, …) ist davon unabhängig.
+
+Der erste Kontakt zu UML besteht häufig darin, dass Diagramme in UML im Rahmen von Softwareprojekten zu erstellen, zu verstehen oder zu beurteilen sind:
 
 + Projektauftraggeber prüfen und bestätigen die Anforderungen an ein System, die Business Analysten in Anwendungsfalldiagrammen in UML festgehalten haben;
 + Softwareentwickler realisieren Arbeitsabläufe, die Wirtschaftsanalytiker in Aktivitätsdiagrammen beschrieben haben;
 + Systemingenieure implementieren, installieren und betreiben Softwaresysteme basierend auf einem Implementationsplan, der als Verteilungsdiagramm vorliegt.
 
-UML enthält dabei Bezeichner (Begriffe) für die meisten Elemente der Modellierung und legt mögliche Beziehungen zwischen diesen Elementen fest. 
-
-UML definiert weiterhin grafische Notationen für diese Begriffe und für **statische Strukturen** und **dynamische Abläufe**, die man mit diesen Begriffen formulieren kann.
+UML enthält dabei Bezeichner (Begriffe) für die meisten Elemente der Modellierung und legt mögliche Beziehungen zwischen diesen Elementen fest. Sie definiert weiterhin grafische Notationen für diese Begriffe und für **statische Strukturen** und **dynamische Abläufe**, die man mit diesen Begriffen formulieren kann.
 
 > **Merke:**  Die grafische Notation ist jedoch nur ein Aspekt, der durch UML geregelt wird. UML legt in erster Linie fest, mit welchen Begriffen und welchen Beziehungen zwischen diesen Begriffen sogenannte Modelle spezifiziert werden.
-
-Was ist UML nicht:
-
-+ vollständige, eindeutige Abbildung aller Anwendungsfälle
-+ keine Programmiersprache
-+ keine rein formale Sprache
-+ kein vollständiger Ersatz für textuelle Beschreibungen
-+ keine Methode oder Vorgehensmodell
-
-[^Jeckle]:  Mario Jeckle, Christine Rupp, Jürgen Hahn, Barbara Zengler, Stefan Queins, UML 2 glasklar, Hanser Verlag, 2004
 
 **UML-Modell und Diagramme**
 
@@ -935,27 +483,15 @@ Was ist UML nicht:
 
 ![Modelle](https://www.plantuml.com/plantuml/png/JSj1oi9030NW_PmYpFA7ARG7-Ed2fLrwW3WJsq3IWIIzlwAYhXxlVRpP0oqEbIHq2uWEnkiMqDYe1lSzRTm8bFHAvgzIsQfGIbNG7V9bEPUbDnB9W0xFTVh54-DggFhbyNsU88yPIlb_v33yvO_EjBT3vGu0 "Modell vs. Diagramm")
 
-### Geschichte
+[^Jeckle]:  Mario Jeckle, Christine Rupp, Jürgen Hahn, Barbara Zengler, Stefan Queins, UML 2 glasklar, Hanser Verlag, 2004
 
-UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die ISO (ISO/IEC 19505 für Version 2.4.1) genormt.
+### Geschichte (Kurzüberblick)
+
+UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die ISO (ISO/IEC 19505) genormt. Entstanden ist sie Mitte der 1990er Jahre aus der Konsolidierung dreier konkurrierender Vorgängermethoden — der **Booch-Methode** (*Grady Booch*), der **Object Modeling Technique** (*James Rumbaugh*) und **OOSE** (*Ivar Jacobson*). Die "drei Amigos" vereinten ihre Ansätze bei Rational Software zu UML 1 (1997), das von der OMG als Industriestandard übernommen wurde. UML 2 (2005) erweiterte den Sprachumfang und verbesserte die Semantik.
 
 ![OOPGeschichte](./img/13_UML/OO-historie.png "Darstellung der Historie von UML [^WikiUMLHist]")
 
 [^WikiUMLHist]: https://commons.wikimedia.org/w/index.php?curid=7892951, Autor GuidoZockoll, Mitarbeiter der oose.de Dienstleistungen für Innovative Informatik GmbH - derivative work: File:OO-historie.svg : AxelScheithauer, oose.de Dienstleistungen für Innovative Informatik GmbH - derivative work: Chris828 (talk) - File:Objektorientieren methoden historie.png and File:OO-historie.svg, CC BY-SA 3.0
-
-**Booch-Methode** (*Grady Booch*, 1984) umfasste die ersten formalen Methoden für das objektorientierte Software-Engineering, Konzepte wie Klassen, Vererbung, Assoziationen und Aggregationen mit graphischen Elementen. 
-
-**OMT - Object Modeling Technique** (*James Rumbaugh* et al., Ende der 1980er) war eine Methode für das objektorientierte Modellieren mit der grafischen Notation für die Analyse und das Design von Systemen. 
-
-**OOSE - Object-Oriented Software Engineering** (*Ivar Jacobson*, 1992) betonte die Verwendung von Anwendungsfällen (Use Cases) zur Spezifikation von Systemanforderungen und war eine der ersten Methoden, die diese Konzept einführte.
-
-**UML** (3 amigos, Rational Software, Mitte 1990er) vereinheitlichtes Modellierungssystem, das die verschiedenen Ansätze und Diagrammtypen der Objektorientierten Analyse und Design (OOA/OOD) vereint.
-
-**UML 1** (1997) umfasst eine Reihe von Diagrammen, etabliert sich als Standard für die Modellierung von Software- und Systemarchitekturen.
-
-**Übernahme durch die OMG - Object Management Group** (1997) leitete den Beginn als offenen Industriestandard ein.
-
-**UML 2** (2005) eine aktualisierte und erweiterte Version der UML mit weiteren Diagrammtypen und Verbesserungen in der Semantik und der Modellierungssprache.  
 
 ### UML Werkzeuge
 
@@ -967,8 +503,6 @@ UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die I
 
     *Herausforderungen:* Synchronisation der beiden Repräsentationen, Abbildung widersprüchlicher Aussagen aus verschiedenen Diagrammtypen
 
-    (Beispiel mit Visual Studio folgt am Ende der Vorlesung.)
-
 * Reverse Engineering / Dokumentation - UML-Werkzeuge bilden Quelltext als Eingabe auf entsprechende UML-Diagramme und Modelldaten ab
 
     *Herausforderungen:* Abstraktionskonzept der Modelle führt zu verallgemeinernden Darstellungen, die ggf. Konzepte des Codes nicht reflektieren.
@@ -978,9 +512,18 @@ UML (aktuell UML 2.5) ist durch die Object Management Group (OMG) als auch die I
 
 **Darstellung von UML im Rahmen dieser Vorlesung**
 
-Die Vorlesungsunterlagen der Veranstaltung "Softwareentwicklung" setzen auf die domainspezifische Beschreibungssprache plantUML auf, die verschiedene Aspekte in einer einheitlichen und übersichtlichen Weise darstellt.
+Die Vorlesungsunterlagen der Veranstaltung "Softwareentwicklung" setzen auf die domainspezifische Beschreibungssprache **PlantUML** auf, die verschiedene Aspekte in einer einheitlichen und übersichtlichen Weise darstellt — und sich als Textquelle bestens in die in den Vorlesungen 11/12 eingeführte **Versionskontrolle** mit Git einfügt (Stichwort *Doc-as-Code*: Diagramme im Repository, mit Pull-Request-Review, Diff und Historie).
 
 http://plantuml.com/de/
+
+> **Hinweis – verwandte Werkzeuge:** Neben PlantUML hat sich in den letzten Jahren **Mermaid** als De-facto-Standard für Diagramme in Markdown-Dateien etabliert. GitHub, GitLab, Obsidian und viele Wikis rendern Mermaid-Diagramme nativ — ohne externes Werkzeug. Mermaid deckt nicht den vollen UML-Sprachumfang ab, aber für die in dieser Vorlesung relevanten Diagrammtypen (Klassen-, Sequenz-, Aktivitäts-, Use-Case-Diagramme) reicht es meist aus. Wer Architektur­skizzen auf einem höheren Abstraktionsniveau erstellen will, sollte einen Blick auf das **C4-Modell** (Simon Brown) werfen — eine schlanke Notation für System-Kontext, Container, Komponenten und Code.
+
+https://github.blog/developer-skills/github/include-diagrams-markdown-files-mermaid/
+
+> **Hinweis – vollständige UML2-Compliance:** PlantUML und Mermaid decken die *häufig genutzten* UML2-Diagrammtypen sehr gut ab, stoßen aber bei selten verwendeten Konstrukten (etwa Pins und Object Nodes im Aktivitätsdiagramm, History-Zustände, Composite Structure) an Grenzen. Wer den vollständigen Standard inklusive der spezielleren Diagrammtypen ausreizen möchte, findet in [**Modelio**](https://github.com/ModelioOpenSource/Modelio) (GPL-3.0, Java/Eclipse-basiert) einen frei verfügbaren CASE-Editor mit XMI-Import/-Export. Der Preis: Die `.modelio`-Workspaces sind nicht doc-as-code-tauglich und integrieren sich daher schlecht in den Git-Workflow. Im professionellen Umfeld dominieren kommerzielle Werkzeuge wie *Enterprise Architect* oder *Visual Paradigm*.
+
+> [!TIP]
+> LiaScript unterstützt sowohl PlantUML als auch Mermaid — und bietet damit die Möglichkeit, beide Notationen direkt in den Vorlesungsunterlagen zu verwenden. Die Einbettung kann nativ oder interaktiv erfolgen.
 
 ```text ClassDiagram
 @startuml
@@ -1048,7 +591,5 @@ WB is Waiting
 
 ## Aufgaben
 
-- [ ] Schließen Sie das Bearbeiten der Aufgabe 3 im GitHub Classroom
-- [ ] Machen Sie sich mit den SOLID Prinzipien weiter vertraut:
-
-!?[alt-text](https://www.youtube.com/watch?v=R1AimDBGtkY)
+- [ ] **Transfer auf eine andere Domäne:** Stellen Sie sich vor, die TU Freiberg beauftragt Sie mit einem webbasierten System zur *Anmeldung und Bewertung von Prüfungsleistungen*. Skizzieren Sie dafür ein erstes Lastenheft (1 Seite): Was soll das System leisten? Wer sind die beteiligten Akteure? Welche funktionalen und nicht-funktionalen Anforderungen sehen Sie?
+- [ ] Zeichnen Sie für den Webshop ein einfaches **Sequenzdiagramm** der Auftragsklärung (Auftraggeber ↔ Auftragnehmer) in PlantUML oder Mermaid und committen Sie es in Ihr Projekt-Repository.
