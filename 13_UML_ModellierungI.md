@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 comment:  Motivation der Modellierung von Software, Anforderungserhebung (Lasten-/Pflichtenheft), V-Modell, OO-Analyse und Design, Unified Modeling Language
@@ -147,7 +147,7 @@ if __name__ == "__main__":
 
 > Wir stellen die Relationen im Code grafisch dar und haben damit die Möglichkeit die "Architektur" unseres Codes zu verstehen. In diesem Fall haben wir drei Klassen: `Report`, `ReportSaver` und `ReportSender`. `ReportSaver` und `ReportSender` sind abstrakte Klassen, die von `FileSaver` und `EmailSender` implementiert werden.
 
-```text @plantUML.png
+```text @plantUML
 @startuml
 
 ' ===== Abstrakte Basisklassen =====
@@ -173,7 +173,7 @@ class EmailSender {
 }
 
 ' ===== Datenklasse =====
-class Report { https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
+class Report {
     - title: str
     - content: str
     + __init__(title: str, content: str)
