@@ -2,10 +2,10 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.7
+version:  1.0.8
 language: de
 narrator: Deutsch Female
-comment:  Klassifikation von UML Diagrammtypen, Anwendungsfall Diagramm, Aktivitätsdiagramm, Sequenzdiagramm, Klassendiagramm, Objektdiagramm, UML Tools
+comment:  Klassifikation von UML Diagrammtypen, Anwendungsfall Diagramm, Aktivitätsdiagramm, Sequenzdiagramm, Klassendiagramm, UML Tools
 tags:      
 logo:     
 title: Modellierung von Software II
@@ -14,6 +14,8 @@ import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
+
+link: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/css/styles.css
 
 -->
 
@@ -35,73 +37,29 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
-## Warum die Formalisierung?
+## Organisatorisches 
 
-**Lastenheft und Pflichtenheft**:
+Projektarbeiten als Leistungsnachweis für die Vorlesung Softwareentwicklung.
 
-1. Das Lastenheft beschreibt alle Anforderungen und Wünsche des Auftraggebers an ein zukünftiges System,  u.a. *funktionale Anforderungen*: was soll das System tun? (Features, Anwendungsfälle). 
+https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2026_Projektaufgaben
 
-   Beispiel aus dem Lastenheft (was? — Kundensicht): _Der Webshop soll es Endkunden ermöglichen, Produkte aus dem Bereich Haushaltswaren online zu bestellen. Ziel ist es, einen nutzerfreundlichen, performanten und responsiven Online-Shop bereitzustellen, der eine einfache Produktsuche, einen sicheren Bestellprozess sowie gängige Zahlungsmethoden (z. B. PayPal, Kreditkarte) unterstützt._
+## Worum es heute geht
 
-2. Das Pflichtenheft beschreibt, wie die Anforderungen des Lastenhefts umgesetzt werden sollen, d.h. es enthält detaillierte Spezifikationen und Entwürfe für die Realisierung des Systems und enthält ebenfalls einen Abschnitt zu funktionalen Anforderungen.
+In der vorangegangenen Vorlesung haben wir gesehen, *warum* wir modellieren:
+Aus einem unklaren Kundenauftrag müssen präzise, kommunizierbare Anforderungen
+werden — festgehalten in Lasten- und Pflichtenheft, eingebettet in einen
+Entwicklungsprozess wie das V-Modell. UML ist dabei die formale Notation, mit
+der wir die Modelle aufschreiben.
 
-   Beispiel aus dem Pflichtenheft (wie? — Entwicklersicht): _Der Webshop wird mit dem Framework Django umgesetzt und verwendet eine PostgreSQL-Datenbank. Die Produktsuche wird über ein Volltext-Suchfeld mit Autovervollständigung realisiert. Der Bestellprozess besteht aus folgenden Schritten:_
-
-    - Warenkorb anzeigen und bearbeiten
-    - Benutzer-Login oder Gastbestellung
-    - Eingabe der Lieferadresse
-    - Auswahl der Zahlungsart (Stripe-Integration für Kreditkarte und PayPal)
-    - Bestellübersicht mit Bestätigungsfunktion
-    - Automatischer E-Mail-Versand der Bestellbestätigung
-
-
-```text @plantUML.png
-@startuml
-actor Auftraggeber
-actor Auftragnehmer
-
-== Initiale Anforderungen ==
-Auftraggeber -> Auftragnehmer : übermittelt Lastenheft
-note right of Auftraggeber
-Lastenheft: beschreibt Ziel, Zweck, Anforderungen
-aus Sicht des Auftraggebers
-end note
-
-== Analyse und Rückfragen ==
-Auftragnehmer -> Auftraggeber : stellt Verständnisfragen
-Auftraggeber -> Auftragnehmer : klärt offene Punkte
-
-== Erstellung Pflichtenheft ==
-Auftragnehmer -> Auftragnehmer : erstellt Pflichtenheft
-note right of Auftragnehmer
-Pflichtenheft: technische Umsetzung
-basierend auf Lastenheft
-end note
-Auftragnehmer -> Auftraggeber : übergibt Pflichtenheft
-
-== Abstimmung ==
-Auftraggeber -> Auftragnehmer : gibt Rückmeldung
-alt Änderungen notwendig?
-    Auftragnehmer -> Auftragnehmer : überarbeitet Pflichtenheft
-    Auftragnehmer -> Auftraggeber : übermittelt aktualisiertes Pflichtenheft
-end
-
-== Freigabe ==
-Auftraggeber -> Auftragnehmer : gibt Pflichtenheft frei
-note right of Auftraggeber
-Nach Freigabe beginnt die Umsetzung
-end note
-
-@enduml
-```
-
-> **Merke:** Das Lastenheft beschreibt die Anforderungen aus Sicht des Auftraggebers, während das Pflichtenheft die technische Umsetzung dieser Anforderungen aus Sicht des Auftragnehmers beschreibt.
+Heute geht es um die **Werkzeuge selbst**: Wir lernen die wichtigsten
+UML-Diagrammtypen im Detail kennen und sehen, welche Fragen sie jeweils
+beantworten. Dabei begleitet uns ein durchgehendes Beispiel — der **TUBAF-Merchandising-Shop** aus
+der letzten Vorlesung.
 
 > **Merke:** UML-Diagramme sind ein wichtiges Hilfsmittel, um die Anforderungen und das Design eines Systems zu visualisieren und zu kommunizieren. Sie helfen dabei, komplexe Zusammenhänge verständlich darzustellen und dienen als Grundlage für die Implementierung.
 
-## UML Diagrammtypen
 
-![OOPGeschichte](https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/UML-Diagrammhierarchie.svg/1200px-UML-Diagrammhierarchie.svg.png "Autor `Stkl`- derivative work: File: UML-Diagrammhierarchie.png: Sae1962, CC BY-SA 4.0, https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/UML-Diagrammhierarchie.svg/1200px-UML-Diagrammhierarchie.svg.png")
+![OOPGeschichte](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/UML_diagrams_overview.svg/960px-UML_diagrams_overview.svg.png "Hierarchy of diagrams in UML 2.2, Autor `Derfel73`, `Pmerson`- derivative work: File: https://commons.wikimedia.org/wiki/File:Uml_diagram2.png, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:UML_diagrams_overview.svg")
 
 > [OMG-Spezifikation](https://www.omg.org/spec/UML/2.5.1/PDF)
 
@@ -116,60 +74,102 @@ Im folgenden werden wir uns aus den beiden Hauptkategorien jeweils folgende Diag
 + Strukturdiagramme
 
   + Klassendiagramm
-  + Objektdiagramm
 
-### Anwendungsfall Diagramm
+## Anwendungsfall Diagramm
 
+> [!TIP]
 > Das Anwendungsfalldiagramm (Use-Case Diagramm) abstrahiert das erwartete
 > Verhalten eines Systems und wird dafür eingesetzt, die Anforderungen an ein
 > System zu spezifizieren.
 
+### Grundlagen
+
 Ein Anwendungsfalldiagramm ist eine grafische Darstellung der *funktionalen Anforderungen* eines Systems. Es zeigt die verschiedenen Anwendungsfälle (Use Cases), Akteure und deren Interaktionen.
 
-> Achtung: Ein Anwendungsfalldiagramm stellt keine Ablaufbeschreibung dar! Diese kann stattdessen mit einem Aktivitäts-, einem Sequenz- oder einem Kommunikationsdiagramm dargestellt werden.
+**Basiskonzepte — Erste Abstraktionsebene**
 
-**Basiskonzepte**
+Wir starten mit einer **groben Sicht** auf den TUBAF-Merchandising-Shop. Auf dieser Abstraktionsebene fassen wir alle kaufenden Nutzer als einen einzigen Sammelakteur *Kunde* zusammen — Differenzierungen kommen im nächsten Schritt.
 
-Elemente:
+```text @plantUML.png
+@startuml
+left to right direction
+skinparam packageStyle rectangle
 
-+ Systemgrenzen werden durch Rechtecke gekennzeichnet.
-+ Akteure werden als „Strichmännchen“ dargestellt, dies können sowohl Personen (Kunden, Administratoren) als auch technische Systeme sein (manchmal auch ein Bandsymbol verwendet). Sie ordnen den Symbolen Rollen zu.
-+ Anwendungsfälle werden in Ellipsen dargestellt. Üblich ist die Kombination aus Verb und ein Substantiv `Kundendaten Ändern`.
-+ Beziehungen zwischen Akteuren und Anwendungsfällen müssen durch Linien gekennzeichnet werden. Man unterscheidet "Association", "Include", "Extend" und "Generalization".
+actor "Kunde" as Kunde
+actor "ShopAdmin" as Admin
+actor "Lagerist" as Lager
+actor "Zahlungsdienst" as Payment
 
-![Modelle](https://www.plantuml.com/plantuml/png/RL11Rkf03DtFAInMi63n-HUWeAverGLIkpQ9IKPndCZZgGHLRzDZTCV5EY4f6gIk_6I_Pp-_TJ1KYoqxfgE1TQ2-gWrAhrIOxyI5nakFYYtqM3HOqTvEJ32CKIecXuLr2hievI_Urrt_Z9AuEdMU1ko3kPiCNeIzK4XK-700ymSrtn33WO8HCya2C40CjCL0_nmaoYQDK4eeenPrY4LzJrev66t0SlbdRtv5KgAHmEKhOPL5JiYkpTzGIP9LEdG6_P6f6gubKlxTP8gOerHmZYsyaeR1utkd1rBoDgbk2NowB8JP1gK9fs3Kml7ohV2uNUvGasWsFBQ_JbPkghd5VCaO9MpeZ3MFspBvVpVLExbRavInvHy0 "Einfaches Anwendungsfalldiagramm für einen Online-Versand")
+rectangle "TUBAF-Merchandising-Shop" {
+  (Merchandise anzeigen) as UC1
+  (In den Warenkorb legen) as UC2
+  (Bestellung abschließen) as UC3
+  (Katalog pflegen) as UC4
+  (Versand vorbereiten) as UC5
 
-**Verfeinerung**
+  Kunde -- UC1
+  Kunde -- UC2
+  Kunde -- UC3
+  Admin -- UC4
+  Lager -- UC5
+}
 
-Use-Case Diagramme erlauben die Abstraktion von Elementen auf der Basis von Generalisierungen. So können Akteure von einander erben und redundante Beschreibungen von Verhalten über `<<extend>>` oder `<<include>>` (unter bestimmten Bedingungen) erweitert werden.
+UC3 -- Payment
+@enduml
+```
+
+An diesem Diagramm sehen wir alle vier Notations-Elemente:
+
++ **Systemgrenzen** werden durch Rechtecke gekennzeichnet — hier der *TUBAF-Merchandising-Shop*. Alles innerhalb gehört zum modellierten System, die Akteure agieren von außen.
++ **Akteure** werden als „Strichmännchen" dargestellt — das können Personen (*Kunde*, *ShopAdmin*, *Lagerist*) oder technische Systeme (*Zahlungsdienst*) sein. Sie ordnen den Symbolen Rollen zu.
++ **Anwendungsfälle** werden in Ellipsen dargestellt. Üblich ist die Kombination aus Verb und Substantiv (`Bestellung abschließen`).
++ **Beziehungen** zwischen Akteuren und Anwendungsfällen werden durch Linien gekennzeichnet. Man unterscheidet *Association*, *Include*, *Extend* und *Generalization*.
+
+**Verfeinerung — Konkretisierung des Sammelakteurs**
+
+In der ersten Sicht haben wir *den Kunden* als einheitlichen Akteur modelliert. In der Praxis verbergen sich dahinter mindestens zwei unterschiedliche Rollen: **Gäste** (anonyme Besucher) und **TUBAF-Studierende** (authentifiziert über das hochschul­interne Single-Sign-On). Beide *sind Kunden* im Shop-Sinn — sie unterscheiden sich aber in ihren Rechten (Studi-Rabatt) und ihrer Authentifizierung.
+
+Use-Case-Diagramme erlauben diese Konkretisierung durch zwei Mechanismen: **Akteur-Generalisierung** (Gast und Studierende erben vom Sammelakteur *Kunde*) sowie die Verfeinerung von Abläufen über **`<<include>>`** (verpflichtende Teilschritte) und **`<<extend>>`** (optionale Erweiterungen unter Bedingungen).
 
 
-|                | <img src="https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/b4a1739500b5a58e729c148a070343fce8faaf45/img/10_UML/UseCaseInclude.png" height="42">                           | <img src="https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/b4a1739500b5a58e729c148a070343fce8faaf45/img/10_UML/UseCaseExtend.png" height="42">         |
+|                | <img src="https://www.plantuml.com/plantuml/png/7Ssx3SCm30RXdbFyfTDuWC0GBAsG2GY9KGJJj27HHRRFeplWYcyTpjslNKdbwV03lTMNexGksTjXDBPc9tVUSNBUkCh3tohuRRQgGbEyWGSYJUaVYIBcEI3XZcLfblKg4WAjOkKBVG00" height="42">                           | <img src="https://www.plantuml.com/plantuml/png/7Or13e8m50Nt_nHlYHiEO1f2UmLFy0FVsb0AQP-9tjxAQYQPnSoDMldUisHx4ZnGKtmHQwgsC1r5sfRAgLLtdBfi6kt1RpRyivQOJGP_WpPu6S8bGJpSE2BW3kViGolhDCdSqJy_" height="42">         |
 | -------------- | ------------------------------------------------ | ------------------------------------------------ |
 |                | `<<include>>` Beziehung                          | `<<extend>>` Beziehung                           |
 | Bedeutung      | Ablauf von A schließt den Ablauf von B immer ein | Ablauf von A kann optional um B erweitert werden |
 | Anwendung      | Hierachische Zerlegung                           | Abbildung von Sonderfällen                       |
 | Abhängigkeiten | A muss B bei der Modellierung berücksichtigen    | Unabhängige Modellierung möglich                 |
 
-
+> [!CAUTION]
+> Beachten Sie die unterschiedliche Richtung der Pfeile: `<<include>>` zeigt von der übergeordneten Anwendungsfall zu dem inkludierten Anwendungsfall, während `<<extend>>` von der Erweiterung zum Basis-Anwendungsfall zeigt. Wer den Pfeil schickt, ist abhängig vom Empfänger.
 
 ```text @plantUML.png
 @startuml
 left to right direction
 
-actor Kunde
+actor "Kunde" as Kunde
+actor "Gast" as Gast
+actor "Studierende:r\n(TUBAF-Login)" as Student
 
-usecase "Produkte anzeigen" as UC1
-usecase "In den Warenkorb legen" as UC2
-usecase "Bestellung abschließen" as UC3
-usecase "Zahlung durchführen" as UC4
-usecase "Gutschein einlösen" as UC5
-usecase "Rabattinformationen anzeigen" as UC6
+' Konkretisierung: Gast und Studierende sind beide Kunden im Shop-Sinn
+Gast --|> Kunde
+Student --|> Kunde
 
-' Basis-Interaktionen
+rectangle "TUBAF-Merchandising-Shop" {
+  usecase "Merchandise anzeigen" as UC1
+  usecase "In den Warenkorb legen" as UC2
+  usecase "Bestellung abschließen" as UC3
+  usecase "Zahlung durchführen" as UC4
+  usecase "Gutschein einlösen" as UC5
+  usecase "Studi-Rabatt anwenden" as UC6
+}
+
+' Basis-Interaktionen (für alle Kunden — wandert an den Sammelakteur)
 Kunde -- UC1
 Kunde -- UC2
 Kunde -- UC3
+
+' Studi-spezifisch
+Student -- UC6
 
 ' include: Immer bei Bestellung
 UC3 ..> UC4 : <<include>>
@@ -177,8 +177,8 @@ UC3 ..> UC4 : <<include>>
 ' extend: Optionaler Gutschein
 UC3 <.. UC5 : <<extend>>\n[Bedingung: Gutschein vorhanden]
 
-' extend: Optional Rabattinfo
-UC1 <.. UC6 : <<extend>>\n[Bedingung: Premiumkunde]
+' extend: Studi-Rabatt nur für TUBAF-Studierende mit gültigem Login
+UC3 <.. UC6 : <<extend>>\n[Bedingung: gültiger TUBAF-Login]
 
 ' Detaillierte Bedingungen als Notizen
 note right of UC5
@@ -189,60 +189,120 @@ end note
 
 note right of UC6
 Bedingung für Erweiterung:
-Nur wenn der Kunde eingeloggt
-und als Premiumkunde markiert ist
+Nur wenn der TUBAF-Status
+über Shibboleth-SSO bestätigt wurde
 end note
 
 @enduml
 ```
 
+> **Lesart der Konkretisierung:** Die Linien `Gast --|> Kunde` und `Studierende --|> Kunde` sind **Akteur-Generalisierungen** — Gast *ist ein* Kunde, Studierende *ist ein* Kunde. Damit erben beide automatisch alle Use-Case-Verbindungen, die am Sammel­akteur *Kunde* hängen (UC1, UC2, UC3). Im Diagramm zeichnen wir diese geerbten Verbindungen nicht doppelt — DRY-Prinzip auch in der Modellierung. Studi-spezifisch ist nur UC6 (*Studi-Rabatt anwenden*), den wir direkt an *Studierende* anhängen.
+>
+> **Vorsicht — kontroverse Praxis:** Akteur-Generalisierung ist UML-konform, wird aber in der Praxis skeptisch gesehen, weil die Bedeutung von "ist ein" bei Akteuren weniger eindeutig ist als bei Klassen.
+
 **Anwendungsfälle**
+
+> Achtung: Ein Anwendungsfalldiagramm stellt keine Ablaufbeschreibung dar! Diese kann stattdessen mit einem Aktivitäts-, einem Sequenz- oder einem Kommunikationsdiagramm dargestellt werden.
 
 + Darstellung der wichtigsten Systemfunktionen
 + Austausch mit dem Anwender und dem Management auf der Basis logischer, handhabbarer Teile
 + Dokumentation des Systemüberblicks und der Außenschnittstellen
 + Indentifikation von Anwendungsfällen
 
-**Vermeiden Sie ...**
-
-+ ... eine zu detaillierte Beschreibung von Operationen und Funktionen
-+ ... nicht funktionale Anforderungen mit einem Use-Case abbilden zu wollen
-+ ... Use-Case Analysen aus Entwicklersicht durchzuführen
-+ ... zu viele Use-Cases in einem Diagramm abzubilden (max. 10)
-
+> [!TIP]
 > Halten Sie komplexe `<extend>` Bedingungen in separaten Dokumenten fest.
 
-### Aktivitätsdiagramm
+### Diskussion
 
+Der TUBAF-Shop mit seinen sechs Use-Cases wirkt überschaubar — fast banal. In realen Projekten sieht die Situation anders aus: Use-Case-Diagramme sind oft das *erste vertragsrelevante Engineering-Artefakt* eines Projekts und können sich in mehreren Dimensionen entfalten.
+
++ **Skalierung mit dem Systemumfang.** TUBAF-Shop: 6 Use-Cases. Ein realer Online-Shop: 50–200 Use-Cases. Ein ERP-System: mehrere *tausend* Use-Cases, hierarchisch organisiert in Paketen. 
++ **Granularität ist eine schwierige Designentscheidung.** Zu fein modelliert ist *"Knopf drücken"* oder *"Feld ausfüllen"* — das sind UI-Interaktionen, keine Use-Cases. Zu grob ist *"System nutzen"* — sagt nichts aus. Cockburn-Faustregel: Ein Use-Case sollte einen **abgeschlossenen Geschäftswert** liefern (*User Goal Level* — typischerweise 5–20 Minuten Nutzungs­dauer, mit klarem Erfolgs­ergebnis). *"Bestellung abschließen"* erfüllt das; *"Warenkorb-Icon anklicken"* nicht.
++ **Akteur-Identifikation ist nicht trivial.** Wer ist *"der Kunde"* im TUBAF-Shop wirklich? Anonymer Besucher? Eingeloggter Studi? Lehrstuhl-Sekretariat, das im Auftrag mehrerer Kollegen bestellt? 
++ **Das Diagramm ist nur die Spitze des Eisbergs.** Was Sie hier sehen, zeigt **welche** Use-Cases es gibt und **wer** sie nutzt. Die eigentliche Arbeit steckt in den **Use-Case-Beschreibungen**.
++ **Politische Dimension.** Use-Cases sind oft das **erste vertraglich relevante Dokument** zwischen Auftraggeber und Auftragnehmer (siehe Lasten- und Pflichtenheft aus VL 13). Was *nicht* im Use-Case-Katalog steht, wird typischerweise auch *nicht* implementiert — und Nachforderungen werden teuer. 
+> **Pragmatische Konsequenz:** Ein Anwendungsfall-Diagramm ist *einfach zu zeichnen*, aber *schwer richtig zu modellieren*. Die formale Notation lernen Sie in einer Stunde — die Modellierungs-Disziplin, die nötig ist, um ein tragfähiges Anforderungs­dokument zu erzeugen, ist Berufserfahrung von Jahren. 
+
+## Aktivitätsdiagramm
+
+> [!TIP]
 > Aktivitätsdiagramme stellen die Vernetzung von elementaren Aktionen und deren Verbindungen mit Kontroll- und Datenflüssen grafisch dar.
 
+### Ausgangspunkt UML 1.x-Modellierung
 
-      {{0-1}}
-*******************************
-
-**Aktivitätsmodellierung in UML1**
-
-| <img src="https://www.plantuml.com/plantuml/svg/JOynRW9134LxdyAY8bTOYX3gz3Gq1lxkM3Fn8i-CLk8iANCJBXOJjaXdVV_tfB-lJRprhqBqTn4vRf16pCE7DyqeNFibmNR_8pM-mlXaHqaEoxEVkM2ArihpahI0jqTeWuDNyFsDdew0dG-uIohTffFnylX9vKcFisSQ7jzd-0AjyNrbB9EeqN0Gor2xzyXXLtxrDv-A4IvMBybrR66KNbVfPXVJvXlHFe1O-Wi0"> | <img src="https://www.plantuml.com/plantuml/png/JOz1JiD034NtFeKbDic60oIBDX8tgA3hQVlRCPgwmUE0LCrTs706Bf2BCQe8PUdlxoU_TVPWFfqJbUSCAtIRoJ0YE7MRVJJ83a_1eJt9aPlD2Db76BzVKbgrx17AZKAq9Uw6AP_23hoqJZP_pv_e2Ic3czTGIrmU1dLvcx2DuYZ3uInQQjwz_1tO7T4JtxdNAJ_-sq0FSbnUxvPS-ry1_eYImCqMuZ3mJIFFNtx5ggsgbv7M5L7rVm00">|
-|Aktivitätsdiagramme.plantUML | ActivityUser.plantUML |
-
-Elemente UML 1.x: 
+Elemente UML 1.x:
 
 + Aktivitätszustände (Activity States)
-+ Übergänge (Transitions) 
++ Übergänge (Transitions)
 + Startzustand (Initial State)
-+ Endzustand (Final State) 
++ Endzustand (Final State)
 + Entscheidungsknoten (Decision Nodes)
 + Synchronisationsbalken
-+ Aktivitätspartitionen.
++ Aktivitätspartitionen (Swimlanes)
 
-Bis UML 1.x waren Aktivitätsdiagramme eine Mischung aus Zustandsdiagramm, Petrinetz und Ereignisdiagramm, was zu theoretischen und praktischen Problemen führte.
+<section class="flex-container">
+<div class="flex-child">
 
-*******************************
+```text @plantUML.png
+@startuml
+start
 
-      {{1-2}}
-*******************************
+repeat
+  :Artikel suchen;
+  :Artikel in den \nWarenkorb legen;
+repeat while (Weitere Artikel?)
+:Art der Bezahlung\n wählen;
+fork
+:Überweisung;
+fork again
+:Bankeinzug;
+end fork
+:Lieferanschrift\n auswählen;
+stop
+@enduml
+```
 
-**Erweiterung des Konzeptes in UML2**
+</div>
+<div class="flex-child">
+
+```text @plantUML.png
+@startuml
+|User|
+start
+repeat
+:SchreibeDaten;
+if (Speicher voll?) then (nein)
+ :Ausgabe Speichergröße;
+else (ja)
+  |#AntiqueWhite|Admin|
+  :Vergrößere Speicher;
+  :Ausgabe zus. Speicher;
+endif
+|User|
+:Speichern;
+repeat while (Weitere Datensätze?)
+stop
+@enduml
+```
+
+</div>
+</section>
+
+An den beiden Beispielen lassen sich die zentralen Schwächen ablesen:
+
++ **Konzeptioneller Mischmasch.** UML 1.x-Aktivitätsdiagramme waren formal als *Spezialfall eines Zustands­automaten* definiert — sahen aber aus wie Flussdiagramme. Was im linken Diagramm wie "Aktion ausführen" wirkt, war semantisch ein "Zustand", der durch Transitionen verlassen wird. Die Sprache war eine Mischung aus **Zustandsdiagramm**, **Petrinetz** und **Ereignis­diagramm** ohne saubere Trennung.
+
++ **Kein expliziter Objektfluss.** Beide Diagramme zeigen nur, *was* nach *wann* passiert (Kontrollfluss). Welche **Daten** zwischen den Aktivitäten fließen — z. B. der zusammen­gestellte Warenkorb, der zur Bezahlung wandert — bleibt unsichtbar. Erst UML 2 führte Objektknoten und Pins ein.
+
++ **Nebenläufigkeit nur grob darstellbar.** Im linken Beispiel laufen "Überweisung" und "Bankeinzug" parallel — aber semantisch ist unklar, ob beide ausgeführt werden müssen oder eines reicht. UML 2 differenziert hier sauber zwischen **Fork/Join** (alle Zweige) und **Decision/Merge** (einer von vielen).
+
++ **Schwache Partitions-Semantik.** Im rechten Diagramm wechselt der Verantwortliche zwischen *User* und *Admin* (Swimlanes). In UML 1.x waren Swimlanes rein dekorativ; in UML 2 erhalten sie eine formale Bedeutung als *Activity Partitions* mit klar zuordenbarem Verhalten.
+
++ **Keine Ausnahme­behandlung.** Was passiert im linken Beispiel, wenn die Zahlung fehlschlägt? Im rechten, wenn das Vergrößern des Speichers misslingt? UML 1.x hatte dafür kein Konstrukt — UML 2 ergänzte *Interruptible Regions* und *Exception Handlers*.
+
+Diese Schwächen führten dazu, dass Aktivitätsdiagramme in der Praxis oft *intuitiv als Flussdiagramme* gelesen wurden — entgegen ihrer eigentlichen Definition. UML 2 hat die Sprache deshalb neu fundiert: Aktivitätsdiagramme basieren seitdem auf einer **Token-Semantik** (vergleichbar mit Petrinetzen), die Kontroll- und Objektfluss gleichberechtigt behandelt.
+
+### Erweiterung des Konzeptes in UML2
 
 | Bereich                           | UML 1.x                                               | UML 2.x                                                                                     |
 | --------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------------- |
@@ -266,96 +326,32 @@ Kontrollfluss auch der Objektfluss modelliert wird.
 
 + Aktivitäten definieren Strukturierungselemente für Aktionen, die durch Ein- und Ausgangsparameter, Bedingungen, zugehörige Aktionen und Objekte sowie einen Bezeichner gekennzeichnet sind.
 
-<!--
-style="width: 60%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
--->
-````ascii
-
-     .---------------------------------------------------.
-     | Flächenberechnung Rechteck     ≪ precondition ≫   |
-     |                                   Höhe ≥ 0        |
- +---+----+                              Breite ≥ 0      |
- | Höhe   |----ᗒ                                         |
- +---+----+                                          +---+----+
-     |                                          ----ᗒ| Fläche |
- +---+----+                                          +---+----+
- | Breite |----ᗒ                                         |
- +---+----+                                              |
-     |                                                   |
-     .---------------------------------------------------.
-````
-
 + Aktionen stehen für den Aufruf eines Verhaltens oder die Bearbeitung von Daten, die innerhalb einer Aktivität nicht weiter zerlegt wird.
 
-<!--
-style="width: 80%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
--->
-````ascii
++ Objekte repräsentieren Daten und Werte, die innerhalb der Aktivität manipuliert werden. Damit ergibt sich ein nebeneinander von **Kontroll-** und **Objektfluss**.
 
- +--------------------------+
- |   ≪ localPrecondition ≫  |\
- |                          +-+
- |  Papier vorhanden          |
- +----------------------------+
-               \
-                \
-     .-----------------------.         .-------------------------.
-     | Einladung verschicken |  -----ᗒ | Getränke einkaufen      |
-     .-----------------------.         .-------------------------.
-                  \
-                   \
-         +----------------------------+
-         | ≪ localPostcondition ≫     |\
-         |                            +-+
-         |  Hälfte der Gäste angenommen |
-         +------------------------------+
+   * *Kontrollfluss* — die Pfeile signalisieren nur, *wann* die nächste Aktion ausgeführt wird:
+   * *Objektfluss mit explizitem Objektknoten* — der durchlaufende Datenwert wird als eigenständiger Knoten zwischen die Aktionen gesetzt. So lässt sich der Datentyp oder Zustand des Objekts kennzeichnen, das von Aktion zu Aktion weitergereicht wird:
 
-````
++ Signale und Ereignisse sind die Schnittstellen für das Auslösen einer Aktion. UML2 unterscheidet das *Send-Signal* (Fünfeck mit Spitze nach rechts) vom *Receive-Event* (Fünfeck mit Einkerbung links):
 
-+ Objekte repräsentieren Daten und Werte, die innerhalb der Aktivität manipuliert werden. Damit ergibt sich ein nebeneinander von Kontroll- und Objektfluss.
+### Beispiel
 
-<!--
-style="width: 80%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
--->
-````ascii
-                      Kontrollfluss
-     .-------------.                    .-------------.
-     | Aktion      |------------------ᗒ | Aktion      |
-     .-------------.                    .-------------.
-
- ---------------------------------------------------------------
-
-             Ausgabe-                 Eingabe-
-              pin                      pin
-                       Objektfluss
-    .-------------._                   _.-------------.
-    | Aktion      |_|----------------ᗒ|_| Aktion      |
-    .-------------.                     .-------------.
-
-
-    .-------------.   +-------------+     .-------------.
-    | Aktion      |---| Objekt      |---ᗒ | Aktion      |
-    .-------------.   +-------------+     .-------------.
-````
-
-
-+ Signale und Ereignisse sind die Schnittstellen für das Auslösen einer Aktion
-
-<!--
-style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
--->
-````ascii
-
- +--------------.       .----------------+       .------------------------.
- |    Sende      \       \  Erster Gast  |------ᗒ| Vorbereitungen beenden |
- |    Signal     /       /  eingetroffen |       .------------------------.
- +--------------.       .----------------+
-````
-
-
-**Beispiel**
+> **UML2-Notation mit Pins:** Eine kompaktere Schreibweise von UML2 nutzt **Input-** und **Output-Pins** direkt an den Aktions-Rechtecken — kleine Quadrate am Rand der Aktion, die den Datenfluss markieren. Diese Notation ist in PlantUML nicht direkt verfügbar; in der Praxis greift man bei dieser Art von Detail auf CASE-Werkzeuge zurück (siehe Werkzeug-Hinweise in der vorherigen Vorlesung). Das **Gesamtbeispiel** weiter unten zeigt eine reichere UML2-Darstellung mit Pins und Objektknoten in der Wikimedia-Variante.
 
 ![Aktivitätsdiagramme](./img/14_UML_II/ActivityDiagram.png "Beispiel eines Aktivitätsdiagramms - Wikimedia, Autor Gubaer, UML2 Aktivitätsdiagramm,  https://commons.wikimedia.org/wiki/File:Uml-Activity-Beispiel2.svg")
+
+Das Beispiel modelliert das Kochen von Spaghetti und führt alle wichtigen UML2-Konzepte auf einen Blick zusammen. Es lohnt sich, die Elemente einzeln zu lesen:
+
++ Die *Aktivität* **„Spaghetti kochen"** ist der äußere Rahmen — sie hat einen Eingangsparameter (`Spaghetti [roh]`) und einen Ausgangsparameter (`Spaghetti [al dente]`), beide als **Aktivitätsparameterknoten** am Rand gezeichnet. Sie entsprechen Eingangs- und Rückgabewert einer Methode.
+
++ Die *Aktionen* (`Spaghetti einfüllen`, `Wasser kochen`, `Spaghetti 10min kochen`) sind die elementaren Verarbeitungsschritte. Hier wird nichts weiter zerlegt.
+
++ **Kontroll- und Objektfluss laufen parallel.** Der Pfeil vom *Startknoten* (schwarzer Kreis) zu `Wasser kochen` ist ein **Kontrollfluss** — er sagt nur, *wann* die Aktion ausgeführt wird, ohne ein Datenobjekt zu übergeben. Der Pfeil von `Spaghetti [roh]` zu `Spaghetti einfüllen` ist dagegen ein **Objektfluss** — er übergibt zugleich ein Datenobjekt UND aktiviert die Aktion. Eine Aktion kann mehrere Eingangs-Tokens benötigen (manche Kontroll-, manche Objekt-Tokens) — sie startet erst, wenn alle vorhanden sind. Genau das ist die **Token-Semantik** aus dem Petrinetz-Modell.
+
++ **Pins** sind die kleinen Quadrate am Rand der Aktionen (z. B. zwischen `Spaghetti einfüllen` und `Spaghetti 10min kochen`). Sie sind die kompakte Schreibweise für Objektknoten: Output-Pin der einen Aktion = Input-Pin der nächsten. In PlantUML lässt sich das nicht direkt darstellen — in CASE-Werkzeugen wie Modelio oder Enterprise Architect schon.
+
+> **Merke:** Ein Pfeil im UML2-Aktivitätsdiagramm sagt nicht automatisch "Kontrollfluss" — er sagt "Token-Weitergabe". Ob es ein Kontroll- oder ein Objekt-Token ist, hängt davon ab, *was* an seinen Enden hängt (eine Aktion direkt oder ein Objektknoten/Pin).
 
 **Anwendung**
 
@@ -367,9 +363,7 @@ style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-r
 
 !?[Link](https://www.youtube.com/watch?v=VaKCZOhVJkQ)
 
-*******************************
-
-### Sequenzdiagramm
+## Sequenzdiagramm
 
 > Sequenzdiagramme beschreiben den Austausch von Nachrichten zwischen Objekten mittels Lebenslinien.
 
@@ -395,8 +389,8 @@ Die schmalen Rechtecke, die auf den Lebenslinien liegen, sind **Aktivierungsbalk
 @startuml
 actor Kunde
 participant "Webbrowser" as Browser
-participant "Webshop-Frontend" as Frontend
-participant "Webshop-Backend" as Backend
+participant "Shop-Frontend" as Frontend
+participant "Shop-Backend" as Backend
 participant "Zahlungsdienst" as Payment
 
 Kunde -> Browser : Produktseite aufrufen
@@ -456,7 +450,7 @@ Browser -> Kunde : Anzeige „Vielen Dank für Ihre Bestellung!“
 | Fragmente              | Kapseln Sequenzen in Szenarien, wie optionalen Interaktionen (opt), Alternativen (alt), Schleifen (Loop), Parallelität (par)  |
 | Interaktionsreferenzen | Binden Submodelle und deren Ergebnisse ein  (ref)                                                                     |
 
-
+> Parallel laufende Aktivitäten bei unterschiedlichen Akteuren sind damit unmittebar ersichtlich. 
 
 ```text @plantUML.png
 @startuml
@@ -487,10 +481,76 @@ deactivate System
 @enduml
 ```
 
-**Beispiel**
+**Beispiel — komplexer Bestellprozess im TUBAF-Shop**
 
-| <img src="https://www.plantuml.com/plantuml/png/ZPCn3jim34LtdUBt00NQ8Ok15idGR0K2z0IApTX2PCgGw0w6ZzQj5wiYrqOP1sYM26B8pwTF-fZ4HXbxRuPykjeDbWLdsqMAAdG9taqkYGgUxg4BNYZ9K_Pfb63C8eEFNxVg2Z_gpbjkYRrZHxWzKjZOMjnFAxHstkvRMpFFdm_pRDP0LlsRNC5oPxtiPJO0HR1cL-5k6jftQkXPPXzvFDO0hs0k55DWwnqnXlZxrutO0FismBCeiBmH1lWlEV2A7TYpaa-aMSjuglB_H6CxZKaiD-_IbjcY79fl4to7RnKYReonNfHl7xuWt14QYflc4dljULPAGgubXhSfvMFa1hqJfgudrWxeodEqBO5jtU7aopOlH64Gw1Arx5M-vLSuYielbRFCyrFUMQZul-s_KqeZjoXVePOgAKfatOaTowfofSnEektNKeSzZXhXjzZIbLs2vQaugfHKOJ7gc7_6tly1"> |
-|Alkoholkontrolle.plantUML |
+Das folgende Diagramm zeigt den vollständigen Bestellprozess mit Studi-Rabatt-Prüfung — inklusive **paralleler Validierungen** (`par`), **alternativer Pfade** (`alt`), **optionaler Erweiterungen** (`opt`) und **Fehlerbehandlung**:
+
+```text @plantUML.png
+@startuml
+actor "Studierende:r" as Studi
+participant "Shop-Frontend" as Frontend
+participant "Bestellservice" as Bestellung
+participant "Lagerservice" as Lager
+participant "Shibboleth-SSO" as SSO
+participant "Zahlungsdienst" as Payment
+
+Studi -> Frontend : Checkout starten
+activate Frontend
+
+par Login- und Bestand prüfen
+  Frontend -> SSO : TUBAF-Login prüfen
+  activate SSO
+  ||10||
+  SSO --> Frontend : Studi-Status: bestätigt
+  deactivate SSO
+else
+  Frontend -> Lager : Artikelverfügbarkeit prüfen
+  activate Lager
+  Lager --> Frontend : alle Artikel verfügbar
+  deactivate Lager
+end
+
+alt Studi-Status bestätigt
+  Frontend -> Bestellung : Bestellung mit Studi-Rabatt anlegen
+  activate Bestellung
+else kein gültiger Login
+  Frontend -> Bestellung : Bestellung zum Normalpreis anlegen
+  activate Bestellung
+end
+
+Bestellung --> Frontend : Bestell-Id, Gesamtsumme
+deactivate Bestellung
+
+opt Gutschein eingegeben
+  Frontend -> Bestellung : Gutschein einlösen
+  activate Bestellung
+  Bestellung --> Frontend : aktualisierte Summe
+  deactivate Bestellung
+end
+
+Frontend -> Payment : Zahlung auslösen
+activate Payment
+||15||
+Payment --> Frontend : Zahlung bestätigt
+deactivate Payment
+
+Frontend -> Bestellung : Bestellung freigeben
+activate Bestellung
+Bestellung --> Frontend : Versand vorbereitet
+deactivate Bestellung
+
+Frontend --> Studi : Bestellbestätigung anzeigen
+deactivate Frontend
+@enduml
+```
+
+> **Was zeigt das Diagramm?**
+>
+> - **`par`-Fragment:** Login-Prüfung beim Shibboleth-SSO und Bestandsprüfung beim Lagerservice laufen *parallel* — beide Antworten werden gebraucht, bevor es weitergeht.
+> - **`alt`-Fragment:** Je nach Ergebnis der Login-Prüfung wird die Bestellung *mit Studi-Rabatt* oder *zum Normalpreis* angelegt — beides exklusiv.
+> - **`opt`-Fragment:** Der Gutschein-Schritt ist *optional* und nur durchlaufen, wenn der Kunde einen Code eingegeben hat. Das spiegelt direkt das `<<extend>>` aus dem Use-Case-Diagramm wider.
+> - **`||15||`:** Zeitliche Verzögerung — z. B. 15 Zeiteinheiten Wartezeit auf die SSO- oder Zahlungs-Antwort. Im Sequenzdiagramm visualisiert das Latenz an realen Schnittstellen.
+> - **`activate`/`deactivate`:** Die schmalen Rechtecke auf den Lebenslinien zeigen, *welche Komponente gerade aktiv ist* (Focus of Control). Im `par`-Block sind dadurch *zwei* Aktivierungsbalken gleichzeitig sichtbar.
 
 **Anwendung**
 
@@ -506,75 +566,150 @@ deactivate System
 + Aktivität: Visualisierung der Ablaufschritte, Darstellung/Dokumentation von komplexen Geschäftsprozessen oder Systemabläufen
 + Sequenz: Darstellung von Interaktionen zwischen Objekten, einschließlich Aufrufen von Methoden einer Klasse, betonen die zeitliche Abfolge der Kommunikation
 
-### Klassendiagramme
+## Klassendiagramme
 
 > Ein Klassendiagramm ist eine grafischen Darstellung (Modellierung) von Klassen, Schnittstellen sowie deren Beziehungen.
 
-**Beispiel**
+**Beispiel — TUBAF-Merchandising-Shop**
 
-Nehmen wir an, sie planen die Software für ein Online-Handel System. Es soll
-sowohl verschieden Nutzertypen (*Customer* und *Administrator*) als auch die Objekt *ShoppingCart* und *Order* umfassen.
+Wir greifen das durchgehende Beispiel aus den Use-Case- und Sequenzdiagrammen auf
+und modellieren jetzt die *statische Struktur* des Shops. Anders als im
+Use-Case-Diagramm — wo wir nur die Rollen *Gast* und *Studierende:r* gebraucht
+haben — ist das Datenmodell reicher: wir unterscheiden **kaufende** Nutzer (Gast,
+TUBAF-Angehörige) von **verwaltenden** Nutzern (ShopAdmin), und innerhalb der
+TUBAF-Angehörigen wieder *Studierende* und *Mitarbeiter*. Dazu kommen die
+Geschäftsobjekte *MerchandiseArtikel*, *Warenkorb*, *Bestellung* und *Versandinfo*.
 
 ```text @plantUML.png
 @startuml
 left to right direction
 skinparam classAttributeIconSize 0
-abstract class User{
-  -userId: string
-  -password: string
+
+abstract class Nutzer{
+  -nutzerId: string
   -email: string
   -loginStatus: string
-  +verifyLogin():bool
+  +verifyLogin(): bool
   +login()
 }
 
-class Customer{
-  -customerName: string
+abstract class Kunde{
+  +legeInWarenkorb(a: MerchandiseArtikel)
+  +bestelle()
+}
+
+class Gast{
+  -gastName: string
   +register()
-  +updateProfile()
 }
 
-class Administrator{
+abstract class TUBAFAngehoeriger{
+  -tubafLogin: string
+  +verifyShibbolethStatus(): bool
+}
+
+class Studierende{
+  -matrikelnummer: string
+  -studienfach: string
+}
+
+class Mitarbeiter{
+  -mitarbeiterId: string
+  -institut: string
+}
+
+class ShopAdmin{
   -adminName: string
-  +updateCatlog(): bool
+  +updateKatalog(): bool
 }
 
-class ShoppingCart{
-  -cartId: int
-  +addCartItem()
-  +updateQuantity()
+class MerchandiseArtikel{
+  -artikelId: int
+  -bezeichnung: string
+  -preis: decimal
+  -bestand: int
+}
+
+class Warenkorb{
+  -warenkorbId: int
+  +addArtikel()
+  +updateMenge()
   +checkOut()
 }
 
-class Order{
-  -orderId: int
-  -customerId: int
-  -shippingId: int
-  -dateCreated: date
-  -dateShipped: date
+class Bestellung{
+  -bestellId: int
+  -datumErstellt: date
+  -datumVersand: date
   -status: string
-  +updateQuantity()
-  +checkOut()
+  +bestaetigen()
+  +stornieren()
 }
 
-class ShippingInfo{
-  -shipingId: int
-  -shipingType: string
-  +updateShipingInfo()
+class Versandinfo{
+  -versandId: int
+  -versandArt: string
+  +updateVersandinfo()
 }
 
-User <|-- Customer
-User <|-- Administrator
-Customer "1" *-- "0..*" ShoppingCart
-Customer "1" *-- "0..*" Order
-Order "1" *-- "1" ShippingInfo
+Nutzer <|-- Kunde
+Nutzer <|-- ShopAdmin
+Kunde <|-- Gast
+Kunde <|-- TUBAFAngehoeriger
+TUBAFAngehoeriger <|-- Studierende
+TUBAFAngehoeriger <|-- Mitarbeiter
+
+Kunde "1" *-- "0..*" Warenkorb
+Kunde "1" *-- "0..*" Bestellung
+Warenkorb "1" o-- "0..*" MerchandiseArtikel
+Bestellung "1" *-- "1" Versandinfo
 
 @enduml
 ```
 
-#### Klassen
+> **Modellierungs-Diskussion — warum diese Hierarchie?**
+>
+> Die naheliegende Intuition wäre: "Drei Nutzertypen → drei Klassen unter
+> *Nutzer*, fertig." Oder noch knapper: "Studierende erbt von Gast, weil beide
+> browsen können." Beides ist **falsch** — und genau hier zeigt sich, dass
+> Klassendiagramme ein Designwerkzeug sind, nicht ein Abbild der Akteure.
+>
+> **Warum erbt *Studierende* nicht von *Gast*?** Ein/e Studierende:r *ist* kein
+> Gast — *Gast* meint hier den anonymen, nicht-authentifizierten Besucher.
+> Studierende und Gast sind disjunkte Nutzertypen. Liskov-Test: An jeder Stelle,
+> an der ein Gast erwartet wird, müsste auch ein/e Studierende:r einsetzbar sein
+> — das passt hier semantisch nicht.
+>
+> **Warum die abstrakte Zwischenklasse *Kunde*?** Warenkorb und Bestellung
+> gehören semantisch zu *kaufenden* Nutzern. Würden wir sie an *Nutzer* hängen,
+> hätte auch *ShopAdmin* einen Warenkorb — das wäre Unfug. *Kunde* bündelt das
+> Kauf-Verhalten genau bei denen, die kaufen (Gast und TUBAF-Angehörige).
+>
+> **Warum *TUBAFAngehoeriger* als weitere abstrakte Klasse?** Sowohl Studierende
+> als auch Mitarbeiter authentifizieren sich über das TUBAF-SSO und teilen das
+> Attribut `tubafLogin`. Diese Gemeinsamkeit landet in einer abstrakten
+> Zwischen­klasse — sonst hätten wir Code-Duplikation in beiden konkreten Klassen.
+>
+> **Bezug zum Use-Case-Diagramm:** Dort haben wir den Sammelakteur *Kunde* in
+> *Gast* und *Studierende:r* konkretisiert (Akteur-Generalisierung). Diese
+> Hierarchie wandert hier ins Klassenmodell — wird aber an zwei Stellen *reicher*:
+>
+> + Auf der einen Seite kommt **TUBAFAngehoeriger** als Zwischenklasse dazu, weil
+>   Studierende und Mitarbeiter im Datenmodell gemeinsame Attribute teilen, die
+>   im Use-Case-Diagramm (das nur Rollen kennt) nicht aufgetaucht waren.
+> + Auf der anderen Seite kommt **ShopAdmin** dazu, der aus der reinen Kunden-Sicht
+>   herausfällt — Admins kaufen nicht, sie verwalten. Im Use-Case-Diagramm war das
+>   ein eigener Akteur außerhalb der Kunden-Hierarchie; hier wird es eine eigene
+>   Klasse unter *Nutzer*, parallel zu *Kunde*.
+>
+> Die zentrale Botschaft: **Akteur-Modell und Klassen-Modell sind verwandt,
+> aber nicht identisch.** Akteure sind *Rollen mit Berechtigungen*, Klassen sind
+> *Datenstrukturen und Verhalten*. Das eine kann das andere informieren, ersetzt
+> es aber nicht — und Verfeinerungen passieren auf beiden Seiten unabhängig.
 
-                        {{0-2}}
+### Klassen
+
+                        {{0-1}}
 ********************************************************************************
 
 Klassen werden durch Rechtecke dargestellt, die entweder nur den Namen der
@@ -584,7 +719,7 @@ Schlüsselwörter in _Guillemets_ ('<< >>') und unterhalb des Klassennamens in
 geschweiften Klammern zusätzliche Eigenschaften (wie {abstrakt}) stehen.
 Mit Schlüsselwörtern können zusätzliche Informationen oder Meta-Eigenschaften zur Standardsemantik der Elemente hinzugefügt werden. Sie bieten eine Möglichkeit, benutzerdefinierte Modellierungskonzepte hinzuzufügen oder vorhandene Konzepte zu präzisieren.
 
-Elemente der Darstellung :
+Elemente der Darstellung:
 
 | Eigenschaften | Bedeutung                                                                         |
 | ------------- | --------------------------------------------------------------------------------- |
@@ -593,42 +728,17 @@ Elemente der Darstellung :
 | Zusicherungen | Bedingungen, Voraussetzungen und Regeln, die die Objekte erfüllen müssen          |
 | Beziehungen   | Beziehungen einer Klasse zu anderen Klassen                                       |
 
-Wenn die Klasse keine Eigenschaften oder Operationen besitzt, können die entspechenden Abschnitte wegfallen.
+Wenn die Klasse keine Eigenschaften oder Operationen besitzt, können die entsprechenden Abschnitte wegfallen.
 
 ![OOPGeschichte](./img/14_UML_II/ClassTypes.png "UML Klassendiagramme und deren Attribute - adaptiert aus [^WikiUMLClass]")
 
 
 ********************************************************************************
 
-                                  {{1-2}}
+                                  {{1}}
 ********************************************************************************
 
-**Objekte vs. Klassen**
-
-| Klassendiagramm                                                                                                                                                                                                                                                                                                                                   | Beispielhaftes Objektdiagramm                                                                          |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| <img src="https://www.plantuml.com/plantuml/png/TP2_JWCn3CRtF8Lr4r1LWXKn5C7I1OPxWjGnhKNYd1o7WJ_lJhXhInYOelm-Vpz7sHJpQZL5vyeho-JL9y3eIxatKzvLeorc6VcTuDeTE10WAqPoRfw2Xrei9rBuS01h49y8Rc5iNTdF96Rqnbbwke924fura5vSpdSb97wZ4_ewwHiukuEt7_TZEvPTDUr86zcAqPvq5c6M5zPqr6BCXNhVKzRauwzr1O7Bv0qFVn-oT8wbSIBaVrjjRadkFjVhVa6FUuKx_zbmCq0BXwi1bcH34cgAtm00" width="228"> | <img src="https://www.plantuml.com/plantuml/png/TSwnJiCm4CRntKznojvWEss7gaIL8h4HaF84RdmK8pj6b_DKyMPil1WnY10ARDRdltwwmyY6E0KlF3umS0HofqS6wmXxTd4G8XwVfYSK-rGtQUGOa7PmZuoqlqfr0MQ4vYm64n2kFtUuVNlr7adus9kCJ1ytXEw8T18lFyGsKZ3-Zcn6LQNqUaPRTHRMS5OBfKkvARNKiX132XCqhHzvzlu7rzKIrD-Wbd-1ERyui7l6tisWtcotizSj3wnAMLrwkSvS0wjL3Qs27SJieFsQzA-fMrO776mA_Xq0" width="300">  |
-_ Gegenüberstellung motiviert nach _What is Object Diagram?_, https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-object-diagram/, Autor unbekannt_
-
-
-**Objektdiagramm** stellt die Instanzen von Klassen und ihre Beziehungen zueinander zu einem bestimmten Zeitpunkt dar basierend auf einem Klassendiagramm
-(ein „Schnappschuss“ der Objekte innerhalb eines Systems) und enthält als Elemente: Objekte (Instanzen der Klasse), Links (Instanzen von Assoziationen), Attribute (Werte von Eigenschaften von Objekten).
-
-Anwendung des Objektdiagramms:
-
-+ Um den Zustand eines Systems zu einem bestimmten Zeitpunkt darzustellen bzw. während der Laufzeit zu visualisieren.
-+ Um Testfälle und Szenarien zu beschreiben.
-
-
-
-********************************************************************************
-
-                                  {{2}}
-********************************************************************************
-
-> **Merke:** Vermeiden Sie bei der Benennung von Klassen, Attributen, Operationen usw. sprachspezifische Zeichen
-
-Modellierung in UML
+> **Merke:** Vermeiden Sie bei der Benennung von Klassen, Attributen, Operationen usw. sprachspezifische Zeichen — Umlaute und Sonderzeichen sind in der UML zwar erlaubt, führen bei der Code-Generierung in vielen Zielsprachen aber zu Problemen.
 
 ```text @plantUML.png
 @startuml
@@ -640,165 +750,45 @@ class Zähler{
 @enduml
 ```
 
-Ausführbarer Code in Python 2
+Der Bezeichner *Zähler* wäre in C# zwar legal, in vielen Werkzeugketten (Code-Generatoren, Datei­namen, JSON-Schlüssel) aber problematisch. Empfehlung: Klassen- und Attributnamen ASCII-konform halten (`Zaehler`, `Counter`).
 
-```python KlasseMitUmlaut.py
-class Zaehler:
-    """A simple example class"""
-    i = 12345
+********************************************************************************
 
-A = Zaehler()
-print A.i
-```
-@LIA.evalWithDebug(`["main.py"]`, `python2.7 -m compileall .`, `python2.7 main.pyc`)
+                                  {{2}}
+********************************************************************************
 
+**Sichtbarkeitsattribute — Notation**
 
-Ausführbarer Code in C++ 20
+Die Sichtbarkeit einzelner Attribute und Operationen wird durch ein vorangestelltes Symbol gekennzeichnet:
 
-```c KlasseMitUmlaut.cpp
-#include <iostream>
+| Symbol | UML-Bezeichnung | Bedeutung                                                                     |
+| ------ | --------------- | ----------------------------------------------------------------------------- |
+| `+`    | public          | von überall sichtbar                                                          |
+| `-`    | private         | nur innerhalb der Klasse                                                      |
+| `#`    | protected       | innerhalb der Klasse und ihrer Subklassen                                     |
+| `~`    | package         | innerhalb desselben Pakets (in C#: `internal`)                                |
 
-class Zähler{
-  public:
-   int i = 12345;
-};   
-
-int main()
-{
-  Zähler A = Zähler();
-  std::cout << A.i;
-  return 0;
+```text @plantUML.png
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+class MerchandiseArtikel{
+  - artikelId: int
+  - preis: decimal
+  # setPreis(neuerPreis: decimal)
+  + getPreis(): decimal
+  ~ aktualisiereBestand(menge: int)
 }
+@enduml
 ```
-@LIA.eval(`["main.cpp"]`, `g++ main.cpp -o a.out`, `./a.out`)
 
+> **Merke:** Der UML-Standard kennt nur die vier obenstehenden Sichtbarkeiten. Sprachspezifische Differenzierungen wie `internal protected` in C# sind in UML nicht vorgesehen — die Sprach-Realität entscheidet jeweils, wie streng diese Notation interpretiert wird (vgl. Abschnitt *UML vs. Implementierungssprache* weiter unten).
+
+> **Hinweis:** Die *Semantik* der einzelnen Sichtbarkeiten — was genau `protected` bei Vererbung erlaubt, wie sich `internal` über Assembly-Grenzen verhält — wird in **VL 09 (Vererbung)** ausführlich behandelt. Hier liegt der Fokus auf der UML-Notation.
 
 ********************************************************************************
 
                                   {{3}}
-********************************************************************************
-
-**Sichtbarkeitsattribute**
-
-<!--
-style="width: 100%; display: block; margin-left: auto; margin-right: auto;"
--->
-````ascii
-
-| Zugriffsmodifizierer | Innerhalb eines Assemblys       || Außerhalb eines Assemblys      |
-|                      | Vererbung      | Instanzierung  || Vererbung     | Instanzierung  |
-| -------------------- | -------------- | -------------- || ------------- | -------------- |
-| `public`             | ja             | ja             || ja            | ja             |
-| `private`            | nein           | nein           || nein          | nein           |
-| `protected`          | ja             | nein           || ja            | nein           |
-| `internal`           | ja             | ja             || nein          | nein           |
-| `ìnternal protected` | ja             | ja             || ja            | nein           |
-
-````
-
-**public, private**
-
-Die Sichtbarkeitsattribute `public` und `private` sind unabhängig vom Vererbungs-, Instanzierungs- oder Paketstatus einer Klasse. Im Beispiel kannn der TrafficOperator nicht
-auf die Geschwindigkeiten der Instanzen von Car zurückgreifen.
-
-```text @plantUML.png
-@startuml
-skinparam classAttributeIconSize 0
-hide circle
-class Car{
-  - speed: double
-  - setSpeed(double speed)
-  + GetSpeed() : double
-}
-
-class TrafficOperator{
-  - Vehicles: Car[]
-  + MonitorAllCars()
-}
-
-TrafficOperator "1" *-- "0:.. "Car : "greift zu auf"
-
-note top of Car : speed als Property,\npublic get Methode, \nprivate set Methode
-note top of TrafficOperator : Das Objekt kann auf die \nGeschwindigkeiten aller Fahrzeuge\n zurückgreifen, sie aber nicht verändern.
-@enduml
-```
-
-**protected**
-
-Die abgeleitete Klassen Bus und PassagerCar erben von Car und übernehmen damit deren Methoden. Die Zahl
-der Sitze wird beispielsweise mit ihrem Initialisierungswert von 5 auf 40 gesetzt.
-Zudem muss die Methode `StopAtStation` auch auf die Geschwindigkeit zurückgreifen können.
-
-```text @plantUML.png
-@startuml
-skinparam classAttributeIconSize 0
-hide circle
-abstract class Car{
-  - speed: double
-  - numberOfSeats
-  # setSpeed(double speed)
-  + getSpeed() : double
-}
-
-class PassengerCar{
-  - numberOfSeats: int = 5
-}
-
-class Bus{
-  - numberOfSeats: int = 40
-  + CheckTickets()
-  + StopAtStation()
-}
-
-class TrafficOperator{
-  - Vehicle: Car[]
-  + monitorAllCars()
-}
-
-Car <|-- Bus : "erbt von"
-Car <|-- PassengerCar : "erbt von"
-TrafficOperator "1" *-- "0:.. "PassengerCar : "greift zu auf"
-TrafficOperator "1" *-- "0:.. "Bus : "greift zu auf"
-@enduml
-```
-
-**internal**
-
-Ein Member vom Typ `internal` einer Basisklasse kann von jedem Typ innerhalb seiner enthaltenden Assembly aus zugegriffen werden.
-
-
-```text @plantUML.png
-@startuml
-skinparam classAttributeIconSize 0
-hide circle
-package RoadTraffic <<Folder>> {
-  class Vehicle{
-    - speed: double
-    ~ setSpeed(double speed)
-    + getSpeed(): double
-  }
-}
-
-class Junction{
-  - cars: Traffic::Vehicles[]
-  + SimulateJam()
-}
-
-class Airplane{
-  - heigth : double
-  + Fly()
-}
-
-Junction "1" -- "0:.. "Vehicle : "greift zu auf"
-Airplane -|> Vehicle
-@enduml
-```
-
-> **Merke: ** Der UML Standard kennt nur `+ public`, `- private`, `# protected` und `~ internal`. Das C# spezifische `internal protected` ist als weitere Differenzierungsmöglichlichkeit nicht vorgesehen.
-
-********************************************************************************
-
-                                  {{4}}
 ********************************************************************************
 
 **Attribute**
@@ -846,18 +836,33 @@ definierbar:
 | `sequence`  | legt fest, dass der Inhalt sortiert ist, Duplikate sind erlaubt               |
 | `composite` | starke Abhängigkeitsbeziehungen                                               |
 
-Daraus ergeben sich UML-korrekte Darstellungen
+<section class="flex-container">
+<div class="flex-child">
 
-| Attributdeklaration              | Korrekt | Bemerkung                                                                          |
-| -------------------------------- | ------- | ---------------------------------------------------------------------------------- |
-| `public zähler:int `             | ja      | Umlaute sind nicht verboten                                                        |
-| `/ alter`                        | ja      | Datentypen müssen nicht zwingend angegeben werden                                  |
-| `privat adressen: String [1..*]` | ja      | Menge der Zeichenketten                                                            |
-| `protected bruder: Person`       | ja      | Datentyp kann neben den Basistypen jede andere Klasse oder eine Schnittstelle sein |
-| String                           | nein    | Name des Attributes fehlt                                                          |
-| privat, public name: String      | nein    | Fehler wegen mehrfachen Zugriffsattributen                                         |
+```text @plantUML.png
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+class Example{
+  attribute1: int
+  + attribute2: int
+  {static} public : double = 3.14
+  - attribute3: boolean
+  # attribute4: short
+  ~ attribute5: String = "Test" {readonly}
+  attribute6: B[0..1]{composite}
+  attribute7: String [0..1]{ordered}
+  / attribute8
+}
 
-![Protected](https://www.plantuml.com/plantuml/png/LP1FImCn4CNl-HIFUXHhrzO_18HQyE2v7WJna4q66yncbcGMr6Nzx4Pj3RqDFtxlmRnr5fDaw8BARpxs9faEDfYSxqIIRmUX1yjnwpy92xNpZc1zie7KhuJxTzFrWKO5c4EWqV1H2ZcjxEB0nYn6l9tG3stm5XgEoqMunNBUh8fnLbDBZPOva8c5drI-qiWxJeA2log-rDYMCxwMijaZPPbXJ6GSn_0nALJnIcFpl9ZFcvVHSjTpza97mlL_qrxZv2YH-v7EgtQZ9hKVOdCqmTFVkvDQKtHbt6y0 "Korrespondierendes UML-Klassendiagramm [AttributeExample.plantUML](https://github.com/liaScript/CsharpCourse/blob/master/code/10_UML/Graphs/AttributeExample.plantUML)")
+class B{
+  attributeX: int
+}
+@enduml
+```
+
+</div>
+<div class="flex-child">
 
 ```csharp    AttributeExample
 using System;
@@ -871,16 +876,30 @@ class Example
   protected short attribute4;
   internal const string attribute5 = "Test";
   B attribute6;
-  System.Collections.Speciallized.StringCollection attribute7;
+  System.Collections.Specialized.StringCollection attribute7;
   Object attribute8{
     get{return wert * 10;}
   }
 }
 ```
 
+</div>
+</section>
+
+Daraus ergeben sich UML-korrekte Darstellungen
+
+| Attributdeklaration              | Korrekt | Bemerkung                                                                          |
+| -------------------------------- | ------- | ---------------------------------------------------------------------------------- |
+| `public zähler:int `             | ja      | Umlaute sind nicht verboten                                                        |
+| `/ alter`                        | ja      | Datentypen müssen nicht zwingend angegeben werden                                  |
+| `privat adressen: String [1..*]` | ja      | Menge der Zeichenketten                                                            |
+| `protected bruder: Person`       | ja      | Datentyp kann neben den Basistypen jede andere Klasse oder eine Schnittstelle sein |
+| String                           | nein    | Name des Attributes fehlt                                                          |
+| privat, public name: String      | nein    | Fehler wegen mehrfachen Zugriffsattributen                                         |
+
 ********************************************************************************
 
-                                  {{5}}
+                                  {{4}}
 ********************************************************************************
 
 **Operationen**
@@ -913,7 +932,24 @@ Dabei ist die Parameterliste durch folgende Elemente definiert:
 + *Eigenschaftswert* ... Angaben zu besonderen Charakteristika der Operation
 
 
-![Protected](https://www.plantuml.com/plantuml/png/HO_1IiH044JlynK5NhAAYzdLIq1O5G-UzoWUnfb66oSzeTC1DSHlTpQ1pQtegbT57thpQaERNF_5qddrBKBoVVzWflm-6Bs4B4V-9TouJuw4m1eIkJc4vs_VTeb61-0AOoap3XDoHrfKbhhQdAphzRAhM33lr0rO3FUusongLF8nI_gPJip5okmBamTRi1qQFCsjVslYjZhx-mP7KvOFlDRRxUKRngoHbE9KPXxTv0uaiJpy3m00 "Korrespondierendes UML-Klassendiagramm")
+<section class="flex-container">
+<div class="flex-child">
+
+```text @plantUML.png
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+class Example{
+   + {static} operation1()
+   - operation2(in param1: int = 5): int {readonly}
+   # operation3(inout param2 : C)
+   ~ operation4(out param3: String [1..*] {ordered}): B
+}
+@enduml
+```
+
+</div>
+<div class="flex-child">
 
 ```csharp    OperationsExample
 using System;
@@ -944,11 +980,14 @@ class Example
 }
 ```
 
+</div>
+</section>
+
 ********************************************************************************
 
 [^WikiUMLClass]: https://de.wikipedia.org/wiki/Klassendiagramm#/media/Datei:UmlCd_Klasse-3.svg, Autor Gubaer, CC BY-SA 3.0
 
-#### Schnittstellen
+### Schnittstellen
 
 Eine Schnittstelle wird ähnlich wie eine Klasse mit einem Rechteck dargestellt, zur Unterscheidung aber mit dem Schlüsselwort `interface` gekennzeichnet.
 
@@ -962,7 +1001,7 @@ Eine alternative Darstellung erfolgt in der LolliPop Notation, die die grafische
 ```csharp    OperationsExample
 using System;
 
-interface Sortierliste{
+interface SortierteListe{
   void einfuegen (Eintrag e);
   void loeschen (Eintrag e);
 }
@@ -974,30 +1013,192 @@ class Datenbank : SortierteListe
 }
 ```
 
-#### Beziehungen
+### Beziehungen
 
-Die Möglichkeiten der Verknüpfung zwischen Klassen und Interfaces lassen sich wie folgt gliedern:
+Die Stärke des Klassendiagramms liegt nicht in den einzelnen Klassen, sondern in den **Beziehungen** zwischen ihnen — also darin, wie das System als Ganzes verbunden ist. UML kennt dafür vier Grundtypen, die sich in **Strichart**, **Pfeilspitze** und **Multiplizität** unterscheiden.
 
-| Beziehung                             | Darstellung                                                                                                                                          | Bedeutung                                                                                  |
-| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Generalisierung                       | <img src="https://www.plantuml.com/plantuml/png/LOv12W8n40Jlyuh-m7vW3x9NRu8l2CcO7KmcC9diHVsxgoZehMcgw5ww1_DH2wsI654i5gR25uStcEJLaSGukZIbM4BlEB7rfZS2D5IUSNOJpGHipVwQnrSmsO9VXoP-MNWd7RMopJYgSsRROVhXC4ttmsU95jQqNtm2" width="660"> | gerichtete Beziehung zwischen einer generelleren und einer spezielleren Klasse (Vererbung) |
-| Assoziationen (ohne Anpassung)        | <img src="https://www.plantuml.com/plantuml/png/NSon3S9038NXtbEy1LWW1Kf1Hya4nvr9B3csvFFHeEoE0550-_H_R-vP8iUcj4fZL8cgJCgtH3f2bZNH9BYck15LBRtZx9R-8C3AnXCk6M8B0Rreymad7rTbsh_riCQl6dUFFm4hTVtPTgBtFGx7ZwIPhOrDdm00"width="160">          | beschreiben die Verknüpfung allgemein                                                      |
-| Assoziation (Komposition/Aggregation) | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Komposition_Aggregation.svg/1920px-Komposition_Aggregation.svg.png"width="660">  | Bildet Beziehungen von einem Ganzen und seinen Teilen ab                                   |
+| Beziehung           | Notation                  | Bedeutung                                                                                                       |
+| ------------------- | ------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **Assoziation**     | durchgezogene Linie       | "kennt" — eine Klasse hat eine Referenz auf die andere, ohne Besitzverhältnis                                   |
+| **Aggregation**     | Linie mit leerer Raute    | "hat" — schwaches Ganzes-Teil-Verhältnis, Teile existieren auch ohne das Ganze                                  |
+| **Komposition**     | Linie mit gefüllter Raute | "besteht aus" — starkes Ganzes-Teil-Verhältnis, Teile existieren nicht ohne das Ganze                           |
+| **Generalisierung** | Linie mit leerem Dreieck  | "ist ein" — Vererbung von Eigenschaften und Verhalten von der allgemeineren auf die speziellere Klasse          |
 
-## UML- Metamodell
+**Beispiel am TUBAF-Shop**
 
-Abstraktionseben der UML-Modellierung:
+```text @plantUML.png
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
 
-+ M0 - Instanzebene: repräsentiert die konkrete Ausführung des Systems und ist nicht direkt in der UML-Modellierung abgebildet, auf dieser Ebene befinden sich die tatsächlichen Instanzen von Objekten, die während der Laufzeit eines Systems existieren. 
+abstract class TUBAFAngehoeriger
+class Studierende
+abstract class Kunde
+class Warenkorb
+class MerchandiseArtikel
+class Bestellung
+class Adresse
 
-+ M1 - Modellierungsebene: beinhaltet verschiedene Arten von UML-Diagrammen wie Klassendiagramme, Aktivitätsdiagramme, Zustandsdiagramme usw. für eigentliche Benutzermodelle. 
+' Generalisierung: Studierende ist eine konkrete TUBAF-Angehörige
+Studierende --|> TUBAFAngehoeriger
 
-+ M2 - Metamodell-Ebene: beinhaltet die Modelle, die das System selbst beschreiben. Das UML-Metamodell ist ein Beispiel für ein Metamodell auf dieser Ebene. Es beschreibt die Struktur und Syntax der UML selbst und ermöglicht es, UML-Diagramme zu erstellen und zu interpretieren.
+' Komposition: ein Warenkorb gehört genau einem Kunden; ohne Kunden keine Existenz
+Kunde "1" *-- "0..*" Warenkorb : besitzt
 
-+ M3 - Metametamodell-Ebene: Diese Ebene beschreibt die Struktur und Semantik von Metamodellen auf der M2-Ebene. Metametamodelle definieren die Regeln und Konzepte, die verwendet werden, um Metamodelle zu erstellen. 
+' Aggregation: Artikel existieren unabhängig vom Warenkorb
+Warenkorb "1" o-- "0..*" MerchandiseArtikel : enthält
 
-![Metamodel-Hierarchy](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/MetamodelHierarchy_de.svg/1920px-MetamodelHierarchy_de.svg.png "Von Jens von Pilgrim - created by author, based on OMG: Unified Modeling Language: Infrastructure. Page 31, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=9914721")
+' Komposition: Bestellung gehört genau einem Kunden
+Kunde "1" *-- "0..*" Bestellung : tätigt
 
+' Assoziation: Bestellung kennt eine Adresse, ohne Besitzverhältnis
+Bestellung "1" -- "1" Adresse : Lieferadresse
+@enduml
+```
+
+> **Lesart:** *Komposition* bei `Kunde *-- Warenkorb` heißt: Wird der Kunden-Account gelöscht, verschwinden auch seine Warenkörbe. *Aggregation* bei `Warenkorb o-- MerchandiseArtikel` heißt: Wird der Warenkorb geleert, bleiben die Artikel im Katalog bestehen. Die Unterscheidung wirkt subtil — sie macht aber Aussagen über *Lebensdauer* und *Verantwortlichkeit*.
+
+**Multiplizitäten**
+
+Die Zahlen an den Linienenden (`1`, `0..*`, `1..*`) heißen *Multiplizitäten* und geben an, wie viele Instanzen auf jeder Seite beteiligt sind:
+
+| Notation | Bedeutung                                   | Beispiel im Shop                                       |
+| -------- | ------------------------------------------- | ------------------------------------------------------ |
+| `1`      | genau eins                                  | jede Bestellung hat genau eine Lieferadresse           |
+| `0..1`   | keins oder eins (optional)                  | ein Kunde kann (muss aber nicht) eine Standard-Versandadresse haben |
+| `0..*`   | beliebig viele (auch null)                  | ein Warenkorb kann leer oder voll sein                 |
+| `1..*`   | mindestens eins                             | eine Bestellung enthält mindestens einen Artikel       |
+| `n..m`   | zwischen n und m                            | maximal 50 Artikel pro Warenkorb                       |
+
+> **Vorsicht — häufige Verwechslung:** Die Multiplizität steht *gegenüber* der Klasse, auf die sie sich bezieht. `Kunde "1" *-- "0..*" Warenkorb` heißt: *Ein* Kunde besitzt *null bis viele* Warenkörbe — nicht umgekehrt.
+
+## UML vs. Implementierungssprache
+
+> **Kernbotschaft:** Ein UML-Klassendiagramm ist **sprachunabhängig**. Es beschreibt die Struktur eines Systems, nicht seine Realisierung. Wie ein Konzept aus dem Diagramm konkret im Code aussieht, hängt von der gewählten Zielsprache ab — und manche UML-Konstrukte haben in einer Sprache eine *direkte* Entsprechung, in einer anderen nur eine *Konvention* oder gar nichts.
+
+Das wird besonders deutlich, wenn man dieselbe UML-Klasse in C# und in Python umsetzt:
+
+```text @plantUML.png
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class Bestellung{
+  - bestellId: int
+  - status: string
+  + bestaetigen()
+  # validieren(): bool
+}
+@enduml
+```
+
+**Umsetzung in C#:**
+
+```csharp
+public class Bestellung {
+    private int bestellId;
+    private string status;
+
+    public void Bestaetigen() { /* ... */ }
+    protected bool Validieren() { /* ... */ return true; }
+}
+```
+
+**Umsetzung in Python:**
+
+```python
+class Bestellung:
+    def __init__(self):
+        self._bestell_id: int = 0       # protected per Konvention
+        self.__status: str = ""         # private per Name Mangling
+
+    def bestaetigen(self) -> None:      # public
+        ...
+
+    def _validieren(self) -> bool:      # protected per Konvention
+        ...
+```
+
+**Wo sich die Interpretationen unterscheiden:**
+
+| UML-Konzept                  | C#                                          | Python                                                   |
+| ---------------------------- | ------------------------------------------- | -------------------------------------------------------- |
+| `-` private                  | `private` Schlüsselwort, hart erzwungen     | `__name` mit Name Mangling — *Konvention*, umgehbar      |
+| `#` protected                | `protected` Schlüsselwort, vom Compiler geprüft | `_name` — reine Konvention, kein Compiler-Schutz     |
+| `+` public                   | `public` Schlüsselwort                      | Default — kein Präfix                                    |
+| `~` package / `internal`     | `internal` (Assembly-Grenze)                | keine direkte Entsprechung — Modul-Konvention            |
+| **Interfaces**               | eigenes `interface`-Schlüsselwort           | `abc.ABC` + `@abstractmethod` oder Duck Typing           |
+| **Abstrakte Klasse**         | `abstract class`                            | `ABC`-Basisklasse oder per Konvention                    |
+| **Mehrfachvererbung**        | nur über Interfaces erlaubt                 | echte Mehrfachvererbung mit MRO erlaubt                  |
+| **Properties** (`/abgeleitet`) | `get`/`set`-Accessoren als Sprachfeature  | `@property`-Decorator                                    |
+| **Aggregation ↔ Komposition** | syntaktisch nicht unterscheidbar           | syntaktisch nicht unterscheidbar                         |
+| **Multiplizität `0..*`**     | meist `List<T>`                             | meist `list[T]`                                          |
+
+**Was das didaktisch bedeutet:**
+
++ Ein UML-Diagramm ist **kein Code-Bauplan im 1:1-Sinn**. Es legt die *Struktur* und die *gewünschten Eigenschaften* fest — der Entwickler übersetzt sie in die Idiome der Zielsprache.
++ Manche UML-Konstrukte sind in der Zielsprache **gar nicht durchsetzbar**. Wer in Python ein `private`-Attribut modelliert, dokumentiert eine *Absicht* — verhindern kann die Sprache den Zugriff nicht.
++ Der Unterschied zwischen **Aggregation und Komposition** lebt nur im Diagramm. Keine Mainstream-Sprache hat dafür eigene Schlüsselwörter — was bleibt, ist die Verantwortung der Entwicklerin, das Lebenszeit-Verhältnis im Code (z. B. durch Konstruktor­injektion vs. interne Erzeugung) sichtbar zu machen.
++ UML ist deshalb auch nützlich als **Kommunikations­medium zwischen Teams**, die in unterschiedlichen Sprachen arbeiten — und als **Brücke**, wenn ein System portiert wird.
+
+**Beziehungen in C# — was tatsächlich sichtbar wird**
+
+Besonders deutlich wird die Sprach­lücke bei den **Beziehungen** des Klassendiagramms. Von den fünf Beziehungstypen haben nur zwei in C# eine direkte syntaktische Entsprechung:
+
+| UML-Beziehung      | C#-Umsetzung                                    | Eigenes Sprach­konstrukt? |
+| ------------------ | ----------------------------------------------- | ------------------------- |
+| Assoziation        | Feld/Property mit Referenz                      | ✗                         |
+| Aggregation        | Feld/Liste, von außen befüllt                   | ✗                         |
+| Komposition        | Feld/Liste, intern per `new` erzeugt            | ✗                         |
+| **Generalisierung** | `: Basisklasse` + `abstract`/`virtual`/`override` | ✓                       |
+| **Realisierung**    | `: IInterface` + `interface`-Definition        | ✓                         |
+
+*Assoziation* (`Bestellung kennt Adresse`) — Referenz wird *von außen* übergeben:
+
+```csharp
+public class Bestellung {
+    public Adresse Lieferadresse { get; set; }   // einfache Referenz
+}
+```
+
+*Aggregation* (`Warenkorb enthält Artikel`) — Artikel existieren unabhängig, werden von außen hinzugefügt:
+
+```csharp
+public class Warenkorb {
+    public List<MerchandiseArtikel> Artikel { get; } = new();
+    public void Hinzufuegen(MerchandiseArtikel a) => Artikel.Add(a);
+}
+```
+
+*Komposition* (`Bestellung enthält Bestellpositionen`) — Bestellpositionen werden *intern erzeugt* und sterben mit der Bestellung. Eine Bestellposition (Artikel + Menge + Einzelpreis-Snapshot zum Zeitpunkt der Bestellung) hat keine Identität außerhalb genau dieser Bestellung:
+
+```csharp
+public class Bestellung {
+    private List<Bestellposition> positionen = new();   // privat, keine Setter
+
+    public Bestellposition NeuePosition(MerchandiseArtikel a, int menge) {
+        var pos = new Bestellposition(a, menge, a.Preis);   // selbst erzeugt
+        positionen.Add(pos);
+        return pos;
+    }
+}
+```
+
+*Generalisierung* und *Realisierung* — die einzigen Beziehungen mit Sprach­konstrukten:
+
+```csharp
+public abstract class TUBAFAngehoeriger : Nutzer { /* ... */ }    // Generalisierung
+public class Studierende : TUBAFAngehoeriger { /* ... */ }
+
+public interface ISortierteListe { /* ... */ }                    // Realisierung
+public class Datenbank : ISortierteListe { /* ... */ }
+```
+
+> **Das Kern­ergebnis:** Aggregation und Komposition sehen in C# *gleich aus* — ihre Unterscheidung lebt nur im Lebens­zyklus. Erkennbar wird Komposition über drei Code-Indikatoren: (a) die Liste ist `private`, (b) sie wird *intern* mit `new` erzeugt, (c) es gibt keinen öffentlichen Setter, der die Liste durch eine fremde ersetzt. Wer das nicht diszipliniert codiert, verliert die Modellierungs­absicht beim Übergang vom Diagramm zum Code.
+
+> **Praxis­konsequenz:** Wenn die Aggregation-vs.-Komposition-Unterscheidung später wichtig wird (z. B. *Cascading Delete* in einer Datenbank, *Ownership* in einer Domain-Driven-Architektur), gehört sie ins UML-Diagramm. Aus dem Code allein lässt sie sich nicht mehr rekonstruieren.
+
+> **Merke:** Wenn Sie ein UML-Diagramm lesen, fragen Sie sich nicht "wie heißt das Schlüsselwort dafür", sondern "welche *Eigenschaft* wird hier gefordert" — und übersetzen Sie diese Eigenschaft in die Mittel Ihrer Zielsprache.
 
 ## Verwendung von UML Tools
 
