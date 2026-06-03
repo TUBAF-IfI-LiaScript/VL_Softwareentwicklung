@@ -17,18 +17,18 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/08_OOPGrundlagenII.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/09_OOPGrundlagenII.md)
 
 # Klassenelemente in C#
 
 | Parameter                | Kursinformationen                                                                               |
 | ------------------------ | ----------------------------------------------------------------------------------------------- |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                 |
-| **Teil:**                | `8/27`                                                                                          |
+| **Teil:**                | `9/27`                                                                                          |
 | **Semester**             | @config.semester                                                                                |
 | **Hochschule:**          | @config.university                                                                              |
 | **Inhalte:**             | @comment                                                                                        |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/08_OOPGrundlagenII.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/09_OOPGrundlagenII.md |
 | **Autoren**              | @author                                                                                         |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
@@ -116,7 +116,7 @@ Einige der Eigenschaften ...
 
 Welche Schwachstellen sehen Sie bei unserem Modellierungsansatz — und welche Antworten hat OOP darauf?
 
-> **Genau hier zahlt sich Objektorientierung aus:** Jede der drei Säulen aus 07a löst ein konkretes Problem, das wir gerade selbst gesehen haben.
+> **Genau hier zahlt sich Objektorientierung aus:** Jede der drei Säulen aus 07 löst ein konkretes Problem, das wir gerade selbst gesehen haben.
 >
 > + **Redundanz** zwischen `Spieler`/`Trainer`/`Schiedsrichter` (Name, Alter, Position) → **Vererbung** aus einer gemeinsamen Basisklasse `Person`.
 > + Zugriff auf fremden Zustand (`Foul()` verändert die Fitness eines anderen Spielers) → **Kapselung**: Änderungen laufen kontrolliert über Methoden, nicht über offene Felder.
@@ -196,7 +196,7 @@ flowchart LR
     class Python,Cpp,CSharp pillar
 ```
 
-> *Blau hervorgehoben:* C++, Python (Vorlesung 07a) und C# (Vorlesung 07 ff.) — die Sprachen, auf die wir in dieser Reihe regelmäßig Bezug nehmen.
+> *Blau hervorgehoben:* C++, Python (Vorlesung 07) und C# (Vorlesung 08 ff.) — die Sprachen, auf die wir in dieser Reihe regelmäßig Bezug nehmen.
 
 Unsere drei Bezugssprachen positionieren sich in dieser Geschichte sehr unterschiedlich:
 
@@ -418,7 +418,7 @@ public class Program
 
 ### Statische Konstruktoren
 
-> **Wiederholung aus 07:** Die Grundlagen der Konstruktoren in C# — Standardkonstruktor, Überladung, Verkettung mit `: this(...)` und Object Initializer — wurden in [Vorlesung 07](07_OOPGrundlagenI.md) eingeführt. Hier ergänzen wir, was C# auf Klassenebene zusätzlich anbietet: **statische Konstruktoren**.
+> **Wiederholung aus 08:** Die Grundlagen der Konstruktoren in C# — Standardkonstruktor, Überladung, Verkettung mit `: this(...)` und Object Initializer — wurden in [Vorlesung 08](08_OOPGrundlagenI.md) eingeführt. Hier ergänzen wir, was C# auf Klassenebene zusätzlich anbietet: **statische Konstruktoren**.
 
 Statische Konstruktoren ...
 

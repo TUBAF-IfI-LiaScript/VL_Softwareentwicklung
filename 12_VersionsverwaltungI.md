@@ -17,18 +17,18 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/11_VersionsverwaltungI.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/12_VersionsverwaltungI.md)
 
 # Versionsverwaltung I
 
 | Parameter                | Kursinformationen                                                                                   |
 | ------------------------ | --------------------------------------------------------------------------------------------------- |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                     |
-| **Teil:**                | `11/27`                                                                                              |
+| **Teil:**                | `12/27`                                                                                              |
 | **Semester**             | @config.semester                                                                                    |
 | **Hochschule:**          | @config.university                                                                                  |
 | **Inhalte:**             | @comment                                                                                            |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/11_VersionsverwaltungI.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/12_VersionsverwaltungI.md |
 | **Autoren**              | @author                                                                                             |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
@@ -988,13 +988,13 @@ Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git restore <file>..." to discard changes in working directory)
 
-        modified:   11_VersionsverwaltungI.md
+        modified:   12_VersionsverwaltungI.md
         deleted:    alt_ContinuousIntegration.md
 
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
-        12_VersionsverwaltungII.md
+        13_VersionsverwaltungII.md
         code/
         img/11_VersionsverwaltungI/
 ```

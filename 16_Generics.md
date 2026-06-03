@@ -15,18 +15,18 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/15_Generics.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/16_Generics.md)
 
 # Generics
 
 | Parameter                | Kursinformationen                                                                        |
 | ------------------------ | ---------------------------------------------------------------------------------------- |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                          |
-| **Teil:**                | `15/27`                                                                                  |
+| **Teil:**                | `16/27`                                                                                  |
 | **Semester**             | @config.semester                                                                         |
 | **Hochschule:**          | @config.university                                                                       |
 | **Inhalte:**             | @comment                                                                                 |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/15_Generics.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/16_Generics.md |
 | **Autoren**              | @author                                                                                  |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)

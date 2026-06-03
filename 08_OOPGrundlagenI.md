@@ -15,29 +15,29 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/07_OOPGrundlagenI.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/08_OOPGrundlagenI.md)
 
 # Klassen in C#
 
 | Parameter                | Kursinformationen                                                                              |
 | ------------------------ | ---------------------------------------------------------------------------------------------- |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                |
-| **Teil:**                | `7/27`                                                                                         |
+| **Teil:**                | `8/27`                                                                                         |
 | **Semester**             | @config.semester                                                                               |
 | **Hochschule:**          | @config.university                                                                             |
 | **Inhalte:**             | @comment                                                                                       |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/07_OOPGrundlagenI.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/08_OOPGrundlagenI.md |
 | **Autoren**              | @author                                                                                        |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
 
-## Brücke: von Python-OOP (07a) zu C#
+## Brücke: von Python-OOP (07) zu C#
 
-In Vorlesung 07a haben wir die OOP-Konzepte anhand von Python eingeführt: Klasse als Bauplan, Objekt als Instanz, Konstruktor, Methoden, Vererbung, Kapselung. Diese Vorlesung übersetzt diese Konzepte nach **C#** — und zeigt, wo C# *strenger* oder *reicher* ist als Python.
+In Vorlesung 07 haben wir die OOP-Konzepte anhand von Python eingeführt: Klasse als Bauplan, Objekt als Instanz, Konstruktor, Methoden, Vererbung, Kapselung. Diese Vorlesung übersetzt diese Konzepte nach **C#** — und zeigt, wo C# *strenger* oder *reicher* ist als Python.
 
-| Konzept           | Python (07a)                          | C# (ab heute)                                       |
+| Konzept           | Python (07)                           | C# (ab heute)                                       |
 | ----------------- | ------------------------------------- | --------------------------------------------------- |
 | Klassendefinition | `class Animal:`                       | `public class Animal { ... }`                       |
 | Konstruktor       | `def __init__(self, name): ...`       | `public Animal(string name) { ... }`                |
@@ -49,11 +49,11 @@ In Vorlesung 07a haben wir die OOP-Konzepte anhand von Python eingeführt: Klass
 
 > **Lernziele dieser Vorlesung:** Sie können eine C#-Klasse mit Konstruktor und Methoden anlegen, das Verhalten von `this` benennen, **Wert- vs. Referenztypen** unterscheiden, einen `struct` als Werttyp-Spezialfall einsetzen und die Sichtbarkeitsmodifizierer von C# nennen.
 
-> **Was kommt in 08 / 09?** — 08 vertieft die *Klassenelemente* (Properties, statische Mitglieder, Operator-Überladung). 09 behandelt **Vererbung in C#** mit ihrer expliziten `virtual`/`override`-Mechanik.
+> **Was kommt in 09 / 10?** — 09 vertieft die *Klassenelemente* (Properties, statische Mitglieder, Operator-Überladung). 10 behandelt **Vererbung in C#** mit ihrer expliziten `virtual`/`override`-Mechanik.
 
 ## Aus Python wird C#
 
-Hier dieselbe `Animal`-Klasse wie in 07a — einmal Python, einmal C# nebeneinander:
+Hier dieselbe `Animal`-Klasse wie in 07 — einmal Python, einmal C# nebeneinander:
 
 ```python      AnimalPython.py
 class Animal:
@@ -224,7 +224,7 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-> **Ausblick:** `this` taucht später noch in zwei weiteren Rollen auf — bei der Definition von **Indexern** (`public int this[int i] { ... }`, VL 08) und bei sogenannten **Extension Methods** (VL 26 / LINQ). Dieselbe Idee, immer „dieses konkrete Objekt".
+> **Ausblick:** `this` taucht später noch in zwei weiteren Rollen auf — bei der Definition von **Indexern** (`public int this[int i] { ... }`, VL 09) und bei sogenannten **Extension Methods** (VL 26 / LINQ). Dieselbe Idee, immer „dieses konkrete Objekt".
 
 ## Konstruktoren in C#
 
@@ -451,7 +451,7 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-> **Aufgabe:** Übersetzen Sie das `Cat`-Beispiel mit `super().__init__(...)` aus 07a nach C# — denken Sie an `: base(...)` (kommt in 09 ausführlich).
+> **Aufgabe:** Übersetzen Sie das `Cat`-Beispiel mit `super().__init__(...)` aus 07 nach C# — denken Sie an `: base(...)` (kommt in 10 ausführlich).
 
 ### Sonderfall: privater Konstruktor
 
@@ -597,7 +597,7 @@ Der Compiler erzeugt für jeden Record automatisch:
 - eine `ToString()`-Implementierung,
 - den `with`-Operator.
 
-> **Ausblick:** *Properties*, *Operator-Überladung* und *Equals/GetHashCode-Verträge* — also genau das, was der Record-Compiler hier für Sie schreibt — folgen ausführlich in **VL 08**. Vererbung von Records: in **VL 09**.
+> **Ausblick:** *Properties*, *Operator-Überladung* und *Equals/GetHashCode-Verträge* — also genau das, was der Record-Compiler hier für Sie schreibt — folgen ausführlich in **VL 09**. Vererbung von Records: in **VL 10**.
 
 ### Und C-`struct`s?
 
@@ -671,9 +671,9 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-> **Python-Vergleich:** In 07a war `_age` eine Bitte. In C# wird `private int age;` vom Compiler durchgesetzt.
+> **Python-Vergleich:** In 07 war `_age` eine Bitte. In C# wird `private int age;` vom Compiler durchgesetzt.
 
-> **Vertiefung:** Vorlesung 08 zeigt **Properties** als idiomatische C#-Lösung für „kontrollierter Zugriff auf private Felder" (statt expliziter Getter/Setter wie in 07a). Vorlesung 09 erklärt `protected` und die Wechselwirkungen mit Vererbung.
+> **Vertiefung:** Vorlesung 09 zeigt **Properties** als idiomatische C#-Lösung für „kontrollierter Zugriff auf private Felder" (statt expliziter Getter/Setter wie in 07). Vorlesung 10 erklärt `protected` und die Wechselwirkungen mit Vererbung.
 
 ## Beispiel: `internal` in Aktion
 
@@ -801,7 +801,7 @@ public struct Animal { ... }
 
 ## Aufgaben
 
-1. **Übersetzen.** Übertragen Sie das `Animal`-Beispiel aus 07a (mit `make_noise`) nach C#. Erzeugen Sie drei Instanzen und rufen Sie `MakeNoise()` in einer Schleife auf.
+1. **Übersetzen.** Übertragen Sie das `Animal`-Beispiel aus 07 (mit `make_noise`) nach C#. Erzeugen Sie drei Instanzen und rufen Sie `MakeNoise()` in einer Schleife auf.
 
 2. **Konstruktor-Überladung.** Schreiben Sie für `Animal` drei Konstruktoren: parameterlos, nur Name, vollständig (Name, Sound, Age). Verwenden Sie `: this(...)`-Verkettung, um Code-Duplikate zu vermeiden.
 

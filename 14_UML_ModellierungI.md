@@ -20,18 +20,18 @@ link: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklu
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/13_UML_ModellierungI.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/14_UML_ModellierungI.md)
 
 # Modellierung von Software
 
 | Parameter                | Kursinformationen                                                                                |
 | ------------------------ | ------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                  |
-| **Teil:**                | `13/27`                                                                                           |
+| **Teil:**                | `14/27`                                                                                           |
 | **Semester**             | @config.semester                                                                                 |
 | **Hochschule:**          | @config.university                                                                               |
 | **Inhalte:**             | @comment                                                                                         |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/13_UML_ModellierungI.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/14_UML_ModellierungI.md |
 | **Autoren**              | @author                                                                                          |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)

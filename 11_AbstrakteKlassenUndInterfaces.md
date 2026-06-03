@@ -16,18 +16,18 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/10_AbstrakteKlassenUndInterfaces.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/11_AbstrakteKlassenUndInterfaces.md)
 
 # Abstrakte Klassen und Interfaces
 
 | Parameter                | Kursinformationen                                                                                             |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------- |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                               |
-| **Teil:**                | `10/27`                                                                                                        |
+| **Teil:**                | `11/27`                                                                                                        |
 | **Semester**             | @config.semester                                                                                              |
 | **Hochschule:**          | @config.university                                                                                            |
 | **Inhalte:**             | @comment                                                                                                      |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/10_AbstrakteKlassenUndInterfaces.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/11_AbstrakteKlassenUndInterfaces.md |
 | **Autoren**              | @author                                                                                                       |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)

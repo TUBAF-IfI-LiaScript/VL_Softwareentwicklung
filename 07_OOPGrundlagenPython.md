@@ -14,18 +14,18 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/07a_OOPGrundlagenPython.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/07_OOPGrundlagenPython.md)
 
 # OOP — Konzeptioneller Einstieg (Python)
 
 | Parameter                | Kursinformationen                                                                                  |
 | ------------------------ | -------------------------------------------------------------------------------------------------- |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                    |
-| **Teil:**                | `7a/27`                                                                                            |
+| **Teil:**                | `7/27`                                                                                            |
 | **Semester**             | @config.semester                                                                                   |
 | **Hochschule:**          | @config.university                                                                                 |
 | **Inhalte:**             | @comment                                                                                           |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/07a_OOPGrundlagenPython.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/07_OOPGrundlagenPython.md |
 | **Autoren**              | @author                                                                                            |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
@@ -410,7 +410,7 @@ print(f"{kitty.name} ist {kitty.get_age()} Jahre alt.")
 
 > **Merke:** Kapselung trennt das *Was* (öffentliches Verhalten) vom *Wie* (interne Umsetzung). Wer die Klasse benutzt, soll nur das Was sehen müssen — wir können das Wie ändern, ohne dass Aufrufer kaputt gehen.
 
-> In C# werden wir dafür echte Modifizierer (`public`, `private`) und sogenannte **Properties** kennenlernen — Vorlesung 07/08. Das geht in Python auch — siehe nächster Slide.
+> In C# werden wir dafür echte Modifizierer (`public`, `private`) und sogenannte **Properties** kennenlernen — Vorlesung 08/09. Das geht in Python auch — siehe nächster Slide.
 
 ### Python Properties: Elegante Kapselung mit `@property`
 

@@ -19,18 +19,18 @@ link: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklu
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/14_UML_ModellierungII.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/15_UML_ModellierungII.md)
 
 # Modellierung von Software
 
 | Parameter                | Kursinformationen                                                                                  |
 | ------------------------ | -------------------------------------------------------------------------------------------------- |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                                    |
-| **Teil:**                | `14/27`                                                                                            |
+| **Teil:**                | `15/27`                                                                                            |
 | **Semester**             | @config.semester                                                                                   |
 | **Hochschule:**          | @config.university                                                                                 |
 | **Inhalte:**             | @comment                                                                                           |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/14_UML_ModellierungII.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/15_UML_ModellierungII.md |
 | **Autoren**              | @author                                                                                            |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
@@ -220,7 +220,7 @@ Der TUBAF-Shop mit seinen sechs Use-Cases wirkt überschaubar — fast banal. In
 + **Granularität ist eine schwierige Designentscheidung.** Zu fein modelliert ist *"Knopf drücken"* oder *"Feld ausfüllen"* — das sind UI-Interaktionen, keine Use-Cases. Zu grob ist *"System nutzen"* — sagt nichts aus. Cockburn-Faustregel: Ein Use-Case sollte einen **abgeschlossenen Geschäftswert** liefern (*User Goal Level* — typischerweise 5–20 Minuten Nutzungs­dauer, mit klarem Erfolgs­ergebnis). *"Bestellung abschließen"* erfüllt das; *"Warenkorb-Icon anklicken"* nicht.
 + **Akteur-Identifikation ist nicht trivial.** Wer ist *"der Kunde"* im TUBAF-Shop wirklich? Anonymer Besucher? Eingeloggter Studi? Lehrstuhl-Sekretariat, das im Auftrag mehrerer Kollegen bestellt? 
 + **Das Diagramm ist nur die Spitze des Eisbergs.** Was Sie hier sehen, zeigt **welche** Use-Cases es gibt und **wer** sie nutzt. Die eigentliche Arbeit steckt in den **Use-Case-Beschreibungen**.
-+ **Politische Dimension.** Use-Cases sind oft das **erste vertraglich relevante Dokument** zwischen Auftraggeber und Auftragnehmer (siehe Lasten- und Pflichtenheft aus VL 13). Was *nicht* im Use-Case-Katalog steht, wird typischerweise auch *nicht* implementiert — und Nachforderungen werden teuer. 
++ **Politische Dimension.** Use-Cases sind oft das **erste vertraglich relevante Dokument** zwischen Auftraggeber und Auftragnehmer (siehe Lasten- und Pflichtenheft aus VL 14). Was *nicht* im Use-Case-Katalog steht, wird typischerweise auch *nicht* implementiert — und Nachforderungen werden teuer. 
 > **Pragmatische Konsequenz:** Ein Anwendungsfall-Diagramm ist *einfach zu zeichnen*, aber *schwer richtig zu modellieren*. Die formale Notation lernen Sie in einer Stunde — die Modellierungs-Disziplin, die nötig ist, um ein tragfähiges Anforderungs­dokument zu erzeugen, ist Berufserfahrung von Jahren. 
 
 ## Aktivitätsdiagramm
@@ -784,7 +784,7 @@ class MerchandiseArtikel{
 
 > **Merke:** Der UML-Standard kennt nur die vier obenstehenden Sichtbarkeiten. Sprachspezifische Differenzierungen wie `internal protected` in C# sind in UML nicht vorgesehen — die Sprach-Realität entscheidet jeweils, wie streng diese Notation interpretiert wird (vgl. Abschnitt *UML vs. Implementierungssprache* weiter unten).
 
-> **Hinweis:** Die *Semantik* der einzelnen Sichtbarkeiten — was genau `protected` bei Vererbung erlaubt, wie sich `internal` über Assembly-Grenzen verhält — wird in **VL 09 (Vererbung)** ausführlich behandelt. Hier liegt der Fokus auf der UML-Notation.
+> **Hinweis:** Die *Semantik* der einzelnen Sichtbarkeiten — was genau `protected` bei Vererbung erlaubt, wie sich `internal` über Assembly-Grenzen verhält — wird in **VL 10 (Vererbung)** ausführlich behandelt. Hier liegt der Fokus auf der UML-Notation.
 
 ********************************************************************************
 

@@ -15,32 +15,32 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/09_Vererbung.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/10_Vererbung.md)
 
 # Vererbung
 
 | Parameter                | Kursinformationen                                                                         |
 | ------------------------ | ----------------------------------------------------------------------------------------- |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                           |
-| **Teil:**                | `9/27`                                                                                    |
+| **Teil:**                | `10/27`                                                                                    |
 | **Semester**             | @config.semester                                                                          |
 | **Hochschule:**          | @config.university                                                                        |
 | **Inhalte:**             | @comment                                                                                  |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/09_Vererbung.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/10_Vererbung.md |
 | **Autoren**              | @author                                                                                   |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
 
-## Brücke: Vererbung von Python (07a) nach C#
+## Brücke: Vererbung von Python (07) nach C#
 
-In **07a** haben Sie Vererbung in Python kennengelernt — `class Dog(Animal):`, `super().__init__(...)`, beliebiges Überschreiben. C# behandelt dasselbe Konzept *strenger und expliziter*, weil große Codebasen und die Statik des Compilers das brauchen.
+In **07** haben Sie Vererbung in Python kennengelernt — `class Dog(Animal):`, `super().__init__(...)`, beliebiges Überschreiben. C# behandelt dasselbe Konzept *strenger und expliziter*, weil große Codebasen und die Statik des Compilers das brauchen.
 
-| Aspekt                       | Python (07a)                          | C# (heute)                                                |
+| Aspekt                       | Python (07)                           | C# (heute)                                                |
 | ---------------------------- | ------------------------------------- | --------------------------------------------------------- |
 | Erben von einer Basisklasse  | `class Dog(Animal):`                  | `public class Dog : Animal { ... }`                       |
-| Mehrfachvererbung            | erlaubt                               | **nicht erlaubt** (nur über Interfaces — siehe VL 10)     |
+| Mehrfachvererbung            | erlaubt                               | **nicht erlaubt** (nur über Interfaces — siehe VL 11)     |
 | Eltern-Konstruktor aufrufen  | `super().__init__(name)`              | `: base(name)`                                            |
 | Eltern-Methode aufrufen      | `super().make_noise()`                | `base.MakeNoise()`                                        |
 | Methode überschreiben        | implizit (gleicher Name reicht)       | **explizit:** `virtual` in Basis + `override` in Kind     |
@@ -837,7 +837,7 @@ public class Program
 
 ## Aufgaben
 
-- [ ] **Übersetzen (Animal → Dog → Puppy).** Übertragen Sie die mehrstufige Hierarchie aus 07a (Python: `Animal` → `Dog` → `Puppy` mit `super()`-Kette) nach C#. Markieren Sie `describe()` als `virtual` und in jeder Stufe als `override`. Rufen Sie über eine `Animal`-Variable, der ein `Puppy` zugewiesen ist, `describe()` auf und beobachten Sie die Ausgabe.
+- [ ] **Übersetzen (Animal → Dog → Puppy).** Übertragen Sie die mehrstufige Hierarchie aus 07 (Python: `Animal` → `Dog` → `Puppy` mit `super()`-Kette) nach C#. Markieren Sie `describe()` als `virtual` und in jeder Stufe als `override`. Rufen Sie über eine `Animal`-Variable, der ein `Puppy` zugewiesen ist, `describe()` auf und beobachten Sie die Ausgabe.
 
 - [ ]  **`new` vs. `override`.** Schreiben Sie dieselbe Hierarchie mit `new` statt `override` in `Dog.describe()`. Was ändert sich, wenn Sie über eine `Animal`-Variable auf das Objekt zugreifen? Erklären Sie das Ergebnis im Hinblick auf statische und dynamische Bindung.
 
