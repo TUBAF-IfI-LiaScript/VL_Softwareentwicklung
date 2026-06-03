@@ -1,1 +1,257 @@
-- !include metadata/00_Einfuehrung.yml
+name: "Softwareentwicklung"
+creativeWorkStatus: Published
+description: >
+  Vorlesung "Softwareentwicklung" der TU Bergakademie Freiberg. Vom
+  Softwareentwicklungsprozess über die objektorientierte Programmierung mit C#
+  und .NET (Sprachgrundlagen, Klassen, Vererbung, abstrakte Klassen und
+  Interfaces, Generics und Container) bis zu Werkzeugen und Methoden der
+  professionellen Softwareentwicklung: Versionsverwaltung mit Git,
+  UML-Modellierung, Dokumentation und Build-Tools, Testen, Continuous
+  Integration sowie fortgeschrittene Konzepte (Delegaten, Events, Threads und
+  Tasks, LINQ, Entwurfsmuster und GUI-Entwicklung mit MAUI). Alle Materialien
+  sind als interaktive LiaScript-Kurse aufbereitet.
+
+# Grundmetadaten
+license: "https://creativecommons.org/publicdomain/zero/1.0/"
+inLanguage: "de"
+learningResourceType: "Course"
+url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/README.md"
+image: "https://upload.wikimedia.org/wikipedia/commons/e/e8/TUBAF_Logo.svg"
+
+# Autor & Herausgeber
+creator:
+  - givenName: "Sebastian"
+    familyName: "Zug"
+    id: "https://orcid.org/0000-0001-9949-6963"
+    type: "Person"
+    affiliation:
+      name: "TU Bergakademie Freiberg"
+      id: "https://ror.org/031vc2293"
+      type: "Organization"
+  - givenName: "Volker"
+    familyName: "Göhler"
+    type: "Person"
+    affiliation:
+      name: "TU Bergakademie Freiberg"
+      id: "https://ror.org/031vc2293"
+      type: "Organization"
+  - givenName: "Andre"
+    familyName: "Dietrich"
+    id: "https://github.com/andre-dietrich"
+    type: "Person"
+
+publisher:
+  - name: "TU Bergakademie Freiberg"
+    id: "https://ror.org/031vc2293"
+    type: "Organization"
+
+# Zielgruppe & Niveau
+educationalLevel:
+  - "Undergraduate"
+  - "Bachelor"
+audience:
+  - "http://purl.org/dcx/lrmi-vocabs/educationalAudienceRole/student"
+
+# Fachliche Einordnung (Informatik)
+about:
+  - "https://w3id.org/kim/hochschulfaechersystematik/n71"
+
+keywords:
+  - Softwareentwicklung
+  - Objektorientierte Programmierung
+  - C#
+  - .NET
+  - UML
+  - Versionsverwaltung
+  - Git
+  - Continuous Integration
+  - Softwaretest
+  - Design Pattern
+  - Generics
+  - LINQ
+  - MAUI
+  - LiaScript
+  - OER
+  - Interaktiv
+  - Informatik
+
+hasPart:
+  - name: "Einführung"
+    description: "Motivation der Vorlesung Softwareentwicklung und Beschreibung der Organisation der Veranstaltung."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/00_Einfuehrung.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/00_Einfuehrung.png"
+
+  - name: "Softwareentwicklung als Prozess"
+    description: "Software als Produkt und Softwareentwicklung als ingenieurmäßiger Prozess: Vorgehensmodelle, Phasen und Herausforderungen der Entwicklung großer Softwaresysteme."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/01_Software.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/01_Software.png"
+
+  - name: ".NET und Einordnung der Sprache C#"
+    description: "Konzepte der .NET-Plattform und Einordnung der Sprache C#: Common Language Runtime, Kompilierung, Laufzeitumgebung und das Ökosystem von .NET."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/02_DotNet.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/02_DotNet.png"
+
+  - name: "C# Grundlagen I"
+    description: "Elemente der Sprache C#: Aufbau eines Programms, Datentypen, Variablen, Operatoren und grundlegende Ein- und Ausgabe."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/03_CsharpGrundlagenI.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/03_CsharpGrundlagenI.png"
+
+  - name: "C# Grundlagen II"
+    description: "Vertiefung der Sprachgrundlagen von C#: Typkonvertierungen, Wert- und Referenztypen sowie der Umgang mit grundlegenden Datenstrukturen."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/04_CsharpGrundlagenII.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/04_CsharpGrundlagenII.png"
+
+  - name: "C# Grundlagen III"
+    description: "Weiterführende Sprachelemente von C#: Felder und Arrays sowie der Aufbau strukturierter Programme."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/05_CsharpGrundlagenIII.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/05_CsharpGrundlagenIII.png"
+
+  - name: "Programmfluss und Funktionen"
+    description: "Steuerung des Programmflusses mit Verzweigungen und Schleifen sowie die Strukturierung von Code durch Funktionen und Methoden in C#."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/06_ProgrammflussUndFunktionen.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/06_ProgrammflussUndFunktionen.png"
+
+  - name: "OOP — Konzeptioneller Einstieg (Python)"
+    description: "Konzeptioneller Einstieg in die objektorientierte Programmierung anhand von Python: Klassen, Objekte und Kapselung als Brücke für Studierende ohne C#-Vorkenntnisse vor den C#-OOP-Vorlesungen."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/07_OOPGrundlagenPython.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/07_OOPGrundlagenPython.png"
+
+  - name: "Klassen in C#"
+    description: "Grundlagen der objektorientierten Programmierung in C#: Definition von Klassen, Erzeugung von Objekten und das Verhältnis von Struktur und Verhalten."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/08_OOPGrundlagenI.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/08_OOPGrundlagenI.png"
+
+  - name: "Klassenelemente in C#"
+    description: "Elemente einer Klasse in C#: Felder, Eigenschaften (Properties), Methoden, Konstruktoren sowie Sichtbarkeit und Kapselung."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/09_OOPGrundlagenII.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/09_OOPGrundlagenII.png"
+
+  - name: "Vererbung"
+    description: "Vererbung als Säule der objektorientierten Programmierung: Basis- und abgeleitete Klassen, Überschreiben von Methoden und Polymorphie in C#."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/10_Vererbung.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/10_Vererbung.png"
+
+  - name: "Abstrakte Klassen und Interfaces"
+    description: "Abstrakte Klassen und Interfaces in C#: Trennung von Schnittstelle und Implementierung sowie der Entwurf erweiterbarer und austauschbarer Komponenten."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/11_AbstrakteKlassenUndInterfaces.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/11_AbstrakteKlassenUndInterfaces.png"
+
+  - name: "Versionsverwaltung I"
+    description: "Grundlagen der Versionsverwaltung mit Git: Motivation, Repositories, Commits und der Umgang mit der Historie von Softwareprojekten."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/12_VersionsverwaltungI.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/12_VersionsverwaltungI.png"
+
+  - name: "Versionsverwaltung II"
+    description: "Fortgeschrittene Versionsverwaltung mit Git: Branching, Merging, verteiltes Arbeiten sowie Workflows für die Zusammenarbeit im Team."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/13_VersionsverwaltungII.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/13_VersionsverwaltungII.png"
+
+  - name: "Modellierung von Software I (UML)"
+    description: "Einführung in die Modellierung von Software mit UML: Requirements Engineering, Lastenheft und der Übergang von Anforderungen zu strukturellen Modellen."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/14_UML_ModellierungI.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/14_UML_ModellierungI.png"
+
+  - name: "Modellierung von Software II (UML)"
+    description: "Vertiefung der UML-Modellierung: Klassendiagramme, Beziehungen zwischen Klassen sowie der Einsatz von UML-Werkzeugen zur Softwaremodellierung."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/15_UML_ModellierungII.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/15_UML_ModellierungII.png"
+
+  - name: "Generics"
+    description: "Generische Programmierung in C#: typsichere und wiederverwendbare Klassen und Methoden durch generische Typparameter und Constraints."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/16_Generics.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/16_Generics.png"
+
+  - name: "Collections"
+    description: "Container und Collections in C#: Listen, Dictionaries, Mengen und weitere Datenstrukturen sowie ihre Eigenschaften und Einsatzszenarien."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/17_Container.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/17_Container.png"
+
+  - name: "Dokumentation und Build-Tools"
+    description: "Softwaredokumentation für unterschiedliche Rollen sowie Build-Toolchains: automatisierte Erstellung, Generierung von Dokumentation und Werkzeuge des Build-Prozesses."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/18_Dokumentation_BuildTools.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/18_Dokumentation_BuildTools.png"
+
+  - name: "Testen von Software"
+    description: "Grundlagen des Softwaretests: Unit-Tests, Testverfahren und -strategien sowie der systematische Nachweis der Korrektheit von Software."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/19_Testen.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/19_Testen.png"
+
+  - name: "Continuous Integration"
+    description: "Continuous Integration mit GitHub: automatisierte Builds und Tests, Workflows und Pipelines zur kontinuierlichen Integration von Softwareänderungen."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/20_ContinuousIntegration.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/20_ContinuousIntegration.png"
+
+  - name: "Delegaten"
+    description: "Delegaten in C#: Methoden als Werte, Callback-Mechanismen und die Grundlage für ereignisbasierte und funktionale Programmierung."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/21_Delegaten.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/21_Delegaten.png"
+
+  - name: "Events"
+    description: "Ereignisse (Events) in C#: das Publisher-Subscriber-Muster, Eventhandler und die Entkopplung von Komponenten durch ereignisbasierte Kommunikation."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/22_Events.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/22_Events.png"
+
+  - name: "Threads"
+    description: "Nebenläufigkeit mit Threads in C#: parallele Ausführung, Synchronisation und typische Herausforderungen der nebenläufigen Programmierung."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/23_Threads.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/23_Threads.png"
+
+  - name: "Tasks"
+    description: "Das Task-Modell in C#: asynchrone Programmierung mit Tasks, async/await und die abstrahierte Verwaltung nebenläufiger Operationen."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/24_Tasks.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/24_Tasks.png"
+
+  - name: "Entwurfsmuster"
+    description: "Entwurfsmuster (Design Patterns) in der objektorientierten Softwareentwicklung: bewährte Lösungen für wiederkehrende Entwurfsprobleme sowie die SOLID-Prinzipien und Dependency Injection."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/25_DesignPattern.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/25_DesignPattern.png"
+
+  - name: "Language-Integrated Query (LINQ)"
+    description: "Language-Integrated Query (LINQ) in C#: deklarative Abfragen über Collections und Datenquellen mit Methoden- und Abfragesyntax."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/26_LINQ.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/26_LINQ.png"
+
+  - name: "GUI-Programmierung mit .NET MAUI"
+    description: "Grafische Oberflächen mit .NET MAUI: Aufbau plattformübergreifender Anwendungen, XAML und die Grundlagen der MAUI-Anwendungsentwicklung."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/27_MAUI.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/27_MAUI.png"
+
+  - name: ".NET MAUI Elemente"
+    description: "Vertiefung der .NET-MAUI-Entwicklung: Layouts, Controls, Datenbindung (Data Binding) und das MVVM-Muster für strukturierte UI-Anwendungen."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/28_MAUI_II.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/28_MAUI_II.png"
+
+  - name: "Anwendungsbeispiele"
+    description: "Anwendungsbeispiele und Praxisfragen der Softwareentwicklung, u. a. der sichere Umgang mit Schlüsseln, Passwörtern und Konfigurationsdaten in Projekten."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/29_Anwendungen.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/29_Anwendungen.png"
