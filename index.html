@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Softwareentwicklung - Kursuebersicht</title>
+  <meta name="description" content="Interaktive LiaScript-Kursuebersicht zur Vorlesung Softwareentwicklung" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f2f5f9;
+      --ink: #10253a;
+      --muted: #496173;
+      --brand: #00497f;
+      --brand-2: #0069b4;
+      --brand-3: #0b7bc9;
+      --card: #ffffff;
+      --line: #d4dfec;
+      --shadow: 0 14px 34px rgba(16, 37, 58, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", "Segoe UI", "Noto Sans", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(0, 105, 180, 0.08), rgba(0, 105, 180, 0) 180px),
+        radial-gradient(850px 500px at 120% -30%, rgba(0, 73, 127, 0.18), transparent 65%),
+        radial-gradient(900px 500px at -20% -20%, rgba(0, 105, 180, 0.14), transparent 60%),
+        var(--bg);
+      min-height: 100vh;
+    }
+
+    .shell {
+      width: min(1200px, calc(100% - 2rem));
+      margin: 0 auto;
+      padding: 2.2rem 0 3rem;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #003e6d 0%, #0069b4 62%, #0f82d0 100%);
+      color: #eef6ff;
+      border-radius: 18px;
+      padding: 1.4rem 1.2rem 1.2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 0.7rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .brand img {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 12px;
+      padding: 0.25rem;
+    }
+
+    .brand small {
+      display: block;
+      font-size: 0.84rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #dbeeff;
+      font-weight: 700;
+    }
+
+    .brand strong {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #f2f8ff;
+    }
+
+    .hero h1 {
+      margin: 0 0 0.4rem;
+      font-family: "Merriweather", Georgia, serif;
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+    }
+
+    .hero p {
+      margin: 0.4rem 0;
+      max-width: 75ch;
+      color: #d8ebff;
+    }
+
+    .hero-desc p {
+      margin: 0.45rem 0;
+      max-width: 75ch;
+      color: #d8ebff;
+      line-height: 1.45;
+    }
+
+    .hero-desc a {
+      color: #ffffff;
+      font-weight: 700;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 2px;
+    }
+
+    .hero-desc a:hover {
+      color: #e5f2ff;
+    }
+
+    .actions {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(235, 245, 255, 0.45);
+      border-radius: 999px;
+      padding: 0.55rem 0.95rem;
+      color: #f7fbff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: transform 150ms ease, background 150ms ease, box-shadow 150ms ease;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btn.primary {
+      background: #ffffff;
+      color: #00497f;
+      border-color: #ffffff;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 18px rgba(9, 36, 61, 0.2);
+    }
+
+    .btn.primary:hover {
+      background: #f4f9ff;
+    }
+
+    .meta {
+      margin: 1.2rem 0 0.6rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 9px 20px rgba(16, 37, 58, 0.08);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      opacity: 0;
+      transform: translateY(8px);
+      animation: rise 360ms ease forwards;
+    }
+
+    .card:hover {
+      border-color: #9ab8d8;
+      box-shadow: 0 14px 30px rgba(16, 37, 58, 0.14);
+      transform: translateY(-2px);
+    }
+
+    .card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: #e9efee;
+      display: block;
+    }
+
+    .body {
+      padding: 0.75rem 0.8rem 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .title {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.35;
+      color: #0e3255;
+    }
+
+    .desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+      flex: 1;
+    }
+
+    .row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      border-radius: 999px;
+      border: 1px solid #b8cfe8;
+      padding: 0.3rem 0.55rem;
+      font-size: 0.8rem;
+      color: #14456f;
+      text-decoration: none;
+      background: #f7fbff;
+    }
+
+    .chip:hover {
+      border-color: #5e95c8;
+      background: #ebf4ff;
+    }
+
+    .warn {
+      margin-top: 1rem;
+      border: 1px solid #d7c491;
+      background: #fff9eb;
+      color: #5b4825;
+      border-radius: 10px;
+      padding: 0.7rem 0.8rem;
+      display: none;
+    }
+
+    @keyframes rise {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(1200px, calc(100% - 1rem));
+      }
+
+      .hero {
+        padding: 1rem;
+      }
+
+      .brand img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div class="brand">
+        <img src="./img/Logo_TU_Freiberg.png" alt="Logo TU Bergakademie Freiberg" />
+        <div>
+          <small>TU Bergakademie Freiberg</small>
+          <strong>Fakultaet fuer Mathematik und Informatik</strong>
+        </div>
+      </div>
+      <h1 id="courseTitle">Softwareentwicklung</h1>
+      <div class="hero-desc" id="courseDescription"><p>Lade Kursmetadaten...</p></div>
+      <div class="actions">
+        <a class="btn primary" id="openMain" href="README.md">Kurs starten</a>
+        <a class="btn" href="https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung">Repository</a>
+      </div>
+    </section>
+
+    <p class="meta" id="metaLine">Module werden geladen...</p>
+    <section class="grid" id="grid"></section>
+    <section class="warn" id="warn"></section>
+  </main>
+
+  <script>
+    function escapeHtml(text) {
+      return String(text)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+
+    function parseTopValue(yaml, key) {
+      const re = new RegExp('^' + key + ':\\s*"([^\\"]*)"', 'm');
+      const m = yaml.match(re);
+      return m ? m[1] : '';
+    }
+
+    function parseDescription(yaml) {
+      const m = yaml.match(/^description:\s*>\s*([\s\S]*?)\n\n#/m);
+      if (!m) return [];
+      const paragraphs = [];
+      let current = [];
+
+      for (const rawLine of m[1].split('\n')) {
+        const line = rawLine.trim();
+        if (!line) {
+          if (current.length) {
+            paragraphs.push(current.join(' ').replace(/\s+/g, ' ').trim());
+            current = [];
+          }
+          continue;
+        }
+        current.push(line);
+      }
+
+      if (current.length) {
+        paragraphs.push(current.join(' ').replace(/\s+/g, ' ').trim());
+      }
+
+      return paragraphs;
+    }
+
+    function linkify(text) {
+      return escapeHtml(text).replace(
+        /(https?:\/\/[^\s<]+)/g,
+        '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'
+      );
+    }
+
+    function parseCourses(yaml) {
+      const lines = yaml.split('\n');
+      const courses = [];
+      let inHasPart = false;
+      let current = null;
+
+      for (const line of lines) {
+        if (line.startsWith('hasPart:')) {
+          inHasPart = true;
+          continue;
+        }
+        if (!inHasPart) continue;
+
+        if (line.startsWith('  - name: ')) {
+          if (current) courses.push(current);
+          current = { name: line.replace('  - name: ', '').replace(/^"|"$/g, '') };
+          continue;
+        }
+        if (!current) continue;
+
+        if (line.startsWith('    description: ')) {
+          current.description = line.replace('    description: ', '').replace(/^"|"$/g, '');
+        } else if (line.startsWith('    url: ')) {
+          current.url = line.replace('    url: ', '').replace(/^"|"$/g, '');
+        } else if (line.startsWith('    image: ')) {
+          current.image = line.replace('    image: ', '').replace(/^"|"$/g, '');
+        }
+      }
+      if (current) courses.push(current);
+      return courses;
+    }
+
+    async function loadOverview() {
+      const grid = document.getElementById('grid');
+      const warn = document.getElementById('warn');
+      try {
+        const response = await fetch('./metadata.yml', { cache: 'no-store' });
+        if (!response.ok) throw new Error('metadata.yml konnte nicht geladen werden');
+
+        const yaml = await response.text();
+        const title = parseTopValue(yaml, 'name') || 'Softwareentwicklung';
+        const descriptionParagraphs = parseDescription(yaml);
+        const mainUrl = parseTopValue(yaml, 'url') || './README.md';
+
+        document.getElementById('courseTitle').textContent = title;
+        document.getElementById('courseDescription').innerHTML =
+          (descriptionParagraphs.length ? descriptionParagraphs : ['Interaktive Kursuebersicht'])
+            .map((paragraph) => `<p>${linkify(paragraph)}</p>`)
+            .join('');
+        document.getElementById('openMain').href = mainUrl;
+
+        const courses = parseCourses(yaml);
+        document.getElementById('metaLine').textContent = courses.length + ' Kursmodule';
+
+        grid.innerHTML = courses
+          .map((course, idx) => {
+            const delay = (idx % 8) * 32;
+            const name = escapeHtml(course.name || 'Ohne Titel');
+            const desc = escapeHtml(course.description || '');
+            const url = escapeHtml(course.url || '#');
+            const image = escapeHtml(course.image || '');
+            const sourceUrl = course.url
+              ? course.url.replace('https://liascript.github.io/course/?', '')
+              : '#';
+            const githubUrl = sourceUrl
+              .replace('https://raw.githubusercontent.com/', 'https://github.com/')
+              .replace('/master/', '/blob/master/');
+            return `
+              <article class="card" style="animation-delay:${delay}ms">
+                <img src="${image}" alt="Logo ${name}" loading="lazy" />
+                <div class="body">
+                  <h2 class="title">${name}</h2>
+                  <p class="desc">${desc}</p>
+                  <div class="row">
+                    <a class="chip" href="${url}">LiaScript</a>
+                    <a class="chip" href="${escapeHtml(sourceUrl)}">Markdown</a>
+                    <a class="chip" href="${escapeHtml(githubUrl)}" target="_blank" rel="noopener noreferrer">Link</a>
+                  </div>
+                </div>
+              </article>
+            `;
+          })
+          .join('');
+      } catch (error) {
+        warn.style.display = 'block';
+        warn.textContent = 'Fehler beim Laden der Kursuebersicht: ' + error.message;
+        document.getElementById('metaLine').textContent = 'Uebersicht konnte nicht geladen werden';
+        grid.innerHTML = '';
+      }
+    }
+
+    loadOverview();
+  </script>
+</body>
+</html>

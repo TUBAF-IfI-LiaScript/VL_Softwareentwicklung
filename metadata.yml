@@ -8,14 +8,17 @@ description: >
   professionellen Softwareentwicklung: Versionsverwaltung mit Git,
   UML-Modellierung, Dokumentation und Build-Tools, Testen, Continuous
   Integration sowie fortgeschrittene Konzepte (Delegaten, Events, Threads und
-  Tasks, LINQ, Entwurfsmuster und GUI-Entwicklung mit MAUI). Alle Materialien
-  sind als interaktive LiaScript-Kurse aufbereitet.
+  Tasks, LINQ, Entwurfsmuster und GUI-Entwicklung mit MAUI).
+
+  Alle Materialien sind als interaktive LiaScript-Kurse aufbereitet. Die
+  zentrale Uebersicht ist unter
+  https://tubaf-ifi-liascript.github.io/VL_Softwareentwicklung/ abrufbar.
 
 # Grundmetadaten
 license: "https://creativecommons.org/publicdomain/zero/1.0/"
 inLanguage: "de"
 learningResourceType: "Course"
-url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/README.md"
+url: "https://tubaf-ifi-liascript.github.io/VL_Softwareentwicklung/"
 image: "https://upload.wikimedia.org/wikipedia/commons/e/e8/TUBAF_Logo.svg"
 
 # Autor & Herausgeber
