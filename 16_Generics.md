@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.5
+version:  1.0.6
 language: de
 narrator: Deutsch Female
 comment:  Generische Typen und Methoden, Constrains und Vererbung bei generischen Typen
@@ -35,8 +35,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ## Nachgefragt und nachgedacht
 
-+ Beispiel zur Anwendung der Polymorphie 
-+ Interfaces
+> **Frage:** Was ist der Unterschied zwischen einem Interface und einer abstrakten Klasse?
 
 | interface                         | abstract class                                    |
 | --------------------------------- | ------------------------------------------------- |
@@ -48,7 +47,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 | keine statischen Member           | statische Member möglich                          |
 
 
-```
+```csharp  InterfaceVsAbstractClass
 interface IFile
 {
     void ReadFile();
@@ -119,7 +118,7 @@ public class Program{
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-Die Dokumentation von `Array` findet sich unter https://docs.microsoft.com/de-de/dotnet/api/system.array?view=netcore-3.1
+Die Dokumentation von `Array` findet sich unter https://learn.microsoft.com/de-de/dotnet/api/system.array?view=net-9.0
 
 > **Merke:** Arrays sind in C# statisch definiert und haben keine veränderliche Größe.
 
@@ -135,6 +134,9 @@ Lassen Sie uns einen alternativen Ansatz bestreiten. Wir implementieren ein eige
        +----------+      +----------+      +----------+      +----------+
 
 ```
+
+> [!CAUTION]
+> Die nachfolgende Implementierung soll beispielhaft die Umsetzung einer verketteten Liste zeigen - es handelt sich um eine rudimentäre Umsetzung. Benutzen Sie für die Praxis die entsprechenden .NET-Bibliotheken, z.B. `LinkedList<T>` aus `System.Collections.Generic`!
 
 ```csharp   LinkedList.cs
 using System;
@@ -173,7 +175,7 @@ public class LinkedList{
               current = current.next;
               count++;
           }
-          return 1;
+          throw new IndexOutOfRangeException();
       }
    }
 }
@@ -204,10 +206,8 @@ Boxing und Unboxing würden die spezifischen Datentypen auf diesen abgebildet.
 
 ```csharp
 int i = 123;
-object o = i;  // The following line boxes i.
-
-o = 123;
-i = (int)o;    // unboxing
+object o = i;     // boxing: der Werttyp i wird auf den Heap kopiert
+int j = (int)o;   // unboxing: explizite Cast-Operation erforderlich
 ```
 
 Nachteilig daran ist, dass
@@ -293,7 +293,8 @@ class MyGenericClass<T, U>
 }
 ```
 
-Hinsichtlich der Namenswahl für die generischen Typen sind sie frei, sollten aber berücksichtigen, dass für den Leser ggf. unklar ist, wie welcher konkrete Datentyp realisiert werden kann. Die Einbuchstabenvariante "T" sollte nur genutzt werden, wenn in Bezug auf einen Container die Bedeutung wirklich klar ist.
+> [!CAUTION]
+> Hinsichtlich der Namenswahl für die generischen Typen sind sie frei, sollten aber berücksichtigen, dass für den Leser ggf. unklar ist, wie welcher konkrete Datentyp realisiert werden kann. Die Einbuchstabenvariante "T" sollte nur genutzt werden, wenn in Bezug auf einen Container die Bedeutung wirklich klar ist.
 
 ```csharp      StackExample
 using System;
@@ -312,7 +313,7 @@ public class Stack<T>{
   }
 
   public T Pop(){
-    return data[position--];
+    return data[--position];
   }
 
   public override string ToString(){
@@ -445,7 +446,7 @@ anderen Namen.
 
 Verwenden Sie Beschränkungen, analog zu den generischen Typen, sinnvolle Einschränkungen für die Typparametern in Methoden gewährleisten. Das folgende Beispiel gibt als Beschränkung die Implementierung des Interfaces IComparable<T> an, um unseren Vergleich zu realisieren.
 
-```csharp      IComparable
+```csharp      SwapIfGreater
 using System;
 
 public class Program{
@@ -476,7 +477,7 @@ Interface implementieren, existieren müssen.
 
 https://learn.microsoft.com/de-de/dotnet/api/system.icomparable?view=net-9.0
 
-```csharp      IComparable
+```csharp      IComparableImplementierung
 using System;
 
 public class Animal : IComparable<Animal> {
@@ -541,7 +542,7 @@ public class Program{
 Wie bereits bei den generischen Methoden angedeutet können wir mittels "Beschränkungen" sicherstellen, dass eine gültige Operation für einen Datentyp existiert.
 
 
-```csharp    initKeyword
+```csharp    PlusOhneConstraint
 using System;
 
 public class Program{
@@ -561,8 +562,7 @@ public class Program{
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-     <EnablePreviewFeatures>true</EnablePreviewFeatures>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 </Project>
 ```
@@ -571,14 +571,31 @@ public class Program{
 Folglich ist es notwendig die Allgemeinheit der generischen Methoden oder Klassen zu
 beschränken. Man definiert Beschänkungen oder *Constraints*, die die Breite der verwendbaren Datentypen einschränken. Die Typprüfung bezieht diese Informationen dann ein.
 
-| Beschränkung                | Das Typargument muss ...                                |
-| --------------------------- | ------------------------------------------------------- |
-| `where T : struct`          | ... ein Werttyp sein.                                   |
-| `where T : class`           | ... ein Verweistyp sein.                                |
-| `where T : <Basisklasse>`   | ... die Basisklasse sein oder von ihr abgeleitete sein. |
-| `where T : <Schnittstelle>` | ... die Schnittstelle sein oder diese  implementieren.  |
+| Beschränkung                | Das Typargument muss ...                                          |
+| --------------------------- | ----------------------------------------------------------------- |
+| `where T : struct`          | ... ein Werttyp (Nicht-Nullable) sein.                            |
+| `where T : class`           | ... ein Verweistyp sein.                                          |
+| `where T : notnull`         | ... ein Nicht-Nullable-Typ (Wert- oder Verweistyp) sein.          |
+| `where T : unmanaged`       | ... ein _unmanaged_ Werttyp sein (keine Referenzen enthalten).    |
+| `where T : new()`           | ... einen öffentlichen, parameterlosen Konstruktor besitzen.      |
+| `where T : <Basisklasse>`   | ... die Basisklasse sein oder von ihr abgeleitet sein.            |
+| `where T : <Schnittstelle>` | ... die Schnittstelle sein oder diese implementieren.             |
 
-> Unter `net7` lässt sich obiges Problem sehr elegant mit einem `where T : INumber<T>` lösen. Testen Sie dieses Feature auf Ihrem lokalen Rechner. [Link](https://devblogs.microsoft.com/dotnet/dotnet-7-generic-math/)
+Mehrere Beschränkungen lassen sich kombinieren; dabei gilt eine feste Reihenfolge: zuerst `struct`/`class`/`notnull`, dann Basisklasse und Schnittstellen, zuletzt `new()`.
+
+```csharp
+class EmployeeList<T> where T : notnull, Employee, IComparable<T>, new() { }
+```
+
+> Obiges Problem lässt sich sehr elegant über die Beschränkung `where T : INumber<T>` lösen. Das Interface `INumber<T>` (aus `System.Numerics`) fasst die arithmetischen Operatoren als `static abstract`-Member zusammen, sodass `+`, `-` usw. innerhalb der generischen Methode garantiert verfügbar sind.
+>
+> ```csharp
+> using System.Numerics;
+>
+> static T Plus<T>(T x, T y) where T : INumber<T> {
+>     return x + y;   // dank Constraint nun gültig
+> }
+> ```
 
 Das folgende Beispiel setzt die Möglichkeiten der Beschränkung konsequent um und lässt nur Klasse
 `Employee` zu. Damit wird sichergestellt, dass die Methoden,
@@ -615,7 +632,7 @@ ggf. notwendig die spezifischen Parameter des Datentyps zur Laufzeit
 auszuwerten. Im folgenden sollen die Beispiele die Bedeutung diese Vorgehens
 aufzeigen.
 
-```csharp      IComparable
+```csharp      ReflectionConstraints
 using System;
 using System.Reflection;
 
