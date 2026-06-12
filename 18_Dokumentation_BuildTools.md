@@ -11,7 +11,6 @@ logo:
 
 import: https://github.com/liascript/CodeRunner
         https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
-        https://raw.githubusercontent.com/liaTemplates/ExplainGit/master/README.md
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
@@ -28,45 +27,12 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 | **Semester**             | @config.semester                                                                                         |
 | **Hochschule:**          | @config.university                                                                                       |
 | **Inhalte:**             | @comment                                                                                                 |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/17_Dokumentation_BuildTools.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/18_Dokumentation_BuildTools.md |
 | **Autoren**              | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
-
-## Praktische Prüfungsleistung
-
-https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2024_Projektaufgaben/tree/main
-
-## Github-Aktivitäten in 2022
-
-> Forschungsfrage: Arbeiten Studentische Teams kollaborativ oder kooperativ? Können wir als Lehrende dieses Verhalten beeinflussen?
-
-<!--data-type="none"-->
-| TeamID | author_A                                          | author_B                                          | CollaborationRatio |
-| ------ | ------------------------------------------------- | ------------------------------------------------- | ------------------ |
-| 0      | [.gitignore, Program.cs, project.assets.json, ... | NaN                                               | 0.00               |
-| 1      | [README.md, IP.Tools class, Computer.simulatio... | NaN                                               | 0.00               |
-| 2      | [team.config, Program.cs]                         | [.gitignore, Program.cs, softwareentwicklung_a... | 0.25               |
-| 4      | [Program.cs, gitbefehle.md]                       | [.gitignore, Computer.csproj, Program.cs]         | 0.25               |
-| 5      | [.gitignore, Program.cs, softwareentwicklung_a... | [printmethode]                                    | 0.00               |
-| 6      | [class-computer.cs, computer_archive.2.cs, mai... | [computer_archive.cs, computer_archive.2.cs, I... | 0.20               |
-| 7      | [.gitignore, Archive.cs, Comnputer.cs, IPTools... | NaN                                               | 0.00               |
-| 8      | [.gitignore, Program.cs, user.csproj, Computer... | [.gitignore, Computer.cs, übung04.csproj]         | 0.40               |
-| 9      | [aufg1, aufg1.cs]                                 | [aufg2.cs]                                        | 0.00               |
-| 10     | [Computer.cs, IPTools.cs, .gitignore, Program.... | [Computer.cs, Program.cs, Archive.cs]             | 0.33               |
-| 11     | [ComputerClass.cs, ClassComputer.cs, softwaree... | [main.cs, .gitignore, Program.cs, softwareentw... | 0.38               |
-| 12     | [Program.cs, softwareentwicklung_aufgabe4_sose... | [Program.cs, .gitignore]                          | 0.66               |
-| 13     | [Schritt1.cs]                                     | NaN                                               | 0.00               |
-| 14     | [.gitignore, Program.cs, Computer.cs, .NETCore... | [Computer.cs, Program.cs, softwareentwicklung_... | 0.16               |
-| 15     | [computer.cs, computerclass.cs, Aufgabe4.cspro... | [Program.cs, Archiv.cs, IPTools.cs, .gitignore... | 0.42               |
-| 16     | NaN                                               | NaN                                               | 0.00               |
-| 17     | [Aufgabe04.csproj, Program.cs, daten_speichern... | [.gitignore, Computer.cs, Program.cs, Archive.cs] | 0.16               |
-
-> Welche Vorteile / Probeleme sehen Sie in diesen Mustern der Zusammenarbeit der Teams?
-
-!?[](https://www.youtube.com/watch?v=hlUD6uOJ5j4)
 
 ## Dokumentation
 
@@ -156,9 +122,93 @@ der Dokumentationsarbeit:
 + Systematiker ... liest zuerst einmal die Grundlagen, bemüht sich alle Hintergrundinfo zu API/Framework, zu erfassen. Benötigt Architekturbeschreibung, Konzepte allgemeiner Programmieraufgaben (Error handling, Lokalisierung &Co.)
 + Bedarfsleser ... situationsgetriebene Auswertung der Dokumentation, erwartet Antworten auf spezifische Fragen, benötigt Code-Kommentare, Hintergrundinformationen und Code-Beispiele
 
-![Modelle](https://www.plantuml.com/plantuml/png/XP1FRzD04CNl-oc6NDfAiKq27AXGL2ino6fIgZXHuOJMzjXPTVz4Esj2-VHuRLACP2cdrRxvpNkZTqUEMzSeoQwMvlXYHNrmC7yx-mYnuh-D3WkZff3g8WHZGJW2NbL22kwGGeYbXArV8TWYeVs9PSYkiiVLjs0j2jI4GLgYTg8IQ6zXa-xW-dFhKwBZGj8K214EpXtfDefguGvDxWCZVYB9S_9l80gZAQYC3OwIQtzgb4kJHugJGnkjqsNoa2KtZBqHkf1DYV39huiyYf-ofL7AwCNeB1FgAFrbvM9a-Gjgj5n6Uq9BBT2zr_iisSwcC16wpMu1YFK9TObsqeemkHbWyrR1NnUnTqEtHBkJA9xb6FY-zxiCVcYL3TUyHeNQdUUiuBRyUqUZQy9N1-04oSFkALtUhvCjguH4Y1_J7olpt7W7xeJH7bfzlT_F-ddsGWvLEKRC6JbZUNs6l9vzptR9Xh6kFWY2nJ2mQs5CxCa-jMjq-7zTwZExXiR-v-okcG70sByq2CCpzh_OPOreStRdQrJo3m00)
+```text @plantUML
+@startuml
+'Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+'SPDX-License-Identifier: MIT (For details, see https://github.com/awslabs/aws-icons-for-plantuml/blob/master/LICENSE)
+
+!include <awslib/AWSCommon>
+!include <awslib/AWSSimplified>
+
+!include <awslib/General/Users>
+
+Users(USER1, "interner Anwender", " ")
+Users(USER2, "externer Anwender", " ")
+Users(USER3, "interner Entwickler", " ")
+Users(USER4, "externer Entwickler", " ")
+Users(USER5, "Management", " ")
+
+card Anwendungsentwickler as ENTWICKLER
+file API_Dokumentation as DOKU1
+file Systemdokumentation as DOKU2
+storage System as SYSTEM
+
+USER1 --> ENTWICKLER
+USER3 --> ENTWICKLER
+USER1 --> DOKU1
+USER2 --> DOKU1
+USER3 --> DOKU2
+USER4 --> DOKU2
+USER4 --> SYSTEM
+USER5 --> DOKU2
+
+
+ENTWICKLER .. SYSTEM
+ENTWICKLER .. DOKU1
+ENTWICKLER .. DOKU2
+@enduml
+```
 
 _Abbildung motiviert aus  [^codecentric]_
+
+Das Diagramm verdeutlicht, dass sich **Dokumentationsart und Zielgruppe**
+gegenseitig bedingen — nicht jede Nutzergruppe greift auf dieselben Artefakte zu.
+Mit `System` ist dabei das **laufende Produkt selbst** gemeint (der ausgelieferte,
+ausführbare Code) — also kein Dokument, sondern das Artefakt, das die beiden
+Dokumentationen _beschreiben_:
+
+- **Anwender** (intern wie extern) interessieren sich für die **API-Dokumentation**
+  (`DOKU1`) — sie wollen die Software _benutzen_, nicht verstehen, wie sie gebaut ist.
+- **Entwickler** und das **Management** benötigen dagegen die **Systemdokumentation**
+  (`DOKU2`) mit Architektur- und Hintergrundinformationen.
+- Nur der **externe Entwickler** greift direkt auf das **System** selbst zu.
+- Der **Anwendungsentwickler** (`ENTWICKLER`) ist die zentrale Quelle: Er speist
+  beide Dokumentationen und das System (gestrichelte Verbindungen).
+
+
+> [!IMPORTANT]
+> Die Konsequenz für die Praxis: Bevor man dokumentiert, klärt man _für wen_ — die
+Zielgruppe bestimmt Inhalt, Detailtiefe und Form (vgl. die drei Lesertypen oben).
+
+**Konkretisierung am Beispiel eines Wetterdienstes**
+
+Machen wir das Schema an einem realen System fest — der Vorhersage-Plattform
+eines Wetterdienstes (z. B. dem [Open-Data-Angebot des DWD](https://opendata.dwd.de/)).
+`System` ist hier die laufende Software, die Messdaten einsammelt, Vorhersagen
+berechnet und ausliefert:
+
+| Rolle im Diagramm        | Wer das im Wetterdienst ist                       | Was er/sie braucht                                       |
+| ------------------------ | ------------------------------------------------- | -------------------------------------------------------- |
+| externer Anwender        | Bürger mit einer Wetter-App                        | nur das _Produkt_ (die App-Ausgabe)                      |
+| externer Entwickler      | beauftragte Fremdfirma, die ein Vorhersage-Modul baut | **Systemdoku** (`DOKU2`) **+** Zugriff auf das **System** |
+| interner Anwender        | Meteorolog:in an der Fachoberfläche                | das Produkt (die interne Bedienoberfläche)               |
+| interner Entwickler      | Betriebsteam des Rechenzentrums                   | **Systemdoku** (`DOKU2`): Architektur, Betrieb           |
+| Management               | Behördenleitung                                   | **Systemdoku** (`DOKU2`): Überblick, Konzepte            |
+
+Hier lohnt ein genauer Blick auf den **externen Entwickler**: „extern" heißt
+_nicht_ automatisch „nur API-Nutzer". Die beauftragte Fremdfirma arbeitet im
+Unterauftrag _am_ System mit — sie erweitert es, statt es nur zu benutzen.
+Deshalb ist sie im Diagramm die einzige externe Rolle, die _sowohl_ die interne
+Systemdokumentation (`DOKU2`) _als auch_ das System selbst berührt — genau wie
+ein interner Entwickler. Der entscheidende Unterschied verläuft also nicht
+zwischen „intern" und „extern", sondern zwischen **benutzen** (Anwender → API-Doku)
+und **mitentwickeln** (Entwickler → Systemdoku + System).
+
+Der Kontrast wird damit besonders greifbar: Die **API-Dokumentation** (`DOKU1`)
+ist _öffentlich_ und beschreibt nur die Schnittstelle (welche URL liefert die
+Temperatur für Freiberg?) — sie genügt dem App-Hersteller, der die Open-Data-API
+konsumiert. Die **Systemdokumentation** (`DOKU2`) bleibt _intern_ und erklärt,
+_wie_ die Vorhersage zustande kommt — sie bekommt nur, wer am System mitbaut.
 
 
 [^codecentric]:  Uwe Friedrichsen, Optimale Systemdokumentation mit agilen Prinzipien, 06/11, https://www.codecentric.de/publikation/optimale-systemdokumentation-mit-agilen-prinzipien/
@@ -203,7 +253,7 @@ Unter C\# wird hinsichtlich der Darstellung zusätzlich zwischen Kommentaren mit
 `//` oder `/*  */` und Dokumentationsinhalten unterschieden, die mit `///`
 eingeleitet werden.
 
-```csharp    Dokumenation
+```csharp    Documentation.cs
 using System;
 
 // Eine zweielementige Vektorklasse ohne Methoden
@@ -214,10 +264,15 @@ public class Vector {
     this.X = x;
     this.Y = y;
   }
+  // Hinweis: C# verlangt operator == und != immer paarweise.
+  public static bool operator ==(Vector p1, Vector p2){
+    // TODO die Methode müsste noch implementiert werden.
+    throw new NotImplementedException();
+  }
   public static bool operator !=(Vector p1, Vector p2){
     // hier hatte ich keine Lust mehr
     // TODO die Methode müsste noch implementiert werden.
-    return true;     
+    throw new NotImplementedException();
   }
 }
 
@@ -233,12 +288,27 @@ public class Program
   {
     Vector a = new Vector (3,4);
     Vector b = new Vector (9,6);
-    Console.WriteLine (a == b);
+    // Console.WriteLine (a == b);  // wirft NotImplementedException - bitte ausprobieren!
+    Console.WriteLine ("Vektoren a und b wurden angelegt.");
   }
 }
 ```
+```xml   -project.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Documentation.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
-> Anmerkung: Bauen Sie nie Rückgabewerte für nicht ausimplementierte Klassenelemente ein ohne eine `throw new NotImplementedException();` zu integrieren.
+> Anmerkung: Bauen Sie nie Rückgabewerte für nicht ausimplementierte Klassenelemente ein ohne eine `throw new NotImplementedException();` zu integrieren. Kommentieren Sie die `a == b`-Zeile ein und beobachten Sie, dass der ehrliche Programmabbruch der stillen Falschausgabe (`return true;`) vorzuziehen ist.
+>
+> Der Compiler weist zusätzlich mit zwei Warnungen (`CS0660`/`CS0661`) darauf hin,
+> dass zu einem `operator ==` üblicherweise auch `Equals()` und `GetHashCode()`
+> überschrieben werden sollten — ein weiterer Beleg dafür, dass das Beispiel
+> bewusst unfertig ist.
 
 Über entsprechende Tags lassen sich den Dokumentationsfragmenten Bedeutungen
 geben, die eine entsprechende Gliederung und Zuordnung erlaubt:
@@ -254,6 +324,7 @@ geben, die eine entsprechende Gliederung und Zuordnung erlaubt:
 | `<c>`         | Indikator für Inline-Codefragmente                                                    |
 | `<exception>` | Erlaubt die Beschreibung möglicher Exceptions, die in einer Methode auftreten können. |
 | `<see>`       | Klickbare Links in Verbindung mit `<cref>`                                             |
+
 
 Was lässt sich damit umsetzen?
 
@@ -363,7 +434,7 @@ Aufbauend auf den Inhalten der XML Datei ist IntelliSense in Visual Studio dann
 in der Lage, die Textinformationen zu Klassen und Membern bei der Eingabe
 anzuzeigen.
 
-![IntelliSense](./img/17_Dokumentation/vs_intelliSense.png "Einbettung der Dokumentation in das IntelliSense-Feedbacksystem [^MS_VisualStudio]")
+![IntelliSense](./img/18_Dokumentation/vs_intelliSense.png "Einbettung der Dokumentation in das IntelliSense-Feedbacksystem [^MS_VisualStudio]")
 
 Sie können die Parameterinformation manuell aufrufen, indem Sie
 STRG+UMSCHALT+LEERTASTE drücken (die alternativen Methoden mit der Maus braucht
@@ -376,13 +447,49 @@ Sandcastle als Open-Source Projekt weitergeführt.
 https://github.com/EWSoftware/SHFB
 
 Im folgenden soll beispielhaft auf die Anwendung von Doxygen eingegangen werden.
+Das vollständige, lauffähige Beispiel liegt im Repository unter
+`code/18_ToolChain/doxywizard`. Es dokumentiert die folgende `intDivide`-Methode:
 
-![doxygen](./img/17_Dokumentation/Doyxgen_infoflow.png "Arbeits- und Datenfluss während der Dokumentationserzeugung mit Doxygen [^Doxygen]")
+```csharp
+namespace doxyexample
+{
+  public class Program
+  {
+    /// <summary>
+    /// Divides an integer <paramref name="a"/> by another integer <paramref name="b"/> and returns the result.
+    /// </summary>
+    /// <returns> The quotient of two integers. </returns>
+    /// <exception cref="System.DivideByZeroException">Thrown when <paramref name="b"/> is equal to 0.</exception>
+    public static int intDivide(int a, int b)
+    {
+        return a / b;
+    }
+    // ...
+  }
+}
+```
+
+Die Steuerung des Generierungsprozesses erfolgt über das `Doxyfile`. Drei
+Einstellungen lohnen einen genaueren Blick:
+
+| Flag             | Wert im Beispiel | Wirkung                                                          |
+| ---------------- | ---------------- | --------------------------------------------------------------- |
+| `EXTRACT_ALL`    | `YES`            | Auch undokumentierte Elemente werden erfasst (Abdeckung sichtbar)|
+| `INPUT`          | `doxyexample`    | Verzeichnis/Dateien, die eingelesen werden                       |
+| `GENERATE_HTML`  | `YES`            | Erzeugt die durchsuchbare HTML-Dokumentation                     |
+
+Der Aufruf reduziert sich damit auf einen einzigen Befehl:
+
+```bash
+doxygen Doxyfile      # liest das Doxyfile, erzeugt ./html/index.html
+```
+
+![doxygen](./img/18_Dokumentation/Doyxgen_infoflow.png "Arbeits- und Datenfluss während der Dokumentationserzeugung mit Doxygen [^Doxygen]")
 
 !?[doxygenmovie](https://www.youtube.com/watch?v=-V_vHZPOZfY)
 
-Die Anwendung von Doxygen wird im folgenden Foliensatz anhand eines Beipielprojektes
-gezeigt. Dabei werden zwei Verbesserungen der Darstellung realisiert.
+Am Beispielprojekt `code/18_ToolChain/doxywizard` lassen sich darüber hinaus zwei
+Verbesserungen der Darstellung nachvollziehen — probieren Sie es selbst aus:
 
 1. Auswertung der Doxygen Ausgaben im Hinblick auf die Abdeckung der Dokumentation.
 
@@ -454,6 +561,10 @@ ausgehend von einer Veränderung, eine bestimmte Folge von Aktionen auslösen.
 Ausgangspunkt für diese Aktionen können unterschiedliche Quellen sein (vgl.
 Generierung der Dokumentation in obiger Tabelle).
 
+Den ersten Punkt der Liste - die _Auflösung der Abhängigkeiten von anderen
+Paketen_ - betrachten wir gleich beim Werkzeug `dotnet` im Exkurs zum
+Paketmanagement (NuGet) genauer.
+
 ### dotnet
 
 `dotnet` ist ein Tool für das Verwalten von .NET-Quellcode und Binärdateien. Das
@@ -488,6 +599,7 @@ soffice -calc myworkbook.xlsx
 `dotnet` ermöglicht keine Definition von Abhängigkeiten (ohne auf MSBuild
 zurückzugreifen) standardisiert aber den Erstellungs- und Testprozess, sowie das
 Pakethandling!
+
 
 ### MSBuild
 
@@ -540,7 +652,40 @@ könnte folgende Konfiguration haben:
 </Project>
 ```
 
-Ein Beispiel für eigene Experimente findet sich unter 'code/17_ToolChain/msbuildProject'
+In der Praxis hängt man eigene Schritte an die vordefinierten Targets an. Das
+Beispiel unter `code/18_ToolChain/msbuildProject` (Aufruf via `dotnet build` bzw.
+`dotnet msbuild /t:SayHello`) zeigt die wichtigsten Mechanismen:
+
+```xml    buildExample.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>MSBuildExample</AssemblyName>
+  </PropertyGroup>
+
+  <!-- läuft automatisch NACH dem Standard-Build -->
+  <Target Name="CustomPostBuild" AfterTargets="Build">
+    <Message Text="✅ Build abgeschlossen: $(AssemblyName).dll" Importance="high" />
+  </Target>
+
+  <!-- manuell aufrufbar: dotnet msbuild /t:SayHello -->
+  <Target Name="SayHello">
+    <Message Text="👋 Hello from SayHello target!" Importance="high" />
+  </Target>
+
+  <!-- Abhängigkeit: erst Clean, dann Build, dann diese Meldung -->
+  <Target Name="CustomRebuild" DependsOnTargets="Clean;Build">
+    <Message Text="♻️ CustomRebuild abgeschlossen." Importance="high" />
+  </Target>
+
+</Project>
+```
+
++ `AfterTargets="Build"` — hängt einen Schritt _automatisch_ an ein bestehendes Ziel an (hier: Meldung nach jedem Build).
++ `DependsOnTargets="Clean;Build"` — bildet genau die Abhängigkeitsidee aus obiger Tabelle ab: `CustomRebuild` zieht zuerst `Clean` und `Build` nach sich.
++ Ein freistehendes Target wie `SayHello` ist ein manueller Einsprungpunkt.
 
 Die zuvor besprochenen dotnet Befehle bauen auf MSBuild auf und kapseln diese.
 Die Ausführung von `dotnet build` entspricht `dotnet msbuild -restore -target:Build`.
@@ -567,6 +712,23 @@ A: B
 B: D E
   generate_B
 ```
+
+Gelesen wird das als _"`A` hängt von `B` ab; um `A` zu erzeugen, führe
+`generate_A` aus"_. Ruft man `make A` auf, ergibt sich folgender Ablauf — und
+zwar **nur**, wenn die Zieldatei älter als ihre Abhängigkeiten ist (zeitstempel-
+gesteuert):
+
+```text
+$ make A
+  → A benötigt B
+      → B benötigt D und E   (sind vorhanden/aktuell)
+      → generate_B           # B wird zuerst gebaut
+  → generate_A               # danach A
+```
+
+Genau hier liegt der Unterschied zu MSBuild: MSBuild-Targets werden über
+explizite Namen/`DependsOnTargets` angestoßen, `make` entscheidet anhand der
+**Datei-Zeitstempel**, ob ein Schritt überhaupt nötig ist.
 
 Daneben können Sie entsprechende Makros `$(MAKRO_NAME)`, `wildcard` und Platzhalter
 verwenden, um die Beschreibung effizienter und kompakter zu gestalten. Ein
@@ -606,4 +768,184 @@ clean:
 
 > MERKE: Die Einschübe im MAKEFILE sind keine Leerzeichen, sondern Tabulatorshifts!
 
+Drei Konstrukte aus dem Beispiel verdienen einen genaueren Blick, weil sie den
+kompakten Stil eines typischen Makefiles ausmachen:
+
+**1. Pattern Rules & Automatische Variablen** — Die Regel `%.o: %.c` ist eine
+_Schablone_: Das `%` (genannt _Stem_) steht für einen beliebigen Dateinamen und
+gilt damit für `a.o`, `b.o`, `d.o` gleichermaßen, ohne dass man jede Datei
+einzeln auflisten muss. Innerhalb des Rezeptes referenzieren _automatische
+Variablen_ die beteiligten Dateien:
+
+| Variable | Bedeutung                              | im Beispiel `a.o: a.c` |
+| -------- | -------------------------------------- | ---------------------- |
+| `$@`     | das Ziel (target)                      | `a.o`                  |
+| `$<`     | die _erste_ Abhängigkeit               | `a.c`                  |
+| `$^`     | _alle_ Abhängigkeiten                  | `a.c`                  |
+| `$*`     | der Stem (das, wofür `%` steht)        | `a`                    |
+
+Die Zeile `$(CC) -c $(CFLAGS) $*.c` übersetzt also für jede `.c`-Datei genau die
+passende Quelldatei in ihr `.o`-Pendant — eine einzige Regel ersetzt beliebig
+viele konkrete.
+
+**2. Phony Targets** — `clean` ist kein Dateiname, sondern ein _Kommando-Ziel_.
+Existierte zufällig eine Datei namens `clean` im Verzeichnis, würde `make` sie
+für aktuell halten und das Rezept nie ausführen (Zeitstempel-Logik!). Deshalb
+deklariert man solche Ziele explizit als _phony_:
+
+```makefile
+.PHONY: clean
+clean:
+	$(RM) $(OBJ) $(EXE) core a.out
+```
+
+**3. Default Goal** — Ruft man `make` _ohne_ Argument auf, wird das **erste** in
+der Datei definierte Target gebaut (im Beispiel die Regel für `$(EXE)`). Aus
+diesem Grund steht das Haupt-Build-Ziel konventionell oben und `clean` weiter
+unten.
+
 Das Hilfsprogramm `make` ist Teil des POSIX-Standards.
+
+## Einordnung der drei Werkzeuge
+
+Die drei vorgestellten Werkzeuge bedienen dieselbe Grundidee — _aus einer
+Veränderung von Eingabedateien die nötigen Schritte ableiten_ — auf
+unterschiedlichen Abstraktionsebenen:
+
+|                  | `dotnet`                       | MSBuild                          | `make`                              |
+| ---------------- | ------------------------------ | -------------------------------- | ----------------------------------- |
+| Abstraktionsebene| hoch (Kommando-Wrapper)        | mittel (XML-Targets)             | niedrig (Regeln + Shell)            |
+| Konfiguration    | `*.csproj` (Konvention)        | `*.csproj`/`*.targets` (XML)     | `Makefile` (Regeln)                 |
+| Trigger-Modell   | Befehl pro Aufgabe             | Targets & `DependsOnTargets`     | Datei-Zeitstempel                   |
+| Plattform/Ökosystem | .NET                        | .NET / Visual Studio             | sprachunabhängig (POSIX)            |
+| Typischer Einsatz| Alltag im .NET-Projekt         | Feinsteuerung des .NET-Builds    | C/C++, Embedded, beliebige Pipelines|
+
+> **Merke:** `dotnet` kapselt MSBuild, MSBuild ist das eigentliche Build-Engine
+> dahinter. `make` steht daneben als sprachunabhängiger Klassiker. Wer das
+> _Abhängigkeitsdenken_ einmal verstanden hat, findet sich in allen drei wieder.
+
+**Ausblick — vom lokalen Build zur Pipeline:** Genau diese Build-Tools sind die
+Bausteine, die in einer **CI/CD-Pipeline** (z. B. GitHub Actions, vgl. Vorlesung
+zum Versionsmanagement) automatisch bei jedem Push ausgeführt werden. Ein
+Workflow ruft am Ende nichts anderes auf als `dotnet build`, `dotnet test` und
+`doxygen` — nur eben serverseitig und für jeden Commit.
+
+## Beispiel der Woche
+
+> **Merke:** Erfinde das Rad nicht neu!
+
+Das `dotnet add package`-Kommando oben hat im Hintergrund das Paketmanagement
+angestoßen. Werfen wir einen genaueren Blick darauf. Häufig wiederkehrende
+Aufgaben wie zum Beispiel:
+
++ das Logging
++ der Zugriff auf Datenquellen
++ mathematische Operationen
++ Datenkapselung und Abstraktion
++ ...
+
+werden bereits durch umfangreiche Bibliotheken implementiert und werden entsprechend nicht neu geschrieben.
+
+Ok, dann ziehe ich mir eben die zugehörigen Repositories in mein Projekt und kann die Bibliotheken nutzen. In individuell genutzten Implementierungen mag das ein gangbarer Weg sein, aber das Wissen um die zugehörigen Abhängigkeiten - Welche Subbibliotheken und welches .NET Framework werden vorausgesetzt? -  liegt so nur implizit vor.
+
+Entsprechend brauchen wir ein Tool, mit dem wir die Abhängigkeiten UND den eigentlichen Code kombinieren und einem Projekt hinzufügen können.
+`NuGet` löst diese Aufgabe für .NET und schließt auch gleich die Mechanismen zur Freigabe von Code ein. NuGet definiert dabei, wie Pakete für .NET erstellt, gehostet und verarbeitet werden.
+
+Ein `NuGet`-Paket ist eine gepackte Datei mit der Erweiterung `.nupkg` die:
+
++ den kompilierten Code (DLLs),
++ ein beschreibendes Manifest, in dem Informationen wie die Versionsnummer des Pakets, ggf. der Speicherort des Source Codes oder die Projektwebseite enthalten sind sowie
++ die Abhängigkeiten von anderen Paketen und dessen Versionen
+enthalten sind
+Ein Entwickler, der seinen Code veröffentlichen möchte generiert die zugehörige Struktur und läd diese auf einen `NuGet` Server. Unter dem [Link](https://www.nuget.org/) kann dieser durchsucht werden.
+
+**Anwendungsbeispiel: Symbolisches Lösen von Mathematischen Gleichungen**
+
+Eine entsprechende Bibliothek steht unter [Projektwebseite](https://symbolics.mathdotnet.com/). Das Ganze wird als `Nuget` Paket gehostet [MathNet](https://www.nuget.org/packages/MathNet.Symbolics/).
+
+Unter der Annahme, dass wir `dotnet` als Buildtool benutzen ist die Einbindung denkbar einfach.
+
+```
+dotnet new console -o SymbolicMath
+cd SymbolicMath
+dotnet add package MathNet.Symbolics
+Determining projects to restore...
+Writing /tmp/tmpNsaYtc.tmp
+info : Adding PackageReference for package 'MathNet.Symbolics' into project '.../SymbolicMath/SymbolicMath.csproj'.
+info :   GET https://api.nuget.org/v3/registration5-gz-semver2/mathnet.symbolics/index.json
+...
+```
+
+Danach findet sich in unserer Projektdatei `.csproj` ein entsprechender Eintrag
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MathNet.Symbolics" Version="0.24.0" />
+  </ItemGroup>
+</Project>
+```
+
+> Die `Version`-Angabe im `PackageReference` pinnt das Paket auf einen definierten
+> Stand. Damit ist der Build reproduzierbar - jeder, der das Projekt auscheckt,
+> erhält dieselbe Bibliotheksversion. Build-Tools wie `dotnet` lösen darüber hinaus
+> die _transitiven_ Abhängigkeiten (Pakete, die MathNet seinerseits benötigt)
+> automatisch mit auf.
+
+```csharp SymbolicMath.cs
+using System;
+using System.Collections.Generic;
+using MathNet.Symbolics;
+using Expr = MathNet.Symbolics.SymbolicExpression;  // Platzhalter für verkürzte Schreibweise
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    Console.WriteLine("Beispiele für die Verwendung des MathNet.Symbolics Paketes");
+    var x = Expr.Variable("x");
+    var y = Expr.Variable("y");
+    var a = Expr.Variable("a");
+    var b = Expr.Variable("b");
+    var c = Expr.Variable("c");
+    var d = Expr.Variable("d");
+    Console.WriteLine("a+a+a =" + (a + a + a).ToString());
+    Console.WriteLine("(2 + 1 / x - 1) =" + (2 + 1 / x - 1).ToString());
+    Console.WriteLine("((a / b / (c * a)) * (c * d / a) / d) =" + ((a / b / (c * a)) * (c * d / a) / d).ToString());
+    Console.WriteLine("Der zugehörige Latex Code lautet " + ((a / b / (c * a)) * (c * d / a) / d).ToLaTeX());
+  }
+}
+```
+```-xml  SymbolicMath.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MathNet.Symbolics" Version="0.24.0" />
+  </ItemGroup>
+</Project>
+```
+@LIA.eval(`["SymbolicMath.cs", "SymbolicMath.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+
+
+## Aufgaben der Woche
+
+1. **Dokumentation:** Versehen Sie die `intDivide`-Methode aus
+   `code/18_ToolChain/doxywizard` mit einem `<param>`-Tag für beide Parameter
+   und generieren Sie die HTML-Dokumentation mit `doxygen Doxyfile`.
+
+2. **MSBuild:** Ergänzen Sie im Projekt `code/18_ToolChain/msbuildProject` ein
+   eigenes Target `Docs`, das nach dem Build eine Meldung ausgibt. Rufen Sie es
+   über `dotnet msbuild /t:Docs` auf.
+
+3. **make:** Schreiben Sie ein minimales `Makefile`, das eine einzelne `.c`- oder
+   `.cs`-Datei übersetzt, und beobachten Sie, dass ein erneutes `make` ohne
+   Quelltextänderung **nichts** tut. Erklären Sie warum.
