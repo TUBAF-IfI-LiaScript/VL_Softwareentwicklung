@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf, André Dietrich, Volker Göhler, `Lina` & `Florian2501`
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.9
+version:  1.0.10
 language: de
 narrator: Deutsch Female
 comment:  Werte- und Referenzdatentypen, Array, String, implizite Variablendefinition und Nullables
