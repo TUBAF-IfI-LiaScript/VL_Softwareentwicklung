@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.9
+version:  1.0.10
 language: de
 narrator: Deutsch Female
 comment:  Generelle Container und Datenkonzepte, Collections, Implementierung in Csharp und Anwendung der generischen Collections
@@ -464,15 +464,89 @@ Fragenkatalog für die Auswahl von Collections:
 
 ### Performance
 
-Und wie sieht es mit der Performance aus? Der Beitrag des Autors `Serj-Tm` auf Stackoverflow vergleicht in einem Codebeispiel unterschiedliche Operationen für verschiedene Container-Typen.
+Spannend wird es, wenn die
+**Wahl des Containers die Komplexitätsklasse der Operation verändert**. Betrachten
+wir dazu die wohl häufigste Frage an einen Container: _"Enthältst du Element x?"_
 
-<!-- data-type="none" -->
-| Array            | `List<T>`        | Penalties | Method    |
-| ---------------- | ---------------- | --------- | --------- |
-| 00:00:01.3932446 | 00:00:01.6677450 | 1 vs  1,2 | Generate  |
-| 00:00:00.1856069 | 00:00:01.0291365 | 1 vs  5,5 | Sum       |
-| 00:00:00.4350745 | 00:00:00.9422126 | 1 vs  2,2 | BlockCopy |
-| 00:00:00.2029309 | 00:00:00.4272936 | 1 vs  2,1 | Sort      |
+| Container             | Suchstrategie          | Aufwand    |
+| --------------------- | ---------------------- | ---------- |
+| `List<T>`             | lineare Suche          | $O(n)$     |
+| `SortedList<K,V>`     | binäre Suche (sortiert)| $O(\log n)$|
+| `HashSet<T>`          | Hash-Lookup            | $O(1)$     |
+
+Hier geht es nicht mehr um den Faktor 2 oder 5, sondern um den Unterschied
+zwischen Sekunden und Mikrosekunden – und der wächst mit der Datenmenge. Das
+folgende Beispiel füllt drei Container mit `N` Elementen und führt anschließend
+`M` zufällige Lookups durch:
+
+```csharp     Program.cs
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+
+class Program
+{
+  static void Main()
+  {
+    int N = 100_000;   // Anzahl der Elemente im Container
+    int M =  50_000;   // Anzahl der Suchanfragen
+
+    // --- Container befüllen ---------------------------------------
+    var list = new List<int>();
+    var sorted = new SortedSet<int>();      // intern als Baum, O(log n) Lookup
+    var hash = new HashSet<int>();
+    for (int i = 0; i < N; i++)
+    {
+        list.Add(i);
+        sorted.Add(i);
+        hash.Add(i);
+    }
+
+    // Wonach gesucht wird (deterministisch, damit fair vergleichbar)
+    var queries = new int[M];
+    for (int i = 0; i < M; i++)
+        queries[i] = (i * 2654435761L % N) > 0 ? (int)(i * 2654435761L % N) : 0;
+
+    // --- Messung --------------------------------------------------
+    Console.WriteLine($"N = {N:N0} Elemente, M = {M:N0} Suchanfragen\n");
+
+    Measure("List<int>     O(n)   ", () => {
+        foreach (var q in queries) _ = list.Contains(q);
+    });
+    Measure("SortedSet<int> O(log n)", () => {
+        foreach (var q in queries) _ = sorted.Contains(q);
+    });
+    Measure("HashSet<int>   O(1)   ", () => {
+        foreach (var q in queries) _ = hash.Contains(q);
+    });
+  }
+
+  static void Measure(string name, Action action)
+  {
+    var sw = Stopwatch.StartNew();
+    action();
+    sw.Stop();
+    Console.WriteLine($"{name} : {sw.Elapsed.TotalMilliseconds,10:N2} ms");
+  }
+}
+```
+```xml   -project.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+
+> **Beobachtung:** Alle drei Container speichern _dieselben_ Daten und liefern
+> beim `Contains` _dasselbe_ Ergebnis. Trotzdem liegen zwischen `List` und
+> `HashSet` typischerweise mehrere Größenordnungen. Verdoppeln Sie `N` und
+> beobachten Sie, wie sich die Zeiten verändern: bei `List` ungefähr ×2, beim
+> `HashSet` kaum. Genau das ist der Unterschied zwischen $O(n)$ und $O(1)$ –
+> und der Grund, warum die Auswahl des passenden Containers (vgl. Fragenkatalog
+> oben) wichtiger ist als ein konstanter Geschwindigkeitsfaktor.
 
 
 ## Containerimplementierung in Csharp
