@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.8
+version:  1.0.9
 language: de
 narrator: Deutsch Female
 comment:  Generelle Container und Datenkonzepte, Collections, Implementierung in Csharp und Anwendung der generischen Collections
@@ -10,6 +10,7 @@ tags:
 logo:     
 
 import: https://github.com/liascript/CodeRunner
+        https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
@@ -35,30 +36,30 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
-## ... zur Erinnerung und in Ergänzung
+## Nachgefragt Records
 
 ```ascii
-                                     C# Typen
-                                         |
-                       .------------------------------------.
-                       |                                    |
-                   Werttypen                           Referenztypen
-                       |                                    |
-         .-------+-----+---+--------.        .-------+---------+-------.
-         |       |         |        |        |       |         |       |
-     Vordefi-  Enumer-  Structs   Tupel   Klassen  Inter    Arrays  Delegates
- nierte Typen  ation                     (String) -faces
-         |
-         |      ...............................................................
-         |                           Benutzerdefinierte Typen
-         |
-         .----+------+-----------+-------------.
-         |           |           |             |
-     Character    Ganzzahl   Gleitkommazahl   Bool
-                     |
-             .------+---------.
-             |                |
-     mit Vorzeichen     vorzeichenlos                                                                    .
+                                          C# Typen
+                                              |
+                          .----------------------------------------------.
+                          |                                              |
+                      Werttypen                                    Referenztypen
+                          |                                              |
+   .------+------+------+--+----+--------.      .-------+--------+-------+-------+--------.
+   |      |      |      |       |        |      |       |        |       |       |        |
+ Vordef. Enum  Structs record  Tupel    …    Klassen record    Inter-  Arrays Delegates  …
+ Typen                 struct                (String) class    faces
+   |
+   |    ...............................................................
+   |                      Benutzerdefinierte Typen
+   |
+   .----+------+-----------+-------------+----------.
+   |           |           |             |          |
+ Character  Ganzzahl  Gleitkommazahl    Bool       …
+               |
+        .------+---------.
+        |                |
+  mit Vorzeichen   vorzeichenlos                                                                    .
 ```
 
 Die bisher behandelten Userdatentypen `struct` und `class` erfahren in C# 9.0 eine Erweiterung - `records`. Es wurden zwei Varianten integriert
@@ -67,7 +68,7 @@ Die bisher behandelten Userdatentypen `struct` und `class` erfahren in C# 9.0 ei
 + `record struct` ist ein Wertdatentyp.
 
 
-```csharp    initKeyword
+```csharp    RecordsVsClass
 using System;
 
 public record PersonRecord(string FirstName, string LastName);
@@ -122,7 +123,130 @@ public class Program
 - Records sind per default immutable!
 
 
-> Nutzen Sie https://sharplab.io, um sich intensiver mit dem autogenerierten Code auseinanderzusetzen.
+> **Blick über den Tellerrand: Python `dataclass`**
+>
+> Wer aus Python kommt, kennt das Konzept bereits unter einem anderen Namen. Ein mit
+> `@dataclass` dekoriertes Klassendefinition generiert ebenfalls automatisch
+> `__init__`, `__repr__` (Pendant zu `ToString()`) und `__eq__` (Wertvergleich)  –
+> exakt die Methoden, die ein C#-`record` mitbringt.
+
+```python    DataclassExample.py
+from dataclasses import dataclass
+
+@dataclass
+class PersonRecord:
+    first_name: str
+    last_name: str
+
+record_1 = PersonRecord("Calvin", "Allen")
+record_2 = PersonRecord("Calvin", "Allen")
+
+print(record_1)              # repr wird automatisch erzeugt
+print(record_1 == record_2)  # True - Vergleich über die Daten
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
+Die Konzepte ähneln sich, unterscheiden sich aber in den Details:
+
+| Aspekt              | C# `record`                                  | Python `@dataclass`                                      |
+| ------------------- | -------------------------------------------- | --------------------------------------------------------- |
+| Aktivierung         | eigenes Schlüsselwort `record`               | Dekorator `@dataclass` über einer `class`                |
+| Wertgleichheit      | per default (`==` vergleicht Inhalte)        | per default (`__eq__` vergleicht Inhalte)                |
+| String-Ausgabe      | `ToString()` automatisch                     | `__repr__` automatisch                                   |
+| Unveränderlichkeit  | per default immutable (`init`-only)          | nur via `@dataclass(frozen=True)`                        |
+| Wert- vs. Referenz  | `record class` (Ref) bzw. `record struct` (Wert) | immer Referenztyp (Objekt auf dem Heap)             |
+| Typprüfung          | statisch zur Compile-Zeit                    | Typannotationen sind Hinweise, zur Laufzeit nicht erzwungen |
+
+> Merke: Beide nehmen dem Entwickler den Boilerplate-Code für datenhaltende Klassen
+> ab. C# trifft dabei die strengere, statisch geprüfte Variante.
+
+
+## Nachgefragt — Anwendung Generics
+
+In der vergangenen Vorlesung haben wir generische Typen mit _einem_ Typparameter
+kennengelernt (`LinkedList<T>`, `Stack<T>`). Bevor wir uns die fertigen Collections
+des .NET-Frameworks ansehen, schlagen wir die Brücke und bauen selbst einen
+_assoziativen_ Container - ein Dictionary, das Schlüssel auf Werte abbildet. Es
+nutzt gleich **zwei** Typparameter: `TKey` für den Schlüssel und `TValue` für den Wert.
+
+Die Idee ist bewusst einfach gehalten: Wir speichern die Einträge intern als Liste von
+Schlüssel-Wert-Paaren ([`KeyValuePair<TKey, TValue>`](https://learn.microsoft.com/de-de/dotnet/api/system.collections.generic.keyvaluepair-2?view=net-9.0) -
+ein vordefinierter `struct` aus `System.Collections.Generic`, der genau einen Schlüssel
+und einen Wert über die Eigenschaften `.Key` und `.Value` zusammenfasst) und suchen linear. Das echte
+`Dictionary<TKey, TValue>` arbeitet stattdessen mit einer Hash-Tabelle und ist damit
+deutlich schneller - das Prinzip der generischen Parametrisierung ist aber dasselbe.
+
+```csharp      EigenesDictionary
+using System;
+using System.Collections.Generic;
+
+// Ein einfaches, generisches Dictionary mit zwei Typparametern:
+// TKey für den Schlüssel, TValue für den Wert.
+public class MyDictionary<TKey, TValue>
+{
+    // Intern halten wir die Einträge als Liste von Schlüssel-Wert-Paaren.
+    private List<KeyValuePair<TKey, TValue>> items = new List<KeyValuePair<TKey, TValue>>();
+
+    // Indexer: erlaubt den Zugriff über myDict[key]
+    public TValue this[TKey key]
+    {
+        get
+        {
+            foreach (var pair in items)
+                if (pair.Key.Equals(key))
+                    return pair.Value;
+            throw new KeyNotFoundException($"Schlüssel '{key}' nicht gefunden.");
+        }
+        set
+        {
+            // Existiert der Schlüssel bereits, überschreiben wir den Wert ...
+            for (int i = 0; i < items.Count; i++)
+                if (items[i].Key.Equals(key))
+                {
+                    items[i] = new KeyValuePair<TKey, TValue>(key, value);
+                    return;
+                }
+            // ... andernfalls fügen wir ein neues Paar an.
+            items.Add(new KeyValuePair<TKey, TValue>(key, value));
+        }
+    }
+
+    public int Count => items.Count;
+
+    public bool ContainsKey(TKey key)
+    {
+        foreach (var pair in items)
+            if (pair.Key.Equals(key))
+                return true;
+        return false;
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        // Dank der Typparameter funktioniert derselbe Container für
+        // string->int genauso wie für jede andere Typkombination.
+        var telefonbuch = new MyDictionary<string, int>();
+        telefonbuch["Peter"] = 1234;
+        telefonbuch["Paula"] = 5234;
+        telefonbuch["Peter"] = 9999;   // überschreibt den vorhandenen Eintrag
+
+        Console.WriteLine("Einträge: " + telefonbuch.Count);
+        Console.WriteLine("Peter:    " + telefonbuch["Peter"]);
+        Console.WriteLine("Enthält 'Paula'? " + telefonbuch.ContainsKey("Paula"));
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+Beachten Sie, dass dieselbe Implementierung ohne jede Änderung auch für andere
+Typkombinationen funktioniert - etwa `MyDictionary<int, Animal>`. Genau diese
+Wiederverwendbarkeit ist der Kern der Generics. Im nächsten Abschnitt sehen wir, wie
+das .NET-Framework diese Idee mit `Dictionary<TKey, TValue>`, `List<T>` & Co. zu Ende
+denkt.
+
 
 ## Collections
 
@@ -130,7 +254,7 @@ public class Program
 
 In der vergangen Vorlesung haben wir über die Vorteile von generischen Speicherstrukturen am Beispiel der Liste gesprochen. Allerdings ist die Möglichkeit durch die Struktur hindurchzuiterieren nicht immer die günstigste. In dieser Vorlesung wollen wir alternative Konzepte und deren Implementierung im C# Framework untersuchen.
 
-Beginnen wir zunächst mit einem Vergleich einiger listenähnlichen Konstrukte. Diese sind in den Namespaces `System.Collections` und `System.Collections.Generic` enthalten. Um zu vermeiden, dass diese beständig mitgeführt werden, betten wir sie mit `using` in unseren Code ein.
+Beginnen wir zunächst mit einem Vergleich einiger listenähnlichen Konstrukte. Diese sind in den Namespaces `System.Collections` und `System.Collections.Generic` enthalten.
 
 
 ```csharp      ContainerTypes.cs
@@ -190,6 +314,17 @@ public class Program{
 @LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
 
+Worin liegt der Unterschied zu den bereits bekannten `Array` Implementierung?
+
+| Feature             | Array                          | `ArrayList`                             | `List<T>`        |
+| ------------------- | ------------------------------ | --------------------------------------- | ----------------- |
+| Generisch?          | nein                           | nein                                    | ja                |
+| Anzahl der Elemente | feste Größe                    | variabel                               | variabel          |
+| Datentyp            | muss homogen sein (typsicher)  | kann variieren (nicht streng typisiert) | muss homogen sein |
+| null                | nicht akzeptiert               | wird akzeptiert                         | wird akzeptiert   |
+| Dimensionen         | multidimensional `array[X][Y]` | -                                       | -                 |
+
+Die Methoden von `ArrayList` sind zum Beispiel unter https://learn.microsoft.com/de-de/dotnet/api/system.collections.arraylist?view=net-8.0 zu finden.
 
 Dabei setzen die vielfältigen Methoden Anforderungen an die im Container gespeicherten Werte.
 
@@ -255,17 +390,6 @@ public class ArrayExamples  {
 
 
 
-Worin liegt der Unterschied zu den bereits bekannten `Array` Implementierung?
-
-| Feature             | Array                          | `ArrayList`                             | `List<T>`        |
-| ------------------- | ------------------------------ | --------------------------------------- | ----------------- |
-| Generisch?          | nein                           | nein                                    | ja                |
-| Anzahl der Elemente | feste Größe                    | variabel                               | variabel          |
-| Datentyp            | muss homogen sein (typsicher)  | kann variieren (nicht streng typisiert) | muss homogen sein |
-| null                | nicht akzeptiert               | wird akzeptiert                         | wird akzeptiert   |
-| Dimensionen         | multidimensional `array[X][Y]` | -                                       | -                 |
-
-Die Methoden von `ArrayList` sind zum Beispiel unter https://learn.microsoft.com/de-de/dotnet/api/system.collections.arraylist?view=net-8.0 zu finden.
 
 ### Einordnung
 
@@ -437,35 +561,47 @@ class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-> **Achtung:** Das Beispiel implmentiert das Iteratorkonzept mittels [`yield`](https://docs.microsoft.com/de-de/dotnet/csharp/language-reference/keywords/yield). Damit lässt sich einige Tipparbeit sparen, die bei der konventionellen Umsetzung anfallen würde, vgl [Link](https://docs.microsoft.com/de-de/troubleshoot/dotnet/csharp/make-class-foreach-statement).
+> **Achtung:** Das Beispiel implmentiert das Iteratorkonzept mittels [`yield`](https://learn.microsoft.com/de-de/dotnet/csharp/language-reference/keywords/yield). Damit lässt sich einige Tipparbeit sparen, die bei der konventionellen Umsetzung anfallen würde, vgl [Link](https://learn.microsoft.com/de-de/dotnet/csharp/language-reference/statements/iteration-statements#the-foreach-statement).
 
 Die Methoden für das Handling der Daten beschränken sich aber auf ein `Add()` und die Iteration - hier braucht es noch deutlich mehr, um anwendbar zu sein. Um diese Funktionalität umzusetzen, greift die C#-Collections Implementierung auf eine ganze Reihe von Interfaces zurück, die den einzelnen Containern die notwendige Funktion geben.
 
 
-````````````
+```text @plantUML
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+hide Method
+hide Field
 
-                Non-generic                             Generic
+package "Non-generic" {
+  interface IEnumerator
+  interface IEnumerable
+  interface ICollection
+  interface IDictionary
+  interface IList
 
-            +----------------+                     +-----------------+
-            | IEnumerator    |                     | IEnumerator﹤T﹥|
-            +----------------+                     +-----------------+
+  IEnumerable ..> IEnumerator : GetEnumerator()
+  IEnumerable <|-- ICollection
+  ICollection <|-- IDictionary
+  ICollection <|-- IList
+}
 
-            +----------------+                     +-----------------+
-            | IEnumerable    | ⊲------------------ | IEnumerable﹤T﹥|
-            +----------------+                     +-----------------+
-                    ∆                                       ∆
-                    |                                       |
-            +----------------+                     +-----------------+
-            | ICollection    |                     | ICollection﹤T﹥|
-            +----------------+                     +-----------------+
-                    ∆                                       ∆
-                    |                                       |
-        .-----------+----------.                  .---------+----------.
-        |                      |                  |                    |
- +----------------+  +----------------+   +-----------------+  +----------------+
- | IDictionary    |  | IList          |   | IDictionary﹤T﹥|  | IList﹤T﹥     |
- +----------------+  +----------------+   +-----------------+  +----------------+                        .
-````````````
+package "Generic" {
+  interface "IEnumerator<T>"  as IEnumeratorT
+  interface "IEnumerable<T>"  as IEnumerableT
+  interface "ICollection<T>"  as ICollectionT
+  interface "IDictionary<K,V>" as IDictionaryT
+  interface "IList<T>"        as IListT
+
+  IEnumerableT ..> IEnumeratorT : GetEnumerator()
+  IEnumerableT <|-- ICollectionT
+  ICollectionT <|-- IDictionaryT
+  ICollectionT <|-- IListT
+}
+
+IEnumerable <|-- IEnumerableT
+@enduml
+```
 
 An dieser Stelle greift das Interface `ICollection` und definiert die Methoden `Add`, `Clear`, `Contains`, `CopyTo` und `Remove`. Mit `Contains` kann geprüft werden, ob ein bestimmter Wert im Container enthalten ist. `CopyTo` extrahiert die Werte des Containers in ein Array. Dabei können bestimmte Ranges definiert werden. Die anderen Methoden sind selbsterklärend.
 
@@ -479,7 +615,50 @@ An dieser Stelle greift das Interface `ICollection` und definiert die Methoden `
 Folgendes Klassendiagramm zeigt die Teile der in C# implementierten Collection-Types
 und deren Relationen zu den entsprechenden Interfaces.
 
-![Collections](https://www.plantuml.com/plantuml/png/VP5FIyD04CNlyoaMl8afVe0GAlw1OZr8nVjsCzeXcrsPp1uKFxma4tN9jhqDx_VcCRnP3s9PKkzXw2XyMBQzSTuEmuq8qpu9RbmCE_f2Smq7Qj4uOkTHvoUKGsnrVY3qBS2qR3Rt8VN8LYAR-gKnTKr1aD-imwOn2zFUOsdwzTn6xz49nN3QiwL19deStz6qR_dJr8zNvdMPCll-KYxU6J7CwdF2XAMy4-kwKjvIwB0zdbIUiOYCBBfxZeyfImvvavTLazSFUODLzQrmDaFMZSBC3Tfh8KEsirgDy5-0xCWJR0mjMQQE8sYHIrMVeK9saJwZaDSOsjJx7m00)<!-- size="350px" -->
+```text @plantUML
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+hide Method
+hide Field
+
+class IEnumerator <T> <<interface>> 
+class IEnumerable <T> <<interface>>
+class ICollection <T> <<interface>>
+class IList <T>  <<interface>>
+class IDictionary <K, V> <<interface>>
+
+class List <T> #green
+class Queue <T> #green
+class Stack <T> #green
+class LinkedList <T> #green
+class Dictionary <K, V>  #green
+class SortedList <K, V>  #green
+class SortedDict <K, V>  #green
+
+IEnumerable ..> IEnumerator : GetEnumerator()
+ICollection --|> IEnumerable
+IDictionary --|> ICollection
+IList --|> ICollection
+
+Dictionary ..|> IDictionary
+SortedDict ..|> IDictionary
+SortedList ..|> IDictionary
+List ..|> IList
+LinkedList ..|> IList
+Queue ..|> ICollection
+Stack ..|> ICollection
+@enduml
+```
+
+> **Zur Beziehung zwischen `IEnumerable` und `IEnumerator`:** Beachten Sie, dass diese
+> Relation als gestrichelte _Abhängigkeit_ (`..>`) und nicht als Komposition gezeichnet
+> ist. Ein Interface ist ein reiner Vertrag - es besitzt keine Felder und kann daher
+> kein anderes Objekt im Sinne einer Komposition "enthalten". `IEnumerable` verspricht
+> lediglich über die Methode `GetEnumerator()`, bei Bedarf einen `IEnumerator` zu
+> _erzeugen_. Dieser Iterator ist ein eigenständiges, kurzlebiges Objekt (jeder
+> `foreach`-Durchlauf fordert typischerweise einen neuen an); seine Lebensdauer hängt am
+> Aufrufer, nicht am `IEnumerable`. Genau das drückt die Abhängigkeitsbeziehung aus.
 
 
                                      {{1-2}}
@@ -489,11 +668,11 @@ Im Folgenden sollen Beispiele für die aufgeführten Datenstrukturen dargestellt
 
 | C# Collection | Bezeichnung                                   | Bedeutung                                                                                                        |                                                                                                              |
 | ------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| List          | unsortiertes Datenfeld indizierbarer Elemente | Im Unterschied zum Array "beliebig" erweiterbar                                                                  | [Link](https://docs.microsoft.com/de-de/dotnet/api/system.collections.generic.list-1?view=netframework-4.8)  |
-| SortedList    | sortiertes Datenfeld                          | Abbildung der Reihenfolge über einen numerischen Schlüssel                                                       |    [Link](https://docs.microsoft.com/de-de/dotnet/api/system.collections.generic.sortedlist-2?view=netframework-4.8)                                                                                                          |
-| Stack         | LIFO Datenstruktur                            |                                                                                                                  | [Link](https://docs.microsoft.com/de-de/dotnet/api/system.collections.generic.stack-1?view=netframework-4.8) |
-| Queue         | FIFO Datenstruktur                            |                                                                                                                  | [Link](https://docs.microsoft.com/de-de/dotnet/api/system.collections.generic.queue-1?view=netframework-4.8) |
-| Dictionary     | assoziatives Datenfeld                        | ... Datenstruktur mit nicht-numerischen (fortlaufenden ) Schlüsseln, um die enthaltenen Elemente zu adressieren. |  [Link](https://docs.microsoft.com/de-de/dotnet/api/system.collections.generic.dictionary-2?view=netframework-4.8)                                                                                                            |
+| List          | unsortiertes Datenfeld indizierbarer Elemente | Im Unterschied zum Array "beliebig" erweiterbar                                                                  | [Link](https://learn.microsoft.com/de-de/dotnet/api/system.collections.generic.list-1?view=net-9.0)  |
+| SortedList    | sortiertes Datenfeld                          | Abbildung der Reihenfolge über einen numerischen Schlüssel                                                       |    [Link](https://learn.microsoft.com/de-de/dotnet/api/system.collections.generic.sortedlist-2?view=net-9.0)                                                                                                          |
+| Stack         | LIFO Datenstruktur                            |                                                                                                                  | [Link](https://learn.microsoft.com/de-de/dotnet/api/system.collections.generic.stack-1?view=net-9.0) |
+| Queue         | FIFO Datenstruktur                            |                                                                                                                  | [Link](https://learn.microsoft.com/de-de/dotnet/api/system.collections.generic.queue-1?view=net-9.0) |
+| Dictionary     | assoziatives Datenfeld                        | ... Datenstruktur mit nicht-numerischen (fortlaufenden ) Schlüsseln, um die enthaltenen Elemente zu adressieren. |  [Link](https://learn.microsoft.com/de-de/dotnet/api/system.collections.generic.dictionary-2?view=net-9.0)                                                                                                            |
 
 ********************************************************************************
 
@@ -580,7 +759,7 @@ public class Program{
 HashSet<T>
 =====================
 
-```csharp      DictionaryExample
+```csharp      HashSetExample
 using System;
 using System.Reflection;
 using System.Collections.Generic;
@@ -625,6 +804,55 @@ public class a : IEqualityComparer<a>
 }
 ```
 
+## Wert- und Referenztypen in Containern
+
+Beim Arbeiten mit Collections wird die anfangs eingeführte Unterscheidung zwischen
+Wert- und Referenztypen plötzlich praktisch relevant. Eine Collection speichert
+Werttypen (`struct`, `int`, ...) **als Kopie**, Referenztypen (`class`) dagegen **als
+Verweis** auf das eigentliche Objekt. Das hat eine wichtige Konsequenz: Was passiert,
+wenn wir ein Element aus dem Container herausholen und verändern?
+
+```csharp      WertVsReferenzImContainer
+using System;
+using System.Collections.Generic;
+
+public struct PunktStruct { public int X; }   // Werttyp
+public class  PunktClass  { public int X; }   // Referenztyp
+
+public class Program
+{
+    public static void Main()
+    {
+        // --- Werttyp in der Liste ---
+        var structListe = new List<PunktStruct> { new PunktStruct { X = 1 } };
+        PunktStruct s = structListe[0];   // liefert eine KOPIE
+        s.X = 99;                         // ändert nur die Kopie
+        Console.WriteLine("struct in Liste: " + structListe[0].X);   // -> 1
+
+        // --- Referenztyp in der Liste ---
+        var classListe = new List<PunktClass> { new PunktClass { X = 1 } };
+        PunktClass c = classListe[0];     // liefert die REFERENZ
+        c.X = 99;                         // ändert das Objekt in der Liste
+        Console.WriteLine("class in Liste:  " + classListe[0].X);    // -> 99
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+Das Ergebnis überrascht auf den ersten Blick:
+
++ Bei der **`struct`-Liste** liefert `structListe[0]` eine _Kopie_. Die Änderung `s.X = 99`
+  wirkt nur auf diese lokale Kopie - das Element in der Liste bleibt unverändert (`1`).
++ Bei der **`class`-Liste** liefert `classListe[0]` die _Referenz_ auf dasselbe Objekt.
+  Die Änderung `c.X = 99` schlägt damit direkt auf den Listeneintrag durch (`99`).
+
+> **Merke:** Wer einen Werttyp aus einem Container holt, verändert, und das Ergebnis
+> zurückerwartet, muss das geänderte Element explizit wieder zurückschreiben
+> (`structListe[0] = s;`). Bei Referenztypen entfällt das - dort teilen sich Variable und
+> Container ohnehin dasselbe Objekt. Genau deshalb sind unveränderliche Werttypen
+> (`readonly struct`, `record struct`) in Collections oft die robustere Wahl.
+
+
 ## Achtung!
 
 Die heute besprochenen Inhalte finden sich in verschiedenen Formen in allen höheren Programmiersprachen wieder.
@@ -658,5 +886,5 @@ print(my_set | your_set)
 ## Aufgaben der Woche
 
 - [ ] Erklären Sie, warum `Array` keine `Add`-Methode umfasst, obwohl es das Interface `IList` implementiert, dass wiederum diese einschließt. Tipp: Rufen Sie Ihr wissen um die explizite Methodenimplementierung noch mal auf.
-- [ ] Die Erläuterung zu den Beschränkungen beim Einsatz von Generics im Dokumemt 19 basiert auf der nicht generischen Implementierung des Interfaces `IComparable`. Ersetzen Sie diese im Codebeispiel durch die  generische Variante.
+- [ ] Die Erläuterung zu den Beschränkungen beim Einsatz von Generics in Vorlesung 16 (Generics) basiert auf der nicht generischen Implementierung des Interfaces `IComparable`. Ersetzen Sie diese im Codebeispiel durch die  generische Variante.
 - [ ] Evaluieren Sie verschiedene Container in Bezug auf Methoden zum Einfügen, Löschen, etc. Generieren Sie dazu entsprechende künstliche Objekte, die Sie manipulieren _"Füge 100.000 int Werte in eine Liste ein."_. Messen Sie die dafür benötigten Zeiten.

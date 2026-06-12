@@ -116,27 +116,27 @@ build-backend = "poetry.core.masonry.api"
 ## Referenzdatentypen
 
 ```ascii
-                                     C# Typen
-                                         |
-                       .------------------------------------.
-                       |                                    |
-                   Werttypen                           Referenztypen
-                       |                                    |
-         .-------+-----+---+--------.        .-------+---------+-------.
-         |       |         |        |        |       |         |       |
-     Vordefi-  Enumer-  Structs   Tupel   Klassen  Inter    Arrays  Delegates
- nierte Typen  ation                     (String) -faces
-         |
-         |      ...............................................................
-         |           Klassenbibliotheksbasierte / Benutzerdefinierte Typen
-         |
-         .----+------+-----------+-------------.
-         |           |           |             |
-     Character    Ganzzahl   Gleitkommazahl   Bool
-                     |
-             .------+---------.
-             |                |
-     mit Vorzeichen     vorzeichenlos                                                                      .
+                                          C# Typen
+                                              |
+                          .----------------------------------------------.
+                          |                                              |
+                      Werttypen                                    Referenztypen
+                          |                                              |
+   .------+------+------+--+----+--------.      .-------+--------+-------+-------+--------.
+   |      |      |      |       |        |      |       |        |       |       |        |
+ Vordef. Enum  Structs record  Tupel    …    Klassen record    Inter-  Arrays Delegates  …
+ Typen                 struct                (String) class    faces
+   |
+   |    ...............................................................
+   |          Klassenbibliotheksbasierte / Benutzerdefinierte Typen
+   |
+   .----+------+-----------+-------------+----------.
+   |           |           |             |          |
+ Character  Ganzzahl  Gleitkommazahl    Bool       …
+               |
+        .------+---------.
+        |                |
+  mit Vorzeichen   vorzeichenlos                                                                    .
 ```
 
 

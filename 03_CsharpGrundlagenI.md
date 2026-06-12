@@ -363,27 +363,27 @@ Datentypen können in der C# Welt nach unterschiedlichen Kriterien strukturiert 
 Schaubild realisiert dies auf 2 Ebenen (nach Mössenböck, Kompaktkurs C# 7 )
 
 ```ascii
-                                     C# Typen
-                                         |
-                       .------------------------------------.
-                       |                                    |
-                   Werttypen                           Referenztypen
-                       |                                    |
-         .-------+-----+---+--------.        .-------+---------+-------.
-         |       |         |        |        |       |         |       |
-     Vordefi-  Enumer-  Structs   Tupel   Klassen  Inter    Arrays  Delegates
- nierte Typen  ation                     (String) -faces
-         |     
-         |      <----------------------------------------------------------->
-         |           Klassenbibliotheksbasierte / Benutzerdefinierte Typen
-         |
-         .----+------+-----------+-------------.
-         |           |           |             |
-     Character    Ganzzahl   Gleitkommazahl   Bool
-                     |
-             .------+---------.
-             |                |
-     mit Vorzeichen     vorzeichenlos                                                                 .
+                                          C# Typen
+                                              |
+                          .----------------------------------------------.
+                          |                                              |
+                      Werttypen                                    Referenztypen
+                          |                                              |
+   .------+------+------+--+----+--------.      .-------+--------+-------+-------+--------.
+   |      |      |      |       |        |      |       |        |       |       |        |
+ Vordef. Enum  Structs record  Tupel    …    Klassen record    Inter-  Arrays Delegates  …
+ Typen                 struct                (String) class    faces
+   |
+   |    <----------------------------------------------------------->
+   |          Klassenbibliotheksbasierte / Benutzerdefinierte Typen
+   |
+   .----+------+-----------+-------------+----------.
+   |           |           |             |          |
+ Character  Ganzzahl  Gleitkommazahl    Bool       …
+               |
+        .------+---------.
+        |                |
+  mit Vorzeichen   vorzeichenlos                                                                    .
 ```
 
 Die Zuordnung zu Wert- und Referenzdatentypen ergibt sich dabei aus den zwei
