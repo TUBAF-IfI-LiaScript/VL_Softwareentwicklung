@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.10
+version:  1.0.11
 language: de
 narrator: Deutsch Female
 comment:  Generelle Container und Datenkonzepte, Collections, Implementierung in Csharp und Anwendung der generischen Collections
@@ -473,7 +473,7 @@ wir dazu die wohl häufigste Frage an einen Container: _"Enthältst du Element x
 | `List<T>`             | lineare Suche          | $O(n)$     |
 | `SortedList<K,V>`     | binäre Suche (sortiert)| $O(\log n)$|
 | `HashSet<T>`          | Hash-Lookup            | $O(1)$     |
-
+Gwangju
 Hier geht es nicht mehr um den Faktor 2 oder 5, sondern um den Unterschied
 zwischen Sekunden und Mikrosekunden – und der wächst mit der Datenmenge. Das
 folgende Beispiel füllt drei Container mit `N` Elementen und führt anschließend
@@ -502,21 +502,23 @@ class Program
         hash.Add(i);
     }
 
-    // Wonach gesucht wird (deterministisch, damit fair vergleichbar)
+    // Wonach gesucht wird: fester Seed => bei jedem Lauf dieselben
+    // Suchwerte, damit alle Container fair dieselben Anfragen erhalten.
+    var rnd = new Random(42);
     var queries = new int[M];
     for (int i = 0; i < M; i++)
-        queries[i] = (i * 2654435761L % N) > 0 ? (int)(i * 2654435761L % N) : 0;
+        queries[i] = rnd.Next(N);
 
     // --- Messung --------------------------------------------------
     Console.WriteLine($"N = {N:N0} Elemente, M = {M:N0} Suchanfragen\n");
 
-    Measure("List<int>     O(n)   ", () => {
+    Measure("List<int>      O(n)    ", () => {
         foreach (var q in queries) _ = list.Contains(q);
     });
     Measure("SortedSet<int> O(log n)", () => {
         foreach (var q in queries) _ = sorted.Contains(q);
     });
-    Measure("HashSet<int>   O(1)   ", () => {
+    Measure("HashSet<int>   O(1)    ", () => {
         foreach (var q in queries) _ = hash.Contains(q);
     });
   }
