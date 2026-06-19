@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.11
+version:  1.0.12
 language: de
 narrator: Deutsch Female
 comment:  Softwarefehler, Testen zur Qualitätssicherung, Planung von Tests, Konzepte und Umsetzung in dotnet
@@ -42,13 +42,14 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 Zu Erinnerung an die bereits diskutierten Softwarefehler ...
 
-> 1999 verpasste die NASA-Sonde Mars Climate Orbiter den Landeanflug auf den Mars, weil die Programmierer unterschiedliche Maßsysteme verwendeten (ein Team verwendete das metrische und das andere das angloamerikanische) und beim Datenaustausch es so zu falschen Berechnungen kam. Eine Software wurde so programmiert, dass sie sich nicht an die vereinbarte Schnittstelle hielt, in der die metrische Einheit Newton × Sekunde festgelegt war. Die NASA verlor dadurch die Sonde. [Quelle](https://www.bernd-leitenberger.de/mco.shtml)
+> 1999 verpasste die NASA-Sonde Mars Climate Orbiter den Landeanflug auf den Mars, weil die Programmierer unterschiedliche Maßsysteme verwendeten (ein Team verwendete das metrische und das andere das angloamerikanische) und beim Datenaustausch es so zu falschen Berechnungen kam. Eine Software wurde so programmiert, dass sie sich nicht an die vereinbarte Schnittstelle hielt, in der für den Impuls die metrische Einheit Newtonsekunde (N·s) festgelegt war – geliefert wurden jedoch Werte in der angloamerikanischen Einheit Pound-force-Sekunde (lbf·s). Die NASA verlor dadurch die Sonde. [Quelle](https://www.bernd-leitenberger.de/mco.shtml)
 
-Softwarefehler sind sowohl sicherheitstechnisch wie ökonomisch ein erhebliches Risiko. Eine Studie der Zeitschrift iX ermittelte 2013 für Deutschland folgende Werte:
+Softwarefehler sind sowohl sicherheitstechnisch wie ökonomisch ein erhebliches Risiko. Das **Consortium for Information & Software Quality (CISQ)** beziffert die Kosten schlechter Softwarequalität in den USA für das Jahr 2022 [^CISQ]:
 
-+ Ca. 84,4 Mrd. Euro betragen die jährlichen Verluste durch Softwarefehler in Mittelstands- und Großunternehmen
-+ Ca. 14,4 Mrd. Euro jährlich (35,9 % des IT-Budgets) werden für die Beseitigung von Programmfehlern verwendet;
-+ Ca. 70 Mrd. Euro betragen die Produktivitätsverluste durch Computerausfälle aufgrund fehlerhafter Software
++ Ca. **2,41 Billionen US-Dollar** betragen die jährlichen Gesamtkosten schlechter Softwarequalität (fehlerhafte Software, gescheiterte IT-Projekte, Betriebsstörungen).
++ Ca. **1,52 Billionen US-Dollar** davon entfallen auf aufgelaufene *technische Schulden* (technical debt) – also den Aufwand, um über die Zeit angehäufte strukturelle Mängel im Code nachträglich zu beheben.
+
+[^CISQ]: Consortium for Information & Software Quality (CISQ): *The Cost of Poor Software Quality in the US: A 2022 Report*, November 2022. https://www.it-cisq.org/the-cost-of-poor-quality-software-in-the-us-a-2022-report/
 
 *******************************************************************************
 
@@ -58,9 +59,22 @@ Softwarefehler sind sowohl sicherheitstechnisch wie ökonomisch ein erhebliches 
 
 **Was sind Softwarefehler eigentlich?**
 
-Ein Programm- oder Softwarefehler ist, angelehnt an die allgemeine Definition für „Fehler“
+Ein Programm- oder Softwarefehler ist, angelehnt an die allgemeine Qualitätsterminologie. Die Norm DIN EN ISO 9000:2015 unterscheidet dabei:
 
-> „Nichterfüllung einer Anforderung“ [EN ISO 9000:2005]
+> *Nichtkonformität* – „Nichterfüllung einer Anforderung“ (3.6.9)
+>
+> *Fehler* (defect) – „Nichtkonformität in Bezug auf einen beabsichtigten oder festgelegten Gebrauch“ (3.6.10)
+
+Der Unterschied liegt im Gebrauchsbezug: Jeder *Fehler* ist eine *Nichtkonformität*, aber nicht jede Nichtkonformität ist ein Fehler.
+
+| Situation                                                                                       | Nichtkonformität? | Fehler (defect)? |
+| ----------------------------------------------------------------------------------------------- | :---------------: | :--------------: |
+| Variablennamen verletzen den vereinbarten Coding-Standard (Funktion ist korrekt)                |        ja         |       nein       |
+| Pflichtangabe „PLZ“ wird nicht validiert – ein Bestellformular akzeptiert leere Felder          |        ja         |        ja        |
+| Die Doku nennt eine veraltete Versionsnummer, das Programm läuft aber wie spezifiziert          |        ja         |       nein       |
+| Eine Zinsberechnung rundet falsch und überweist Kunden zu wenig Geld                            |        ja         |        ja        |
+
+Die ersten beiden Beispiele verletzen jeweils eine *Anforderung* (Coding-Standard bzw. aktuelle Doku), beeinträchtigen aber nicht den beabsichtigten Gebrauch der Software – es sind Nichtkonformitäten, aber keine Fehler im engeren Sinn. Die anderen beiden wirken sich direkt auf die Nutzung aus und sind damit *Fehler*.
 
 Konkret definiert sich der Fehler danach als
 
@@ -68,11 +82,13 @@ Konkret definiert sich der Fehler danach als
 
 Im Rahmen dieser Veranstaltung lassen wir Lexikalische Fehler und Syntaxfehler außen vor. Diese sind in der Regel über den Compiler identifizierbar. Darüber hinaus existieren aber :
 
-| Fehlertyp               | Folgen                                                                                                                                                          |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Logisch/semantische Fehler      | Anweisung ist zwar syntaktisch fehlerfrei, aber inhaltlich trotzdem fehlerhaft (plus statt minus, kleiner statt kleiner gleich, fehlende Synchronisation, usw.) |
-| Designfehler            | Strukturelle Mängel auf der Modul oder Systemebene, die das Zusammenspiel der Komponenten, deren Erweiterung, usw. verhindern.                                  |
-| Fehler im Bedienkonzept | Unintuitive Benutztung, das Programm "fühlt sich komisch an"                                                                                                    |
+| Fehlertyp                      | Folgen                                                                                                                                                          |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Spezifikations-/Anforderungsfehler | Die Software tut korrekt das Falsche – die Anforderung selbst war falsch, unvollständig oder missverständlich. Entsteht, bevor eine Zeile Code geschrieben ist. |
+| Logische / semantische Fehler  | Anweisung ist zwar syntaktisch fehlerfrei, aber inhaltlich trotzdem fehlerhaft (plus statt minus, kleiner statt kleiner gleich, falsche Schleifengrenze, usw.) |
+| Designfehler                   | Strukturelle Mängel auf der Modul- oder Systemebene, die das Zusammenspiel der Komponenten, deren Erweiterung, usw. verhindern.                                  |
+| Nebenläufigkeitsfehler         | Race Conditions, Deadlocks, fehlende Synchronisation – treten oft nicht-deterministisch und nur unter bestimmten Timing-Bedingungen auf.                        |
+| Fehler im Bedienkonzept        | Unintuitive Benutzung, das Programm "fühlt sich komisch an"                                                                                                     |
 
 Darüber hinaus ist es wichtig zwischen Laufzeit- und Designzeitfehlern zu unterscheiden.
 
@@ -83,36 +99,16 @@ Darüber hinaus ist es wichtig zwischen Laufzeit- und Designzeitfehlern zu unter
 
 **Wann entstehen Fehler im Projekt?**
 
-Problem- und Systemanalyse:
+| Phase                      | Typische Fehlerquellen                                                                                                              |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Problem- und Systemanalyse | Anforderungen und Qualitätsmerkmale werden nicht festgelegt; es fehlen eindeutige Begriffsdefinitionen.                             |
+| Systementwurf              | Die Systemarchitektur ist gar nicht oder nur mit großem Aufwand erweiterbar; das System ist nicht modular aufgebaut, die Daten sind nicht gekapselt. |
+| Feinentwurf                | Schnittstellen sind nicht hinreichend spezifiziert; Interaktionsmodelle weisen Lücken auf.                                          |
+| Codierung                  | Programmier-Standards bzw. -Richtlinien werden nicht beachtet; die Namensvergabe ist ungünstig.                                     |
+| Betrieb und Wartung        | Die Dokumentation fehlt ganz, ist veraltet oder nicht adäquat; die Schulung der Anwender wird vernachlässigt; das Konfigurationsmanagement ist unzureichend. |
 
-+ Die Anforderungen und Qualitätsmerkmale werden nicht festgelegt.
-+ Es fehlen eindeutige Begriffsdefinitionen.
 
-Systementwurf:
-
-+ Die Systemarchitektur ist gar nicht oder nur mit großem Aufwand erweiterbar.
-+ Das System ist nicht modular aufgebaut, die Daten sind nicht gekapselt.
-
-Feinentwurf:
-
-+ Schnittstellen sind nicht hinreichend spezifiziert
-+ Interaktionsmodelle weisen Lücken auf
-
-Codierung
-
-+ Programmier-Standards bzw. -Richtlinien werden nicht beachtet.
-+ Die Namensvergabe ist ungünstig.
-
-Betrieb und Wartung:
-
-+ Die Dokumentation fehlt ganz, ist veraltet oder nicht adäquat.
-+ Die Schulung der Anwender wird vernachlässigt.
-+ Das Konfigurationsmanagement ist unzureichend.
-
-<!--https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/refs/heads/master/19_Testen.md
-style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-right: auto;"
--->
-````````````
+```ascii
 
           ^
  Fehler-  | +---------+
@@ -129,10 +125,8 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
           | |         | entwurf  | mentier- | tion &   | und     |
           | |         |          | ung      | Tests    | Wartung |
           ----------------------------------------------------------->
-                                              Software Lebenszyklus
-
-
-````````````
+                                              Software Lebenszyklus                                   .
+```
 
 *******************************************************************************
 
@@ -191,7 +185,7 @@ style="width: 100%; max-width: 560px; display: block; margin-left: auto; margin-
 
 Es gibt unterschiedliche Definitionen für den Softwaretest:
 
-> „the process of operating a system or component under specified conditions, observing or recording the results and making an evaluation of some aspects of the system or component.“ [ANSI/IEEE Std. 610.12-1990 ]
+> „the process of operating a system or component under specified conditions, observing or recording the results and making an evaluation of some aspects of the system or component.“ [ursprünglich ANSI/IEEE Std. 610.12-1990, heute abgelöst durch ISO/IEC/IEEE 24765]
 
 > „Test […] der überprüfbare und jederzeit wiederholbare Nachweis der Korrektheit eines Softwarebausteines relativ zu vorher festgelegten Anforderungen“ ist. [^Denert]
 
@@ -199,14 +193,30 @@ Es gibt unterschiedliche Definitionen für den Softwaretest:
 
 Welche Unterschiede sehen Sie in den Definitionen?
 
+<details>
+<summary>Ein erkenntnistheoretischer Hinweis ...</summary>
+
+Beachten Sie insbesondere den Anspruch der mittleren Definition, die *Korrektheit* nachzuweisen. Testen kann das streng genommen nicht leisten – es kann immer nur die *Anwesenheit* von Fehlern zeigen, nie deren *Abwesenheit*:
+
+> „Program testing can be used to show the presence of bugs, but never to show their absence!“ [Edsger W. Dijkstra]
+
+Die Definition von Pol et al. ist hier vorsichtiger formuliert: Sie spricht vom *Aufzeigen des Unterschieds* zwischen Soll- und Ist-Zustand – nicht vom Beweis der Korrektheit.
+
+</details>
+
 [^Denert]:  Ernst Denert: Software-Engineering. Methodische Projektabwicklung. Springer, Berlin u. a. 1991, ISBN 3-540-53404-0.
 
 [^Pol]: Martin Pol, Tim Koomen, Andreas Spillner: Management und Optimierung des Testprozesses. Ein praktischer Leitfaden für erfolgreiches Testen von Software mit TPI und TMap. 2., aktualisierte Auflage. dpunkt.Verlag, Heidelberg 2002, ISBN 3-89864-156-2.
 
-> Unterschied Verifikation vs. Validierung
->
+<details>
+<summary>UVerifikation und Validierung?</summary>
+
 > + **Verifikation** ... ist der Prozess, der sicherstellt, dass ein Softwareprodukt die Spezifikationen erfüllt und korrekt implementiert wurde. (_Bauen wir das Produkt richtig?_)
 > + **Validierung** ... ist der Prozess, der sicherstellt, dass das Softwareprodukt die Bedürfnisse des Kunden erfüllt und die richtige Software entwickelt wurde. (_Bauen wir das richtige Produkt?_)
+
+V&V (das *Ziel*) und die Frage nach der Programmausführung (die *Methode*) sind zwei unabhängige Dimensionen. Bei der Methode unterscheidet man **statisch** (ohne Ausführung – Reviews, statische Analyse, formaler Beweis) und **dynamisch** (durch Ausführung mit konkreten Eingaben). **Testen ist die dynamische Methode** und kann je nach Teststufe beide Ziele bedienen – Modultest (Verifikation) bis Abnahmetest (Validierung).
+
+</details>
 
 ### Ablauf beim Testen
 
@@ -351,17 +361,22 @@ der Eingangsparameter.
 
 Für Black-Box-Testing existieren unterschiedliche Ausprägungen:
 
-+ Äquivalenzklassenanalyse
-+ Grenzwertanalyse [Link](https://www.youtube.com/watch?v=GshMbff3mzw)
-+ Zustandsbasierte Testmethoden
+| Methode                                                              | Idee                                                                                                                                                            | Beispiel (Eingabe `Alter` für einen Tarif, gültig 18–65)                                            |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| **Äquivalenzklassenanalyse**                                        | Der Eingaberaum wird in Klassen zerlegt, die das Programm *vermutlich gleich* behandelt. Pro Klasse genügt ein Repräsentant – statt aller Werte nur wenige.    | drei Klassen: `< 18` (ungültig), `18–65` (gültig), `> 65` (ungültig) → z. B. Testwerte 10, 40, 80   |
+| **Grenzwertanalyse** [Link](https://www.youtube.com/watch?v=GshMbff3mzw) | Fehler häufen sich *an den Rändern* der Äquivalenzklassen. Getestet werden gezielt die Grenzen und ihre direkten Nachbarn.                                  | Werte 17, 18, 19 und 64, 65, 66 – die Übergänge gültig/ungültig                                      |
+| **Zustandsbasierte Testmethoden**                                   | Das Verhalten hängt nicht nur von der aktuellen Eingabe ab, sondern vom *Zustand* (Vorgeschichte). Getestet werden Zustände und erlaubte/verbotene Übergänge.  | Geldautomat: Karte → PIN → Auszahlung; Test: Auszahlung *ohne* vorherige PIN-Eingabe muss scheitern  |
+
+Äquivalenzklassen- und Grenzwertanalyse ergänzen sich typischerweise: Erst werden
+die Klassen gebildet, dann gezielt deren Grenzen abgetestet.
 
 Problematisch ist dabei, dass spezifische Lösungen, wie zum Beispiel in folgendem Fall. Der Entwickler hat hier beschlossen die Performance der Berechnung der Fakultät zu steigern, um die Performance des Algorithmus für Werte kleiner 5 zu verbessern (hypothetisches Beispiel!).
 
 ```csharp
 static class MyMathFunctions{
   public int fak (int i){
-    if ( i==1 ) return 0;           // Fehler
-    elseif (i == 2) return 1;       // Fehler
+    if ( i==1 ) return 0;           // FEHLER: fak(1) == 1, nicht 0!
+    elseif (i == 2) return 1;       // FEHLER: fak(2) == 2, nicht 1!
     elseif  ... Ergebnisse für 3 und 4 ...
     elseif (i == 5) return 120;
     else return i * fak(i-1);
@@ -427,7 +442,7 @@ static class MyMathFunctions{
     facArray[9] = 1;                         // 9
     // besser:
     // int [] facArray = new int[] { 1, 3, 5, 7, 9 };
-    if ( i<10 ) return fakArray[i];          // 10 + 11
+    if ( i<10 ) return facArray[i];          // 10 + 11
     else return i * fak(i-1);                // 12
   }
 }
@@ -464,7 +479,7 @@ static class MyMathFunctions{
     facArray[9] = 1;                         //
     // besser:
     // int [] facArray = new int[] { 1, 3, 5, 7, 9 };
-    if ( i<10 ) return fakArray[i];          // 1. Verzweigung
+    if ( i<10 ) return facArray[i];          // 1. Verzweigung
     else return i * fak(i-1);                //
   }
 }
@@ -481,8 +496,10 @@ Schleifen in variabler Durchlaufzahl umsetzten.
 
 **C_3 Bedingungsüberdeckungstest**
 
-$C_3$ Tests extrahieren die Bedingungen die zum Eintritt in die Schleifen führen
-und generieren Testfälle, die alle Kombinationen abdecken.
+$C_3$ Tests betrachten *zusammengesetzte* Verzweigungsbedingungen (z. B. `a || b`)
+und prüfen nicht nur das Gesamtergebnis der Bedingung, sondern die Wahrheitswerte
+der einzelnen Teilbedingungen. Je nachdem, wie vollständig diese Teilbedingungen
+kombiniert werden, unterscheidet man drei Ausprägungen.
 
 ```csharp
 static class MyMathFunctions{
@@ -496,18 +513,18 @@ static class MyMathFunctions{
 <!-- data-type="none" -->
 |      | Test                                         | Testfälle im Beispiel                |
 | ---- | -------------------------------------------- | ------------------------------------ |
-| C_3a | Einfachbedingungsüberdeckungstest            | 2 (a = b = true sowie a = b = false) |
-| C_3b | Mehrfachbedingungsüberdeckungstest           | $2^n$                                |
-| C_3c | minimaler Mehrfachbedingungsüberdeckungstest | $<=2^n$                              |
+| C_3a | Einfachbedingungsüberdeckungstest            | 2 – jede Teilbedingung je einmal true/false, z. B. (a=true, b=false) und (a=false, b=true). Deckt **nicht** zwingend beide Zweige ab! |
+| C_3b | Mehrfachbedingungsüberdeckungstest           | $2^n$ – alle Kombinationen der Teilbedingungen (vollständige Wahrheitstabelle) |
+| C_3c | minimaler Mehrfachbedingungsüberdeckungstest | $\le 2^n$ – jede Teilbedingung beeinflusst das Ergebnis nachweislich allein (MC/DC) |
+
+> [!IMPORTANT]
+> Die Überdeckung eines Codes lässt sich nicht durch *eine* Kennzahl ausdrücken, sondern erst durch das Zusammenspiel der Kriterien $C_1$ bis $C_3$. Sie beleuchten unterschiedliche Strukturmerkmale – Zweige ($C_1$), Pfade und Schleifen ($C_2$) sowie zusammengesetzte Bedingungen ($C_3$) – und gehen gerade *nicht* vollständig ineinander auf. Erst gemeinsam, als Profil betrachtet, ergeben sie ein belastbares Bild der Testabdeckung.
 
 
 ## Und jetzt konkret!
 
-![alt-text](https://media.giphy.com/media/1msEFc2RYrY1AJL5hH/giphy-downsized.gif)
-
-> **Zu Erinnerung:** Testen ist der Vergleich eines Ergebnisses mit einem erwarteten Resultat.
-
-### Exkurs: Attribute in C#
+Exkurs: Attribute in C#
+-----------------------------
 
 Im Folgenden werden wir Attribute als Hilfsmittel verwenden. Entsprechend soll an dieser Stelle ein kurzer Einschub die Möglichkeiten dieser Zuordnung von Metainformationen zum C# Code verdeutlichen.
 
@@ -604,7 +621,7 @@ class Test
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
-    <DefineConstants>CONDITION2;</DefineConstants>
+    <DefineConstants>CONDITION2;CONDITION1;</DefineConstants>
   </PropertyGroup>
 </Project>
 ```
@@ -670,16 +687,15 @@ public class CalculatorTests
     public void TestMethod1()
     {
         // Arrange
-        double result;
+        double result = 0;
         double x = 3, y = 4;
-        int state;
         double expected = 0.75;
 
         // Act
         int state = Calculator.DivideTwoValues(x, y, ref result);
 
         // Assert
-        Assert.AreEqual(result, expected);
+        Assert.AreEqual(expected, result);   // Konvention: (expected, actual)
         //       ^---- Framework specifisch
     }
 }
@@ -749,6 +765,46 @@ public class Test_DivideTwoValues
 }
 ```
 
+### Was macht einen *guten* Test aus?
+
+Bisher haben wir gefragt, *ob* ein Test läuft. Mindestens ebenso wichtig ist,
+*wie* er geschrieben ist. Ein xUnit-Test, der durchläuft, ist nicht automatisch
+ein guter Test.
+
+**Das AAA-Muster (Arrange – Act – Assert)**
+
+Ist Ihnen die Kommentarstruktur in allen bisherigen Beispielen aufgefallen? Sie
+ist kein Zufall, sondern eine etablierte Konvention:
+
++ **Arrange** ... Testumgebung aufbauen (Objekte, Eingabewerte, erwartete Ergebnisse)
++ **Act** ... die zu testende Aktion *einmalig* ausführen
++ **Assert** ... das tatsächliche gegen das erwartete Ergebnis prüfen
+
+Ein Test sollte **genau eine Sache** prüfen. Mehrere Asserts sind erlaubt, wenn
+sie denselben Sachverhalt absichern — aber ein Test, der drei unabhängige Dinge
+testet, sagt im Fehlerfall nicht, *welches* davon kaputt ist.
+
+**FIRST-Prinzipien**
+
+Gute Unit-Tests erfüllen die fünf FIRST-Kriterien:
+
+| Buchstabe         | Bedeutung                                                                                  |
+| ----------------- | ------------------------------------------------------------------------------------------ |
+| **F**ast          | schnell genug, um sie bei *jeder* Änderung laufen zu lassen (Millisekunden, nicht Sekunden) |
+| **I**solated      | unabhängig voneinander — keine geteilte Reihenfolge, kein gemeinsamer Zustand              |
+| **R**epeatable    | gleiches Ergebnis bei jedem Lauf (kein `DateTime.Now`, kein Zufall, keine echte Datenbank)  |
+| **S**elf-validating | bestanden/fehlgeschlagen ist automatisch entscheidbar — kein manuelles Ablesen der Ausgabe |
+| **T**imely        | zeitnah geschrieben, idealerweise *vor* oder *mit* dem Produktivcode (vgl. TDD)            |
+
+**Test-Smells — Warnzeichen schlechter Tests**
+
++ **Logik im Test** ... `if`/`for`/Berechnungen im Testcode. Dann testet man den
+  Test mit. Erwartete Werte gehören als Literal in den Test.
++ **Abhängige Tests** ... Test B funktioniert nur, wenn Test A vorher lief.
++ **Test ohne Assert** ... ruft nur die Methode auf und prüft nichts (außer "wirft keine Exception").
++ **Jagd nach der Coverage-Zahl** ... Tests, die Zeilen *durchlaufen*, aber nichts
+  *prüfen*, heben die Coverage, nicht die Qualität (siehe `facArray`-Beispiel).
+
 Wie setzen wir das Ganze um?
 
 ```
@@ -792,6 +848,18 @@ Das Argument "XPlat Code Coverage" bezieht sich auf das Zwischenformat der Darst
 
 ![instruction-set](./img/16_Testen/ReportGenerator.png)
 
+> **Brücke zur Theorie:** Was der Report als *"Line Coverage"* ausweist, ist
+> nichts anderes als das weiter oben eingeführte **$C_0$-Kriterium
+> (Anweisungsüberdeckung)**. Die Spalte *"Branch Coverage"* entspricht dem
+> **$C_1$-Kriterium (Zweigüberdeckung)**. `coverlet` misst also genau die
+> Metriken, die wir im White-Box-Abschnitt von Hand berechnet haben — nur
+> automatisiert.
+>
+> Achtung: Der Report sagt **nicht**, ob Ihre Tests *gut* sind. Erinnern Sie
+> sich an das `facArray`-Beispiel — dort erreichte ein einziger Testfall
+> ($i = 1$) eine Line Coverage von 91 %, ohne einen einzigen der versteckten
+> Copy-&-Paste-Fehler aufzudecken. **Hohe Coverage ist notwendig, aber nicht
+> hinreichend für Qualität.**
 
 > Im Projektordner finden Sie die gesamte Testimplementierung. Diese wurde um eine Python Applikation erweitert, die eine Sprachübergreifende Nutzung einer Csharp Bibliothek illustriert.
 
@@ -813,8 +881,6 @@ Testen auf Modulebene ist ein wichtiger Bestandteil der Softwareentwicklung, abe
 
 ### Testen auf Modulebene
  
-                           {{0-1}}
-****************************************************************
 
 Modul oder Komponententests sind Tests, die sich auf einzelne Module oder Komponenten einer Software konzentrieren. Sie überprüfen die Funktionalität und das Verhalten dieser Module isoliert von anderen Teilen des Systems. 
 
@@ -837,12 +903,6 @@ public class WarenkorbTests {
     }
 }
 ```
-
-****************************************************************
-
-                           {{1-2}}
-****************************************************************
-
 
 In der realen Software bestehen viele Klassen aus Abhängigkeiten zu anderen Komponenten – z. B. Datenbanken, externe Dienste oder Services.
 
@@ -870,11 +930,6 @@ __Best Practices beim Mocking__
 - Verwende `.Setup(...)` nur für erwartetes Verhalten
 - Nutze `.Verify(...)` zur Kontrolle von Aufrufen (z. B. ob ein E-Mail-Versand ausgelöst wurde)
 
-****************************************************************
-
-                           {{2-3}}
-****************************************************************
-
 Produktionscode:
 
 ```csharp
@@ -896,7 +951,7 @@ public class Kasse {
 }
 ```
 
-Testcode mit Mocking:
+> Testcode mit Mocking - Der Mock ersetzt die Abhängigkeit (IPreisDienst), damit der echte Prüfling (Kasse) unter vollständig kontrollierten Bedingungen getestet werden kann. Wir legen einen generischen Mock an, der als Preisdienst fungiert — und reichen ihn der echten Kasse herein.
 
 ```csharp
 using Moq;
@@ -919,8 +974,6 @@ public class KasseTests {
     }
 }
 ```
-
-***************************************************************
 
 ### Integrationstests
 
@@ -956,7 +1009,15 @@ public class ArtikelRepository {
 }
 ```
 
-Testcode mit Mocking:
+Testcode mit In-Memory-Datenbank (Fake statt Mock):
+
+> Achtung – Abgrenzung zum Unittest oben: Dort haben wir die Abhängigkeit
+> (`IPreisDienst`) durch einen **Mock** ersetzt, der *kein eigenes Verhalten*
+> besitzt und nur die per `.Setup(...)` diktierte Antwort liefert. Hier dagegen
+> läuft die **echte** EF-Core-Logik (`Add`, `SaveChanges`, `Find`, Schlüsselvergabe) –
+> nur das Speichermedium ist durch RAM ersetzt. Ein gemockter `DbContext` würde
+> genau das aushebeln, was der Integrationstest beweisen soll: das **Zusammenspiel**
+> von Repository und Kontext.
 
 ```csharp
 using Xunit;
@@ -987,6 +1048,10 @@ public class ArtikelRepositoryTests {
 
 > Anstatt einen echten Datenbankserver zu verwenden, nutzen wir eine **In-Memory-Datenbank** für die Tests. Diese ermöglicht aber auch wesentlich konkrete Umsetzungen als die Mock-Objekte, da sie die tatsächliche Datenbank-Logik "simuliert".
 
+>[!IMPORTANT]
+> Beim Unittest mit Mock ersetzt du die Abhängigkeit vollständig — der Test sagt nichts über deren echtes Verhalten aus, nur über den Prüfling.
+> Beim Integrationstest willst du genau das Zusammenspiel prüfen — deshalb darfst du dort gerade nicht mocken, sondern nutzt einen Fake (In-Memory-DB), der die echte Logik durchlaufen lässt.
+
 ### Testen auf Systemebene
 
 Ein **Systemtest** überprüft das **gesamte Systemverhalten** aus Sicht des Endnutzers.  
@@ -994,9 +1059,6 @@ Dabei wird die gesamte Anwendung als Black Box getestet – **alle Komponenten, 
 
 > Ziel: Sicherstellen, dass das System als Ganzes die Anforderungen erfüllt.
 
----
-
-### Abgrenzung zu anderen Tests
 
 | Testart          | Fokus                         | Perspektive     |
 | ---------------- | ----------------------------- | --------------- |
@@ -1006,12 +1068,78 @@ Dabei wird die gesamte Anwendung als Black Box getestet – **alle Komponenten, 
 | **Systemtest**   | Gesamtsystem                  | **Nutzer / Tester** |
 
 
-### Eigenschaften von Systemtests
+Eigenschaften von Systemtests
 
 - Arbeiten mit **realen oder simulierten Datenbanken, Schnittstellen, UI**
 - Testen **End-to-End-Szenarien** (z. B. Anmeldung, Bestellung, Zahlung)
 - Häufig **automatisiert** mit Tools wie Selenium, Playwright oder TestServer
 - Können auch **manuell** durchgeführt werden (z. B. nach Checklisten)
+
+**Ein lauffähiges Beispiel mit dem TestServer**
+
+Auch ein Systemtest lässt sich automatisieren. .NET bringt dafür die
+`WebApplicationFactory` mit: Sie startet die **komplette Anwendung** in einem
+In-Memory-Webserver (alle Komponenten, Middleware, Routing integriert) und
+schickt echte HTTP-Anfragen dagegen — ohne externen Browser oder Server. Der Test
+sieht die Anwendung von außen als **Black Box**, genau aus der Nutzerperspektive.
+
+Produktionscode (eine minimale Web-API):
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+app.MapGet("/preis/{artikelId}", (string artikelId) =>
+    artikelId == "A1" ? Results.Ok(10.0m) : Results.NotFound());
+
+app.Run();
+
+public partial class Program { }   // macht Program für die Tests sichtbar
+```
+
+Systemtest (End-to-End über echtes HTTP):
+
+```csharp
+using Microsoft.AspNetCore.Mvc.Testing;
+using Xunit;
+
+public class PreisApiSystemTests : IClassFixture<WebApplicationFactory<Program>>
+{
+    private readonly WebApplicationFactory<Program> _factory;
+
+    public PreisApiSystemTests(WebApplicationFactory<Program> factory)
+        => _factory = factory;
+
+    [Fact]
+    public async Task GET_Preis_fuer_bekannten_Artikel_liefert_200()
+    {
+        // Arrange: gesamte App hochfahren, HTTP-Client holen
+        var client = _factory.CreateClient();
+
+        // Act: echte HTTP-Anfrage gegen die laufende Anwendung
+        var antwort = await client.GetAsync("/preis/A1");
+
+        // Assert: Verhalten aus Nutzersicht
+        antwort.EnsureSuccessStatusCode();
+        var preis = await antwort.Content.ReadAsStringAsync();
+        Assert.Equal("10.0", preis);
+    }
+
+    [Fact]
+    public async Task GET_Preis_fuer_unbekannten_Artikel_liefert_404()
+    {
+        var client = _factory.CreateClient();
+        var antwort = await client.GetAsync("/preis/UNBEKANNT");
+        Assert.Equal(System.Net.HttpStatusCode.NotFound, antwort.StatusCode);
+    }
+}
+```
+
+> Im Gegensatz zum Unit-Test wird hier **nichts gemockt oder substituiert**: Routing, Modellbindung
+> und Endpunktlogik laufen real zusammen. Das ist der Preis (langsamer, mehr
+> Fehlerquellen) und zugleich der Gewinn (testet, was der Nutzer tatsächlich
+> erlebt) eines Systemtests — genau die Abwägung, die die Testpyramide unten
+> zeigt.
 
 
 ## Vergleich 

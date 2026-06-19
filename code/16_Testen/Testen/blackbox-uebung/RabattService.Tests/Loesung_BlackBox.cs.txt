@@ -1,0 +1,60 @@
+namespace RabattService.Tests;
+
+using Xunit;
+
+// ===========================================================================
+//  MUSTERLÖSUNG zur Black-Box-Übung
+// ===========================================================================
+//
+//  Diese Datei trägt bewusst die Endung ".cs.txt", damit sie NICHT mit
+//  kompiliert wird (sonst kollidieren die [Theory]-Daten in der Vorführung).
+//
+//  Zum Vorführen der Lösung:
+//     mv Loesung_BlackBox.cs.txt Loesung_BlackBox.cs
+//     dotnet test
+//  und ggf. Aufgabe_BlackBox.cs vorübergehend nach .cs.txt umbenennen.
+//
+//  ERGEBNIS: Der Testfall (2000.00 -> 15 %) schlägt fehl. Die Black-Box-
+//  Grenzwertanalyse deckt damit den Off-by-one-Fehler an der 2000-Grenze auf
+//  (im Code steht  <= 2000m  statt  < 2000m, deshalb erhält 2000,00 nur 10 %).
+// ===========================================================================
+
+public class Loesung_BlackBox
+{
+    // ----- 1. Äquivalenzklassen --------------------------------------------
+
+    [Theory]
+    [InlineData(50.00, 0)]      // Klasse  0 %
+    [InlineData(250.00, 5)]      // Klasse  5 %
+    [InlineData(1000.00, 10)]     // Klasse 10 %
+    [InlineData(5000.00, 15)]     // Klasse 15 %
+    public void Rabatt_je_Aequivalenzklasse(decimal bestellwert, int erwartet)
+    {
+        var rabatt = Rabatt.RabattInProzent(bestellwert);
+        Assert.Equal(erwartet, rabatt);
+    }
+
+    // ----- 2. Grenzwertanalyse ---------------------------------------------
+
+    [Theory]
+    [InlineData(99.99, 0)]
+    [InlineData(100.00, 5)]
+    [InlineData(499.99, 5)]
+    [InlineData(500.00, 10)]
+    [InlineData(1999.99, 10)]
+    [InlineData(2000.00, 15)]   // <- deckt den Off-by-one-Fehler auf
+    public void Rabatt_an_den_Grenzen(decimal bestellwert, int erwartet)
+    {
+        var rabatt = Rabatt.RabattInProzent(bestellwert);
+        Assert.Equal(erwartet, rabatt);
+    }
+
+    // ----- 3. Ungültige Eingabe --------------------------------------------
+
+    [Fact]
+    public void NegativerBestellwert_wirftException()
+    {
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => Rabatt.RabattInProzent(-1m));
+    }
+}
