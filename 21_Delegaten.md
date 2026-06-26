@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.8
+version:  1.0.9
 language: de
 narrator: Deutsch Female
 comment:  Grundidee, Multicast Delegaten, Anonyme/Lambda Funktionen, generische Delegaten, Action und Func
@@ -10,6 +10,7 @@ tags:
 logo:     
 
 import: https://github.com/liascript/CodeRunner
+        https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md 
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
 
@@ -33,11 +34,107 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
-## Hinweise zu den praktischen Prüfungsprojekten
+## Exkurse: Logging
 
-[Projektaufgaben](https://github.com/ComputerScienceLecturesTUBAF/SoftwareentwicklungSoSe2023_Projektaufgaben)
+Wie arbeiten wir bisher in Bezug auf Textausgaben?
 
-> Bitte teilen Sie Ihr Repo mit uns! Schreiben Sie dazu eine Einladungsemail an Frau Dr. Rudolf.
+```csharp    ImplicitConstructorCall
+using System;
+using System.Reflection;
+using System.ComponentModel.Design;
+
+public class Person {
+  public int geburtsjahr;
+  public string name;
+
+  public Person(){
+    geburtsjahr = 1984;
+    name = "Orwell";
+    Console.WriteLine("ctor of Person");
+  }
+}
+
+public class Fußballspieler : Person {
+  public byte rückennummer;
+}
+
+public class Program
+{
+  public static void Main(string[] args){
+    Fußballspieler champ = new Fußballspieler();
+    Console.WriteLine("{0,4} - {1}", champ.geburtsjahr, champ.name );
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+Dieses Vorgehen kann auf Dauer ziemlich nerven ...
+
+> Lösung: Verwenden Sie ein Logging Framework, z.B. NLog - ein Logging-Framework für .NET-Anwendungen!
+>
+> NLog wird als NuGet-Paket eingebunden - das zugrundeliegende Paketmanagement haben
+> wir in der Vorlesung [Dokumentation und Build-Tools](18_Dokumentation_BuildTools.md) besprochen.
+
+| **Merkmal**            | **Beschreibung**                                                              | **`print()`** | **Logging-Framework** |
+| ---------------------- | ----------------------------------------------------------------------------- | ------------- | --------------------- |
+| **Zentrale Steuerung** | Konfiguration und Steuerung der Ausgabe zentral möglich                       | ❌            | ✅                    |
+| **Log-Level**          | Nachrichten können je nach Wichtigkeit kategorisiert werden                   | ❌            | ✅                    |
+| **Formatierung**       | Ausgaben können standardisiert formatiert werden (z. B. mit Zeitstempel)      | ❌            | ✅                    |
+| **Dateihandling**      | Logs können automatisch in Dateien geschrieben und rotiert werden             | ❌            | ✅                    |
+| **Mehrere Ausgaben**   | Gleichzeitige Ausgabe an Konsole, Datei, Netzwerk usw.                        | ❌            | ✅                    |
+| **Thread-Sicherheit**  | Gleichzeitige Ausgaben mehrerer Threads führen nicht zu vermischten Zeilen    | ❌            | ✅                    |
+| **Integration**        | Logs können mit externen Tools (z. B. Logserver, Dashboards) verwendet werden | ❌            | ✅                    |
+
+
+                              {{1-2}}
+***********************************************************************
+
+NLog:
+
++ ermöglicht das Protokollieren von Informationen, Warnungen, Fehlern und anderen Ereignissen,
++ unterstützt Datei-Logging, Datenbank-Logging, E-Mail-Logging, Konsolen-Logging und mehr
+
+nlog.config:
+
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <targets>
+        <target name="logfile" xsi:type="File" fileName="file.txt" />
+        <target name="logconsole" xsi:type="Console" />
+    </targets>
+
+    <rules>
+        <logger name="*" minlevel="Info" writeTo="logconsole" />
+        <logger name="*" minlevel="Debug" writeTo="logfile" />
+    </rules>
+</nlog>
+```
+
+```csharp
+using NLog;
+
+public class Program
+{
+    private static Logger logger = LogManager.GetCurrentClassLogger();
+
+    public static void Main()
+    {
+        logger.Info("Anwendung gestartet");
+        // ... Weitere Anwendungslogik ...
+        logger.Error("Ein Fehler ist aufgetreten");
+        // ... Weitere Anwendungslogik ...
+        logger.Info("Anwendung beendet");
+    }
+}
+```
+
++ https://github.com/NLog
++ https://riptutorial.com/nlog
+
+***********************************************************************
 
 ## Motivation und Konzept der Delegaten
 
@@ -81,10 +178,11 @@ public class Program{
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-Gegen das Hinzufügen weiterer Ausgabemethoden in die Klasse `VideoEncodingService` spricht
-die Tatsache, dass dies nicht deren zentrale Aufgabe ist. Eigentlich sollte
-sich die Klasse gar nicht darum kümmern müssen, welche Art der Notifikation
-genutzt werden soll, dies sollte dem Nutzer überlassen bleiben.
+> [!IMPORTANT]
+> Gegen das Hinzufügen weiterer Ausgabemethoden in die Klasse `VideoEncodingService` spricht
+> die Tatsache, dass dies nicht deren zentrale Aufgabe ist. Eigentlich sollte
+> sich die Klasse gar nicht darum kümmern müssen, welche Art der Notifikation
+> genutzt werden soll, dies sollte dem Nutzer überlassen bleiben.
 
 Folglich wäre es sinnvoll, wenn wir `StartVideoEncoding` eine Funktion als
 Parameter übergeben könnten, die wir unabhängig von der eigentlichen Klasse
@@ -140,28 +238,29 @@ int main()
 ```
 @LIA.evalWithDebug(`["main.c"]`, `gcc -Wall main.c -o a.out`, `./a.out`)
 
-Und auch noch ein Python Beispiel, um die Anwendung in einer nicht typisierte Sprache zu zeigen:
+Die Deklaration `void (*fun_ptr_arr[])(int, int)` wirkt zunächst kryptisch. Sie
+wird „von innen nach außen" gelesen, beginnend beim Bezeichner:
 
-```python
-def quadriere(x):
-    return x * x
+| Bestandteil                       | Bedeutung                                          |
+| --------------------------------- | -------------------------------------------------- |
+| `fun_ptr_arr`                     | der Name                                            |
+| `fun_ptr_arr[]`                   | … ist ein _Array_                                   |
+| `(*fun_ptr_arr[])`                | … von _Pointern_                                    |
+| `(*fun_ptr_arr[])(int, int)`      | … auf _Funktionen_ mit zwei `int`-Parametern        |
+| `void (*fun_ptr_arr[])(int, int)` | … die `void` _zurückgeben_                          |
 
-def wende_an(funktion, wert):
-    print("Wende Funktion an:", funktion.__name__)
-    result = funktion(wert)
-    print("Ergebnis:", result)
-    return result
-
-ergebnis = wende_an(quadriere, 5)
-print(ergebnis)  # Ausgabe: 25
-```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`, `*`)
+> [!ATTENTION]
+> Das `void` ist hier der **Rückgabetyp** der referenzierten Funktion — und
+> **kein** `void`-Pointer (`void *`). Ein Funktionspointer ist gerade _nicht_
+> typlos: Er trägt die vollständige Signatur (Parameter **und** Rückgabetyp) im
+> Typ. Genau diese typsichere Signatur-Bindung formalisiert der C#-Delegat im
+> nächsten Abschnitt sauberer.
 
 
 ### Grundidee
 
-> Merke: Ein Delegat ist ein Methodentyp und dient zur Deklaration von Variablen,
-> die auf eine Methode verweisen.
+> [!IMPORTANT]
+> **Ein Delegat ist ein Methodentyp und dient zur Deklaration von Variablen, die auf eine Methode verweisen.**
 
 Für die Anwendung sind drei Vorgänge nötig:
 
@@ -179,7 +278,7 @@ static int Addition(int x, int y){
 }
 
 static int Modulo(int dividend, int divisor){
-  return divident % divisor;
+  return dividend % divisor;
 }
 
 // Schritt 2 - Instanzieren
@@ -197,7 +296,6 @@ Lassen Sie uns dieses Konzept auf unsere `VideoEncodingService`-Klasse anwenden.
 using System;
 using System.Reflection;
 using System.Collections.Generic;
-
 
 // Schritt 1
 public delegate void NotifyUser(string userId, string filename);
@@ -237,63 +335,15 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-### Was passiert hinter den Kulissen?
-
-Was wird anhand des Aufrufes
-
-```
-NotifyUser notifyMe = new NotifyUser(NotifyUserByText);
-```
-
-deutlich? Handelt es sich bei `notifyMe` wirklich nur um eine Methode?
-
-
-                                           {{1}}
-*******************************************************************************
-Delegattypen werden von der `Delegate`-Klasse im .NET Framework abgeleitet.
-
-https://learn.microsoft.com/de-de/dotnet/api/system.delegate?view=net-9.0
-
-Wenn der C#-Compiler Delegiertentypen verarbeitet, erzeugt er automatisch eine versiegelte Klassenableitung aus `System.MulticastDelegate`. Diese Klasse (in Verbindung mit ihrer Basisklasse, `System.Delegate`) stellt die notwendige Infrastruktur zur Verfügung, damit der Delegierte eine Liste von Methoden vorhalten kann. Der Compiler erzeugt insbesondere drei Methoden, um diese  aufzurufen:
-
-+ die synchrone Invoke()-Methode, die aber nicht explizit von Ihrem C#-Code aufgerufen wird
-+ die asynchrone `BeginInvoke()` und
-+ `EndInvoke()` als Methoden, die die Möglichkeit bieten, die die eigentliche Methode in einem separaten Ausführungsthread zu handhaben.
-
-Entsprechend der Codezeile `delegate int Transformer(int x);` generiert der
-Compiler eine spezielle `sealed class Transformers`
-
-```csharp
-sealed class Transformer : System.MulticastDelegate
-{
-  ...
-  public int Invoke(int x);
-  public IAsyncResult BeginInvoke(int x, AsyncCallback cb, object state);
-  public int EndInvoke(IAsyncResult result);
-  ...
-}
-```
-*******************************************************************************
-
-                               {{2}}
-*******************************************************************************
-Seit C# 2.0 ist die Syntax für die Zuweisung einer Methode an eine Delegate-Variable
-vereinfacht. Statt
-
-```
-NotifyUser notifyMe = new NotifyUser(this.NotifyUserByText);
-```
-
-kann nunmehr auch
-
-```
-NotifyUser notifyMe = this.NotifyUserByText;
-NotifyUser notifyMe = NotifyUserByText;
-```
-
-verwendet werden.
-
-*******************************************************************************
+> [!NOTE]
+> Hier übergeben wir den Delegaten noch direkt als Methodenparameter und rufen
+> ihn unmittelbar in `StartVideoEncoding` auf. In typischem C#-Code würde man die
+> Benachrichtigung stattdessen als **`event`** modellieren: Der
+> `VideoEncodingService` bietet dann ein Ereignis an (z. B. `EncodingFinished`),
+> bei dem sich beliebig viele Interessenten _registrieren_ (`+=`) und das er nach
+> getaner Arbeit _auslöst_. Der Dienst muss so seine „Zuhörer" nicht mehr als
+> Parameter kennen. Dieses Publish-Subscribe-Muster auf Basis von Delegaten
+> behandeln wir in der folgenden Vorlesung [Events](22_Events.md).
 
 ### Multicast Delegaten
 
@@ -372,6 +422,97 @@ public class Program
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
+### Was passiert hinter den Kulissen?
+
+Was wird anhand des Aufrufes
+
+```
+NotifyUser notifyMe = new NotifyUser(NotifyUserByText);
+```
+
+deutlich? Handelt es sich bei `notifyMe` wirklich nur um eine Methode?
+
+Delegattypen werden von der `Delegate`-Klasse im .NET Framework abgeleitet.
+
+https://learn.microsoft.com/de-de/dotnet/api/system.delegate?view=net-9.0
+
+Wenn der C#-Compiler Delegiertentypen verarbeitet, erzeugt er automatisch eine versiegelte Klassenableitung aus `System.MulticastDelegate`. Diese Klasse (in Verbindung mit ihrer Basisklasse, `System.Delegate`) stellt die notwendige Infrastruktur zur Verfügung, damit der Delegierte eine Liste von Methoden vorhalten kann. Der Compiler erzeugt insbesondere drei Methoden, um diese  aufzurufen:
+
++ die synchrone Invoke()-Methode, die aber nicht explizit von Ihrem C#-Code aufgerufen wird
++ die asynchrone `BeginInvoke()` und
++ `EndInvoke()` als Methoden, die die Möglichkeit bieten, die die eigentliche Methode in einem separaten Ausführungsthread zu handhaben.
+
+Entsprechend der Codezeile `delegate int Transformer(int x);` generiert der
+Compiler eine spezielle `sealed class Transformer`
+
+```csharp
+sealed class Transformer : System.MulticastDelegate
+{
+  ...
+  public int Invoke(int x);
+  public IAsyncResult BeginInvoke(int x, AsyncCallback cb, object state);
+  public int EndInvoke(IAsyncResult result);
+  ...
+}
+```
+
+Die Vererbungsbeziehung lässt sich wie folgt zusammenfassen: Die vom Compiler
+erzeugte Klasse (hier exemplarisch `Transformer`) erbt von `MulticastDelegate`
+und damit von `Delegate`. Die Felder `Target` (das Empfängerobjekt) und `Method`
+(welche Methode) werden aus `System.Delegate` _geerbt_; die signaturspezifische
+`Invoke`-Methode steuert der Compiler je Delegat-Typ bei.
+
+```text @plantUML
+@startuml
+skinparam classAttributeIconSize 0
+
+abstract class "System.Delegate" as Delegate {
+  + Target : object
+  + Method : MethodInfo
+}
+
+abstract class "System.MulticastDelegate" as Multicast {
+  - _invocationList : object[]
+}
+
+class "Transformer" as Transformer << sealed, generiert >> {
+  + Invoke(x : int) : int
+  + BeginInvoke(...) : IAsyncResult
+  + EndInvoke(...) : int
+}
+
+Delegate <|-- Multicast
+Multicast <|-- Transformer
+
+' has-a: ein Multicast-Delegat enthaelt selbst eine Liste von Delegaten
+Multicast "1" o-- "0..*" Delegate : _invocationList
+
+note right of Delegate
+  Target + Method = Verweis auf
+  "welche Methode auf welchem Objekt"
+end note
+
+note right of Multicast
+  Zwei Beziehungen zugleich:
+  * is-a  : IST ein Delegate (Vererbung)
+  * has-a : ENTHAELT eine Liste von
+            Delegaten -> ermoeglicht +=
+  (vgl. Composite-Pattern)
+end note
+
+note bottom of Transformer
+  Pro 'delegate'-Deklaration erzeugt
+  der Compiler eine eigene, 'sealed'
+  Klasse mit passender Invoke-Signatur.
+end note
+@enduml
+```
+
+> [!NOTE]
+> **Alle** in C# deklarierten Delegaten (auch `Action`, `Func<>`, `EventHandler`)
+> erben von `MulticastDelegate` — nie direkt von `Delegate`. Deshalb ist jeder
+> Delegat von Haus aus multicast-fähig (`+=`), selbst wenn nur eine einzige
+> Methode angehängt ist.
 
 
 
@@ -776,6 +917,96 @@ Console.WriteLine(MyLambdaAction("Tests"));
 
 Warum würde die Verwendung von Action an dieser Stelle einen Fehler generieren?
 
+### Praxisbeispiel: Kollisions-Callbacks in einer Physik-Engine
+
+> Wo werden Delegaten "im echten Leben" eingesetzt? Ein klassisches Anwendungsfeld sind Spiele- und Physik-Engines (z.B. Unity oder Godot, das ebenfalls auf C# setzt). Die Engine erkennt, *dass* zwei Objekte kollidieren - was dann passieren soll, weiß nur der Entwickler des konkreten Spiels.
+
+Die Engine soll universell sein: Sie kennt weder die Spielregeln noch die Objekte
+des konkreten Spiels. Deshalb übergibt der Entwickler jedem Objekt eine Reaktion
+in Form eines `Action`-Delegaten. Beim Zusammenstoß ruft die Engine diese auf -
+ganz ohne zu wissen, *was* dabei geschieht.
+
+```csharp           CollisionCallback
+using System;
+using System.Collections.Generic;
+
+// Ein Spielobjekt mit Position, Größe und einer Reaktion auf Kollisionen
+public class GameObject
+{
+  public string Name;
+  public double X;
+  public double Width;
+
+  // Die Reaktion ist NICHT fest einprogrammiert, sondern wird von außen
+  // hineingereicht: Welches andere Objekt wurde getroffen?
+  public Action<GameObject> OnCollision;
+}
+
+// Die Engine kennt nur Geometrie - nicht die Spielregeln
+public class PhysicsEngine
+{
+  private List<GameObject> objects = new List<GameObject>();
+
+  public void Add(GameObject obj) => objects.Add(obj);
+
+  public void DetectCollisions()
+  {
+    for (int i = 0; i < objects.Count; i++)
+      for (int j = i + 1; j < objects.Count; j++)
+      {
+        var a = objects[i];
+        var b = objects[j];
+        bool overlap = Math.Abs(a.X - b.X) < (a.Width + b.Width) / 2;
+
+        if (overlap)
+        {
+          // Die Engine ruft nur den hinterlegten Delegaten auf
+          a.OnCollision?.Invoke(b);
+          b.OnCollision?.Invoke(a);
+        }
+      }
+  }
+}
+
+public class Program
+{
+  public static void Main(string[] args)
+  {
+    var engine = new PhysicsEngine();
+
+    // Der Spieler reagiert mit einer benannten Methode
+    var player = new GameObject { Name = "Spieler", X = 10, Width = 4,
+                                  OnCollision = PlayerHit };
+
+    // Ein Münzobjekt reagiert mit einem Lambda - kurz und lokal definiert
+    var coin = new GameObject { Name = "Münze", X = 12, Width = 2,
+        OnCollision = other => Console.WriteLine($"  {other.Name} sammelt die Münze ein (+10 Punkte)") };
+
+    // Eine Wand braucht gar keine Reaktion (Delegat bleibt null -> ?. greift)
+    var wall = new GameObject { Name = "Wand", X = 100, Width = 4 };
+
+    engine.Add(player);
+    engine.Add(coin);
+    engine.Add(wall);
+
+    engine.DetectCollisions();
+  }
+
+  static void PlayerHit(GameObject other)
+  {
+    Console.WriteLine($"  Spieler kollidiert mit {other.Name}!");
+  }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+Was zeigt dieses Beispiel?
+
++ Die `PhysicsEngine` ist **vollständig vom Spiel entkoppelt** - sie ruft nur `OnCollision` auf, ohne die konkreten Reaktionen zu kennen.
++ Jedes Objekt bringt seine **eigene Reaktion** mit: als benannte Methode (`PlayerHit`), als Lambda (Münze) oder gar nicht (Wand).
++ Der `?.`-Operator (`OnCollision?.Invoke(...)`) schützt vor dem Aufruf eines nicht gesetzten Delegaten (`null`).
++ Echte Engines wie Godot (das ebenfalls auf C# setzt) lösen genau dieses Muster über **Events** bzw. **Signals** - technisch eine Erweiterung des Delegaten. Wir greifen Godot als konkretes Praxisbeispiel in der **nächsten Vorlesung (Events)** wieder auf.
+
 ## Abgrenzung zu c++
 
 > Gibt es in C++ Delegaten?
@@ -848,9 +1079,66 @@ int main()
 @LIA.eval(`["main.cpp"]`, `g++ -Wall main.cpp -o main`, `./main`)
 
 
+## Exkurs: Und in Python? — von First-Class-Funktionen zu Dekoratoren
+
+Python kennt kein eigenes Sprachkonstrukt `delegate`. Es braucht keines, weil
+Funktionen hier _First-Class-Objekte_ sind: Eine Funktion ist einfach ein Wert,
+den man in einer Variablen halten, als Parameter übergeben und zurückgeben kann.
+Was C# über den _Typ_ `delegate` (bzw. `Action`/`Func`) formalisiert, ist in der
+dynamisch typisierten Sprache Python bereits implizit vorhanden — siehe das
+Python-Beispiel im Motivationsteil, in dem `quadriere` an `wende_an` übergeben
+wird.
+
+Am deutlichsten wird das, wenn man eine Funktion einer Variablen _zuweist_ und
+anschließend über diese Variable aufruft — ganz so, wie man es mit einer Zahl
+oder einem String täte:
+
+```python
+def quadriere(x):
+    return x * x
+
+# Die Funktion wird wie ein Wert in einer Variablen abgelegt
+operation = quadriere      # kein Aufruf! (keine Klammern)
+
+print(operation)           # <function quadriere at 0x...>
+print(operation(5))        # Aufruf über die Variable -> 25
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`, `*`)
+
+Genau aus dieser Eigenschaft entsteht ein nächster Schritt: der **Dekorator**.
+Ein Dekorator ist eine Funktion, die eine Funktion _entgegennimmt_ (wie ein
+Delegat) **und** eine _neue_ Funktion _zurückgibt_ — also eine Funktion, die
+Funktionen transformiert (eine _Higher-Order-Function_).
+
+```python
+def log_call(func):               # nimmt eine Funktion (wie ein Delegat)
+    def wrapper(*args, **kwargs):  # baut eine neue Funktion drumherum
+        print("Aufruf von", func.__name__)
+        return func(*args, **kwargs)
+    return wrapper                 # gibt eine Funktion zurück -> das Neue!
+
+@log_call
+def quadriere(x):
+    return x * x
+
+print(quadriere(5))
+```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`, `*`)
+
+Die Schreibweise `@log_call` ist dabei nur _Syntactic Sugar_ für
+
+```python
+quadriere = log_call(quadriere)
+```
+
+> [!IMPORTANT] 
+> Das Python-Sprachfeature `@decorator` ist nicht
+> identisch mit dem _Decorator-Pattern_ aus der Vorlesung zu den Design Patterns.
+> Beide verfolgen dieselbe _Absicht_ (Verhalten ergänzen, ohne die ursprüngliche
+> Funktion/Klasse zu ändern), aber das GoF-Pattern wird in C# klassisch über
+> _Interfaces + Wrapper-Klassen_ realisiert.
+
 
 ## Aufgaben der Woche
-
-- [ ] Vertiefen Sie das Erlernte anhand von zusätzichen Materialien
 
 !?[alt-text](https://www.youtube.com/watch?v=R8Blt5c-Vi4)
