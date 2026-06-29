@@ -1,0 +1,18 @@
+# Beispiel für "eigene Regeln" der Code-Analyse (Vorlesung 22, Hinweis 2).
+# Wirkt projektweit, sobald die Analyzer in der .csproj aktiv sind.
+#
+# severity-Stufen: error | warning | suggestion | silent | none
+
+root = true
+
+[*.cs]
+
+# CA1030 als Hinweis BEHALTEN, aber nur als Vorschlag (statt Warnung) anzeigen:
+dotnet_diagnostic.CA1030.severity = suggestion
+
+# Beispiel: eine als störend empfundene Regel abschalten
+# (CA1303 verlangt, Strings aus Ressourcendateien zu laden - im Kurs unnötig):
+dotnet_diagnostic.CA1303.severity = none
+
+# Beispiel: das unbenutzte Feld konsequent als FEHLER behandeln:
+dotnet_diagnostic.CA1823.severity = error
