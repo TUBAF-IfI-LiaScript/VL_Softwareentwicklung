@@ -13,8 +13,8 @@
          Mit den Schaltern kommen u.a. CA1823 und das event-spezifische
          CA1030 hinzu.
          ==================================================================== -->
-    <!-- <EnableNETAnalyzers>true</EnableNETAnalyzers> -->
-    <!-- <AnalysisLevel>latest-all</AnalysisLevel> -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers> 
+    <AnalysisLevel>latest-all</AnalysisLevel> 
   </PropertyGroup>
 
 </Project>

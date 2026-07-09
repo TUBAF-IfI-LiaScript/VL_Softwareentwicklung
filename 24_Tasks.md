@@ -2,16 +2,17 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  2.0.1
+version:  2.2.0
 language: de
 narrator: Deutsch Female
-comment:  Logging in Software, Konfiguration eines Programmweiten Loggingsystems, weiterführenden Abstraktionen für Multithreading, Task Modell in C#, asynchrone Methoden
+comment:  Weiterführende Abstraktionen für Multithreading, Task Modell in C#, asynchrone Methoden, koordinierte Tasks mit WhenAll, kooperativer Abbruch mit CancellationToken
 tags:      
 logo:     
 
 import: https://github.com/liascript/CodeRunner
 
 import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/config.md
+        https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
 
 -->
 
@@ -33,209 +34,7 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
-## Exkurs - Paketmanagement
-
-> **Merke:** Erfinde das Rad nicht neu!
-
-Wie schaffen es erfahrene Entwickler innerhalb kürzester Zeit Prototypen mit beeindruckender Funktionalität zu entwerfen? Sicher, die Erfahrung spielt hier eine große Rolle aber auch die Wiederverwendung von existierendem Code. Häufig wiederkehrende Aufgaben wie zum Beispiel:
-
-+ das Logging
-+ der Zugriff auf Datenquellen
-+ mathematische Operationen
-+ Datenkapselung und Abstraktion
-+ ...
-
-werden bereits durch umfangreiche Bibliotheken implementiert und werden entsprechend nicht neu geschrieben.
-
-Ok, dann ziehe ich mir eben die zugehörigen Repositories in mein Projekt und kann die Bibliotheken nutzen. In individuell genutzten Implementierungen mag das ein gangbarer Weg sein, aber das Wissen um die zugehörigen Abhängigkeiten - Welche Subbibliotheken und welches .NET Framework werden vorausgesetzt? -  liegt so nur implizit vor.
-
-Entsprechend brauchen wir ein Tool, mit dem wir die Abhängigkeiten UND den eigentlichen Code kombinieren und einem Projekt hinzufügen können.
-`NuGet` löst diese Aufgabe für .NET und schließt auch gleich die Mechanismen zur Freigabe von Code ein. NuGet definiert dabei, wie Pakete für .NET erstellt, gehostet und verarbeitet werden.
-
-Ein `NuGet`-Paket ist eine gepackte Datei mit der Erweiterung `.nupkg` die:
-
-+ den kompilierten Code (DLLs),
-+ ein beschreibendes Manifest, in dem Informationen wie die Versionsnummer des Pakets, ggf. der Speicherort des Source Codes oder die Projektwebseite enthalten sind sowie
-+ die Abhängigkeiten von anderen Paketen und dessen Versionen
-enthalten sind
-Ein Entwickler, der seinen Code veröffentlichen möchte generiert die zugehörige Struktur und läd diese auf einen `NuGet` Server. Unter dem [Link](https://www.nuget.org/) kann dieser durchsucht werden.
-
-**Anwendungsbeispiel: Symbolisches Lösen von Mathematischen Gleichungen**
-
-Eine entsprechende Bibliothek steht unter [Projektwebseite](https://symbolics.mathdotnet.com/). Das Ganze wird als `Nuget` Paket gehostet [MathNet](https://www.nuget.org/packages/MathNet.Symbolics/).
-
-Unter der Annahme, dass wir `dotnet` als Buildtool benutzen ist die Einbindung denkbar einfach.
-
-```
-dotnet new console -o SymbolicMath
-cd SymbolicMath
-dotnet add package MathNet.Symbolics
-Determining projects to restore...
-Writing /tmp/tmpNsaYtc.tmp
-info : Adding PackageReference for package 'MathNet.Symbolics' into project '/home/zug/Desktop/Vorlesungen/VL_Softwareentwicklung/code/16_Testen/ConditionalBuild/ConditionalBuild.csproj'.
-info :   GET https://api.nuget.org/v3/registration5-gz-semver2/mathnet.symbolics/index.json
-...
-```
-
-Danach findet sich in unserer Projektdatei `.csproj` ein entsprechender Eintrag
-
-```xml
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="MathNet.Symbolics" Version="0.24.0" />
-  </ItemGroup>
-</Project>
-```
-
-```csharp PreprocessorConsts.cs
-using System;
-using System.Collections.Generic;
-using MathNet.Symbolics;
-using Expr = MathNet.Symbolics.SymbolicExpression;  // Platzhalter für verkürzte Schreibweise
-
-class Program
-{
-  static void Main(string[] args)
-  {
-    Console.WriteLine("Beispiele für die Verwendung des MathNet.Symbolics Paketes");
-    var x = Expr.Variable("x");
-    var y = Expr.Variable("y");
-    var a = Expr.Variable("a");
-    var b = Expr.Variable("b");
-    var c = Expr.Variable("c");
-    var d = Expr.Variable("d");
-    Console.WriteLine("a+a+a =" + (a + a + a).ToString());
-    Console.WriteLine("(2 + 1 / x - 1) =" + (2 + 1 / x - 1).ToString());
-    Console.WriteLine("((a / b / (c * a)) * (c * d / a) / d) =" + ((a / b / (c * a)) * (c * d / a) / d).ToString());
-    Console.WriteLine("Der zugehörige Latex Code lautet " + ((a / b / (c * a)) * (c * d / a) / d).ToLaTeX());
-  }
-}
-```
-```-xml  PreprocessorConsts.csproj
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="MathNet.Symbolics" Version="0.24.0" />
-  </ItemGroup>
-</Project>
-```
-@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
-
-
-## Exkurse: Logging
-
-Wie arbeiten wir bisher in Bezug auf Textausgaben?
-
-```csharp    ImplicitConstructorCall
-using System;
-using System.Reflection;
-using System.ComponentModel.Design;
-
-public class Person {
-  public int geburtsjahr;
-  public string name;
-
-  public Person(){
-    geburtsjahr = 1984;
-    name = "Orwell";
-    Console.WriteLine("ctor of Person");
-  }
-
-  public Person(int auswahl){
-    if (auswahl == 1) {name = "Micky Maus";}
-    else {name = "Donald Duck";}
-  }
-}
-
-public class Fußballspieler : Person {
-  public byte rückennummer;
-}
-
-public class Program
-{
-  public static void Main(string[] args){
-    Fußballspieler champ = new Fußballspieler();
-    Console.WriteLine("{0,4} - {1}", champ.geburtsjahr, champ.name );
-  }
-}
-```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
-
-Dieses Vorgehen kann auf Dauer ziemlich nerven ...
-
-> Lösung: Verwenden Sie ein Logging Framework, z.B. NLog - ein Logging-Framework für .NET-Anwendungen!
-
-| **Merkmal**            | **Beschreibung**                                                              | **`print()`** | **Logging-Framework** |
-| ---------------------- | ----------------------------------------------------------------------------- | ------------- | --------------------- |
-| **Zentrale Steuerung** | Konfiguration und Steuerung der Ausgabe zentral möglich                       | ❌            | ✅                    |
-| **Log-Level**          | Nachrichten können je nach Wichtigkeit kategorisiert werden                   | ❌            | ✅                    |
-| **Formatierung**       | Ausgaben können standardisiert formatiert werden (z. B. mit Zeitstempel)      | ❌            | ✅                    |
-| **Dateihandling**      | Logs können automatisch in Dateien geschrieben und rotiert werden             | ❌            | ✅                    |
-| **Mehrere Ausgaben**   | Gleichzeitige Ausgabe an Konsole, Datei, Netzwerk usw.                        | ❌            | ✅                    |
-| **Thread-Sicherheit**  | Gleichzeitige Ausgaben mehrerer Threads führen nicht zu vermischten Zeilen    | ❌            | ✅                    |
-| **Integration**        | Logs können mit externen Tools (z. B. Logserver, Dashboards) verwendet werden | ❌            | ✅                    |
-
-
-                              {{1-2}}
-***********************************************************************
-
-NLog:
-
-+ ermöglicht das Protokollieren von Informationen, Warnungen, Fehlern und anderen Ereignissen,
-+ unterstützt Datei-Logging, Datenbank-Logging, E-Mail-Logging, Konsolen-Logging und mehr
-
-nlog.config:
-
-```
-<?xml version="1.0" encoding="utf-8" ?>
-<nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
-    <targets>
-        <target name="logfile" xsi:type="File" fileName="file.txt" />
-        <target name="logconsole" xsi:type="Console" />
-    </targets>
-
-    <rules>
-        <logger name="*" minlevel="Info" writeTo="logconsole" />
-        <logger name="*" minlevel="Debug" writeTo="logfile" />
-    </rules>
-</nlog>
-```
-
-```csharp
-using NLog;
-
-public class Program
-{
-    private static Logger logger = LogManager.GetCurrentClassLogger();
-
-    public static void Main()
-    {
-        logger.Info("Anwendung gestartet");
-        // ... Weitere Anwendungslogik ...
-        logger.Error("Ein Fehler ist aufgetreten");
-        // ... Weitere Anwendungslogik ...
-        logger.Info("Anwendung beendet");
-    }
-}
-```
-
-+ https://github.com/NLog
-+ https://riptutorial.com/nlog
-
-***********************************************************************
-
-## Rückblick: Multithreading
+## Rückblick: Von Threads zu einer offenen Frage
 
 Die prozedurale/objektorientierte Programmierung basiert auf der Idee, dass ausgehend von einem
 Hauptprogramm Methoden aufgerufen werden, deren Abarbeitung realisiert wird und
@@ -263,7 +62,7 @@ class Program
 
 > An dieser Stelle spricht man von **synchronen** Methodenaufrufen. Das
 Hauptprogramm (Rufer oder Caller) stoppt, wartet auf den Abschluss des
-aufgerufenen Programms und setzt seine  Bearbeitung erst dann fort. 
+aufgerufenen Programms und setzt seine  Bearbeitung erst dann fort. **Synchron heißt blockierend**
 
 Das
 blockierende Verhalten des Rufers generiert aber einen entscheidenden Nachteil -
@@ -274,20 +73,10 @@ realisiert.
 Der Rufer könnte in dieser Zeit auch andere Arbeiten umsetzen. Dafür muss er aber
 nach dem Methodenaufruf die Kontrolle zurück bekommen und kann dann weiterarbeiten.
 
-Ein Beispiel aus der "Praxis" - Vorbereitung eines Frühstücks:
+### Threads: die Kontrolle zurückbekommen
 
-1. Schenken Sie sich eine Tasse Kaffee ein.
-2. Erhitzen Sie eine Pfanne, und braten Sie darin zwei Eier.
-3. Braten Sie drei Scheiben Frühstücksspeck.
-4. Toasten Sie zwei Scheiben Brot.
-5. Bestreichen Sie das getoastete Brot mit Butter und Marmelade.
-6. Schenken Sie sich ein Glas Orangensaft ein.
-
-Das anschauliche Beispiel entstammt der Microsoft Dokumentation und ist unter
-https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/async/
-zu finden.
-
-Eine Lösung für diesen Ansatz könnten Threads bieten.
+Mit Threads bekommt der Rufer die Kontrolle sofort zurück und kann weiterarbeiten,
+während die Threads im Hintergrund laufen - abgewartet wird am Ende mit `Join`.
 
 ```csharp           Program.cs
 using System;
@@ -337,77 +126,80 @@ class Program {
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="MathNet.Symbolics" Version="0.24.0" />
-  </ItemGroup>
 </Project>
 ```
 @LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
-Welche Nachteile sehen Sie in dieser Lösung?
+Im zeitlichen Ablauf sieht das so aus: `Main` startet A, B und C und läuft
+*sofort* weiter (die `*`-Ausgabe), während die drei Threads unabhängig schlafen.
+Erst die `Join`-Aufrufe lassen `Main` warten, bis alle fertig sind.
 
-```csharp Monitor.cs
-using System;
-using System.Threading;
+```text @plantUML
+@startuml
+participant Main
+participant ThreadA
+participant ThreadB
+participant ThreadC
 
-public class Fass
-{
-    private int max, level;
-    private readonly object lockObject = new object();
+Main -> ThreadA : Start(0)
+activate ThreadA
+Main -> ThreadB : Start(1)
+activate ThreadB
+Main -> ThreadC : Start(2)
+activate ThreadC
 
-    public Fass(int max)
-    {
-        this.max = max;
-        this.level = 0;
-    }
+note over Main : Schleife: gibt "*" aus\n(läuft sofort weiter)
+note over ThreadA, ThreadC : Sleep(delay)\n- alle drei warten -
 
-    public void Füllen(int x)
-    {
-        while (true){
-            lock (lockObject)
-            {
-                while ((level + x) > max)
-                {
-                    Monitor.Wait(lockObject);
-                }
-                level += x;
-                Console.WriteLine("plus " + x + " level " + level);
-                Monitor.PulseAll(lockObject);
-            }
-            Thread.Sleep(500);
-        }
-    }
+ThreadA --> Main : Hello (Join)
+deactivate ThreadA
+ThreadB --> Main : Hello (Join)
+deactivate ThreadB
+ThreadC --> Main : Hello (Join)
+deactivate ThreadC
 
-    public void Leeren(int x)
-    {
-        while (true){
-            lock (lockObject)
-            {
-                while ((level - x) < 0)
-                {
-                    Monitor.Wait(lockObject);
-                }
-                level -= x;
-                Console.WriteLine("minus " + x + " level " + level);
-                Monitor.PulseAll(lockObject);
-               
-            }
-            Thread.Sleep(500);
-        }
-    }
-}
-
-class Program
-{
-    static void Main()
-    {
-        Fass fass = new Fass(500);
-        new Thread(() => fass.Füllen(30)).Start();
-        new Thread(() => fass.Leeren(10)).Start();
-    }
-}
+note over Main : "Aus die Maus!"
+@enduml
 ```
-@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+> Beachten Sie: `Main` und die drei Threads laufen **echt parallel** - deshalb
+> mischen sich die `*` in der Ausgabe mit den "Hello"-Zeilen. Die drei Threads
+> verbringen ihre Zeit aber fast vollständig in `Sleep`, also **wartend** - genau
+> hier setzt gleich die Kritik an.
+
+### Die Rechnung für Threads
+
+Betrachten wir, was ein Thread in `TransmitsMessage` die meiste Zeit tut:
+`Thread.Sleep(delay)` - er **schläft**. Ein vollwertiger Betriebssystem-Thread,
+belegt und blockiert, nur um auf das Ablaufen einer Zeit zu warten. Bei drei
+Aufgaben sind das drei blockierte Threads, die nichts tun. Das ist der Kern des
+Problems, und es reiht sich in eine Liste von Nachteilen ein, die wir in der
+Thread-Vorlesung gesehen haben:
+
++ **Teuer:** Jeder Thread belegt eigene Ressourcen (u. a. eigener Stack). Viele
+  wartende Threads skalieren schlecht.
++ **Kein Rückgabewert:** Ergebnisse müssen über von außen sichtbare Variablen
+  (hier das `Result`-Array) oder Callbacks zurückgereicht werden.
++ **Manuelle Verwaltung:** Erzeugen, Starten, `Join`-en liegt komplett in unserer
+  Hand.
++ **Synchronisation nötig:** Sobald Threads geteilte Daten anfassen, drohen *Race
+  Conditions*; der Schutz über `lock`/`Monitor` (das Fass-Beispiel aus VL 23) ist
+  aufwändig und fehleranfällig.
+
+> **Kern:** Threads geben uns Nebenläufigkeit, aber wir bezahlen mit Mechanik -
+> und mit Threads, die beim Warten nur schlafen.
+
+Was wäre, wenn wir nur noch sagen müssten, *was* nebenläufig laufen soll, nicht
+*wie* - inklusive Rückgabewert, Abbruch, und mit einem Thread, der **während des
+Wartens freigegeben** wird, statt zu schlafen?
+
+> **Bild dafür:** ein Restaurant mit *einem* Kellner. Synchron bliebe er am Tisch
+> stehen, bis die Küche fertig gekocht hat - ein Kellner pro Gast, absurd teuer.
+> Stattdessen gibt er die Bestellung ab und bedient in der Wartezeit andere Tische.
+> Genau das macht `await`: den Thread während des Wartens zurückgeben. Ein Kellner,
+> viele Gäste.
+
+Genau das ist das **Task-Modell**.
 
 ## Task Modell in C#
 
@@ -665,6 +457,65 @@ Die Initiierung und der Abschluss eines asynchronen Vorgangs wird in TAP in eine
 das `async`-Präfix hat und dadurch eine `await`-Anweisung enthalten darf, wenn sie Awaitable-Typen zurückgibt, 
 wie z. B. Task oder Task<TResult>.
 
+### Was `async` genau bewirkt - und was nicht
+
+Ein verbreitetes Missverständnis: `async` mache eine Methode "nebenläufig" oder
+lasse sie auf einem eigenen Thread laufen. **Das tut es nicht.** `async` ist
+zunächst nur ein *Schalter für den Compiler*, der zwei Dinge erlaubt:
+
+1. Innerhalb der Methode darf `await` verwendet werden.
+2. Der Compiler baut die Methode in eine **Zustandsmaschine** um: An jedem `await`
+   kann sie *pausieren*, die Kontrolle an den Rufer zurückgeben und später - wenn
+   der erwartete Task fertig ist - an genau dieser Stelle *weitermachen*.
+
+> **Kurz:** `async` schaltet `await` frei und macht die Methode
+> *unterbrechbar/fortsetzbar*. Ausgeführt wird sie zunächst ganz normal auf dem
+> aufrufenden Thread - bis zum ersten `await`.
+
+### `async` steckt an - die ganze Aufrufkette
+
+Der entscheidende Punkt, der oft übersehen wird: **`await` darf nur in einer
+Methode stehen, die selbst `async` ist.** Will also eine Methode das Ergebnis
+einer asynchronen Operation abwarten, muss sie selbst `async` werden - und gibt
+dann ihrerseits einen `Task` zurück. Deren Aufrufer steht vor demselben Problem
+und muss ebenfalls `async` werden. So *wandert* die Markierung die Aufrufkette
+hinauf, bis ganz oben (in `Main` oder einem Event-Handler).
+
+Schauen wir uns das im Download-Beispiel von oben an:
+
+<!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 815px;" -->
+```text @plantUML
+@startuml
+skinparam defaultTextAlignment center
+rectangle "async Task Main()" as M
+rectangle "async Task<int>\nDownloadFileAsync()" as D
+rectangle "httpClient.GetAsync(url)\n(gibt Task<...> zurück)" as G
+
+M -down-> D : await
+D -down-> G : await
+note right of G : hier passiert das\neigentliche Warten (I/O)
+note left of M : muss async sein,\nweil es DownloadFileAsync\nawait-et
+note left of D : muss async sein,\nweil es GetAsync\nawait-et
+@enduml
+```
+
+- `httpClient.GetAsync(...)` liefert einen `Task<...>` (die eigentliche
+  asynchrone I/O-Operation der Bibliothek).
+- `DownloadFileAsync` will dieses Ergebnis mit `await` abwarten → **muss `async`
+  sein** und gibt selbst `Task<int>` zurück.
+- `Main` will *dessen* Ergebnis mit `await` abwarten → **muss ebenfalls `async`
+  sein** (`async Task Main`).
+
+> **Merksatz:** *"async all the way"* - asynchron ist keine lokale Eigenschaft
+> einer einzelnen Methode, sondern zieht sich durch die gesamte Aufrufkette bis
+> nach oben.
+
+Warum unterbricht man die Kette nicht einfach, indem man das Ergebnis mit
+`.Result` oder `.Wait()` "synchron abholt"? Weil man damit genau den Vorteil
+wegwirft (der Thread blockiert dann doch wieder) und sich in UI-Anwendungen sogar
+**Deadlocks** einhandeln kann. Die saubere Regel lautet daher: nicht die Kette
+brechen, sondern `async`/`await` konsequent bis oben durchziehen.
+
 Eine asynchrone Methode ruft einen Task auf, setzt die eigene Bearbeitung aber
 fort und wartet auf dessen Beendigung.
 
@@ -687,53 +538,48 @@ Programmablauf ergeben.
 **Fall I** Das Ergebnis der Lambdafunktion liegt vor, bevor DoAsync die Zeile
 mit await erreicht hat (Quasi-Synchroner Fall)
 
-<!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 815px;" -->
-```ascii
-      Rufer(main)
-        |
-        v
-                           DoAnsync()
-      DoAsync() - - - - - - - >|
-                               |
-                               v
-                                                    ()=＞{..}
-                      task=Task.Run(()=＞{..});   - - >|
-                               |                       |
-              Instruktionen I  |        results        v
-                               | < - - - - - - - - - - -
-              Instruktionen II |
-                               v
-         < - - - - - - - - - - -
-        |
-        v
+```text @plantUML
+@startuml
+participant "Rufer (main)" as Main
+participant "DoAsync()" as Do
+participant "Task.Run(()=>{..})" as Task
+
+Main -> Do : Aufruf
+activate Do
+Do -> Task : starten
+activate Task
+Task --> Do : results (schon fertig)
+deactivate Task
+note over Do : Instruktionen I\nawait: Ergebnis liegt\nbereits vor -> kein Pausieren\nInstruktionen II
+Do --> Main : return
+deactivate Do
+@enduml
 ```
 
 **Fall II** Das Ergebnis der Lambdafunktion liegt erst später, nachdem DoAsync die Zeile mit await erreicht hat.
 Die Methode pausiert an der Stelle des await-Ausdrucks und wartet darauf, dass der Task abgeschlossen wird. 
 Während dieser Wartezeit wird der Thread, auf dem DoAsync() ausgeführt wird, nicht blockiert, sondern steht für andere Aufgaben zur Verfügung.
 
-<!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 815px;" -->
-```ascii
-      Rufer(main)
-        |
-        v
-                           DoAnsync()
-      DoAsync() - - - - - - - >|
-                               |
-                               v
-                                                    ()=＞{..}
-                      task=Task.Run(()=＞{..}); - - - >|
-                               |                       |
-              Instruktionen I  |                       |
-                               v                       |
-         < - - - - - - - - - - -                       |
-        |                                              |
-        |                              results         v
-        |                      |<- - - - - - - - - - - -
-        |     Instruktionen II |
-        |                      |
-        |                      v
-        v
+```text @plantUML
+@startuml
+participant "Rufer (main)" as Main
+participant "DoAsync()" as Do
+participant "Task.Run(()=>{..})" as Task
+
+Main -> Do : Aufruf
+activate Do
+Do -> Task : starten
+activate Task
+note over Do : Instruktionen I
+Do --> Main : return bei await\n(Kontrolle zurück,\nErgebnis fehlt noch)
+deactivate Do
+note over Main : läuft weiter
+Task --> Do : results (später)
+deactivate Task
+activate Do
+note over Do : Instruktionen II\n(Fortsetzung nach await)
+deactivate Do
+@enduml
 ```
 
 Zwei sehr anschauliche Beispiele finden sich im Code Ordner des Projekts.
@@ -742,3 +588,408 @@ Zwei sehr anschauliche Beispiele finden sich im Code Ordner des Projekts.
 | -------- | --------- |
 | [AsyncExampleI.cs](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/code/24_Tasks/AsyncExampleI/Program.cs) | Generelle Einbettung des asynchronen Tasks |
 | [AsyncExampleII.cs](https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/code/24_Tasks/AsyncExampleII/Program.cs) | Was passiert eigentlich, wenn `main` zum Ende kommt mit den noch ausbleibenden Ergebnissen von Tasks? |
+
+## Fehlerbehandlung in Tasks
+
+Bei synchronem Code ist die Sache klar: Wirft eine Methode eine Exception, wird
+sie sofort am Aufrufort geworfen und kann dort mit `try/catch` behandelt werden.
+Bei asynchronen Tasks verschiebt sich dieser Zeitpunkt - und genau das ist eine
+der häufigsten Fehlerquellen.
+
+Wirft der Code innerhalb eines Tasks eine Exception, wird diese nicht sofort
+weitergereicht. Der Task wechselt stattdessen in den Status `Faulted` und
+"parkt" die Exception in seiner Eigenschaft `Exception`. Erst wenn der Rufer den
+Task mit `await` (oder `Wait`/`Result`) abfragt, wird die Exception dort erneut
+geworfen.
+
+```csharp           Program.cs
+using System;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task<int> BerechneMitFehler()
+    {
+        await Task.Delay(200);
+        throw new InvalidOperationException("Etwas ist schiefgelaufen!");
+    }
+
+    public static async Task Main()
+    {
+        Task<int> task = BerechneMitFehler();   // Exception fliegt hier NOCH nicht
+        Console.WriteLine("Task gestartet, Status: {0}", task.Status);
+
+        try
+        {
+            int ergebnis = await task;          // ... sondern erst HIER
+            Console.WriteLine("Ergebnis: {0}", ergebnis);
+        }
+        catch (InvalidOperationException ex)
+        {
+            Console.WriteLine("Abgefangen: {0}", ex.Message);
+            Console.WriteLine("Task-Status jetzt: {0}", task.Status);
+        }
+    }
+}
+```
+```xml   -project.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+
+> Die Exception wird an der Stelle des `await` geworfen - nicht dort, wo der Task
+> gestartet wurde. Das `try/catch` gehört also **um das `await`**, nicht um den
+> Aufruf, der den Task erzeugt.
+
+### Die Falle: `async void`
+
+Eine asynchrone Methode sollte immer `Task` (bzw. `Task<T>`) zurückgeben, nicht
+`void`. Bei `async void` gibt es keinen Task, den der Rufer abfragen könnte -
+also gibt es auch keinen Ort, an dem eine Exception geworfen werden kann. Sie
+geht damit **verloren** bzw. reißt im schlimmsten Fall den ganzen Prozess ab.
+
+<!-- style="display: block; margin-left: auto; margin-right: auto; max-width: 815px;" -->
+```ascii
+   async Task  M()          async void  M()
+        |                        |
+   Exception                Exception
+        |                        |
+        v                        v
+   im Task "geparkt"        kein Task vorhanden
+        |                        |
+   await wirft sie          niemand fängt sie
+   -> catch möglich         -> Prozess kann abstürzen
+```
+
+> **Merksatz:** `async void` nur für Event-Handler verwenden, wo die Signatur es
+> erzwingt. Überall sonst: `async Task`.
+
+### Fehler bei mehreren Tasks - `AggregateException`
+
+Warten wir gleichzeitig auf mehrere Tasks, können auch mehrere davon fehlschlagen.
+`Task.WaitAll` bündelt diese Fehler in einer `AggregateException`, die über
+`InnerExceptions` alle einzelnen Fehler zugänglich macht - das erklärt den
+`catch (AggregateException ...)`-Block aus dem `WaitAll`-Beispiel weiter oben.
+
+```csharp           Program.cs
+using System;
+using System.Threading.Tasks;
+
+class Program
+{
+    static void Main()
+    {
+        Task taskX = Task.Run(() => { throw new IndexOutOfRangeException(); });
+        Task taskY = Task.Run(() => { throw new FormatException(); });
+
+        try
+        {
+            Task.WaitAll(taskX, taskY);
+        }
+        catch (AggregateException ae)
+        {
+            Console.WriteLine("{0} Fehler aufgetreten:", ae.InnerExceptions.Count);
+            foreach (var ex in ae.Flatten().InnerExceptions)
+                Console.WriteLine("   {0}: {1}", ex.GetType().Name, ex.Message);
+        }
+    }
+}
+```
+```xml   -project.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+
+> Achtung auf einen feinen Unterschied: `await Task.WhenAll(...)` wirft nur die
+> **erste** der aufgetretenen Exceptions direkt. Die vollständige Liste steht auch
+> hier über die `Exception`-Eigenschaft des von `WhenAll` zurückgegebenen Tasks
+> zur Verfügung.
+
+## Mehrere Tasks koordinieren - `WhenAll`
+
+Kehren wir zum Frühstücksbeispiel vom Anfang der Vorlesung zurück. Der
+entscheidende Gedanke war: Der Rufer soll die Kontrolle *behalten* und mehrere
+Aufgaben **nebenläufig** anstoßen, statt blockierend auf jede einzelne zu warten.
+Was wir bei den Threads mit `Join` und bei den synchronen Tasks mit `WaitAll`
+gelöst haben, hat im Umfeld von `async`/`await` ein eigenes Pendant: `Task.WhenAll`.
+
+Der Unterschied ist wichtig:
+
++ `Task.WaitAll(...)` **blockiert** den aufrufenden Thread, bis alle Tasks fertig sind.
++ `await Task.WhenAll(...)` **gibt die Kontrolle zurück** an den Rufer und setzt erst
+  fort, wenn alle Tasks abgeschlossen sind - ohne den Thread zu blockieren.
+
+Im Beispiel bereiten wir Eier, Speck und Toast zu. Zunächst nacheinander (jede
+Aufgabe wird `await`-et, bevor die nächste beginnt), dann nebenläufig: Alle drei
+Tasks werden *gestartet* und erst danach gemeinsam abgewartet.
+
+```csharp           Program.cs
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task BrateEier()   { await Task.Delay(300); Console.WriteLine("  Eier fertig"); }
+    static async Task BrateSpeck()  { await Task.Delay(500); Console.WriteLine("  Speck fertig"); }
+    static async Task ToasteBrot()  { await Task.Delay(200); Console.WriteLine("  Toast fertig"); }
+
+    public static async Task Main()
+    {
+        var watch = Stopwatch.StartNew();
+
+        // synchron: eins nach dem anderen -> Summe der Wartezeiten
+        await BrateEier();
+        await BrateSpeck();
+        await ToasteBrot();
+        Console.WriteLine("Nacheinander: {0} ms\n", watch.ElapsedMilliseconds);
+
+        // nebenläufig: alle drei starten, DANN gemeinsam abwarten
+        watch.Restart();
+        Task eier  = BrateEier();
+        Task speck = BrateSpeck();
+        Task toast = ToasteBrot();
+        await Task.WhenAll(eier, speck, toast);
+        Console.WriteLine("Mit WhenAll: {0} ms", watch.ElapsedMilliseconds);
+    }
+}
+```
+```xml   -project.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+
+> Die nacheinander ausgeführte Variante braucht rund `300 + 500 + 200 = 1000 ms`.
+> Die nebenläufige Variante braucht nur so lange wie die **längste** Einzelaufgabe
+> (`500 ms`) - genau das ist der Gewinn, den das Frühstücksbeispiel motiviert hat.
+
+> **Hinweis:** `Task.WhenAll` gibt es auch mit Rückgabewert: `await Task.WhenAll(t1, t2)`
+> auf einem `Task<T>[]` liefert ein `T[]` mit allen Ergebnissen. Das Gegenstück
+> `Task.WhenAny` setzt fort, sobald der *erste* Task fertig ist - nützlich z. B. für
+> Timeouts oder das schnellste von mehreren Ergebnissen.
+
+## Kooperativer Abbruch - `CancellationToken`
+
+In der Gegenüberstellung von `Thread` und `Task` hatten wir als Vorteil des
+Task-Modells die *native Unterstützung für den Abbruch* über einen
+`CancellationToken` genannt. Diese Zusage lösen wir nun ein.
+
+Der Abbruch in .NET ist **kooperativ**: Es gibt keinen "harten" Abschuss eines
+laufenden Tasks von außen (das wäre so gefährlich wie das veraltete
+`Thread.Abort`). Stattdessen signalisiert der Rufer über eine
+`CancellationTokenSource` einen *Abbruchwunsch*, und der Task prüft an geeigneten
+Stellen selbst, ob er beenden soll.
+
+```csharp           Cancellation.cs
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+
+class Program
+{
+    static void Main()
+    {
+        CancellationTokenSource cts = new CancellationTokenSource();
+        CancellationToken token = cts.Token;
+
+        Task worker = Task.Run(() => {
+            int i = 0;
+            while (!token.IsCancellationRequested)   // Task prüft den Wunsch selbst
+            {
+                Console.WriteLine("  arbeite... Schritt {0}", i++);
+                Thread.Sleep(200);
+            }
+            Console.WriteLine("  Task hat den Abbruchwunsch bemerkt und stoppt.");
+        }, token);
+
+        Thread.Sleep(1000);      // Hauptthread lässt den Task eine Weile laufen
+        Console.WriteLine("Main: fordere Abbruch an.");
+        cts.Cancel();            // Abbruch nur SIGNALISIEREN, nicht erzwingen
+        worker.Wait();
+        Console.WriteLine("Main: fertig.");
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+> Der Rufer ruft `cts.Cancel()` - erzwingt aber nichts. Der Task entscheidet an
+> der Schleifenbedingung `!token.IsCancellationRequested` selbst, dass er aufhört.
+> Genau dieses Zusammenspiel meint "kooperativer" Abbruch.
+
+Zwei weitere Bausteine runden das Bild ab:
+
++ `token.ThrowIfCancellationRequested()` wirft eine `OperationCanceledException` -
+  praktisch, um eine tief verschachtelte Berechnung sofort zu verlassen. Der Task
+  wechselt dann in den Status `Canceled`.
++ `new CancellationTokenSource(TimeSpan)` löst den Abbruch **automatisch nach
+  Ablauf einer Zeit** aus - der klassische Weg, einem Task ein Timeout zu geben.
+
+## Fortgeschrittene Muster
+
+Mit `WhenAll`, Fehlerbehandlung und `CancellationToken` ist das Handwerkszeug
+beisammen. Zwei weitere Muster tauchen in der Praxis so häufig auf, dass sie hier
+noch ihren Platz bekommen.
+
+### Der Erste gewinnt - `WhenAny` als Timeout
+
+`Task.WhenAll` wartet, bis **alle** Tasks fertig sind. Das Gegenstück
+`Task.WhenAny` setzt fort, sobald der **erste** Task abgeschlossen ist, und liefert
+genau diesen Task zurück. Ein typischer Einsatz: Man lässt die eigentliche Arbeit
+gegen einen "Wecker-Task" (`Task.Delay`) antreten. Ist der Wecker zuerst fertig,
+war die Arbeit zu langsam - ein Timeout.
+
+```text @plantUML
+@startuml
+participant "Main" as Main
+participant "arbeit\n(Task.Delay 900 ms)" as Arbeit
+participant "timeout\n(Task.Delay 500 ms)" as Timeout
+
+Main -> Arbeit : starten
+activate Arbeit
+Main -> Timeout : starten
+activate Timeout
+Main -> Main : await Task.WhenAny(arbeit, timeout)
+
+Timeout --> Main : fertig nach 500 ms
+deactivate Timeout
+note over Main : WhenAny setzt fort\n-> Timeout hat "gewonnen"
+note over Arbeit : läuft im Hintergrund\nweiter (nicht abgebrochen!)
+Arbeit --> Arbeit : fertig nach 900 ms
+deactivate Arbeit
+@enduml
+```
+
+```csharp           Program.cs
+using System;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task<string> LangeArbeit()
+    {
+        await Task.Delay(900);
+        return "Ergebnis der Arbeit";
+    }
+
+    public static async Task Main()
+    {
+        Task<string> arbeit  = LangeArbeit();
+        Task         timeout = Task.Delay(500);
+
+        Task ersterFertig = await Task.WhenAny(arbeit, timeout);
+
+        if (ersterFertig == arbeit)
+            Console.WriteLine("Rechtzeitig fertig: {0}", await arbeit);
+        else
+            Console.WriteLine("Timeout! Die Arbeit war zu langsam.");
+    }
+}
+```
+```xml   -project.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+
+> `WhenAny` bricht den langsameren Task **nicht** ab - er läuft im Hintergrund
+> weiter. Für ein sauberes Timeout kombiniert man das Muster daher meist mit einem
+> `CancellationToken`, der den unterlegenen Task tatsächlich stoppt.
+
+### Fortschritt melden - `IProgress<T>`
+
+Beim `CancellationToken` fließt Information vom Rufer *zum* Task ("bitte aufhören").
+Häufig braucht man auch die Gegenrichtung: Der laufende Task will dem Rufer seinen
+**Fortschritt** melden (z. B. für einen Ladebalken). Dafür gibt es die Schnittstelle
+`IProgress<T>`. Der Rufer stellt ein `Progress<T>`-Objekt bereit und gibt an, was
+mit jeder Meldung geschehen soll; der Task ruft nur `Report(...)` auf.
+
+```text @plantUML
+@startuml
+participant "Main (Rufer)" as Main
+participant "Progress<int>\n(Callback)" as Prog
+participant "RechneMitFortschritt" as Task
+
+Main -> Prog : erstellen mit Callback\n(prozent => WriteLine)
+Main -> Task : await ...(progress)
+activate Task
+loop 5 Arbeitsschritte
+  Task -> Task : await Task.Delay(200)
+  Task -> Prog : Report(i * 20)
+  Prog -> Main : Callback: "Fortschritt X %"
+end
+Task --> Main : fertig
+deactivate Task
+@enduml
+```
+
+```csharp           Program.cs
+using System;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task RechneMitFortschritt(IProgress<int> progress)
+    {
+        for (int i = 1; i <= 5; i++)
+        {
+            await Task.Delay(200);          // ein Arbeitsschritt
+            progress.Report(i * 20);        // Fortschritt in Prozent melden
+        }
+    }
+
+    public static async Task Main()
+    {
+        var progress = new Progress<int>(prozent =>
+            Console.WriteLine("  Fortschritt: {0} %", prozent));
+
+        Console.WriteLine("Starte Berechnung...");
+        await RechneMitFortschritt(progress);
+        Console.WriteLine("Fertig!");
+    }
+}
+```
+```xml   -project.csproj
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+</Project>
+```
+@LIA.eval(`["Program.cs", "project.csproj"]`, `dotnet build -nologo`, `dotnet run -nologo`)
+
+> `Progress<T>` fängt den Aufrufkontext ein: In einer UI-Anwendung landet der
+> Callback automatisch wieder im UI-Thread, sodass man von dort gefahrlos
+> Oberflächenelemente aktualisieren kann - ein Detail, das uns in der
+> MAUI-Vorlesung wieder begegnet.
+
+### Ausblick
+
+Das Task-Modell reicht noch deutlich weiter, als diese Vorlesung zeigen kann.
+Zwei Stichworte für die eigene Vertiefung:
+
++ **`ValueTask<T>`** - eine ressourcenschonendere Alternative zu `Task<T>` für
+  Methoden, die ihr Ergebnis oft schon synchron vorliegen haben und nur selten
+  wirklich asynchron werden.
++ **`IAsyncEnumerable<T>`** mit `await foreach` - erlaubt es, einen *Strom* von
+  Ergebnissen asynchron zu durchlaufen, statt auf ein einziges Gesamtergebnis zu
+  warten (z. B. seitenweise aus einer Datenbank oder einem Netzwerk-Stream).
