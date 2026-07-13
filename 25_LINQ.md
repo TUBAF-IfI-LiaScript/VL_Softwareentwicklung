@@ -34,16 +34,6 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 ---------------------------------------------------------------------
 
-## Diskussion der Evaluation 
-
-...
-
-
-## Prüfung Eingebettete Systeme 
-
-Prüfung und Terminabstimmung gern nach der Vorlesung.
-
-
 ## Fragen aus den Projekten
 
 > Frage: Was ist eigentlich eine csv Datei?
@@ -57,7 +47,17 @@ Das Dateiformat CSV _comma-separated values_ beschreibt den Aufbau einer Textdat
 ...
 ```
 
-Wie werten wir das Ganze aus?
+Wie werten wir das Ganze aus? Für das Einlesen einer CSV-Datei gibt es grundsätzlich
+zwei unterschiedliche Herangehensweisen, die wir im Folgenden gegenüberstellen. Achten
+Sie darauf, dass die beiden Beispiele _nicht dasselbe_ tun – sie unterscheiden sich in
+der Frage, ob und wie die Daten typisiert werden.
+
+**Variante 1 – manuelles Parsen in typisierte Objekte:** Wir lesen die Datei Zeile für
+Zeile und überführen jedes Feld _explizit_ in die Attribute einer eigenen Klasse
+`Student`. Dabei findet eine echte Typüberprüfung statt (`Int32.Parse(fields[0])` wirft
+eine Exception, falls in der ID-Spalte kein gültiger Integer steht). Das Ergebnis ist
+eine stark typisierte `List<Student>`, auf der wir anschließend bequem mit LINQ arbeiten
+können.
 
 ```csharp  csvExampleI.cs9
 using System;
@@ -128,7 +128,41 @@ StudentID, StudentName, Topic
 @LIA.eval(`["Program.cs", "project.csproj", "Data.csv"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
 
-Alternative Umsetzung mit `DataFrames` [Link](https://dotnet.microsoft.com/en-us/apps/machinelearning-ai/ml-dotnet). Dafür muss das Paket `ML.NET` installiert werden (vgl. erweiterte Projektkonfigurationsdatei).
+**Variante 2 – bibliotheksbasiertes Laden in eine generische Tabelle:** Mit `DataFrames`
+[Link](https://dotnet.microsoft.com/en-us/apps/machinelearning-ai/ml-dotnet) übernimmt
+eine Bibliothek das Einlesen. Dafür muss das Paket `ML.NET` installiert werden (vgl.
+erweiterte Projektkonfigurationsdatei).
+
+> **Wichtiger Unterschied:** Hier definieren wir _keine_ eigene Klasse und führen _keine_
+> explizite Typüberprüfung durch. Die Spaltentypen werden vom `DataFrame` beim Einlesen
+> automatisch _inferiert_ – aus einer Stichprobe der ersten Zeilen. Die einzelnen Spalten
+> sind zwar intern typisiert (`StudentID` etwa wird als `Single`, also Fließkomma,
+> erkannt), aber welcher Typ das ist, entscheidet sich erst zur Laufzeit anhand der Daten.
+> Das ist flexibler und mit weniger Code verbunden, kostet uns aber die statische
+> Typsicherheit: Ein Tippfehler im Spaltennamen oder ein falsch interpretierter Typ fällt
+> erst zur Laufzeit auf. Entsprechend arbeitet dieses Beispiel auch nicht mit einzelnen
+> `Student`-Objekten, sondern direkt mit spaltenweisen Auswertungen (`ValueCounts()`).
+>
+> Man wägt also ab: **manuelles Parsen** (mehr Code, dafür typsichere Objekte für LINQ)
+> gegen **DataFrame** (kompakt und explorativ, dafür ohne kompilierzeitliche Garantien).
+>
+> **Machen Sie sich den Unterschied selbst sichtbar!** Ersetzen Sie in der Datei `Data.csv`
+> oben in der Spalte `StudentID` eine Zahl durch einen Buchstaben (z. B. `A`) und lassen
+> Sie _beide_ Varianten erneut laufen. Sie werden drei verschiedene Reaktionen beobachten:
+>
+> - **Variante 1** bricht _sofort_ mit einer `FormatException` an der Zeile
+>   `Int32.Parse(fields[0])` ab (_fail fast_) – der Fehler ist lokal und eindeutig.
+> - **Variante 2**, wenn das `A` in den ersten Zeilen (im Inferenz-Sample) steht: _kein_
+>   Fehler! Die gesamte Spalte `StudentID` kippt still auf den Typ `string` – auch die
+>   gültigen Zahlen sind nun Text, und jede spätere Rechnung darauf schlägt fehl.
+> - **Variante 2**, wenn das `A` erst _hinter_ dem Inferenz-Sample steht (z. B. in einer
+>   sehr langen Datei): Die Spalte wurde bereits als numerisch inferiert, und `LoadCsv`
+>   wirft nun doch eine `FormatException` – allerdings _verschleppt_ und ohne Angabe der
+>   betroffenen Zeile, also deutlich schwerer zu diagnostizieren.
+>
+> Ein und dieselbe fehlerhafte Eingabe führt bei der DataFrame-Variante also – je nach
+> _Position_ des Fehlers – zu einer stillen Umtypung oder zu einem verschleppten Absturz.
+> Genau diese Unvorhersehbarkeit ist der Preis der bequemen Typinferenz.
 
 ```csharp  csvExampleII.cs9
 using System;
@@ -170,6 +204,47 @@ StudentID, StudentName, Topic
 ```
 @LIA.eval(`["Program.cs", "project.csproj", "Data.csv"]`, `dotnet build -nologo`, `dotnet run -nologo`)
 
+## Exkurs: Secrets
+
+Wie gehen wir mit Schlüsseln, Passwörtern usw. in unseren Codes um?
+
+Zielstellung:
++ Komfortable Handhabung im Projekt
++ Projektübergreifende Verwendung (?)
++ Speicherung ohne Weiterleitung an Repositories
+
+Ein Lösungsansatz ist die Verwendung von [Microsoft.Extensions.Configuration.UserSecrets](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets)
+
+```
+dotnet new console -o secret_example
+dotnet add package Microsoft.Extensions.Configuration.UserSecrets
+dotnet user-secrets init
+dotnet user-secrets set "ServiceAPIKey" "1213234435"
+```
+
+Das war es schon. Nun finden Sie unter
+
++ `~/.microsoft/usersecrets/<user_secrets_id>/secrets.json` (Linux/macOS)
++ `%APPDATA%\Microsoft\UserSecrets\<user_secrets_id>\secrets.json` (Windows)
+
+den Eintrag
+
+```json
+{
+  "ServiceAPIKey": "1213234435"
+}
+```
+
+Aus dem Programm heraus können Sie darauf unmittelbar zurückgreifen.
+
+```csharp
+using Microsoft.Extensions.Configuration;
+
+var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
+string APIsecret = config["ServiceAPIKey"];
+
+Console.WriteLine(APIsecret);
+```
 
 ## Motivation
 
@@ -228,7 +303,7 @@ public class Program
 
 Die intuitive Lösung könnte folgendermaßen daher kommen:
 
-Die Dokumentation von `List<T>` findet sich unter folgendem [Link](https://docs.microsoft.com/de-de/dotnet/api/system.collections.generic.list-1.removeall?view=netcore-3.1)
+Die Dokumentation von `List<T>` findet sich unter folgendem [Link](https://learn.microsoft.com/de-de/dotnet/api/system.collections.generic.list-1.removeall?view=net-8.0)
 
 1. Wir "erinnern" uns an das `Count` Member der Klasse `List`.
 2. Für die Filteroperation implementieren Sie einen Loop. Sie können dazu `foreach` verwenden, weil `List<T>` das Interface `IEnumerable` implementiert.
@@ -618,6 +693,16 @@ connection.commit()
 connection.close()
 ```
 
+> [!IMPORTANT]
+> Die eigentliche Datenbanklogik – `CREATE TABLE`, `INSERT`, die Spaltennamen und -typen –
+> steckt hier ausschließlich in **Zeichenketten**, die über `cursor.execute(...)` an die
+> SQL-API übergeben werden. Für Python (bzw. den Compiler) ist das schlicht Text: Es findet
+> _keine_ Typprüfung und _keine_ Prüfung der Struktur zur Übersetzungszeit statt. Ein
+> Tippfehler im Tabellen- oder Spaltennamen fällt erst _zur Laufzeit_ auf, wenn der String
+> an die Datenbank gereicht wird. Genau hier setzt LINQ an: Es integriert die Abfrage als
+> typisierten Bestandteil der Sprache, sodass der Compiler sie bereits zur Übersetzungszeit
+> prüfen kann.
+
 ## LINQ Umsetzung
 
 *Language Integrated Query* (LINQ) zielt auf die direkte Integration von
@@ -1001,6 +1086,12 @@ Insgesamt sind 7 Query-Klauseln vorimplementiert, können aber durch Erweiterung
 | `join`    | vereinigt Elemente mehrerer Datenquellen          |
 | `let`     | definiert eine Hilfsvariable                      |
 
+> **Hinweis:** Diese 7 Klauseln sind die _Schlüsselwörter_ der Abfragesyntax und
+> unverändert. Darüber hinaus stellt LINQ eine große Zahl an _Methoden_ bereit,
+> die nur in der Methodensyntax (vgl. Abschnitt "Hinter den Kulissen") verfügbar
+> sind. Deren Umfang wächst mit jeder .NET-Version – einen Überblick über die
+> jüngsten Ergänzungen gibt die Tabelle im Abschnitt [LINQ heute](#linq-heute).
+
 ```csharp
 class Student{
   public string Name;
@@ -1071,21 +1162,39 @@ using System.Linq;
 class Program
 {
     public static void Main(string[] args){
-      var numbers = new List<int>() {1,2,3,4};
-      // Spezifikation der Anfrage
+      var numbers = new List<int>() {1, 2, 3, 4};
+      // Spezifikation der Anfrage: nur die geraden Zahlen
       var query = from x in numbers
+                  where x % 2 == 0
                   select x;
       Console.WriteLine(query.GetType());
-      // Manipulation der Daten
-      numbers.Add(5);
-      Console.WriteLine(query.Count());
-      // Manipulation und erneute Anwendung der Abfrage
+      Console.WriteLine(query.Count()); // 2 -> {2, 4}
+      // Manipulation der Daten: eine gerade Zahl kommt hinzu
       numbers.Add(6);
-      Console.WriteLine(query.Count()); // 6
+      Console.WriteLine(query.Count()); // 3 -> {2, 4, 6}, die Query "sieht" die 6
+      // Manipulation der Daten: eine ungerade Zahl kommt hinzu
+      numbers.Add(7);
+      Console.WriteLine(query.Count()); // 3 -> die 7 wird vom where herausgefiltert
+      // Manipulation der Daten: wieder eine gerade Zahl
+      numbers.Add(8);
+      Console.WriteLine(query.Count()); // 4 -> {2, 4, 6, 8}, die 8 zählt wieder mit
     }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+> [!IMPORTANT]
+> Eine LINQ-Abfrage speichert die **Vorschrift**, nicht das **Ergebnis**. `query` hält also
+> nicht die zwei geraden Zahlen vom Zeitpunkt der Definition fest, sondern die Anweisung
+> „durchlaufe `numbers` und filtere die geraden heraus". Erst der _terminale_ Operator
+> `Count()` löst die Auswertung aus – und zwar bei jedem Aufruf erneut über die dann
+> _aktuelle_ Liste. Deshalb steigt der Zähler nach `Add(6)` auf `3`, bleibt nach `Add(7)`
+> bei `3` (die `7` passiert das `where` nicht) und steigt nach `Add(8)` wieder auf `4`.
+>
+> Würde man das `Count()` direkt in den Ausdruck integrieren
+> (`(from x in numbers where ... select x).Count()`), erhielte man sofort einen `int` –
+> eine Momentaufnahme. Die verzögerte Auswertung und damit dieser Effekt wären dann
+> verschwunden.
 
 ### Hinter den Kulissen
 
@@ -1166,6 +1275,50 @@ class Program {
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
+### LINQ heute
+
+Der Methodenumfang von LINQ ist seit der Einführung stetig gewachsen. Viele
+Aufgaben, die in den frühen Beispielen noch umständlich über eine Kette aus
+`GroupBy`, `Select` und manueller Zählung gelöst werden mussten, lassen sich mit
+neueren Methoden als Einzeiler ausdrücken. Da diese ausschließlich in der
+Methodensyntax vorliegen, verwenden sie – anders als die 7 Query-Klauseln – kein
+eigenes Schlüsselwort.
+
+> **Wichtig:** Diese Methoden setzen ein aktuelles .NET voraus (siehe Spalte
+> "seit"). Unter der in einigen Beispielen dieser Vorlesung genutzten
+> `mono`/`mcs`-Toolchain stehen sie **nicht** zur Verfügung – dort ist ein
+> Projekt mit `dotnet` (`net9.0` bzw. `net10.0`) erforderlich.
+
+| Methode         | seit    | Bedeutung                                                                 |
+| --------------- | ------- | ------------------------------------------------------------------------- |
+| `MinBy`/`MaxBy` | .NET 6  | Element mit kleinstem/größtem Schlüssel – ohne vorheriges Sortieren       |
+| `DistinctBy`    | .NET 6  | Duplikate anhand eines Schlüssels entfernen                               |
+| `Chunk`         | .NET 6  | zerlegt eine Sequenz in Blöcke fester Größe                               |
+| `CountBy`       | .NET 9  | zählt Elemente je Schlüssel (ersetzt `group … into g … g.Count()`)        |
+| `AggregateBy`   | .NET 9  | beliebige Aggregation (Summe, Mittelwert …) je Schlüssel                  |
+| `Index`         | .NET 9  | liefert `(Index, Item)`-Paare (ersetzt `Select((item, i) => …)`)          |
+| `LeftJoin`      | .NET 10 | echter Outer-Join – behält Elemente ohne Partner in der zweiten Quelle    |
+| `RightJoin`     | .NET 10 | echter Outer-Join – behält Elemente ohne Partner in der ersten Quelle     |
+
+Ein direkter Vergleich zeigt den Gewinn an Lesbarkeit. Die Gruppierung mit
+Zählung aus dem Abschnitt "Gruppieren"
+
+```csharp
+var query2 = from s in students
+             group s by s.Subject into sg
+             select new { Subject = sg.Key, Count = sg.Count() };
+```
+
+lässt sich mit `CountBy` (ab .NET 9) auf eine Zeile verkürzen:
+
+```csharp
+var query2 = students.CountBy(s => s.Subject);
+// Ergebnis: IEnumerable<KeyValuePair<string, int>>
+```
+
+Eine ausführliche Übersicht bietet die Dokumentation unter
+https://learn.microsoft.com/de-de/dotnet/api/system.linq.enumerable
+
 ## Basisfunktionen von LINQ
 
 Mit LINQ lassen sich Elementaroperationen definieren, die dann im Ganzen die Mächtigkeit des Konzeptes ausmachen.
@@ -1185,7 +1338,7 @@ Mit LINQ lassen sich Elementaroperationen definieren, die dann im Ganzen die Mä
 -->
 
 Das Beispiel zur Filterung einer Customer-Tabelle wurde der C# Dokumentation
-unter https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations
+unter https://learn.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations
 entnommen.
 
 Die üblichste Abfrageoperation ist das Anwenden eines Filters in Form eines
@@ -1417,7 +1570,7 @@ class Program {
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 Einen guten Überblick zu den Konzequenzen einer Projektion gibt die Webseite
-https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/linq/type-relationships-in-linq-query-operations
+https://learn.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/linq/type-relationships-in-linq-query-operations
 
 
 ## Aufgabe der Woche
