@@ -12,3 +12,4 @@ obj/
 
 code/01_Software/improved
 code/01_Software/withBugs
+*.proj.Backup.tmp

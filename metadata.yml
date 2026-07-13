@@ -240,21 +240,3 @@ hasPart:
     url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/26_DesignPattern.md"
     learningResourceType: "Course"
     image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/26_DesignPattern.png"
-
-  - name: "GUI-Programmierung mit .NET MAUI"
-    description: "Grafische Oberflächen mit .NET MAUI: Aufbau plattformübergreifender Anwendungen, XAML und die Grundlagen der MAUI-Anwendungsentwicklung."
-    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/27_MAUI.md"
-    learningResourceType: "Course"
-    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/27_MAUI.png"
-
-  - name: ".NET MAUI Elemente"
-    description: "Vertiefung der .NET-MAUI-Entwicklung: Layouts, Controls, Datenbindung (Data Binding) und das MVVM-Muster für strukturierte UI-Anwendungen."
-    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/28_MAUI_II.md"
-    learningResourceType: "Course"
-    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/28_MAUI_II.png"
-
-  - name: "Anwendungsbeispiele"
-    description: "Anwendungsbeispiele und Praxisfragen der Softwareentwicklung, u. a. der sichere Umgang mit Schlüsseln, Passwörtern und Konfigurationsdaten in Projekten."
-    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/29_Anwendungen.md"
-    learningResourceType: "Course"
-    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/29_Anwendungen.png"
