@@ -5,7 +5,7 @@ email:    sebastian.zug@informatik.tu-freiberg.de
 version:  1.0.6
 language: de
 narrator: Deutsch Female
-comment:  Entwurfsmuster-Kategorien und ausgewählte Beispiele, Singleton Pattern, Adapter Pattern, State Pattern, Factory Pattern, Anti-Pattern 
+comment:  SOLID-Prinzipien (SRP, OCP, LSP, ISP, DIP), Entwurfsmuster-Kategorien und ausgewählte Beispiele, Singleton Pattern, Adapter Pattern, State Pattern, Factory Pattern, Anti-Pattern 
 tags:      
 logo:     
 
@@ -375,6 +375,650 @@ public class Program {
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
 > Mischformen lassen sich wunderbar mit der Methodenüberladung realisieren. Wir prüfen ab, ob es einen gültigen `this.calculator` gibt.
+
+## Prinzipien des (objektorientierten) Softwareentwurfs
+
+> **Merke:** Software lebt!
+
+Bisher haben wir mit Polymorphie und Dependency Injection zwei zentrale *Werkzeuge* der objektorientierten Programmierung wiederholt. Bevor wir uns gleich den **Entwurfsmustern** zuwenden, brauchen wir die Brücke dazwischen: die **Prinzipien**, die festlegen, *wann* und *warum* wir diese Werkzeuge einsetzen. Entwurfsmuster sind nämlich keine Selbstzwecke — sie sind erprobte Lösungen, die genau diese Prinzipien umsetzen.
+
+Gibt es für ein Problem mehrere Lösungen? Sind sie alle gleich gut? Ist das einfachste und nahliegende nach KISS-Prinzip (Keep It Simple, Stupid) immer am besten?
+
++ Prinzipien zum Entwurf von Systemen: Modularität, Trennung von Zuständigkeiten (Separation of Concerns), Schichtenarchitektur, lose Kopplung und hohe Kohäsion von Modulen
++ Prinzipien zum Entwurf einzelner Klassen: Single Responsibility (einzige Verantwortlichkeit) Principle, Kapselung, Immutable Objects
++ Prinzipien zum Entwurf miteinander kooperierender Klassen: O, L, I, D, Law of Demeter (Kommunikation nur unter "verwandten" Klassen, keine langen Aufrufketten)
+
+[Robert C. Martin](https://de.wikipedia.org/wiki/Robert_Cecil_Martin)
+fasste eine wichtige Gruppe von Prinzipien zur Erzeugung wartbarer und
+erweiterbarer Software unter dem Begriff "SOLID" zusammen [^UncleBob]. Robert
+C. Martin erklärte diese Prinzipien zu den wichtigsten Entwurfsprinzipien. Die
+SOLID-Prinzipien bestehen aus:
+
+* **S** ingle Responsibility Prinzip
+* **O** pen-Closed Prinzip
+* **L** iskovsches Substitutionsprinzip
+* **I** nterface Segregation Prinzip
+* **D** ependency Inversion Prinzip
+
+Die folgende Darstellung basiert auf den Referenzen [^Just]. Eine
+sehr gute, an einem Beispiel vorangetrieben Erläuterung ist unter [^Krämer] zu finden.
+
+[^Krämer]: Andre Krämer, "SOLID - Die 5 Prinzipien für objektorientiertes Softwaredesign", [Link](https://www.informatik-aktuell.de/entwicklung/methoden/solid-die-5-prinzipien-fuer-objektorientiertes-softwaredesign.html)
+
+[^Just]: Markus Just, IT Designers Gruppe, "Entwurfsprinzipien", Foliensatz Fachhochschule Esslingen [Link](http://www.it-designers-gruppe.de/fileadmin/Inhalte/Studentenportal/Die_SOLID-Prinzipien__Folien___1_.pdf)
+
+[^UncleBob]: Robert C. Martin, Webseite "The principles of OOD", http://www.butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod
+
+### Prinzip einer einzigen Verantwortung (Single-Responsibility-Prinzip SRP)
+
+In der objektorientierten Programmierung sagt das SRP aus, dass jede Klasse nur
+eine fest definierte Aufgabe zu erfüllen hat. In einer Klasse sollten lediglich
+Funktionen vorhanden sein, die direkt zur Erfüllung dieser Aufgabe beitragen.
+
+> “There should never be more than one reason for a class to change. [^UncleBob]
+
++  Verantwortlichkeit = Grund für eine Änderung (multiple Veränderungen == multiple Verantwortlichkeiten)
+
+```csharp
+public class Book
+{
+    // nur eine Verantwortlichkeit: die Verwaltung der Buchdetails
+    public string Title { get; private set; }
+    public string Author { get; private set; }
+    public string ISBN { get; private set; }
+
+    public Book(string title, string author, string isbn)
+    {
+        Title = title;
+        Author = author;
+        ISBN = isbn;
+    }
+
+    public string GetBookDetails()
+    {
+        return $"Title: {Title}, Author: {Author}, ISBN: {ISBN}";
+    }
+    //Speichern von Büchern in einer Datenbank, das Drucken der Buchdetails erfolgt in den separaten Klassen
+}
+
+```
+
+* Mehrere Verantwortlichkeiten innerhalb eines Software-Moduls führen zu zerbrechlichem Design, da Wechselwirkungen bei den Verantwortlichkeit nicht ausgeschlossen werden können
+
+
+```csharp
+public class SpaceStation{
+  public initialize() ...
+  public void run_sensors() ...
+  public void show_sensors() ...
+  public void load_supplies(type, quantity) ...
+  public void use_supplies(type, quantity) ...
+  public void report_supplies () ...
+  public void load_fuel(quantity) ...
+  public void report_fuel() ...
+  public void activate_thrusters() ...
+}
+```
+
+Eine mögliche separaten Realisierung findet sich unter [Link](https://medium.com/@severinperez/writing-flexible-code-with-the-single-responsibility-principle-b71c4f3f883f)
+
+> **Merke:** Vermeiden Sie "God"-Objekte, die alles wissen.
+
+
+**Verallgemeinerung**
+
+Eine Verallgemeinerung des SRP stellt Curly’s Law [CodingHorror](https://blog.codinghorror.com/curlys-law-do-one-thing/) dar, welches das Konzept
+"methods should do one thing" bis "single source of truth" zusammenfasst und
+auf alle Aspekte eines Softwareentwurfs anwendet. Dazu gehören
+nicht nur Klassen, sondern unter anderem auch Funktionen und Variablen.
+
+> Jedes Wissenselement muss eine einzigartige, eindeutige Darstellung innerhalb eines Systems haben.
+
+```csharp
+var numbers = new [] { 5,8,4,3,1 };
+numbers = numbers.OrderBy(i => i);
+
+var numbers = new [] { 5,8,4,3,1 };
+var orderedNumbers = numbers.OrderBy(i => i);
+```
+
+Da die Variable `numbers` zuerst die unsortierten Zahlen repräsentiert und später
+die sortierten Zahlen, wird Curly’s Law verletzt. Dies lässt sich auflösen,
+indem eine zusätzliche Variable eingeführt wird.
+
+### Open-Closed Prinzip
+
+Bertrand Meyer beschreibt das Open-Closed-Prinzip durch:
+*Module sollten sowohl offen (für Erweiterungen) als auch verschlossen (für Modifikationen) sein.* [^Meyer]
+
+Eine Erweiterung im Sinne des Open-Closed-Prinzips ist beispielsweise die
+Vererbung. Diese verändert das vorhandene Verhalten der Einheit nicht, erweitert
+aber die Einheit um zusätzliche Funktionen oder Daten. Überschriebene Methoden
+verändern auch nicht das Verhalten der Basisklasse, sondern nur das der
+abgeleiteten Klasse.
+
+
+```csharp                                      PriceCalculator.cs  
+using System;
+using System.Collections.Generic;
+
+// Basisklasse mit abstrakter Methode
+public abstract class Product
+{
+    public string Name { get; set; }
+    public abstract decimal GetPrice();
+}
+
+// Erweiterung 1: Einfaches Produkt
+public class StandardProduct : Product
+{
+    public decimal BasePrice { get; set; }
+
+    public override decimal GetPrice()
+    {
+        return BasePrice;
+    }
+}
+
+// Erweiterung 2: Produkt mit Rabatt
+public class DiscountedProduct : Product
+{
+    public decimal BasePrice { get; set; }
+    public decimal DiscountPercent { get; set; }
+
+    public override decimal GetPrice()
+    {
+        return BasePrice * (1 - DiscountPercent / 100m);
+    }
+}
+
+// Erweiterung 3: Premium-Produkt mit Aufschlag
+public class PremiumProduct : Product
+{
+    public decimal BasePrice { get; set; }
+    public decimal PremiumFee { get; set; }
+
+    public override decimal GetPrice()
+    {
+        return BasePrice + PremiumFee;
+    }
+}
+
+// Verwenderklasse
+public class PriceCalculator
+{
+    public decimal CalculateTotalPrice(List<Product> products)
+    {
+        decimal total = 0;
+        foreach (var product in products)
+        {
+            total += product.GetPrice();
+        }
+        return total;
+    }
+}
+
+// Testprogramm
+class Program
+{
+    static void Main()
+    {
+        var products = new List<Product>
+        {
+            new StandardProduct { Name = "Buch", BasePrice = 20m },
+            new DiscountedProduct { Name = "Stift", BasePrice = 5m, DiscountPercent = 10 },
+            new PremiumProduct { Name = "Laptop", BasePrice = 1000m, PremiumFee = 150m }
+        };
+
+        var calculator = new PriceCalculator();
+        var total = calculator.CalculateTotalPrice(products);
+
+        Console.WriteLine($"Gesamtpreis: {total} EUR");
+    }
+}
+```
+@LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
+
+
+Die Klasse PriceCalculator muss nicht geändert werden, wenn ein neuer Produkttyp hinzukommt. Stattdessen kann man durch Vererbung und Polymorphie neue Klassen hinzufügen (GiftProduct, Leihprodukt, etc.). Die Erweiterung erfolgt über neue Klassen, nicht durch Änderung des bestehenden Codes.
+
+[^Meyer]: Bertrand Meyer, "Object Oriented Software Construction" Prentice Hall, 1988,
+
+###  Liskovsche Substitutionsprinzip (LSP)
+
+> *"Sei $q(x)$ eine beweisbare Eigenschaft von Objekten $x$ des Typs $T$. Dann soll $q(y)$ für Objekte $y$ des Typs $S$ wahr sein, wobei $S$ein Untertyp von $T$ ist.“* [^Liskov]
+> Das Liskovsche Substitutionsprinzip (LSP) oder Ersetzbarkeitsprinzip besagt, dass ein Programm, das Objekte einer Basisklasse T verwendet, auch mit Objekten der davon abgeleiteten Klasse S korrekt funktionieren muss, ohne dabei das Programm zu verändern.
+
+Beispiel: Grafische Darstellung von verschiedenen Primitiven
+
+![Liskov](https://www.plantuml.com/plantuml/png/SoWkIImgAStDuN8lIapBB4xEI2rspKdDJSqhKR2fqTLL24fDpYX9JSx69U-QavDPK9oAIpeajQA42we68k9Tb9fPp8L5lPL2LMfcSaPUgeOcbqDgNWhGKG00)<!-- width="30%" -->
+
+Entsprechend sollte eine Methode, die `GrafischesElement` verarbeitet, auch auf  `Ellipse` und `Kreis` anwendbar sein. Problematisch ist dabei allerdings deren unterschiedliches Verhalten. `Kreis` weist zwei gleich lange Halbachsen auf. Die zugehörigen Membervariablen sind nicht unabhängig voneinander.
+
+[^Liskov]: Liskov, Barbara H., and Jeannette M. Wing. “A Behavioral Notion of Subtyping.” ACM Transactions on Programming Languages and Systems, vol. 16, no. 6, 1994, pp. 1811–41. doi:10.1145/197320.197383
+
+### Interface Segregation Prinzip
+
+Zu große Schnittstellen sollten in mehrere Schnittstellen aufgeteilt werden,
+so dass die implementierende Klassen keine unnötigen Methoden umfasst.
+Schnittstellen müssen aufgeteilt werden, falls implementierende Klassen unnötige
+Methoden haben. Nach erfolgreicher Anwendung dieses Entwurfprinzips würde
+ein Modul, das eine Schnittstelle benutzt, nur die Methoden implementieren, die es auch wirklich braucht.
+
+
+```csharp
+public interface IVehicle
+{
+    void Drive();
+    void Fly();
+}
+
+
+public class MultiFunctionalCar : IVehicle
+{
+    public void Drive()
+    {
+        //actions to start driving car
+        Console.WriteLine("Drive a multifunctional car");
+    }
+
+    public void Fly()
+    {
+        //actions to start flying
+        Console.WriteLine("Fly a multifunctional car");
+    }
+}
+
+public class Car : IVehicle
+{
+    public void Drive()
+    {
+        //actions to drive a car
+        Console.WriteLine("Driving a car");
+    }
+
+    public void Fly()
+    {
+        throw new NotImplementedException();
+    }
+}
+```
+
+Lösung unter Beachtung des Interface Segregation Prinzip
+
+```csharp
+public interface ICar
+{
+    void Drive();
+}
+
+public interface IAirplane
+{
+    void Fly();
+}
+
+public class Car : ICar
+{
+    public void Drive()
+    {
+        //actions to drive a car
+        Console.WriteLine("Driving a car");
+    }
+}
+
+
+public class MultiFunctionalCar : ICar, IAirplane
+{
+    public void Drive()
+    {
+        //actions to start driving car
+        Console.WriteLine("Drive a multifunctional car");
+    }
+
+    public void Fly()
+    {
+        //actions to start flying
+        Console.WriteLine("Fly a multifunctional car");
+    }
+}
+```
+
+Man könnte jetzt sogar ein Highlevel Interface realisieren, dass beide Aspekte
+integriert.
+
+```csharp
+public interface IMultiFunctionalVehicle : ICar, IAirplane
+{
+}
+
+public class MultiFunctionalCar : IMultiFunctionalVehicle
+{
+}
+```
+**Vorteil**
+
++ übersichtlichere kleinere Schnittstellen, die flexibler kombiniert werden können
++ Klassen umfassen keine Methoden, die sie nicht benötigen
+
+-> Das Prinzip der Schnittstellentrennung verbessert die Lesbarkeit und Wartbarkeit unseres Codes.
+
+
+### Dependency Inversion Prinzip
+
+> "High-level modules should not depend on low-level modules. Both should
+> depend on abstractions. Abstractions should not depend upon details. Details
+> should depend upon abstractions" [UncleBob]
+
+> **Brücke zur DI-Wiederholung:** Das Dependency Inversion Prinzip beschreibt, *welche* Abhängigkeits­struktur wir anstreben; die zu Beginn dieser Vorlesung wiederholte **Dependency Injection** ist die konkrete *technische Umsetzung* dazu. DIP ist das Prinzip, DI ist das Mittel.
+
+Lösungsansatz für die Realisierung ist eine veränderte Sicht auf die
+klassischerweise hierachische Struktur von Klassen.
+
+<!--
+style="width: 90%; max-width: 860px; display: block; margin-left: auto; margin-right: auto;"
+-->
+````ascii
+
+  Traditionelle Sicht                 Objektorientierte Perspektive
+
+  +-----------------------+           +-------------------------------+
+  | Präsentation          |           |          Präsentation         |
+  +-----------------------+           | Realisierung        Interface |
+              |                       +-------------------------^-----+
+              |                                                 |
+              |                                                 |
+              v                               +-----------------+
+  +-----------------------+           +-------|-----------------------+
+  | Anwendung             |           |       |  Anwendung            |
+  +-----------------------+           | Realisierung        Interface |
+              |                       +-------------------------^-----+
+              |                                                 |
+              |                                                 |
+              v                               +-----------------+
+  +-----------------------+           +-------|-----------------------+
+  | Verarbeitung          |           |       |  Verarbeitung         |
+  +-----------------------+           | Realisierung        Interface |
+             |                        +-------------------------^-----+
+             |                                                  |
+             |                                                  |
+             v                                +-----------------+
+  +-----------------------+           +-------|-----------------------+
+  | Daten                 |           |       |     Daten             |
+  +-----------------------+           | Realisierung        Interface |
+                                      +-------------------------------+
+````
+
+Hohe Abstraktionsebenen (High-level modules) sind die Komponenten des Systems, die höhere Logik oder Funktionalität implementieren (z.B. Benutzeroberfläche). 
+
+Niedrige Abstraktionsebenen (Low-level modules) sind Komponenten, die konkrete Aufgaben wie Datenzugriff, Netzwerkkommunikation oder hardwarebezogene Operationen ausführen.
+
+> Die High-level Module sollen nicht direkt von den Low-level Modulen abhängig sein. Stattdessen sollten beide Arten von Modulen von Abstraktionen abhängen, wie Schnittstellen oder abstrakte Klassen.
+
+                                       {{0-1}}
+****************************************************************************
+
+Beispiel:
+High-level Modul ist ein Rechnungsservice, und ein Low-level Modul ist ein konkretes Datenrepository. Rechnungsservice soll nicht direkt vom Datenrepository abhängen, sondern von einer Abstraktion (IDataRepository). Das konkrete Datenrepository implementiert dann diese Schnittstelle.
+
+```csharp
+public interface IDataRepository
+{
+    void SaveInvoice(Invoice invoice);
+}
+
+public class DatabaseRepository : IDataRepository //Low-level Modul
+{
+    public void SaveInvoice(Invoice invoice)
+    {
+        // Konkrete Implementierung zum Speichern der Rechnung in der Datenbank
+    }
+}
+
+public class InvoiceService //High-level Modul
+{
+    private IDataRepository repository;
+
+    public InvoiceService(IDataRepository repository)
+    {
+        this.repository = repository;
+    }
+
+    public void CreateInvoice(Invoice invoice)
+    {
+        // Geschäftslogik zur Erstellung einer Rechnung
+        repository.SaveInvoice(invoice);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        IDataRepository repository = new DatabaseRepository();
+        InvoiceService invoiceService = new InvoiceService(repository);
+
+        Invoice invoice = new Invoice();
+        invoiceService.CreateInvoice(invoice);
+    }
+}
+```
+
+> Abstraktionen (wie Schnittstellen oder abstrakte Klassen) sollen nicht von konkreten Implementierungen abhängig sein, sondern nur von (anderen) Abstraktionen.
+
+```csharp
+public interface INotificationSender
+{
+    void Send(string message);
+}
+
+//EmailSender, SmsSender
+
+public interface INotificationService //abhängige Abstraktion
+{
+    void Notify(string message, INotificationSender sender);
+}
+
+public class NotificationService : INotificationService 
+{
+    public void Notify(string message, INotificationSender sender)
+    {
+        // Geschäftslogik zur Benachrichtigung
+        sender.Send(message);
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        INotificationSender emailSender = new EmailSender();
+        INotificationSender smsSender = new SmsSender();
+        
+        INotificationService notificationService = new NotificationService();
+
+        notificationService.Notify("Notification via Email.", emailSender);
+        notificationService.Notify("Notification via SMS.", smsSender);
+    }
+}
+
+```
+
+
+```python
+from abc import ABC, abstractmethod
+
+# Definition des Interface INotificationSender
+class INotificationSender(ABC):
+    @abstractmethod
+    def send(self, message: str):
+        pass
+
+# Definition des Interface INotificationService
+class INotificationService(ABC):
+    @abstractmethod
+    def notify(self, message: str, sender: INotificationSender):
+        pass
+
+# Implementierung des EmailSender
+class EmailSender(INotificationSender):
+    def send(self, message: str):
+        print(f"Sending email: {message}")
+
+# Implementierung des SmsSender
+class SmsSender(INotificationSender):
+    def send(self, message: str):
+        print(f"Sending SMS: {message}")
+
+# Implementierung des NotificationService
+class NotificationService(INotificationService):
+    def notify(self, message: str, sender: INotificationSender):
+        # Geschäftslogik zur Benachrichtigung
+        sender.send(message)
+
+# Hauptprogramm
+if __name__ == "__main__":
+    email_sender = EmailSender()
+    sms_sender = SmsSender()
+    notification_service = NotificationService()
+    notification_service.notify("Notification via Email.", email_sender)
+    notification_service.notify("Notification via SMS.", sms_sender)
+```
+
+
+****************************************************************************
+
+                     {{1-2}}
+**************************************************
+
+Das folgende Beispiel entstammt der Webseite
+https://exceptionnotfound.net/simply-solid-the-dependency-inversion-principle/
+
+Beachten Sie, dass die Benachrichtigungsklasse, eine übergeordnete Klasse, eine
+Abhängigkeit sowohl von der E-Mail-Klasse als auch von der SMS-Klasse hat, bei
+denen es sich um untergeordnete Klassen handelt. Mit anderen Worten, die
+Benachrichtigung hängt von der konkreten Implementierung von E-Mail und SMS ab
+und nicht von einer Abstraktion der Implementierung. Da DIP verlangt, dass
+sowohl Klassen der höheren als auch der unteren Ebenen von Abstraktionen
+abhängen, verstoßen wir derzeit gegen das Prinzip der Abhängigkeitsinversion.
+
+
+```csharp
+public class Email
+{
+    public string ToAddress { get; set; }
+    public string Subject { get; set; }
+    public string Content { get; set; }
+    public void SendEmail()
+    {
+        //Send email
+    }
+}
+
+public class SMS
+{
+    public string PhoneNumber { get; set; }
+    public string Message { get; set; }
+    public void SendSMS()
+    {
+        //Send sms
+    }
+}
+
+public class Notification
+{
+    private Email _email;
+    private SMS _sms;
+
+    public Notification()
+    {
+        _email = new Email();
+        _sms = new SMS();
+    }
+
+    public void Send()
+    {
+        _email.SendEmail();      // Abhängigkeit von Email
+        _sms.SendSMS();          // Abhängigkeit von SMS
+    }
+}
+
+```
+
+> Warum ist dieser Code nicht DIP konform?
+
+**************************************************
+
+
+                     {{2-3}}
+**************************************************
+
+```csharp
+// Schritt 1: Interface Definition
+public interface IMessage
+{
+    void SendMessage();
+}
+
+// Schritt 2: Die niederwertigeren Klassen implmentieren das Interface
+public class Email : IMessage
+{
+    public string ToAddress { get; set; }
+    public string Subject { get; set; }
+    public string Content { get; set; }
+    public void SendMessage()
+    {
+        //Send email
+    }
+}
+
+public class SMS : IMessage
+{
+    public string PhoneNumber { get; set; }
+    public string Message { get; set; }
+    public void SendMessage()
+    {
+        //Send sms
+    }
+}
+
+// Schritt 3: Die höherwertige Klasse wird gegen das Interface implementiert
+public class Notification
+{
+    private IMessage _message;
+
+    public Notification(IMessage messages)
+    {
+        this._message = message;
+    }
+    public void Send()
+    {
+        _message.SendMessage();
+    }
+}
+
+// Variante für multiple Messages
+//public class Notification
+//{
+//    private ICollection<IMessage> _messages;
+//    public Notification(ICollection<IMessage> messages)
+//    {
+//        this._messages = messages;
+//    }
+//    public void Send()
+//    {
+//        foreach(var message in _messages)
+//        {
+//            message.SendMessage();
+//        }
+//    }
+//}
+```
+
+Beispiel aus https://exceptionnotfound.net/simply-solid-the-dependency-inversion-principle/
+
+**************************************************
+
+> **Von Prinzipien zu Mustern:** Die SOLID-Prinzipien sagen uns *worauf* wir achten sollen — sie sind abstrakt formuliert und gelten für jede objektorientierte Software. **Design Patterns** sind die nächste Stufe: konkrete, wiederverwendbare Lösungs­schablonen, die diese Prinzipien in typischen Situationen umsetzen. So realisiert etwa das *Strategy*-Pattern das Open-Closed-Prinzip, *Adapter* unterstützt das Dependency Inversion Prinzip, und *Factory* entkoppelt Objekterzeugung von Verwendung im Sinne von SRP und DIP.
 
 ## Design Pattern (Entwurfsmuster)
 
