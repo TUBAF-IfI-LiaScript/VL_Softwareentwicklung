@@ -1108,7 +1108,7 @@ Wert, Zähler, Timer) **selbst** in Feldern mitführen. Die **Reactive Extension
 (Rx)** nehmen uns das ab: Sie behandeln den Ereignisstrom als ein
 `IObservable<T>` - ein Objekt, das man mit Operatoren verarbeitet, die das
 Gedächtnis bereits eingebaut haben (vgl. die LINQ-Operatoren in Vorlesung
-[LINQ](26_LINQ.md)).
+[LINQ](25_LINQ.md)).
 
 | Aspekt                       | Event (`event`)                          | Observable (Rx)                                  |
 | ---------------------------- | ---------------------------------------- | ------------------------------------------------ |
@@ -1213,5 +1213,5 @@ beliebig komplexe Strom-Operationen.
 > **Einordnung:** Rx ist kein Ersatz für Events, sondern deren Verallgemeinerung
 > für komplexe, zeitabhängige Ereignisfolgen (Sensordaten, Nutzereingaben,
 > Netzwerk-Streams). Wer das Prinzip vertieft, findet die LINQ-artigen Operatoren
-> in der nächsten Vorlesung zu [LINQ](26_LINQ.md) wieder. Dokumentation:
+> in der nächsten Vorlesung zu [LINQ](25_LINQ.md) wieder. Dokumentation:
 > https://github.com/dotnet/reactive und https://reactivex.io

@@ -178,7 +178,7 @@ class Program
 }
 ```
 
-[SOLID](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/13_UML_ModellierungI.md#4)
+[SOLID](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/26_DesignPattern.md#3)
 
 ## Erster Entwurf mit LLM
 

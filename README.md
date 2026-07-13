@@ -48,6 +48,6 @@ link: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklu
 | 13    | 29. Juni  | Taskmodell                                              |                                                         |
 |       | 03. Juli  | Testen                                                  |                                                         |
 | 14    | 06. Juli  | Continuous Integration in GitHub                        |                                                         |
-|       | 10. Juli  | Design Pattern                                          |                                                         |
-| 15    | 13. Juli  | Language Integrated Query                               |                                                         |
+|       | 10. Juli  | Language Integrated Query                               |                                                         |
+| 15    | 13. Juli  | Design Pattern                                          |                                                         |
 |       | 17. Juli  | GUI - MAUI                                              |                                                         |

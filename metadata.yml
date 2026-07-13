@@ -229,17 +229,17 @@ hasPart:
     learningResourceType: "Course"
     image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/24_Tasks.png"
 
-  - name: "Entwurfsmuster"
-    description: "Entwurfsmuster (Design Patterns) in der objektorientierten Softwareentwicklung: bewährte Lösungen für wiederkehrende Entwurfsprobleme sowie die SOLID-Prinzipien und Dependency Injection."
-    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/25_DesignPattern.md"
-    learningResourceType: "Course"
-    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/25_DesignPattern.png"
-
   - name: "Language-Integrated Query (LINQ)"
     description: "Language-Integrated Query (LINQ) in C#: deklarative Abfragen über Collections und Datenquellen mit Methoden- und Abfragesyntax."
-    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/26_LINQ.md"
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/25_LINQ.md"
     learningResourceType: "Course"
-    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/26_LINQ.png"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/25_LINQ.png"
+
+  - name: "Entwurfsmuster"
+    description: "Entwurfsmuster (Design Patterns) in der objektorientierten Softwareentwicklung: bewährte Lösungen für wiederkehrende Entwurfsprobleme sowie die SOLID-Prinzipien und Dependency Injection."
+    url: "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/26_DesignPattern.md"
+    learningResourceType: "Course"
+    image: "https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/master/img/course_logos/26_DesignPattern.png"
 
   - name: "GUI-Programmierung mit .NET MAUI"
     description: "Grafische Oberflächen mit .NET MAUI: Aufbau plattformübergreifender Anwendungen, XAML und die Grundlagen der MAUI-Anwendungsentwicklung."

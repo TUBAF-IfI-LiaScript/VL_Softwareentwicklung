@@ -16,18 +16,18 @@ import: https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_Softwareentwick
 
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/26_LINQ.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/25_LINQ.md)
 
 # Language-Integrated Query
 
 | Parameter                | Kursinformationen                                                                    |
 | ------------------------ | ------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Vorlesung Softwareentwicklung`                                                      |
-| **Teil:**                | `26/27`                                                                              |
+| **Teil:**                | `25/27`                                                                              |
 | **Semester**             | @config.semester                                                                     |
 | **Hochschule:**          | @config.university                                                                   |
 | **Inhalte:**             | @comment                                                                             |
-| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/26_LINQ.md |
+| **Link auf den GitHub:** | https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/25_LINQ.md |
 | **Autoren**              | @author                                                                              |
 
 ![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
