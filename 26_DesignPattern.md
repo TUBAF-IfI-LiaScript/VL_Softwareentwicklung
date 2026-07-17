@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, Galina Rudolf & André Dietrich
 email:    sebastian.zug@informatik.tu-freiberg.de
-version:  1.0.6
+version:  1.0.7
 language: de
 narrator: Deutsch Female
 comment:  SOLID-Prinzipien (SRP, OCP, LSP, ISP, DIP), Entwurfsmuster-Kategorien und ausgewählte Beispiele, Singleton Pattern, Adapter Pattern, State Pattern, Factory Pattern, Anti-Pattern 
@@ -222,6 +222,18 @@ public class DataProcessor {
 }
 ```
 
+Der `DataProcessor` erzeugt seine Helfer — Datenbankzugriff und Rechenkern — mit `new` selbst. Damit legt er drei Entscheidungen fest, die ihn eigentlich gar nichts angehen:
+
++ **Welche** Implementierung verwendet wird (`SqliteDbManager`, `HighPrecisionCalculator`),
++ **wie** sie konfiguriert wird (der Dateiname `"db.sqlite"`, die Genauigkeit `5`),
++ **wann** sie erzeugt wird (unweigerlich beim Anlegen des `DataProcessor`).
+
+Die Folgen bekommen wir spätestens beim Testen zu spüren: Es gibt keine Möglichkeit, den `SqliteDbManager` durch eine In-Memory-Attrappe zu ersetzen — jeder Test schreibt in eine echte Datei. Ebenso wenig lässt sich der Rechenkern gegen eine GPU-Variante austauschen, ohne den Quellcode von `DataProcessor` anzufassen.
+
+> **Merke:** Das Problem ist nicht die *Benutzung* der Abhängigkeit, sondern deren *Erzeugung*. Eine Klasse soll ihre Helfer verwenden, aber nicht auswählen.
+
+Die folgenden Beispiele beschränken sich der Übersichtlichkeit halber auf den `Calculator`; für den `DbManager` gilt aber Wort für Wort dasselbe.
+
 > ”One should depend upon abstractions, [not] concretions.”
 >
 > --Robert C. Martin (2000), Design Principles and Design Patterns
@@ -229,6 +241,8 @@ public class DataProcessor {
 ### Constructor Injection
 
 > Konstruktor- oder initialisierungsbasierte Abhängigkeitsinjektion bedeutet, dass alle erforderlichen Abhängigkeiten während der Initialisierung einer Instanz als Konstruktorargumente bereitgestellt werden.
+
+Die Idee ist denkbar einfach: Wir drehen die Verantwortung um. Nicht mehr `DataProcessor` besorgt sich seine Abhängigkeiten, sondern der *Aufrufer* reicht sie beim Anlegen der Instanz hinein. Der `DataProcessor` deklariert damit nur noch, *was* er braucht, und nicht mehr, *woher* er es bekommt.
 
 ```csharp
 public class DataProcessor {
@@ -248,8 +262,11 @@ public class DataProcessor {
 }
 ```
 
-{{1-2}}
-```csharp  DependencyInjectionViaInterfac.cs
+Beachten Sie das `readonly`: Nach dem Konstruktoraufruf steht die Abhängigkeit fest und kann nicht mehr vertauscht werden. Das ist die zentrale Stärke der Konstruktor-Injektion — ein `DataProcessor` existiert *nie* in einem unvollständigen Zustand. Wer ihn in Händen hält, weiß, dass `manager` und `calculator` gesetzt sind, und braucht keine `null`-Prüfung in `calc()`.
+
+Damit der Austausch aber tatsächlich funktioniert, muss der Parametertyp eine **Abstraktion** sein. Genau das leistet im folgenden Beispiel das Interface `iCalculator`: `DataProcessor` kennt nur noch den Vertrag `expensiveCalculation(int)`, während `cpuCalculator` und `gpuCalculator` zwei austauschbare Erfüllungen dieses Vertrags sind. Die Entscheidung, welche davon zum Zuge kommt, fällt erst in `Main()` — an genau einer Stelle.
+
+```csharp  ConstructorInjection.cs
 using System;
 
 public interface iCalculator {
@@ -258,15 +275,15 @@ public interface iCalculator {
 
 public class cpuCalculator : iCalculator {
     public int expensiveCalculation(int input) {
-        // some expensive calculation
+        Console.WriteLine("... rechne auf der CPU");
         return input * 2;
     }
 }
 
 public class gpuCalculator : iCalculator {
     public int expensiveCalculation(int input) {
-        // some expensive calculation
-        return input * 2;
+        Console.WriteLine("... rechne auf der GPU");
+        return input * 4;
     }
 }
 
@@ -292,9 +309,21 @@ public class Program {
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
+> **Aufgabe:** Tauschen Sie in `Main()` den `cpuCalculator` gegen den `gpuCalculator`. Die Ausgabe wechselt von `10` auf `20`. Wie viele Zeilen mussten Sie dafür ändern — und musste `DataProcessor` angefasst werden?
+
+Genau darin liegt der Gewinn: Die Klasse `DataProcessor` ist gegenüber neuen Rechenkernen *offen für Erweiterung, aber geschlossen für Modifikation*. Ein `testCalculator`, der im Unit-Test feste Werte liefert, ließe sich ohne jede Änderung an `DataProcessor` einhängen.
+
+> **Merke:** Konstruktor-Injektion ist der Standardfall. Sie ist die richtige Wahl für alle **verpflichtenden** Abhängigkeiten, ohne die eine Instanz nicht sinnvoll arbeiten kann.
+
+Was aber, wenn eine Abhängigkeit optional ist oder sich zur Laufzeit ändern soll? Dann greifen die beiden folgenden Varianten.
+
 ### Property Injection
 
-```csharp  DependencyInjectionViaInterfac.cs
+> Bei der eigenschaftsbasierten Abhängigkeitsinjektion wird die Abhängigkeit erst *nach* der Konstruktion über eine öffentliche Eigenschaft gesetzt.
+
+Die Instanz entsteht also zunächst ohne ihren Rechenkern und wird erst im zweiten Schritt vervollständigt. Das erkauft uns Flexibilität — die Abhängigkeit lässt sich zur Laufzeit jederzeit austauschen — und kostet uns genau die Garantie, die `readonly` uns eben noch gegeben hat.
+
+```csharp  PropertyInjection.cs
 using System;
 
 public interface iCalculator {
@@ -303,15 +332,15 @@ public interface iCalculator {
 
 public class cpuCalculator : iCalculator {
     public int expensiveCalculation(int input) {
-        // some expensive calculation
+        Console.WriteLine("... rechne auf der CPU");
         return input * 2;
     }
 }
 
 public class gpuCalculator : iCalculator {
     public int expensiveCalculation(int input) {
-        // some expensive calculation
-        return input * 2;
+        Console.WriteLine("... rechne auf der GPU");
+        return input * 4;
     }
 }
 
@@ -329,14 +358,25 @@ public class Program {
     DataProcessor dp = new DataProcessor();
     dp.calculator = new cpuCalculator();
     Console.WriteLine(dp.calc(5));
+    // Wechsel des Rechenkerns zur Laufzeit - mit dem Konstruktor unmöglich
+    dp.calculator = new gpuCalculator();
+    Console.WriteLine(dp.calc(5));
   }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
+> **Aufgabe:** Kommentieren Sie die Zeile `dp.calculator = new cpuCalculator();` aus. Der Code kompiliert weiterhin fehlerfrei — und scheitert erst zur Laufzeit mit einer `NullReferenceException`.
+
+Damit ist die Schwäche benannt: Zwischen Konstruktion und Zuweisung existiert ein **unvollständiges Objekt**, und der Compiler kann uns nicht davor schützen. `calc()` müsste streng genommen auf `null` prüfen. Property Injection ist deshalb die Wahl für *optionale* Abhängigkeiten — etwa einen Logger, der auch fehlen darf — nicht für verpflichtende.
+
 ### Method Injection
 
-```csharp  DependencyInjectionViaInterfac.cs
+> Bei der methodenbasierten Abhängigkeitsinjektion wird die Abhängigkeit als Parameter genau des Aufrufs übergeben, der sie benötigt.
+
+Der `DataProcessor` *speichert* den Rechenkern jetzt gar nicht mehr — er bekommt ihn gereicht, benutzt ihn und vergisst ihn wieder. Die Klasse wird dadurch zustandslos: Zwei Aufrufe können problemlos mit verschiedenen Kernen arbeiten.
+
+```csharp  MethodInjection.cs
 using System;
 
 public interface iCalculator {
@@ -345,15 +385,15 @@ public interface iCalculator {
 
 public class cpuCalculator : iCalculator {
     public int expensiveCalculation(int input) {
-        // some expensive calculation
+        Console.WriteLine("... rechne auf der CPU");
         return input * 2;
     }
 }
 
 public class gpuCalculator : iCalculator {
     public int expensiveCalculation(int input) {
-        // some expensive calculation
-        return input * 2;
+        Console.WriteLine("... rechne auf der GPU");
+        return input * 4;
     }
 }
 
@@ -367,14 +407,28 @@ public class DataProcessor {
 public class Program {
   public static void Main(string[] args){
     DataProcessor dp = new DataProcessor();
-    iCalculator calculation = new cpuCalculator();
-    Console.WriteLine(dp.calc(calculation, 5));
+    // Die Abhängigkeit gilt nur für diesen einen Aufruf
+    Console.WriteLine(dp.calc(new cpuCalculator(), 5));
+    Console.WriteLine(dp.calc(new gpuCalculator(), 5));
   }
 }
 ```
 @LIA.eval(`["main.cs"]`, `mcs main.cs`, `mono main.exe`)
 
-> Mischformen lassen sich wunderbar mit der Methodenüberladung realisieren. Wir prüfen ab, ob es einen gültigen `this.calculator` gibt.
+Der Preis: Jeder Aufrufer muss die Abhängigkeit kennen und mitbringen. Bei einer Methode, die hundertmal im Projekt aufgerufen wird, verteilt sich das Wissen über den `cpuCalculator` auf hundert Stellen — genau die Kopplung, die wir loswerden wollten. Method Injection lohnt daher vor allem dann, wenn die Abhängigkeit *pro Aufruf* wechselt und das Objekt sie gar nicht behalten soll.
+
+### Die drei Varianten im Vergleich
+
+|                              | **Constructor Injection** | **Property Injection**  | **Method Injection**  |
+| Übergabe                     | Konstruktorargument       | öffentliche Eigenschaft | Methodenparameter     |
+| Abhängigkeit ist             | verpflichtend             | optional                | aufrufspezifisch      |
+| Objekt unvollständig möglich | nein                      | ja (`null`-Gefahr)      | entfällt              |
+| Austausch zur Laufzeit       | nein (`readonly`)         | ja                      | bei jedem Aufruf      |
+| Typischer Einsatz            | Standardfall              | Logger, Konfiguration   | Strategie pro Aufruf  |
+
+> **Merke:** Im Zweifel Konstruktor-Injektion. Die anderen beiden Varianten brauchen eine Begründung — Optionalität oder einen Wechsel zur Laufzeit.
+
+> **Aufgabe:** Mischformen lassen sich mit der Methodenüberladung realisieren: Eine Klasse hält per Konstruktor einen Standard-Rechenkern, erlaubt aber pro Aufruf einen abweichenden. Skizzieren Sie die beiden Signaturen von `calc()` — welche der beiden delegiert an die andere?
 
 ## Prinzipien des (objektorientierten) Softwareentwurfs
 
